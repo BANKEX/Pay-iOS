@@ -1,0 +1,899 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		62AC3C13B9AE98E37A41F993 /* Pods_BankexWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */; };
+		7BAB8872E86CF84AE0B9EC1D /* Pods_BankexWalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */; };
+		8104B04A201F333300AE94B5 /* SingleAddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B049201F333300AE94B5 /* SingleAddressTableViewController.swift */; };
+		8104B04C201F353700AE94B5 /* BalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B04B201F353700AE94B5 /* BalanceCell.swift */; };
+		8104B04E201F356F00AE94B5 /* TokenBalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B04D201F356F00AE94B5 /* TokenBalanceCell.swift */; };
+		8104B050201F368200AE94B5 /* Web3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B04F201F368200AE94B5 /* Web3.swift */; };
+		8104B052201F6BF100AE94B5 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B051201F6BF100AE94B5 /* AddressCell.swift */; };
+		81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81942F06201B36A300F0AE29 /* AppDelegate.swift */; };
+		81942F09201B36A300F0AE29 /* WalletsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81942F08201B36A300F0AE29 /* WalletsTableViewController.swift */; };
+		81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81942F0A201B36A300F0AE29 /* Main.storyboard */; };
+		81942F0F201B36A300F0AE29 /* BankexWallet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81942F0D201B36A300F0AE29 /* BankexWallet.xcdatamodeld */; };
+		81942F11201B36A300F0AE29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81942F10201B36A300F0AE29 /* Assets.xcassets */; };
+		81942F14201B36A300F0AE29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81942F12201B36A300F0AE29 /* LaunchScreen.storyboard */; };
+		81942F1F201B36A300F0AE29 /* BankexWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81942F1E201B36A300F0AE29 /* BankexWalletTests.swift */; };
+		81942F2A201B36A300F0AE29 /* BankexWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81942F29201B36A300F0AE29 /* BankexWalletUITests.swift */; };
+		81C4333C201B3B5C008D3343 /* StoragePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4333B201B3B5C008D3343 /* StoragePaths.swift */; };
+		81C4333E201B3BE5008D3343 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4333D201B3BE5008D3343 /* Constants.swift */; };
+		81C43341201B7327008D3343 /* WalletState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43340201B7327008D3343 /* WalletState.swift */; };
+		81C43343201B7BDA008D3343 /* Keystores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43342201B7BDA008D3343 /* Keystores.swift */; };
+		81C43348201B820A008D3343 /* EthereumKeystoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43347201B820A008D3343 /* EthereumKeystoreCell.swift */; };
+		C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		81942F1B201B36A300F0AE29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81942EFB201B36A300F0AE29 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81942F02201B36A300F0AE29;
+			remoteInfo = BankexWallet;
+		};
+		81942F26201B36A300F0AE29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81942EFB201B36A300F0AE29 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81942F02201B36A300F0AE29;
+			remoteInfo = BankexWallet;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWalletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		805299A5A8B2FE29BB36247D /* Pods-BankexWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.debug.xcconfig"; sourceTree = "<group>"; };
+		8104B049201F333300AE94B5 /* SingleAddressTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAddressTableViewController.swift; sourceTree = "<group>"; };
+		8104B04B201F353700AE94B5 /* BalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCell.swift; sourceTree = "<group>"; };
+		8104B04D201F356F00AE94B5 /* TokenBalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenBalanceCell.swift; sourceTree = "<group>"; };
+		8104B04F201F368200AE94B5 /* Web3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3.swift; sourceTree = "<group>"; };
+		8104B051201F6BF100AE94B5 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
+		81942F03201B36A300F0AE29 /* BankexWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankexWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81942F06201B36A300F0AE29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		81942F08201B36A300F0AE29 /* WalletsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsTableViewController.swift; sourceTree = "<group>"; };
+		81942F0B201B36A300F0AE29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		81942F0E201B36A300F0AE29 /* BankexWallet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BankexWallet.xcdatamodel; sourceTree = "<group>"; };
+		81942F10201B36A300F0AE29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		81942F13201B36A300F0AE29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		81942F15201B36A300F0AE29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81942F1A201B36A300F0AE29 /* BankexWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankexWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		81942F1E201B36A300F0AE29 /* BankexWalletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankexWalletTests.swift; sourceTree = "<group>"; };
+		81942F20201B36A300F0AE29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81942F25201B36A300F0AE29 /* BankexWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BankexWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		81942F29201B36A300F0AE29 /* BankexWalletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankexWalletUITests.swift; sourceTree = "<group>"; };
+		81942F2B201B36A300F0AE29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81C4333B201B3B5C008D3343 /* StoragePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePaths.swift; sourceTree = "<group>"; };
+		81C4333D201B3BE5008D3343 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		81C43340201B7327008D3343 /* WalletState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletState.swift; sourceTree = "<group>"; };
+		81C43342201B7BDA008D3343 /* Keystores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keystores.swift; sourceTree = "<group>"; };
+		81C43347201B820A008D3343 /* EthereumKeystoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumKeystoreCell.swift; sourceTree = "<group>"; };
+		84DEF2425AC575B94C445B85 /* Pods-BankexWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
+		84EEC64EB525553C3FF4EBC1 /* Pods-BankexWalletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BD1E76CD13960E44B2411D0D /* Pods-BankexWalletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.release.xcconfig"; sourceTree = "<group>"; };
+		D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		81942F00201B36A300F0AE29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81942F17201B36A300F0AE29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62AC3C13B9AE98E37A41F993 /* Pods_BankexWalletTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81942F22201B36A300F0AE29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BAB8872E86CF84AE0B9EC1D /* Pods_BankexWalletUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34C573DBC09792B63DAD18FA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				805299A5A8B2FE29BB36247D /* Pods-BankexWallet.debug.xcconfig */,
+				D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */,
+				84DEF2425AC575B94C445B85 /* Pods-BankexWalletTests.debug.xcconfig */,
+				CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */,
+				BD1E76CD13960E44B2411D0D /* Pods-BankexWalletUITests.debug.xcconfig */,
+				84EEC64EB525553C3FF4EBC1 /* Pods-BankexWalletUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8104B047201F32C700AE94B5 /* SingleAddressTableView */ = {
+			isa = PBXGroup;
+			children = (
+				8104B049201F333300AE94B5 /* SingleAddressTableViewController.swift */,
+				8104B048201F32F900AE94B5 /* Cells */,
+			);
+			path = SingleAddressTableView;
+			sourceTree = "<group>";
+		};
+		8104B048201F32F900AE94B5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8104B04B201F353700AE94B5 /* BalanceCell.swift */,
+				8104B04D201F356F00AE94B5 /* TokenBalanceCell.swift */,
+				8104B051201F6BF100AE94B5 /* AddressCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		81942EFA201B36A300F0AE29 = {
+			isa = PBXGroup;
+			children = (
+				81942F05201B36A300F0AE29 /* BankexWallet */,
+				81942F1D201B36A300F0AE29 /* BankexWalletTests */,
+				81942F28201B36A300F0AE29 /* BankexWalletUITests */,
+				81942F04201B36A300F0AE29 /* Products */,
+				34C573DBC09792B63DAD18FA /* Pods */,
+				D9242BFE1AD22F65352D9039 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		81942F04201B36A300F0AE29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81942F03201B36A300F0AE29 /* BankexWallet.app */,
+				81942F1A201B36A300F0AE29 /* BankexWalletTests.xctest */,
+				81942F25201B36A300F0AE29 /* BankexWalletUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		81942F05201B36A300F0AE29 /* BankexWallet */ = {
+			isa = PBXGroup;
+			children = (
+				81C43344201B81E4008D3343 /* InterfaceElements */,
+				81C4333F201B730C008D3343 /* GlobalState */,
+				81C4333A201B3B48008D3343 /* Constants */,
+				81942F06201B36A300F0AE29 /* AppDelegate.swift */,
+				81942F0A201B36A300F0AE29 /* Main.storyboard */,
+				81942F10201B36A300F0AE29 /* Assets.xcassets */,
+				81942F12201B36A300F0AE29 /* LaunchScreen.storyboard */,
+				81942F15201B36A300F0AE29 /* Info.plist */,
+				81942F0D201B36A300F0AE29 /* BankexWallet.xcdatamodeld */,
+			);
+			path = BankexWallet;
+			sourceTree = "<group>";
+		};
+		81942F1D201B36A300F0AE29 /* BankexWalletTests */ = {
+			isa = PBXGroup;
+			children = (
+				81942F1E201B36A300F0AE29 /* BankexWalletTests.swift */,
+				81942F20201B36A300F0AE29 /* Info.plist */,
+			);
+			path = BankexWalletTests;
+			sourceTree = "<group>";
+		};
+		81942F28201B36A300F0AE29 /* BankexWalletUITests */ = {
+			isa = PBXGroup;
+			children = (
+				81942F29201B36A300F0AE29 /* BankexWalletUITests.swift */,
+				81942F2B201B36A300F0AE29 /* Info.plist */,
+			);
+			path = BankexWalletUITests;
+			sourceTree = "<group>";
+		};
+		81C4333A201B3B48008D3343 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				81C4333B201B3B5C008D3343 /* StoragePaths.swift */,
+				81C4333D201B3BE5008D3343 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		81C4333F201B730C008D3343 /* GlobalState */ = {
+			isa = PBXGroup;
+			children = (
+				81C43340201B7327008D3343 /* WalletState.swift */,
+				81C43342201B7BDA008D3343 /* Keystores.swift */,
+				8104B04F201F368200AE94B5 /* Web3.swift */,
+			);
+			path = GlobalState;
+			sourceTree = "<group>";
+		};
+		81C43344201B81E4008D3343 /* InterfaceElements */ = {
+			isa = PBXGroup;
+			children = (
+				8104B047201F32C700AE94B5 /* SingleAddressTableView */,
+				81C43345201B81F0008D3343 /* WalletsTableView */,
+			);
+			path = InterfaceElements;
+			sourceTree = "<group>";
+		};
+		81C43345201B81F0008D3343 /* WalletsTableView */ = {
+			isa = PBXGroup;
+			children = (
+				81942F08201B36A300F0AE29 /* WalletsTableViewController.swift */,
+				81C43346201B81FA008D3343 /* Cells */,
+			);
+			path = WalletsTableView;
+			sourceTree = "<group>";
+		};
+		81C43346201B81FA008D3343 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				81C43347201B820A008D3343 /* EthereumKeystoreCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D9242BFE1AD22F65352D9039 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */,
+				73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */,
+				64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		81942F02201B36A300F0AE29 /* BankexWallet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81942F2E201B36A300F0AE29 /* Build configuration list for PBXNativeTarget "BankexWallet" */;
+			buildPhases = (
+				9C72C1A9D9F1A596745CFBC7 /* [CP] Check Pods Manifest.lock */,
+				81942EFF201B36A300F0AE29 /* Sources */,
+				81942F00201B36A300F0AE29 /* Frameworks */,
+				81942F01201B36A300F0AE29 /* Resources */,
+				F99A2D9B6BE0ECA6BB8C7B27 /* [CP] Embed Pods Frameworks */,
+				2BFA9AF974F1A80DDF7A2830 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BankexWallet;
+			productName = BankexWallet;
+			productReference = 81942F03201B36A300F0AE29 /* BankexWallet.app */;
+			productType = "com.apple.product-type.application";
+		};
+		81942F19201B36A300F0AE29 /* BankexWalletTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81942F31201B36A300F0AE29 /* Build configuration list for PBXNativeTarget "BankexWalletTests" */;
+			buildPhases = (
+				8FF2F84AC7CC8E99F6CE8DC6 /* [CP] Check Pods Manifest.lock */,
+				81942F16201B36A300F0AE29 /* Sources */,
+				81942F17201B36A300F0AE29 /* Frameworks */,
+				81942F18201B36A300F0AE29 /* Resources */,
+				9D45F0BB4CF0B30A5FF88143 /* [CP] Embed Pods Frameworks */,
+				883DA4B4B91598FD256BF4C1 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				81942F1C201B36A300F0AE29 /* PBXTargetDependency */,
+			);
+			name = BankexWalletTests;
+			productName = BankexWalletTests;
+			productReference = 81942F1A201B36A300F0AE29 /* BankexWalletTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		81942F24201B36A300F0AE29 /* BankexWalletUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81942F34201B36A300F0AE29 /* Build configuration list for PBXNativeTarget "BankexWalletUITests" */;
+			buildPhases = (
+				F6A04EEFAB9A2739A3E79EB3 /* [CP] Check Pods Manifest.lock */,
+				81942F21201B36A300F0AE29 /* Sources */,
+				81942F22201B36A300F0AE29 /* Frameworks */,
+				81942F23201B36A300F0AE29 /* Resources */,
+				C18D95298866F04E359A1805 /* [CP] Embed Pods Frameworks */,
+				693DBC79175DE2CF4980E058 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				81942F27201B36A300F0AE29 /* PBXTargetDependency */,
+			);
+			name = BankexWalletUITests;
+			productName = BankexWalletUITests;
+			productReference = 81942F25201B36A300F0AE29 /* BankexWalletUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		81942EFB201B36A300F0AE29 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Alexander Vlasov";
+				TargetAttributes = {
+					81942F02201B36A300F0AE29 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					81942F19201B36A300F0AE29 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 81942F02201B36A300F0AE29;
+					};
+					81942F24201B36A300F0AE29 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 81942F02201B36A300F0AE29;
+					};
+				};
+			};
+			buildConfigurationList = 81942EFE201B36A300F0AE29 /* Build configuration list for PBXProject "BankexWallet" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 81942EFA201B36A300F0AE29;
+			productRefGroup = 81942F04201B36A300F0AE29 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				81942F02201B36A300F0AE29 /* BankexWallet */,
+				81942F19201B36A300F0AE29 /* BankexWalletTests */,
+				81942F24201B36A300F0AE29 /* BankexWalletUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		81942F01201B36A300F0AE29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81942F14201B36A300F0AE29 /* LaunchScreen.storyboard in Resources */,
+				81942F11201B36A300F0AE29 /* Assets.xcassets in Resources */,
+				81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81942F18201B36A300F0AE29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81942F23201B36A300F0AE29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2BFA9AF974F1A80DDF7A2830 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		693DBC79175DE2CF4980E058 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		883DA4B4B91598FD256BF4C1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8FF2F84AC7CC8E99F6CE8DC6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BankexWalletTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C72C1A9D9F1A596745CFBC7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BankexWallet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D45F0BB4CF0B30A5FF88143 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C18D95298866F04E359A1805 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6A04EEFAB9A2739A3E79EB3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BankexWalletUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F99A2D9B6BE0ECA6BB8C7B27 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-Synchronous/Alamofire_Synchronous.framework",
+				"${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework",
+				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_Synchronous.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwaitKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		81942EFF201B36A300F0AE29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81C4333E201B3BE5008D3343 /* Constants.swift in Sources */,
+				8104B04E201F356F00AE94B5 /* TokenBalanceCell.swift in Sources */,
+				8104B050201F368200AE94B5 /* Web3.swift in Sources */,
+				81942F09201B36A300F0AE29 /* WalletsTableViewController.swift in Sources */,
+				8104B04C201F353700AE94B5 /* BalanceCell.swift in Sources */,
+				8104B04A201F333300AE94B5 /* SingleAddressTableViewController.swift in Sources */,
+				81C43348201B820A008D3343 /* EthereumKeystoreCell.swift in Sources */,
+				81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */,
+				81C4333C201B3B5C008D3343 /* StoragePaths.swift in Sources */,
+				81C43341201B7327008D3343 /* WalletState.swift in Sources */,
+				81C43343201B7BDA008D3343 /* Keystores.swift in Sources */,
+				81942F0F201B36A300F0AE29 /* BankexWallet.xcdatamodeld in Sources */,
+				8104B052201F6BF100AE94B5 /* AddressCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81942F16201B36A300F0AE29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81942F1F201B36A300F0AE29 /* BankexWalletTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81942F21201B36A300F0AE29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81942F2A201B36A300F0AE29 /* BankexWalletUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		81942F1C201B36A300F0AE29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81942F02201B36A300F0AE29 /* BankexWallet */;
+			targetProxy = 81942F1B201B36A300F0AE29 /* PBXContainerItemProxy */;
+		};
+		81942F27201B36A300F0AE29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81942F02201B36A300F0AE29 /* BankexWallet */;
+			targetProxy = 81942F26201B36A300F0AE29 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		81942F0A201B36A300F0AE29 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				81942F0B201B36A300F0AE29 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		81942F12201B36A300F0AE29 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				81942F13201B36A300F0AE29 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		81942F2C201B36A300F0AE29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		81942F2D201B36A300F0AE29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		81942F2F201B36A300F0AE29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 805299A5A8B2FE29BB36247D /* Pods-BankexWallet.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62V9CKQN89;
+				INFOPLIST_FILE = BankexWallet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWallet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		81942F30201B36A300F0AE29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62V9CKQN89;
+				INFOPLIST_FILE = BankexWallet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWallet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		81942F32201B36A300F0AE29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84DEF2425AC575B94C445B85 /* Pods-BankexWalletTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62V9CKQN89;
+				INFOPLIST_FILE = BankexWalletTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BankexWallet.app/BankexWallet";
+			};
+			name = Debug;
+		};
+		81942F33201B36A300F0AE29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62V9CKQN89;
+				INFOPLIST_FILE = BankexWalletTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BankexWallet.app/BankexWallet";
+			};
+			name = Release;
+		};
+		81942F35201B36A300F0AE29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD1E76CD13960E44B2411D0D /* Pods-BankexWalletUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62V9CKQN89;
+				INFOPLIST_FILE = BankexWalletUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWalletUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BankexWallet;
+			};
+			name = Debug;
+		};
+		81942F36201B36A300F0AE29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84EEC64EB525553C3FF4EBC1 /* Pods-BankexWalletUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62V9CKQN89;
+				INFOPLIST_FILE = BankexWalletUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWalletUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BankexWallet;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		81942EFE201B36A300F0AE29 /* Build configuration list for PBXProject "BankexWallet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81942F2C201B36A300F0AE29 /* Debug */,
+				81942F2D201B36A300F0AE29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81942F2E201B36A300F0AE29 /* Build configuration list for PBXNativeTarget "BankexWallet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81942F2F201B36A300F0AE29 /* Debug */,
+				81942F30201B36A300F0AE29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81942F31201B36A300F0AE29 /* Build configuration list for PBXNativeTarget "BankexWalletTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81942F32201B36A300F0AE29 /* Debug */,
+				81942F33201B36A300F0AE29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81942F34201B36A300F0AE29 /* Build configuration list for PBXNativeTarget "BankexWalletUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81942F35201B36A300F0AE29 /* Debug */,
+				81942F36201B36A300F0AE29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		81942F0D201B36A300F0AE29 /* BankexWallet.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				81942F0E201B36A300F0AE29 /* BankexWallet.xcdatamodel */,
+			);
+			currentVersion = 81942F0E201B36A300F0AE29 /* BankexWallet.xcdatamodel */;
+			path = BankexWallet.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 81942EFB201B36A300F0AE29 /* Project object */;
+}
