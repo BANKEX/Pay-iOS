@@ -21,6 +21,11 @@ class WalletsTableViewController: UITableViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -49,10 +54,10 @@ class WalletsTableViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            guard let c = BankexWalletKeystores.EthereumKeystoresManager.addresses?.count else {return 1}
+            let c = BankexWalletKeystores.EthereumKeystoresManager.keystores.count
             return c + 1
         case 1:
-            guard let c = BankexWalletKeystores.BIP32KeystoresManager.addresses?.count else {return 1}
+            let c = BankexWalletKeystores.BIP32KeystoresManager.bip32keystores.count
             return c + 1
         case 2:
             return 1
@@ -70,9 +75,9 @@ class WalletsTableViewController: UITableViewController{
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "EthereumKeystoreCell", for: indexPath)
                     as! EthereumKeystoreCell
-                guard let c = BankexWalletKeystores.EthereumKeystoresManager.addresses?.count else {fatalError("Invalid number of cells")}
+                let c = BankexWalletKeystores.EthereumKeystoresManager.keystores.count
                 guard indexPath.row < c else {fatalError("Invalid number of cells")}
-                cell.addressLabel.text = BankexWalletKeystores.EthereumKeystoresManager.addresses![indexPath.row].address
+                cell.addressLabel.text = BankexWalletKeystores.EthereumKeystoresManager.keystores[indexPath.row].addresses?[0].address
                 return cell
             }
         case 1:
@@ -82,9 +87,9 @@ class WalletsTableViewController: UITableViewController{
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BIP32KeystoreCell", for: indexPath)
                     as! EthereumKeystoreCell
-                guard let c = BankexWalletKeystores.EthereumKeystoresManager.addresses?.count else {fatalError("Invalid number of cells")}
+                let c = BankexWalletKeystores.BIP32KeystoresManager.bip32keystores.count
                 guard indexPath.row < c else {fatalError("Invalid number of cells")}
-                cell.addressLabel.text = BankexWalletKeystores.EthereumKeystoresManager.addresses![indexPath.row].address
+                cell.addressLabel.text = BankexWalletKeystores.BIP32KeystoresManager.bip32keystores[indexPath.row].addresses?[0].address
                 return cell
             }
         case 2:
@@ -92,7 +97,6 @@ class WalletsTableViewController: UITableViewController{
             return cell
         default:
             fatalError("Invalid number of cells")
-//            return UITableViewCell()
         }
     }
     
@@ -103,28 +107,10 @@ class WalletsTableViewController: UITableViewController{
         switch indexPath.section {
         case 0:
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-                guard let newWallet = try? EthereumKeystoreV3(password: "BANKEXFOUNDATION") else {return}
-                guard let wallet = newWallet, wallet.addresses != nil, wallet.addresses?.count == 1 else {return}
-                guard let keydata = try? JSONEncoder().encode(wallet.keystoreParams) else {return}
-                let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-                guard let address = newWallet?.addresses?.first?.address else {return}
-                let path = userDir + BankexWalletConstants.KeystoreStoragePath
-                let fileManager = FileManager.default
-                var isDir : ObjCBool = false
-                var exists = fileManager.fileExists(atPath: path, isDirectory: &isDir)
-                if (!exists && !isDir.boolValue){
-                    try? fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-                    exists = fileManager.fileExists(atPath: path, isDirectory: &isDir)
-                }
-                if (!isDir.boolValue) {
-                    return
-                }
-                FileManager.default.createFile(atPath: path + "/" + address + ".json", contents: keydata, attributes: nil)
-                self.tableView.reloadData()
                 return
             } else {
-                let address = BankexWalletKeystores.EthereumKeystoresManager.addresses![indexPath.row]
-                guard let keystore = BankexWalletKeystores.EthereumKeystoresManager.walletForAddress(address) else {return}
+                let keystore = BankexWalletKeystores.EthereumKeystoresManager.keystores[indexPath.row] as AbstractKeystore
+                guard let address = keystore.addresses?[0] else {return}
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "SingleAddressTableViewController") as! SingleAddressTableViewController
                 controller.tokens = [EthereumAddress]()
@@ -137,7 +123,12 @@ class WalletsTableViewController: UITableViewController{
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 return
             } else {
-                return
+//                let keystore = BankexWalletKeystores.BIP32KeystoresManager.bip32keystores[indexPath.row]
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let controller = storyboard.instantiateViewController(withIdentifier: "HDWalletTableViewController") as! HDWalletTableViewController
+//                controller.keystore = keystore
+//                self.navigationController?.pushViewController(controller, animated: true)
+//                return
             }
         case 2:
             return

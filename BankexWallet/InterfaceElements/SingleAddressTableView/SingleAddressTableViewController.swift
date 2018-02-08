@@ -16,17 +16,17 @@ class SingleAddressTableViewController: UITableViewController {
     var address: EthereumAddress? = nil
     var keystore: AbstractKeystore? = nil
 
-    convenience init(tokens: [EthereumAddress], keystore: AbstractKeystore, address: EthereumAddress?) {
-        self.init()
-        self.tokens = tokens
-        self.keystore = keystore
-        if (address == nil) {
-            self.address = keystore.addresses?.first
-        } else {
-            assert(keystore.addresses?.first == address)
-            self.address = address
-        }
-    }
+//    convenience init(tokens: [EthereumAddress], keystore: AbstractKeystore, address: EthereumAddress?) {
+//        self.init()
+//        self.tokens = tokens
+//        self.keystore = keystore
+//        if (address == nil) {
+//            self.address = keystore.addresses?.first
+//        } else {
+//            assert(keystore.addresses?.first == address)
+//            self.address = address
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

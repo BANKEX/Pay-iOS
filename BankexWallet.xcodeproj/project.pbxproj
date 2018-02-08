@@ -14,6 +14,9 @@
 		8104B04E201F356F00AE94B5 /* TokenBalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B04D201F356F00AE94B5 /* TokenBalanceCell.swift */; };
 		8104B050201F368200AE94B5 /* Web3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B04F201F368200AE94B5 /* Web3.swift */; };
 		8104B052201F6BF100AE94B5 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B051201F6BF100AE94B5 /* AddressCell.swift */; };
+		8104B0552020C40700AE94B5 /* CreateKeystoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B0542020C40700AE94B5 /* CreateKeystoreTableViewController.swift */; };
+		818571E2202B8C78005729EA /* ImportPrivateKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818571E1202B8C78005729EA /* ImportPrivateKeyTableViewController.swift */; };
+		818571E5202B90AD005729EA /* CreateHDWalletTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818571E4202B90AD005729EA /* CreateHDWalletTableViewController.swift */; };
 		81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81942F06201B36A300F0AE29 /* AppDelegate.swift */; };
 		81942F09201B36A300F0AE29 /* WalletsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81942F08201B36A300F0AE29 /* WalletsTableViewController.swift */; };
 		81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81942F0A201B36A300F0AE29 /* Main.storyboard */; };
@@ -56,6 +59,9 @@
 		8104B04D201F356F00AE94B5 /* TokenBalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenBalanceCell.swift; sourceTree = "<group>"; };
 		8104B04F201F368200AE94B5 /* Web3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3.swift; sourceTree = "<group>"; };
 		8104B051201F6BF100AE94B5 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
+		8104B0542020C40700AE94B5 /* CreateKeystoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateKeystoreTableViewController.swift; sourceTree = "<group>"; };
+		818571E1202B8C78005729EA /* ImportPrivateKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPrivateKeyTableViewController.swift; sourceTree = "<group>"; };
+		818571E4202B90AD005729EA /* CreateHDWalletTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHDWalletTableViewController.swift; sourceTree = "<group>"; };
 		81942F03201B36A300F0AE29 /* BankexWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankexWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81942F06201B36A300F0AE29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81942F08201B36A300F0AE29 /* WalletsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsTableViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +149,30 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		8104B0532020C3E800AE94B5 /* CreateKeystoreTableView */ = {
+			isa = PBXGroup;
+			children = (
+				8104B0542020C40700AE94B5 /* CreateKeystoreTableViewController.swift */,
+			);
+			path = CreateKeystoreTableView;
+			sourceTree = "<group>";
+		};
+		818571E0202B8C63005729EA /* ImportPrivateKeyTableView */ = {
+			isa = PBXGroup;
+			children = (
+				818571E1202B8C78005729EA /* ImportPrivateKeyTableViewController.swift */,
+			);
+			path = ImportPrivateKeyTableView;
+			sourceTree = "<group>";
+		};
+		818571E3202B9098005729EA /* CreateHDWalletTableView */ = {
+			isa = PBXGroup;
+			children = (
+				818571E4202B90AD005729EA /* CreateHDWalletTableViewController.swift */,
+			);
+			path = CreateHDWalletTableView;
+			sourceTree = "<group>";
+		};
 		81942EFA201B36A300F0AE29 = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +251,9 @@
 		81C43344201B81E4008D3343 /* InterfaceElements */ = {
 			isa = PBXGroup;
 			children = (
+				818571E3202B9098005729EA /* CreateHDWalletTableView */,
+				818571E0202B8C63005729EA /* ImportPrivateKeyTableView */,
+				8104B0532020C3E800AE94B5 /* CreateKeystoreTableView */,
 				8104B047201F32C700AE94B5 /* SingleAddressTableView */,
 				81C43345201B81F0008D3343 /* WalletsTableView */,
 			);
@@ -567,16 +600,19 @@
 			files = (
 				81C4333E201B3BE5008D3343 /* Constants.swift in Sources */,
 				8104B04E201F356F00AE94B5 /* TokenBalanceCell.swift in Sources */,
+				818571E5202B90AD005729EA /* CreateHDWalletTableViewController.swift in Sources */,
 				8104B050201F368200AE94B5 /* Web3.swift in Sources */,
 				81942F09201B36A300F0AE29 /* WalletsTableViewController.swift in Sources */,
 				8104B04C201F353700AE94B5 /* BalanceCell.swift in Sources */,
 				8104B04A201F333300AE94B5 /* SingleAddressTableViewController.swift in Sources */,
 				81C43348201B820A008D3343 /* EthereumKeystoreCell.swift in Sources */,
+				8104B0552020C40700AE94B5 /* CreateKeystoreTableViewController.swift in Sources */,
 				81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */,
 				81C4333C201B3B5C008D3343 /* StoragePaths.swift in Sources */,
 				81C43341201B7327008D3343 /* WalletState.swift in Sources */,
 				81C43343201B7BDA008D3343 /* Keystores.swift in Sources */,
 				81942F0F201B36A300F0AE29 /* BankexWallet.xcdatamodeld in Sources */,
+				818571E2202B8C78005729EA /* ImportPrivateKeyTableViewController.swift in Sources */,
 				8104B052201F6BF100AE94B5 /* AddressCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

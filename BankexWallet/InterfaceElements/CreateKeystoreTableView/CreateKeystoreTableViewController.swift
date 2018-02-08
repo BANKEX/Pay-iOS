@@ -10,8 +10,12 @@ import Foundation
 import web3swift
 import BigInt
 
-class ImportPrivateKeyTableViewController: UITableViewController {
-    @IBOutlet weak var keyInputTextView: UITextView!
+class CreateKeystoreTableViewController: UITableViewController {
+    
+    var tokens: [EthereumAddress] = [EthereumAddress]()
+    var address: EthereumAddress? = nil
+    var keystore: AbstractKeystore? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -26,24 +30,14 @@ class ImportPrivateKeyTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-    
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         switch indexPath.row {
-        case 1:
-            guard var text = self.keyInputTextView.text else {return}
-            text = text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            guard let data = Data.fromHex(text) else {return}
-            guard let newWallet = try? EthereumKeystoreV3(privateKey:data) else {return}
+        case 0:
+            guard let newWallet = try? EthereumKeystoreV3(password: "BANKEXFOUNDATION") else {return}
             guard let wallet = newWallet, wallet.addresses != nil, wallet.addresses?.count == 1 else {return}
             guard let keydata = try? JSONEncoder().encode(wallet.keystoreParams) else {return}
             let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -71,10 +65,9 @@ class ImportPrivateKeyTableViewController: UITableViewController {
             }
         default:
             return
-            //            fatalError("Invalid number of cells")
+//            fatalError("Invalid number of cells")
         }
     }
     
 }
-
 
