@@ -29,7 +29,7 @@ class ConfirmTransactionTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.destinationAddressTextField.text = self.address?.address
+        self.destinationAddressTextField.text = self.intermediate?.transaction.to.address
         self.amountTextField.text = Web3.Utils.formatToEthereumUnits((self.intermediate?.options?.value)!)
         self.extraDataTextView.text = self.intermediate?.transaction.data.toHexString()
         self.gasLimitTextField.text = Web3.Utils.formatToEthereumUnits((self.intermediate?.options?.gas)!, toUnits: .wei, decimals: 0)

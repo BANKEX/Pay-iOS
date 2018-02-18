@@ -64,7 +64,7 @@ class SendETHTableViewController: UITableViewController {
                 options.gas = BigUInt(21000)
                 options.from = self.address
                 options.value = BigUInt(amount)
-                guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: self.address!) else {return}
+                guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destination) else {return}
                 guard let estimatedGas = contract.method(options: options)?.estimateGas(options: nil) else {return}
                 options.gas = estimatedGas
                 guard let gasPrice = web3.eth.getGasPrice() else {return}
