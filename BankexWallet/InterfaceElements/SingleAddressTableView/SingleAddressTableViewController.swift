@@ -15,18 +15,6 @@ class SingleAddressTableViewController: UITableViewController {
     var tokens: [EthereumAddress] = [EthereumAddress]()
     var address: EthereumAddress? = nil
     var keystore: AbstractKeystore? = nil
-
-//    convenience init(tokens: [EthereumAddress], keystore: AbstractKeystore, address: EthereumAddress?) {
-//        self.init()
-//        self.tokens = tokens
-//        self.keystore = keystore
-//        if (address == nil) {
-//            self.address = keystore.addresses?.first
-//        } else {
-//            assert(keystore.addresses?.first == address)
-//            self.address = address
-//        }
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +23,7 @@ class SingleAddressTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        if (self.address != nil) {
-//            self.navigationItem.title = self.address?.address
-//            self.navigationController?.navigationBar.titleTextAttributes = [
-//                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10)]
-//        }
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -116,25 +100,21 @@ class SingleAddressTableViewController: UITableViewController {
         defer {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-//        switch indexPath.section {
-//        case 0:
-//            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-//                return
-//            } else {
-//                return
-//            }
-//        case 1:
-//            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-//                return
-//            } else {
-//                return
-//            }
-//        case 2:
-//            return
-//        default:
-//            fatalError("Invalid number of cells")
-//            //            return UITableViewCell()
-//        }
+        switch indexPath.section {
+        case 0:
+            return
+        case 1:
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "SendETHTableViewController") as! SendETHTableViewController
+            controller.keystore = keystore
+            controller.address = address
+            self.navigationController?.pushViewController(controller, animated: true)
+            return
+        case 2:
+            return
+        default:
+            fatalError("Invalid number of cells")
+        }
     }
     
 }
