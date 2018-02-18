@@ -137,6 +137,31 @@ class WalletsTableViewController: UITableViewController{
             //            return UITableViewCell()
         }
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            switch indexPath.section{
+            case 0:
+                if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+                    return
+                }
+                let keystore = BankexWalletKeystores.EthereumKeystoresManager.keystores[indexPath.row]
+                let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+                let address = keystore.addresses![0].address
+                let path = userDir + BankexWalletConstants.KeystoreStoragePath
+                let fileManager = FileManager.default
+                _ = try? fileManager.removeItem(atPath: path + "/" + address + ".json")
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            case 1:
+                return
+            default:
+                return
+            }
+        default:
+            return
+        }
+    }
 
 }
 
