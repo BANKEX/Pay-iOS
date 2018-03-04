@@ -16,7 +16,7 @@ struct BankexWalletWeb3 {
     static var web3: web3 {
         get {
             if _web3 == nil {
-                _web3 = Web3.InfuraMainnetWeb3()
+                _web3 = Web3.InfuraRinkebyWeb3()
             }
             return _web3!
         }

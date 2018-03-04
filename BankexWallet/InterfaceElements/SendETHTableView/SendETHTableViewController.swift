@@ -18,20 +18,6 @@ class SendETHTableViewController: UITableViewController {
     var address: EthereumAddress? = nil
     var keystore: AbstractKeystore? = nil
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -61,13 +47,13 @@ class SendETHTableViewController: UITableViewController {
                     web3.addKeystoreManager(BankexWalletKeystores.EthereumKeystoresManager)
                 }
                 var options = Web3Options.defaultOptions()
-                options.gas = BigUInt(21000)
+                options.gasLimit = BigUInt(21000)
                 options.from = self.address
                 options.value = BigUInt(amount)
                 guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destination) else {return}
-                guard let estimatedGas = contract.method(options: options)?.estimateGas(options: nil) else {return}
-                options.gas = estimatedGas
-                guard let gasPrice = web3.eth.getGasPrice() else {return}
+                guard let estimatedGas = contract.method(options: options)?.estimateGas(options: nil).value else {return}
+                options.gasLimit = estimatedGas
+                guard let gasPrice = web3.eth.getGasPrice().value else {return}
                 options.gasPrice = gasPrice
                 let transactionIntermediate = contract.method(options: options)
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
