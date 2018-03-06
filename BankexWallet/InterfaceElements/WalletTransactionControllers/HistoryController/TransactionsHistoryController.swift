@@ -38,6 +38,7 @@ class TransactionsHistoryController: UIViewController,
         super.viewWillAppear(animated)
         tableView.isHidden = true
         emptyView.isHidden = true
+        addTransactionButton.isHidden = true
         activityIndicator.startAnimating()
         presenter.viewIsReady()
     }
@@ -46,6 +47,7 @@ class TransactionsHistoryController: UIViewController,
     func showEmptyView() {
         emptyView.isHidden = false
         tableView.isHidden = true
+        addTransactionButton.isHidden = false
         activityIndicator.stopAnimating()
         emptyViewLabel.text = NSLocalizedString("You don't have any transactions yet", comment: "")
         emptyViewButton.setTitle("Send money", for: .normal)
@@ -54,6 +56,7 @@ class TransactionsHistoryController: UIViewController,
     func showNoKeysAvailableView() {
         emptyView.isHidden = false
         tableView.isHidden = true
+        addTransactionButton.isHidden = true
         activityIndicator.stopAnimating()
         emptyViewLabel.text = NSLocalizedString("You don't have any keys yet", comment: "")
         emptyViewButton.setTitle("Add key", for: .normal)
@@ -61,6 +64,7 @@ class TransactionsHistoryController: UIViewController,
     }
     
     func show(transactions: [Any]) {
+        addTransactionButton.isHidden = false
         emptyView.isHidden = true
         tableView.isHidden = false
         activityIndicator.stopAnimating()

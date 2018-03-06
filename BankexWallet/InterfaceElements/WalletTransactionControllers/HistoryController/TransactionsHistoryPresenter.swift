@@ -16,10 +16,10 @@ class TransactionsHistoryPresenter: TransactionsHistoryViewOutput {
         //check if any of key exists
         let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         let keystoreManager = KeystoreManager.managerForPath(userDir + "/keystore")
-        guard let address = keystoreManager?.addresses?.first else {
+        guard let _ = keystoreManager?.addresses?.first else {
             view?.showNoKeysAvailableView()
-            
             return
         }
+        view?.showEmptyView()
     }
 }
