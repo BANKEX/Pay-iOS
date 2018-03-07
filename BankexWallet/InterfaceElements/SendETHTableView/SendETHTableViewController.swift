@@ -40,7 +40,7 @@ class SendETHTableViewController: UITableViewController {
                 guard destination.isValid else {return}
                 guard let amountString = amountTextField.text else {return}
                 guard let amount = Web3.Utils.parseToBigUInt(amountString, toUnits: .eth) else {return}
-                let web3 = BankexWalletWeb3.web3
+                let web3 = WalletWeb3Factory.web3
                 if (self.keystore!.isHDKeystore) {
                     web3.addKeystoreManager(BankexWalletKeystores.BIP32KeystoresManager)
                 } else {
