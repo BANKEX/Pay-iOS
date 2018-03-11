@@ -85,32 +85,109 @@ extension CustomNetwork {
     }
 }
 
+enum NetworksServiceError: Error {
+    case networkDuplication
+    case noNetworkWithId
+}
+
 protocol NetworksService {
     func addCustomNetwork(name: String?,
                           networkId: BigUInt,
                           networkUrlString: String,
-                          accessToken: String?) -> Error?
-    func currentNetworksList() -> [CustomNetwork]?
-    func deleteNetwork(with networkId: BigUInt) -> Error?
+                          accessToken: String?) throws
+    func currentNetworksList() -> [CustomNetwork]
+    func deleteNetwork(with networkId: BigUInt) throws
     func preferredNetwork() -> CustomNetwork
 }
 
 class NetworksServiceImplementation: NetworksService {
     
-    func currentNetworksList() -> [CustomNetwork]? {
-        return nil
+    let fullPathToTheFile: String
+
+    init(with pathToNetworksStorage: String = "/Networks") {
+        let fileManager = FileManager.default
+        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        let fullPath = userDir! + pathToNetworksStorage
+        var isDir : ObjCBool = false
+        var exists = fileManager.fileExists(atPath: fullPath, isDirectory: &isDir)
+        self.fullPathToTheFile = fullPath + "/networksList"
+
+        if (!exists){
+            try? fileManager.createDirectory(atPath: fullPath, withIntermediateDirectories: true, attributes: nil)
+            exists = fileManager.fileExists(atPath: fullPath, isDirectory: &isDir)
+            FileManager.default.createFile(atPath: self.fullPathToTheFile, contents: nil, attributes: nil)
+        }
+    }
+    
+    var networksList = [CustomNetwork]()
+    func currentNetworksList() -> [CustomNetwork] {
+        if !networksList.isEmpty {
+            return networksList
+        }
+        
+        if let data = FileManager.default.contents(atPath: fullPathToTheFile) {
+            let decoder = JSONDecoder()
+            do {
+                let model = try decoder.decode([CustomNetwork].self, from: data)
+                self.networksList = model
+            } catch {
+                self.networksList = [CustomNetwork]()
+            }
+        } else {
+            self.networksList = [CustomNetwork]()
+        }
+        
+        return networksList
     }
     
     func addCustomNetwork(name: String? = nil,
                           networkId: BigUInt,
                           networkUrlString: String,
-                          accessToken: String? = nil) -> Error? {
-        //TODO: check, if there would be conflicts because of networkId/URL
-        return nil
+                          accessToken: String? = nil) throws {
+        
+        let possibleNetworkToSave = CustomNetwork(networkName: name,
+                                                  networkId: networkId,
+                                                  networkUrlString: networkUrlString,
+                                                  accessToken: accessToken)
+        
+        let duplicate = networksList.first(where: { (customNetwork) -> Bool in
+            return customNetwork.fullNetworkUrl == possibleNetworkToSave.fullNetworkUrl ||
+                    customNetwork.networkId == possibleNetworkToSave.networkId
+        })
+        
+        if duplicate != nil {
+            throw NetworksServiceError.networkDuplication
+        }
+        networksList.append(possibleNetworkToSave)
+        storeNetworksListToDisk()
     }
     
-    func deleteNetwork(with networkId: BigUInt) -> Error? {
-        return nil
+    func deleteNetwork(with networkId: BigUInt) throws {
+        
+        let duplicateIndex = networksList.index(where: { (customNetwork) -> Bool in
+            return customNetwork.networkId == networkId
+        })
+        
+        guard let duplicatedIndex = duplicateIndex else {
+            throw NetworksServiceError.noNetworkWithId
+        }
+        
+        networksList.remove(at: duplicatedIndex)
+        storeNetworksListToDisk()
+    }
+    
+    
+    private func storeNetworksListToDisk() {
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(networksList)
+            if FileManager.default.fileExists(atPath: fullPathToTheFile) {
+                try FileManager.default.removeItem(at: URL(fileURLWithPath: fullPathToTheFile))
+            }
+            FileManager.default.createFile(atPath: fullPathToTheFile, contents: data, attributes: nil)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
     func preferredNetwork() -> CustomNetwork {
