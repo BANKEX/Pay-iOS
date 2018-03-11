@@ -17,7 +17,7 @@ protocol SingleKeyService {
     func fullListOfPublicAddresses() -> [String]?
     func preferredSingleAddress() -> String?
     func updatePreferred(address: String)
-    
+    func delete(address: String)
 }
 
 class SingleKeyServiceImplementation: SingleKeyService {
@@ -93,6 +93,20 @@ class SingleKeyServiceImplementation: SingleKeyService {
         if (!isDir.boolValue) {
             return
         }
-        FileManager.default.createFile(atPath: path + "/" + address + ".json", contents: keyData, attributes: nil)
+        fileManager.createFile(atPath: path + "/" + address + ".json", contents: keyData, attributes: nil)
+    }
+    
+    func delete(address: String) {
+        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let path = userDir + pathForKeys
+        let fileManager = FileManager.default
+        try! fileManager.removeItem(atPath: path + "/" + address + ".json")
+    }
+    
+    func clearAllWallets() {
+        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let path = userDir + pathForKeys
+        let fileManager = FileManager.default
+        try! fileManager.removeItem(atPath: path)
     }
 }
