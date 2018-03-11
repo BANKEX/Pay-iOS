@@ -2,7 +2,7 @@
 //  CustomNetwork.swift
 //  BankexWallet
 //
-//  Created by Korovkina, Ekaterina (Agoda) on 3/11/2561 BE.
+//  Created by Korovkina, Ekaterina on 3/11/2561 BE.
 //  Copyright © 2561 Alexander Vlasov. All rights reserved.
 //
 
@@ -14,24 +14,42 @@ struct CustomNetwork {
     //It's just beautiful identifier for the user
     let networkName: String?
     let networkId: BigUInt
-    let networkUrlString: URL
+    let fullNetworkUrl: URL
     
-    //TODO: think if it can be stored like this
-    let accessToken: String?
+    init(networkName: String? = nil,
+         networkId: BigUInt,
+         networkUrlString: String,
+         accessToken: String? = nil) {
+        self.networkName = networkName
+        self.networkId = networkId
+        let requestURLstring = networkUrlString + (accessToken ?? "")
+        guard let urlString = URL(string: requestURLstring) else {
+            //TODO: somehow we cannot convert to URL, what a maaaagic 
+            self.fullNetworkUrl = URL(string: "https://rinkeby.infura.io")!
+            return
+        }
+        self.fullNetworkUrl = urlString
+    }
 }
 
 extension CustomNetwork {
     static func convert(network: Networks) -> CustomNetwork {
         let adapter = Web3SwiftNetworksAdapter()
         let networkId = adapter.id(from: network)
-        guard let networkName = adapter.name(from: network),
-            let networkUrl = URL(string: "https://" + networkName + ".infura.io/")
+        guard let networkName = adapter.name(from: network)
             else {
                 //TODO: Should be smth else, but without name we cannot produce real url
                 return convert(network: Networks.Rinkeby)
         }
-        
-        return CustomNetwork(networkName: networkName, networkId: networkId, networkUrlString: networkUrl, accessToken: nil)
+        let networkUrlString = "https://" + networkName + ".infura.io/"
+        return CustomNetwork(networkName: networkName,
+                             networkId: networkId,
+                             networkUrlString: networkUrlString,
+                             accessToken: nil)
+    }
+    
+    func convertToNetworks() -> Networks {
+        return Networks.Custom(networkID: self.networkId)
     }
 }
 
