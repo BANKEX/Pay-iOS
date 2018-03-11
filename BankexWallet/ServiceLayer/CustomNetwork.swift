@@ -16,6 +16,12 @@ struct CustomNetwork {
     let networkId: BigUInt
     let fullNetworkUrl: URL
     
+    enum CodingKeys: String, CodingKey {
+        case id = "networkId"
+        case networkName
+        case networkUrl
+    }
+    
     init(networkName: String? = nil,
          networkId: BigUInt,
          networkUrlString: String,
@@ -24,13 +30,39 @@ struct CustomNetwork {
         self.networkId = networkId
         let requestURLstring = networkUrlString + (accessToken ?? "")
         guard let urlString = URL(string: requestURLstring) else {
-            //TODO: somehow we cannot convert to URL, what a maaaagic 
+            //TODO: somehow we cannot convert to URL, what a maaaagic
             self.fullNetworkUrl = URL(string: "https://rinkeby.infura.io")!
             return
         }
         self.fullNetworkUrl = urlString
     }
 }
+
+
+extension CustomNetwork: Encodable {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        if let networkName = self.networkName {
+            try container.encode(networkName, forKey: .networkName)
+        }
+        try container.encode(networkId, forKey: .id)
+        try container.encode(fullNetworkUrl, forKey: .networkUrl)
+    }
+}
+
+extension CustomNetwork: Decodable {
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        if values.contains(.networkName) {
+            networkName = try values.decode(String.self, forKey: .networkName) as? String
+        } else {
+            networkName = nil
+        }
+        networkId = try values.decode(BigUInt.self, forKey: .id)
+        fullNetworkUrl = try values.decode(URL.self, forKey: .networkUrl)
+    }
+}
+
 
 extension CustomNetwork {
     static func convert(network: Networks) -> CustomNetwork {
@@ -82,7 +114,7 @@ class NetworksServiceImplementation: NetworksService {
     }
     
     func preferredNetwork() -> CustomNetwork {
-        //TODO: What is this? Should it be like that?
+        //TODO: DI! DI! DI! Or maybe delete this settings class
         let networkSelectionSetting = NetworkSelectionSettings()
         return CustomNetwork.convert(network: networkSelectionSetting.preferredNetwork())
     }
