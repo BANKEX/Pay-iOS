@@ -33,6 +33,13 @@
 		81C43343201B7BDA008D3343 /* Keystores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43342201B7BDA008D3343 /* Keystores.swift */; };
 		81C43348201B820A008D3343 /* EthereumKeystoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43347201B820A008D3343 /* EthereumKeystoreCell.swift */; };
 		C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */; };
+		F075A44F204BF4B8001949A9 /* TransactionsHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A44E204BF4B8001949A9 /* TransactionsHistoryController.swift */; };
+		F075A451204BF4EE001949A9 /* TransactionHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */; };
+		F075A453204BFA34001949A9 /* TransactionsHistoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A452204BFA34001949A9 /* TransactionsHistoryPresenter.swift */; };
+		F0FF1C5A204BFB610051D894 /* TransactionsHistoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A454204BFA69001949A9 /* TransactionsHistoryProtocols.swift */; };
+		F0FF1C5C204C01E40051D894 /* WalletTransactionsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF1C5B204C01E40051D894 /* WalletTransactionsContainerController.swift */; };
+		F0FF1C5F204C05BE0051D894 /* CreateNewKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF1C5E204C05BD0051D894 /* CreateNewKeyController.swift */; };
+		F0FF1C62204E6E2D0051D894 /* TokenTransferContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF1C61204E6E2D0051D894 /* TokenTransferContainerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +98,13 @@
 		CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.release.xcconfig"; sourceTree = "<group>"; };
+		F075A44E204BF4B8001949A9 /* TransactionsHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryController.swift; sourceTree = "<group>"; };
+		F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryCell.swift; sourceTree = "<group>"; };
+		F075A452204BFA34001949A9 /* TransactionsHistoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryPresenter.swift; sourceTree = "<group>"; };
+		F075A454204BFA69001949A9 /* TransactionsHistoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryProtocols.swift; sourceTree = "<group>"; };
+		F0FF1C5B204C01E40051D894 /* WalletTransactionsContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionsContainerController.swift; sourceTree = "<group>"; };
+		F0FF1C5E204C05BD0051D894 /* CreateNewKeyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewKeyController.swift; sourceTree = "<group>"; };
+		F0FF1C61204E6E2D0051D894 /* TokenTransferContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTransferContainerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +285,8 @@
 		81C43344201B81E4008D3343 /* InterfaceElements */ = {
 			isa = PBXGroup;
 			children = (
+				F0FF1C60204E6E210051D894 /* TokenTransferContainerController */,
+				F075A44B204BF470001949A9 /* WalletTransactionControllers */,
 				813D5903203924D8003D9175 /* ConfirmTransactionTableView */,
 				813D590020391C76003D9175 /* SendETHTableView */,
 				818571E3202B9098005729EA /* CreateHDWalletTableView */,
@@ -307,6 +323,51 @@
 				64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F075A44B204BF470001949A9 /* WalletTransactionControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF1C5D204C05BD0051D894 /* CreateNewKey */,
+				F075A44D204BF490001949A9 /* ContainerController */,
+				F075A44C204BF484001949A9 /* HistoryController */,
+			);
+			path = WalletTransactionControllers;
+			sourceTree = "<group>";
+		};
+		F075A44C204BF484001949A9 /* HistoryController */ = {
+			isa = PBXGroup;
+			children = (
+				F075A44E204BF4B8001949A9 /* TransactionsHistoryController.swift */,
+				F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */,
+				F075A452204BFA34001949A9 /* TransactionsHistoryPresenter.swift */,
+				F075A454204BFA69001949A9 /* TransactionsHistoryProtocols.swift */,
+			);
+			path = HistoryController;
+			sourceTree = "<group>";
+		};
+		F075A44D204BF490001949A9 /* ContainerController */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF1C5B204C01E40051D894 /* WalletTransactionsContainerController.swift */,
+			);
+			path = ContainerController;
+			sourceTree = "<group>";
+		};
+		F0FF1C5D204C05BD0051D894 /* CreateNewKey */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF1C5E204C05BD0051D894 /* CreateNewKeyController.swift */,
+			);
+			path = CreateNewKey;
+			sourceTree = "<group>";
+		};
+		F0FF1C60204E6E210051D894 /* TokenTransferContainerController */ = {
+			isa = PBXGroup;
+			children = (
+				F0FF1C61204E6E2D0051D894 /* TokenTransferContainerController.swift */,
+			);
+			path = TokenTransferContainerController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,6 +651,7 @@
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
@@ -603,6 +665,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
@@ -620,22 +683,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0FF1C5A204BFB610051D894 /* TransactionsHistoryProtocols.swift in Sources */,
 				81C4333E201B3BE5008D3343 /* Constants.swift in Sources */,
+				F0FF1C5F204C05BE0051D894 /* CreateNewKeyController.swift in Sources */,
 				813D5905203924EE003D9175 /* ConfirmTransactionTableViewController.swift in Sources */,
 				8104B04E201F356F00AE94B5 /* TokenBalanceCell.swift in Sources */,
+				F075A451204BF4EE001949A9 /* TransactionHistoryCell.swift in Sources */,
 				818571E5202B90AD005729EA /* CreateHDWalletTableViewController.swift in Sources */,
 				8104B050201F368200AE94B5 /* Web3.swift in Sources */,
 				813D590220391C97003D9175 /* SendETHTableViewController.swift in Sources */,
 				81942F09201B36A300F0AE29 /* WalletsTableViewController.swift in Sources */,
 				8104B04C201F353700AE94B5 /* BalanceCell.swift in Sources */,
 				8104B04A201F333300AE94B5 /* SingleAddressTableViewController.swift in Sources */,
+				F075A453204BFA34001949A9 /* TransactionsHistoryPresenter.swift in Sources */,
 				81C43348201B820A008D3343 /* EthereumKeystoreCell.swift in Sources */,
+				F075A44F204BF4B8001949A9 /* TransactionsHistoryController.swift in Sources */,
 				8104B0552020C40700AE94B5 /* CreateKeystoreTableViewController.swift in Sources */,
 				81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */,
 				81C4333C201B3B5C008D3343 /* StoragePaths.swift in Sources */,
 				81C43341201B7327008D3343 /* WalletState.swift in Sources */,
+				F0FF1C62204E6E2D0051D894 /* TokenTransferContainerController.swift in Sources */,
 				81C43343201B7BDA008D3343 /* Keystores.swift in Sources */,
 				81942F0F201B36A300F0AE29 /* BankexWallet.xcdatamodeld in Sources */,
+				F0FF1C5C204C01E40051D894 /* WalletTransactionsContainerController.swift in Sources */,
 				818571E2202B8C78005729EA /* ImportPrivateKeyTableViewController.swift in Sources */,
 				8104B052201F6BF100AE94B5 /* AddressCell.swift in Sources */,
 			);
@@ -807,6 +877,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5UH69GW6GE;
 				INFOPLIST_FILE = BankexWallet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -823,6 +894,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5UH69GW6GE;
 				INFOPLIST_FILE = BankexWallet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

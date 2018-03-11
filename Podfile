@@ -6,7 +6,9 @@ target 'BankexWallet' do
   # Pods for BankexWallet
   pod 'PromiseKit', '~> 4.4'
   pod 'AwaitKit', '~> 3.0.1'
-  pod 'web3swift', :path => '../../web3swift/web3swift'
+  #pod 'web3swift', :path => '../../web3swift/web3swift'
+  pod 'web3swift', :git => 'https://github.com/bankex/web3swift.git'
+
   target 'BankexWalletTests' do
     inherit! :search_paths
     # Pods for testing
