@@ -18,14 +18,22 @@ protocol SingleKeyService {
     func preferredSingleAddress() -> String?
     func updatePreferred(address: String)
     func delete(address: String)
+    func keystoreManager() -> KeystoreManager?
 }
 
+//TODO: Add here more magic for default things
 class SingleKeyServiceImplementation: SingleKeyService {
+    
+    func keystoreManager() -> KeystoreManager? {
+        return KeystoreManager.managerForPath(defaultKeystorePath)
+    }
     
     let userDefaultsKeyForSelectedAddress = "SelectedAddress"
     
     let pathForKeys: String
     let defaultPassword: String
+    let defaultKeystorePath = "/keystore"
+    
     init(pathToStoreKeys: String = "/keystore", defaultPassword: String = "BANKEXFOUNDATION") {
         self.pathForKeys = pathToStoreKeys
         self.defaultPassword = defaultPassword

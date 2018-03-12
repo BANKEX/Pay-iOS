@@ -17,6 +17,7 @@ enum SendEthErrors: Error {
     case retrievingGasPriceError
     case retrievingEstimatedGasError
     case emptyResult
+    case noAvailableKeys
 }
 
 protocol SendEthService {
@@ -28,7 +29,10 @@ protocol SendEthService {
               with password: String) throws -> [String: String]
 }
 
+// TODO: check that correct address will be used
 class SendEthServiceImplementation: SendEthService {
+    
+    let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
     func send(transaction: TransactionIntermediate, with password: String = "BANKEXFOUNDATION") throws -> [String: String] {
         let result = transaction.send()
@@ -52,14 +56,16 @@ class SendEthServiceImplementation: SendEthService {
         guard let amount = Web3.Utils.parseToBigUInt(amountString, toUnits: .eth) else {
             throw SendEthErrors.invalidAmountFormat
         }
-
-        let web3 = WalletWeb3Factory.web3
-        // TODO: Add KeyStore Here to web3
         
+        let web3 = WalletWeb3Factory.web3
+        guard let selectedKey = keysService.preferredSingleAddress() else {
+                throw SendEthErrors.noAvailableKeys
+        }
+        let ethAddressFrom = EthereumAddress(selectedKey)
+        web3.addKeystoreManager(keysService.keystoreManager())
         var options = Web3Options.defaultOptions()
         options.gasLimit = BigUInt(gasLimit)
-        // TODO: Setup current address
-//        options.from = self.address
+        options.from = ethAddressFrom
         options.value = BigUInt(amount)
         guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destinationEthAddress) else {
             throw SendEthErrors.contractLoadingError
