@@ -97,7 +97,7 @@ class TokenTransferContainerController: UIViewController, UIScrollViewDelegate {
             switch result {
             case .Success(let response):
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
-                let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 0)
+                let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
                 self.currentBalanceLabel.text = "Amount: " + formattedAmount!
             case .Error(let error):
                 print("\(error)")

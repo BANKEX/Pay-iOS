@@ -9,6 +9,7 @@
 import UIKit
 import web3swift
 import BigInt
+import SugarRecord
 
 enum SendEthErrors: Error {
     case invalidDestinationAddress
@@ -43,6 +44,8 @@ protocol SendEthService {
     
     func send(transaction: TransactionIntermediate, completion:
         @escaping (SendEthResult<[String: String]>) -> Void)
+    
+    func getAllTransactions() -> [SendEthTransaction]?
 }
 
 extension SendEthService {
@@ -62,6 +65,19 @@ extension SendEthService {
 // TODO: check that correct address will be used
 class SendEthServiceImplementation: SendEthService {
     
+    func getAllTransactions() -> [SendEthTransaction]? {
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().sorted(with: "date", ascending: false))
+        return transactions
+    }
+    
+    let db: CoreDataDefaultStorage
+    init() {
+        let store = CoreDataStore.named("BankexWallet")
+        let bundle = Bundle.main
+        let model = CoreDataObjectModel.merged([bundle])
+        db = try! CoreDataDefaultStorage(store: store, model: model)
+    }
+    
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
     func send(transaction: TransactionIntermediate, with password: String = "BANKEXFOUNDATION", completion: @escaping (SendEthResult<[String: String]>) -> Void) {
@@ -79,7 +95,19 @@ class SendEthServiceImplementation: SendEthService {
                 }
                 return
             }
-            
+            do {
+                try self.db.operation { (context, save) in
+                    let newTask: SendEthTransaction = try context.new()
+                    newTask.to = transaction.options?.to?.address
+                    newTask.from = transaction.options?.from?.address
+                    newTask.date = NSDate()
+                    newTask.amount = transaction.options?.value?.description
+                    try context.insert(newTask)
+                    save()
+                }
+            } catch {
+                // There was an error in the operation
+            }
             DispatchQueue.main.async {
                 completion(SendEthResult.Success(value))
             }
@@ -151,4 +179,6 @@ class SendEthServiceImplementation: SendEthService {
             }
         }
     }
+    
+    // MARK:
 }
