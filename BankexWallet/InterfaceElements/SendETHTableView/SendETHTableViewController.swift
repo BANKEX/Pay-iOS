@@ -26,6 +26,9 @@ class SendETHTableViewController: UITableViewController {
         return UITableViewAutomaticDimension
     }
     
+    
+    let sendEthService: SendEthService = SendEthServiceImplementation()
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer {
             tableView.deselectRow(at: indexPath, animated: true)
@@ -58,8 +61,6 @@ class SendETHTableViewController: UITableViewController {
                 let transactionIntermediate = contract.method(options: options)
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "ConfirmTransactionTableViewController") as! ConfirmTransactionTableViewController
-                controller.keystore = keystore
-                controller.address = address
                 controller.intermediate = transactionIntermediate
                 self.navigationController?.pushViewController(controller, animated: true)
                 return
