@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import web3swift
+import BigInt
 
 class TransactionHistoryCell: UITableViewCell {
 
@@ -17,14 +19,24 @@ class TransactionHistoryCell: UITableViewCell {
 
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
+        formatter.dateFormat = "dd.MM.YYYY"
         return formatter
     }()
     
     
     func configure(withTransaction: Any) {
-        
+        guard let trans = withTransaction as? SendEthTransaction else {
+            return
+        }
+        statusImageView.image = #imageLiteral(resourceName: "icons-checked")
+        dateLabel.text = dateFormatter.string(from: trans.date! as Date)
+        addressLabel.text = trans.to
+        //TODO: nope, please, don't do it like this
+        var amountString = Web3.Utils.formatToEthereumUnits(BigUInt(UInt(trans.amount!)!), toUnits: .eth, decimals: 15)
+        while amountString?.hasSuffix("0") ?? false {
+            amountString?.removeLast()
+        }
+        amountLabel.text = (amountString ?? "") + " Eth."
     }
     
     override func awakeFromNib() {

@@ -25,7 +25,8 @@ protocol SingleKeyService {
 class SingleKeyServiceImplementation: SingleKeyService {
     
     func keystoreManager() -> KeystoreManager? {
-        return KeystoreManager.managerForPath(defaultKeystorePath)
+        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        return KeystoreManager.managerForPath(userDir + pathForKeys)
     }
     
     let userDefaultsKeyForSelectedAddress = "SelectedAddress"

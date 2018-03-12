@@ -12,6 +12,8 @@ import web3swift
 class TransactionsHistoryPresenter: TransactionsHistoryViewOutput {
     weak var view: TransactionsHistoryViewInput?
     
+    let service: SendEthService = SendEthServiceImplementation()
+    
     func viewIsReady() {
         //check if any of key exists
         let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -20,6 +22,11 @@ class TransactionsHistoryPresenter: TransactionsHistoryViewOutput {
             view?.showNoKeysAvailableView()
             return
         }
-        view?.showEmptyView()
+        let objects = service.getAllTransactions()
+        guard let obj = objects,  !obj.isEmpty else {
+            view?.showEmptyView()
+            return
+        }
+        view?.show(transactions: obj)
     }
 }

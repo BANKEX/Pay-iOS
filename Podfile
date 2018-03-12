@@ -8,6 +8,7 @@ target 'BankexWallet' do
   pod 'AwaitKit', '~> 3.0.1'
   #pod 'web3swift', :path => '../../web3swift/web3swift'
   pod 'web3swift', :git => 'https://github.com/bankex/web3swift.git'
+  pod "SugarRecord/CoreData"
 
   target 'BankexWalletTests' do
     inherit! :search_paths
