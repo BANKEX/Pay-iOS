@@ -18,15 +18,24 @@ enum SendEthErrors: Error {
     case retrievingEstimatedGasError
     case emptyResult
     case noAvailableKeys
+    case createTransactionIssue
 }
 
 protocol SendEthService {
     func prepareTransactionForSending(destinationAddressString: String,
                                       amountString: String,
-                                      gasLimit: UInt) throws -> TransactionIntermediate?
+                                      gasLimit: UInt) throws -> TransactionIntermediate
     
     func send(transaction: TransactionIntermediate,
               with password: String) throws -> [String: String]
+    
+    func send(transaction: TransactionIntermediate) throws -> [String: String]
+}
+
+extension SendEthService {
+    func send(transaction: TransactionIntermediate) throws -> [String: String] {
+        return try send(transaction: transaction, with: "BANKEXFOUNDATION")
+    }
 }
 
 // TODO: check that correct address will be used
@@ -47,7 +56,7 @@ class SendEthServiceImplementation: SendEthService {
     
     func prepareTransactionForSending(destinationAddressString: String,
                                       amountString: String,
-                                      gasLimit: UInt = 21000) throws -> TransactionIntermediate? {
+                                      gasLimit: UInt = 21000) throws -> TransactionIntermediate {
         
         let destinationEthAddress = EthereumAddress(destinationAddressString)
         if !destinationEthAddress.isValid {
@@ -79,10 +88,9 @@ class SendEthServiceImplementation: SendEthService {
             throw SendEthErrors.retrievingGasPriceError
         }
         options.gasPrice = gasPrice
-        return contract.method(options: options)
-    }
-    
-    func sendEth(transaction: Any) throws {
-        
+        guard let transaction = contract.method(options: options) else {
+            throw SendEthErrors.createTransactionIssue
+        }
+        return transaction
     }
 }
