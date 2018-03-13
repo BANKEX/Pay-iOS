@@ -8,9 +8,13 @@
 
 import UIKit
 import web3swift
+import AVFoundation
+import QRCodeReader
 
-class TokenTransferContainerController: UIViewController, UIScrollViewDelegate, AddressSelection {
-    
+class TokenTransferContainerController: UIViewController,
+UIScrollViewDelegate,
+AddressSelection,
+QRCodeReaderViewControllerDelegate {
     
     func didSelect(address: String) {
         destinationTextfield.text = address
@@ -127,7 +131,16 @@ class TokenTransferContainerController: UIViewController, UIScrollViewDelegate, 
     
     // MARK: Actions
     @IBAction func scanQRCode(_ sender: Any) {
+        readerVC.delegate = self
         
+        // Or by using the closure pattern
+        readerVC.completionBlock = { (result: QRCodeReaderResult?) in
+            print(result)
+        }
+        
+        // Presents the readerVC as modal form sheet
+        readerVC.modalPresentationStyle = .formSheet
+        present(readerVC, animated: true, completion: nil)
     }
     
     @IBAction func openSavedAddressesList(_ sender: Any) {
@@ -155,5 +168,36 @@ class TokenTransferContainerController: UIViewController, UIScrollViewDelegate, 
                 print("\(error)")
             }
         }
+    }
+    
+    // MARK: QR Code scan
+    lazy var readerVC: QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
+        }
+        
+        return QRCodeReaderViewController(builder: builder)
+    }()
+    
+    // MARK: - QRCodeReaderViewController Delegate Methods
+    
+    func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
+        reader.stopScanning()
+        destinationTextfield.text = result.value
+        dismiss(animated: true, completion: nil)
+    }
+    
+    //This is an optional delegate method, that allows you to be notified when the user switches the cameraName
+    //By pressing on the switch camera button
+    func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput) {
+//        if let cameraName = newCaptureDevice.device.localizedName {
+//            print("Switching capturing to: \(cameraName)")
+//        }
+    }
+    
+    func readerDidCancel(_ reader: QRCodeReaderViewController) {
+        reader.stopScanning()
+        
+        dismiss(animated: true, completion: nil)
     }
 }

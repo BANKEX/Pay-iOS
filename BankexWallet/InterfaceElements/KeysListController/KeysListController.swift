@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KeysListController: UITableViewController {
+class KeysListController: UITableViewController, OpenQRCode {
 
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
@@ -31,13 +31,10 @@ class KeysListController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "DefaultCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PublicKeyCell", for: indexPath) as! PublicKeyCell
         let addressAtIndex = (index < addresses?.count ?? 0) ? addresses?[indexPath.row] : nil
-        cell.textLabel?.text = addressAtIndex ?? "Create New Key"
-        cell.backgroundColor = UIColor.clear
-        if addressAtIndex == selectedAddress {
-            cell.imageView?.image = #imageLiteral(resourceName: "icons-checked")
-        }
+        cell.configure(withAddress: (addressAtIndex ?? ""), isSelected: addressAtIndex == selectedAddress)
+        cell.delegate = self
         return cell
     }
 
@@ -49,6 +46,21 @@ class KeysListController: UITableViewController {
         selectedAddress = newSelectedAddress
         keysService.updatePreferred(address: newSelectedAddress)
         tableView.reloadData()
+    }
+    
+    // MARK: OpenQRCode
+    var address: String = ""
+    func openQRCode(for address: String) {
+        self.address = address
+        performSegue(withIdentifier: "showQRCode", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showQRCode" {
+            let controller = segue.destination as? AddressQRCodeController
+            controller?.addressToGenerateQR = address
+        }
+        address = ""
     }
 
 }

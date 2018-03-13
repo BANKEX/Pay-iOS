@@ -9,6 +9,7 @@ target 'BankexWallet' do
   #pod 'web3swift', :path => '../../web3swift/web3swift'
   pod 'web3swift', :git => 'https://github.com/bankex/web3swift.git'
   pod "SugarRecord/CoreData"
+  pod 'QRCodeReader.swift', '~> 8.1.1'
 
   target 'BankexWalletTests' do
     inherit! :search_paths
