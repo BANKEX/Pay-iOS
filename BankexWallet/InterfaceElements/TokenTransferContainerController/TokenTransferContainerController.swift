@@ -11,6 +11,8 @@ import web3swift
 import AVFoundation
 import QRCodeReader
 import BigInt
+import LocalAuthentication
+
 
 class TokenTransferContainerController: UIViewController,
 UIScrollViewDelegate,
@@ -50,10 +52,13 @@ QRCodeReaderViewControllerDelegate {
     var selectedTransaction: SendEthTransaction?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        destinationTextfield.text = selectedTransaction?.to
+        guard let selectedTransaction = selectedTransaction else {
+            return
+        }
+        destinationTextfield.text = selectedTransaction.to
         
         //TODO: don't do this, please
-        guard let amount = selectedTransaction?.amount,
+        guard let amount = selectedTransaction.amount,
             let uintAmount = UInt(amount)
              else {
                 return
@@ -83,11 +88,36 @@ QRCodeReaderViewControllerDelegate {
         let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you want to send \(amount) Eth. to \(destinationAddress)", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "Sure", style: .default, handler: { (_) in
-            self.confirm(transaction: transaction)
+            self.useFaceIdToAuth(transaction: transaction)
         }))
         alertController.addAction(UIAlertAction(title: "Let me think", style: .cancel, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+    
+    
+    func useFaceIdToAuth(transaction: TransactionIntermediate) {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself!"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
+                [unowned self] (success, authenticationError) in
+                
+                DispatchQueue.main.async {
+                    if success {
+                        self.confirm(transaction: transaction)
+                    } else {
+                        // error
+                    }
+                }
+            }
+        } else {
+            // no biometry
+        }
+    }
+    
     
     let addressesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     
@@ -98,7 +128,8 @@ QRCodeReaderViewControllerDelegate {
                 let alertController = UIAlertController(title: "Succeed", message: "\(response)", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
                     self.showSaveRecipientSuggestion(addressToSave: transaction.options?.to?.address)
-                    
+                    self.destinationTextfield.text = nil
+                    self.ethAmountTextfield.text = nil
                 }))
                 self.present(alertController, animated: true, completion: nil)
                 self.updateBalance()
@@ -214,7 +245,6 @@ QRCodeReaderViewControllerDelegate {
     
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
         reader.stopScanning()
-        
         dismiss(animated: true, completion: nil)
     }
 }
