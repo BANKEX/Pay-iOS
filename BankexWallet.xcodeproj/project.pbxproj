@@ -35,6 +35,9 @@
 		C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */; };
 		F05876222056D467007CF0E1 /* SendEthTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05876202056D467007CF0E1 /* SendEthTransaction+CoreDataClass.swift */; };
 		F05876232056D467007CF0E1 /* SendEthTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05876212056D467007CF0E1 /* SendEthTransaction+CoreDataProperties.swift */; };
+		F05876482057AC86007CF0E1 /* SavedAddressesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05876472057AC86007CF0E1 /* SavedAddressesList.swift */; };
+		F058764A2057B7D7007CF0E1 /* PublicKeyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05876492057B7D7007CF0E1 /* PublicKeyCell.swift */; };
+		F058764D2057BAE5007CF0E1 /* AddressQRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */; };
 		F075A44F204BF4B8001949A9 /* TransactionsHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A44E204BF4B8001949A9 /* TransactionsHistoryController.swift */; };
 		F075A451204BF4EE001949A9 /* TransactionHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */; };
 		F075A453204BFA34001949A9 /* TransactionsHistoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A452204BFA34001949A9 /* TransactionsHistoryPresenter.swift */; };
@@ -113,6 +116,9 @@
 		D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.release.xcconfig"; sourceTree = "<group>"; };
 		F05876202056D467007CF0E1 /* SendEthTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SendEthTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F05876212056D467007CF0E1 /* SendEthTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SendEthTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F05876472057AC86007CF0E1 /* SavedAddressesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAddressesList.swift; sourceTree = "<group>"; };
+		F05876492057B7D7007CF0E1 /* PublicKeyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyCell.swift; sourceTree = "<group>"; };
+		F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressQRCodeController.swift; sourceTree = "<group>"; };
 		F075A44E204BF4B8001949A9 /* TransactionsHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryController.swift; sourceTree = "<group>"; };
 		F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryCell.swift; sourceTree = "<group>"; };
 		F075A452204BFA34001949A9 /* TransactionsHistoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryPresenter.swift; sourceTree = "<group>"; };
@@ -314,6 +320,8 @@
 		81C43344201B81E4008D3343 /* InterfaceElements */ = {
 			isa = PBXGroup;
 			children = (
+				F058764B2057BAC5007CF0E1 /* AddressQRCodeController */,
+				F05876462057AC68007CF0E1 /* SavedAddressesList */,
 				F0FF1C7820568EEE0051D894 /* KeysListController */,
 				F0FF1C60204E6E210051D894 /* TokenTransferContainerController */,
 				F075A44B204BF470001949A9 /* WalletTransactionControllers */,
@@ -353,6 +361,22 @@
 				64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F05876462057AC68007CF0E1 /* SavedAddressesList */ = {
+			isa = PBXGroup;
+			children = (
+				F05876472057AC86007CF0E1 /* SavedAddressesList.swift */,
+			);
+			path = SavedAddressesList;
+			sourceTree = "<group>";
+		};
+		F058764B2057BAC5007CF0E1 /* AddressQRCodeController */ = {
+			isa = PBXGroup;
+			children = (
+				F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */,
+			);
+			path = AddressQRCodeController;
 			sourceTree = "<group>";
 		};
 		F075A44B204BF470001949A9 /* WalletTransactionControllers */ = {
@@ -428,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				F0FF1C7920568F0A0051D894 /* KeysListController.swift */,
+				F05876492057B7D7007CF0E1 /* PublicKeyCell.swift */,
 			);
 			path = KeysListController;
 			sourceTree = "<group>";
@@ -722,6 +747,7 @@
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SugarRecord/SugarRecord.framework",
@@ -737,6 +763,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SugarRecord.framework",
@@ -762,6 +789,7 @@
 				81C4333E201B3BE5008D3343 /* Constants.swift in Sources */,
 				F0FF1C5F204C05BE0051D894 /* CreateNewKeyController.swift in Sources */,
 				813D5905203924EE003D9175 /* ConfirmTransactionTableViewController.swift in Sources */,
+				F058764A2057B7D7007CF0E1 /* PublicKeyCell.swift in Sources */,
 				8104B04E201F356F00AE94B5 /* TokenBalanceCell.swift in Sources */,
 				F075A451204BF4EE001949A9 /* TransactionHistoryCell.swift in Sources */,
 				818571E5202B90AD005729EA /* CreateHDWalletTableViewController.swift in Sources */,
@@ -781,6 +809,8 @@
 				81C4333C201B3B5C008D3343 /* StoragePaths.swift in Sources */,
 				81C43341201B7327008D3343 /* WalletState.swift in Sources */,
 				F0FF1C62204E6E2D0051D894 /* TokenTransferContainerController.swift in Sources */,
+				F05876482057AC86007CF0E1 /* SavedAddressesList.swift in Sources */,
+				F058764D2057BAE5007CF0E1 /* AddressQRCodeController.swift in Sources */,
 				81C43343201B7BDA008D3343 /* Keystores.swift in Sources */,
 				81942F0F201B36A300F0AE29 /* BankexWallet.xcdatamodeld in Sources */,
 				F0FF1C5C204C01E40051D894 /* WalletTransactionsContainerController.swift in Sources */,
@@ -961,7 +991,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5UH69GW6GE;
+				DEVELOPMENT_TEAM = W4C5X5EUJU;
 				INFOPLIST_FILE = BankexWallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -978,7 +1008,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5UH69GW6GE;
+				DEVELOPMENT_TEAM = W4C5X5EUJU;
 				INFOPLIST_FILE = BankexWallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
