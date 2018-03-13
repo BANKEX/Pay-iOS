@@ -44,16 +44,21 @@ class TransactionsHistoryController: UIViewController,
     }
     
     // MARK: Update view status
+    var canSendTransactions = false
     func showEmptyView() {
+        canSendTransactions = true
         emptyView.isHidden = false
         tableView.isHidden = true
         addTransactionButton.isHidden = false
         activityIndicator.stopAnimating()
         emptyViewLabel.text = NSLocalizedString("You don't have any transactions yet", comment: "")
         emptyViewButton.setTitle("Send money", for: .normal)
+        emptyViewButton.addTarget(self, action: #selector(showSendEth), for: .touchUpInside)
+
     }
     
     func showNoKeysAvailableView() {
+        canSendTransactions = false
         emptyView.isHidden = false
         tableView.isHidden = true
         addTransactionButton.isHidden = true
@@ -64,6 +69,7 @@ class TransactionsHistoryController: UIViewController,
     }
     
     func show(transactions: [Any]) {
+        canSendTransactions = true
         addTransactionButton.isHidden = false
         emptyView.isHidden = true
         tableView.isHidden = false
@@ -85,8 +91,37 @@ class TransactionsHistoryController: UIViewController,
         return cell
     }
     
+    var selectedTransaction: SendEthTransaction?
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let transaction = transactionsToShow?[indexPath.row] as? SendEthTransaction else {return}
+        
+        selectedTransaction = transaction
+        performSegue(withIdentifier: "showSendTransactions", sender: self)
+
+    }
+    
     // MARK:
+    @objc func showSendEth() {
+        performSegue(withIdentifier: "showSendTransactions", sender: self)
+    }
+    
     @objc func showAddNewKeyController() {
-        performSegue(withIdentifier: "addNewKey", sender: self)
+        if canSendTransactions {
+            performSegue(withIdentifier: "showSendTransactions", sender: self)
+        }
+        else {
+            performSegue(withIdentifier: "addNewKey", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showSendTransactions",
+            let transaction = selectedTransaction,
+            let navController = segue.destination as? UINavigationController,
+            let controller = navController.viewControllers.first as? TokenTransferContainerController {
+            controller.selectedTransaction = transaction
+            selectedTransaction = nil
+        }
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 import web3swift
 import AVFoundation
 import QRCodeReader
+import BigInt
 
 class TokenTransferContainerController: UIViewController,
 UIScrollViewDelegate,
@@ -44,6 +45,21 @@ QRCodeReaderViewControllerDelegate {
         }
         addressLabel.text = "Address: " + selectedAddress
         updateBalance()
+    }
+    
+    var selectedTransaction: SendEthTransaction?
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        destinationTextfield.text = selectedTransaction?.to
+        
+        //TODO: don't do this, please
+        guard let amount = selectedTransaction?.amount,
+            let uintAmount = UInt(amount)
+             else {
+                return
+        }
+        let formattedAmount = Web3.Utils.formatToEthereumUnits(BigUInt(uintAmount), toUnits: .eth, decimals: 5)
+        ethAmountTextfield.text = formattedAmount
     }
     
     // MARK: 
@@ -93,7 +109,8 @@ QRCodeReaderViewControllerDelegate {
     }
     
     func showSaveRecipientSuggestion(addressToSave: String?) {
-        guard let address = addressToSave else {
+        guard let address = addressToSave,
+            !addressesService.contains(address: address) else {
             return
         }
         
