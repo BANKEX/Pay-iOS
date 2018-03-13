@@ -9,7 +9,14 @@
 import UIKit
 import web3swift
 
-class TokenTransferContainerController: UIViewController, UIScrollViewDelegate {
+class TokenTransferContainerController: UIViewController, UIScrollViewDelegate, AddressSelection {
+    
+    
+    func didSelect(address: String) {
+        destinationTextfield.text = address
+        addressesListContainer.isHidden = true
+    }
+    
 
     // MARK: Services
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
@@ -18,27 +25,13 @@ class TokenTransferContainerController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Outlets
     
+    @IBOutlet weak var addressesListContainer: UIView!
     @IBOutlet weak var currentBalanceLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     
     @IBOutlet weak var ethAmountTextfield: UITextField!
     @IBOutlet weak var destinationTextfield: UITextField!    
-    
-    @IBAction func sendTransaction(_ sender: Any) {
-        guard let amount = ethAmountTextfield.text,
-            let destinationAddress = destinationTextfield.text else {
-                return
-        }
-        sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in
-            switch result {
-            case .Success(let transaction):
-                self.showConfirmation(forSending: amount, destinationAddress: destinationAddress, transaction: transaction)
-            case .Error(let error):
-                print("\(error)")
-            }
-        }
-        
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +43,11 @@ class TokenTransferContainerController: UIViewController, UIScrollViewDelegate {
     }
     
     // MARK: 
-    @IBAction func endEditingTapped(_ sender: Any) {
-        view.endEditing(true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addressesList" {
+            let controller = segue.destination as? SavedAddressesList
+            controller?.selectionAddressDelegate = self
+        }
     }
     
     // MARK: ScrollView
@@ -73,12 +69,16 @@ class TokenTransferContainerController: UIViewController, UIScrollViewDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
+    let addressesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
+    
     func confirm(transaction: TransactionIntermediate) {
         sendEthService.send(transaction: transaction) { (result) in
             switch result {
             case .Success(let response):
                 let alertController = UIAlertController(title: "Succeed", message: "\(response)", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                    self.showSaveRecipientSuggestion(addressToSave: transaction.options?.to?.address)
+                    
                 }))
                 self.present(alertController, animated: true, completion: nil)
                 self.updateBalance()
@@ -86,6 +86,26 @@ class TokenTransferContainerController: UIViewController, UIScrollViewDelegate {
                 print("\(error)")
             }
         }
+    }
+    
+    func showSaveRecipientSuggestion(addressToSave: String?) {
+        guard let address = addressToSave else {
+            return
+        }
+        
+        let alertController = UIAlertController(title: "Save address", message: "Do you want to save \(address) ?", preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Contact Name"
+        }
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+            guard let text = alertController.textFields?[0].text, !text.isEmpty else {
+                return
+            }
+            self.addressesService.store(address: address, with: text)
+        }))
+        alertController.addAction(UIAlertAction(title: "No need", style: .cancel, handler: { (_) in
+        }))
+        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: Balance
@@ -99,6 +119,38 @@ class TokenTransferContainerController: UIViewController, UIScrollViewDelegate {
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
                 let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
                 self.currentBalanceLabel.text = "Amount: " + formattedAmount!
+            case .Error(let error):
+                print("\(error)")
+            }
+        }
+    }
+    
+    // MARK: Actions
+    @IBAction func scanQRCode(_ sender: Any) {
+        
+    }
+    
+    @IBAction func openSavedAddressesList(_ sender: Any) {
+        addressesListContainer.isHidden = false
+    }
+    
+    @IBAction func openDefaultAddressInput(_ sender: Any) {
+        addressesListContainer.isHidden = true
+    }
+    
+    @IBAction func endEditingTapped(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    @IBAction func sendTransaction(_ sender: Any) {
+        guard let amount = ethAmountTextfield.text,
+            let destinationAddress = destinationTextfield.text else {
+                return
+        }
+        sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in
+            switch result {
+            case .Success(let transaction):
+                self.showConfirmation(forSending: amount, destinationAddress: destinationAddress, transaction: transaction)
             case .Error(let error):
                 print("\(error)")
             }
