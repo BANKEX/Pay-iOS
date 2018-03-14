@@ -17,9 +17,27 @@ enum UtilTransactionsErrors: Error {
 
 protocol UtilTransactionsService {
     func getBalance(for address: String, completion: @escaping (SendEthResult<BigUInt>)->Void)
+    func name(completion: @escaping (SendEthResult<String>) -> Void)
+    func symbol(completion: @escaping (SendEthResult<String>) -> Void)
+    func decimals(completion: @escaping (SendEthResult<BigUInt>) -> Void)
 }
 
 class UtilTransactionsServiceImplementation: UtilTransactionsService {
+    
+    let keysService: SingleKeyService = SingleKeyServiceImplementation()
+    
+    func name(completion: @escaping (SendEthResult<String>) -> Void) {
+        
+    }
+    
+    func symbol(completion: @escaping (SendEthResult<String>) -> Void) {
+        
+    }
+    
+    func decimals(completion: @escaping (SendEthResult<BigUInt>) -> Void) {
+        
+    }
+    
     
     func getBalance(for address: String, completion: @escaping (SendEthResult<BigUInt>)->Void) {
         DispatchQueue.global().async {
@@ -31,6 +49,7 @@ class UtilTransactionsServiceImplementation: UtilTransactionsService {
                 }
                 return
             }
+            
             let result = web3.eth.getBalance(address: ethAddress)
             guard result.error == nil,
                 let resultValue = result.value else {
