@@ -13,10 +13,19 @@ protocol RecipientsAddressesService {
     func getAllStoredAddresses() -> [(String, String)]?
     func clearAllSavedAddresses()
     func delete(with name: String)
+    func contains(address: String) -> Bool
 }
 
 class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
     let keyForStoreRecipientAddresses = "RecipientAddressesKey"
+    
+    func contains(address: String) -> Bool {
+        let addresses = getAllStoredAddresses()
+        let contains = addresses?.contains(where: { (_, localAddress) -> Bool in
+            return address == localAddress
+        })
+        return contains ?? false
+    }
     
     func store(address: String, with name: String) {
         var savedAddresses = UserDefaults.standard.dictionary(forKey: keyForStoreRecipientAddresses)
