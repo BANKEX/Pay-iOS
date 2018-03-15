@@ -70,12 +70,9 @@ class SendEthServiceImplementation: SendEthService {
         return transactions
     }
     
-    let db: CoreDataDefaultStorage
+    let db = DBStorage.db
     init() {
-        let store = CoreDataStore.named("BankexWallet")
-        let bundle = Bundle.main
-        let model = CoreDataObjectModel.merged([bundle])
-        db = try! CoreDataDefaultStorage(store: store, model: model)
+
     }
     
     let keysService: SingleKeyService = SingleKeyServiceImplementation()

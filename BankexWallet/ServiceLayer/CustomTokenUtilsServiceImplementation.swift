@@ -2,7 +2,7 @@
 //  CustomTokenUtilsService.swift
 //  BankexWallet
 //
-//  Created by Korovkina, Ekaterina (Agoda) on 3/14/2561 BE.
+//  Created by Korovkina, Ekaterina  on 3/14/2561 BE.
 //  Copyright © 2561 Alexander Vlasov. All rights reserved.
 //
 
@@ -11,43 +11,45 @@ import BigInt
 import web3swift
 
 class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
-    func name(completion: @escaping (SendEthResult<String>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let contract = self.contract(for: "0x6ff6c0ff1d68b964901f986d4c9fa3ac68346570")
+    
+    func name(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
+//        DispatchQueue.global(qos: .userInitiated).async {
+            let contract = self.contract(for: token)
             let transaction = contract?.method("name", parameters: [AnyObject](), options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 completion(SendEthResult.Success(bkxBalance!.value!["0"] as! String))
-            }
-        }
+//            }
+//        }
     }
     
-    func symbol(completion: @escaping (SendEthResult<String>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let contract = self.contract(for: "0x6ff6c0ff1d68b964901f986d4c9fa3ac68346570")
+    func symbol(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
+//        DispatchQueue.global(qos: .userInitiated).async {
+            let contract = self.contract(for: token)
             let transaction = contract?.method("symbol", parameters: [AnyObject](), options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 completion(SendEthResult.Success(bkxBalance!.value!["0"] as! String))
-            }
-        }
+//            }
+//        }
     }
     
-    func decimals(completion: @escaping (SendEthResult<BigUInt>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let contract = self.contract(for: "0x6ff6c0ff1d68b964901f986d4c9fa3ac68346570")
+    func decimals(for token: String, completion: @escaping (SendEthResult<BigUInt>) -> Void) {
+//        DispatchQueue.global(qos: .userInitiated).async {
+            let contract = self.contract(for: token)
             let transaction = contract?.method("decimals", parameters: [AnyObject](), options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 completion(SendEthResult.Success(bkxBalance!.value!["0"] as! BigUInt))
-            }
-        }
+//            }
+//        }
     }
     
     
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
-    func getBalance(for address: String,
+    func getBalance(for token: String,
+                    address: String,
                     completion: @escaping (SendEthResult<BigUInt>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             
@@ -59,7 +61,7 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
                 return
             }
             
-            let contract = self.contract(for: "0x6ff6c0ff1d68b964901f986d4c9fa3ac68346570")
+            let contract = self.contract(for: token)
             let parameters = [ethAddress]
             let transaction = contract?.method("balanceOf", parameters: parameters as [AnyObject], options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())

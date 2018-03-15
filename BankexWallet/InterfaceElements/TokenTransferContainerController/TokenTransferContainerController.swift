@@ -28,7 +28,7 @@ QRCodeReaderViewControllerDelegate {
     // MARK: Services
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     let sendEthService: SendEthService = SendEthServiceImplementation()
-    let utilsService: UtilTransactionsService = UtilTransactionsServiceImplementation()
+    var utilsService: UtilTransactionsService!
     
     // MARK: Outlets
     
@@ -46,12 +46,18 @@ QRCodeReaderViewControllerDelegate {
             return
         }
         addressLabel.text = "Address: " + selectedAddress
-        updateBalance()
     }
     
+    
     var selectedTransaction: SendEthTransaction?
+    let tokensService = CustomERC20TokensServiceImplementation()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        utilsService = tokensService.selectedERC20Token().address.isEmpty ? UtilTransactionsServiceImplementation() :
+            CustomTokenUtilsServiceImplementation()
+        updateBalance()
+
         guard let selectedTransaction = selectedTransaction else {
             return
         }
@@ -165,7 +171,7 @@ QRCodeReaderViewControllerDelegate {
         guard let selectedAddress = keysService.preferredSingleAddress() else {
             return
         }
-        utilsService.getBalance(for: selectedAddress) { (result) in
+        utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in
             switch result {
             case .Success(let response):
                 // TODO: it shouldn't be here anyway and also, lets move to background thread

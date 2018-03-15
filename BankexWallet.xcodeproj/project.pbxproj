@@ -44,6 +44,9 @@
 		F0B1B4C5205944E1009D76D5 /* CustomERC20TokensService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4C4205944E1009D76D5 /* CustomERC20TokensService.swift */; };
 		F0B1B4C920594C43009D76D5 /* CustomTokenUtilsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4C820594C43009D76D5 /* CustomTokenUtilsServiceTests.swift */; };
 		F0B1B4CA20594D53009D76D5 /* CustomTokenUtilsServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4C620594AB0009D76D5 /* CustomTokenUtilsServiceImplementation.swift */; };
+		F0B1B4CD205AABF2009D76D5 /* TokensListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4CC205AABF2009D76D5 /* TokensListController.swift */; };
+		F0B1B4CF205AAC08009D76D5 /* TokensListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4CE205AAC08009D76D5 /* TokensListCell.swift */; };
+		F0B1B4D2205AAC95009D76D5 /* CreateTokenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4D1205AAC95009D76D5 /* CreateTokenController.swift */; };
 		F0FF1C5A204BFB610051D894 /* TransactionsHistoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A454204BFA69001949A9 /* TransactionsHistoryProtocols.swift */; };
 		F0FF1C5C204C01E40051D894 /* WalletTransactionsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF1C5B204C01E40051D894 /* WalletTransactionsContainerController.swift */; };
 		F0FF1C5F204C05BE0051D894 /* CreateNewKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FF1C5E204C05BD0051D894 /* CreateNewKeyController.swift */; };
@@ -129,6 +132,9 @@
 		F0B1B4C4205944E1009D76D5 /* CustomERC20TokensService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomERC20TokensService.swift; sourceTree = "<group>"; };
 		F0B1B4C620594AB0009D76D5 /* CustomTokenUtilsServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTokenUtilsServiceImplementation.swift; sourceTree = "<group>"; };
 		F0B1B4C820594C43009D76D5 /* CustomTokenUtilsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTokenUtilsServiceTests.swift; sourceTree = "<group>"; };
+		F0B1B4CC205AABF2009D76D5 /* TokensListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensListController.swift; sourceTree = "<group>"; };
+		F0B1B4CE205AAC08009D76D5 /* TokensListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensListCell.swift; sourceTree = "<group>"; };
+		F0B1B4D1205AAC95009D76D5 /* CreateTokenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenController.swift; sourceTree = "<group>"; };
 		F0FF1C5B204C01E40051D894 /* WalletTransactionsContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionsContainerController.swift; sourceTree = "<group>"; };
 		F0FF1C5E204C05BD0051D894 /* CreateNewKeyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewKeyController.swift; sourceTree = "<group>"; };
 		F0FF1C61204E6E2D0051D894 /* TokenTransferContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTransferContainerController.swift; sourceTree = "<group>"; };
@@ -326,6 +332,8 @@
 		81C43344201B81E4008D3343 /* InterfaceElements */ = {
 			isa = PBXGroup;
 			children = (
+				F0B1B4D0205AAC6A009D76D5 /* CreateToken */,
+				F0B1B4CB205AAA55009D76D5 /* TokensList */,
 				F058764B2057BAC5007CF0E1 /* AddressQRCodeController */,
 				F05876462057AC68007CF0E1 /* SavedAddressesList */,
 				F0FF1C7820568EEE0051D894 /* KeysListController */,
@@ -412,6 +420,23 @@
 				F0FF1C5B204C01E40051D894 /* WalletTransactionsContainerController.swift */,
 			);
 			path = ContainerController;
+			sourceTree = "<group>";
+		};
+		F0B1B4CB205AAA55009D76D5 /* TokensList */ = {
+			isa = PBXGroup;
+			children = (
+				F0B1B4CC205AABF2009D76D5 /* TokensListController.swift */,
+				F0B1B4CE205AAC08009D76D5 /* TokensListCell.swift */,
+			);
+			path = TokensList;
+			sourceTree = "<group>";
+		};
+		F0B1B4D0205AAC6A009D76D5 /* CreateToken */ = {
+			isa = PBXGroup;
+			children = (
+				F0B1B4D1205AAC95009D76D5 /* CreateTokenController.swift */,
+			);
+			path = CreateToken;
 			sourceTree = "<group>";
 		};
 		F0FF1C5D204C05BD0051D894 /* CreateNewKey */ = {
@@ -793,9 +818,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0FF1C7C205693480051D894 /* UtilTransactionsService.swift in Sources */,
+				F0B1B4CD205AABF2009D76D5 /* TokensListController.swift in Sources */,
 				F0FF1C5A204BFB610051D894 /* TransactionsHistoryProtocols.swift in Sources */,
 				F0FF1C73205551350051D894 /* RecipientsAddressesService.swift in Sources */,
 				F0B1B4C5205944E1009D76D5 /* CustomERC20TokensService.swift in Sources */,
+				F0B1B4D2205AAC95009D76D5 /* CreateTokenController.swift in Sources */,
 				81C4333E201B3BE5008D3343 /* Constants.swift in Sources */,
 				F0FF1C5F204C05BE0051D894 /* CreateNewKeyController.swift in Sources */,
 				813D5905203924EE003D9175 /* ConfirmTransactionTableViewController.swift in Sources */,
@@ -810,6 +837,7 @@
 				8104B04C201F353700AE94B5 /* BalanceCell.swift in Sources */,
 				8104B04A201F333300AE94B5 /* SingleAddressTableViewController.swift in Sources */,
 				F075A453204BFA34001949A9 /* TransactionsHistoryPresenter.swift in Sources */,
+				F0B1B4CF205AAC08009D76D5 /* TokensListCell.swift in Sources */,
 				81C43348201B820A008D3343 /* EthereumKeystoreCell.swift in Sources */,
 				F075A44F204BF4B8001949A9 /* TransactionsHistoryController.swift in Sources */,
 				F0FF1C7A20568F0A0051D894 /* KeysListController.swift in Sources */,
