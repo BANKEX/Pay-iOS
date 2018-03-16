@@ -203,7 +203,7 @@ class NetworkSelectionSettings {
     
     func preferredNetwork() -> Networks {
         guard let savedNetworkIdData = UserDefaults.standard.data(forKey: savingNetworkIdKey) else {
-            return Networks.Kovan
+            return Networks.Rinkeby
         }
         let savedNetworkId = BigUInt(savedNetworkIdData)
         return Web3SwiftNetworksAdapter().network(from: savedNetworkId)

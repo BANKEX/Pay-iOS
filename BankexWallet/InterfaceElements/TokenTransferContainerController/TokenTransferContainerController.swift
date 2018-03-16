@@ -138,7 +138,7 @@ QRCodeReaderViewControllerDelegate {
             case .Success(let response):
                 let alertController = UIAlertController(title: "Succeed", message: "\(response)", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                    self.showSaveRecipientSuggestion(addressToSave: transaction.options?.to?.address)
+                    self.showSaveRecipientSuggestion(addressToSave: self.destinationTextfield.text)
                     self.destinationTextfield.text = nil
                     self.ethAmountTextfield.text = nil
                 }))
@@ -193,9 +193,7 @@ QRCodeReaderViewControllerDelegate {
         readerVC.delegate = self
         
         // Or by using the closure pattern
-        readerVC.completionBlock = { (result: QRCodeReaderResult?) in
-            print(result)
-        }
+        readerVC.completionBlock = { (result: QRCodeReaderResult?) in        }
         
         // Presents the readerVC as modal form sheet
         readerVC.modalPresentationStyle = .formSheet
@@ -216,7 +214,7 @@ QRCodeReaderViewControllerDelegate {
     
     @IBAction func sendTransaction(_ sender: Any) {
         guard let amount = ethAmountTextfield.text,
-            let destinationAddress = destinationTextfield.text else {
+            let destinationAddress = destinationTextfield.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
                 return
         }
         sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in
