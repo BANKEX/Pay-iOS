@@ -70,11 +70,7 @@ class SendEthServiceImplementation: SendEthService {
         return transactions
     }
     
-    let db = DBStorage.db
-    init() {
-
-    }
-    
+    let db = DBStorage.db    
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
     func send(transaction: TransactionIntermediate, with password: String = "BANKEXFOUNDATION", completion: @escaping (SendEthResult<[String: String]>) -> Void) {

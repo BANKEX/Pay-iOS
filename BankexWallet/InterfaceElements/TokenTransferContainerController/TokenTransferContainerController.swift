@@ -27,7 +27,7 @@ QRCodeReaderViewControllerDelegate {
 
     // MARK: Services
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
-    let sendEthService: SendEthService = SendEthServiceImplementation()
+    var sendEthService: SendEthService!
     var utilsService: UtilTransactionsService!
     
     // MARK: Outlets
@@ -51,8 +51,13 @@ QRCodeReaderViewControllerDelegate {
     
     var selectedTransaction: SendEthTransaction?
     let tokensService = CustomERC20TokensServiceImplementation()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
+            SendEthServiceImplementation() :
+            ERC20TokenContractMethodsServiceImplementation()
         
         utilsService = tokensService.selectedERC20Token().address.isEmpty ? UtilTransactionsServiceImplementation() :
             CustomTokenUtilsServiceImplementation()
