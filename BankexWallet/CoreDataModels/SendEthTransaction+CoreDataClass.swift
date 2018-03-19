@@ -7,9 +7,10 @@
 //
 
 import Foundation
-import CoreData
+//import CoreData
+//
+//
+//public class SendEthTransactionModel {
+//
+//}
 
-
-public class SendEthTransaction: NSManagedObject {
-
-}

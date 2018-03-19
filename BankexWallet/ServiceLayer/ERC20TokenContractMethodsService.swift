@@ -9,13 +9,16 @@
 import UIKit
 import web3swift
 import BigInt
+import SugarRecord
 
 class ERC20TokenContractMethodsServiceImplementation: SendEthService {
-    let db = DBStorage.db
-
-    func send(transaction: TransactionIntermediate, with password: String, completion: @escaping (SendEthResult<[String : String]>) -> Void) {
+    func send(transactionModel: ETHTransactionModel,
+              transaction: TransactionIntermediate,
+              with password: String,
+              completion: @escaping (SendEthResult<[String : String]>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let result = transaction.send(password: "BANKEXFOUNDATION", options: transaction.options)
+            let result = transaction.send(password: "BANKEXFOUNDATION",
+                                          options: transaction.options)
             if let error = result.error {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(error))
@@ -31,10 +34,14 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
             do {
                 try self.db.operation { (context, save) in
                     let newTask: SendEthTransaction = try context.new()
-                    newTask.to = transaction.options?.to?.address
-                    newTask.from = transaction.options?.from?.address
-                    newTask.date = NSDate()
-                    newTask.amount = transaction.options?.value?.description
+                    newTask.to = transactionModel.to
+                    newTask.from = transactionModel.from
+                    newTask.date = transactionModel.date
+                    newTask.amount = transactionModel.amount
+                    // TODO: Now we suppose that we can have only one with given address
+                    let selectedTokenModel = CustomERC20TokensServiceImplementation().selectedERC20Token()
+                    let token = try context.fetch(FetchRequest<ERC20Token>().filtered(with: "address", equalTo: selectedTokenModel.address))
+                    newTask.token = token.first
                     try context.insert(newTask)
                     save()
                 }
@@ -47,6 +54,12 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
         }
     }
     
+    func delete(transaction: SendEthTransaction) {
+        
+    }
+    
+    let db = DBStorage.db
+
     
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     

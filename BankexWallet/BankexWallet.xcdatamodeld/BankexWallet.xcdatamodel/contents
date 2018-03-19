@@ -7,15 +7,17 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="networkURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="symbol" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SendEthTransaction" inverseName="token" inverseEntity="SendEthTransaction" syncable="YES"/>
     </entity>
-    <entity name="SendEthTransaction" representedClassName=".SendEthTransaction" syncable="YES">
+    <entity name="SendEthTransaction" representedClassName=".SendEthTransaction" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="from" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="to" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="token" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ERC20Token" inverseName="transactions" inverseEntity="ERC20Token" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="ERC20Token" positionX="-63" positionY="9" width="128" height="135"/>
+        <element name="ERC20Token" positionX="-63" positionY="9" width="128" height="150"/>
+        <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

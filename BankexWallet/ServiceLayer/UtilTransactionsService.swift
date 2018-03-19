@@ -31,15 +31,15 @@ class UtilTransactionsServiceImplementation: UtilTransactionsService {
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
     func name(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
-        
+        completion(SendEthResult.Success("Ether"))
     }
     
     func symbol(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
-        
+        completion(SendEthResult.Success("Eth"))
     }
     
     func decimals(for token: String, completion: @escaping (SendEthResult<BigUInt>) -> Void) {
-        
+        completion(SendEthResult.Success(BigUInt(18)))
     }
     
     

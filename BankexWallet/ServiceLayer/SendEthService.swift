@@ -27,7 +27,17 @@ enum SendEthResult<T> {
     case Error(Error)
 }
 
+struct ETHTransactionModel {
+    let from: String
+    let to: String
+    let amount: String
+    let date: Date
+    let token: ERC20TokenModel
+}
+
 protocol SendEthService {
+    
+    
     func prepareTransactionForSending(destinationAddressString: String,
                                       amountString: String,
                                       gasLimit: UInt,
@@ -38,20 +48,28 @@ protocol SendEthService {
                                       completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void)
     
     
-    func send(transaction: TransactionIntermediate,
+    func send(transactionModel: ETHTransactionModel,
+              transaction: TransactionIntermediate,
               with password: String,
               completion: @escaping (SendEthResult<[String: String]>) -> Void)
     
-    func send(transaction: TransactionIntermediate, completion:
+    func send(transactionModel: ETHTransactionModel,
+              transaction: TransactionIntermediate, completion:
         @escaping (SendEthResult<[String: String]>) -> Void)
     
     func getAllTransactions() -> [SendEthTransaction]?
+    
+    func delete(transaction: SendEthTransaction)
 }
 
 extension SendEthService {
-    func send(transaction: TransactionIntermediate,
+    func send(transactionModel: ETHTransactionModel,
+              transaction: TransactionIntermediate,
               completion: @escaping (SendEthResult<[String: String]>) -> Void)  {
-        send(transaction: transaction, with: "BANKEXFOUNDATION", completion: completion)
+        send(transactionModel: transactionModel,
+             transaction: transaction,
+             with: "BANKEXFOUNDATION",
+             completion: completion)
     }
     
     func prepareTransactionForSending(destinationAddressString: String,
@@ -64,16 +82,7 @@ extension SendEthService {
 
 // TODO: check that correct address will be used
 class SendEthServiceImplementation: SendEthService {
-    
-    func getAllTransactions() -> [SendEthTransaction]? {
-        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().sorted(with: "date", ascending: false))
-        return transactions
-    }
-    
-    let db = DBStorage.db    
-    let keysService: SingleKeyService = SingleKeyServiceImplementation()
-    
-    func send(transaction: TransactionIntermediate, with password: String = "BANKEXFOUNDATION", completion: @escaping (SendEthResult<[String: String]>) -> Void) {
+    func send(transactionModel: ETHTransactionModel, transaction: TransactionIntermediate, with password: String, completion: @escaping (SendEthResult<[String : String]>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let result = transaction.send()
             if let error = result.error {
@@ -91,10 +100,10 @@ class SendEthServiceImplementation: SendEthService {
             do {
                 try self.db.operation { (context, save) in
                     let newTask: SendEthTransaction = try context.new()
-                    newTask.to = transaction.options?.to?.address
-                    newTask.from = transaction.options?.from?.address
-                    newTask.date = NSDate()
-                    newTask.amount = transaction.options?.value?.description
+                    newTask.to = transactionModel.to
+                    newTask.from = transactionModel.from
+                    newTask.date = transactionModel.date as Date
+                    newTask.amount = transactionModel.amount
                     try context.insert(newTask)
                     save()
                 }
@@ -105,6 +114,38 @@ class SendEthServiceImplementation: SendEthService {
                 completion(SendEthResult.Success(value))
             }
         }
+    }
+    
+    
+    func delete(transaction: SendEthTransaction) {
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            do {
+//                try self.db.operation { (context, save) in
+//                    let newTask: SendEthTransaction = try context.new()
+//                    newTask.to = transaction.options?.to?.address
+//                    newTask.from = transaction.options?.from?.address
+//                    newTask.date = NSDate() as Date
+//                    newTask.amount = transaction.options?.value?.description
+//                    try context.insert(newTask)
+//                    save()
+//                }
+//            } catch {
+//                //TODO: There was an error in the operation
+//            }
+//        }
+    }
+    
+    
+    func getAllTransactions() -> [SendEthTransaction]? {
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().sorted(with: "date", ascending: false))
+        return transactions
+    }
+    
+    let db = DBStorage.db    
+    let keysService: SingleKeyService = SingleKeyServiceImplementation()
+    
+    func send(transaction: TransactionIntermediate, with password: String = "BANKEXFOUNDATION", completion: @escaping (SendEthResult<[String: String]>) -> Void) {
+        
     }
     
     func prepareTransactionForSending(destinationAddressString: String,

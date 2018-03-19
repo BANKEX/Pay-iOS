@@ -48,7 +48,7 @@ class ConfirmTransactionTableViewController: UITableViewController {
             guard let intermediate = intermediate else {
                 return
             }
-            service.send(transaction: intermediate, completion: { (result) in
+//            service.send(transaction: intermediate, completion: { (result) in
 //                let alert = UIAlertController.init(title: "Sent successfully",
 //                                                   message: "TX hash is " + (result["txhash"])!,
 //                                                   preferredStyle: UIAlertControllerStyle.alert)
@@ -57,7 +57,7 @@ class ConfirmTransactionTableViewController: UITableViewController {
 //                }))
 //                self.present(alert, animated: true, completion: nil)
                 
-            })
+//            })
             
 
             return
