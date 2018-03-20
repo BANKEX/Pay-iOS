@@ -31,12 +31,7 @@ class TransactionHistoryCell: UITableViewCell {
         statusImageView.image = #imageLiteral(resourceName: "icons-checked")
         dateLabel.text = dateFormatter.string(from: trans.date! as Date)
         addressLabel.text = trans.to
-        //TODO: nope, please, don't do it like this
-        var amountString = Web3.Utils.formatToEthereumUnits(BigUInt(UInt(trans.amount!)!), toUnits: .eth, decimals: 15)
-        while amountString?.hasSuffix("0") ?? false {
-            amountString?.removeLast()
-        }
-        amountLabel.text = (amountString ?? "") + " Eth."
+        amountLabel.text = trans.amount
     }
     
     override func awakeFromNib() {

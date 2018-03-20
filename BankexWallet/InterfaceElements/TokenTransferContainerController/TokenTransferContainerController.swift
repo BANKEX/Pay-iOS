@@ -27,8 +27,8 @@ QRCodeReaderViewControllerDelegate {
 
     // MARK: Services
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
-    let sendEthService: SendEthService = SendEthServiceImplementation()
-    let utilsService: UtilTransactionsService = UtilTransactionsServiceImplementation()
+    var sendEthService: SendEthService!
+    var utilsService: UtilTransactionsService!
     
     // MARK: Outlets
     
@@ -46,25 +46,35 @@ QRCodeReaderViewControllerDelegate {
             return
         }
         addressLabel.text = "Address: " + selectedAddress
-        updateBalance()
     }
     
+    
     var selectedTransaction: SendEthTransaction?
+    let tokensService = CustomERC20TokensServiceImplementation()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
+            SendEthServiceImplementation() :
+            ERC20TokenContractMethodsServiceImplementation()
+        
+        utilsService = tokensService.selectedERC20Token().address.isEmpty ? UtilTransactionsServiceImplementation() :
+            CustomTokenUtilsServiceImplementation()
+        updateBalance()
+
         guard let selectedTransaction = selectedTransaction else {
             return
         }
         destinationTextfield.text = selectedTransaction.to
         
-        //TODO: don't do this, please
-        guard let amount = selectedTransaction.amount,
+        guard let amount = selectedTransaction.amount?.components(separatedBy: " ").first,
             let uintAmount = UInt(amount)
              else {
                 return
         }
-        let formattedAmount = Web3.Utils.formatToEthereumUnits(BigUInt(uintAmount), toUnits: .eth, decimals: 5)
-        ethAmountTextfield.text = formattedAmount
+        //TODO: Check how it works now with ether
+        ethAmountTextfield.text = amount
     }
     
     // MARK: 
@@ -85,7 +95,7 @@ QRCodeReaderViewControllerDelegate {
     func showConfirmation(forSending amount: String,
                           destinationAddress:String,
                           transaction: TransactionIntermediate) {
-        let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you want to send \(amount) Eth. to \(destinationAddress)", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you want to send \(amount) \(tokensService.selectedERC20Token().symbol). to \(destinationAddress)", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "Sure", style: .default, handler: { (_) in
             self.useFaceIdToAuth(transaction: transaction)
@@ -122,12 +132,19 @@ QRCodeReaderViewControllerDelegate {
     let addressesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     
     func confirm(transaction: TransactionIntermediate) {
-        sendEthService.send(transaction: transaction) { (result) in
+        let token = tokensService.selectedERC20Token()
+        let transactionModel = ETHTransactionModel(from: keysService.preferredSingleAddress() ?? "",
+                                                   to: destinationTextfield.text ?? "",
+                                                   amount: (ethAmountTextfield.text ?? "") + " " + token.symbol,
+                                                   date: Date(),
+                                                   token: token)
+        sendEthService.send(transactionModel:transactionModel,
+                            transaction: transaction) { (result) in
             switch result {
             case .Success(let response):
                 let alertController = UIAlertController(title: "Succeed", message: "\(response)", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                    self.showSaveRecipientSuggestion(addressToSave: transaction.options?.to?.address)
+                    self.showSaveRecipientSuggestion(addressToSave: self.destinationTextfield.text)
                     self.destinationTextfield.text = nil
                     self.ethAmountTextfield.text = nil
                 }))
@@ -165,7 +182,7 @@ QRCodeReaderViewControllerDelegate {
         guard let selectedAddress = keysService.preferredSingleAddress() else {
             return
         }
-        utilsService.getBalance(for: selectedAddress) { (result) in
+        utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in
             switch result {
             case .Success(let response):
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
@@ -182,9 +199,7 @@ QRCodeReaderViewControllerDelegate {
         readerVC.delegate = self
         
         // Or by using the closure pattern
-        readerVC.completionBlock = { (result: QRCodeReaderResult?) in
-            print(result)
-        }
+        readerVC.completionBlock = { (result: QRCodeReaderResult?) in        }
         
         // Presents the readerVC as modal form sheet
         readerVC.modalPresentationStyle = .formSheet
@@ -205,7 +220,7 @@ QRCodeReaderViewControllerDelegate {
     
     @IBAction func sendTransaction(_ sender: Any) {
         guard let amount = ethAmountTextfield.text,
-            let destinationAddress = destinationTextfield.text else {
+            let destinationAddress = destinationTextfield.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
                 return
         }
         sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in

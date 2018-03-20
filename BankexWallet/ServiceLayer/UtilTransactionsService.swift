@@ -16,12 +16,36 @@ enum UtilTransactionsErrors: Error {
 }
 
 protocol UtilTransactionsService {
-    func getBalance(for address: String, completion: @escaping (SendEthResult<BigUInt>)->Void)
+    
+    func getBalance(for token: String,
+                    address: String,
+                    completion: @escaping (SendEthResult<BigUInt>)->Void)
+    func name(for token: String,completion: @escaping (SendEthResult<String>) -> Void)
+    func symbol(for token: String,completion: @escaping (SendEthResult<String>) -> Void)
+    func decimals(for token: String,completion: @escaping (SendEthResult<BigUInt>) -> Void)
+    
 }
 
 class UtilTransactionsServiceImplementation: UtilTransactionsService {
     
-    func getBalance(for address: String, completion: @escaping (SendEthResult<BigUInt>)->Void) {
+    let keysService: SingleKeyService = SingleKeyServiceImplementation()
+    
+    func name(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
+        completion(SendEthResult.Success("Ether"))
+    }
+    
+    func symbol(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
+        completion(SendEthResult.Success("Eth"))
+    }
+    
+    func decimals(for token: String, completion: @escaping (SendEthResult<BigUInt>) -> Void) {
+        completion(SendEthResult.Success(BigUInt(18)))
+    }
+    
+    
+    func getBalance(for token: String,
+                    address: String,
+                    completion: @escaping (SendEthResult<BigUInt>)->Void) {
         DispatchQueue.global().async {
             let web3 = WalletWeb3Factory.web3
             let ethAddress = EthereumAddress(address)

@@ -55,17 +55,11 @@ class SingleKeyServiceImplementation: SingleKeyService {
     }
     
     func fullListOfSingleEthereumAddresses() -> [EthereumAddress]? {
-        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let keystoreManager = KeystoreManager.managerForPath(userDir + pathForKeys)
-        
-        return keystoreManager?.addresses
+        return keystoreManager()?.addresses
     }
     
-    func fullListOfPublicAddresses() -> [String]? {
-        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let keystoreManager = KeystoreManager.managerForPath(userDir + pathForKeys)
-        
-        return keystoreManager?.addresses?.flatMap{ (ethAddress) -> String in
+    func fullListOfPublicAddresses() -> [String]? {        
+        return keystoreManager()?.addresses?.flatMap{ (ethAddress) -> String in
             return ethAddress.address
         }
     }

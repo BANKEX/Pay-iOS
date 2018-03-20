@@ -12,17 +12,27 @@ class WalletTransactionsContainerController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        segmentedControlValueChanged(self)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    @IBOutlet weak var historyContainerView: UIView!
+    @IBOutlet weak var tokensListContainerView: UIView!
     
     @IBAction func unwind(segue:UIStoryboardSegue) { }
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    
+    
+    @IBAction func segmentedControlValueChanged(_ sender: Any) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            historyContainerView.isHidden = false
+            tokensListContainerView.isHidden = true
+        } else {
+            historyContainerView.isHidden = true
+            tokensListContainerView.isHidden = false
+        }
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
