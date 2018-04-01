@@ -9,6 +9,7 @@
 import UIKit
 import web3swift
 import BigInt
+import web3swift
 
 enum UtilTransactionsErrors: Error {
     case invalidAddress
@@ -47,7 +48,7 @@ class UtilTransactionsServiceImplementation: UtilTransactionsService {
                     address: String,
                     completion: @escaping (SendEthResult<BigUInt>)->Void) {
         DispatchQueue.global().async {
-            let web3 = WalletWeb3Factory.web3
+            let web3 = WalletWeb3Factory.web3()
             let ethAddress = EthereumAddress(address)
             guard ethAddress.isValid else {
                 DispatchQueue.main.async {

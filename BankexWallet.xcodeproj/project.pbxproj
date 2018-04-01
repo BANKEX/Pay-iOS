@@ -33,6 +33,7 @@
 		81C43343201B7BDA008D3343 /* Keystores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43342201B7BDA008D3343 /* Keystores.swift */; };
 		81C43348201B820A008D3343 /* EthereumKeystoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43347201B820A008D3343 /* EthereumKeystoreCell.swift */; };
 		C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */; };
+		F004A1F020691FE300E3970A /* SelectNetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F004A1EF20691FE300E3970A /* SelectNetworkController.swift */; };
 		F05876482057AC86007CF0E1 /* SavedAddressesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05876472057AC86007CF0E1 /* SavedAddressesList.swift */; };
 		F058764A2057B7D7007CF0E1 /* PublicKeyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05876492057B7D7007CF0E1 /* PublicKeyCell.swift */; };
 		F058764D2057BAE5007CF0E1 /* AddressQRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */; };
@@ -119,6 +120,7 @@
 		CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.release.xcconfig"; sourceTree = "<group>"; };
+		F004A1EF20691FE300E3970A /* SelectNetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkController.swift; sourceTree = "<group>"; };
 		F05876202056D467007CF0E1 /* SendEthTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SendEthTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F05876212056D467007CF0E1 /* SendEthTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SendEthTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F05876472057AC86007CF0E1 /* SavedAddressesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAddressesList.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 		81C43344201B81E4008D3343 /* InterfaceElements */ = {
 			isa = PBXGroup;
 			children = (
+				F004A1EE20691FBC00E3970A /* SelectNetwork */,
 				F0B1B4D0205AAC6A009D76D5 /* CreateToken */,
 				F0B1B4CB205AAA55009D76D5 /* TokensList */,
 				F058764B2057BAC5007CF0E1 /* AddressQRCodeController */,
@@ -375,6 +378,14 @@
 				64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F004A1EE20691FBC00E3970A /* SelectNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				F004A1EF20691FE300E3970A /* SelectNetworkController.swift */,
+			);
+			path = SelectNetwork;
 			sourceTree = "<group>";
 		};
 		F05876462057AC68007CF0E1 /* SavedAddressesList */ = {
@@ -578,7 +589,7 @@
 				TargetAttributes = {
 					81942F02201B36A300F0AE29 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					81942F19201B36A300F0AE29 = {
 						CreatedOnToolsVersion = 9.2;
@@ -832,6 +843,7 @@
 				F075A451204BF4EE001949A9 /* TransactionHistoryCell.swift in Sources */,
 				818571E5202B90AD005729EA /* CreateHDWalletTableViewController.swift in Sources */,
 				8104B050201F368200AE94B5 /* Web3.swift in Sources */,
+				F004A1F020691FE300E3970A /* SelectNetworkController.swift in Sources */,
 				813D590220391C97003D9175 /* SendETHTableViewController.swift in Sources */,
 				81942F09201B36A300F0AE29 /* WalletsTableViewController.swift in Sources */,
 				8104B04C201F353700AE94B5 /* BalanceCell.swift in Sources */,
@@ -966,9 +978,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1017,8 +1029,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -1030,13 +1043,17 @@
 			baseConfigurationReference = 805299A5A8B2FE29BB36247D /* Pods-BankexWallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = W4C5X5EUJU;
 				INFOPLIST_FILE = BankexWallet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0eb02df2-6ed0-47d4-94d3-5f98927aad6d";
+				PROVISIONING_PROFILE_SPECIFIER = "Bankex Wallet Test";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1047,13 +1064,16 @@
 			baseConfigurationReference = D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = W4C5X5EUJU;
 				INFOPLIST_FILE = BankexWallet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0eb02df2-6ed0-47d4-94d3-5f98927aad6d";
+				PROVISIONING_PROFILE_SPECIFIER = "Bankex Wallet Test";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
