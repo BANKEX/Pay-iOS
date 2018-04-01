@@ -54,7 +54,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
         }
     }
     
-    func delete(transaction: SendEthTransaction) {
+    func delete(transaction: ETHTransactionModel) {
         
     }
     
@@ -132,7 +132,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
 
     }
     
-    func getAllTransactions() -> [SendEthTransaction]? {
+    func getAllTransactions() -> [ETHTransactionModel]? {
         // TODO: Select only transacions with selected token?
         // TODO: Or show all of them??
         // Make a setting

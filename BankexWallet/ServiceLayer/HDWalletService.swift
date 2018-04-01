@@ -25,6 +25,7 @@ protocol GlobalWalletsService {
     func keystoreManager() -> KeystoreManager
     func fullHDKeysList() -> [HDKey]?
     func selectedAddress() -> String?
+    func selectedKey() -> HDKey?
     func updateSelected(address: String)
     func delete(address: String)
 }
@@ -47,6 +48,13 @@ extension GlobalWalletsService {
         return key
     }
     
+    func selectedKey() -> HDKey? {
+        guard let selectedWallet = selectedWallet(), let address = selectedWallet.address else {
+            return nil
+        }
+        return HDKey(name: selectedWallet.name, address: address)
+    }
+
     func selectedAddress() -> String? {
         let key = try! DBStorage.db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).first
         return key?.address

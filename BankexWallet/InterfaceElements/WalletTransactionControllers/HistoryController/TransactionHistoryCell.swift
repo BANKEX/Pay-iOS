@@ -25,11 +25,11 @@ class TransactionHistoryCell: UITableViewCell {
     
     
     func configure(withTransaction: Any) {
-        guard let trans = withTransaction as? SendEthTransaction else {
+        guard let trans = withTransaction as? ETHTransactionModel else {
             return
         }
         statusImageView.image = #imageLiteral(resourceName: "icons-checked")
-        dateLabel.text = dateFormatter.string(from: trans.date! as Date)
+        dateLabel.text = dateFormatter.string(from: trans.date as Date)
         addressLabel.text = trans.to
         amountLabel.text = trans.amount
     }

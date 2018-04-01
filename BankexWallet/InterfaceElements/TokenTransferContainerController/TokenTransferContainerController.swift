@@ -137,7 +137,8 @@ QRCodeReaderViewControllerDelegate {
                                                    to: destinationTextfield.text ?? "",
                                                    amount: (ethAmountTextfield.text ?? "") + " " + token.symbol,
                                                    date: Date(),
-                                                   token: token)
+                                                   token: token,
+                                                   key: keysService.selectedKey()!)
         sendEthService.send(transactionModel:transactionModel,
                             transaction: transaction) { (result) in
             switch result {
