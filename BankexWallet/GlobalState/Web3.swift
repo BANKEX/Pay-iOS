@@ -13,7 +13,9 @@ import BigInt
 // TODO: Let's think about DI here
 class WalletWeb3Factory {
     
-    static let web3: web3 = {
+//    static let web3: web3 =
+    
+     static  func web3() -> web3 {
         let networksService = NetworksServiceImplementation()
         let preferredNetwork = networksService.preferredNetwork()
         let net = preferredNetwork.convertToNetworks()
@@ -23,5 +25,5 @@ class WalletWeb3Factory {
             return web3swift.web3(provider: InfuraProvider(Networks.Rinkeby)!)
         }
         return web3swift.web3(provider: provider)
-    }()
+    }//()
 }

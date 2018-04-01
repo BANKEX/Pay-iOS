@@ -167,7 +167,7 @@ class SendEthServiceImplementation: SendEthService {
                 return
             }
             
-            let web3 = WalletWeb3Factory.web3
+            let web3 = WalletWeb3Factory.web3()
             guard let selectedKey = self.keysService.preferredSingleAddress() else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.noAvailableKeys))

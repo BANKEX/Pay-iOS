@@ -74,7 +74,7 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
     }
     
     private func contract(for address: String) -> web3.web3contract? {
-        let web3 = WalletWeb3Factory.web3
+        let web3 = WalletWeb3Factory.web3()
         web3.addKeystoreManager(self.keysService.keystoreManager())
         
         let ethAddress = EthereumAddress(address)

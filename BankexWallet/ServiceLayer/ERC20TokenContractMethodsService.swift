@@ -83,7 +83,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
                 return
             }
             
-            let web3 = WalletWeb3Factory.web3
+            let web3 = WalletWeb3Factory.web3()
             web3.addKeystoreManager(self.keysService.keystoreManager())
             
             let token = CustomERC20TokensServiceImplementation().selectedERC20Token().address
@@ -142,7 +142,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
     
     // TODO: Move these two to somewhere else
     private func contract(for address: String) -> web3.web3contract? {
-        let web3 = WalletWeb3Factory.web3
+        let web3 = WalletWeb3Factory.web3()
         web3.addKeystoreManager(self.keysService.keystoreManager())
         
         let ethAddress = EthereumAddress(address)

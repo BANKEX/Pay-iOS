@@ -79,7 +79,7 @@ class SingleAddressTableViewController: UITableViewController {
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "BalanceCell", for: indexPath)
                 as! BalanceCell
-            let balance = WalletWeb3Factory.web3.eth.getBalance(address: self.address!, onBlock: "pending")
+            let balance = WalletWeb3Factory.web3().eth.getBalance(address: self.address!, onBlock: "pending")
             if (balance.value == nil) {
                 return cell
             }

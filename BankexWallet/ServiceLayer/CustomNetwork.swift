@@ -98,6 +98,7 @@ protocol NetworksService {
     func currentNetworksList() -> [CustomNetwork]
     func deleteNetwork(with networkId: BigUInt) throws
     func preferredNetwork() -> CustomNetwork
+    func updatePreferredNetwork(customNetwork: CustomNetwork)
 }
 
 class NetworksServiceImplementation: NetworksService {
@@ -137,7 +138,7 @@ class NetworksServiceImplementation: NetworksService {
             self.networksList = [CustomNetwork]()
         }
         
-        return networksList
+        return defaultNetworks() + networksList
     }
     
     func addCustomNetwork(name: String? = nil,
@@ -190,10 +191,29 @@ class NetworksServiceImplementation: NetworksService {
         }
     }
     
+    func updatePreferredNetwork(customNetwork: CustomNetwork) {
+        guard customNetwork.networkId == 1 ||
+            customNetwork.networkId == 3 ||
+            customNetwork.networkId == 4 ||
+            customNetwork.networkId == 42 else {
+            return
+        }
+        let network = Web3SwiftNetworksAdapter().network(from: customNetwork.networkId)
+        let networkSelectionSetting = NetworkSelectionSettings()
+        networkSelectionSetting.updatePreferredNetwork(to: network)
+    }
+
+    
     func preferredNetwork() -> CustomNetwork {
         //TODO: DI! DI! DI! Or maybe delete this settings class
         let networkSelectionSetting = NetworkSelectionSettings()
         return CustomNetwork.convert(network: networkSelectionSetting.preferredNetwork())
+    }
+    
+    private func defaultNetworks() -> [CustomNetwork] {
+        return [Networks.Mainnet, Networks.Rinkeby, Networks.Kovan, Networks.Ropsten].map { (network) -> CustomNetwork in
+            return CustomNetwork.convert(network: network)
+        }
     }
 }
 
