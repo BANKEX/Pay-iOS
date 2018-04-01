@@ -8,27 +8,24 @@
 
 import UIKit
 import web3swift
+import SugarRecord
 
 //TODO: Part of these calls should throw
-protocol SingleKeyService {
+protocol SingleKeyService: GlobalWalletsService {
     
-    func createNewSingleAddressWallet(withPassword password: String?)
-    func createNewSingleAddressWallet(fromText privateKey: String, password: String?)
+    func createNewSingleAddressWallet(with name: String?,
+                                      password: String?,
+                                      completion: @escaping (Error?)-> Void)
+    func createNewSingleAddressWallet(with name: String?,
+                                      fromText privateKey: String,
+                                      password: String?,
+                                      completion: @escaping (Error?)-> Void)
     func fullListOfPublicAddresses() -> [String]?
-    func preferredSingleAddress() -> String?
-    func updatePreferred(address: String)
-    func delete(address: String)
-    func keystoreManager() -> KeystoreManager?
 }
 
 //TODO: Add here more magic for default things
 class SingleKeyServiceImplementation: SingleKeyService {
-    
-    func keystoreManager() -> KeystoreManager? {
-        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        return KeystoreManager.managerForPath(userDir + pathForKeys)
-    }
-    
+
     let userDefaultsKeyForSelectedAddress = "SelectedAddress"
     
     let pathForKeys: String
@@ -40,76 +37,77 @@ class SingleKeyServiceImplementation: SingleKeyService {
         self.defaultPassword = defaultPassword
     }
     
-    func preferredSingleAddress() -> String? {
-        guard let selectedAddress = UserDefaults.standard.string(forKey: userDefaultsKeyForSelectedAddress) else {
-            if let address = fullListOfPublicAddresses()?.first {
-                return address
-            }
+    
+    
+    func fullListOfSingleEthereumAddresses() -> [HDKey]? {
+        guard let allKeys = try? db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isHD == %@", NSNumber(value: false)))) else {
             return nil
         }
-        return selectedAddress
-    }
-    
-    func updatePreferred(address: String) {
-        UserDefaults.standard.set(address, forKey: userDefaultsKeyForSelectedAddress)
-    }
-    
-    func fullListOfSingleEthereumAddresses() -> [EthereumAddress]? {
-        return keystoreManager()?.addresses
+        return allKeys.map({ (wallet) -> HDKey in
+            return HDKey(name: wallet.name, address: wallet.address ?? "")
+        })
     }
     
     func fullListOfPublicAddresses() -> [String]? {        
-        return keystoreManager()?.addresses?.flatMap{ (ethAddress) -> String in
-            return ethAddress.address
+        guard let allKeys = try? db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isHD == %@", NSNumber(value: false)))) else {
+            return nil
         }
+        return allKeys.flatMap({ (wallet) -> String in
+            return wallet.address ?? ""
+        })
     }
     
-    func createNewSingleAddressWallet(withPassword password: String? = nil) {
+    func createNewSingleAddressWallet(with name: String?,
+                                      password: String? = nil,
+                                      completion: @escaping (Error?)-> Void) {
         let usingPassword = password ?? defaultPassword
         guard let newWallet = try? EthereumKeystoreV3(password: usingPassword) else {return}
         guard let wallet = newWallet, wallet.addresses?.count == 1 else {return}
         guard let keydata = try? JSONEncoder().encode(wallet.keystoreParams) else {return}
         guard let address = newWallet?.addresses?.first?.address else {return}
-        save(keyData: keydata, for: address)
+        save(with: name, keyData: keydata, for: address, completion: completion)
     }
     
-    func createNewSingleAddressWallet(fromText privateKey: String, password: String?) {
+    func createNewSingleAddressWallet(with name: String?,
+                                      fromText privateKey: String,
+                                      password: String?,
+                                      completion: @escaping (Error?)-> Void) {
         let text = privateKey.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         guard let data = Data.fromHex(text) else {return}
         guard let newWallet = try? EthereumKeystoreV3(privateKey: data, password: password ?? defaultPassword) else {return}
         guard let wallet = newWallet, wallet.addresses?.count == 1 else {return}
         guard let keydata = try? JSONEncoder().encode(wallet.keystoreParams) else {return}
         guard let address = newWallet?.addresses?.first?.address else {return}
-        save(keyData: keydata, for: address)
+        save(with: name, keyData: keydata, for: address, completion: completion)
     }
     
-    private func save(keyData: Data, for address: String) {
-        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let path = userDir + pathForKeys
-        let fileManager = FileManager.default
-        var isDir : ObjCBool = false
-        var exists = fileManager.fileExists(atPath: path, isDirectory: &isDir)
-        if (!exists && !isDir.boolValue){
-            try? fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-            exists = fileManager.fileExists(atPath: path, isDirectory: &isDir)
+    
+    // MARK: Private Part
+    let db = DBStorage.db
+    
+    private func save(with name: String?,
+                      keyData: Data,
+                      for address: String,
+                      completion: @escaping (Error?)-> Void) {
+        
+        db.backgroundOperation({ (context, save) in
+            do {
+                let newWallet: KeyWallet = try context.new()
+                newWallet.name = name
+                newWallet.address = address
+                newWallet.isHD = false
+                newWallet.isSelected = true
+                newWallet.data = keyData
+                try context.insert(newWallet)
+                save()
+            }
+            catch {
+                
+            }
+        }) { (error) in
+            DispatchQueue.main.async {
+                completion(nil)
+            }
         }
-        if (!isDir.boolValue) {
-            return
-        }
-        fileManager.createFile(atPath: path + "/" + address + ".json", contents: keyData, attributes: nil)
-    }
-    
-    func delete(address: String) {
-        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let path = userDir + pathForKeys
-        let fileManager = FileManager.default
-        try! fileManager.removeItem(atPath: path + "/" + address + ".json")
-    }
-    
-    func clearAllWallets() {
-        let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let path = userDir + pathForKeys
-        let fileManager = FileManager.default
-        try! fileManager.removeItem(atPath: path)
     }
 }

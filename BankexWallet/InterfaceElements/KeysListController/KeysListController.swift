@@ -19,7 +19,7 @@ class KeysListController: UITableViewController, OpenQRCode {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addresses = keysService.fullListOfPublicAddresses()
-        selectedAddress = keysService.preferredSingleAddress()
+        selectedAddress = keysService.selectedAddress()
         tableView.reloadData()
     }
     
@@ -44,7 +44,7 @@ class KeysListController: UITableViewController, OpenQRCode {
             return
         }
         selectedAddress = newSelectedAddress
-        keysService.updatePreferred(address: newSelectedAddress)
+        keysService.updateSelected(address: newSelectedAddress)
         tableView.reloadData()
     }
     

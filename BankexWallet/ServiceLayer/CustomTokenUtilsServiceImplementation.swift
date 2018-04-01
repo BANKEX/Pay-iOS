@@ -91,7 +91,7 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
         var options = Web3Options.defaultOptions()
         options.gasLimit = BigUInt(250000)
         options.gasPrice = BigUInt(25000000000)
-        options.from = EthereumAddress(self.keysService.preferredSingleAddress()!)
+        options.from = EthereumAddress(self.keysService.selectedAddress()!)
         return options
     }
 }
