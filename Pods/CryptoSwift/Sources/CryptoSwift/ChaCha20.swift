@@ -1,4 +1,5 @@
 //
+//  ChaCha20.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -206,18 +207,18 @@ public final class ChaCha20: BlockCipher {
     }
 
     // XORKeyStream
-    func process(bytes: ArraySlice<UInt8>, counter: inout Array<UInt8>, key: Array<UInt8>) -> Array<UInt8> {
+    func process(bytes: Array<UInt8>, counter: inout Array<UInt8>, key: Array<UInt8>) -> Array<UInt8> {
         precondition(counter.count == 16)
         precondition(key.count == 32)
 
         var block = Array<UInt8>(repeating: 0, count: ChaCha20.blockSize)
-        var bytesSlice = bytes
-        var out = Array<UInt8>(reserveCapacity: bytesSlice.count)
+        var bytes = bytes // TODO: check bytes[bytes.indices]
+        var out = Array<UInt8>(reserveCapacity: bytes.count)
 
-        while bytesSlice.count >= ChaCha20.blockSize {
+        while bytes.count >= ChaCha20.blockSize {
             core(block: &block, counter: counter, key: key)
             for (i, x) in block.enumerated() {
-                out.append(bytesSlice[bytesSlice.startIndex + i] ^ x)
+                out.append(bytes[i] ^ x)
             }
             var u: UInt32 = 1
             for i in 0..<4 {
@@ -225,12 +226,12 @@ public final class ChaCha20: BlockCipher {
                 counter[i] = UInt8(u & 0xFF)
                 u >>= 8
             }
-            bytesSlice = bytesSlice[bytesSlice.startIndex + ChaCha20.blockSize..<bytesSlice.endIndex]
+            bytes = Array(bytes[ChaCha20.blockSize..<bytes.endIndex])
         }
 
-        if bytesSlice.count > 0 {
+        if bytes.count > 0 {
             core(block: &block, counter: counter, key: key)
-            for (i, v) in bytesSlice.enumerated() {
+            for (i, v) in bytes.enumerated() {
                 out.append(v ^ block[i])
             }
         }
@@ -242,7 +243,7 @@ public final class ChaCha20: BlockCipher {
 extension ChaCha20: Cipher {
 
     public func encrypt(_ bytes: ArraySlice<UInt8>) throws -> Array<UInt8> {
-        return process(bytes: bytes, counter: &counter, key: Array(key))
+        return process(bytes: Array(bytes), counter: &counter, key: Array(key))
     }
 
     public func decrypt(_ bytes: ArraySlice<UInt8>) throws -> Array<UInt8> {
@@ -292,7 +293,7 @@ extension ChaCha20 {
         }
 
         public mutating func update(withBytes bytes: ArraySlice<UInt8>, isLast: Bool = true) throws -> Array<UInt8> {
-            // prepend "offset" number of bytes at the beginning
+            // prepend "offset" number of bytes at the begining
             if offset > 0 {
                 accumulated += Array<UInt8>(repeating: 0, count: offset) + bytes
                 offsetToRemove = offset

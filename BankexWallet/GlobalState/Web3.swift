@@ -8,20 +8,17 @@
 
 import Foundation
 import web3swift
-import BigInt
 
-// TODO: Let's think about DI here
-class WalletWeb3Factory {
+struct BankexWalletWeb3 {
     
-    static let web3: web3 = {
-        let networksService = NetworksServiceImplementation()
-        let preferredNetwork = networksService.preferredNetwork()
-        let net = preferredNetwork.convertToNetworks()
-        
-        guard let provider = Web3HttpProvider(preferredNetwork.fullNetworkUrl, network: net, keystoreManager: nil) else {
-            //TODO: Let's trust our library, and pray it creates provider at least for default net
-            return web3swift.web3(provider: InfuraProvider(Networks.Rinkeby)!)
+    private static var _web3: web3? = nil
+    
+    static var web3: web3 {
+        get {
+            if _web3 == nil {
+                _web3 = Web3.InfuraMainnetWeb3()
+            }
+            return _web3!
         }
-        return web3swift.web3(provider: provider)
-    }()
+    }
 }

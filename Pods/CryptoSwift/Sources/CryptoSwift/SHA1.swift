@@ -1,4 +1,5 @@
 //
+//  SHA1.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -105,7 +106,6 @@ public final class SHA1: DigestType {
 
 extension SHA1: Updatable {
 
-    @discardableResult
     public func update(withBytes bytes: ArraySlice<UInt8>, isLast: Bool = false) throws -> Array<UInt8> {
         accumulated += bytes
 

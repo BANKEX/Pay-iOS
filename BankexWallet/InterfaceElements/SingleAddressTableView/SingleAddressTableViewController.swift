@@ -79,11 +79,11 @@ class SingleAddressTableViewController: UITableViewController {
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "BalanceCell", for: indexPath)
                 as! BalanceCell
-            let balance = WalletWeb3Factory.web3.eth.getBalance(address: self.address!, onBlock: "pending")
-            if (balance.value == nil) {
+            let balance = BankexWalletWeb3.web3.eth.getBalance(address: self.address!, onBlock: "pending")
+            if (balance == nil) {
                 return cell
             }
-            guard let formattedAmount = Web3.Utils.formatToEthereumUnits(balance.value!, toUnits: .eth, decimals: 3) else {return cell}
+            guard let formattedAmount = Web3.Utils.formatToEthereumUnits(balance!, toUnits: .eth, decimals: 3) else {return cell}
             cell.balanceLabel.text = formattedAmount + " ETH"
             return cell
         case 2:
