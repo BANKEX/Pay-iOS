@@ -9,6 +9,15 @@
         <attribute name="symbol" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SendEthTransaction" inverseName="token" inverseEntity="SendEthTransaction" syncable="YES"/>
     </entity>
+    <entity name="KeyWallet" representedClassName="KeyWallet" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="isHD" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="childKeys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="parentKey" inverseEntity="KeyWallet" syncable="YES"/>
+        <relationship name="parentKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="childKeys" inverseEntity="KeyWallet" syncable="YES"/>
+    </entity>
     <entity name="SendEthTransaction" representedClassName=".SendEthTransaction" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -19,5 +28,6 @@
     <elements>
         <element name="ERC20Token" positionX="-63" positionY="9" width="128" height="150"/>
         <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="KeyWallet" positionX="-54" positionY="54" width="128" height="150"/>
     </elements>
 </model>

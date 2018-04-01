@@ -12,33 +12,11 @@ import BigInt
 
 class CustomTokenUtilsServiceTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
     func testGetName() {
         //given
         let service = CustomTokenUtilsServiceImplementation()
         let expectationrer = expectation(description: "Example")
-        service.name(completion:{(_) in
+        service.name(for: "", completion:{(_) in
             expectationrer.fulfill()
         })
 
@@ -49,7 +27,7 @@ class CustomTokenUtilsServiceTests: XCTestCase {
         //given
         let service = CustomTokenUtilsServiceImplementation()
         let expectationrer = expectation(description: "Example")
-        service.symbol(completion:{(_) in
+        service.symbol(for: "", completion:{(_) in
             expectationrer.fulfill()
         })
         
@@ -60,7 +38,7 @@ class CustomTokenUtilsServiceTests: XCTestCase {
         //given
         let service = CustomTokenUtilsServiceImplementation()
         let expectationrer = expectation(description: "Example")
-        service.decimals(completion:{(_) in
+        service.decimals(for: "", completion:{(_) in
             expectationrer.fulfill()
         })
         
@@ -71,7 +49,7 @@ class CustomTokenUtilsServiceTests: XCTestCase {
         //given
         let service = CustomTokenUtilsServiceImplementation()
         let expectationrer = expectation(description: "Example")
-        service.getBalance(for: "0xD3671e3d9BC2F737097Fe1E3aF4572c4529a5Ff3", completion:{(_) in
+        service.getBalance(for: "0xD3671e3d9BC2F737097Fe1E3aF4572c4529a5Ff3", address: "", completion:{(_) in
             expectationrer.fulfill()
         })
         

@@ -37,6 +37,6 @@ class CreateNewKeyController: UIViewController {
     }
     
     func importKey(keyText: String) {
-        keysService.createNewSingleAddressWallet(fromText: keyText)
+        keysService.createNewSingleAddressWallet(fromText: keyText, password: "")
     }
 }

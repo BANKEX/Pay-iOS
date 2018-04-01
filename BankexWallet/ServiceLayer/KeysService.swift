@@ -13,7 +13,7 @@ import web3swift
 protocol SingleKeyService {
     
     func createNewSingleAddressWallet(withPassword password: String?)
-    func createNewSingleAddressWallet(fromText privateKey: String)
+    func createNewSingleAddressWallet(fromText privateKey: String, password: String?)
     func fullListOfPublicAddresses() -> [String]?
     func preferredSingleAddress() -> String?
     func updatePreferred(address: String)
@@ -73,10 +73,10 @@ class SingleKeyServiceImplementation: SingleKeyService {
         save(keyData: keydata, for: address)
     }
     
-    func createNewSingleAddressWallet(fromText privateKey: String) {
+    func createNewSingleAddressWallet(fromText privateKey: String, password: String?) {
         let text = privateKey.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         guard let data = Data.fromHex(text) else {return}
-        guard let newWallet = try? EthereumKeystoreV3(privateKey:data) else {return}
+        guard let newWallet = try? EthereumKeystoreV3(privateKey: data, password: password ?? defaultPassword) else {return}
         guard let wallet = newWallet, wallet.addresses?.count == 1 else {return}
         guard let keydata = try? JSONEncoder().encode(wallet.keystoreParams) else {return}
         guard let address = newWallet?.addresses?.first?.address else {return}
