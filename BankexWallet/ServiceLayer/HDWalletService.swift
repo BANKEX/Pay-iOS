@@ -134,10 +134,10 @@ protocol HDWalletService: GlobalWalletsService {
                            walletPassword: String,
                            completion: @escaping (String?, Error?) -> Void)
     
-    func generateChildNode(forKey: HDKey,
+    func generateChildNode(with name: String,
+                           key: HDKey,
                            password: String,
                            completion: @escaping (String?, Error?) -> Void)
-    
 }
 
 extension HDWalletService {
@@ -185,13 +185,14 @@ class HDWalletServiceImplementation: HDWalletService {
     }
     
 
-    func generateChildNode(forKey: HDKey,
+    func generateChildNode(with name: String,
+                           key: HDKey,
                            password: String,
                            completion: @escaping (String?, Error?) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 try self.db.operation({ (context, save) in
-                    guard let key = try context.fetch(FetchRequest<KeyWallet>().filtered(with: "address", equalTo: forKey.address)).first, let data = key.data else {
+                    guard let foundKey = try context.fetch(FetchRequest<KeyWallet>().filtered(with: "address", equalTo: key.address)).first, let data = foundKey.data else {
                         DispatchQueue.main.async {
                             completion(nil, nil)
                         }
@@ -200,11 +201,40 @@ class HDWalletServiceImplementation: HDWalletService {
                     
                     let wallet = BIP32Keystore(data)
                     try wallet?.createNewChildAccount(password: password)
-                    let _ = wallet?.addresses
-                    // TODO: Finish him
+                    guard let allAddresses = wallet?.addresses?.flatMap({ (ethAddress) -> String? in
+                        return ethAddress.address
+                    }) else {
+                        DispatchQueue.main.async {
+                            completion(nil, nil)
+                        }
+                        return
+                    }
+                    let allStored = try context.fetch(FetchRequest<KeyWallet>()).flatMap({ (key) -> String? in
+                        return key.address
+                    })
+                    let addressINeed = Set(allAddresses).subtracting(Set(allStored))
+                    guard addressINeed.count == 1 else {
+                        DispatchQueue.main.async {
+                            completion(nil, nil)
+                        }
+                        return
+                    }
+                    //TODO: Fix me
+                    let newChild: KeyWallet = try context.new()
+                    newChild.name = name
+                    newChild.isHD = true
+                    newChild.isSelected = true
+                    newChild.parentKey = foundKey
+                    newChild.address = addressINeed.first
+//                    newChild.data =
+//                    save()
+//                    DispatchQueue.main.async {
+//                        completion(nil, nil)
+//                    }
+//                    return
                 })
             }
-            catch {
+            catch (let error) {
                 DispatchQueue.main.async {
                     completion(nil, nil)
                 }

@@ -65,10 +65,11 @@ class HDWalletServiceTests: XCTestCase {
         //when
         service.createNewHDWallet(with: "Wallet name", mnemonics: mnemonics, mnemonicsPassword: "MnemonicsPassword", walletPassword: "WalletPAssword") { (address, error) in
             let allKeys = service.fullHDKeysList()
-            service.generateChildNode(forKey: allKeys!.first!, password: "WalletPAssword", completion: { (_, _) in
-                expectationForCreate.fulfill()
+            service.generateChildNode(with:"First Name", key: allKeys!.first!, password: "WalletPAssword", completion: { (_, _) in
+//                service.generateChildNode(with: "Second Name", key: allKeys!.first!, password: "WalletPAssword", completion: { (_, _) in
+                    expectationForCreate.fulfill()
+//                })
             })
-//            expectationForCreate.fulfill()
         }
         
         //then
@@ -77,6 +78,8 @@ class HDWalletServiceTests: XCTestCase {
                 XCTFail()
                 return
             }
+            let wallets = try! DBStorage.db.fetch(FetchRequest<KeyWallet>())
+            XCTAssertEqual(wallets.count, 3)
         }
     }
     
