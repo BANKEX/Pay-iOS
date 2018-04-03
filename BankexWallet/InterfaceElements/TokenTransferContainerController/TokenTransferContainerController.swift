@@ -42,7 +42,7 @@ QRCodeReaderViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let selectedAddress = keysService.preferredSingleAddress() else {
+        guard let selectedAddress = keysService.selectedAddress() else {
             return
         }
         addressLabel.text = "Address: " + selectedAddress
@@ -133,11 +133,12 @@ QRCodeReaderViewControllerDelegate {
     
     func confirm(transaction: TransactionIntermediate) {
         let token = tokensService.selectedERC20Token()
-        let transactionModel = ETHTransactionModel(from: keysService.preferredSingleAddress() ?? "",
+        let transactionModel = ETHTransactionModel(from: keysService.selectedAddress() ?? "",
                                                    to: destinationTextfield.text ?? "",
                                                    amount: (ethAmountTextfield.text ?? "") + " " + token.symbol,
                                                    date: Date(),
-                                                   token: token)
+                                                   token: token,
+                                                   key: keysService.selectedKey()!)
         sendEthService.send(transactionModel:transactionModel,
                             transaction: transaction) { (result) in
             switch result {
@@ -179,7 +180,7 @@ QRCodeReaderViewControllerDelegate {
     
     // MARK: Balance
     func updateBalance() {
-        guard let selectedAddress = keysService.preferredSingleAddress() else {
+        guard let selectedAddress = keysService.selectedAddress() else {
             return
         }
         utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in

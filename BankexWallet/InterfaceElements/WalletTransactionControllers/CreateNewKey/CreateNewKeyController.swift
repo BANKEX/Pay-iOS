@@ -21,22 +21,27 @@ class CreateNewKeyController: UIViewController {
             return
         }
         importKey(keyText: inputKeyTextView.text)
-        navigationController?.popViewController(animated: true)
+//        navigationController?.popViewController(animated: true)
     }
     
     
     @IBAction func createNewKey(_ sender: Any) {
         createWallet()
-        navigationController?.popViewController(animated: true)
     }
 
 
     // MARK: Create New Wallet
     func createWallet() {
-        keysService.createNewSingleAddressWallet()
+        //TODO: Add name here
+        keysService.createNewSingleAddressWallet(with: "", password: "BANKEXFOUNDATION") { (error) in
+            self.navigationController?.popViewController(animated: true)//(with: "") { (error) in
+        }//createNewSingleAddressWallet()
     }
     
     func importKey(keyText: String) {
-        keysService.createNewSingleAddressWallet(fromText: keyText)
+        // TODO: add name
+        keysService.createNewSingleAddressWallet(with: "", fromText: keyText, password: "BANKEXFOUNDATION") { (error) in
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }

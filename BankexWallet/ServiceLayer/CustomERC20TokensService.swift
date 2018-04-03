@@ -16,6 +16,26 @@ struct ERC20TokenModel {
     let decimals: String
     let symbol: String
     let isSelected: Bool
+    
+    init(token: ERC20Token) {
+        self.name = token.name ?? ""
+        self.address = token.address ?? ""
+        self.decimals = token.decimals ?? ""
+        self.symbol = token.symbol ?? ""
+        self.isSelected = token.isSelected
+    }
+    
+    init(name: String,
+         address: String,
+         decimals: String,
+         symbol: String,
+         isSelected: Bool) {
+        self.name = name
+        self.address = address
+        self.decimals = decimals
+        self.symbol = symbol
+        self.isSelected = isSelected
+    }
 }
 
 
@@ -213,7 +233,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     private func etherModel() -> ERC20TokenModel {
         let isEtherSelected = try! db.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).isEmpty
 
-        return ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth.", isSelected: isEtherSelected)
+        return ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: isEtherSelected)
     }
     
 }

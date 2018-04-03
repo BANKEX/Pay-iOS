@@ -54,7 +54,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
         }
     }
     
-    func delete(transaction: SendEthTransaction) {
+    func delete(transaction: ETHTransactionModel) {
         
     }
     
@@ -92,7 +92,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
             options.gasLimit = BigUInt(55000)
             options.gasPrice = BigUInt(25000000000)
 
-            options.from = EthereumAddress(self.keysService.preferredSingleAddress()!)
+            options.from = EthereumAddress(self.keysService.selectedAddress()!)
             
             guard let estimatedGas = contract?.method(options: options)?.estimateGas(options: options).value else {
                 DispatchQueue.main.async {
@@ -132,7 +132,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
 
     }
     
-    func getAllTransactions() -> [SendEthTransaction]? {
+    func getAllTransactions() -> [ETHTransactionModel]? {
         // TODO: Select only transacions with selected token?
         // TODO: Or show all of them??
         // Make a setting
@@ -159,7 +159,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
         var options = Web3Options.defaultOptions()
         options.gasLimit = BigUInt(21000)
         options.gasPrice = BigUInt(25000)
-        options.from = EthereumAddress(self.keysService.preferredSingleAddress()!)
+        options.from = EthereumAddress(self.keysService.selectedAddress()!)
         return options
     }
 }
