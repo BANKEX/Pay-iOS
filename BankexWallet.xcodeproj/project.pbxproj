@@ -34,6 +34,13 @@
 		81C43348201B820A008D3343 /* EthereumKeystoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43347201B820A008D3343 /* EthereumKeystoreCell.swift */; };
 		C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */; };
 		F004A1F020691FE300E3970A /* SelectNetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F004A1EF20691FE300E3970A /* SelectNetworkController.swift */; };
+		F00E460B2073CFA300387B96 /* WalletCreationTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E460A2073CFA300387B96 /* WalletCreationTypeController.swift */; };
+		F00E460E2073CFDB00387B96 /* WalletSingleKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E460D2073CFDB00387B96 /* WalletSingleKeyController.swift */; };
+		F00E46112073CFFD00387B96 /* WalletBIP32KeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E46102073CFFD00387B96 /* WalletBIP32KeyController.swift */; };
+		F00E461320750E4600387B96 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E461220750E4600387B96 /* Colors.swift */; };
+		F00E461520751D1E00387B96 /* WalletCreationTypeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E461420751D1E00387B96 /* WalletCreationTypeRouter.swift */; };
+		F00E461A2075212900387B96 /* MainInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E46192075212900387B96 /* MainInfoController.swift */; };
+		F00E461C2075245100387B96 /* CurrentWalletInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E461B2075245100387B96 /* CurrentWalletInfoCell.swift */; };
 		F05876482057AC86007CF0E1 /* SavedAddressesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05876472057AC86007CF0E1 /* SavedAddressesList.swift */; };
 		F058764A2057B7D7007CF0E1 /* PublicKeyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05876492057B7D7007CF0E1 /* PublicKeyCell.swift */; };
 		F058764D2057BAE5007CF0E1 /* AddressQRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */; };
@@ -122,6 +129,13 @@
 		D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.release.xcconfig"; sourceTree = "<group>"; };
 		F004A1EF20691FE300E3970A /* SelectNetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkController.swift; sourceTree = "<group>"; };
+		F00E460A2073CFA300387B96 /* WalletCreationTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreationTypeController.swift; sourceTree = "<group>"; };
+		F00E460D2073CFDB00387B96 /* WalletSingleKeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSingleKeyController.swift; sourceTree = "<group>"; };
+		F00E46102073CFFD00387B96 /* WalletBIP32KeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBIP32KeyController.swift; sourceTree = "<group>"; };
+		F00E461220750E4600387B96 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		F00E461420751D1E00387B96 /* WalletCreationTypeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreationTypeRouter.swift; sourceTree = "<group>"; };
+		F00E46192075212900387B96 /* MainInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInfoController.swift; sourceTree = "<group>"; };
+		F00E461B2075245100387B96 /* CurrentWalletInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWalletInfoCell.swift; sourceTree = "<group>"; };
 		F05876472057AC86007CF0E1 /* SavedAddressesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAddressesList.swift; sourceTree = "<group>"; };
 		F05876492057B7D7007CF0E1 /* PublicKeyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyCell.swift; sourceTree = "<group>"; };
 		F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressQRCodeController.swift; sourceTree = "<group>"; };
@@ -278,7 +292,6 @@
 		81942F05201B36A300F0AE29 /* BankexWallet */ = {
 			isa = PBXGroup;
 			children = (
-				F0FF1C7D2056CF9F0051D894 /* CoreDataModels */,
 				F0FF1C632054E75C0051D894 /* ServiceLayer */,
 				81C43344201B81E4008D3343 /* InterfaceElements */,
 				81C4333F201B730C008D3343 /* GlobalState */,
@@ -317,6 +330,7 @@
 			children = (
 				81C4333B201B3B5C008D3343 /* StoragePaths.swift */,
 				81C4333D201B3BE5008D3343 /* Constants.swift */,
+				F00E461220750E4600387B96 /* Colors.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -334,6 +348,7 @@
 		81C43344201B81E4008D3343 /* InterfaceElements */ = {
 			isa = PBXGroup;
 			children = (
+				F00E46082073CEBB00387B96 /* DesignElements */,
 				F004A1EE20691FBC00E3970A /* SelectNetwork */,
 				F0B1B4D0205AAC6A009D76D5 /* CreateToken */,
 				F0B1B4CB205AAA55009D76D5 /* TokensList */,
@@ -386,6 +401,51 @@
 				F004A1EF20691FE300E3970A /* SelectNetworkController.swift */,
 			);
 			path = SelectNetwork;
+			sourceTree = "<group>";
+		};
+		F00E46082073CEBB00387B96 /* DesignElements */ = {
+			isa = PBXGroup;
+			children = (
+				F00E4616207520B400387B96 /* MainInfoController */,
+				F00E460F2073CFE100387B96 /* WalletCreateController */,
+				F00E460C2073CFC100387B96 /* WalletImportController */,
+				F00E46092073CF8100387B96 /* WalletCreationTypeController */,
+			);
+			path = DesignElements;
+			sourceTree = "<group>";
+		};
+		F00E46092073CF8100387B96 /* WalletCreationTypeController */ = {
+			isa = PBXGroup;
+			children = (
+				F00E460A2073CFA300387B96 /* WalletCreationTypeController.swift */,
+				F00E461420751D1E00387B96 /* WalletCreationTypeRouter.swift */,
+			);
+			path = WalletCreationTypeController;
+			sourceTree = "<group>";
+		};
+		F00E460C2073CFC100387B96 /* WalletImportController */ = {
+			isa = PBXGroup;
+			children = (
+				F00E460D2073CFDB00387B96 /* WalletSingleKeyController.swift */,
+			);
+			path = WalletImportController;
+			sourceTree = "<group>";
+		};
+		F00E460F2073CFE100387B96 /* WalletCreateController */ = {
+			isa = PBXGroup;
+			children = (
+				F00E46102073CFFD00387B96 /* WalletBIP32KeyController.swift */,
+			);
+			path = WalletCreateController;
+			sourceTree = "<group>";
+		};
+		F00E4616207520B400387B96 /* MainInfoController */ = {
+			isa = PBXGroup;
+			children = (
+				F00E46192075212900387B96 /* MainInfoController.swift */,
+				F00E461B2075245100387B96 /* CurrentWalletInfoCell.swift */,
+			);
+			path = MainInfoController;
 			sourceTree = "<group>";
 		};
 		F05876462057AC68007CF0E1 /* SavedAddressesList */ = {
@@ -502,13 +562,6 @@
 				F05876492057B7D7007CF0E1 /* PublicKeyCell.swift */,
 			);
 			path = KeysListController;
-			sourceTree = "<group>";
-		};
-		F0FF1C7D2056CF9F0051D894 /* CoreDataModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CoreDataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -836,14 +889,18 @@
 				F0B1B4D2205AAC95009D76D5 /* CreateTokenController.swift in Sources */,
 				81C4333E201B3BE5008D3343 /* Constants.swift in Sources */,
 				F0FF1C5F204C05BE0051D894 /* CreateNewKeyController.swift in Sources */,
+				F00E461A2075212900387B96 /* MainInfoController.swift in Sources */,
+				F00E461520751D1E00387B96 /* WalletCreationTypeRouter.swift in Sources */,
 				813D5905203924EE003D9175 /* ConfirmTransactionTableViewController.swift in Sources */,
 				F058764A2057B7D7007CF0E1 /* PublicKeyCell.swift in Sources */,
 				8104B04E201F356F00AE94B5 /* TokenBalanceCell.swift in Sources */,
 				F075A451204BF4EE001949A9 /* TransactionHistoryCell.swift in Sources */,
 				818571E5202B90AD005729EA /* CreateHDWalletTableViewController.swift in Sources */,
+				F00E461320750E4600387B96 /* Colors.swift in Sources */,
 				8104B050201F368200AE94B5 /* Web3.swift in Sources */,
 				F004A1F020691FE300E3970A /* SelectNetworkController.swift in Sources */,
 				813D590220391C97003D9175 /* SendETHTableViewController.swift in Sources */,
+				F00E46112073CFFD00387B96 /* WalletBIP32KeyController.swift in Sources */,
 				81942F09201B36A300F0AE29 /* WalletsTableViewController.swift in Sources */,
 				8104B04C201F353700AE94B5 /* BalanceCell.swift in Sources */,
 				8104B04A201F333300AE94B5 /* SingleAddressTableViewController.swift in Sources */,
@@ -855,6 +912,7 @@
 				F0FF1C652054E77E0051D894 /* CustomNetwork.swift in Sources */,
 				8104B0552020C40700AE94B5 /* CreateKeystoreTableViewController.swift in Sources */,
 				F0B1B4CA20594D53009D76D5 /* CustomTokenUtilsServiceImplementation.swift in Sources */,
+				F00E460E2073CFDB00387B96 /* WalletSingleKeyController.swift in Sources */,
 				81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */,
 				81C4333C201B3B5C008D3343 /* StoragePaths.swift in Sources */,
 				81C43341201B7327008D3343 /* WalletState.swift in Sources */,
@@ -863,8 +921,10 @@
 				F058764D2057BAE5007CF0E1 /* AddressQRCodeController.swift in Sources */,
 				81C43343201B7BDA008D3343 /* Keystores.swift in Sources */,
 				81942F0F201B36A300F0AE29 /* BankexWallet.xcdatamodeld in Sources */,
+				F00E461C2075245100387B96 /* CurrentWalletInfoCell.swift in Sources */,
 				F0FF1C5C204C01E40051D894 /* WalletTransactionsContainerController.swift in Sources */,
 				818571E2202B8C78005729EA /* ImportPrivateKeyTableViewController.swift in Sources */,
+				F00E460B2073CFA300387B96 /* WalletCreationTypeController.swift in Sources */,
 				8104B052201F6BF100AE94B5 /* AddressCell.swift in Sources */,
 				F0FF1C772056528D0051D894 /* SendEthService.swift in Sources */,
 				F0FF1C6F20554B240051D894 /* HDWalletService.swift in Sources */,
