@@ -15,7 +15,11 @@ class WalletCreationTypeController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // TODO: setup container mode depending on segue name
+
+        guard let controller = segue.destination as? GenericWalletCreationContainer else {
+            return
+        }
+        controller.walletCreationMode = segue.identifier == "importWallet" ? WalletKeysMode.importKey : WalletKeysMode.createKey
     }
  
     @IBAction func unwind(segue:UIStoryboardSegue) { }

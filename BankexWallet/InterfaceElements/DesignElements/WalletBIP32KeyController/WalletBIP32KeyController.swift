@@ -1,48 +1,42 @@
 //
-//  WalletImportController.swift
+//  WalletCreateController.swift
 //  BankexWallet
 //
-//  Created by Korovkina, Ekaterina on 4/3/2561 BE.
+//  Created by Korovkina, Ekaterina  on 4/3/2561 BE.
 //  Copyright © 2561 Alexander Vlasov. All rights reserved.
 //
 
 import UIKit
 
-enum WalletKeysMode {
-    case importKey
-    case createKey
-}
-
-class WalletSingleKeyController: UIViewController,
-UITextFieldDelegate,
-UIScrollViewDelegate {
-
+class WalletBIP32KeyController: UIViewController,
+    UITextFieldDelegate,
+UIScrollViewDelegate  {
+    
     var mode: WalletKeysMode = WalletKeysMode.createKey
     let router: WalletCreationRouter = WalletCreationTypeRouterImplementation()
+    let service = HDWalletServiceImplementation()
     
     // MARK: Outlets
-    @IBOutlet weak var enterPrivateTextField: UITextField!
+    
+    @IBOutlet weak var generatePassphraseButton: UIButton!
+    @IBOutlet weak var enterPassphraseTextField: UITextField!
     @IBOutlet weak var walletNameTextField: UITextField!
     @IBOutlet weak var repeatPasswordTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet var textfields: [UITextField]!
     @IBOutlet weak var hideKeyboardButton: UIButton!
-    @IBOutlet weak var createButtonBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var createButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var createButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet var textfieldsSeparators: [UIView]!
     @IBOutlet weak var importButton: UIButton!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    // MARK: --
-    let service = SingleKeyServiceImplementation()
-    
-    
-    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        importButton.setTitle(mode.shortTitle(), for: .normal)
+        let generatePassphraseTitle = mode == .createKey ? "Generate passphrase" :
+                                                            "Copy from clipboard"
         hideKeyboardButton.gestureRecognizers?.forEach({ (rcgn) in
             rcgn.require(toFail: scrollView.panGestureRecognizer)
         })
@@ -73,7 +67,7 @@ UIScrollViewDelegate {
         let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
         let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
         let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-
+        
         UIView.animate(withDuration: duration,
                        delay: TimeInterval(0),
                        options: animationCurve,
@@ -100,7 +94,7 @@ UIScrollViewDelegate {
             if textFieldFrameY > view.frame.maxY - endFrameHeight && textField != nil {
                 newOffset = textFieldFrameY - (view.frame.maxY - endFrameHeight)
             }
-
+            
             UIView.animate(withDuration: duration,
                            delay: TimeInterval(0),
                            options: animationCurve,
@@ -117,7 +111,6 @@ UIScrollViewDelegate {
         }
     }
     
-    
     // MARK: TextFieldDelegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let index = textfields.index(of: textField) ?? 0
@@ -129,9 +122,9 @@ UIScrollViewDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text ?? "")  as NSString
         let futureString = currentText.replacingCharacters(in: range, with: string) as String
-
+        
         switch textField {
-        case enterPrivateTextField:
+        case enterPassphraseTextField:
             if passwordTextField.text == repeatPasswordTextField.text &&
                 !(passwordTextField.text?.isEmpty ?? true) &&
                 !futureString.isEmpty {
@@ -139,14 +132,14 @@ UIScrollViewDelegate {
             }
         case passwordTextField:
             if !futureString.isEmpty &&
-            futureString == repeatPasswordTextField.text {
-                importButton.isEnabled = !(enterPrivateTextField.text?.isEmpty ?? true) || mode == .createKey
+                futureString == repeatPasswordTextField.text {
+                importButton.isEnabled = !(enterPassphraseTextField.text?.isEmpty ?? true) || mode == .createKey
             }
         case repeatPasswordTextField:
             if !futureString.isEmpty &&
                 futureString == passwordTextField.text
-                 {
-                importButton.isEnabled = !(enterPrivateTextField.text?.isEmpty ?? true) || mode == .createKey
+            {
+                importButton.isEnabled = !(enterPassphraseTextField.text?.isEmpty ?? true) || mode == .createKey
             }
         default:
             importButton.isEnabled = false
@@ -178,32 +171,26 @@ UIScrollViewDelegate {
         }
         return true
     }
-    
-    // MARK: ScrollViewDelegate
-    
-    
-    // MARK: Actions
     @IBAction func emptySpaceTapped(_ sender: Any) {
         view.endEditing(false)
     }
     
     @IBAction func createWalletButtonTapped(_ sender: Any) {
-        if mode == .createKey {
-            service.createNewSingleAddressWallet(with: walletNameTextField.text,
-                                                 password: enterPrivateTextField.text!,
-                                                 completion: { (error) in
-                                                    self.router.exitFromTheScreen()
-            })
-        } else {
-            service.createNewSingleAddressWallet(with: walletNameTextField.text,
-                                                 fromText: enterPrivateTextField.text!,
-                                                 password: passwordTextField.text!,
-                                                 completion: { (error) in
-                                                    self.router.exitFromTheScreen()
-            })
+        service.createNewHDWallet(with: walletNameTextField.text!,
+                                  mnemonics: enterPassphraseTextField.text!,
+                                  mnemonicsPassword: "",
+                                  walletPassword: passwordTextField.text!) { (_, error) in
+                                    self.router.exitFromTheScreen()
         }
     }
     
-    @IBAction func qrScanTapped(_ sender: Any) {
+    @IBAction func generatePassphraseButtonTapped(_ sender: Any) {
+        if mode == .createKey {
+            let text = service.generateMnemonics(bitsOfEntropy: 128)
+            enterPassphraseTextField.text = text
+        } else {
+            enterPassphraseTextField.text = clipb
+        }
     }
+    
 }
