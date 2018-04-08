@@ -189,7 +189,7 @@ UIScrollViewDelegate  {
             let text = service.generateMnemonics(bitsOfEntropy: 128)
             enterPassphraseTextField.text = text
         } else {
-            enterPassphraseTextField.text = clipb
+            //enterPassphraseTextField.text = clipb
         }
     }
     

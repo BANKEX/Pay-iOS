@@ -15,7 +15,7 @@ class MainInfoController: UITableViewController {
                       "TransactionHistoryCell",
                       "LastTransactionsCell",
                       "FavouritesTitleCell",
-                      "FavouritesListCell"]
+                      "FavouritesListWithCollectionCell"]
     
     
     override func viewDidLoad() {
