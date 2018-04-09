@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import QRCodeReader
+import AVFoundation
 
 enum WalletKeysMode {
+    
     case importKey
     case createKey
     
@@ -34,7 +37,8 @@ enum WalletKeysMode {
 
 class WalletSingleKeyController: UIViewController,
 UITextFieldDelegate,
-UIScrollViewDelegate {
+UIScrollViewDelegate,
+QRCodeReaderViewControllerDelegate {
 
     var mode: WalletKeysMode = WalletKeysMode.createKey
     let router: WalletCreationRouter = WalletCreationTypeRouterImplementation()
@@ -222,5 +226,36 @@ UIScrollViewDelegate {
     }
     
     @IBAction func qrScanTapped(_ sender: Any) {
+        readerVC.delegate = self
+        
+        // Or by using the closure pattern
+        readerVC.completionBlock = { (result: QRCodeReaderResult?) in        }
+        
+        // Presents the readerVC as modal form sheet
+        readerVC.modalPresentationStyle = .formSheet
+        present(readerVC, animated: true, completion: nil)
+    }
+    
+    // MARK: QR Code scan
+    lazy var readerVC: QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
+        }
+        
+        return QRCodeReaderViewController(builder: builder)
+    }()
+    
+    // MARK: - QRCodeReaderViewController Delegate Methods
+    
+    func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
+        reader.stopScanning()
+        enterPrivateTextField.text = result.value
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func readerDidCancel(_ reader: QRCodeReaderViewController) {
+        reader.stopScanning()
+        dismiss(animated: true, completion: nil)
     }
 }
