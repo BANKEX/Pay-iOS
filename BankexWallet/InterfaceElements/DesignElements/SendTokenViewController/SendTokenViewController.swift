@@ -158,8 +158,6 @@ QRCodeReaderViewControllerDelegate {
         return true
     }
     
-    
-    // QR:
     // MARK: QR Code scan
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {

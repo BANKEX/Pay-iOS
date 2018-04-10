@@ -892,10 +892,6 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="c5G-1M-vRa"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
-                    <connections>
-                        <segue destination="ygp-st-s37" kind="show" identifier="showSuccess" id="1Yw-5Z-hJA"/>
-                        <segue destination="sAg-Vp-s64" kind="show" identifier="showError" id="Cwv-LF-8CH"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pgo-aG-xko" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -951,6 +947,10 @@ minutes, wait ...</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rAE-rD-6Fo"/>
                     </view>
+                    <connections>
+                        <segue destination="ygp-st-s37" kind="show" identifier="showSuccess" id="75X-cE-nQ5"/>
+                        <segue destination="sAg-Vp-s64" kind="show" identifier="showError" id="XCh-X3-sC4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsZ-Th-0fb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1449,12 +1449,13 @@ minutes, wait ...</string>
                         <outletCollection property="separators" destination="7cz-Fc-S25" collectionClass="NSMutableArray" id="8Dr-2n-3T0"/>
                         <outletCollection property="separators" destination="o8D-pL-34A" collectionClass="NSMutableArray" id="LFo-bW-TpY"/>
                         <segue destination="VyL-LX-B8a" kind="show" identifier="showConfirmation" id="3SJ-h0-gVt"/>
+                        <segue destination="sAg-Vp-s64" kind="show" identifier="showError" id="JaH-wa-aDn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PgD-J7-QUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Clf-OT-Rj1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-97" y="3899"/>
+            <point key="canvasLocation" x="-242" y="3949"/>
         </scene>
         <!--Transactions History Controller-->
         <scene sceneID="AFl-r3-XjB">
@@ -3297,7 +3298,7 @@ successfully</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mfj-3B-o4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2" y="4656"/>
+            <point key="canvasLocation" x="1724" y="4756"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Sol-li-be7">
@@ -3668,6 +3669,7 @@ successfully</string>
                         <outlet property="fromAddressLabel" destination="owG-f4-t6b" id="Faw-Wz-knH"/>
                         <outlet property="toAddressLabel" destination="AYQ-a9-DJ9" id="Y2a-Ql-LON"/>
                         <segue destination="5w2-uu-h6s" kind="show" identifier="showSending" id="OXd-vi-azc"/>
+                        <segue destination="sAg-Vp-s64" kind="show" identifier="showError" id="5aJ-iq-fAg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29U-uW-kdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3701,6 +3703,7 @@ successfully</string>
         <image name="qr code" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="XCh-X3-sC4"/>
         <segue reference="XEQ-3E-euS"/>
         <segue reference="zl4-lC-AqZ"/>
     </inferredMetricsTieBreakers>
