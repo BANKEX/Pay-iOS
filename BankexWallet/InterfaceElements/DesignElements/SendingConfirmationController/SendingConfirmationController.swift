@@ -65,10 +65,11 @@ class SendingConfirmationController: UIViewController {
                             with: inputtedPassword ?? "") { (result) in
                                 switch result {
                                 case .Success(_):
-                                    self.performSegue(withIdentifier: "showSuccess", sender: self)
+                                    self.transactionCompletionDelegate?.transactionDidSucceed()
                                 case .Error(_):
                                     //TODO:
-                                    self.performSegue(withIdentifier: "showError", sender: self)
+                                    self.transactionCompletionDelegate?.transactionDidFail()
+
                                 }
 //                                }
         }//transaction?.send(password: inputtedPassword ?? "", options: nil)
