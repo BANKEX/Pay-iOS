@@ -56,6 +56,12 @@ QRCodeReaderViewControllerDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var topEmptyView: UIView!
+    @IBOutlet weak var privateTextfieldContainer: UIView!
+    
+    @IBOutlet weak var separator1: UIView!
+    
     // MARK: --
     let service = SingleKeyServiceImplementation()
     
@@ -78,6 +84,16 @@ QRCodeReaderViewControllerDelegate {
                                                selector: #selector(self.keyboardDidHide(notification:)),
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if mode == .createKey {
+            stackView.removeArrangedSubview(topEmptyView)
+            privateTextfieldContainer.removeFromSuperview()
+//            stackView.removeArrangedSubview(privateTextfieldContainer)
+            stackView.removeArrangedSubview(separator1)
+        }
     }
     
     deinit {
@@ -223,6 +239,14 @@ QRCodeReaderViewControllerDelegate {
                                                     self.router.exitFromTheScreen()
             })
         }
+    }
+    
+    @IBAction func switchPasswordSecurity(_ sender: UIButton) {
+        passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+        sender.setImage(passwordTextField.isSecureTextEntry ? #imageLiteral(resourceName: "Eye open") : #imageLiteral(resourceName: "Eye closed"), for: .normal)
+    }
+    @IBAction func clearPrivateKeyTapped(_ sender: Any) {
+        enterPrivateTextField.text = ""
     }
     
     @IBAction func qrScanTapped(_ sender: Any) {

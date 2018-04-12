@@ -14,6 +14,7 @@ enum WalletColors {
     case errorRed
     case greySeparator
     case defaultText
+    case defaultGreyText
     case disableButtonBackground
     case defaultDarkBlueButton
     case defaultLightBlueButton
@@ -26,6 +27,8 @@ enum WalletColors {
             return UIColor(red: 239/255, green: 134/255, blue: 167/255, alpha: 1)
         case .defaultText:
             return UIColor(red: 32/255, green: 35/255, blue: 38/255, alpha: 1)
+        case .defaultGreyText:
+            return UIColor(red: 156/255, green: 166/255, blue: 175/255, alpha: 1)
         case .greySeparator:
             return UIColor(red: 193/255, green: 202/255, blue: 210/255, alpha: 1)
         case .disableButtonBackground:

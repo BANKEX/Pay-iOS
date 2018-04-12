@@ -21,10 +21,15 @@ class GenericWalletCreationContainer: UIViewController {
     @IBOutlet weak var importPrivateKeyContainer: UIView!
     @IBOutlet weak var importPassphraseContainer: UIView!
     
+    @IBOutlet weak var privateKeyLabel: UILabel!
     
+    @IBOutlet weak var passphraseLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = walletCreationMode.title()
+        privateKeyLabel.borderWidth = 3
+        passphraseLabel.borderWidth = 3
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +43,10 @@ class GenericWalletCreationContainer: UIViewController {
         }
         privateKeyButton.isSelected = false
         passphraseButton.isSelected = true
+        privateKeyLabel.borderColor = UIColor.clear
+        privateKeyLabel.textColor = WalletColors.defaultGreyText.color()
+        passphraseLabel.borderColor = WalletColors.defaultDarkBlueButton.color()
+        passphraseLabel.textColor = WalletColors.blueText.color()
         importPrivateKeyContainer.isHidden = true
         importPassphraseContainer.isHidden = false
     }
@@ -48,6 +57,10 @@ class GenericWalletCreationContainer: UIViewController {
         }
         privateKeyButton.isSelected = true
         passphraseButton.isSelected = false
+        passphraseLabel.borderColor = UIColor.clear
+        passphraseLabel.textColor = WalletColors.defaultGreyText.color()
+        privateKeyLabel.borderColor = WalletColors.defaultDarkBlueButton.color()
+        privateKeyLabel.textColor = WalletColors.blueText.color()
         importPrivateKeyContainer.isHidden = false
         importPassphraseContainer.isHidden = true
     }
