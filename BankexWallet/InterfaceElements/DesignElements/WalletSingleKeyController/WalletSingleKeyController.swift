@@ -75,7 +75,8 @@ QRCodeReaderViewControllerDelegate {
         importButton.setTitle(mode.shortTitle(), for: .normal)
 
         importButton.isEnabled = false
-        
+        importButton.backgroundColor = importButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.keyboardNotification(notification:)),
                                                name: NSNotification.Name.UIKeyboardWillShow,
@@ -166,6 +167,7 @@ QRCodeReaderViewControllerDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text ?? "")  as NSString
         let futureString = currentText.replacingCharacters(in: range, with: string) as String
+        importButton.isEnabled = false
 
         switch textField {
         case enterPrivateTextField:
@@ -190,7 +192,7 @@ QRCodeReaderViewControllerDelegate {
         }
         
         importButton.backgroundColor = importButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
-        
+
         return true
     }
     

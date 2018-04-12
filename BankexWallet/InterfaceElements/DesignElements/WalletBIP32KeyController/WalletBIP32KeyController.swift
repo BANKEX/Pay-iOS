@@ -28,9 +28,15 @@ UIScrollViewDelegate  {
     @IBOutlet weak var hideKeyboardButton: UIButton!
     @IBOutlet var textfieldsSeparators: [UIView]!
     @IBOutlet weak var importButton: UIButton!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var topEmptyView: UIView!
+    @IBOutlet weak var passphraseContainer: UIView!
     
+    @IBOutlet var clipboardButtonContainer: UIView!
+    
+    @IBOutlet weak var separator1: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +57,16 @@ UIScrollViewDelegate  {
                                                selector: #selector(self.keyboardDidHide(notification:)),
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if mode == .createKey {
+            stackView.removeArrangedSubview(topEmptyView)
+            stackView.removeArrangedSubview(separator1)
+            clipboardButtonContainer.removeFromSuperview()
+            passphraseContainer.removeFromSuperview()
+        }
     }
     
     deinit {
@@ -150,7 +166,6 @@ UIScrollViewDelegate  {
         return true
     }
     
-    
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         let index = textfields.index(of: textField) ?? 0
         textfieldsSeparators[index].backgroundColor = WalletColors.greySeparator.color()
@@ -171,8 +186,13 @@ UIScrollViewDelegate  {
         }
         return true
     }
+    
     @IBAction func emptySpaceTapped(_ sender: Any) {
         view.endEditing(false)
+    }
+    
+    @IBAction func clearPassphraseTapped(_ sender: Any) {
+        enterPassphraseTextField.text = ""
     }
     
     @IBAction func createWalletButtonTapped(_ sender: Any) {
@@ -182,6 +202,16 @@ UIScrollViewDelegate  {
                                   walletPassword: passwordTextField.text!) { (_, error) in
                                     self.router.exitFromTheScreen()
         }
+    }
+    
+    @IBAction func switchPasswordVisibility(_ sender: UIButton) {
+        passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+        sender.setImage(passwordTextField.isSecureTextEntry ? #imageLiteral(resourceName: "Eye open") : #imageLiteral(resourceName: "Eye closed"), for: .normal)
+
+    }
+    
+    @IBAction func insertFromClipboardTapped(_ sender: Any) {
+        enterPassphraseTextField.text = UIPasteboard.general.string
     }
     
     @IBAction func generatePassphraseButtonTapped(_ sender: Any) {
