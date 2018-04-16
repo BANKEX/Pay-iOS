@@ -60,7 +60,8 @@ ScreenWithInputs {
     @IBOutlet weak var importButton: UIButton!
     
     @IBOutlet weak var scrollView: UIScrollView!
-    
+    @IBOutlet weak var importButtonTopConstraint: NSLayoutConstraint!
+
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var topEmptyView: UIView!
     @IBOutlet weak var privateTextfieldContainer: UIView!
@@ -101,6 +102,17 @@ ScreenWithInputs {
 //            stackView.removeArrangedSubview(privateTextfieldContainer)
             stackView.removeArrangedSubview(separator1)
         }
+    }
+    
+    // It's magic, I just like 30
+    let minimumTopImportButtonSpace: CGFloat = 30
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // 40 here is not a magic number, it's bottom space we need to keep
+        var availableSpace = view.frame.height - stackView.frame.height - importButton.frame.height - 40
+        
+        availableSpace = availableSpace >=  minimumTopImportButtonSpace ? availableSpace : minimumTopImportButtonSpace
+        importButtonTopConstraint.constant = availableSpace
     }
     
     deinit {

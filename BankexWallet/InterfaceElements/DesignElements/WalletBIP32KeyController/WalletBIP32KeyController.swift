@@ -19,6 +19,7 @@ ScreenWithInputs {
     
     // MARK: Outlets
     
+    @IBOutlet weak var importButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var generatePassphraseButton: UIButton!
     @IBOutlet weak var enterPassphraseTextField: UITextField!
     @IBOutlet weak var walletNameTextField: UITextField!
@@ -38,6 +39,7 @@ ScreenWithInputs {
     @IBOutlet weak var separator1: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
 
+    // MARK: System Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,10 +72,27 @@ ScreenWithInputs {
         }
     }
     
+    // It's magic, I just like 30
+    let minimumTopImportButtonSpace: CGFloat = 30
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // 40 here is not a magic number, it's bottom space we need to keep
+        var availableSpace = view.frame.height - stackView.frame.height - importButton.frame.height - 40
+        
+        availableSpace = availableSpace >=  minimumTopImportButtonSpace ? availableSpace : minimumTopImportButtonSpace
+        importButtonTopConstraint.constant = availableSpace
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? BackupPassphraseController {
+            controller.passphraseToShow = generatedPassphrase
+        }
+    }
     
     // MARK: Keyboard
     @objc func keyboardDidHide(notification: NSNotification) {
@@ -197,11 +216,21 @@ ScreenWithInputs {
     }
     
     @IBAction func createWalletButtonTapped(_ sender: Any) {
+        if mode == .createKey {
+            let text = service.generateMnemonics(bitsOfEntropy: 128)
+            generatedPassphrase = text
+        } else {
+            generatedPassphrase = enterPassphraseTextField.text!
+        }
         service.createNewHDWallet(with: walletNameTextField.text!,
-                                  mnemonics: enterPassphraseTextField.text!,
+                                  mnemonics: generatedPassphrase!,
                                   mnemonicsPassword: "",
                                   walletPassword: passwordTextField.text!) { (_, error) in
-                                    self.router.exitFromTheScreen()
+                                    if self.mode == .createKey {
+                                        self.performSegue(withIdentifier: "showPassphrase", sender: self)
+                                    } else {
+                                        self.router.exitFromTheScreen()
+                                    }
         }
     }
     
@@ -215,10 +244,12 @@ ScreenWithInputs {
         enterPassphraseTextField.text = UIPasteboard.general.string
     }
     
+    var generatedPassphrase: String?
     @IBAction func generatePassphraseButtonTapped(_ sender: Any) {
         if mode == .createKey {
             let text = service.generateMnemonics(bitsOfEntropy: 128)
-            enterPassphraseTextField.text = text
+            generatedPassphrase = text
+//            enterPassphraseTextField.text = text
         } else {
             //enterPassphraseTextField.text = clipb
         }
