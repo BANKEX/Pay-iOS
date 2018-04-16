@@ -10,7 +10,8 @@ import UIKit
 
 class WalletBIP32KeyController: UIViewController,
     UITextFieldDelegate,
-UIScrollViewDelegate  {
+UIScrollViewDelegate,
+ScreenWithInputs {
     
     var mode: WalletKeysMode = WalletKeysMode.createKey
     let router: WalletCreationRouter = WalletCreationTypeRouterImplementation()
@@ -223,4 +224,9 @@ UIScrollViewDelegate  {
         }
     }
     
+    // MARK: ScreenWithInputs
+    func clearTextfields() {
+        textfields.forEach{$0.text = ""}
+        view.endEditing(true)
+    }
 }

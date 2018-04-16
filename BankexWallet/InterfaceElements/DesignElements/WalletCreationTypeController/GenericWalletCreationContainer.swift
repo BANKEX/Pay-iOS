@@ -49,6 +49,7 @@ class GenericWalletCreationContainer: UIViewController {
         passphraseLabel.textColor = WalletColors.blueText.color()
         importPrivateKeyContainer.isHidden = true
         importPassphraseContainer.isHidden = false
+        controllersWithInputs.forEach{ $0.clearTextfields() }
     }
     
     @IBAction func privateKeyTapped(_ sender: Any) {
@@ -63,7 +64,14 @@ class GenericWalletCreationContainer: UIViewController {
         privateKeyLabel.textColor = WalletColors.blueText.color()
         importPrivateKeyContainer.isHidden = false
         importPassphraseContainer.isHidden = true
+        controllersWithInputs.forEach{ $0.clearTextfields() }
     }
+    
+    // Here I'll do some bad magic
+    // But it's very fast bad magic and I cannot decide how to make it better
+    // Maybe in future should create segue for switching and then I can do it inside prepare for segue
+    // Instead of keeping reference to controllers
+    var controllersWithInputs = [ScreenWithInputs]()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let singleKeyController = segue.destination as? WalletSingleKeyController {
@@ -71,6 +79,9 @@ class GenericWalletCreationContainer: UIViewController {
         }
         else if let hdKeyController = segue.destination as? WalletBIP32KeyController {
             hdKeyController.mode = walletCreationMode
+        }
+        if let controller = segue.destination as? ScreenWithInputs {
+            controllersWithInputs.append(controller)
         }
     }
 }

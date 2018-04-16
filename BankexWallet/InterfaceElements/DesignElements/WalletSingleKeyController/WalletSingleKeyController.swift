@@ -10,6 +10,10 @@ import UIKit
 import QRCodeReader
 import AVFoundation
 
+protocol ScreenWithInputs: class {
+    func clearTextfields()
+}
+
 enum WalletKeysMode {
     
     case importKey
@@ -18,9 +22,9 @@ enum WalletKeysMode {
     func title() -> String {
         switch self {
         case .importKey:
-            return "Import key"
+            return "Import wallet"
         case .createKey:
-            return "Create key"
+            return "Create wallet"
         }
     }
     
@@ -29,7 +33,7 @@ enum WalletKeysMode {
         case .importKey:
             return "Import"
         case .createKey:
-            return "Create"
+            return "Next"
         }
 
     }
@@ -38,7 +42,8 @@ enum WalletKeysMode {
 class WalletSingleKeyController: UIViewController,
 UITextFieldDelegate,
 UIScrollViewDelegate,
-QRCodeReaderViewControllerDelegate {
+QRCodeReaderViewControllerDelegate,
+ScreenWithInputs {
 
     var mode: WalletKeysMode = WalletKeysMode.createKey
     let router: WalletCreationRouter = WalletCreationTypeRouterImplementation()
@@ -90,8 +95,9 @@ QRCodeReaderViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if mode == .createKey {
-            stackView.removeArrangedSubview(topEmptyView)
+//            stackView.removeArrangedSubview(topEmptyView)
             privateTextfieldContainer.removeFromSuperview()
+            topEmptyView.removeFromSuperview()
 //            stackView.removeArrangedSubview(privateTextfieldContainer)
             stackView.removeArrangedSubview(separator1)
         }
@@ -283,5 +289,11 @@ QRCodeReaderViewControllerDelegate {
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
         reader.stopScanning()
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: For calling outside
+    func clearTextfields() {
+        textfields.forEach { $0.text = ""}
+        view.endEditing(true)
     }
 }
