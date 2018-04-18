@@ -10,26 +10,35 @@ import UIKit
 
 class SendingSuccessViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: All the data we need
+    var transactionAmount: String?
+    var addressToSend: String?
+    let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
+    let tokenService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
+    
+    // MARK:  Outlets
+    @IBOutlet weak var transactionSucceedLabel: UILabel!
+    @IBOutlet weak var addToFavoritesView: UIView!
+    
+    // MARK:
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if favoritesService.contains(address: addressToSend ?? "") {
+            addToFavoritesView.isHidden = true
+        }
+        if let amount = transactionAmount {
+            transactionSucceedLabel.text = "Your \(amount) \(tokenService.selectedERC20Token().symbol) has been sent successfully"
+        }
     }
     
+    // MARK: Actions
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func done(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: false)
     }
-    */
-
+    
+    @IBAction func addToFavorites(_ sender: Any) {
+        // TODO: Open save contact screen
+        // TODO: Start to show button again! 
+    }
 }

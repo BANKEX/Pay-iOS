@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SendingResultInformation: class {
-    func transactionDidSucceed()
+    func transactionDidSucceed(withAmount: String, address: String)
     
     func transactionDidFail()
 }
@@ -17,13 +17,18 @@ protocol SendingResultInformation: class {
 class SendingInProcessViewController: UIViewController,
 SendingResultInformation {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? SendingSuccessViewController {
+            controller.transactionAmount = transactionAmount
+            controller.addressToSend = recipientAddress
+        }
     }
 
-    func transactionDidSucceed() {
+    var transactionAmount: String?
+    var recipientAddress: String?
+    func transactionDidSucceed(withAmount: String, address: String) {
+        transactionAmount = withAmount
+        recipientAddress = address
         performSegue(withIdentifier: "showSuccess", sender: self)
     }
     

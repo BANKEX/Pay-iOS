@@ -65,7 +65,7 @@ class SendingConfirmationController: UIViewController {
                             with: inputtedPassword ?? "") { (result) in
                                 switch result {
                                 case .Success(_):
-                                    self.transactionCompletionDelegate?.transactionDidSucceed()
+                                    self.transactionCompletionDelegate?.transactionDidSucceed(withAmount: self.amount ?? "", address: self.destinationAddress ?? "")
                                 case .Error(_):
                                     //TODO:
                                     self.transactionCompletionDelegate?.transactionDidFail()
