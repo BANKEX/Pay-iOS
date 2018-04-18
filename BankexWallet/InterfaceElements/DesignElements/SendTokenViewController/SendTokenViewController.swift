@@ -20,8 +20,6 @@ QRCodeReaderViewControllerDelegate {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet var favNameContainer: UIView!
     
-    @IBAction func deleteSelectedFavTapped(_ sender: Any) {
-    }
     @IBOutlet weak var selectedFavNameLabel: UILabel!
     
     @IBOutlet weak var enterAddressTextfield: UITextField!
@@ -47,6 +45,8 @@ QRCodeReaderViewControllerDelegate {
     var utilsService: UtilTransactionsService!
 
     // MARK: Lifecycle
+    @IBAction func back(segue:UIStoryboardSegue) { }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         nextButton.isEnabled = false
@@ -93,6 +93,7 @@ QRCodeReaderViewControllerDelegate {
         passwordTextfield.isSecureTextEntry = !passwordTextfield.isSecureTextEntry
         sender.setImage(passwordTextfield.isSecureTextEntry ? #imageLiteral(resourceName: "Eye open") : #imageLiteral(resourceName: "Eye closed"), for: .normal)
     }
+    
     @IBAction func clearAddressTapped(_ sender: Any) {
         enterAddressTextfield.text = ""
     }
@@ -115,6 +116,10 @@ QRCodeReaderViewControllerDelegate {
     @IBAction func insertFromClipboardTapped(_ sender: Any) {
         enterAddressTextfield.text = UIPasteboard.general.string
     }
+    
+    @IBAction func deleteSelectedFavTapped(_ sender: Any) {
+    }
+
     
     // MARK: TextField Delegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

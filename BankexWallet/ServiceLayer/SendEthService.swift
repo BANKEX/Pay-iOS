@@ -176,7 +176,7 @@ class SendEthServiceImplementation: SendEthService {
                 }
                 return
             }
-            guard let amount = Web3.Utils.parseToBigUInt(amountString, toUnits: .eth) else {
+            guard let amount = Web3.Utils.parseToBigUInt(amountString, units: .eth) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.invalidAmountFormat))
                 }

@@ -9,14 +9,14 @@
 import UIKit
 import web3swift
 
-class SendingConfirmationController: UIViewController {
+class SendingConfirmationController: UIViewController, Retriable {
 
     // MARK: Outlets
     
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var toAddressLabel: UILabel!
     @IBOutlet weak var fromAddressLabel: UILabel!
-    
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var feeLabel: UILabel!
     
     // MARK:
@@ -34,13 +34,6 @@ class SendingConfirmationController: UIViewController {
         }
         transactionCompletionDelegate = destination
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
     
     let tokensService = CustomERC20TokensServiceImplementation()
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
@@ -81,10 +74,19 @@ class SendingConfirmationController: UIViewController {
         super.viewWillAppear(animated)
         toAddressLabel.text = destinationAddress
         fromAddressLabel.text = SingleKeyServiceImplementation().selectedAddress()
-        amountLabel.text = amount
+        amountLabel.text = (amount ?? "") + " " + tokensService.selectedERC20Token().symbol
         // TODO:  Need to be formatted
-        feeLabel.text = "\(transaction?.estimateGas(options: nil).value)"
+        guard let estimatedGas = transaction?.estimateGas(options: nil).value else {
+            feeLabel.text = "Not defined"
+            return
+        }
+        feeLabel.text = "\(estimatedGas)"
+        nextButton.setTitle("Send " + (amountLabel.text ?? ""), for: .normal)
     }
     
+    // MARK: Retriable
+    func retryExisitngTransaction() {
+        nextButtonTapped(self)
+    }
 
 }
