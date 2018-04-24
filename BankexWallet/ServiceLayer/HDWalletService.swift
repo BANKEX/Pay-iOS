@@ -27,6 +27,7 @@ protocol GlobalWalletsService {
     func selectedAddress() -> String?
     func selectedKey() -> HDKey?
     func updateSelected(address: String)
+    func fullListOfSingleEthereumAddresses() -> [HDKey]?
     func delete(address: String)
 }
 
@@ -62,6 +63,16 @@ extension GlobalWalletsService {
     
     func fullHDKeysList() -> [HDKey]? {
         guard let allKeys = try? DBStorage.db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isHD == %@", NSNumber(value: true)))) else {
+            return nil
+        }
+        return allKeys.map({ (wallet) -> HDKey in
+            return HDKey(name: wallet.name, address: wallet.address ?? "")
+        })
+    }
+    
+    
+    func fullListOfSingleEthereumAddresses() -> [HDKey]? {
+        guard let allKeys = try? DBStorage.db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isHD == %@", NSNumber(value: false)))) else {
             return nil
         }
         return allKeys.map({ (wallet) -> HDKey in
