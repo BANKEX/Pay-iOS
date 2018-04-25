@@ -23,16 +23,19 @@ class CurrentWalletInfoCell: UITableViewCell {
     let tokensService = CustomERC20TokensServiceImplementation()
     
 
+    @IBOutlet weak var tokenIconImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.amountLabel.text = "..."
         utilsService = tokensService.selectedERC20Token().address.isEmpty ? UtilTransactionsServiceImplementation() :
             CustomTokenUtilsServiceImplementation()
         updateBalance()
         
         // Initialization code
+        tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         walletNameLabel.text = keyService.selectedWallet()?.name
-        symbolLabel.text = tokensService.selectedERC20Token().symbol
+        symbolLabel.text = tokensService.selectedERC20Token().symbol.capitalized
         
     }
 
@@ -48,6 +51,8 @@ class CurrentWalletInfoCell: UITableViewCell {
                 let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
                 self.amountLabel.text = formattedAmount!
             case .Error(let error):
+                self.amountLabel.text = "..."
+
                 print("\(error)")
             }
         }

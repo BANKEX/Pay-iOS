@@ -8,18 +8,85 @@
 
 import UIKit
 
+enum PredefinedTokens {
+    case Bankex
+    case BNB
+    case Bytom
+    case DGD
+    case EOS
+    case Ethereum
+    case ICON
+    case LiteCoin
+    case OmiseGo
+    case Populous
+    case Ripple
+    case Thronix
+    case VeChain
+    case NotDefined
+    
+    func image() -> UIImage {
+        switch self {
+        case .Bankex:
+            return #imageLiteral(resourceName: "Bankex")
+        case .BNB:
+            return #imageLiteral(resourceName: "BNB")
+        case .Bytom:
+            return #imageLiteral(resourceName: "Bytom")
+        case .DGD:
+            return #imageLiteral(resourceName: "DGD")
+        case .EOS:
+            return #imageLiteral(resourceName: "EOS")
+        case .Ethereum:
+            return #imageLiteral(resourceName: "Ethereum")
+        case .ICON:
+            return #imageLiteral(resourceName: "ICON")
+        case .LiteCoin:
+            return #imageLiteral(resourceName: "Litecoin")
+        case .OmiseGo:
+            return #imageLiteral(resourceName: "OmiseGo")
+        case .Populous:
+            return #imageLiteral(resourceName: "Populous")
+        case .Ripple:
+            return #imageLiteral(resourceName: "Ripple")
+        case .Thronix:
+            return #imageLiteral(resourceName: "Tronix")
+        case .VeChain:
+            return #imageLiteral(resourceName: "VeChain")
+        default:
+            return #imageLiteral(resourceName: "Other coins")
+
+        }
+    }
+    
+    init(with symbol: String) {
+        switch symbol.lowercased() {
+        case "eth":
+            self = .Ethereum
+        case "bkx":
+            self = .Bankex
+        default:
+            self = .NotDefined
+        }
+    }
+}
+
 class MainInfoController: UITableViewController {
 
     let itemsArray = ["TopLogoCell",
                       "CurrentWalletInfoCell",
                       "TransactionHistoryCell",
-                      "LastTransactionsCell",
-                      "FavouritesTitleCell",
-                      "FavouritesListWithCollectionCell"]
+                      "LastTransactionsCell"]
+//                      "FavouritesTitleCell",
+//                      "FavouritesListWithCollectionCell"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     @IBAction func unwind(segue:UIStoryboardSegue) { }
