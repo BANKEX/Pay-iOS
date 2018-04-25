@@ -24,6 +24,12 @@ class MainInfoController: UITableViewController {
     
     @IBAction func unwind(segue:UIStoryboardSegue) { }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? AddressQRCodeController {
+            let keyService: GlobalWalletsService = SingleKeyServiceImplementation()
+            controller.addressToGenerateQR = keyService.selectedAddress()
+        }
+    }
 
     // MARK: - Table view data source
 

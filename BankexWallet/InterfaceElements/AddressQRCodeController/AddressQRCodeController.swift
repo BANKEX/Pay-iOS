@@ -10,11 +10,7 @@ import UIKit
 
 class AddressQRCodeController: UIViewController {
 
-    var addressToGenerateQR: String? //{
-//        didSet {
-//            imageView?.image = generateQRCode(from: addressToGenerateQR)
-//        }
-//    }
+    var addressToGenerateQR: String?
     
     @IBOutlet weak var imageView: UIImageView!
     override func viewDidLoad() {
@@ -23,11 +19,15 @@ class AddressQRCodeController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBOutlet weak var addressLabel: UILabel!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         imageView.image = generateQRCode(from: addressToGenerateQR)
     }
  
+    @IBAction func copyAddress(_ sender: Any) {
+        UIPasteboard.general.string = addressToGenerateQR
+    }
     
     func generateQRCode(from string: String?) -> UIImage? {
         guard let string = addressToGenerateQR else {
