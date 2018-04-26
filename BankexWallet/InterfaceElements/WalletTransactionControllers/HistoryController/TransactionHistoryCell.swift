@@ -44,5 +44,8 @@ class TransactionHistoryCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+}
 
+class TransactionHistorySectionCell: UITableViewCell {
+    @IBOutlet weak var showMoreButton: UIView!
 }

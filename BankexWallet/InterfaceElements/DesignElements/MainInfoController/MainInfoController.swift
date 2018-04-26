@@ -138,6 +138,9 @@ class MainInfoController: UITableViewController {
             let indexOfTransaction = indexPath.row - transactionInitialDiff
             cell.configure(withTransaction: transactionsToShow[indexOfTransaction], isLastCell: indexOfTransaction == transactionsToShow.count - 1)
         }
+        if let cell = cell as? TransactionHistorySectionCell {
+            cell.showMoreButton.isHidden = transactionsToShow.count == 0
+        }
         return cell
     }
     
