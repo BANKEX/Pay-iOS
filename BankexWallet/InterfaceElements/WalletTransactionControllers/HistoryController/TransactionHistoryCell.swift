@@ -17,6 +17,8 @@ class TransactionHistoryCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
 
+    @IBOutlet weak var transactionTypeLabel: UILabel!
+    
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.YYYY"
@@ -28,8 +30,9 @@ class TransactionHistoryCell: UITableViewCell {
         guard let trans = withTransaction as? ETHTransactionModel else {
             return
         }
-        statusImageView.image = #imageLiteral(resourceName: "icons-checked")
-        dateLabel.text = dateFormatter.string(from: trans.date as Date)
+        let isSend = SingleKeyServiceImplementation().selectedAddress() == trans.from
+        statusImageView.image = isSend ? #imageLiteral(resourceName: "Sent") : #imageLiteral(resourceName: "Received")
+        transactionTypeLabel.text = isSend ? "Sent" : "Received"
         addressLabel.text = trans.to
         amountLabel.text = trans.amount
     }

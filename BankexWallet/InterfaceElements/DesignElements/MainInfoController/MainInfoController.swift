@@ -2,7 +2,7 @@
 //  MainInfoController.swift
 //  BankexWallet
 //
-//  Created by Korovkina, Ekaterina (Agoda) on 4/4/2561 BE.
+//  Created by Korovkina, Ekaterina  on 4/4/2561 BE.
 //  Copyright © 2561 Alexander Vlasov. All rights reserved.
 //
 
@@ -72,10 +72,9 @@ enum PredefinedTokens {
 
 class MainInfoController: UITableViewController {
 
-    let itemsArray = ["TopLogoCell",
+    var itemsArray = ["TopLogoCell",
                       "CurrentWalletInfoCell",
-                      "TransactionHistoryCell",
-                      "LastTransactionsCell"]
+                      "TransactionHistoryCell"]
 //                      "FavouritesTitleCell",
 //                      "FavouritesListWithCollectionCell"]
     
@@ -84,8 +83,30 @@ class MainInfoController: UITableViewController {
         super.viewDidLoad()
     }
     
+    var sendEthService: SendEthService!
+    let tokensService = CustomERC20TokensServiceImplementation()
+
+    var transactionsToShow: [ETHTransactionModel]
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
+            SendEthServiceImplementation() :
+            ERC20TokenContractMethodsServiceImplementation()
+        transactionsToShow = sendEthService.getAllTransactions()?[0..1] ?? [ETHTransactionModel]()
+        var arrayOfTransactions = [String]()
+        switch transactionsToShow.count {
+        case 0:
+            arrayOfTransactions = ["EmptyLastTransactionsCell"]
+        case 1:
+            arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell","BottomRoundedCell"]
+
+        default:
+            arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "TransactionHistoryCell", "BottomRoundedCell"]
+        }
+        
+        let index = itemsArray.index{$0 == "TransactionHistoryCell"} ?? 0
+        itemsArray.insert(contentsOf: arrayOfTransactions, at: index + 1)
         tableView.reloadData()
     }
     
@@ -109,8 +130,9 @@ class MainInfoController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: itemsArray[indexPath.row], for: indexPath)
 
-        // Configure the cell...
-
+        if let cell = cell as? TransactionHistoryCell {
+            cell.configure(withTransaction: <#T##Any#>)
+        }
         return cell
     }
     
