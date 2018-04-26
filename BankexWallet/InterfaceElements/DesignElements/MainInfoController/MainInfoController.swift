@@ -86,14 +86,17 @@ class MainInfoController: UITableViewController {
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
 
-    var transactionsToShow: [ETHTransactionModel]
+    var transactionsToShow = [ETHTransactionModel]()
+    var transactionInitialDiff = 0
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
-        transactionsToShow = sendEthService.getAllTransactions()?[0..1] ?? [ETHTransactionModel]()
+        if let firstTwo = sendEthService.getAllTransactions()?.prefix(2) {
+            transactionsToShow = Array(firstTwo)
+        }
         var arrayOfTransactions = [String]()
         switch transactionsToShow.count {
         case 0:
@@ -106,6 +109,7 @@ class MainInfoController: UITableViewController {
         }
         
         let index = itemsArray.index{$0 == "TransactionHistoryCell"} ?? 0
+        transactionInitialDiff = index + 2
         itemsArray.insert(contentsOf: arrayOfTransactions, at: index + 1)
         tableView.reloadData()
     }
@@ -131,7 +135,8 @@ class MainInfoController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: itemsArray[indexPath.row], for: indexPath)
 
         if let cell = cell as? TransactionHistoryCell {
-            cell.configure(withTransaction: <#T##Any#>)
+            let indexOfTransaction = indexPath.row - transactionInitialDiff
+            cell.configure(withTransaction: transactionsToShow[indexOfTransaction], isLastCell: indexOfTransaction == transactionsToShow.count - 1)
         }
         return cell
     }

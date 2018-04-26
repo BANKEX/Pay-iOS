@@ -16,6 +16,7 @@ class TransactionHistoryCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var separatorView: UIView!
 
     @IBOutlet weak var transactionTypeLabel: UILabel!
     
@@ -26,15 +27,17 @@ class TransactionHistoryCell: UITableViewCell {
     }()
     
     
-    func configure(withTransaction: Any) {
+    func configure(withTransaction: Any, isLastCell: Bool = false) {
         guard let trans = withTransaction as? ETHTransactionModel else {
             return
         }
+        separatorView.isHidden = isLastCell
         let isSend = SingleKeyServiceImplementation().selectedAddress() == trans.from
         statusImageView.image = isSend ? #imageLiteral(resourceName: "Sent") : #imageLiteral(resourceName: "Received")
         transactionTypeLabel.text = isSend ? "Sent" : "Received"
         addressLabel.text = trans.to
-        amountLabel.text = trans.amount
+        amountLabel.text = (isSend ? "- " : "+ ") + trans.amount
+        amountLabel.textColor = isSend ? WalletColors.redText.color() : WalletColors.lightGreenText.color()
     }
     
     override func awakeFromNib() {
