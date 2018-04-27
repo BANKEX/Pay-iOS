@@ -66,6 +66,7 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
             let transaction = contract?.method("balanceOf", parameters: parameters as [AnyObject], options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
             DispatchQueue.main.async {
+                // TODO: Fix me here
                 completion(SendEthResult.Success(bkxBalance!.value!["balance"] as! BigUInt))
             }
             
