@@ -41,7 +41,7 @@ class WalletTransactionsContainerController: UIViewController {
             let historyController = segue.destination as! TransactionsHistoryController
             // TODO:  think about move this to builder
             let presenter = TransactionsHistoryPresenter()
-            presenter.view = historyController
+//            presenter.view = historyController
             historyController.presenter = presenter
         }
     }

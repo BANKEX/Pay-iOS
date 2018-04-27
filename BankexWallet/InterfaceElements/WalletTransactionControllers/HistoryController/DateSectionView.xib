@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DateSectionView" customModule="BankexWallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <userGuides>
+                <userLayoutGuide location="22" affinity="minY"/>
+            </userGuides>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3g-U5-g5j">
+                    <rect key="frame" x="74" y="21" width="277" height="1"/>
+                    <color key="backgroundColor" red="0.88235294119999996" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="M1e-3I-7Mq"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCP-E9-lsr">
+                    <rect key="frame" x="24" y="12" width="31" height="12"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.75686274509803919" green="0.792156862745098" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ZCP-E9-lsr" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="12" id="38G-Ak-WMn"/>
+                <constraint firstItem="ZCP-E9-lsr" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="Gb3-PI-jDQ"/>
+                <constraint firstItem="p3g-U5-g5j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="74" id="dqn-j3-6hy"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="p3g-U5-g5j" secondAttribute="trailing" constant="24" id="iUE-Q3-Y3e"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ZCP-E9-lsr" secondAttribute="bottom" constant="12" id="o00-fl-f61"/>
+                <constraint firstItem="p3g-U5-g5j" firstAttribute="bottom" secondItem="ZCP-E9-lsr" secondAttribute="bottom" constant="-2" id="odj-Wd-gI3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="monthNameLabel" destination="ZCP-E9-lsr" id="Ph0-7g-8sK"/>
+            </connections>
+        </view>
+    </objects>
+</document>

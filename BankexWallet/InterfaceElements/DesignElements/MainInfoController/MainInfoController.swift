@@ -90,7 +90,11 @@ class MainInfoController: UITableViewController {
     var transactionInitialDiff = 0
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        itemsArray = ["TopLogoCell",
+                      "CurrentWalletInfoCell",
+                      "TransactionHistoryCell"]
+        
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
