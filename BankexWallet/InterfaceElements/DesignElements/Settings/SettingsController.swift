@@ -10,6 +10,7 @@ import UIKit
 
 
 class SettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBAction func unwind(segue:UIStoryboardSegue) { }
 
     let settingsToShow = ["WalletsListCell",
                           "NetworksListCell",

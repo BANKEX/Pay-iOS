@@ -39,6 +39,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xxP-32-u8m" userLabel="top view">
                                 <rect key="frame" x="0.0" y="20" width="375" height="175"/>
                                 <subviews>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2C-Nn-1Xg">
+                                        <rect key="frame" x="18" y="5" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="HIe-lg-711"/>
+                                            <constraint firstAttribute="width" constant="40" id="rWh-vW-KTf"/>
+                                        </constraints>
+                                        <state key="normal" image="Arrow back"/>
+                                        <connections>
+                                            <segue destination="8Iq-1q-QTk" kind="unwind" unwindAction="unwindWithSegue:" id="Rrf-Bn-1I8"/>
+                                        </connections>
+                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bankex_wallet_logo" translatesAutoresizingMaskIntoConstraints="NO" id="O5S-ct-LtA">
                                         <rect key="frame" x="65" y="72.5" width="245" height="30"/>
                                     </imageView>
@@ -46,6 +57,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="O5S-ct-LtA" firstAttribute="centerX" secondItem="xxP-32-u8m" secondAttribute="centerX" id="8Z5-HE-1zn"/>
+                                    <constraint firstItem="s2C-Nn-1Xg" firstAttribute="leading" secondItem="xxP-32-u8m" secondAttribute="leading" constant="18" id="HuG-gq-lIh"/>
+                                    <constraint firstItem="s2C-Nn-1Xg" firstAttribute="top" secondItem="xxP-32-u8m" secondAttribute="top" constant="5" id="W9V-0J-Fzo"/>
                                     <constraint firstItem="O5S-ct-LtA" firstAttribute="centerY" secondItem="xxP-32-u8m" secondAttribute="centerY" id="lh2-vg-JoA"/>
                                 </constraints>
                             </view>
@@ -211,8 +224,12 @@
                         <viewLayoutGuide key="safeArea" id="SAA-FI-iNO"/>
                     </view>
                     <navigationItem key="navigationItem" id="ORK-pG-0UM"/>
+                    <connections>
+                        <outlet property="backButton" destination="s2C-Nn-1Xg" id="uhO-FC-EGe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFA-ll-3Mu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8Iq-1q-QTk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-2" y="2397"/>
         </scene>

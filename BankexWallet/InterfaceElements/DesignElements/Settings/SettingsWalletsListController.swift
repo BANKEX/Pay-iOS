@@ -21,6 +21,7 @@ UITableViewDataSource, UITableViewDelegate {
         keysList = (keysService.fullHDKeysList() ?? [HDKey]()) + (keysService.fullListOfSingleEthereumAddresses() ?? [HDKey]())
     }
 
+    @IBAction func unwind(segue:UIStoryboardSegue) { }
 
     // MARK: Actions
     @IBAction func goBack(sender: UIButton) {

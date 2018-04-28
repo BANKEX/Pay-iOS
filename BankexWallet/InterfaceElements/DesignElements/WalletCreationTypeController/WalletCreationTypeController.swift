@@ -10,7 +10,14 @@ import UIKit
 
 class WalletCreationTypeController: UIViewController {
 
+    @IBOutlet weak var backButton: UIButton!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if (navigationController?.viewControllers.count ?? 0) > 1 {
+            backButton.isHidden = false
+        }
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -22,6 +29,8 @@ class WalletCreationTypeController: UIViewController {
         controller.walletCreationMode = segue.identifier == "importWallet" ? WalletKeysMode.importKey : WalletKeysMode.createKey
     }
  
+    
+    
     @IBAction func unwind(segue:UIStoryboardSegue) { }
 
 }
