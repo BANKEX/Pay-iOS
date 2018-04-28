@@ -17,6 +17,11 @@ QRCodeReaderViewControllerDelegate {
 
     //MARK: Outlets
     
+    @IBOutlet weak var additionalDataView: UIView!
+    @IBOutlet weak var dataTopEmptyView: UIView!
+    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var topTokenSymbolLabel: UILabel!
+    @IBOutlet weak var tokenIconImageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet var favNameContainer: UIView!
     
@@ -39,6 +44,8 @@ QRCodeReaderViewControllerDelegate {
     @IBOutlet weak var feeLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     
+    @IBOutlet weak var interDataAndBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var additionalDataSeparator: UIView!
     // MARK: Services
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
@@ -51,6 +58,11 @@ QRCodeReaderViewControllerDelegate {
         super.viewDidLoad()
         nextButton.isEnabled = false
 
+        favNameContainer.removeFromSuperview()
+        dataTopEmptyView.removeFromSuperview()
+        additionalDataView.removeFromSuperview()
+        additionalDataSeparator.removeFromSuperview()
+        
         // Do any additional setup after loading the view.
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
@@ -60,6 +72,13 @@ QRCodeReaderViewControllerDelegate {
         updateBalance()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let fixedFrame = view.convert(stackView.frame, from: stackView.superview)
+        let size = stackView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        let availableSpace = view.frame.height - size.height - fixedFrame.minY - 96 - 25
+        interDataAndBottomConstraint.constant = availableSpace < 25 ? 25 : availableSpace
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "showConfirmation",
@@ -120,6 +139,9 @@ QRCodeReaderViewControllerDelegate {
     @IBAction func deleteSelectedFavTapped(_ sender: Any) {
     }
 
+    @IBAction func emptySpaceTapped(_ sender: Any) {
+        view.endEditing(false)
+    }
     
     // MARK: TextField Delegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -163,6 +185,23 @@ QRCodeReaderViewControllerDelegate {
         return true
     }
     
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        let index = textFields.index(of: textField) ?? 0
+        separators[index].backgroundColor = WalletColors.greySeparator.color()
+        textField.textColor = WalletColors.defaultText.color()
+        
+        
+        if textField == amountTextfield {
+            guard let _ = Float((amountTextfield.text ?? "")) else {
+                let amountIndex = textFields.index(of: amountTextfield) ?? 0
+                separators[amountIndex].backgroundColor = WalletColors.errorRed.color()
+                amountTextfield.textColor = WalletColors.errorRed.color()
+                return true
+            }
+        }
+        return true
+    }
+    
     // MARK: QR Code scan
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
@@ -189,6 +228,10 @@ QRCodeReaderViewControllerDelegate {
     // MARK: Balance
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     func updateBalance() {
+        topTokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
+        tokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
+
+        tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().name ).image()
         guard let selectedAddress = keysService.selectedAddress() else {
             return
         }
@@ -197,8 +240,8 @@ QRCodeReaderViewControllerDelegate {
             case .Success(let response):
                 print("\(response)")
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
-//                let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
-//                self.currentBalanceLabel.text = "Amount: " + formattedAmount!
+                let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
+                self.balanceLabel.text = formattedAmount!
             case .Error(let error):
                 print("\(error)")
             }

@@ -2324,15 +2324,46 @@ minutes, please wait ...</string>
                                         <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQy-KZ-F8Y">
+                                        <rect key="frame" x="106" y="15" width="39.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oi8-iV-lZz">
+                                        <rect key="frame" x="213" y="18" width="31" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SR5-HB-i2Y">
+                                        <rect key="frame" x="178" y="11" width="28" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="28" id="Ddh-aV-lZf"/>
+                                            <constraint firstAttribute="height" constant="28" id="lQa-vm-XO7"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow down" translatesAutoresizingMaskIntoConstraints="NO" id="PO1-Ww-tSv">
+                                        <rect key="frame" x="254" y="19.5" width="14" height="9"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="0yT-dn-M8q"/>
+                                    <constraint firstItem="XQy-KZ-F8Y" firstAttribute="centerY" secondItem="bcl-qt-n58" secondAttribute="centerY" id="A5E-kX-13T"/>
+                                    <constraint firstItem="SR5-HB-i2Y" firstAttribute="centerY" secondItem="bcl-qt-n58" secondAttribute="centerY" id="JvL-nI-gZ1"/>
                                     <constraint firstItem="bcl-qt-n58" firstAttribute="leading" secondItem="Rin-jy-093" secondAttribute="leading" constant="15" id="LX6-mp-H8W"/>
+                                    <constraint firstItem="Oi8-iV-lZz" firstAttribute="centerY" secondItem="bcl-qt-n58" secondAttribute="centerY" id="M5Q-hg-sre"/>
                                     <constraint firstItem="bcl-qt-n58" firstAttribute="centerY" secondItem="Rin-jy-093" secondAttribute="centerY" id="QdG-Ev-XTZ"/>
+                                    <constraint firstItem="PO1-Ww-tSv" firstAttribute="leading" secondItem="Oi8-iV-lZz" secondAttribute="trailing" constant="10" id="RCP-V8-0iK"/>
                                     <constraint firstAttribute="bottom" secondItem="hwa-13-ktA" secondAttribute="bottom" id="TB8-ln-n3R"/>
                                     <constraint firstItem="hwa-13-ktA" firstAttribute="leading" secondItem="Rin-jy-093" secondAttribute="leading" constant="90" id="Ue0-SN-hcu"/>
+                                    <constraint firstItem="PO1-Ww-tSv" firstAttribute="centerY" secondItem="Rin-jy-093" secondAttribute="centerY" id="W0D-qI-fMe"/>
+                                    <constraint firstItem="Oi8-iV-lZz" firstAttribute="leading" secondItem="SR5-HB-i2Y" secondAttribute="trailing" constant="7" id="agF-3A-pWc"/>
+                                    <constraint firstAttribute="trailing" secondItem="PO1-Ww-tSv" secondAttribute="trailing" constant="15" id="cAQ-MK-1kE"/>
+                                    <constraint firstItem="XQy-KZ-F8Y" firstAttribute="leading" secondItem="hwa-13-ktA" secondAttribute="trailing" constant="15" id="eZK-gO-2Cj"/>
                                     <constraint firstItem="hwa-13-ktA" firstAttribute="top" secondItem="Rin-jy-093" secondAttribute="top" id="oaQ-h3-AlD"/>
+                                    <constraint firstItem="SR5-HB-i2Y" firstAttribute="centerY" secondItem="bcl-qt-n58" secondAttribute="centerY" id="vZc-It-SQ3"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -2353,6 +2384,12 @@ minutes, please wait ...</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="649"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vg-VN-TBg">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="649"/>
+                                        <connections>
+                                            <action selector="emptySpaceTapped:" destination="dxz-2H-Uh6" eventType="touchUpInside" id="ap3-0j-Lc8"/>
+                                        </connections>
+                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xfl-fn-w1I">
                                         <rect key="frame" x="28" y="0.0" width="319" height="414"/>
                                         <subviews>
@@ -2470,7 +2507,7 @@ minutes, please wait ...</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Wo-5m-zjJ">
                                                 <rect key="frame" x="0.0" y="139" width="319" height="48"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPV-8a-QkS">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPV-8a-QkS">
                                                         <rect key="frame" x="0.0" y="16" width="120" height="32"/>
                                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -2490,15 +2527,17 @@ minutes, please wait ...</string>
                                                             <action selector="addFromFavouritesTapped:" destination="dxz-2H-Uh6" eventType="touchUpInside" id="kuB-wj-RTN"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNX-au-LAY">
-                                                        <rect key="frame" x="128" y="16" width="120" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNX-au-LAY">
+                                                        <rect key="frame" x="0.0" y="16" width="128" height="32"/>
                                                         <color key="backgroundColor" red="0.96862745098039216" green="0.97647058823529409" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="NTt-7x-CzG"/>
-                                                            <constraint firstAttribute="width" constant="120" id="NlS-kK-Ywx"/>
+                                                            <constraint firstAttribute="width" constant="128" id="NlS-kK-Ywx"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <state key="normal" title="Button">
+                                                        <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="imageEdgeInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <state key="normal" title="From clipboard" image="Plus">
                                                             <color key="titleColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -2517,7 +2556,13 @@ minutes, please wait ...</string>
                                                     <constraint firstAttribute="bottom" secondItem="sPV-8a-QkS" secondAttribute="bottom" id="a10-um-tc8"/>
                                                     <constraint firstAttribute="bottom" secondItem="YNX-au-LAY" secondAttribute="bottom" id="bX5-VS-06n"/>
                                                     <constraint firstItem="sPV-8a-QkS" firstAttribute="top" secondItem="7Wo-5m-zjJ" secondAttribute="top" constant="16" id="egn-yE-VEk"/>
-                                                    <constraint firstItem="YNX-au-LAY" firstAttribute="leading" secondItem="sPV-8a-QkS" secondAttribute="trailing" constant="8" id="ifD-q9-ofu"/>
+                                                    <constraint firstItem="YNX-au-LAY" firstAttribute="leading" secondItem="7Wo-5m-zjJ" secondAttribute="leading" id="ifD-q9-ofu">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="16"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </constraint>
                                                     <constraint firstItem="sPV-8a-QkS" firstAttribute="leading" secondItem="7Wo-5m-zjJ" secondAttribute="leading" id="nlf-gH-zIh"/>
                                                 </constraints>
                                             </view>
@@ -2630,7 +2675,7 @@ minutes, please wait ...</string>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ekE-lZ-poW" secondAttribute="height" multiplier="1:1" id="ctb-lN-CQX"/>
                                                         </constraints>
-                                                        <state key="normal" image="Eye closed"/>
+                                                        <state key="normal" image="Eye open"/>
                                                         <connections>
                                                             <action selector="switchPasswordVisibility:" destination="dxz-2H-Uh6" eventType="touchUpInside" id="xIF-hi-QUr"/>
                                                         </connections>
@@ -2673,8 +2718,8 @@ minutes, please wait ...</string>
                                             <constraint firstItem="nRb-Hn-bOh" firstAttribute="leading" secondItem="xfl-fn-w1I" secondAttribute="leading" id="aKS-Tn-aBo"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee:  0.0025 ETH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZoG-aK-Zal">
-                                        <rect key="frame" x="138.5" y="525.5" width="98" height="14.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee:  0.0025 ETH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZoG-aK-Zal">
+                                        <rect key="frame" x="138.5" y="439" width="98" height="101"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.61176470588235299" green="0.65098039215686276" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
@@ -2700,18 +2745,22 @@ minutes, please wait ...</string>
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="3vg-VN-TBg" secondAttribute="bottom" id="1ff-UV-zBw"/>
+                                    <constraint firstAttribute="trailing" secondItem="3vg-VN-TBg" secondAttribute="trailing" id="21x-VU-KBi"/>
                                     <constraint firstAttribute="bottom" secondItem="LWM-xP-IzI" secondAttribute="bottom" id="8en-3s-EPo"/>
                                     <constraint firstItem="Z5h-r7-uKr" firstAttribute="top" secondItem="ZoG-aK-Zal" secondAttribute="bottom" constant="13" id="9fg-2D-cjD"/>
                                     <constraint firstItem="Z5h-r7-uKr" firstAttribute="leading" secondItem="cpH-Mb-YFp" secondAttribute="leading" constant="28" id="HvN-mq-qsR"/>
-                                    <constraint firstItem="ZoG-aK-Zal" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xfl-fn-w1I" secondAttribute="bottom" constant="25" id="P3c-Au-Sfe"/>
+                                    <constraint firstItem="ZoG-aK-Zal" firstAttribute="top" secondItem="xfl-fn-w1I" secondAttribute="bottom" constant="25" id="P3c-Au-Sfe"/>
                                     <constraint firstAttribute="trailing" secondItem="LWM-xP-IzI" secondAttribute="trailing" id="Rc0-ja-5lS"/>
                                     <constraint firstAttribute="bottom" secondItem="Z5h-r7-uKr" secondAttribute="bottom" constant="40" id="TkX-z8-nZA"/>
                                     <constraint firstItem="xfl-fn-w1I" firstAttribute="leading" secondItem="cpH-Mb-YFp" secondAttribute="leading" constant="28" id="VTl-Oz-f9i"/>
                                     <constraint firstItem="LWM-xP-IzI" firstAttribute="top" secondItem="cpH-Mb-YFp" secondAttribute="top" id="Vts-xt-gen"/>
                                     <constraint firstItem="LWM-xP-IzI" firstAttribute="leading" secondItem="cpH-Mb-YFp" secondAttribute="leading" id="bJ4-tY-XaX"/>
                                     <constraint firstAttribute="trailing" secondItem="xfl-fn-w1I" secondAttribute="trailing" constant="28" id="hB1-Vw-NOI"/>
+                                    <constraint firstItem="3vg-VN-TBg" firstAttribute="top" secondItem="cpH-Mb-YFp" secondAttribute="top" id="m5v-qY-KvE"/>
                                     <constraint firstItem="ZoG-aK-Zal" firstAttribute="centerX" secondItem="cpH-Mb-YFp" secondAttribute="centerX" id="naj-d6-gH6"/>
                                     <constraint firstItem="xfl-fn-w1I" firstAttribute="top" secondItem="cpH-Mb-YFp" secondAttribute="top" id="sFr-gQ-Zok"/>
+                                    <constraint firstItem="3vg-VN-TBg" firstAttribute="leading" secondItem="cpH-Mb-YFp" secondAttribute="leading" id="vhK-VX-xdu"/>
                                     <constraint firstItem="Z5h-r7-uKr" firstAttribute="centerX" secondItem="cpH-Mb-YFp" secondAttribute="centerX" id="xHR-HR-GIs"/>
                                 </constraints>
                             </scrollView>
@@ -2739,18 +2788,25 @@ minutes, please wait ...</string>
                     </view>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
+                        <outlet property="additionalDataSeparator" destination="7cz-Fc-S25" id="zql-JR-f6D"/>
+                        <outlet property="additionalDataView" destination="JdR-pR-32f" id="K92-Oi-Qww"/>
                         <outlet property="additionalInputContainerView" destination="7Wo-5m-zjJ" id="x9L-Zj-3aM"/>
                         <outlet property="amountTextfield" destination="HFk-X3-Yzw" id="4k4-nz-iNe"/>
+                        <outlet property="balanceLabel" destination="XQy-KZ-F8Y" id="z83-Nn-7tO"/>
+                        <outlet property="dataTopEmptyView" destination="9tm-sD-PdS" id="FY9-vX-a7b"/>
                         <outlet property="enterAddressTextfield" destination="C7M-rj-MOi" id="JVZ-JH-xjd"/>
                         <outlet property="favNameContainer" destination="3If-mS-R4S" id="212-CG-7NH"/>
                         <outlet property="feeLabel" destination="ZoG-aK-Zal" id="HlK-fc-7xE"/>
                         <outlet property="insertFromClipboardButton" destination="YNX-au-LAY" id="lUf-Vj-lsD"/>
+                        <outlet property="interDataAndBottomConstraint" destination="P3c-Au-Sfe" id="iMt-qw-hgg"/>
                         <outlet property="memoTextfield" destination="IsK-bf-UcU" id="IKa-eE-YTn"/>
                         <outlet property="nextButton" destination="Z5h-r7-uKr" id="asN-1J-TVM"/>
                         <outlet property="passwordTextfield" destination="XG2-6C-eIe" id="2dW-de-Hl3"/>
                         <outlet property="selectedFavNameLabel" destination="iJR-5o-d2b" id="YLE-ct-gLD"/>
                         <outlet property="stackView" destination="xfl-fn-w1I" id="GLy-mK-fsB"/>
-                        <outlet property="tokenSymbolLabel" destination="PUV-cp-kMm" id="Iz8-cV-kyD"/>
+                        <outlet property="tokenIconImageView" destination="SR5-HB-i2Y" id="Mhf-tF-RaU"/>
+                        <outlet property="tokenSymbolLabel" destination="PUV-cp-kMm" id="KAs-Sl-4E2"/>
+                        <outlet property="topTokenSymbolLabel" destination="Oi8-iV-lZz" id="r8l-Pg-a1P"/>
                         <outletCollection property="textFields" destination="C7M-rj-MOi" collectionClass="NSMutableArray" id="haW-Sq-0EY"/>
                         <outletCollection property="textFields" destination="HFk-X3-Yzw" collectionClass="NSMutableArray" id="RMo-1k-x4O"/>
                         <outletCollection property="textFields" destination="IsK-bf-UcU" collectionClass="NSMutableArray" id="3yX-CD-xxL"/>
@@ -5883,12 +5939,12 @@ successfully</string>
         <image name="Add token" width="40" height="40"/>
         <image name="Add_token_icon" width="63" height="55"/>
         <image name="Arrow back" width="20" height="14"/>
+        <image name="Arrow down" width="14" height="9"/>
         <image name="Bankex_wallet_logo" width="245" height="30"/>
         <image name="Copy" width="64" height="64"/>
         <image name="Create_wallet" width="62" height="74"/>
         <image name="Done" width="64" height="64"/>
         <image name="Edit" width="32" height="32"/>
-        <image name="Eye closed" width="16" height="14"/>
         <image name="Eye open" width="16" height="10"/>
         <image name="Home" width="18" height="18"/>
         <image name="Import_wallet" width="62" height="59"/>
