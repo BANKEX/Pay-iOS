@@ -21,6 +21,7 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
     let service: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     var tokens: [ERC20TokenModel]?
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tokens = service.availableTokensList()
@@ -35,7 +36,8 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TokensListCell", for: indexPath) as! TokensListCell
         let token = tokens![indexPath.row]
-        cell.configure(with: token)
+        let isSelected = token.address == service.selectedERC20Token().address
+        cell.configure(with: token, isSelected: isSelected, isFirstCell: indexPath.row == 0, isLastCell: indexPath.row == (tokens?.count ?? 0) - 1)
         return cell
     }
 

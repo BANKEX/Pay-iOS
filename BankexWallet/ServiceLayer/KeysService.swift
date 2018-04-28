@@ -39,15 +39,6 @@ class SingleKeyServiceImplementation: SingleKeyService {
     
     
     
-    func fullListOfSingleEthereumAddresses() -> [HDKey]? {
-        guard let allKeys = try? db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isHD == %@", NSNumber(value: false)))) else {
-            return nil
-        }
-        return allKeys.map({ (wallet) -> HDKey in
-            return HDKey(name: wallet.name, address: wallet.address ?? "")
-        })
-    }
-    
     func fullListOfPublicAddresses() -> [String]? {        
         guard let allKeys = try? db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isHD == %@", NSNumber(value: false)))) else {
             return nil

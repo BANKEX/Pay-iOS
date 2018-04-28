@@ -10,8 +10,7 @@ import UIKit
 
 class TransactionsHistoryController: UIViewController,
     UITableViewDelegate,
-    UITableViewDataSource,
-    TransactionsHistoryViewInput {
+    UITableViewDataSource {
     
     // MARK: empty View
     @IBOutlet weak var emptyViewButton: UIButton!
@@ -26,79 +25,112 @@ class TransactionsHistoryController: UIViewController,
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: Non-view vars
-    var transactionsToShow: [Any]?
+    var transactionsToShow = [[ETHTransactionModel]]()
+    var sections = [String]()
     var presenter: TransactionsHistoryViewOutput!
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UINib(nibName: "DateSectionView", bundle: nil), forHeaderFooterViewReuseIdentifier: "DateSectionView")
+        tableView.estimatedSectionHeaderHeight = 32
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
     }
- 
+    
+    let service: SendEthService = SendEthServiceImplementation()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.isHidden = true
-        emptyView.isHidden = true
-        addTransactionButton.isHidden = true
-        activityIndicator.startAnimating()
-        presenter.viewIsReady()
+        let objects = service.getAllTransactions()
+
+        guard let obj = objects,
+            !obj.isEmpty else {
+                // TODO:  technically it's invalid state, but let's check later
+                return}
+        show(transactions: obj)
     }
     
     // MARK: Update view status
     var canSendTransactions = false
-    func showEmptyView() {
-        canSendTransactions = true
-        emptyView.isHidden = false
-        tableView.isHidden = true
-        addTransactionButton.isHidden = false
-        activityIndicator.stopAnimating()
-        emptyViewLabel.text = NSLocalizedString("You don't have any transactions yet", comment: "")
-        emptyViewButton.setTitle("Send money", for: .normal)
-        emptyViewButton.addTarget(self, action: #selector(showSendEth), for: .touchUpInside)
-
-    }
+    func showEmptyView() {}
+    func showNoKeysAvailableView() { }
     
-    func showNoKeysAvailableView() {
-        canSendTransactions = false
-        emptyView.isHidden = false
-        tableView.isHidden = true
-        addTransactionButton.isHidden = true
-        activityIndicator.stopAnimating()
-        emptyViewLabel.text = NSLocalizedString("You don't have any keys yet", comment: "")
-        emptyViewButton.setTitle("Add key", for: .normal)
-        emptyViewButton.addTarget(self, action: #selector(showAddNewKeyController), for: .touchUpInside)
-    }
-    
-    func show(transactions: [Any]) {
-        canSendTransactions = true
-        addTransactionButton.isHidden = false
-        emptyView.isHidden = true
+    func show(transactions: [ETHTransactionModel]) {
+        (sections, transactionsToShow) = prepareToShow(transactions: transactions)
+        
         tableView.isHidden = false
-        activityIndicator.stopAnimating()
-        transactionsToShow = transactions
         tableView.reloadData()
     }
     
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM YYYY"
+        return formatter
+    }()
+    
+    let onlyMonthDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM"
+        return formatter
+    }()
+    
+    func prepareToShow(transactions: [ETHTransactionModel]) -> ([String], [[ETHTransactionModel]]) {
+        var dictionaryOfTransactionsByDates = [[ETHTransactionModel]]()
+        var arrayOfDates = [String]()
+        
+        transactions.forEach { (nextModel) in
+            let modelDate = nextModel.date
+            let dateString = modelDate.isInSameYear(date: Date()) ? onlyMonthDateFormatter.string(from: modelDate) : dateFormatter.string(from: modelDate)
+            
+            if arrayOfDates.contains(dateString) {
+                var currentValue = dictionaryOfTransactionsByDates.last ?? [ETHTransactionModel]()
+                currentValue.append(nextModel)
+                dictionaryOfTransactionsByDates.remove(at: dictionaryOfTransactionsByDates.count - 1)
+                dictionaryOfTransactionsByDates.append(currentValue)
+                
+            } else {
+                arrayOfDates.append(dateString)
+                dictionaryOfTransactionsByDates.append([nextModel])
+            }
+        }
+        
+        return (arrayOfDates, dictionaryOfTransactionsByDates)
+    }
+    
     // MARK: Table View
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactionsToShow?.count ?? 0
+        return transactionsToShow[section].count
     }
     
     let identifier = "TransactionHistoryCell"
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! TransactionHistoryCell
-        guard let transaction = transactionsToShow?[indexPath.row] else {return cell}
-        cell.configure(withTransaction: transaction)
+         let transaction = transactionsToShow[indexPath.section][indexPath.row]
+        // TODO: Yes, it's a cheat here, but it's faster right now, please change it
+        cell.configure(withTransaction: transaction, isLastCell: true)
         return cell
     }
     
     var selectedTransaction: SendEthTransaction?
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard let transaction = transactionsToShow?[indexPath.row] as? SendEthTransaction else {return}
-        
-        selectedTransaction = transaction
-        performSegue(withIdentifier: "showSendTransactions", sender: self)
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        guard let transaction = transactionsToShow?[indexPath.row] as? SendEthTransaction else {return}
+//        
+//        selectedTransaction = transaction
+//        performSegue(withIdentifier: "showSendTransactions", sender: self)
 
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard sections.count > 1 else {
+            return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
+        }
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DateSectionView") as! DateSectionView
+        view.monthNameLabel.text = sections[section]
+        return view
     }
     
     // MARK:
@@ -124,4 +156,8 @@ class TransactionsHistoryController: UIViewController,
             selectedTransaction = nil
         }
     }
+}
+
+class DateSectionView: UITableViewHeaderFooterView {
+    @IBOutlet weak var monthNameLabel: UILabel!
 }

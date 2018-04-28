@@ -86,7 +86,7 @@ class SendEthServiceImplementation: SendEthService {
     
     func send(transactionModel: ETHTransactionModel, transaction: TransactionIntermediate, with password: String, completion: @escaping (SendEthResult<[String : String]>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let result = transaction.send()
+            let result = transaction.send(password: password, options: nil)
             if let error = result.error {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(error))
@@ -176,7 +176,7 @@ class SendEthServiceImplementation: SendEthService {
                 }
                 return
             }
-            guard let amount = Web3.Utils.parseToBigUInt(amountString, toUnits: .eth) else {
+            guard let amount = Web3.Utils.parseToBigUInt(amountString, units: .eth) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.invalidAmountFormat))
                 }
