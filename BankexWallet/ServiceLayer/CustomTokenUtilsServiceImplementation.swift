@@ -17,21 +17,22 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
             let contract = self.contract(for: token)
             let transaction = contract?.method("name", parameters: [AnyObject](), options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
-//            DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                //TODO: Somehow it crashes on second launch
                 completion(SendEthResult.Success(bkxBalance!.value!["0"] as! String))
-//            }
+            }
 //        }
     }
     
     func symbol(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
-//        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let contract = self.contract(for: token)
             let transaction = contract?.method("symbol", parameters: [AnyObject](), options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
-//            DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 completion(SendEthResult.Success(bkxBalance!.value!["0"] as! String))
-//            }
-//        }
+            }
+        }
     }
     
     func decimals(for token: String, completion: @escaping (SendEthResult<BigUInt>) -> Void) {

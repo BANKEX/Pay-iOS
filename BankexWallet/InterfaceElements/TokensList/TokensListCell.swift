@@ -36,7 +36,9 @@ class TokensListCell: UITableViewCell {
     var didCallCompletion = true
     
     func configure(with token: ERC20TokenModel, isSelected: Bool, isFirstCell: Bool, isLastCell: Bool) {
-        self.amountLabel.text = "..."
+        if token.address != selectedToken?.address {
+            self.amountLabel.text = "..."
+        }
         selectedToken = token
         if !didCallCompletion {
             didChangeToken = true
