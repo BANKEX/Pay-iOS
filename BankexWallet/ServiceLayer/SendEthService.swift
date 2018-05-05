@@ -115,7 +115,10 @@ class SendEthServiceImplementation: SendEthService {
                     save()
                 }
             } catch {
-                //TODO: There was an error in the operation
+                DispatchQueue.main.async {
+                    completion(SendEthResult.Error(SendEthErrors.createTransactionIssue))
+                }
+                return
             }
             DispatchQueue.main.async {
                 completion(SendEthResult.Success(value))

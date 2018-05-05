@@ -81,6 +81,10 @@ class MainInfoController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let conversionService = FiatServiceImplementation.service
+        conversionService.updateConversionRate(for: tokensService.selectedERC20Token().symbol) { (rate) in
+            print(rate)
+        }
     }
     
     var sendEthService: SendEthService!

@@ -25,7 +25,7 @@ class SingleKeyServiceTests: XCTestCase {
     // TODO:
     func testRemoveAddress() {
         //given
-        let service = SingleKeyServiceImplementation(pathToStoreKeys: "/TestKeystores", defaultPassword: "")
+        let service = SingleKeyServiceImplementation()
         
         //when
         service.createNewSingleAddressWallet(with: "") { (_) in

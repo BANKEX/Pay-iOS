@@ -24,10 +24,11 @@ enum HDWalletCreationError: Error {
 protocol GlobalWalletsService {
     func keystoreManager() -> KeystoreManager
     func fullHDKeysList() -> [HDKey]?
+    func fullListOfSingleEthereumAddresses() -> [HDKey]?
+    func fullListOfWallets() -> [HDKey]?
     func selectedAddress() -> String?
     func selectedKey() -> HDKey?
     func updateSelected(address: String)
-    func fullListOfSingleEthereumAddresses() -> [HDKey]?
     func delete(address: String)
 }
 
@@ -59,6 +60,15 @@ extension GlobalWalletsService {
     func selectedAddress() -> String? {
         let key = try! DBStorage.db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).first
         return key?.address
+    }
+    
+    func fullListOfWallets() -> [HDKey]? {
+        guard let allKeys = try? DBStorage.db.fetch(FetchRequest<KeyWallet>()) else {
+            return nil
+        }
+        return allKeys.map({ (wallet) -> HDKey in
+            return HDKey(name: wallet.name, address: wallet.address ?? "")
+        })
     }
     
     func fullHDKeysList() -> [HDKey]? {
@@ -285,7 +295,9 @@ class HDWalletServiceImplementation: HDWalletService {
                     }
                 }
             } catch {
-                //TODO: There was an error in the operation
+                DispatchQueue.main.async {
+                    completion(nil, HDWalletCreationError.creationError)
+                }
             }
         }
     }

@@ -949,7 +949,7 @@ to add token</string>
                                 <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ITk-yb-siQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ITk-yb-siQ">
                                 <rect key="frame" x="24" y="91" width="327" height="660"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -3240,11 +3240,7 @@ minutes, please wait ...</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Keys list" id="pkk-ib-LyL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dCF-BF-wvJ">
-                            <connections>
-                                <segue destination="pVf-lu-5ed" kind="show" id="w68-x4-ZaO"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dCF-BF-wvJ"/>
                     </navigationItem>
                     <connections>
                         <segue destination="ugT-za-9ye" kind="show" identifier="showQRCode" id="yqu-9K-WKe"/>
@@ -3535,91 +3531,11 @@ minutes, please wait ...</string>
                         <outlet property="emptyViewButton" destination="PAy-3v-3Jr" id="b2a-ah-cJR"/>
                         <outlet property="emptyViewLabel" destination="Cby-us-Dnj" id="Gem-9N-m4K"/>
                         <outlet property="tableView" destination="mYe-xm-MEP" id="1Da-dd-o9y"/>
-                        <segue destination="pVf-lu-5ed" kind="show" identifier="addNewKey" id="XEQ-3E-euS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fq9-rd-3pa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7422" y="4498"/>
-        </scene>
-        <!--Create New Key-->
-        <scene sceneID="BuY-kX-ViP">
-            <objects>
-                <viewController title="Create New Key" id="pVf-lu-5ed" customClass="CreateNewKeyController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="IMW-0c-26T">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bWr-KS-sLy">
-                                <rect key="frame" x="15" y="114" width="345" height="130"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="Rq3-zG-iBz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHU-XZ-wn5">
-                                <rect key="frame" x="134" y="249" width="106" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="ybe-ab-v7L"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Add New Key"/>
-                                <connections>
-                                    <action selector="addKeyFromTextView:" destination="pVf-lu-5ed" eventType="touchUpInside" id="Oja-Vr-34R"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16I-kZ-2Sj">
-                                <rect key="frame" x="15" y="289" width="345" height="1"/>
-                                <color key="backgroundColor" red="0.45098039220000002" green="0.50980392159999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="cTU-DG-eov"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FoN-a1-Olm">
-                                <rect key="frame" x="123.5" y="324" width="127" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="v1G-mb-yjW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Create New Key"/>
-                                <connections>
-                                    <action selector="createNewKey:" destination="pVf-lu-5ed" eventType="touchUpInside" id="2Rn-gs-ovO"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="bWr-KS-sLy" firstAttribute="leading" secondItem="6xM-H5-vNq" secondAttribute="leading" constant="15" id="4vp-92-IvT"/>
-                            <constraint firstItem="16I-kZ-2Sj" firstAttribute="centerX" secondItem="IMW-0c-26T" secondAttribute="centerX" id="ILJ-vP-S05"/>
-                            <constraint firstItem="JHU-XZ-wn5" firstAttribute="top" secondItem="bWr-KS-sLy" secondAttribute="bottom" constant="5" id="Nnu-ml-Mss"/>
-                            <constraint firstItem="bWr-KS-sLy" firstAttribute="centerX" secondItem="IMW-0c-26T" secondAttribute="centerX" id="QEf-6m-Po3"/>
-                            <constraint firstItem="bWr-KS-sLy" firstAttribute="top" secondItem="6xM-H5-vNq" secondAttribute="top" constant="50" id="Vr1-AD-ciA"/>
-                            <constraint firstItem="6xM-H5-vNq" firstAttribute="trailing" secondItem="bWr-KS-sLy" secondAttribute="trailing" constant="15" id="Xec-Sb-K7F"/>
-                            <constraint firstItem="16I-kZ-2Sj" firstAttribute="leading" secondItem="IMW-0c-26T" secondAttribute="leading" constant="15" id="bR3-mc-JzO"/>
-                            <constraint firstItem="JHU-XZ-wn5" firstAttribute="centerX" secondItem="IMW-0c-26T" secondAttribute="centerX" id="dTE-Fa-ZZk"/>
-                            <constraint firstItem="FoN-a1-Olm" firstAttribute="centerX" secondItem="IMW-0c-26T" secondAttribute="centerX" id="dTU-s6-HBQ"/>
-                            <constraint firstItem="FoN-a1-Olm" firstAttribute="top" secondItem="JHU-XZ-wn5" secondAttribute="bottom" constant="40" id="iKt-aT-81J"/>
-                            <constraint firstItem="16I-kZ-2Sj" firstAttribute="top" secondItem="JHU-XZ-wn5" secondAttribute="bottom" constant="5" id="oi4-Or-Kpx"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="6xM-H5-vNq"/>
-                    </view>
-                    <connections>
-                        <outlet property="inputKeyTextView" destination="bWr-KS-sLy" id="7cJ-fl-XLY"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="24B-Yw-yvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7586" y="3076"/>
         </scene>
         <!--Tokens List Controller-->
         <scene sceneID="qdg-vk-8uh">
@@ -5979,7 +5895,6 @@ successfully</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JaH-wa-aDn"/>
-        <segue reference="w68-x4-ZaO"/>
         <segue reference="6XE-pt-w3G"/>
         <segue reference="zl4-lC-AqZ"/>
         <segue reference="890-Uf-GGI"/>

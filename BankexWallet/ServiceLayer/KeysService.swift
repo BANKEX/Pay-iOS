@@ -10,7 +10,6 @@ import UIKit
 import web3swift
 import SugarRecord
 
-//TODO: Part of these calls should throw
 protocol SingleKeyService: GlobalWalletsService {
     
     func createNewSingleAddressWallet(with name: String?,
@@ -23,20 +22,15 @@ protocol SingleKeyService: GlobalWalletsService {
     func fullListOfPublicAddresses() -> [String]?
 }
 
-//TODO: Add here more magic for default things
 class SingleKeyServiceImplementation: SingleKeyService {
 
     let userDefaultsKeyForSelectedAddress = "SelectedAddress"
     
-    let pathForKeys: String
     let defaultPassword: String
-    let defaultKeystorePath = "/keystore"
     
-    init(pathToStoreKeys: String = "/keystore", defaultPassword: String = "BANKEXFOUNDATION") {
-        self.pathForKeys = pathToStoreKeys
+    init(defaultPassword: String = "BANKEXFOUNDATION") {
         self.defaultPassword = defaultPassword
     }
-    
     
     
     func fullListOfPublicAddresses() -> [String]? {        

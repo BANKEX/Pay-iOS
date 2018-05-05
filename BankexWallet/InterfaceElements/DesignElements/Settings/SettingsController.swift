@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MessageUI
+import StoreKit
 
 
 class SettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -51,6 +53,23 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
             cell.configureCell(with: parameter)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if settingsToShow[indexPath.row] == "WriteUsCell" {
+            guard (MFMailComposeViewController.canSendMail()) else {
+                return
+            }
+            let toRecipents = ["ck@bankexfoundation.org"]
+            let mc: MFMailComposeViewController = MFMailComposeViewController()
+            mc.setToRecipients(toRecipents)
+            present(mc, animated: true, completion: nil)
+        }
+        
+        else if settingsToShow[indexPath.row] == "RateUsCell" {
+            SKStoreReviewController.requestReview()
+        }
     }
 }
 
