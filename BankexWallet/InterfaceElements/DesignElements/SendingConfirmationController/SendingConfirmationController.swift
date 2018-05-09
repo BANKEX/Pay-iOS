@@ -80,7 +80,9 @@ class SendingConfirmationController: UIViewController, Retriable {
             feeLabel.text = "Not defined"
             return
         }
-        feeLabel.text = "\(estimatedGas)"
+        let formattedAmount = Web3.Utils.formatToEthereumUnits(estimatedGas, toUnits: .wei, decimals: 1)
+
+        feeLabel.text = (formattedAmount ?? "") + "Wei."
         nextButton.setTitle("Send " + (amountLabel.text ?? ""), for: .normal)
     }
     

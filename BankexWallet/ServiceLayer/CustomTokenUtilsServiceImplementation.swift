@@ -10,18 +10,30 @@ import UIKit
 import BigInt
 import web3swift
 
+enum CustomTokenError: Error {
+    case wrongBalanceError
+    case badNameError
+    case badSymbolError
+}
+
+
 class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
     
     func name(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
-//        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let contract = self.contract(for: token)
             let transaction = contract?.method("name", parameters: [AnyObject](), options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
             DispatchQueue.main.async {
                 //TODO: Somehow it crashes on second launch
-                completion(SendEthResult.Success(bkxBalance!.value!["0"] as! String))
+                if let balance = bkxBalance?.value?["0"] as? String {
+                    completion(SendEthResult.Success(balance))
+                }
+                else {
+                    completion(SendEthResult.Error(CustomTokenError.badNameError))
+                }
             }
-//        }
+        }
     }
     
     func symbol(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
@@ -30,20 +42,30 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
             let transaction = contract?.method("symbol", parameters: [AnyObject](), options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
             DispatchQueue.main.async {
-                completion(SendEthResult.Success(bkxBalance!.value!["0"] as! String))
+                if let balance = bkxBalance?.value?["0"] as? String {
+                    completion(SendEthResult.Success(balance))
+                }
+                else {
+                    completion(SendEthResult.Error(CustomTokenError.badSymbolError))
+                }
             }
         }
     }
     
     func decimals(for token: String, completion: @escaping (SendEthResult<BigUInt>) -> Void) {
-//        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let contract = self.contract(for: token)
             let transaction = contract?.method("decimals", parameters: [AnyObject](), options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
-//            DispatchQueue.main.async {
-                completion(SendEthResult.Success(bkxBalance!.value!["0"] as! BigUInt))
-//            }
-//        }
+            DispatchQueue.main.async {
+                if let balance = bkxBalance?.value?["0"] as? BigUInt {
+                    completion(SendEthResult.Success(balance))
+                }
+                else {
+                    completion(SendEthResult.Error(CustomTokenError.wrongBalanceError))
+                }
+            }
+        }
     }
     
     
@@ -68,7 +90,13 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
             let bkxBalance = transaction?.call(options: self.defaultOptions())
             DispatchQueue.main.async {
                 // TODO: Fix me here
-                completion(SendEthResult.Success(bkxBalance!.value!["balance"] as! BigUInt))
+                if let balance = bkxBalance?.value?["balance"] as? BigUInt {
+                    completion(SendEthResult.Success(balance))
+                }
+                else {
+                    completion(SendEthResult.Error(CustomTokenError.wrongBalanceError))
+                }
+
             }
             
             return

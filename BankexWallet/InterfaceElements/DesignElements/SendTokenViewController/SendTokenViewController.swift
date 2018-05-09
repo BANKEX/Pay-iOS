@@ -215,7 +215,11 @@ QRCodeReaderViewControllerDelegate {
     
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         reader.stopScanning()
-        enterAddressTextfield.text = result.value
+        var value = result.value
+        if !value.hasPrefix("0x") {
+            value = "0x" + value
+        }
+        enterAddressTextfield.text = value
         dismiss(animated: true, completion: nil)
     }
     

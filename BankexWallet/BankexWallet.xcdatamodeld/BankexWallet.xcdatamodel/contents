@@ -27,9 +27,15 @@
         <relationship name="keywallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="transactions" inverseEntity="KeyWallet" syncable="YES"/>
         <relationship name="token" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ERC20Token" inverseName="transactions" inverseEntity="ERC20Token" syncable="YES"/>
     </entity>
+    <entity name="TokenBalance" representedClassName="TokenBalance" syncable="YES" codeGenerationType="class">
+        <attribute name="balance" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="token" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ERC20Token" syncable="YES"/>
+        <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" syncable="YES"/>
+    </entity>
     <elements>
         <element name="ERC20Token" positionX="-63" positionY="9" width="128" height="150"/>
         <element name="KeyWallet" positionX="-54" positionY="54" width="128" height="165"/>
         <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="TokenBalance" positionX="-54" positionY="90" width="128" height="90"/>
     </elements>
 </model>

@@ -23,6 +23,7 @@ class AddressQRCodeController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         imageView.image = generateQRCode(from: addressToGenerateQR)
+        addressLabel.text = addressToGenerateQR
     }
  
     @IBAction func copyAddress(_ sender: Any) {
