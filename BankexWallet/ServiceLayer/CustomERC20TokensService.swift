@@ -207,6 +207,9 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                     oldSelectedToken.isSelected = false
                     newSelectedToken.isSelected = true
                     save()
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: DataChangeNotifications.didChangeToken.notificationName(), object: self, userInfo: ["token": token])
+                    }
                 }
             } catch {
                 //TODO: There was an error in the operation

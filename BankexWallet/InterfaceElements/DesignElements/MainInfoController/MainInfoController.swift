@@ -85,6 +85,15 @@ class MainInfoController: UITableViewController, UITabBarControllerDelegate {
         conversionService.updateConversionRate(for: tokensService.selectedERC20Token().symbol) { (rate) in
             print(rate)
         }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: DispatchQueue.main) { (_) in
+            self.tableView.reloadData()
+        }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: DispatchQueue.main) { (_) in
+            self.tableView.reloadData()
+        }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: DispatchQueue.main) { (_) in
+            self.tableView.reloadData()
+        }
     }
     
     var sendEthService: SendEthService!
@@ -97,7 +106,9 @@ class MainInfoController: UITableViewController, UITabBarControllerDelegate {
         
         itemsArray = ["TopLogoCell",
                       "CurrentWalletInfoCell",
-                      "TransactionHistoryCell"]
+                      "TransactionHistoryCell",
+                      "FavouritesTitleCell",
+                      "FavouritesListWithCollectionCell"]
         
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :

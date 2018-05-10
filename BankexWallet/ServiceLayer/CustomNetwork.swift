@@ -233,6 +233,7 @@ class NetworkSelectionSettings {
         let networkId = Web3SwiftNetworksAdapter().id(from: network)
         let serializedData = networkId.serialize()
         UserDefaults.standard.set(serializedData, forKey: savingNetworkIdKey)
+        NotificationCenter.default.post(name: DataChangeNotifications.didChangeNetwork.notificationName(), object: self, userInfo: ["network": network])
     }
 }
 

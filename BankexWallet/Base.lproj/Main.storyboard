@@ -2113,22 +2113,41 @@ to add token</string>
                                             <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcx-Pz-7CR">
-                                            <rect key="frame" x="302" y="21" width="46" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UM-Vy-Czo">
+                                            <rect key="frame" x="301" y="20.5" width="56" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="56" id="7AC-Mw-8xp"/>
+                                                <constraint firstAttribute="height" constant="32" id="90n-lQ-tDC"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <state key="normal" title="More">
+                                                <color key="titleColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.88235294119999996" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="16"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="E1M-F1-qYJ" firstAttribute="leading" secondItem="Yfq-ME-kVf" secondAttribute="leading" constant="18" id="BuX-VA-ahN"/>
+                                        <constraint firstAttribute="trailing" secondItem="9UM-Vy-Czo" secondAttribute="trailing" constant="18" id="KUR-dk-kBf"/>
                                         <constraint firstItem="E1M-F1-qYJ" firstAttribute="centerY" secondItem="Yfq-ME-kVf" secondAttribute="centerY" id="URp-qS-hdA"/>
+                                        <constraint firstItem="9UM-Vy-Czo" firstAttribute="centerY" secondItem="E1M-F1-qYJ" secondAttribute="centerY" id="amr-DV-F15"/>
                                         <constraint firstItem="E1M-F1-qYJ" firstAttribute="top" secondItem="Yfq-ME-kVf" secondAttribute="topMargin" constant="15" id="pR8-SW-3bf"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FavouritesListWithCollectionCell" rowHeight="126" id="Aut-Qk-Ufn" customClass="FavouritesListWithCollectionCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FavouritesListWithCollectionCell" rowHeight="126" id="Aut-Qk-Ufn" customClass="FavouritesListWithCollectionCell" customModule="BankexWallet" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="721" width="375" height="126"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Aut-Qk-Ufn" id="r0o-Xq-zyD">
@@ -2148,7 +2167,7 @@ to add token</string>
                                                 <inset key="sectionInset" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CgY-kb-y1u">
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddContactCollectionCell" id="CgY-kb-y1u">
                                                     <rect key="frame" x="18" y="0.0" width="102" height="126"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -2157,7 +2176,16 @@ to add token</string>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LNa-Yi-Zxf">
                                                                 <rect key="frame" x="2" y="2" width="98" height="122"/>
+                                                                <subviews>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add" translatesAutoresizingMaskIntoConstraints="NO" id="ygs-IZ-Vve">
+                                                                        <rect key="frame" x="41" y="53" width="16" height="16"/>
+                                                                    </imageView>
+                                                                </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="ygs-IZ-Vve" firstAttribute="centerY" secondItem="LNa-Yi-Zxf" secondAttribute="centerY" id="3p7-Q2-9LF"/>
+                                                                    <constraint firstItem="ygs-IZ-Vve" firstAttribute="centerX" secondItem="LNa-Yi-Zxf" secondAttribute="centerX" id="Vrg-lG-hYp"/>
+                                                                </constraints>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                         <integer key="value" value="2"/>
@@ -2180,7 +2208,19 @@ to add token</string>
                                                         <constraint firstAttribute="bottom" secondItem="LNa-Yi-Zxf" secondAttribute="bottom" constant="2" id="YrJ-81-r5h"/>
                                                     </constraints>
                                                 </collectionViewCell>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoritesCollectionViewCell" id="Ip8-hA-0P7" customClass="FavoritesCollectionViewCell" customModule="BankexWallet" customModuleProvider="target">
+                                                    <rect key="frame" x="145.5" y="0.0" width="102" height="126"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                        <rect key="frame" x="0.0" y="0.0" width="102" height="126"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </view>
+                                                </collectionViewCell>
                                             </cells>
+                                            <connections>
+                                                <outlet property="dataSource" destination="Aut-Qk-Ufn" id="QoY-A6-hsz"/>
+                                                <outlet property="delegate" destination="Aut-Qk-Ufn" id="vIJ-7n-Ao1"/>
+                                            </connections>
                                         </collectionView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5895,7 +5935,7 @@ successfully</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="JaH-wa-aDn"/>
-        <segue reference="6XE-pt-w3G"/>
+        <segue reference="Uws-Ci-KnS"/>
         <segue reference="zl4-lC-AqZ"/>
         <segue reference="890-Uf-GGI"/>
     </inferredMetricsTieBreakers>

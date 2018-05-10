@@ -234,6 +234,7 @@ QRCodeReaderViewControllerDelegate {
     func updateBalance() {
         topTokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
         tokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
+        self.balanceLabel.text = "..."
 
         tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().name ).image()
         guard let selectedAddress = keysService.selectedAddress() else {
