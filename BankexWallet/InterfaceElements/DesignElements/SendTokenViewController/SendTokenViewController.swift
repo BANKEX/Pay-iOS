@@ -77,13 +77,34 @@ QRCodeReaderViewControllerDelegate {
         updateBalance()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         let fixedFrame = view.convert(stackView.frame, from: stackView.superview)
         let size = stackView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-        let availableSpace = view.frame.height - size.height - fixedFrame.minY - 96 - 25
+        var viewHeight: CGFloat = view.frame.height
+        var bottomSpace: CGFloat = 40
+        if #available(iOS 11.0, *) {
+            viewHeight -= view.safeAreaInsets.bottom
+            viewHeight -= view.safeAreaInsets.top
+            bottomSpace = 0
+            
+        }
+        let availableSpace = viewHeight - size.height - fixedFrame.minY - 56 - bottomSpace - 25
         interDataAndBottomConstraint.constant = availableSpace < 25 ? 25 : availableSpace
     }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        let fixedFrame = view.convert(stackView.frame, from: stackView.superview)
+//        let size = stackView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+//        var viewHeight: CGFloat = view.frame.height
+//        if #available(iOS 11.0, *) {
+//            viewHeight -= view.safeAreaInsets.bottom
+//            viewHeight -= view.safeAreaInsets.top
+//
+//        }
+//        let availableSpace = viewHeight - size.height - fixedFrame.minY - 96 - 25
+//        interDataAndBottomConstraint.constant = availableSpace < 25 ? 25 : availableSpace
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "showConfirmation",

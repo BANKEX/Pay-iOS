@@ -106,8 +106,8 @@ ScreenWithInputs {
     
     // It's magic, I just like 30
     let minimumTopImportButtonSpace: CGFloat = 30
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         // 40 here is not a magic number, it's bottom space we need to keep
         var availableSpace = view.frame.height - stackView.frame.height - importButton.frame.height - 40
         
