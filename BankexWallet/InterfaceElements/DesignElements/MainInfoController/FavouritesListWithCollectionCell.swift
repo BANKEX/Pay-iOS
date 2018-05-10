@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol FavoriteSelectionDelegate: class {
+    func didSelectFavorite(with name: String, address: String)
+    func didSelectAddNewFavorite()
+}
+
 class FavouritesListWithCollectionCell: UITableViewCell,
                                         UICollectionViewDelegate,
                                         UICollectionViewDataSource {
 
+    weak var selectionDelegate: FavoriteSelectionDelegate?
+    
     let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     var allFavorites: [(String, String)]?
     override func awakeFromNib() {
@@ -26,7 +33,12 @@ class FavouritesListWithCollectionCell: UITableViewCell,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if indexPath.row == 0 {
+            selectionDelegate?.didSelectAddNewFavorite()
+        }
+        else if let selected = allFavorites?[indexPath.row - 1] {
+            selectionDelegate?.didSelectFavorite(with: selected.0, address: selected.1)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

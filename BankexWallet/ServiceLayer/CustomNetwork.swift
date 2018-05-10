@@ -54,7 +54,7 @@ extension CustomNetwork: Decodable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         if values.contains(.networkName) {
-            networkName = try values.decode(String.self, forKey: .networkName) as? String
+            networkName = try values.decode(String.self, forKey: .networkName)
         } else {
             networkName = nil
         }

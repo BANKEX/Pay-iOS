@@ -46,11 +46,16 @@ QRCodeReaderViewControllerDelegate {
     
     @IBOutlet weak var interDataAndBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var additionalDataSeparator: UIView!
+    
     // MARK: Services
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
     var utilsService: UtilTransactionsService!
 
+    // MARK: Inputs
+    var selectedFavoriteName: String?
+    var selectedFavoriteAddress: String?
+    
     // MARK: Lifecycle
     @IBAction func back(segue:UIStoryboardSegue) { }
 

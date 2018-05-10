@@ -70,8 +70,10 @@ enum PredefinedTokens {
     }
 }
 
-class MainInfoController: UITableViewController, UITabBarControllerDelegate {
-
+class MainInfoController: UITableViewController,
+    UITabBarControllerDelegate,
+FavoriteSelectionDelegate {
+    
     var itemsArray = ["TopLogoCell",
                       "CurrentWalletInfoCell",
                       "TransactionHistoryCell"]
@@ -85,13 +87,13 @@ class MainInfoController: UITableViewController, UITabBarControllerDelegate {
         conversionService.updateConversionRate(for: tokensService.selectedERC20Token().symbol) { (rate) in
             print(rate)
         }
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: DispatchQueue.main) { (_) in
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
         }
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: DispatchQueue.main) { (_) in
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
         }
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: DispatchQueue.main) { (_) in
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
         }
     }
@@ -139,6 +141,11 @@ class MainInfoController: UITableViewController, UITabBarControllerDelegate {
         if let controller = segue.destination as? AddressQRCodeController {
             let keyService: GlobalWalletsService = SingleKeyServiceImplementation()
             controller.addressToGenerateQR = keyService.selectedAddress()
+        } else if let controller = segue.destination as? SendTokenViewController {
+            controller.selectedFavoriteAddress = selectedFavAddress
+            controller.selectedFavoriteName = selectedFavName
+            selectedFavAddress = nil
+            selectedFavName = nil
         }
     }
 
@@ -171,6 +178,19 @@ class MainInfoController: UITableViewController, UITabBarControllerDelegate {
         guard self == viewController else {
             return
         }
+        // This is just to force balance update sometimes, but think about better way maybe
         tableView.reloadData()
+    }
+    
+    // MARK: FavoriteSelectionDelegate
+    func didSelectAddNewFavorite() {
+        
+    }
+    
+    var selectedFavAddress: String?
+    var selectedFavName: String?
+    func didSelectFavorite(with name: String, address: String) {
+        selectedFavName = name
+        selectedFavAddress = address
     }
 }

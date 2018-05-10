@@ -10,4 +10,13 @@ import UIKit
 
 class FavoritesCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    
+    func configure(with contact: (String, String)) {
+        let (name, address) = contact
+        // TODO: Just Do it
+    }
+    
 }
