@@ -156,7 +156,7 @@ class SendEthServiceImplementation: SendEthService {
                                        date: transaction.date!,
                                        token: token,
                                        key: HDKey(name: transaction.keywallet?.name,
-                                                  address: (transaction.keywallet?.address)!))
+                                                  address: (transaction.keywallet?.address ?? "")))
         })
     }
     

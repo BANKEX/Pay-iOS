@@ -11,7 +11,9 @@ import MessageUI
 import StoreKit
 
 
-class SettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsController: UIViewController, UITableViewDelegate,
+UITableViewDataSource,
+MFMailComposeViewControllerDelegate {
     @IBAction func unwind(segue:UIStoryboardSegue) { }
 
     let settingsToShow = ["WalletsListCell",
@@ -67,19 +69,65 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if settingsToShow[indexPath.row] == "WriteUsCell" {
+        let settingToShow = settingsToShow[indexPath.row]
+        if settingToShow == "WriteUsCell" {
             guard (MFMailComposeViewController.canSendMail()) else {
                 return
             }
-            let toRecipents = ["ck@bankexfoundation.org"]
+            let toRecipents = ["wallet@bankexfoundation.org"]
             let mc: MFMailComposeViewController = MFMailComposeViewController()
             mc.setToRecipients(toRecipents)
             present(mc, animated: true, completion: nil)
         }
         
-        else if settingsToShow[indexPath.row] == "RateUsCell" {
-            SKStoreReviewController.requestReview()
+        else if settingToShow == "RateUsCell" {
+            if #available(iOS 10.3, *) {
+                SKStoreReviewController.requestReview()
+            } else {
+                // TODO: Don't Forget App Id
+                rateApp(appId: "")
+            }
         }
+        else if settingToShow == "TwitterCell" {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(URL(string: "https://twitter.com/BankExProtocol")!, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(URL(string: "https://twitter.com/BankExProtocol")!)
+            }
+        }
+        else if settingToShow == "FacebookCell" {
+            if #available(iOS 10.0, *) {
+                
+                UIApplication.shared.open(URL(string: "https://www.facebook.com/BankExchange/")!, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(URL(string: "https://www.facebook.com/BankExchange/")!)
+            }
+        }
+        else if settingToShow == "TelegramCell" {
+            if #available(iOS 10.0, *) {
+                
+                UIApplication.shared.open(URL(string: "https://t.me/bankex")!, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(URL(string: "https://t.me/bankex")!)
+            }
+        }
+    }
+    
+    // MARK: Rate us
+    fileprivate func rateApp(appId: String) {
+        openUrl("itms-apps://itunes.apple.com/app/" + appId)
+    }
+    fileprivate func openUrl(_ urlString:String) {
+        let url = URL(string: urlString)!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

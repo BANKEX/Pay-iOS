@@ -81,10 +81,11 @@ class SingleKeyServiceImplementation: SingleKeyService {
                 newWallet.name = name
                 newWallet.address = address
                 newWallet.isHD = false
-                newWallet.isSelected = true
+                newWallet.isSelected = false
                 newWallet.data = keyData
                 try context.insert(newWallet)
                 save()
+                self.updateSelected(address: address)
             }
             catch {
                 

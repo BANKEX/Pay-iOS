@@ -60,6 +60,8 @@
 		F075A44F204BF4B8001949A9 /* TransactionsHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A44E204BF4B8001949A9 /* TransactionsHistoryController.swift */; };
 		F075A451204BF4EE001949A9 /* TransactionHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */; };
 		F075A453204BFA34001949A9 /* TransactionsHistoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A452204BFA34001949A9 /* TransactionsHistoryPresenter.swift */; };
+		F09FAEB220A4517B008D6AD7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F09FAEB020A4517A008D6AD7 /* Crashlytics.framework */; };
+		F09FAEB320A4517B008D6AD7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F09FAEB120A4517A008D6AD7 /* Fabric.framework */; };
 		F0B1B4C5205944E1009D76D5 /* CustomERC20TokensService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4C4205944E1009D76D5 /* CustomERC20TokensService.swift */; };
 		F0B1B4C920594C43009D76D5 /* CustomTokenUtilsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4C820594C43009D76D5 /* CustomTokenUtilsServiceTests.swift */; };
 		F0B1B4CA20594D53009D76D5 /* CustomTokenUtilsServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4C620594AB0009D76D5 /* CustomTokenUtilsServiceImplementation.swift */; };
@@ -170,6 +172,8 @@
 		F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryCell.swift; sourceTree = "<group>"; };
 		F075A452204BFA34001949A9 /* TransactionsHistoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryPresenter.swift; sourceTree = "<group>"; };
 		F075A454204BFA69001949A9 /* TransactionsHistoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryProtocols.swift; sourceTree = "<group>"; };
+		F09FAEB020A4517A008D6AD7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		F09FAEB120A4517A008D6AD7 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		F0B1B4C4205944E1009D76D5 /* CustomERC20TokensService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomERC20TokensService.swift; sourceTree = "<group>"; };
 		F0B1B4C620594AB0009D76D5 /* CustomTokenUtilsServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTokenUtilsServiceImplementation.swift; sourceTree = "<group>"; };
 		F0B1B4C820594C43009D76D5 /* CustomTokenUtilsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTokenUtilsServiceTests.swift; sourceTree = "<group>"; };
@@ -200,7 +204,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F09FAEB220A4517B008D6AD7 /* Crashlytics.framework in Frameworks */,
 				C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */,
+				F09FAEB320A4517B008D6AD7 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +336,8 @@
 				81942F12201B36A300F0AE29 /* LaunchScreen.storyboard */,
 				81942F15201B36A300F0AE29 /* Info.plist */,
 				81942F0D201B36A300F0AE29 /* BankexWallet.xcdatamodeld */,
+				F09FAEB020A4517A008D6AD7 /* Crashlytics.framework */,
+				F09FAEB120A4517A008D6AD7 /* Fabric.framework */,
 			);
 			path = BankexWallet;
 			sourceTree = "<group>";
@@ -659,6 +667,7 @@
 				81942F01201B36A300F0AE29 /* Resources */,
 				F99A2D9B6BE0ECA6BB8C7B27 /* [CP] Embed Pods Frameworks */,
 				2BFA9AF974F1A80DDF7A2830 /* [CP] Copy Pods Resources */,
+				F09FAEAF20A4514D008D6AD7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -897,6 +906,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F09FAEAF20A4514D008D6AD7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 442fbe5690d8ec206a70df703eb405a2aefdfd3c 9804bdf278c67e8459c88ab9309b16c930496edd25ed5413e72033a07f5c0041\n";
+		};
 		F6A04EEFAB9A2739A3E79EB3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -924,10 +946,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-Synchronous/Alamofire_Synchronous.framework",
-				"${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
@@ -940,10 +960,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_Synchronous.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwaitKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
@@ -1202,16 +1220,20 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = W4C5X5EUJU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BankexWallet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0eb02df2-6ed0-47d4-94d3-5f98927aad6d";
-				PROVISIONING_PROFILE_SPECIFIER = "Bankex Wallet Test";
+				PROVISIONING_PROFILE = "d08990b3-5342-495d-8335-cb04ac3bd104";
+				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc Wallet";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1223,15 +1245,19 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = W4C5X5EUJU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BankexWallet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.BankexWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0eb02df2-6ed0-47d4-94d3-5f98927aad6d";
-				PROVISIONING_PROFILE_SPECIFIER = "Bankex Wallet Test";
+				PROVISIONING_PROFILE = "ca9cd6a8-3f91-41b8-9671-0449b9860920";
+				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc Wallet";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -248,9 +248,10 @@ class HDWalletServiceImplementation: HDWalletService {
                     let newChild: KeyWallet = try context.new()
                     newChild.name = name
                     newChild.isHD = true
-                    newChild.isSelected = true
+                    newChild.isSelected = false
                     newChild.parentKey = foundKey
                     newChild.address = addressINeed.first
+//                    updateSelected(address: address)
 //                    newChild.data =
 //                    save()
 //                    DispatchQueue.main.async {
@@ -290,10 +291,11 @@ class HDWalletServiceImplementation: HDWalletService {
                     newWallet.name = name
                     newWallet.address = wallet.addresses?.first?.address
                     newWallet.isHD = true
-                    newWallet.isSelected = true
+                    newWallet.isSelected = false
                     newWallet.data = keydata
                     try context.insert(newWallet)
                     save()
+                    self.updateSelected(address: wallet.addresses?.first?.address ?? "")
                     DispatchQueue.main.async {
                         completion(wallet.addresses?.first?.address, nil)
                     }
