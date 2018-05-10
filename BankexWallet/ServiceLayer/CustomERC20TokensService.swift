@@ -151,6 +151,10 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
             })
             
             dispatchGroup.notify(queue: .main) {
+                guard !name.isEmpty, !symbol.isEmpty else {
+                    completion(SendEthResult.Error(CustomTokenError.undefinedError))
+                    return
+                }
                 completion(SendEthResult.Success(ERC20TokenModel(name: name,
                                                                  address: address,
                                                                  decimals: decimals.description,

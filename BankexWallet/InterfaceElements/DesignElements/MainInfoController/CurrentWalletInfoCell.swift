@@ -27,6 +27,17 @@ class CurrentWalletInfoCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        updateLayout()
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        updateLayout()
+    }
+    
+    // MARK: Balance
+    
+    func updateLayout() {
         self.amountLabel.text = "..."
         utilsService = tokensService.selectedERC20Token().address.isEmpty ? UtilTransactionsServiceImplementation() :
             CustomTokenUtilsServiceImplementation()
@@ -36,10 +47,8 @@ class CurrentWalletInfoCell: UITableViewCell {
         tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         walletNameLabel.text = keyService.selectedWallet()?.name
         symbolLabel.text = tokensService.selectedERC20Token().symbol.capitalized
-        
-    }
 
-    // MARK: Balance
+    }
     func updateBalance() {
         guard let selectedAddress = keyService.selectedAddress() else {
             return

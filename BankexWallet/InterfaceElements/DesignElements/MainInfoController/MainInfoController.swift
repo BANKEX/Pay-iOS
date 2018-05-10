@@ -108,9 +108,9 @@ FavoriteSelectionDelegate {
         
         itemsArray = ["TopLogoCell",
                       "CurrentWalletInfoCell",
-                      "TransactionHistoryCell",
-                      "FavouritesTitleCell",
-                      "FavouritesListWithCollectionCell"]
+                      "TransactionHistoryCell"]
+//                      "FavouritesTitleCell",
+//                      "FavouritesListWithCollectionCell"]
         
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :

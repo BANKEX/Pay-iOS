@@ -21,7 +21,9 @@ UITextFieldDelegate {
     @IBOutlet weak var findContractButton: UIButton!
     @IBOutlet weak var contractAddressTextfield: UITextField!
     
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var tokenSymbolImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,7 +61,8 @@ UITextFieldDelegate {
             return true
         }
         textField.resignFirstResponder()
-       activityIndicator.startAnimating()
+        self.errorLabel.isHidden = false
+        activityIndicator.startAnimating()
         tokensService.searchForCustomToken(with: tokenAddress, completion: { (result) in
             self.activityIndicator.stopAnimating()
             switch result {
@@ -75,7 +78,7 @@ UITextFieldDelegate {
                 self.emptyView.isHidden = true
                 self.foundTokenView.isHidden = false
             case .Error(let error):
-                print("\(error)")
+                self.errorLabel.isHidden = false
             }
         })
         return true

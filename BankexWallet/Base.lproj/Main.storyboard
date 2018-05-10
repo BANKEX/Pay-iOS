@@ -849,10 +849,10 @@ to add token</string>
                                     <constraint firstAttribute="trailing" secondItem="r1D-oo-z5o" secondAttribute="trailing" id="qF9-a9-QbA"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gye-QW-OEq">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gye-QW-OEq" userLabel="View with textfield">
                                 <rect key="frame" x="24" y="121" width="327" height="48"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Find token" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G2p-vc-z3d">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Find token" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="G2p-vc-z3d">
                                         <rect key="frame" x="25" y="0.0" width="277" height="48"/>
                                         <color key="backgroundColor" red="0.96862745098039216" green="0.97647058823529409" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -889,6 +889,12 @@ to add token</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Couldn't find token" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X77-vk-s9n">
+                                <rect key="frame" x="24" y="176" width="327" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.93725490199999995" green="0.52549019610000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -899,10 +905,13 @@ to add token</string>
                             <constraint firstItem="CCK-nJ-dmk" firstAttribute="top" secondItem="e2a-Fj-hIr" secondAttribute="bottom" id="9jo-a3-oph"/>
                             <constraint firstItem="gye-QW-OEq" firstAttribute="top" secondItem="ecC-21-umN" secondAttribute="bottom" constant="24" id="Afg-jy-ilT"/>
                             <constraint firstItem="pux-sa-Skv" firstAttribute="centerX" secondItem="hvt-8A-GUY" secondAttribute="centerX" id="BTl-MS-B63"/>
+                            <constraint firstItem="X77-vk-s9n" firstAttribute="leading" secondItem="gye-QW-OEq" secondAttribute="leading" id="DTy-5p-KGB"/>
                             <constraint firstItem="v9D-Ut-ESb" firstAttribute="top" secondItem="zmq-L3-ygc" secondAttribute="top" constant="17" id="Duo-vT-Ez9"/>
                             <constraint firstItem="gye-QW-OEq" firstAttribute="leading" secondItem="zmq-L3-ygc" secondAttribute="leading" constant="24" id="GQE-Zw-cy8"/>
                             <constraint firstItem="CCK-nJ-dmk" firstAttribute="centerX" secondItem="hvt-8A-GUY" secondAttribute="centerX" id="GQO-uW-NZ4"/>
                             <constraint firstItem="e2a-Fj-hIr" firstAttribute="top" secondItem="ecC-21-umN" secondAttribute="bottom" id="GbA-vR-ph2"/>
+                            <constraint firstItem="X77-vk-s9n" firstAttribute="top" secondItem="gye-QW-OEq" secondAttribute="bottom" constant="7" id="JJe-zG-znX"/>
+                            <constraint firstItem="X77-vk-s9n" firstAttribute="trailing" secondItem="gye-QW-OEq" secondAttribute="trailing" id="PeG-dc-tUY"/>
                             <constraint firstItem="e2a-Fj-hIr" firstAttribute="centerX" secondItem="hvt-8A-GUY" secondAttribute="centerX" id="R95-FA-EMT"/>
                             <constraint firstItem="pux-sa-Skv" firstAttribute="top" secondItem="ecC-21-umN" secondAttribute="bottom" constant="136" id="UMj-5v-jt9"/>
                             <constraint firstItem="gye-QW-OEq" firstAttribute="centerX" secondItem="hvt-8A-GUY" secondAttribute="centerX" id="VPK-t1-E6B"/>
@@ -922,6 +931,7 @@ to add token</string>
                         <outlet property="activityIndicator" destination="TX3-Is-HDR" id="pd5-Yj-7dB"/>
                         <outlet property="contractAddressTextfield" destination="G2p-vc-z3d" id="kUP-kZ-Y8W"/>
                         <outlet property="emptyView" destination="e2a-Fj-hIr" id="N2c-HX-X79"/>
+                        <outlet property="errorLabel" destination="X77-vk-s9n" id="BqX-lV-pJV"/>
                         <outlet property="findContractButton" destination="CCK-nJ-dmk" id="Z8L-sD-1P6"/>
                         <outlet property="foundTokenView" destination="pux-sa-Skv" id="L8R-Ir-LXe"/>
                         <outlet property="tokenDecimalsLabel" destination="o27-tn-YhT" id="vPo-vt-DDJ"/>
@@ -1737,7 +1747,7 @@ to add token</string>
                                                         <segue destination="vp6-20-0hl" kind="show" id="sLG-Vu-9DC"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibo-Ds-Br4" userLabel="Edit bitton">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibo-Ds-Br4" userLabel="Edit bitton">
                                                     <rect key="frame" x="285" y="28" width="28" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28" id="G3v-Gx-FoA"/>
@@ -2048,10 +2058,10 @@ to add token</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="saM-QL-1kN" userLabel="EmptyView">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="152"/>
+                                            <rect key="frame" x="18" y="0.0" width="339" height="152"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RPj-1H-ngN">
-                                                    <rect key="frame" x="73" y="35.5" width="229" height="80"/>
+                                                    <rect key="frame" x="55" y="35.5" width="229" height="80"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Transaction history  are empty" translatesAutoresizingMaskIntoConstraints="NO" id="qxt-4N-3yl">
                                                             <rect key="frame" x="90.5" y="0.0" width="48" height="48"/>
@@ -2090,9 +2100,9 @@ to add token</string>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="saM-QL-1kN" secondAttribute="trailing" id="KyK-oJ-5EQ"/>
+                                        <constraint firstItem="saM-QL-1kN" firstAttribute="leading" secondItem="JtD-rO-Lse" secondAttribute="leading" constant="18" id="62U-Fn-LZY"/>
                                         <constraint firstItem="saM-QL-1kN" firstAttribute="top" secondItem="JtD-rO-Lse" secondAttribute="top" id="Ui6-3U-XZB"/>
-                                        <constraint firstItem="saM-QL-1kN" firstAttribute="leading" secondItem="JtD-rO-Lse" secondAttribute="leading" id="YMb-G7-4sp"/>
+                                        <constraint firstAttribute="trailing" secondItem="saM-QL-1kN" secondAttribute="trailing" constant="18" id="iEP-uJ-ooa"/>
                                         <constraint firstAttribute="bottom" secondItem="saM-QL-1kN" secondAttribute="bottom" id="rT2-5q-Ejh"/>
                                         <constraint firstItem="saM-QL-1kN" firstAttribute="centerX" secondItem="JtD-rO-Lse" secondAttribute="centerX" id="yjM-5J-ZcC"/>
                                     </constraints>

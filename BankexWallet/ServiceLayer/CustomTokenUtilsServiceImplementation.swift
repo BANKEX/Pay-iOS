@@ -9,11 +9,13 @@
 import UIKit
 import BigInt
 import web3swift
+import SugarRecord
 
 enum CustomTokenError: Error {
     case wrongBalanceError
     case badNameError
     case badSymbolError
+    case undefinedError
 }
 
 
@@ -26,8 +28,8 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
             let bkxBalance = transaction?.call(options: self.defaultOptions())
             DispatchQueue.main.async {
                 //TODO: Somehow it crashes on second launch
-                if let balance = bkxBalance?.value?["0"] as? String {
-                    completion(SendEthResult.Success(balance))
+                if let name = bkxBalance?.value?["0"] as? String, !name.isEmpty {
+                    completion(SendEthResult.Success(name))
                 }
                 else {
                     completion(SendEthResult.Error(CustomTokenError.badNameError))
@@ -42,8 +44,8 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
             let transaction = contract?.method("symbol", parameters: [AnyObject](), options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
             DispatchQueue.main.async {
-                if let balance = bkxBalance?.value?["0"] as? String {
-                    completion(SendEthResult.Success(balance))
+                if let symbol = bkxBalance?.value?["0"] as? String, !symbol.isEmpty  {
+                    completion(SendEthResult.Success(symbol))
                 }
                 else {
                     completion(SendEthResult.Error(CustomTokenError.badSymbolError))
@@ -74,6 +76,7 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
     func getBalance(for token: String,
                     address: String,
                     completion: @escaping (SendEthResult<BigUInt>) -> Void) {
+        completion(SendEthResult.Success(self.localGetBalance(for: token, address: address)))
         DispatchQueue.global(qos: .userInitiated).async {
             
             let ethAddress = EthereumAddress(address)
@@ -91,10 +94,13 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
             DispatchQueue.main.async {
                 // TODO: Fix me here
                 if let balance = bkxBalance?.value?["balance"] as? BigUInt {
+                    self.update(balance: balance, token: token, address: address)
                     completion(SendEthResult.Success(balance))
                 }
                 else {
-                    completion(SendEthResult.Error(CustomTokenError.wrongBalanceError))
+                    DispatchQueue.main.async {
+                        completion(SendEthResult.Success(self.localGetBalance(for: token, address: address)))
+                    }
                 }
 
             }
@@ -123,5 +129,45 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
         options.gasPrice = BigUInt(25000000000)
         options.from = EthereumAddress(self.keysService.selectedAddress()!)
         return options
+    }
+    
+    fileprivate let networkUrl = NetworksServiceImplementation().preferredNetwork().fullNetworkUrl.absoluteString
+    fileprivate func localGetBalance(for token: String, address: String) -> BigUInt {
+        let balances = !token.isEmpty ? try? DBStorage.db.fetch(FetchRequest<TokenBalance>().filtered(with: NSPredicate(format: "token.address == %@ && wallet.address == %@  && networkUrl == %@", token, address, networkUrl))) :
+            try? DBStorage.db.fetch(FetchRequest<TokenBalance>().filtered(with: NSPredicate(format: "token == nil && wallet.address == %@ && networkUrl == %@", address, networkUrl)))
+        
+        guard let balance = balances?.first else {
+            return BigUInt(0)
+        }
+        return BigUInt(balance.balance ?? "0") ?? BigUInt(0)
+    }
+    
+    fileprivate func update(balance: BigUInt, token: String, address: String) {
+        
+        DBStorage.db.backgroundOperation({ (context, save) in
+            do {
+                if let storedBalance = try? context.fetch(FetchRequest<TokenBalance>().filtered(with: NSPredicate(format: "token.address == %@ && wallet.address == %@  && networkUrl == %@", token, address, self.networkUrl))).first, storedBalance != nil {
+                    //We already have the data only need to update
+                    storedBalance?.balance = balance.description
+                } else {
+                    let tokenBalance: TokenBalance = try context.new()
+                    tokenBalance.balance = balance.description
+                    if !token.isEmpty,
+                        let fulltoken =  try? context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address == %@", token))).first {
+                        tokenBalance.token = fulltoken
+                    }
+                    if let wallet = try? context.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "address == %@", address))).first {
+                        tokenBalance.wallet = wallet
+                    }
+                    tokenBalance.networkUrl = self.networkUrl
+                    try context.insert(tokenBalance)
+                }
+                save()
+            } catch {
+                
+            }
+        }) { (_) in
+            // Ok, we couldn't store balance, just relax this time
+        }
     }
 }

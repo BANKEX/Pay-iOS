@@ -33,12 +33,22 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     let walletsService: GlobalWalletsService = SingleKeyServiceImplementation()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        settingsParameters = [walletsService.selectedWallet()?.name ?? walletsService.selectedWallet()?.address ?? "",
-        networksService.preferredNetwork().networkName ?? networksService.preferredNetwork().fullNetworkUrl.absoluteString]
-    tableView.reloadData()
+        
+        reloadData()
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
+            self.reloadData()
+        }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
+            self.reloadData()
+        }
+        
     }
-
+    
+    func reloadData() {
+        settingsParameters = [walletsService.selectedWallet()?.name ?? walletsService.selectedWallet()?.address ?? "",
+                              networksService.preferredNetwork().networkName ?? networksService.preferredNetwork().fullNetworkUrl.absoluteString]
+        tableView.reloadData()
+    }
 
     // MARK: Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
