@@ -15,7 +15,7 @@ class TokensListCell: UITableViewCell {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var symbolLabel: UILabel!
     
-    @IBOutlet weak var tokenNameLabel: UILabel!
+    @IBOutlet weak var tokenNameLabel: UILabel?
 
     
     override func awakeFromNib() {
@@ -23,11 +23,11 @@ class TokensListCell: UITableViewCell {
         // Initialization code
     }
 
-    @IBOutlet weak var theOnlyBackgroundView: UIView!
-    @IBOutlet weak var lastCellBackgroundView: UIView!
-    @IBOutlet weak var firstCellBackgroundView: UIView!
+    @IBOutlet weak var theOnlyBackgroundView: UIView?
+    @IBOutlet weak var lastCellBackgroundView: UIView?
+    @IBOutlet weak var firstCellBackgroundView: UIView?
     @IBOutlet weak var checkmarkImage: UIImageView!
-    @IBOutlet weak var separatorView: UIView!
+    @IBOutlet weak var separatorView: UIView?
     @IBOutlet weak var tokenIconImageView: UIImageView!
 
     var selectedToken: ERC20TokenModel?
@@ -62,13 +62,13 @@ class TokensListCell: UITableViewCell {
                 
             }
         }
-        theOnlyBackgroundView.isHidden = !(isFirstCell && isLastCell)
-        lastCellBackgroundView.isHidden = isFirstCell
-        firstCellBackgroundView.isHidden = isLastCell
-        separatorView.isHidden = isLastCell
+        theOnlyBackgroundView?.isHidden = !(isFirstCell && isLastCell)
+        lastCellBackgroundView?.isHidden = isFirstCell
+        firstCellBackgroundView?.isHidden = isLastCell
+        separatorView?.isHidden = isLastCell
         checkmarkImage.isHidden = !isSelected
         symbolLabel.text = token.symbol
-        tokenNameLabel.text = token.name
+        tokenNameLabel?.text = token.name
         tokenIconImageView.image = PredefinedTokens(with: token.symbol).image()
 
     }

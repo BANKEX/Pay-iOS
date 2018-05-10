@@ -194,6 +194,9 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     func updateSelectedToken(to token: String) {
         if token.isEmpty {
             resetSelectedToken()
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: DataChangeNotifications.didChangeToken.notificationName(), object: self, userInfo: ["token": token])
+            }
             return
         }
         DispatchQueue.global(qos: .userInitiated).async {
@@ -206,6 +209,9 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                     guard let oldSelectedToken = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).first else {
                         newSelectedToken.isSelected = true
                         save()
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: DataChangeNotifications.didChangeToken.notificationName(), object: self, userInfo: ["token": token])
+                        }
                         return
                     }
                     oldSelectedToken.isSelected = false

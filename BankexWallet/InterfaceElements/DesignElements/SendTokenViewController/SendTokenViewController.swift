@@ -67,7 +67,15 @@ QRCodeReaderViewControllerDelegate {
         dataTopEmptyView.removeFromSuperview()
         additionalDataView.removeFromSuperview()
         additionalDataSeparator.removeFromSuperview()
-        
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
+            self.updateTopLayout()
+            self.hideTokensList(self)
+
+        }
+        updateTopLayout()
+    }
+
+    func updateTopLayout() {
         // Do any additional setup after loading the view.
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
@@ -76,7 +84,6 @@ QRCodeReaderViewControllerDelegate {
             CustomTokenUtilsServiceImplementation()
         updateBalance()
     }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let fixedFrame = view.convert(stackView.frame, from: stackView.superview)
@@ -92,19 +99,6 @@ QRCodeReaderViewControllerDelegate {
         let availableSpace = viewHeight - size.height - fixedFrame.minY - 56 - bottomSpace - 25
         interDataAndBottomConstraint.constant = availableSpace < 25 ? 25 : availableSpace
     }
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        let fixedFrame = view.convert(stackView.frame, from: stackView.superview)
-//        let size = stackView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-//        var viewHeight: CGFloat = view.frame.height
-//        if #available(iOS 11.0, *) {
-//            viewHeight -= view.safeAreaInsets.bottom
-//            viewHeight -= view.safeAreaInsets.top
-//
-//        }
-//        let availableSpace = viewHeight - size.height - fixedFrame.minY - 96 - 25
-//        interDataAndBottomConstraint.constant = availableSpace < 25 ? 25 : availableSpace
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "showConfirmation",
@@ -118,6 +112,33 @@ QRCodeReaderViewControllerDelegate {
     }
 
     // MARK: Actions
+    @IBOutlet weak var dimmingView: UIView!
+    @IBOutlet weak var containerView: UIView!
+    @IBAction func showTokensList(_ sender: UIButton) {
+        guard (CustomERC20TokensServiceImplementation().availableTokensList()?.count ?? 1) > 1 else {
+            return
+        }
+        dimmingView.alpha = 0
+        containerView.alpha = 0
+        dimmingView.isHidden = false
+        containerView.isHidden = false
+        UIView.animate(withDuration: 0.3) {
+            self.dimmingView.alpha = 1
+            self.containerView.alpha = 1
+        }
+    }
+    
+
+    @IBAction func hideTokensList(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+            self.dimmingView.alpha = 0
+            self.containerView.alpha = 0
+        }) { (_) in
+            self.dimmingView.isHidden = true
+            self.containerView.isHidden = true
+        }
+    }
+    
     @IBAction func nextButtonTapped(_ sender: Any) {
         guard let amount = amountTextfield.text,
             let destinationAddress = enterAddressTextfield.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {

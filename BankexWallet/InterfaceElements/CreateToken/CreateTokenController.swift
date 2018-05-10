@@ -61,7 +61,7 @@ UITextFieldDelegate {
             return true
         }
         textField.resignFirstResponder()
-        self.errorLabel.isHidden = false
+        self.errorLabel.isHidden = true
         activityIndicator.startAnimating()
         tokensService.searchForCustomToken(with: tokenAddress, completion: { (result) in
             self.activityIndicator.stopAnimating()
@@ -77,7 +77,7 @@ UITextFieldDelegate {
                 self.tokenSymbolImageView.image = PredefinedTokens(with: model.name).image()
                 self.emptyView.isHidden = true
                 self.foundTokenView.isHidden = false
-            case .Error(let error):
+            case .Error(_):
                 self.errorLabel.isHidden = false
             }
         })
