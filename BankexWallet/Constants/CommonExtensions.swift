@@ -110,3 +110,30 @@ extension Date {
         return self < Date()
     }
 }
+
+extension CGFloat {
+    static var random: CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension UIColor {
+    static func randomDark() -> UIColor {
+        let max: CGFloat = 170
+        var red = CGFloat.random
+        var green = CGFloat.random
+        var blue = CGFloat.random
+        red = red > max ? max : red
+        green = green > max ? max : green
+        blue = blue > max ? max : blue
+        
+        return UIColor(red: red, green: green, blue: blue, alpha: 1)
+    }
+    
+    static func random() -> UIColor {
+        return UIColor(red:   .random,
+                       green: .random,
+                       blue:  .random,
+                       alpha: 1.0)
+    }
+}

@@ -11,9 +11,16 @@ import QRCodeReader
 import AVFoundation
 import web3swift
 
+protocol FavoriteInputController: class {
+    var selectedFavoriteName: String? {get set}
+    var selectedFavoriteAddress: String? {get set}
+
+}
+
 class SendTokenViewController: UIViewController,
 UITextFieldDelegate,
-QRCodeReaderViewControllerDelegate {
+QRCodeReaderViewControllerDelegate,
+FavoriteInputController {
 
     //MARK: Outlets
     
@@ -75,6 +82,11 @@ QRCodeReaderViewControllerDelegate {
         updateTopLayout()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        enterAddressTextfield.text = selectedFavoriteAddress ?? ""
+    }
+    
     func updateTopLayout() {
         // Do any additional setup after loading the view.
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?

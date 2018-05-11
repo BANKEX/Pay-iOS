@@ -45,7 +45,8 @@ class FavouritesListWithCollectionCell: UITableViewCell,
         guard indexPath.row != 0 else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "AddContactCollectionCell", for: indexPath)
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddContactCollectionCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCollectionViewCell", for: indexPath) as! FavoritesCollectionViewCell
+        cell.configure(with: allFavorites![indexPath.row - 1])
         return cell
     }
 }

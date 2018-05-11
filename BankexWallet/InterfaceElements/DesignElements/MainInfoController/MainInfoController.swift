@@ -108,9 +108,9 @@ FavoriteSelectionDelegate {
         
         itemsArray = ["TopLogoCell",
                       "CurrentWalletInfoCell",
-                      "TransactionHistoryCell"]
-//                      "FavouritesTitleCell",
-//                      "FavouritesListWithCollectionCell"]
+                      "TransactionHistoryCell",//]
+                      "FavouritesTitleCell",
+                      "FavouritesListWithCollectionCell"]
         
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
@@ -167,6 +167,9 @@ FavoriteSelectionDelegate {
         if let cell = cell as? TransactionHistorySectionCell {
             cell.showMoreButton.isHidden = transactionsToShow.count == 0
         }
+        if let cell = cell as? FavouritesListWithCollectionCell {
+            cell.selectionDelegate = self
+        }
         return cell
     }
     
@@ -192,5 +195,6 @@ FavoriteSelectionDelegate {
     func didSelectFavorite(with name: String, address: String) {
         selectedFavName = name
         selectedFavAddress = address
+        performSegue(withIdentifier: "showSendFunds", sender: self)
     }
 }
