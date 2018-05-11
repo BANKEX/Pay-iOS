@@ -249,16 +249,34 @@ ScreenWithInputs {
             service.createNewSingleAddressWallet(with: walletNameTextField.text,
                                                  password: enterPrivateTextField.text!,
                                                  completion: { (error) in
-                                                    self.router.exitFromTheScreen()
+                                                    
+                                                    guard let _ = error else {
+                                                        self.router.exitFromTheScreen()
+                                                        return
+                                                    }
+                                                    self.showCreationErrorAlert()
+
             })
         } else {
             service.createNewSingleAddressWallet(with: walletNameTextField.text,
                                                  fromText: enterPrivateTextField.text!,
                                                  password: passwordTextField.text!,
                                                  completion: { (error) in
-                                                    self.router.exitFromTheScreen()
+                                                    guard let _ = error else {
+                                                        self.router.exitFromTheScreen()
+                                                        return
+                                                    }
+                                                    self.showCreationErrorAlert()
+
             })
         }
+    }
+    
+    func showCreationErrorAlert() {
+        let alert = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func switchPasswordSecurity(_ sender: UIButton) {

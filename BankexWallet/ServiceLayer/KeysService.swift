@@ -10,6 +10,10 @@ import UIKit
 import web3swift
 import SugarRecord
 
+enum WalletCreationError: Error {
+    case creationError
+}
+
 protocol SingleKeyService: GlobalWalletsService {
     
     func createNewSingleAddressWallet(with name: String?,
@@ -46,10 +50,22 @@ class SingleKeyServiceImplementation: SingleKeyService {
                                       password: String? = nil,
                                       completion: @escaping (Error?)-> Void) {
         let usingPassword = password ?? defaultPassword
-        guard let newWallet = try? EthereumKeystoreV3(password: usingPassword) else {return}
-        guard let wallet = newWallet, wallet.addresses?.count == 1 else {return}
-        guard let keydata = try? JSONEncoder().encode(wallet.keystoreParams) else {return}
-        guard let address = newWallet?.addresses?.first?.address else {return}
+        guard let newWallet = try? EthereumKeystoreV3(password: usingPassword) else {
+            completion(WalletCreationError.creationError)
+            return
+        }
+        guard let wallet = newWallet, wallet.addresses?.count == 1 else {
+            completion(WalletCreationError.creationError)
+            return
+        }
+        guard let keydata = try? JSONEncoder().encode(wallet.keystoreParams) else {
+            completion(WalletCreationError.creationError)
+            return
+        }
+        guard let address = newWallet?.addresses?.first?.address else {
+            completion(WalletCreationError.creationError)
+            return
+        }
         save(with: name, keyData: keydata, for: address, completion: completion)
     }
     
@@ -58,11 +74,26 @@ class SingleKeyServiceImplementation: SingleKeyService {
                                       password: String?,
                                       completion: @escaping (Error?)-> Void) {
         let text = privateKey.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        guard let data = Data.fromHex(text) else {return}
-        guard let newWallet = try? EthereumKeystoreV3(privateKey: data, password: password ?? defaultPassword) else {return}
-        guard let wallet = newWallet, wallet.addresses?.count == 1 else {return}
-        guard let keydata = try? JSONEncoder().encode(wallet.keystoreParams) else {return}
-        guard let address = newWallet?.addresses?.first?.address else {return}
+        guard let data = Data.fromHex(text) else {
+            completion(WalletCreationError.creationError)
+            return
+        }
+        guard let newWallet = try? EthereumKeystoreV3(privateKey: data, password: password ?? defaultPassword) else {
+            completion(WalletCreationError.creationError)
+            return
+        }
+        guard let wallet = newWallet, wallet.addresses?.count == 1 else {
+            completion(WalletCreationError.creationError)
+            return
+        }
+        guard let keydata = try? JSONEncoder().encode(wallet.keystoreParams) else {
+            completion(WalletCreationError.creationError)
+            return
+        }
+        guard let address = newWallet?.addresses?.first?.address else {
+            completion(WalletCreationError.creationError)
+            return
+        }
         save(with: name, keyData: keydata, for: address, completion: completion)
     }
     
@@ -88,7 +119,9 @@ class SingleKeyServiceImplementation: SingleKeyService {
                 self.updateSelected(address: address)
             }
             catch {
-                
+                DispatchQueue.main.async {
+                    completion(WalletCreationError.creationError)
+                }
             }
         }) { (error) in
             DispatchQueue.main.async {

@@ -227,12 +227,23 @@ ScreenWithInputs {
                                   mnemonics: generatedPassphrase!,
                                   mnemonicsPassword: "",
                                   walletPassword: passwordTextField.text!) { (_, error) in
+                                    guard error == nil else {
+                                        self.showCreationErrorAlert()
+                                        return
+                                    }
                                     if self.mode == .createKey {
                                         self.performSegue(withIdentifier: "showPassphrase", sender: self)
                                     } else {
                                         self.router.exitFromTheScreen()
                                     }
         }
+    }
+    
+    func showCreationErrorAlert() {
+        let alert = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func switchPasswordVisibility(_ sender: UIButton) {
