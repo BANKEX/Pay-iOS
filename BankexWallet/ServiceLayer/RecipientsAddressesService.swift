@@ -12,7 +12,7 @@ protocol RecipientsAddressesService {
     func store(address: String, with name: String)
     func getAllStoredAddresses() -> [(String, String)]?
     func clearAllSavedAddresses()
-    func delete(with name: String)
+    func delete(with address: String)
     func contains(address: String) -> Bool
 }
 
@@ -52,10 +52,14 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         }
     }
     
-    func delete(with name: String) {
-        guard var savedAddresses = UserDefaults.standard.dictionary(forKey: keyForStoreRecipientAddresses) as? [String: String] else {
+    func delete(with address: String) {
+        guard var savedAddresses = UserDefaults.standard.dictionary(forKey: keyForStoreRecipientAddresses) as? [String: String],
+            let (name, _) = savedAddresses.first(where: { (_, localAddress) -> Bool in
+                return address == localAddress
+            }) else {
             return
         }
+        
         savedAddresses[name] = nil
         UserDefaults.standard.set(savedAddresses, forKey: keyForStoreRecipientAddresses)
     }

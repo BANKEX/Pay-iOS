@@ -22,8 +22,8 @@ FavoritesHandling {
     let favService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     var allFavorites:[(String, String)]?
     @IBOutlet weak var tableView: UITableView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         allFavorites = favService.getAllStoredAddresses()
         tableView.reloadData()
     }

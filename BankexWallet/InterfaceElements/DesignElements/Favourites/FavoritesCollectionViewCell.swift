@@ -14,7 +14,7 @@ class FavouritesTitleCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        showMoreButton.isHidden = (favService.getAllStoredAddresses()?.count ?? 0) < 1
+        showMoreButton.isHidden = (favService.getAllStoredAddresses()?.count ?? 0) < 3
     }
     
     override func prepareForReuse() {

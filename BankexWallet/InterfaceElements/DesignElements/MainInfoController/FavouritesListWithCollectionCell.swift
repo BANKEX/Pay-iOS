@@ -19,12 +19,19 @@ class FavouritesListWithCollectionCell: UITableViewCell,
 
     weak var selectionDelegate: FavoriteSelectionDelegate?
     
+    @IBOutlet weak var collectionView: UICollectionView?
+    
     let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     var allFavorites: [(String, String)]?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         allFavorites = favoritesService.getAllStoredAddresses()
+    }
+    
+    override func prepareForReuse() {
+        allFavorites = favoritesService.getAllStoredAddresses()
+        collectionView?.reloadData()
     }
     
     // MARK: Collection View

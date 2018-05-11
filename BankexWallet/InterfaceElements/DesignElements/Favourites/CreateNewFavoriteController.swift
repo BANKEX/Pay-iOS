@@ -76,6 +76,7 @@ class CreateNewFavoriteController: UIViewController,
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (Target) in
             self.favoritesService.delete(with: self.addressTextfield.text ?? "")
+            self.navigationController?.popViewController(animated: true)
         }
         alert.addAction(cancelAction)
         alert.addAction(deleteAction)
