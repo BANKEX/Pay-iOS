@@ -23,7 +23,8 @@ QRCodeReaderViewControllerDelegate,
 FavoriteInputController {
 
     //MARK: Outlets
-    
+    @IBOutlet weak var scrollView: UIScrollView!
+
     @IBOutlet weak var additionalDataView: UIView!
     @IBOutlet weak var dataTopEmptyView: UIView!
     @IBOutlet weak var balanceLabel: UILabel!
@@ -82,6 +83,14 @@ FavoriteInputController {
 
         }
         updateTopLayout()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardNotification(notification:)),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardDidHide(notification:)),
+                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -115,15 +124,14 @@ FavoriteInputController {
         interDataAndBottomConstraint.constant = availableSpace < 25 ? 25 : availableSpace
     }
     
+    var sendingProcess: SendingResultInformation?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "showConfirmation",
-        let confirmation = segue.destination as? SendingConfirmationController else {
-            return
+        guard segue.identifier == "showSending",
+            let confirmation = segue.destination as? SendingResultInformation else {
+                return
         }
-        confirmation.amount = amountToSend
-        confirmation.destinationAddress = destinationAddressToSend
-        confirmation.transaction = transactionToSend
-        confirmation.inputtedPassword = passwordTextfield.text
+        sendingProcess =  confirmation
+        
     }
 
     // MARK: Actions
@@ -165,6 +173,7 @@ FavoriteInputController {
             case .Success(let transaction):
                 self.showConfirmation(forSending: amount, destinationAddress: destinationAddress, transaction: transaction)
             case .Error(let error):
+                self.performSegue(withIdentifier: "showError", sender: self)
                 print("\(error)")
             }
         }
@@ -208,6 +217,7 @@ FavoriteInputController {
     
     // MARK: TextField Delegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.returnKeyType = nextButton.isEnabled ? UIReturnKeyType.done : .next
         let index = textFields.index(of: textField) ?? 0
         separators[index].backgroundColor = WalletColors.blueText.color()
         textField.textColor = WalletColors.blueText.color()
@@ -244,7 +254,21 @@ FavoriteInputController {
         }
         
         nextButton.backgroundColor = nextButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
-        
+        textField.returnKeyType = nextButton.isEnabled ? UIReturnKeyType.done : .next
+
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.returnKeyType == .done && nextButton.isEnabled {
+            nextButtonTapped(self)
+        } else if textField.returnKeyType == .next {
+            let index = textFields.index(of: textField) ?? 0
+            let nextIndex = (index == textFields.count - 1) ? 0 : index + 1
+            textFields[nextIndex].becomeFirstResponder()
+        } else {
+            view.endEditing(true)
+        }
         return true
     }
     
@@ -317,15 +341,67 @@ FavoriteInputController {
     }
     
     // MARK: Confirmation
-    var amountToSend: String?
-    var destinationAddressToSend: String?
-    var transactionToSend: TransactionIntermediate?
+//    var amountToSend: String?
+//    var destinationAddressToSend: String?
+//    var transactionToSend: TransactionIntermediate?
     func showConfirmation(forSending amount: String,
                           destinationAddress:String,
                           transaction: TransactionIntermediate) {
-        amountToSend = amount
-        destinationAddressToSend = destinationAddress
-        transactionToSend = transaction
-        performSegue(withIdentifier: "showConfirmation", sender: self)
+        sendingProcess?.transactionCanProceed(withAmount: amount, address: destinationAddress, transactionToSend: transaction, password: passwordTextfield.text ?? "")
+//        performSegue(withIdentifier: "showSending", sender: self)
     }
+    
+    // MARK: Keyboard
+    @objc func keyboardDidHide(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {
+            return
+        }
+        let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+        let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+        
+        UIView.animate(withDuration: duration,
+                       delay: TimeInterval(0),
+                       options: animationCurve,
+                       animations: {
+                        self.scrollView.contentInset = UIEdgeInsets.zero
+                        self.scrollView.contentOffset = CGPoint.zero
+                        
+        },
+                       completion: nil)
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let endFrameY = endFrame?.origin.y ?? 0
+            let endFrameHeight = endFrame?.size.height ?? 0
+            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            let textField = textFields.first {$0.isFirstResponder}
+            let textFieldFrameY = (textField?.frame.maxY ?? 0) + 50
+            var  newOffset: CGFloat = 0
+            if textFieldFrameY > view.frame.maxY - endFrameHeight && textField != nil {
+                newOffset = textFieldFrameY - (view.frame.maxY - endFrameHeight)
+            }
+            
+            UIView.animate(withDuration: duration,
+                           delay: TimeInterval(0),
+                           options: animationCurve,
+                           animations: {
+                            if endFrameY >= UIScreen.main.bounds.size.height {
+                                self.scrollView.contentInset = UIEdgeInsets.zero
+                            } else {
+                                self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, endFrame?.size.height ?? 0.0, 0)
+                            }
+                            self.scrollView.contentOffset = CGPoint(x: 0, y: newOffset)
+                            
+            },
+                           completion: nil)
+        }
+    }
+    
 }

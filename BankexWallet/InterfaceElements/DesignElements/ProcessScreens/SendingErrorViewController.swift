@@ -13,10 +13,11 @@ protocol Retriable {
 }
 
 class SendingErrorViewController: UIViewController {
-
+    
     @IBAction func retryTransaction(_ sender: Any) {
-        let count = navigationController?.viewControllers.count ?? 2
-        if let previousController = navigationController?.viewControllers[count - 2] as? Retriable {
+        let count = navigationController?.viewControllers.count ?? 3
+        if  count >= 3, let previousController = navigationController?.viewControllers[count - 3] as? Retriable
+        {
             previousController.retryExisitngTransaction()
         }
         navigationController?.popViewController(animated: false)
