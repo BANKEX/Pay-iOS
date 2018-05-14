@@ -159,6 +159,7 @@ FavoriteInputController {
             let destinationAddress = enterAddressTextfield.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
                 return
         }
+        performSegue(withIdentifier: "showSending", sender: nil)
         sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in
             switch result {
             case .Success(let transaction):
