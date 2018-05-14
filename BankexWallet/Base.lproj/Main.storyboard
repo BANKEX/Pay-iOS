@@ -3520,7 +3520,7 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-8B-5pa">
-                                                <rect key="frame" x="0.0" y="224" width="319" height="40"/>
+                                                <rect key="frame" x="0.0" y="224" width="319" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sal-QD-Ca0">
                                                         <rect key="frame" x="279" y="0.0" width="40" height="40"/>
@@ -3558,21 +3558,31 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0x-Pn-amR" userLabel="sep3">
-                                                <rect key="frame" x="0.0" y="264" width="319" height="1"/>
+                                                <rect key="frame" x="0.0" y="274" width="319" height="1"/>
                                                 <color key="backgroundColor" red="0.75686274509999996" green="0.79215686269999996" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="y1z-5t-brA"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAi-r5-UVz">
-                                                <rect key="frame" x="0.0" y="265" width="319" height="31"/>
+                                                <rect key="frame" x="0.0" y="275" width="319" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwords don't match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7js-k0-dqB">
+                                                        <rect key="frame" x="0.0" y="4" width="131.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" red="0.93725490199999995" green="0.52549019610000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="7js-k0-dqB" firstAttribute="leading" secondItem="pAi-r5-UVz" secondAttribute="leading" id="0d4-h2-IAO"/>
                                                     <constraint firstAttribute="height" constant="31" id="RF3-d3-yiM"/>
+                                                    <constraint firstItem="7js-k0-dqB" firstAttribute="top" secondItem="pAi-r5-UVz" secondAttribute="top" constant="4" id="mHV-CJ-ts7"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wd7-27-dFs">
-                                                <rect key="frame" x="0.0" y="296" width="319" height="50"/>
+                                                <rect key="frame" x="0.0" y="306" width="319" height="40"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Tl-O1-yhG">
                                                         <rect key="frame" x="0.0" y="0.0" width="129" height="40"/>
@@ -3679,6 +3689,7 @@ minutes, please wait ...</string>
                         <outlet property="importButtonTopConstraint" destination="Z3O-16-5NF" id="9NG-7P-b34"/>
                         <outlet property="passphraseContainer" destination="6Ln-Vn-gcc" id="qGl-3m-rgx"/>
                         <outlet property="passwordTextField" destination="odN-n1-63z" id="n0e-ba-jnx"/>
+                        <outlet property="passwordsDontMatchLabel" destination="7js-k0-dqB" id="C0Y-v6-AMg"/>
                         <outlet property="repeatPasswordTextField" destination="0Tl-O1-yhG" id="rkE-1H-YzG"/>
                         <outlet property="scrollView" destination="aOE-8F-NVo" id="Qsv-D0-pLM"/>
                         <outlet property="separator1" destination="hCH-8F-8mc" id="YSv-5x-zZi"/>
@@ -4080,8 +4091,18 @@ be able to restore your wallet!</string>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKV-dk-li3">
                                                 <rect key="frame" x="0.0" y="249" width="319" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwords don't match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEd-33-v9m">
+                                                        <rect key="frame" x="0.0" y="4" width="131.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" red="0.93725490199999995" green="0.52549019610000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="iEd-33-v9m" firstAttribute="leading" secondItem="rKV-dk-li3" secondAttribute="leading" id="0GG-Lt-Cmo"/>
+                                                    <constraint firstItem="iEd-33-v9m" firstAttribute="top" secondItem="rKV-dk-li3" secondAttribute="top" constant="4" id="JqB-ga-mgR"/>
                                                     <constraint firstAttribute="height" constant="31" id="ZD8-MF-gYD"/>
                                                 </constraints>
                                             </view>
@@ -4089,7 +4110,7 @@ be able to restore your wallet!</string>
                                                 <rect key="frame" x="0.0" y="280" width="319" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nVq-Sl-5QJ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="IkT-Fg-JQf"/>
                                                         </constraints>
@@ -4103,6 +4124,7 @@ be able to restore your wallet!</string>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="nVq-Sl-5QJ" secondAttribute="trailing" id="018-4j-Beb"/>
                                                     <constraint firstItem="nVq-Sl-5QJ" firstAttribute="leading" secondItem="QZq-JJ-Rai" secondAttribute="leading" id="Xny-MN-wrC"/>
                                                     <constraint firstItem="nVq-Sl-5QJ" firstAttribute="top" secondItem="QZq-JJ-Rai" secondAttribute="top" id="YYz-OA-1IO"/>
                                                     <constraint firstAttribute="bottom" secondItem="nVq-Sl-5QJ" secondAttribute="bottom" id="ZoE-wT-OOo"/>
@@ -4187,6 +4209,7 @@ be able to restore your wallet!</string>
                         <outlet property="importButton" destination="Zus-Sh-Hhu" id="Wx5-0u-DDG"/>
                         <outlet property="importButtonTopConstraint" destination="BxX-aa-zbQ" id="dV2-Jm-dYf"/>
                         <outlet property="passwordTextField" destination="r80-Fz-CEK" id="KEV-iW-1me"/>
+                        <outlet property="passwordsDontMatchLabel" destination="iEd-33-v9m" id="mU5-fQ-APo"/>
                         <outlet property="privateTextfieldContainer" destination="tKl-qc-3Ok" id="Jst-qq-p3m"/>
                         <outlet property="repeatPasswordTextField" destination="nVq-Sl-5QJ" id="CJe-ag-GmD"/>
                         <outlet property="scrollView" destination="die-OS-haD" id="yoE-QE-3MK"/>

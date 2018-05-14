@@ -19,6 +19,7 @@ ScreenWithInputs {
     
     // MARK: Outlets
     
+    @IBOutlet weak var passwordsDontMatchLabel: UILabel!
     @IBOutlet weak var importButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var generatePassphraseButton: UIButton!
     @IBOutlet weak var enterPassphraseTextField: UITextField!
@@ -43,6 +44,7 @@ ScreenWithInputs {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       passwordsDontMatchLabel.isHidden = true
         importButton.setTitle(mode.shortTitle(), for: .normal)
         let generatePassphraseTitle = mode == .createKey ? "Generate passphrase" :
                                                             "Copy from clipboard"
@@ -150,9 +152,13 @@ ScreenWithInputs {
     
     // MARK: TextFieldDelegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.returnKeyType = importButton.isEnabled ? UIReturnKeyType.done : .next
         let index = textfields.index(of: textField) ?? 0
         textfieldsSeparators[index].backgroundColor = WalletColors.blueText.color()
         textField.textColor = WalletColors.blueText.color()
+        if textField == passwordTextField || textField == repeatPasswordTextField {
+            passwordsDontMatchLabel.isHidden = true
+        }
         return true
     }
     
@@ -183,7 +189,8 @@ ScreenWithInputs {
         }
         
         importButton.backgroundColor = importButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
-        
+        textField.returnKeyType = importButton.isEnabled ? UIReturnKeyType.done : .next
+
         return true
     }
     
@@ -200,6 +207,7 @@ ScreenWithInputs {
             !(repeatPasswordTextField.text?.isEmpty ?? true) && passwordTextField.text != repeatPasswordTextField.text {
             repeatPasswordTextField.textColor = WalletColors.errorRed.color()
             passwordTextField.textColor = WalletColors.errorRed.color()
+            passwordsDontMatchLabel.isHidden = false
             let psdIndex = textfields.index(of: passwordTextField) ?? 0
             let repeatIndex = textfields.index(of: repeatPasswordTextField) ?? 0
             textfieldsSeparators[psdIndex].backgroundColor = WalletColors.errorRed.color()
@@ -208,6 +216,21 @@ ScreenWithInputs {
         return true
     }
     
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.returnKeyType == .done && importButton.isEnabled {
+            createWalletButtonTapped(self)
+        } else if textField.returnKeyType == .next {
+            let index = textfields.index(of: textField) ?? 0
+            let nextIndex = (index == textfields.count - 1) ? 0 : index + 1
+            textfields[nextIndex].becomeFirstResponder()
+        } else {
+            view.endEditing(true)
+        }
+        return true
+    }
+    
+    // MARK: Actions
     @IBAction func emptySpaceTapped(_ sender: Any) {
         view.endEditing(false)
     }

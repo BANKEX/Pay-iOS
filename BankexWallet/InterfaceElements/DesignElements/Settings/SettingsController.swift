@@ -76,6 +76,7 @@ MFMailComposeViewControllerDelegate {
             }
             let toRecipents = ["wallet@bankexfoundation.org"]
             let mc: MFMailComposeViewController = MFMailComposeViewController()
+            mc.mailComposeDelegate = self
             mc.setToRecipients(toRecipents)
             present(mc, animated: true, completion: nil)
         }

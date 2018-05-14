@@ -62,6 +62,7 @@ ScreenWithInputs {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var importButtonTopConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var passwordsDontMatchLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var topEmptyView: UIView!
     @IBOutlet weak var privateTextfieldContainer: UIView!
@@ -82,6 +83,7 @@ ScreenWithInputs {
 
         importButton.isEnabled = false
         importButton.backgroundColor = importButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
+        passwordsDontMatchLabel.isHidden = true
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.keyboardNotification(notification:)),
@@ -176,9 +178,13 @@ ScreenWithInputs {
     
     // MARK: TextFieldDelegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.returnKeyType = importButton.isEnabled ? UIReturnKeyType.done : .next
         let index = textfields.index(of: textField) ?? 0
         textfieldsSeparators[index].backgroundColor = WalletColors.blueText.color()
         textField.textColor = WalletColors.blueText.color()
+        if textField == passwordTextField || textField == repeatPasswordTextField {
+            passwordsDontMatchLabel.isHidden = true
+        }
         return true
     }
     
@@ -196,13 +202,15 @@ ScreenWithInputs {
             }
         case passwordTextField:
             if !futureString.isEmpty &&
-            futureString == repeatPasswordTextField.text {
+                futureString == repeatPasswordTextField.text {
+                passwordsDontMatchLabel.isHidden = true
                 importButton.isEnabled = !(enterPrivateTextField.text?.isEmpty ?? true) || mode == .createKey
             }
         case repeatPasswordTextField:
             if !futureString.isEmpty &&
                 futureString == passwordTextField.text
-                 {
+            {
+                passwordsDontMatchLabel.isHidden = true
                 importButton.isEnabled = !(enterPrivateTextField.text?.isEmpty ?? true) || mode == .createKey
             }
         default:
@@ -210,7 +218,7 @@ ScreenWithInputs {
         }
         
         importButton.backgroundColor = importButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
-
+        textField.returnKeyType = importButton.isEnabled ? UIReturnKeyType.done : .next
         return true
     }
     
@@ -225,13 +233,28 @@ ScreenWithInputs {
                 return true
         }
         if !(passwordTextField.text?.isEmpty ?? true) &&
-            !(repeatPasswordTextField.text?.isEmpty ?? true) && passwordTextField.text != repeatPasswordTextField.text {
+            !(repeatPasswordTextField.text?.isEmpty ?? true) &&
+            passwordTextField.text != repeatPasswordTextField.text {
+            passwordsDontMatchLabel.isHidden = false
             repeatPasswordTextField.textColor = WalletColors.errorRed.color()
             passwordTextField.textColor = WalletColors.errorRed.color()
             let psdIndex = textfields.index(of: passwordTextField) ?? 0
             let repeatIndex = textfields.index(of: repeatPasswordTextField) ?? 0
             textfieldsSeparators[psdIndex].backgroundColor = WalletColors.errorRed.color()
             textfieldsSeparators[repeatIndex].backgroundColor = WalletColors.errorRed.color()
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.returnKeyType == .done && importButton.isEnabled {
+            createWalletButtonTapped(self)
+        } else if textField.returnKeyType == .next {
+            let index = textfields.index(of: textField) ?? 0
+            let nextIndex = (index == textfields.count - 1) ? 0 : index + 1
+            textfields[nextIndex].becomeFirstResponder()
+        } else {
+            view.endEditing(true)
         }
         return true
     }
