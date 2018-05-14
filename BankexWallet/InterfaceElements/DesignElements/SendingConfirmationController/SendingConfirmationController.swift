@@ -19,6 +19,13 @@ class SendingConfirmationController: UIViewController, Retriable {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var feeLabel: UILabel!
     
+    @IBOutlet weak var stackView: UIView!
+    @IBOutlet weak var nextButtonTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomSpaceNextButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var internalViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
+    
     // MARK:
     var transaction: TransactionIntermediate?
     var amount: String?
@@ -68,21 +75,37 @@ class SendingConfirmationController: UIViewController, Retriable {
         }//transaction?.send(password: inputtedPassword ?? "", options: nil)
     }
     
-    
+    @IBOutlet weak var feeFullView: UIView!
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let fixedFrame = view.convert(stackView.frame, from: stackView.superview)
+        let maxY = feeFullView.frame.maxY
+        var viewHeight: CGFloat =  -fixedFrame.minY
+        var bottomSpace: CGFloat = 40
+        if #available(iOS 11.0, *) {
+            viewHeight -= view.safeAreaInsets.bottom
+            viewHeight -= view.safeAreaInsets.top
+
+            bottomSpaceNextButtonConstraint.constant = 0
+        }
+        let availableSpace = viewHeight - maxY - fixedFrame.minY - 56 - bottomSpace - 25
+        internalViewHeightConstraint.constant = viewHeight
+//        nextButtonTopConstraint.constant = availableSpace < 25 ? 25 : availableSpace
+//        stackViewHeightConstraint.constant = size.height
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         toAddressLabel.text = destinationAddress
         fromAddressLabel.text = SingleKeyServiceImplementation().selectedAddress()
         amountLabel.text = (amount ?? "") + " " + tokensService.selectedERC20Token().symbol
-        // TODO:  Need to be formatted
         guard let estimatedGas = transaction?.estimateGas(options: nil).value else {
             feeLabel.text = "Not defined"
             return
         }
         let formattedAmount = Web3.Utils.formatToEthereumUnits(estimatedGas, toUnits: .wei, decimals: 1)
 
-        feeLabel.text = (formattedAmount ?? "") + "Wei."
+        feeLabel.text = (formattedAmount ?? "") + " Wei."
         nextButton.setTitle("Send " + (amountLabel.text ?? ""), for: .normal)
     }
     

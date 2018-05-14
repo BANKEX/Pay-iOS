@@ -74,6 +74,8 @@ FavoriteInputController {
         dataTopEmptyView.removeFromSuperview()
         additionalDataView.removeFromSuperview()
         additionalDataSeparator.removeFromSuperview()
+        nextButton.backgroundColor = WalletColors.disableButtonBackground.color()
+
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
             self.updateTopLayout()
             self.hideTokensList(self)
@@ -96,6 +98,7 @@ FavoriteInputController {
             CustomTokenUtilsServiceImplementation()
         updateBalance()
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let fixedFrame = view.convert(stackView.frame, from: stackView.superview)
