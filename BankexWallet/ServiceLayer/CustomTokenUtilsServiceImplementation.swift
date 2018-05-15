@@ -143,9 +143,9 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
     }
     
     fileprivate func update(balance: BigUInt, token: String, address: String) {
-        
-        DBStorage.db.backgroundOperation({ (context, save) in
-            do {
+        do {
+            try DBStorage.db.operation({ (context, save) in
+                
                 if let storedBalance = try? context.fetch(FetchRequest<TokenBalance>().filtered(with: NSPredicate(format: "token.address == %@ && wallet.address == %@  && networkUrl == %@", token, address, self.networkUrl))).first, storedBalance != nil {
                     //We already have the data only need to update
                     storedBalance?.balance = balance.description
@@ -163,11 +163,10 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
                     try context.insert(tokenBalance)
                 }
                 save()
-            } catch {
                 
-            }
-        }) { (_) in
-            // Ok, we couldn't store balance, just relax this time
+            })
+        } catch {
+            
         }
     }
 }

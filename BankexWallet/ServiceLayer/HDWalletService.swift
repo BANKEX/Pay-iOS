@@ -113,33 +113,34 @@ extension GlobalWalletsService {
     }
     
     func delete(address: String) {
-        DBStorage.db.backgroundOperation({ (context, save) in
-            do {
-                guard let keyToDelete = try context.fetch(FetchRequest<KeyWallet>().filtered(with: "address", equalTo: address)).first else {
-                    return
+        do {
+            try DBStorage.db.operation({ (context, save) in
+                do {
+                    guard let keyToDelete = try context.fetch(FetchRequest<KeyWallet>().filtered(with: "address", equalTo: address)).first else {
+                        return
+                    }
+                    try context.remove(keyToDelete)
+                    save()
                 }
-                try context.remove(keyToDelete)
-                save()
-            }
-            catch {
-                
-            }
-        }) { (error) in
+
+            })
         }
-        
+        catch {
+            
+        }
     }
     
     func clearAllWallets() {
-        DBStorage.db.backgroundOperation({ (context, save) in
-            do {
+        do {
+            try DBStorage.db.operation{ (context, save) in
+                
                 let keysToDelete = try context.fetch(FetchRequest<KeyWallet>())
                 try context.remove(keysToDelete)
                 save()
             }
-            catch {
-                
-            }
-        }) { (error) in
+        }
+        catch {
+            
         }
     }
     
@@ -226,7 +227,7 @@ class HDWalletServiceImplementation: HDWalletService {
                     
                     let wallet = BIP32Keystore(data)
                     try wallet?.createNewChildAccount(password: password)
-                    guard let allAddresses = wallet?.addresses?.flatMap({ (ethAddress) -> String? in
+                    guard let allAddresses = wallet?.addresses?.compactMap({ (ethAddress) -> String? in
                         return ethAddress.address
                     }) else {
                         DispatchQueue.main.async {
@@ -234,7 +235,7 @@ class HDWalletServiceImplementation: HDWalletService {
                         }
                         return
                     }
-                    let allStored = try context.fetch(FetchRequest<KeyWallet>()).flatMap({ (key) -> String? in
+                    let allStored = try context.fetch(FetchRequest<KeyWallet>()).compactMap({ (key) -> String? in
                         return key.address
                     })
                     let addressINeed = Set(allAddresses).subtracting(Set(allStored))

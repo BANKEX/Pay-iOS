@@ -128,19 +128,17 @@ class SendEthServiceImplementation: SendEthService {
     
     
     func delete(transaction: ETHTransactionModel) {
-        
-        db.backgroundOperation({ (context, save) in
-            do {
+        do {
+            try db.operation({ (context, save) in
+                
                 let transactionToDelete = try context.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format:"from == %@ && to == %@ && date == %@", transaction.from, transaction.to, transaction.date as NSDate)))
                 try context.remove(transactionToDelete)
-                save()}
-            catch {
-                
-            }
-        }) { (error) in
+                save()
+            })
+        }
+        catch {
             
         }
-        
     }
     
     

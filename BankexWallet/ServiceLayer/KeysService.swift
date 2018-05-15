@@ -105,9 +105,8 @@ class SingleKeyServiceImplementation: SingleKeyService {
                       keyData: Data,
                       for address: String,
                       completion: @escaping (Error?)-> Void) {
-        
-        db.backgroundOperation({ (context, save) in
-            do {
+        do {
+            try db.operation({ (context, save) in
                 let newWallet: KeyWallet = try context.new()
                 newWallet.name = name
                 newWallet.address = address
@@ -117,15 +116,14 @@ class SingleKeyServiceImplementation: SingleKeyService {
                 try context.insert(newWallet)
                 save()
                 self.updateSelected(address: address)
-            }
-            catch {
                 DispatchQueue.main.async {
-                    completion(WalletCreationError.creationError)
+                    completion(nil)
                 }
-            }
-        }) { (error) in
+            })
+        }
+        catch {
             DispatchQueue.main.async {
-                completion(nil)
+                completion(WalletCreationError.creationError)
             }
         }
     }

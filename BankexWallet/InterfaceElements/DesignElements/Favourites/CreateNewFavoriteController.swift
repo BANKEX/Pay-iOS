@@ -9,6 +9,7 @@
 import UIKit
 import QRCodeReader
 import AVFoundation
+import web3swift
 
 protocol CreateNewContact {
     func addContact(with address: String)
@@ -19,6 +20,8 @@ class CreateNewFavoriteController: UIViewController,
     QRCodeReaderViewControllerDelegate,
     CreateNewContact,
     FavoriteInputController {
+
+    @IBOutlet weak var scrollView: UIScrollView!
 
     @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var textfields: [UITextField]!
@@ -32,12 +35,24 @@ class CreateNewFavoriteController: UIViewController,
     var selectedFavoriteName: String?
     var selectedFavoriteAddress: String?
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         nameTextfield.text = selectedFavoriteName
         addressTextfield.text = selectedFavoriteAddress
         deleteContactButton.isHidden = !favoritesService.contains(address: addressTextfield.text ?? "")
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardNotification(notification:)),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardDidHide(notification:)),
+                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,9 +70,13 @@ class CreateNewFavoriteController: UIViewController,
     
     let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     @IBAction func saveContact(_ sender: Any) {
+        let ethAddress = EthereumAddress(addressTextfield.text ?? "")
+        guard ethAddress.isValid else {
+                return
+        }
         guard let address = addressTextfield.text,
             let name = nameTextfield.text,
-            !favoritesService.contains(address: address) else {
+            !favoritesService.contains(address: addressTextfield.text ?? "") else {
                 return
         }
         favoritesService.store(address: address, with: name)
@@ -131,5 +150,63 @@ class CreateNewFavoriteController: UIViewController,
         textField.textColor = WalletColors.defaultText.color()
         
         return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        saveContact(self)
+        return true
+    }
+    
+    // MARK: Keyboard
+    @objc func keyboardDidHide(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {
+            return
+        }
+        let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+        let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+        
+        UIView.animate(withDuration: duration,
+                       delay: TimeInterval(0),
+                       options: animationCurve,
+                       animations: {
+                        self.scrollView.contentInset = UIEdgeInsets.zero
+                        self.scrollView.contentOffset = CGPoint.zero
+                        
+        },
+                       completion: nil)
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let endFrameY = endFrame?.origin.y ?? 0
+            let endFrameHeight = endFrame?.size.height ?? 0
+            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            let textField = textfields.first {$0.isFirstResponder}
+            let textFieldFrameY = (textField?.frame.maxY ?? 0) + 50
+            var  newOffset: CGFloat = 0
+            if textFieldFrameY > view.frame.maxY - endFrameHeight && textField != nil {
+                newOffset = textFieldFrameY - (view.frame.maxY - endFrameHeight)
+            }
+            
+            UIView.animate(withDuration: duration,
+                           delay: TimeInterval(0),
+                           options: animationCurve,
+                           animations: {
+                            if endFrameY >= UIScreen.main.bounds.size.height {
+                                self.scrollView.contentInset = UIEdgeInsets.zero
+                            } else {
+                                self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, endFrame?.size.height ?? 0.0, 0)
+                            }
+                            self.scrollView.contentOffset = CGPoint(x: 0, y: newOffset)
+                            
+            },
+                           completion: nil)
+        }
     }
 }

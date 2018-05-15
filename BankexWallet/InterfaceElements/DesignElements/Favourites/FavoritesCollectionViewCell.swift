@@ -11,15 +11,15 @@ import UIKit
 class FavouritesTitleCell: UITableViewCell {
     @IBOutlet weak var showMoreButton: UIButton!
     let favService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
-    
+    let minFavoritesToShow = 1
     override func awakeFromNib() {
         super.awakeFromNib()
-        showMoreButton.isHidden = (favService.getAllStoredAddresses()?.count ?? 0) < 3
+        showMoreButton.isHidden = (favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        showMoreButton.isHidden = (favService.getAllStoredAddresses()?.count ?? 0) < 3
+        showMoreButton.isHidden = (favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow
     }
 }
 
