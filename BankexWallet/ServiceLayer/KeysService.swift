@@ -10,6 +10,26 @@ import UIKit
 import web3swift
 import SugarRecord
 
+
+struct KeyWalletModel {
+    let address: String
+    let data: Data?
+    let isHD: Bool
+    let isSelected: Bool
+    let name: String
+    
+    static func from(wallet: KeyWallet?) -> KeyWalletModel? {
+        guard let wallet = wallet else {
+            return nil
+        }
+        return KeyWalletModel(address: wallet.address ?? "",
+                              data: wallet.data,
+                              isHD: wallet.isHD,
+                              isSelected: wallet.isSelected,
+                              name: wallet.name ?? "")
+    }
+}
+
 enum WalletCreationError: Error {
     case creationError
 }
@@ -27,13 +47,23 @@ protocol SingleKeyService: GlobalWalletsService {
 }
 
 class SingleKeyServiceImplementation: SingleKeyService {
-
+    
+    private var selectedLocalWallet: KeyWalletModel?
+    
+    func selectedWallet() -> KeyWalletModel? {
+        return selectedLocalWallet
+    }
+    
     let userDefaultsKeyForSelectedAddress = "SelectedAddress"
     
     let defaultPassword: String
     
     init(defaultPassword: String = "BANKEXFOUNDATION") {
         self.defaultPassword = defaultPassword
+        selectedLocalWallet = selectedWalletFromDB()
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
+            self.selectedLocalWallet = self.selectedWalletFromDB()
+        }
     }
     
     

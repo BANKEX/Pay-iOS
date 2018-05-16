@@ -28,6 +28,8 @@ SendingResultInformation {
     var transactionToSend: TransactionIntermediate?
     var inputtedPassword: String?
     
+    @IBOutlet weak var processTitleLabel: UILabel?
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? SendingSuccessViewController {
             controller.transactionAmount = transactionAmount
@@ -45,7 +47,12 @@ SendingResultInformation {
         destinationAddressToSend = nil
         transactionToSend = nil
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        processTitleLabel?.text = "Retrieving data"
+    }
+    
     var transactionAmount: String?
     var recipientAddress: String?
     func transactionDidSucceed(withAmount: String, address: String) {

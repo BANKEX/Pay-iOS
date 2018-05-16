@@ -30,6 +30,8 @@ protocol GlobalWalletsService {
     func selectedKey() -> HDKey?
     func updateSelected(address: String)
     func delete(address: String)
+    func selectedWallet() -> KeyWalletModel?
+    func selectedWalletFromDB() -> KeyWalletModel?
 }
 
 extension GlobalWalletsService {
@@ -45,16 +47,16 @@ extension GlobalWalletsService {
         }
     }
 
-    func selectedWallet() -> KeyWallet? {
+    func selectedWalletFromDB() -> KeyWalletModel? {
         let key = try! DBStorage.db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).first
-        return key
+        return KeyWalletModel.from(wallet: key)
     }
     
     func selectedKey() -> HDKey? {
-        guard let selectedWallet = selectedWallet(), let address = selectedWallet.address else {
+        guard let selectedWallet = selectedWallet(), !selectedWallet.address.isEmpty else {
             return nil
         }
-        return HDKey(name: selectedWallet.name, address: address)
+        return HDKey(name: selectedWallet.name, address: selectedWallet.address)
     }
 
     func selectedAddress() -> String? {
@@ -177,6 +179,19 @@ extension HDWalletService {
  Need to remember, that under the hood might be multiple wallets with multiple keys in each
  */
 class HDWalletServiceImplementation: HDWalletService {
+    
+    private var selectedLocalWallet: KeyWalletModel?
+    
+    func selectedWallet() -> KeyWalletModel? {
+        return  selectedLocalWallet
+    }
+    
+    init() {
+        selectedLocalWallet = selectedWalletFromDB()
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
+            self.selectedLocalWallet = self.selectedWalletFromDB()
+        }
+    }
     
     func generateMnemonics(bitsOfEntropy: Int) -> String {
         guard let mnemonics = try? BIP39.generateMnemonics(bitsOfEntropy: bitsOfEntropy),

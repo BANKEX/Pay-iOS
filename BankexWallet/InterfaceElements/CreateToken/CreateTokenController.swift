@@ -62,6 +62,9 @@ UITextFieldDelegate {
         }
         textField.resignFirstResponder()
         self.errorLabel.isHidden = true
+        self.emptyView.isHidden = false
+        self.foundTokenView.isHidden = true
+
         activityIndicator.startAnimating()
         tokensService.searchForCustomToken(with: tokenAddress, completion: { (result) in
             self.activityIndicator.stopAnimating()

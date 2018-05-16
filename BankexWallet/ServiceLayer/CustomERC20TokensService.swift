@@ -9,6 +9,7 @@
 import UIKit
 import SugarRecord
 import BigInt
+import web3swift
 
 struct ERC20TokenModel {
     let name: String
@@ -62,7 +63,7 @@ protocol CustomERC20TokensService {
     
     func updateSelectedToken(to token: String)
     
-    func deleteToken(with name: String)
+    func deleteToken(with address: String)
     
     func availableTokensList() -> [ERC20TokenModel]?
     
@@ -89,25 +90,40 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     }
     
     func addNewCustomToken(with address: String, name: String, decimals: String, symbol: String) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            do {
-                try self.db.operation { (context, save) in
-                    let newToken: ERC20Token = try context.new()
-                    newToken.address = address
-                    newToken.name = name
-                    newToken.symbol = symbol
-                    newToken.decimals = decimals.description
-                    newToken.networkURL = self.networksService.preferredNetwork().fullNetworkUrl.absoluteString
-                    try context.insert(newToken)
-                    save()
+        //        DispatchQueue.global(qos: .userInitiated).async {
+        self.resetSelectedToken()
+        do {
+            try self.db.operation { (context, save) in
+                var newToken: ERC20Token
+                if let token = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address == %@", address))).first {
+                    newToken = token
+                } else {
+                    newToken = try context.new()
                 }
-            } catch {
-                //TODO: There was an error in the operation
+                newToken.address = address
+                newToken.name = name
+                newToken.symbol = symbol
+                newToken.decimals = decimals.description
+                newToken.isAdded = true
+                newToken.isSelected = true
+                newToken.networkURL = self.networksService.preferredNetwork().fullNetworkUrl.absoluteString
+                try context.insert(newToken)
+                save()
             }
+        } catch {
+            //TODO: There was an error in the operation
         }
+        //        }
     }
     
-    func searchForCustomToken(with address: String, completion: @escaping (SendEthResult<ERC20TokenModel>) -> Void) {
+    
+    private func makeOnlineSearchToken(with address: String, completion: @escaping (SendEthResult<ERC20TokenModel>) -> Void) {
+        
+        guard EthereumAddress(address).isValid else {
+            completion(SendEthResult.Error(CustomTokenError.undefinedError))
+            return
+        }
+        
         DispatchQueue.global(qos: .userInitiated).async {
             let dispatchGroup = DispatchGroup()
             
@@ -165,6 +181,33 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
         }
     }
     
+    func searchForCustomToken(with address: String, completion: @escaping (SendEthResult<ERC20TokenModel>) -> Void) {
+        do {
+            try self.db.operation { (context, save) in
+                if let token = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address == %@ || name CONTAINS[c] %@ || symbol CONTAINS[c] %@ && isSelected  == %@", address, address, address, NSNumber(value: false)))).first {
+                    DispatchQueue.main.async {
+                        completion(SendEthResult.Success(ERC20TokenModel(name: token.name ?? "",
+                                                                         address: token.address ?? "",
+                                                                         decimals: token.decimals ?? "",
+                                                                         symbol: token.symbol ?? "",
+                                                                         isSelected: false)))
+                    }
+                    return
+                } else {
+                    DispatchQueue.main.async {
+                        self.makeOnlineSearchToken(with: address, completion: completion)
+                    }
+                }
+            }
+        } catch {
+            DispatchQueue.main.async {
+                
+                self.makeOnlineSearchToken(with: address, completion: completion)
+            }
+        }
+        
+    }
+    
     
     let db: CoreDataDefaultStorage
     init() {
@@ -172,8 +215,17 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
         db = DBStorage.db
     }
     
-    func deleteToken(with name: String) {
-        
+    func deleteToken(with address: String) {
+        do {
+            try self.db.operation { (context, save) in
+                if let token = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address == %@", address))).first {
+                    token.isAdded = true
+                }
+                save()
+            }
+        } catch {
+            //TODO: There was an error in the operation
+        }
     }
     
     let tokensUtilService: UtilTransactionsService = CustomTokenUtilsServiceImplementation()
@@ -231,7 +283,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     let networksService = NetworksServiceImplementation()
     func availableTokensList() -> [ERC20TokenModel]? {
         let selectedNetworkURL = networksService.preferredNetwork().fullNetworkUrl.absoluteString
-        let networks = try! db.fetch(FetchRequest<ERC20Token>().filtered(with: "networkURL", equalTo: selectedNetworkURL))
+        let networks = try! db.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format:"networkURL == %@ && isAdded == %@", selectedNetworkURL, NSNumber(value: true))))
         
         let listOfNetworks = [etherModel()] + networks.map { (token) -> ERC20TokenModel in
             return ERC20TokenModel(name: token.name ?? "",

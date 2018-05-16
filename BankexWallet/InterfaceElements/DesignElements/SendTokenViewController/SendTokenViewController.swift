@@ -20,7 +20,8 @@ protocol FavoriteInputController: class {
 class SendTokenViewController: UIViewController,
 UITextFieldDelegate,
 QRCodeReaderViewControllerDelegate,
-FavoriteInputController {
+FavoriteInputController,
+Retriable {
 
     //MARK: Outlets
     @IBOutlet weak var scrollView: UIScrollView!
@@ -234,20 +235,20 @@ FavoriteInputController {
             if  !(amountTextfield.text?.isEmpty ?? true) &&
                 !(passwordTextfield.text?.isEmpty ?? true) &&
                 !futureString.isEmpty {
-                nextButton.isEnabled = true
+                nextButton.isEnabled = (Float((amountTextfield.text ?? "")) != nil)
             }
         case passwordTextfield:
             if !(amountTextfield.text?.isEmpty ?? true) &&
                 !(enterAddressTextfield.text?.isEmpty ?? true) &&
                 !futureString.isEmpty {
-                    nextButton.isEnabled = true
+                    nextButton.isEnabled =  (Float((amountTextfield.text ?? "")) != nil)
             }
         case amountTextfield:
             if !(passwordTextfield.text?.isEmpty ?? true) &&
                 !(enterAddressTextfield.text?.isEmpty ?? true) &&
                 !futureString.isEmpty
             {
-                nextButton.isEnabled = true
+                nextButton.isEnabled =  (Float((futureString)) != nil)
             }
         default:
             nextButton.isEnabled = false
@@ -323,7 +324,7 @@ FavoriteInputController {
         tokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
         self.balanceLabel.text = "..."
 
-        tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().name ).image()
+        tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         guard let selectedAddress = keysService.selectedAddress() else {
             return
         }
@@ -404,4 +405,9 @@ FavoriteInputController {
         }
     }
     
+    
+    // MARK: Retriable
+    func retryExisitngTransaction() {
+        nextButtonTapped(self)
+    }
 }

@@ -17,10 +17,16 @@ class InitialLogicRouter {
             return
         }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "MainTabController")
+        rootControler.performSegue(withIdentifier: "showProcess", sender: self)
         
-        rootControler.viewControllers = [controller]
+        DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "MainTabController")
+            
+            rootControler.viewControllers = [controller]
+        }
+
         
     }
 }

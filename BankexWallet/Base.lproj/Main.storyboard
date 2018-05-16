@@ -23,6 +23,7 @@
                     </navigationBar>
                     <connections>
                         <segue destination="M7A-D7-jHu" kind="relationship" relationship="rootViewController" id="0M5-ZF-71X"/>
+                        <segue destination="iLc-LU-ReD" kind="show" identifier="showProcess" animates="NO" id="jmi-Ci-Lfa"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89C-4i-6ZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -635,19 +636,19 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2a-Fj-hIr" userLabel="EmptyView">
-                                <rect key="frame" x="0.0" y="97" width="375" height="474"/>
+                                <rect key="frame" x="0.0" y="97" width="375" height="404"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsj-Bz-nGj">
-                                        <rect key="frame" x="20" y="180.5" width="335" height="113.5"/>
+                                        <rect key="frame" x="20" y="136" width="335" height="132.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add_token_icon" translatesAutoresizingMaskIntoConstraints="NO" id="r8G-zC-8s6">
                                                 <rect key="frame" x="136" y="0.0" width="63" height="55"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsI-Wz-mJZ">
-                                                <rect key="frame" x="38.5" y="75" width="258.5" height="38.5"/>
-                                                <string key="text">Enter address of the smart contract
-to add token</string>
+                                                <rect key="frame" x="10" y="75" width="315.5" height="57.5"/>
+                                                <string key="text">Enter address of the smart contract or its symbol 
+to find token</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -656,6 +657,7 @@ to add token</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="r8G-zC-8s6" firstAttribute="centerX" secondItem="hsj-Bz-nGj" secondAttribute="centerX" id="0Uy-dR-quZ"/>
+                                            <constraint firstItem="DsI-Wz-mJZ" firstAttribute="leading" secondItem="hsj-Bz-nGj" secondAttribute="leading" constant="10" id="1NW-pa-zAl"/>
                                             <constraint firstItem="DsI-Wz-mJZ" firstAttribute="top" secondItem="r8G-zC-8s6" secondAttribute="bottom" constant="20" id="6PU-Cz-cgw"/>
                                             <constraint firstItem="r8G-zC-8s6" firstAttribute="top" secondItem="hsj-Bz-nGj" secondAttribute="top" id="Eg9-TI-mXb"/>
                                             <constraint firstAttribute="bottom" secondItem="DsI-Wz-mJZ" secondAttribute="bottom" id="HK8-lf-DlG"/>
@@ -899,11 +901,10 @@ to add token</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="e2a-Fj-hIr" firstAttribute="centerY" secondItem="hvt-8A-GUY" secondAttribute="centerY" id="4Ya-mm-nRp"/>
                             <constraint firstItem="ecC-21-umN" firstAttribute="leading" secondItem="hvt-8A-GUY" secondAttribute="leading" id="5Py-F6-PeE"/>
                             <constraint firstItem="ecC-21-umN" firstAttribute="top" secondItem="zmq-L3-ygc" secondAttribute="top" constant="76" id="6wQ-Yp-YSa"/>
                             <constraint firstItem="pux-sa-Skv" firstAttribute="centerX" secondItem="hvt-8A-GUY" secondAttribute="centerX" id="98L-Z1-cRi"/>
-                            <constraint firstItem="CCK-nJ-dmk" firstAttribute="top" secondItem="e2a-Fj-hIr" secondAttribute="bottom" id="9jo-a3-oph"/>
+                            <constraint firstItem="CCK-nJ-dmk" firstAttribute="top" secondItem="e2a-Fj-hIr" secondAttribute="bottom" constant="70" id="9jo-a3-oph"/>
                             <constraint firstItem="gye-QW-OEq" firstAttribute="top" secondItem="ecC-21-umN" secondAttribute="bottom" constant="24" id="Afg-jy-ilT"/>
                             <constraint firstItem="pux-sa-Skv" firstAttribute="centerX" secondItem="hvt-8A-GUY" secondAttribute="centerX" id="BTl-MS-B63"/>
                             <constraint firstItem="X77-vk-s9n" firstAttribute="leading" secondItem="gye-QW-OEq" secondAttribute="leading" id="DTy-5p-KGB"/>
@@ -3088,15 +3089,20 @@ minutes, please wait ...</string>
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJa-3k-7Bd">
-                                            <rect key="frame" x="-68" y="-336" width="375" height="800"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJa-3k-7Bd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                             <connections>
                                                 <action selector="hideTokensList:" destination="dxz-2H-Uh6" eventType="touchUpInside" id="Gz7-uW-PAW"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="UJa-3k-7Bd" secondAttribute="bottom" id="1Ld-06-Uk9"/>
+                                        <constraint firstItem="UJa-3k-7Bd" firstAttribute="top" secondItem="OsN-Uk-pqj" secondAttribute="top" id="4cX-g5-EPN"/>
+                                        <constraint firstAttribute="trailing" secondItem="UJa-3k-7Bd" secondAttribute="trailing" id="LMf-uk-h2q"/>
+                                        <constraint firstItem="UJa-3k-7Bd" firstAttribute="leading" secondItem="OsN-Uk-pqj" secondAttribute="leading" id="gzk-0O-ahc"/>
+                                    </constraints>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.39977525679999998" colorSpace="calibratedWhite"/>
                                 <blurEffect style="dark"/>
@@ -3171,7 +3177,6 @@ minutes, please wait ...</string>
                         <outlet property="topTokenSymbolLabel" destination="Oi8-iV-lZz" id="r8l-Pg-a1P"/>
                         <outletCollection property="textFields" destination="C7M-rj-MOi" collectionClass="NSMutableArray" id="haW-Sq-0EY"/>
                         <outletCollection property="textFields" destination="HFk-X3-Yzw" collectionClass="NSMutableArray" id="RMo-1k-x4O"/>
-                        <outletCollection property="textFields" destination="IsK-bf-UcU" collectionClass="NSMutableArray" id="3yX-CD-xxL"/>
                         <outletCollection property="textFields" destination="XG2-6C-eIe" collectionClass="NSMutableArray" id="Hqe-3d-ea3"/>
                         <outletCollection property="separators" destination="yCI-A2-wde" collectionClass="NSMutableArray" id="V3Y-Sv-pc8"/>
                         <outletCollection property="separators" destination="acu-cT-63g" collectionClass="NSMutableArray" id="QE2-h2-OvX"/>
@@ -4222,7 +4227,7 @@ be able to restore your wallet!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lxU-wG-4xw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2070" y="2234"/>
+            <point key="canvasLocation" x="2169" y="2192"/>
         </scene>
         <!--Sending Success View Controller-->
         <scene sceneID="wZG-eG-xWt">
@@ -5591,6 +5596,64 @@ successfully</string>
             </objects>
             <point key="canvasLocation" x="-1774" y="6314"/>
         </scene>
+        <!--Sending In Process View Controller-->
+        <scene sceneID="ttd-FO-4vY">
+            <objects>
+                <viewController id="iLc-LU-ReD" customClass="SendingInProcessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="08T-rQ-TzM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vu5-xB-3LK">
+                                <rect key="frame" x="61" y="151" width="252" height="366"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DW4-9U-UJB">
+                                        <rect key="frame" x="11" y="327.5" width="230.5" height="38.5"/>
+                                        <string key="text">The operation may take several 
+minutes, please wait ...</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sending" translatesAutoresizingMaskIntoConstraints="NO" id="Gco-zj-wFy">
+                                        <rect key="frame" x="0.0" y="0.0" width="252" height="264"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending funds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFr-e1-QqG">
+                                        <rect key="frame" x="67.5" y="298" width="117" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Gco-zj-wFy" firstAttribute="top" secondItem="vu5-xB-3LK" secondAttribute="top" id="2g4-QU-wCU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gco-zj-wFy" secondAttribute="trailing" id="EYr-6F-Wyq"/>
+                                    <constraint firstItem="fFr-e1-QqG" firstAttribute="centerX" secondItem="vu5-xB-3LK" secondAttribute="centerX" id="OuW-Yg-bqB"/>
+                                    <constraint firstItem="DW4-9U-UJB" firstAttribute="top" secondItem="fFr-e1-QqG" secondAttribute="bottom" constant="8" id="YTa-tu-XtF"/>
+                                    <constraint firstItem="fFr-e1-QqG" firstAttribute="top" secondItem="Gco-zj-wFy" secondAttribute="bottom" constant="34" id="aLP-tQ-Sks"/>
+                                    <constraint firstItem="Gco-zj-wFy" firstAttribute="leading" secondItem="vu5-xB-3LK" secondAttribute="leading" id="f7c-sU-yAd"/>
+                                    <constraint firstAttribute="bottom" secondItem="DW4-9U-UJB" secondAttribute="bottom" id="lfT-58-8D1"/>
+                                    <constraint firstItem="DW4-9U-UJB" firstAttribute="centerX" secondItem="vu5-xB-3LK" secondAttribute="centerX" id="llL-th-EYc"/>
+                                    <constraint firstItem="Gco-zj-wFy" firstAttribute="centerX" secondItem="vu5-xB-3LK" secondAttribute="centerX" id="nwX-fp-yPF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vu5-xB-3LK" firstAttribute="centerX" secondItem="08T-rQ-TzM" secondAttribute="centerX" id="WaS-Ow-tU4"/>
+                            <constraint firstItem="vu5-xB-3LK" firstAttribute="centerY" secondItem="08T-rQ-TzM" secondAttribute="centerY" id="s9h-fM-v6R"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EUY-xE-arv"/>
+                    </view>
+                    <connections>
+                        <outlet property="processTitleLabel" destination="fFr-e1-QqG" id="CNk-vd-Ftt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jFc-yi-Hy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3391" y="2516"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Add" width="16" height="16"/>
@@ -5636,13 +5699,13 @@ successfully</string>
         <image name="qr code" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vrZ-w3-HnB"/>
-        <segue reference="XCh-X3-sC4"/>
+        <segue reference="3SJ-h0-gVt"/>
+        <segue reference="JaH-wa-aDn"/>
         <segue reference="zcW-e5-SSf"/>
         <segue reference="Z9p-MY-jvY"/>
-        <segue reference="OXd-vi-azc"/>
+        <segue reference="bDG-Xv-WCD"/>
         <segue reference="Uws-Ci-KnS"/>
         <segue reference="zl4-lC-AqZ"/>
-        <segue reference="890-Uf-GGI"/>
+        <segue reference="0M5-ZF-71X"/>
     </inferredMetricsTieBreakers>
 </document>

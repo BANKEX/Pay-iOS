@@ -22,19 +22,22 @@ enum CustomTokenError: Error {
 class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
     
     func name(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
+//        DispatchQueue.global(qos: .userInitiated).async {
             let contract = self.contract(for: token)
-            let transaction = contract?.method("name", parameters: [AnyObject](), options: self.defaultOptions())
-            let bkxBalance = transaction?.call(options: self.defaultOptions())
-            DispatchQueue.main.async {
-                //TODO: Somehow it crashes on second launch
-                if let name = bkxBalance?.value?["0"] as? String, !name.isEmpty {
-                    completion(SendEthResult.Success(name))
+        if let transaction = contract?.method("name", parameters: [AnyObject](), options: self.defaultOptions()) {
+        
+            transaction.call(options: self.defaultOptions(), onBlock: "latest", callback: { (result) in
+                DispatchQueue.main.async {
+                    if let name = result.value?["0"] as? String, !name.isEmpty {
+                        completion(SendEthResult.Success(name))
+                    }
+                    else {
+                        completion(SendEthResult.Error(CustomTokenError.badNameError))
+                    }
                 }
-                else {
-                    completion(SendEthResult.Error(CustomTokenError.badNameError))
-                }
-            }
+            })
+        } else {
+            completion(SendEthResult.Error(CustomTokenError.badNameError))
         }
     }
     

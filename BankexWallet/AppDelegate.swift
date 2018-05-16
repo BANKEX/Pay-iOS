@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
+        
+//        
         return true
     }
 

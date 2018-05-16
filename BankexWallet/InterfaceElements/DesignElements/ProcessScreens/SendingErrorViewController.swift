@@ -19,8 +19,11 @@ class SendingErrorViewController: UIViewController {
         if  count >= 3, let previousController = navigationController?.viewControllers[count - 3] as? Retriable
         {
             previousController.retryExisitngTransaction()
+            navigationController?.popToViewController(previousController as! UIViewController, animated: false)
+
+        } else {
+            navigationController?.popToRootViewController(animated: false)
         }
-        navigationController?.popViewController(animated: false)
     }
     
     @IBAction func done(_ sender: Any) {
