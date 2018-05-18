@@ -307,8 +307,12 @@ Retriable {
         
         if let parsed = Web3.EIP67CodeParser.parse(value) {
             enterAddressTextfield.text = parsed.address.address
-            amountTextfield.text = parsed.amount?.description
-
+            if let amount = parsed.amount {
+                if tokensService.selectedERC20Token().name != "Ether" {
+                    tokensService.updateSelectedToken(to: "")
+                }
+                amountTextfield.text = Web3.Utils.formatToEthereumUnits(amount, toUnits: .eth, decimals: 4)
+            }
         }
         else  {
             let address = EthereumAddress(value)
