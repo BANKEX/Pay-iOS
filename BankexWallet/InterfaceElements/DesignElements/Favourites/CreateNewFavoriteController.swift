@@ -126,9 +126,21 @@ class CreateNewFavoriteController: UIViewController,
     
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         reader.stopScanning()
-        addressTextfield.text = result.value.trimmingCharacters(in: CharacterSet.whitespaces)
+        let value = result.value
+        
+        if let parsed = Web3.EIP67CodeParser.parse(value) {
+            addressTextfield.text = parsed.address.address
+        }
+        else  {
+            let address = EthereumAddress(value)
+            if address.isValid {
+                addressTextfield.text = value
+            }
+        }
+        
         dismiss(animated: true, completion: nil)
     }
+    
     
     
     func readerDidCancel(_ reader: QRCodeReaderViewController) {

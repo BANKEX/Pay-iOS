@@ -148,13 +148,13 @@ class TransactionsHistoryController: UIViewController,
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showSendTransactions",
-            let transaction = selectedTransaction,
-            let navController = segue.destination as? UINavigationController,
-            let controller = navController.viewControllers.first as? TokenTransferContainerController {
-            controller.selectedTransaction = transaction
-            selectedTransaction = nil
-        }
+//        if segue.identifier == "showSendTransactions",
+//            let transaction = selectedTransaction,
+//            let navController = segue.destination as? UINavigationController,
+//            let controller = navController.viewControllers.first as? TokenTransferContainerController {
+//            controller.selectedTransaction = transaction
+//            selectedTransaction = nil
+//        }
     }
 }
 

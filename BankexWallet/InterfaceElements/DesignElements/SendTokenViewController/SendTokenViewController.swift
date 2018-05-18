@@ -96,7 +96,7 @@ Retriable {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        enterAddressTextfield.text = selectedFavoriteAddress ?? ""
+        enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
     }
     
     func updateTopLayout() {
@@ -303,11 +303,20 @@ Retriable {
     
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         reader.stopScanning()
-        var value = result.value
-        if !value.hasPrefix("0x") {
-            value = "0x" + value
+        let value = result.value
+        
+        if let parsed = Web3.EIP67CodeParser.parse(value) {
+            enterAddressTextfield.text = parsed.address.address
+            amountTextfield.text = parsed.amount?.description
+
         }
-        enterAddressTextfield.text = value
+        else  {
+            let address = EthereumAddress(value)
+            if address.isValid {
+                enterAddressTextfield.text = value
+            }
+        }
+
         dismiss(animated: true, completion: nil)
     }
     

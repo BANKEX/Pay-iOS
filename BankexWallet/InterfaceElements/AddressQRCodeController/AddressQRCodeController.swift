@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import web3swift
 
 class AddressQRCodeController: UIViewController {
 
@@ -31,10 +32,13 @@ class AddressQRCodeController: UIViewController {
     }
     
     func generateQRCode(from string: String?) -> UIImage? {
-        guard let string = addressToGenerateQR else {
+        guard let string = string else {
             return nil
         }
-        let data = string.data(using: String.Encoding.ascii)
+        
+        let code = Web3.EIP67Code(address: string).toString()
+        
+        let data = code.data(using: String.Encoding.ascii)
         
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
             filter.setValue(data, forKey: "inputMessage")
