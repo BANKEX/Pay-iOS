@@ -126,7 +126,7 @@ FavoriteSelectionDelegate {
             arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell","BottomRoundedCell"]
 
         default:
-            arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "TransactionHistoryCell", "BottomRoundedCell"]
+            arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "BottomRoundedCell"]
         }
         
         let index = itemsArray.index{$0 == "TransactionHistoryCell"} ?? 0

@@ -17,7 +17,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
               with password: String,
               completion: @escaping (SendEthResult<[String : String]>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let result = transaction.send(password: "BANKEXFOUNDATION",
+            let result = transaction.send(password: password,
                                           options: transaction.options)
             if let error = result.error {
                 DispatchQueue.main.async {
@@ -89,19 +89,33 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
             let token = CustomERC20TokensServiceImplementation().selectedERC20Token().address
             let contract = self.contract(for: token)
             var options = Web3Options.defaultOptions()
-            options.gasLimit = BigUInt(55000)
-            options.gasPrice = BigUInt(250000000)
-
-            options.from = EthereumAddress(self.keysService.selectedAddress()!)
+//            options.gasLimit = BigUInt(55000)
+//            options.gasPrice = BigUInt(250000000)
             
-            guard let estimatedGas = contract?.method(options: options)?.estimateGas(options: options).value else {
+            options.from = EthereumAddress(self.keysService.selectedAddress()!)
+            guard let intermediate = web3.eth.sendERC20tokensWithNaturalUnits(tokenAddress: EthereumAddress(token), from: EthereumAddress(self.keysService.selectedAddress()!),
+                                                                              to: destinationEthAddress,
+                                                                              amount: amountString)
+                
+                else {
+                    DispatchQueue.main.async {
+                        completion(SendEthResult.Error(SendEthErrors.createTransactionIssue))
+                    }
+                    return
+            }
+            DispatchQueue.main.async {
+                completion(SendEthResult.Success(intermediate))
+            }
+
+            return
+            guard let _ = contract?.method(options: options)?.estimateGas(options: options).value else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.retrievingEstimatedGasError))
                 }
                 return
             }
             
-            options.gasLimit = estimatedGas + BigUInt(20000)
+//            options.gasLimit = estimatedGas + BigUInt(20000)
             guard let gasPrice = web3.eth.getGasPrice().value else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.retrievingGasPriceError))
@@ -133,11 +147,21 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
     }
     
     func getAllTransactions() -> [ETHTransactionModel]? {
-        // TODO: Select only transacions with selected token?
-        // TODO: Or show all of them??
-        // Make a setting
-        
-        return nil
+//         TODO: Select only transacions with selected token?
+//         TODO: Or show all of them??
+//         Make a setting
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().sorted(with: "date", ascending: false))
+        return transactions.map({ (transaction) -> ETHTransactionModel in
+            let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :
+                ERC20TokenModel(token: transaction.token!)
+            return ETHTransactionModel(from: transaction.from ?? "",
+                                       to: transaction.to ?? "",
+                                       amount: transaction.amount ?? "",
+                                       date: transaction.date!,
+                                       token: token,
+                                       key: HDKey(name: transaction.keywallet?.name,
+                                                  address: (transaction.keywallet?.address ?? "")))
+        })
     }
     
     // TODO: Move these two to somewhere else
@@ -157,8 +181,8 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
     
     private func defaultOptions() -> Web3Options {
         var options = Web3Options.defaultOptions()
-        options.gasLimit = BigUInt(21000)
-        options.gasPrice = BigUInt(25000)
+//        options.gasLimit = BigUInt(21000)
+//        options.gasPrice = BigUInt(25000)
         options.from = EthereumAddress(self.keysService.selectedAddress()!)
         return options
     }

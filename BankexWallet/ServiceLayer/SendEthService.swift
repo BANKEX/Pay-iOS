@@ -194,7 +194,7 @@ class SendEthServiceImplementation: SendEthService {
             let ethAddressFrom = EthereumAddress(selectedKey)
             web3.addKeystoreManager(self.keysService.keystoreManager())
             var options = Web3Options.defaultOptions()
-            options.gasLimit = BigUInt(gasLimit)
+//            options.gasLimit = BigUInt(gasLimit)
             options.from = ethAddressFrom
             options.value = BigUInt(amount)
             guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destinationEthAddress) else {

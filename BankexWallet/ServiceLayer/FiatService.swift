@@ -2,7 +2,7 @@
 //  FiatService.swift
 //  BankexWallet
 //
-//  Created by Korovkina, Ekaterina (Agoda) on 5/5/2561 BE.
+//  Created by Korovkina, Ekaterina on 5/5/2561 BE.
 //  Copyright © 2561 Alexander Vlasov. All rights reserved.
 //
 

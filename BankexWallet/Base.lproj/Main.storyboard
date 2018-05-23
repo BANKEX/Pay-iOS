@@ -493,7 +493,7 @@
                                                         <constraint firstAttribute="width" constant="28" id="Pic-YR-Lk2"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEn-pk-JNk">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEn-pk-JNk">
                                                     <rect key="frame" x="61" y="18" width="66.5" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                     <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -540,6 +540,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="toz-aa-6EO" secondAttribute="trailing" id="tN0-3r-Dmb"/>
                                                 <constraint firstAttribute="bottom" secondItem="toz-aa-6EO" secondAttribute="bottom" constant="-16" id="tyo-ls-04O"/>
                                                 <constraint firstAttribute="bottom" secondItem="p2m-ga-I8d" secondAttribute="bottom" id="uVa-rQ-KDI"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="npZ-4W-xZr" secondAttribute="trailing" constant="50" id="wce-eD-8Xb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1945,7 +1946,7 @@ to find token</string>
                                                         <constraint firstAttribute="height" constant="28" id="zcB-7O-gnu"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWn-0r-CAy">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWn-0r-CAy">
                                                     <rect key="frame" x="63" y="21.5" width="66.5" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                     <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2012,6 +2013,7 @@ to find token</string>
                                                 <constraint firstItem="1SB-E4-FaI" firstAttribute="bottom" secondItem="5RZ-3h-7Ls" secondAttribute="bottom" constant="-2" id="i1J-kX-wng"/>
                                                 <constraint firstAttribute="bottom" secondItem="tO2-wE-llf" secondAttribute="bottom" constant="30" id="pIk-B1-3ds"/>
                                                 <constraint firstItem="o4l-l2-X8g" firstAttribute="top" secondItem="uch-PB-zaf" secondAttribute="bottom" constant="14" id="qD9-uF-W8Q"/>
+                                                <constraint firstItem="Ibo-Ds-Br4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SWx-xz-fhZ" secondAttribute="trailing" constant="10" id="s58-xS-yWU"/>
                                                 <constraint firstItem="ExC-MO-fyO" firstAttribute="centerX" secondItem="tO2-wE-llf" secondAttribute="centerX" constant="15" id="vtI-Iw-703"/>
                                                 <constraint firstItem="Ibo-Ds-Br4" firstAttribute="top" secondItem="5IH-uW-KG1" secondAttribute="top" constant="28" id="wuh-Wh-sDP"/>
                                                 <constraint firstItem="uch-PB-zaf" firstAttribute="leading" secondItem="5IH-uW-KG1" secondAttribute="leading" constant="26" id="y0f-cO-VQc"/>
@@ -2179,11 +2181,6 @@ to find token</string>
                                                 <constraint firstAttribute="trailing" secondItem="vdG-te-kiY" secondAttribute="trailing" constant="25" id="tfc-9f-4JO"/>
                                                 <constraint firstAttribute="bottom" secondItem="c7O-c9-8tD" secondAttribute="bottom" id="tjo-H8-zfg"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="15"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4304,7 +4301,6 @@ successfully</string>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QyT-YP-aL8" userLabel="AddContactButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="83.5"/>
                                                 <connections>
-                                                    <action selector="addToFavorites:" destination="ygp-st-s37" eventType="touchUpInside" id="FSk-3T-7vO"/>
                                                     <segue destination="ajz-e5-SZx" kind="show" identifier="showAddFavorite" id="mKc-JC-UU5"/>
                                                 </connections>
                                             </button>
@@ -5701,10 +5697,10 @@ minutes, please wait ...</string>
     <inferredMetricsTieBreakers>
         <segue reference="3SJ-h0-gVt"/>
         <segue reference="JaH-wa-aDn"/>
-        <segue reference="zcW-e5-SSf"/>
+        <segue reference="mKc-JC-UU5"/>
         <segue reference="Z9p-MY-jvY"/>
         <segue reference="bDG-Xv-WCD"/>
-        <segue reference="Uws-Ci-KnS"/>
+        <segue reference="I0X-hu-WYJ"/>
         <segue reference="zl4-lC-AqZ"/>
         <segue reference="0M5-ZF-71X"/>
     </inferredMetricsTieBreakers>

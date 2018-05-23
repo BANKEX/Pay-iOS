@@ -43,16 +43,14 @@ UITextFieldDelegate {
     var foundModel: ERC20TokenModel?
     
     @IBAction func findContract(_ sender: Any) {
-            // TODO: Add Token
-            guard let foundModel = foundModel else {
-                return
-            }
-            tokensService.addNewCustomToken(with: foundModel.address,
-                                            name: foundModel.name,
-                                            decimals: foundModel.decimals,
-                                            symbol: foundModel.symbol)
+        guard let foundModel = foundModel else {
+            return
+        }
+        tokensService.addNewCustomToken(with: foundModel.address,
+                                        name: foundModel.name,
+                                        decimals: foundModel.decimals,
+                                        symbol: foundModel.symbol)
         navigationController?.popViewController(animated: true)
-        
     }
     
     // MARK: UITextField
@@ -64,7 +62,9 @@ UITextFieldDelegate {
         self.errorLabel.isHidden = true
         self.emptyView.isHidden = false
         self.foundTokenView.isHidden = true
-
+        self.findContractButton.setTitle("Find Token", for: .normal)
+        findContractButton.backgroundColor = WalletColors.disableButtonBackground.color()        
+        
         activityIndicator.startAnimating()
         tokensService.searchForCustomToken(with: tokenAddress, completion: { (result) in
             self.activityIndicator.stopAnimating()

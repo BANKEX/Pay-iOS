@@ -57,7 +57,10 @@ class CurrentWalletInfoCell: UITableViewCell {
             switch result {
             case .Success(let response):
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
-                let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
+                let formattedAmount = Web3.Utils.formatToEthereumUnits(response,
+                                                                       toUnits: .eth,
+                                                                       decimals: 4,
+                                                                       fallbackToScientific: true)
                 self.amountLabel.text = formattedAmount!
             case .Error(let error):
                 self.amountLabel.text = "..."

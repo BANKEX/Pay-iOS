@@ -17,9 +17,14 @@ class WalletCreationTypeRouterImplementation: WalletCreationRouter {
         guard let navigationC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else {
             return
         }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "MainTabController")
-
-        navigationC.viewControllers = [controller]
+        navigationC.performSegue(withIdentifier: "showProcess", sender: self)
+        
+        DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "MainTabController")
+            
+            navigationC.viewControllers = [controller]
+        }
     }
 }

@@ -311,7 +311,10 @@ Retriable {
                 if tokensService.selectedERC20Token().name != "Ether" {
                     tokensService.updateSelectedToken(to: "")
                 }
-                amountTextfield.text = Web3.Utils.formatToEthereumUnits(amount, toUnits: .eth, decimals: 4)
+                amountTextfield.text = Web3.Utils.formatToEthereumUnits(
+                    amount,
+                    toUnits: .eth,
+                    decimals: 4)
             }
         }
         else  {
