@@ -17,7 +17,7 @@ protocol RecipientsAddressesService {
 }
 
 class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
-    let keyForStoreRecipientAddresses = "RecipientAddressesKey"
+    
     let db = DBStorage.db
     func contains(address: String) -> Bool {
         let addresses = getAllStoredAddresses()
@@ -25,6 +25,7 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
             return address == localAddress
         })
         return contains ?? false
+        return false
     }
     
     func store(address: String, with name: String) {
@@ -32,7 +33,7 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
             try db.operation({ (context, save) in
                 
                 if let _ = try? context.fetch(FetchRequest<RecepientAddress>().filtered(with: NSPredicate(format: "name == %@", name))).first {
-                    //error
+                    print("Error, given name already exists in the database")
                 } else {
                     let recepientAddress: RecepientAddress = try context.new()
                     recepientAddress.name = name
@@ -50,40 +51,65 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
     }
     
     func getAllStoredAddresses() -> [(String, String)]? {
+        
         let request = FetchRequest<RecepientAddress>().sorted(with: "name", ascending: true)
-        var sortedAddresses = [(String, String)]()
+        
         do {
-            try DBStorage.db.operation { (context, _) in
-                guard let addresses = try? context.fetch(request) else { return }
-                sortedAddresses = addresses.map({ (recepientAddress) -> (String, String) in
-                    guard let name = recepientAddress.name else { return ("", "") }
-                    guard let address = recepientAddress.address else { return ("", "") }
-                    return (name, address)
-                })
-            }
-            
+            let addresses = try db.fetch(request)
+            let sortedAddresses = addresses.map({ (recepientAddress) -> (String, String) in
+                guard let name = recepientAddress.name else { return ("", "") }
+                guard let address = recepientAddress.address else { return ("", "") }
+                return (name, address)
+            })
             return sortedAddresses
         } catch {
             print(error)
         }
         
         return nil
+ 
     }
     
     func delete(with address: String) {
-        guard var savedAddresses = UserDefaults.standard.dictionary(forKey: keyForStoreRecipientAddresses) as? [String: String],
-            let (name, _) = savedAddresses.first(where: { (_, localAddress) -> Bool in
-                return address == localAddress
-            }) else {
-            return
+        do {
+            try db.operation { (context, save)  in
+                let fav = try context.fetch(FetchRequest<RecepientAddress>().filtered(with: NSPredicate(format: "address == %@", address))).first
+                if let fav = fav {
+                    try context.remove([fav])
+                    save()
+                }
+            }
+        } catch {
+            print(error)
         }
-        
-        savedAddresses[name] = nil
-        UserDefaults.standard.set(savedAddresses, forKey: keyForStoreRecipientAddresses)
     }
     
     func clearAllSavedAddresses() {
-        UserDefaults.standard.set(nil, forKey: keyForStoreRecipientAddresses)
+        do {
+            try db.operation { (context, save) in
+                let fav = try context.fetch(FetchRequest<RecepientAddress>())
+                if !fav.isEmpty {
+                    try context.remove(fav)
+                    save()
+                }
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func update(address: String, with name: String) {
+        do {
+            try db.operation { (context, save) in
+                if let data = try? context.fetch(FetchRequest<RecepientAddress>().filtered(with: NSPredicate(format: "name == %@", name))).first {
+                    data?.address = address
+                    save()
+                }
+            }
+        } catch {
+            print(error)
+        }
+        
     }
 
 }
