@@ -58,4 +58,20 @@ class RecipientsAddressesServiceTests: XCTestCase {
         service.clearAllSavedAddresses()
     }
     
+    func testUpdateAddress() {
+        //given
+        let service = RecipientsAddressesServiceImplementation()
+        service.store(address: "Some String", with: "First Name")
+        service.store(address: "Another String", with: "Second Name")
+        
+        //when
+        service.update(address: "Yet Another String", with: "First Name")
+        let allAddresses = service.getAllStoredAddresses()
+        
+        //then
+        XCTAssertEqual(allAddresses?.first?.1, "Yet Another String")
+        XCTAssertEqual(allAddresses?.last?.1, "Another String")
+        
+    }
+    
 }

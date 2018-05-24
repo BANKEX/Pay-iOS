@@ -64,9 +64,7 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         } catch {
             print(error)
         }
-        
         return nil
- 
     }
     
     func delete(with address: String) {
@@ -108,7 +106,6 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         } catch {
             print(error)
         }
-        
     }
 
 }
