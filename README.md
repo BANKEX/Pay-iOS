@@ -27,6 +27,9 @@ kind and considerate human beings who learn and grow from giving and receiving
 positive, constructive feedback. We reserve the right to delete or ban any
 behavior violating this base foundation of respect.
 
+## Publishing your own pull request
+If you want to publish your own pull request, you might want to ask us before to avoid doing simmilar work.
+
 ## CocoaPods
 If you want to add you own pods or update existing, you need to install cocoapods.
 
@@ -44,7 +47,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
-target '<Your Target Name>' do
+target 'BankexWallet' do
+#add your new pod here
 pod 'web3swift'
 end
 ```
