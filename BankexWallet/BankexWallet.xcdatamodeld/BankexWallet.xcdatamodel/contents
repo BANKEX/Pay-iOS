@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ERC20Token" representedClassName="ERC20Token" syncable="YES" codeGenerationType="class">
         <attribute name="address" attributeType="String" syncable="YES"/>
         <attribute name="decimals" optional="YES" attributeType="String" syncable="YES"/>
@@ -22,6 +22,10 @@
         <relationship name="parentKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="childKeys" inverseEntity="KeyWallet" syncable="YES"/>
         <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SendEthTransaction" inverseName="keywallet" inverseEntity="SendEthTransaction" syncable="YES"/>
     </entity>
+    <entity name="RecepientAddress" representedClassName="RecepientAddress" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="SendEthTransaction" representedClassName="SendEthTransaction" syncable="YES" codeGenerationType="class">
         <attribute name="amount" attributeType="String" syncable="YES"/>
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -42,5 +46,6 @@
         <element name="KeyWallet" positionX="-54" positionY="54" width="128" height="180"/>
         <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="TokenBalance" positionX="-54" positionY="90" width="128" height="105"/>
+        <element name="RecepientAddress" positionX="-18" positionY="135" width="128" height="75"/>
     </elements>
 </model>

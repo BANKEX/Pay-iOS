@@ -31,7 +31,7 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         do {
             try db.operation({ (context, save) in
                 
-                if let _ = try? context.fetch(FetchRequest<RecepientAddress>().filtered(with: NSPredicate(format: "name == %@", name))).first {
+                if let _ = try context.fetch(FetchRequest<RecepientAddress>().filtered(with: NSPredicate(format: "name == %@", name))).first {
                     print("Error, given name already exists in the database")
                 } else {
                     let recepientAddress: RecepientAddress = try context.new()
