@@ -25,7 +25,6 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
             return address == localAddress
         })
         return contains ?? false
-        return false
     }
     
     func store(address: String, with name: String) {
