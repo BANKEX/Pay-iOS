@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SugarRecord
 protocol RecipientsAddressesService {
     func store(address: String, with name: String)
     func getAllStoredAddresses() -> [(String, String)]?
@@ -18,7 +18,7 @@ protocol RecipientsAddressesService {
 
 class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
     let keyForStoreRecipientAddresses = "RecipientAddressesKey"
-    
+    let db = DBStorage.db
     func contains(address: String) -> Bool {
         let addresses = getAllStoredAddresses()
         let contains = addresses?.contains(where: { (_, localAddress) -> Bool in
@@ -28,28 +28,46 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
     }
     
     func store(address: String, with name: String) {
-        var savedAddresses = UserDefaults.standard.dictionary(forKey: keyForStoreRecipientAddresses)
-        if savedAddresses == nil {
-            savedAddresses = [name: address]
+        do {
+            try db.operation({ (context, save) in
+                
+                if let _ = try? context.fetch(FetchRequest<RecepientAddress>().filtered(with: NSPredicate(format: "name == %@", name))).first {
+                    //error
+                } else {
+                    let recepientAddress: RecepientAddress = try context.new()
+                    recepientAddress.name = name
+                    recepientAddress.address = address
+                    
+                    try context.insert(recepientAddress)
+                }
+                save()
+                
+            })
+        } catch {
+           print(error)
         }
-        else {
-            savedAddresses![name] = address
-        }
-        UserDefaults.standard.set(savedAddresses, forKey: keyForStoreRecipientAddresses)
+        
     }
     
     func getAllStoredAddresses() -> [(String, String)]? {
-        guard let savedAddresses = UserDefaults.standard.dictionary(forKey: keyForStoreRecipientAddresses) as? [String: String] else {
-            return nil
+        let request = FetchRequest<RecepientAddress>().sorted(with: "name", ascending: true)
+        var sortedAddresses = [(String, String)]()
+        do {
+            try DBStorage.db.operation { (context, _) in
+                guard let addresses = try? context.fetch(request) else { return }
+                sortedAddresses = addresses.map({ (recepientAddress) -> (String, String) in
+                    guard let name = recepientAddress.name else { return ("", "") }
+                    guard let address = recepientAddress.address else { return ("", "") }
+                    return (name, address)
+                })
+            }
+            
+            return sortedAddresses
+        } catch {
+            print(error)
         }
         
-        let sortedAddresses = savedAddresses.map { (key, value) -> (String, String) in
-            return (key, value)
-        }
-        
-        return sortedAddresses.sorted { (v1, v2) -> Bool in
-            return v1.0 < v2.0
-        }
+        return nil
     }
     
     func delete(with address: String) {
