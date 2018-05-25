@@ -60,10 +60,12 @@ Retriable {
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
     var utilsService: UtilTransactionsService!
+    var favService: RecipientsAddressesService? = RecipientsAddressesServiceImplementation()
 
     // MARK: Inputs
     var selectedFavoriteName: String?
     var selectedFavoriteAddress: String?
+    var favorites: [FavoriteModel]?
     
     // MARK: Lifecycle
     @IBAction func back(segue:UIStoryboardSegue) { }
@@ -72,7 +74,10 @@ Retriable {
         super.viewDidLoad()
         nextButton.isEnabled = false
 
-        favNameContainer.removeFromSuperview()
+        //favNameContainer.removeFromSuperview()
+        selectedFavNameLabel.text = selectedFavoriteName
+        enterAddressTextfield.text = selectedFavoriteAddress
+        enterAddressTextfield.delegate = self
         dataTopEmptyView.removeFromSuperview()
         additionalDataView.removeFromSuperview()
         additionalDataSeparator.removeFromSuperview()
@@ -97,6 +102,8 @@ Retriable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
+        favorites = favService?.getAllStoredAddresses()
+        
     }
     
     func updateTopLayout() {
@@ -236,6 +243,17 @@ Retriable {
                 !(passwordTextfield.text?.isEmpty ?? true) &&
                 !futureString.isEmpty {
                 nextButton.isEnabled = (Float((amountTextfield.text ?? "")) != nil)
+            }
+            //It'll be a good idea to get a real current string here
+            if let address = enterAddressTextfield.text, let favorites = favorites, address != "" {
+                for favorite in favorites {
+                    if favorite.address.hasPrefix(address) {
+                        selectedFavNameLabel.text = favorite.name
+                        //Here should be a little bit more setup
+                    } else {
+                        selectedFavNameLabel.text = ""
+                    }
+                }
             }
         case passwordTextfield:
             if !(amountTextfield.text?.isEmpty ?? true) &&
