@@ -28,7 +28,7 @@ positive, constructive feedback. We reserve the right to delete or ban any
 behavior violating this base foundation of respect.
 
 ## Publishing your own pull request
-If you want to publish your own pull request, you might want to ask us before to avoid doing simmilar work.
+If you want to publish your own pull request, you might want to ask us before to avoid doing similar work.
 
 ## CocoaPods
 If you want to add you own pods or update existing, you need to install cocoapods.
