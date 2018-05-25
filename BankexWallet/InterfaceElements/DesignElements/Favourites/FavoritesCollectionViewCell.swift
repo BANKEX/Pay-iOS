@@ -30,8 +30,8 @@ class FavoritesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var shortNameLabel: UILabel!
     
-    func configure(with contact: (String, String)) {
-        let (name, _) = contact
+    func configure(with contact: FavoriteModel) {
+        let name = contact.name
         nameLabel.text = name
         let firstLetter = (name as NSString).substring(to: 1)
         
@@ -54,9 +54,9 @@ class FavoritesListCell: UITableViewCell {
     
     var name, address: String?
     
-    func configure(with contact: (String, String), selectionDelegate: FavoritesHandling) {
-        name = contact.0
-        address = contact.1
+    func configure(with contact: FavoriteModel, selectionDelegate: FavoritesHandling) {
+        name = contact.name
+        address = contact.address
         nameLabel.text = name
         let firstLetter = ((name ?? "") as NSString).substring(to: 1)
         self.selectionDelegate = selectionDelegate

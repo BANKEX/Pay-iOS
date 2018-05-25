@@ -20,7 +20,7 @@ UITableViewDataSource,
 FavoritesHandling {
     
     let favService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
-    var allFavorites:[(String, String)]?
+    var allFavorites:[FavoriteModel]?
     @IBOutlet weak var tableView: UITableView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

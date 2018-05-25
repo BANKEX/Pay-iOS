@@ -11,6 +11,11 @@
         <relationship name="balances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TokenBalance" inverseName="token" inverseEntity="TokenBalance" syncable="YES"/>
         <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SendEthTransaction" inverseName="token" inverseEntity="SendEthTransaction" syncable="YES"/>
     </entity>
+    <entity name="FavoritesAddress" representedClassName="FavoritesAddress" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastUsageDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="KeyWallet" representedClassName="KeyWallet" syncable="YES" codeGenerationType="class">
         <attribute name="address" attributeType="String" syncable="YES"/>
         <attribute name="data" attributeType="Binary" syncable="YES"/>
@@ -21,10 +26,6 @@
         <relationship name="childKeys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="parentKey" inverseEntity="KeyWallet" syncable="YES"/>
         <relationship name="parentKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="childKeys" inverseEntity="KeyWallet" syncable="YES"/>
         <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SendEthTransaction" inverseName="keywallet" inverseEntity="SendEthTransaction" syncable="YES"/>
-    </entity>
-    <entity name="RecepientAddress" representedClassName="RecepientAddress" syncable="YES" codeGenerationType="class">
-        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="SendEthTransaction" representedClassName="SendEthTransaction" syncable="YES" codeGenerationType="class">
         <attribute name="amount" attributeType="String" syncable="YES"/>
@@ -44,8 +45,8 @@
     <elements>
         <element name="ERC20Token" positionX="-63" positionY="9" width="128" height="180"/>
         <element name="KeyWallet" positionX="-54" positionY="54" width="128" height="180"/>
+        <element name="FavoritesAddress" positionX="-18" positionY="135" width="128" height="90"/>
         <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="TokenBalance" positionX="-54" positionY="90" width="128" height="105"/>
-        <element name="RecepientAddress" positionX="-18" positionY="135" width="128" height="75"/>
     </elements>
 </model>

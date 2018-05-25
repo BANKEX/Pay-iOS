@@ -79,7 +79,9 @@ class CreateNewFavoriteController: UIViewController,
             !favoritesService.contains(address: addressTextfield.text ?? "") else {
                 return
         }
-        favoritesService.store(address: address, with: name)
+        favoritesService.store(address: address, with: name) { (error) in
+            print(error?.localizedDescription ?? "")
+        }
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -94,7 +96,9 @@ class CreateNewFavoriteController: UIViewController,
         let alert = UIAlertController(title: "Are you sure?", message: "You're going to remove this favorite contact.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (Target) in
-            self.favoritesService.delete(with: self.addressTextfield.text ?? "")
+            self.favoritesService.delete(with: self.addressTextfield.text ?? "") {
+                
+            }
             self.navigationController?.popViewController(animated: true)
         }
         alert.addAction(cancelAction)

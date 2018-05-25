@@ -24,17 +24,17 @@ class RecipientsAddressesServiceTests: XCTestCase {
     func testStoreAndRetrieveData() {
         //given
         let service = RecipientsAddressesServiceImplementation()
-        service.store(address: "Some Another String", with: "Second Name")
-        service.store(address: "Some String", with: "First Name")
-        service.store(address: "Some afgerg String", with: "Third Name")
+        service.store(address: "Some Another String", with: "Second Name") {_ in }
+        service.store(address: "Some String", with: "First Name") {_ in }
+        service.store(address: "Some afgerg String", with: "Third Name") {_ in }
 
         //when
         let allAddresses = service.getAllStoredAddresses()
         
         //then
         XCTAssertEqual(allAddresses?.count, 3)
-        XCTAssertEqual(allAddresses?.first?.0, "First Name")
-        XCTAssertEqual(allAddresses?.last?.0, "Third Name")
+        XCTAssertEqual(allAddresses?.first?.name, "First Name")
+        XCTAssertEqual(allAddresses?.last?.name, "Third Name")
 
         service.clearAllSavedAddresses()
     }
@@ -42,35 +42,37 @@ class RecipientsAddressesServiceTests: XCTestCase {
     func testDeletAddress() {
         //given
         let service = RecipientsAddressesServiceImplementation()
-        service.store(address: "Some Another String", with: "Second Name")
-        service.store(address: "Some String", with: "First Name")
-        service.store(address: "Some afgerg String", with: "Third Name")
+        service.clearAllSavedAddresses()
+        service.store(address: "Some Another String", with: "Second Name") {_ in }
+        service.store(address: "Some String", with: "First Name") {_ in }
+        service.store(address: "Some afgerg String", with: "Third Name") {_ in }
         
         //when
-        service.delete(with: "First Name")
+        service.delete(with: "Some String") { }
         let allAddresses = service.getAllStoredAddresses()
         
         //then
         XCTAssertEqual(allAddresses?.count, 2)
-        XCTAssertEqual(allAddresses?.first?.0, "Second Name")
-        XCTAssertEqual(allAddresses?.last?.0, "Third Name")
-        
+        XCTAssertEqual(allAddresses?.first?.name, "Second Name")
+        XCTAssertEqual(allAddresses?.last?.name, "Third Name")
         service.clearAllSavedAddresses()
+        
+        
     }
     
     func testUpdateAddress() {
         //given
         let service = RecipientsAddressesServiceImplementation()
-        service.store(address: "Some String", with: "First Name")
-        service.store(address: "Another String", with: "Second Name")
+        service.store(address: "Some String", with: "First Name") {_ in }
+        service.store(address: "Another String", with: "Second Name") {_ in }
         
         //when
-        service.update(address: "Yet Another String", with: "First Name")
+        service.updateAddress(newAddress: "Yet Another String", byName: "First Name")
         let allAddresses = service.getAllStoredAddresses()
         
         //then
-        XCTAssertEqual(allAddresses?.first?.1, "Yet Another String")
-        XCTAssertEqual(allAddresses?.last?.1, "Another String")
+        XCTAssertEqual(allAddresses?.first?.address, "Yet Another String")
+        XCTAssertEqual(allAddresses?.last?.address, "Another String")
         
     }
     
