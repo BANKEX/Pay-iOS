@@ -51,10 +51,6 @@ class CreateNewFavoriteController: UIViewController,
                                                object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollViewHeightConstraint.constant = -76 // 76 is top part
@@ -84,7 +80,7 @@ class CreateNewFavoriteController: UIViewController,
     }
     
     func addContact(with address: String) {
-        addressTextfield.text = address
+        selectedFavoriteAddress = address
     }
     
     @IBAction func deleteContact(_ sender: Any) {
