@@ -80,6 +80,8 @@ FavoriteSelectionDelegate {
 //                      "FavouritesTitleCell",
 //                      "FavouritesListWithCollectionCell"]
     
+    var isWalletNew = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,10 +109,19 @@ FavoriteSelectionDelegate {
         super.viewWillAppear(animated)
         
         itemsArray = ["TopLogoCell",
+                      "WalletIsReadyCell",
                       "CurrentWalletInfoCell",
                       "TransactionHistoryCell",//]
                       "FavouritesTitleCell",
                       "FavouritesListWithCollectionCell"]
+        if !isWalletNew {
+            itemsArray = ["TopLogoCell",
+                          "CurrentWalletInfoCell",
+                          "TransactionHistoryCell",//]
+                "FavouritesTitleCell",
+                "FavouritesListWithCollectionCell"]
+            
+        }
         
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
@@ -170,6 +181,11 @@ FavoriteSelectionDelegate {
         if let cell = cell as? FavouritesListWithCollectionCell {
             cell.selectionDelegate = self
         }
+        
+        if let cell = cell as? WalletIsReadyCell {
+            cell.delegate = self
+            return cell
+        }
         return cell
     }
     
@@ -196,5 +212,17 @@ FavoriteSelectionDelegate {
         selectedFavName = name
         selectedFavAddress = address
         performSegue(withIdentifier: "showSendFunds", sender: self)
+    }
+}
+
+extension MainInfoController: CloseNewWalletNotifDelegate {
+    func didClose() {
+        itemsArray = ["TopLogoCell",
+                      "CurrentWalletInfoCell",
+                      "TransactionHistoryCell",//]
+            "FavouritesTitleCell",
+            "FavouritesListWithCollectionCell"]
+        tableView.reloadData()
+        isWalletNew = false
     }
 }

@@ -1853,8 +1853,78 @@ to find token</string>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletIsReadyCell" rowHeight="255" id="vPH-4m-yLg" customClass="WalletIsReadyCell" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="111" width="375" height="255"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vPH-4m-yLg" id="cdP-Tk-ISz">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="255"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U6t-sS-Ahv">
+                                            <rect key="frame" x="18" y="0.0" width="339" height="225"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VKg-mp-3TJ">
+                                                    <rect key="frame" x="285" y="28" width="28" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="Zks-wp-qDe"/>
+                                                        <constraint firstAttribute="width" constant="28" id="eZO-f9-SHB"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Close"/>
+                                                    <connections>
+                                                        <action selector="close:" destination="vPH-4m-yLg" eventType="touchUpInside" id="0EH-zk-DGO"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wallet_ready" translatesAutoresizingMaskIntoConstraints="NO" id="a3L-k0-1TW">
+                                                    <rect key="frame" x="144" y="42" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="ZNY-c1-J8J"/>
+                                                        <constraint firstAttribute="width" constant="50" id="pet-06-bnZ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your wallet is ready!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HG-jq-r59">
+                                                    <rect key="frame" x="84.5" y="100" width="170" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <color key="textColor" red="0.0" green="0.83137254901960789" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="On this screen you can see your wallet, send, receive function, transaction history and favorites contacts." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4p-T0-HvI">
+                                                    <rect key="frame" x="18" y="131" width="303" height="86"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.71372549019607845" green="0.74509803921568629" blue="0.77647058823529413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="L4p-T0-HvI" secondAttribute="trailing" constant="18" id="838-jK-E4p"/>
+                                                <constraint firstItem="a3L-k0-1TW" firstAttribute="centerX" secondItem="U6t-sS-Ahv" secondAttribute="centerX" id="Dii-eG-Xhx"/>
+                                                <constraint firstItem="VKg-mp-3TJ" firstAttribute="top" secondItem="U6t-sS-Ahv" secondAttribute="top" constant="28" id="Jir-9c-qbd"/>
+                                                <constraint firstItem="a3L-k0-1TW" firstAttribute="top" secondItem="VKg-mp-3TJ" secondAttribute="centerY" id="f5d-hh-ZEV"/>
+                                                <constraint firstItem="L4p-T0-HvI" firstAttribute="top" secondItem="3HG-jq-r59" secondAttribute="bottom" constant="8" id="f5l-4w-mHH"/>
+                                                <constraint firstItem="3HG-jq-r59" firstAttribute="top" secondItem="a3L-k0-1TW" secondAttribute="bottom" constant="8" id="fHa-9K-FxN"/>
+                                                <constraint firstAttribute="trailing" secondItem="VKg-mp-3TJ" secondAttribute="trailing" constant="26" id="fSO-5G-U0c"/>
+                                                <constraint firstAttribute="bottom" secondItem="L4p-T0-HvI" secondAttribute="bottom" constant="8" id="ioA-Vk-BlY"/>
+                                                <constraint firstItem="3HG-jq-r59" firstAttribute="centerX" secondItem="U6t-sS-Ahv" secondAttribute="centerX" id="mBV-LA-jXY"/>
+                                                <constraint firstItem="L4p-T0-HvI" firstAttribute="leading" secondItem="U6t-sS-Ahv" secondAttribute="leading" constant="18" id="rkI-pf-wv1"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="16"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="U6t-sS-Ahv" secondAttribute="bottom" constant="30" id="Mn9-2w-mLa"/>
+                                        <constraint firstItem="U6t-sS-Ahv" firstAttribute="leading" secondItem="cdP-Tk-ISz" secondAttribute="leading" constant="18" id="TYb-Mo-ul4"/>
+                                        <constraint firstAttribute="trailing" secondItem="U6t-sS-Ahv" secondAttribute="trailing" constant="18" id="iiX-fH-IcK"/>
+                                        <constraint firstItem="U6t-sS-Ahv" firstAttribute="top" secondItem="cdP-Tk-ISz" secondAttribute="top" id="jqJ-jk-ObU"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CurrentWalletInfoCell" rowHeight="225" id="AEP-MK-4ji" customClass="CurrentWalletInfoCell" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="111" width="375" height="225"/>
+                                <rect key="frame" x="0.0" y="366" width="375" height="225"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AEP-MK-4ji" id="iC3-ZW-853">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
@@ -2044,7 +2114,7 @@ to find token</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TransactionHistoryCell" rowHeight="72" id="W4I-Md-rHz" customClass="TransactionHistorySectionCell" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="336" width="375" height="72"/>
+                                <rect key="frame" x="0.0" y="591" width="375" height="72"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W4I-Md-rHz" id="qda-6k-cwZ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
@@ -2097,7 +2167,7 @@ to find token</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TopRoundedCell" rowHeight="12" id="OD6-eG-L6b">
-                                <rect key="frame" x="0.0" y="408" width="375" height="12"/>
+                                <rect key="frame" x="0.0" y="663" width="375" height="12"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OD6-eG-L6b" id="bef-U0-Cur">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="12"/>
@@ -2127,7 +2197,7 @@ to find token</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LastTransactionHistoryCell" rowHeight="65" id="oWP-aY-NgM" customClass="TransactionHistoryCell" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="420" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="675" width="375" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oWP-aY-NgM" id="izt-UX-iVR">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -2201,7 +2271,7 @@ to find token</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="BottomRoundedCell" rowHeight="12" id="jo3-oM-PB7">
-                                <rect key="frame" x="0.0" y="485" width="375" height="12"/>
+                                <rect key="frame" x="0.0" y="740" width="375" height="12"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jo3-oM-PB7" id="zCV-9M-A1N">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="12"/>
@@ -2231,7 +2301,7 @@ to find token</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EmptyLastTransactionsCell" rowHeight="152" id="Mb2-pG-t6i" userLabel="EmptyLastTransactionsCell">
-                                <rect key="frame" x="0.0" y="497" width="375" height="152"/>
+                                <rect key="frame" x="0.0" y="752" width="375" height="152"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mb2-pG-t6i" id="JtD-rO-Lse">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="152"/>
@@ -2290,7 +2360,7 @@ to find token</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FavouritesTitleCell" rowHeight="72" id="Q0H-Io-0Z7" customClass="FavouritesTitleCell" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="649" width="375" height="72"/>
+                                <rect key="frame" x="0.0" y="904" width="375" height="72"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q0H-Io-0Z7" id="Yfq-ME-kVf">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
@@ -2343,7 +2413,7 @@ to find token</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FavouritesListWithCollectionCell" rowHeight="141" id="Aut-Qk-Ufn" customClass="FavouritesListWithCollectionCell" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="721" width="375" height="141"/>
+                                <rect key="frame" x="0.0" y="976" width="375" height="141"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Aut-Qk-Ufn" id="r0o-Xq-zyD">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
@@ -2510,7 +2580,7 @@ crypto</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pgo-aG-xko" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1172" y="3868"/>
+            <point key="canvasLocation" x="-1172" y="3867.1664167916047"/>
         </scene>
         <!--Sending In Process View Controller-->
         <scene sceneID="uFU-yy-1EF">
@@ -3371,17 +3441,17 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOE-8F-NVo">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="516"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="473"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xd-qC-sge">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="516"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="473"/>
                                         <connections>
                                             <action selector="emptySpaceTapped:" destination="9N0-3K-f0j" eventType="touchUpInside" id="Mc4-UM-t3j"/>
                                             <action selector="emptySpaceTapped:" destination="aYE-8c-Ufz" eventType="touchUpInside" id="m2Q-PG-Zsu"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x3M-aK-D9K">
-                                        <rect key="frame" x="28" y="0.0" width="319" height="390"/>
+                                        <rect key="frame" x="28" y="0.0" width="319" height="347"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-K3-P9M" userLabel="top empty view">
                                                 <rect key="frame" x="0.0" y="0.0" width="319" height="32"/>
@@ -3520,7 +3590,7 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-8B-5pa">
-                                                <rect key="frame" x="0.0" y="224" width="319" height="93"/>
+                                                <rect key="frame" x="0.0" y="224" width="319" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sal-QD-Ca0">
                                                         <rect key="frame" x="279" y="0.0" width="40" height="40"/>
@@ -3557,14 +3627,14 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0x-Pn-amR" userLabel="sep3">
-                                                <rect key="frame" x="0.0" y="317" width="319" height="1"/>
+                                                <rect key="frame" x="0.0" y="274" width="319" height="1"/>
                                                 <color key="backgroundColor" red="0.75686274509999996" green="0.79215686269999996" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="y1z-5t-brA"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAi-r5-UVz">
-                                                <rect key="frame" x="0.0" y="318" width="319" height="31"/>
+                                                <rect key="frame" x="0.0" y="275" width="319" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwords don't match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7js-k0-dqB">
                                                         <rect key="frame" x="0.0" y="4" width="131.5" height="14.5"/>
@@ -3581,7 +3651,7 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wd7-27-dFs">
-                                                <rect key="frame" x="0.0" y="349" width="319" height="40"/>
+                                                <rect key="frame" x="0.0" y="306" width="319" height="40"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Tl-O1-yhG">
                                                         <rect key="frame" x="0.0" y="0.0" width="129" height="40"/>
@@ -3603,7 +3673,7 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0cD-6l-YnN" userLabel="sep4">
-                                                <rect key="frame" x="0.0" y="389" width="319" height="1"/>
+                                                <rect key="frame" x="0.0" y="346" width="319" height="1"/>
                                                 <color key="backgroundColor" red="0.75686274509999996" green="0.79215686269999996" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Quv-qq-cot"/>
@@ -3613,7 +3683,7 @@ minutes, please wait ...</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </stackView>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNr-ML-6r6">
-                                        <rect key="frame" x="28" y="420" width="319" height="56"/>
+                                        <rect key="frame" x="28" y="377" width="319" height="56"/>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.97647058819999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="Q6j-fQ-ce2"/>
@@ -5660,6 +5730,7 @@ minutes, please wait ...</string>
         <image name="Arrow back" width="20" height="14"/>
         <image name="Arrow down" width="14" height="9"/>
         <image name="Bankex_wallet_logo" width="245" height="30"/>
+        <image name="Close" width="32" height="32"/>
         <image name="Copy" width="64" height="64"/>
         <image name="Create_wallet" width="62" height="74"/>
         <image name="Done" width="64" height="64"/>
@@ -5686,6 +5757,7 @@ minutes, please wait ...</string>
         <image name="Success" width="320" height="270"/>
         <image name="Tokens" width="19" height="18"/>
         <image name="Transaction history  are empty" width="48" height="48"/>
+        <image name="Wallet_ready" width="48" height="48"/>
         <image name="Warning- Error" width="278" height="261"/>
         <image name="attention" width="16" height="16"/>
         <image name="check" width="16" height="12"/>
@@ -5695,9 +5767,9 @@ minutes, please wait ...</string>
         <image name="qr code" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3SJ-h0-gVt"/>
-        <segue reference="JaH-wa-aDn"/>
-        <segue reference="mKc-JC-UU5"/>
+        <segue reference="vrZ-w3-HnB"/>
+        <segue reference="XCh-X3-sC4"/>
+        <segue reference="zcW-e5-SSf"/>
         <segue reference="Z9p-MY-jvY"/>
         <segue reference="bDG-Xv-WCD"/>
         <segue reference="I0X-hu-WYJ"/>
