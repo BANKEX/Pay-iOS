@@ -105,7 +105,7 @@ extension GlobalWalletsService {
                 newSelected?.isSelected = true
                 save()
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: DataChangeNotifications.didChangeNetwork.notificationName(), object: self, userInfo: ["wallet": address])
+                    NotificationCenter.default.post(name: DataChangeNotifications.didChangeWallet.notificationName(), object: self, userInfo: ["wallet": address])
 
                 }
             }

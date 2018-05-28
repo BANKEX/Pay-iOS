@@ -19,6 +19,9 @@ UITableViewDataSource, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         keysList = (keysService.fullHDKeysList() ?? [HDKey]()) + (keysService.fullListOfSingleEthereumAddresses() ?? [HDKey]())
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
+            self.tableView.reloadData()
+        }
     }
 
     @IBAction func unwind(segue:UIStoryboardSegue) { }
