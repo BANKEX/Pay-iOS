@@ -60,10 +60,12 @@ Retriable {
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
     var utilsService: UtilTransactionsService!
+    var favService: RecipientsAddressesService? = RecipientsAddressesServiceImplementation()
 
     // MARK: Inputs
     var selectedFavoriteName: String?
     var selectedFavoriteAddress: String?
+    var favorites: [FavoriteModel]?
     
     // MARK: Lifecycle
     @IBAction func back(segue:UIStoryboardSegue) { }
@@ -72,7 +74,10 @@ Retriable {
         super.viewDidLoad()
         nextButton.isEnabled = false
 
-        favNameContainer.removeFromSuperview()
+        //favNameContainer.removeFromSuperview()
+        selectedFavNameLabel.text = selectedFavoriteName
+        enterAddressTextfield.text = selectedFavoriteAddress
+        enterAddressTextfield.delegate = self
         dataTopEmptyView.removeFromSuperview()
         additionalDataView.removeFromSuperview()
         additionalDataSeparator.removeFromSuperview()
@@ -97,6 +102,8 @@ Retriable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
+        favorites = favService?.getAllStoredAddresses()
+        
     }
     
     func updateTopLayout() {
@@ -127,6 +134,10 @@ Retriable {
     
     var sendingProcess: SendingResultInformation?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let favVC = segue.destination as? FavoritesHelperViewController {
+            favVC.allFavorites = self.favorites
+            favVC.delegate = self
+        }
         guard segue.identifier == "showSending",
             let confirmation = segue.destination as? SendingResultInformation else {
                 return
@@ -203,6 +214,8 @@ Retriable {
     
     @IBAction func addFromFavouritesTapped(_ sender: Any) {
         // TODO: Open favs list
+        
+        
     }
     
     @IBAction func insertFromClipboardTapped(_ sender: Any) {
@@ -210,6 +223,7 @@ Retriable {
     }
     
     @IBAction func deleteSelectedFavTapped(_ sender: Any) {
+        
     }
 
     @IBAction func emptySpaceTapped(_ sender: Any) {
@@ -229,6 +243,7 @@ Retriable {
         let currentText = (textField.text ?? "")  as NSString
         let futureString = currentText.replacingCharacters(in: range, with: string) as String
         nextButton.isEnabled = false
+        let favorites = self.favorites ?? []
 
         switch textField {
         case enterAddressTextfield:
@@ -237,6 +252,19 @@ Retriable {
                 !futureString.isEmpty {
                 nextButton.isEnabled = (Float((amountTextfield.text ?? "")) != nil)
             }
+            
+            var i = 0
+            while i < favorites.count, !favorites[i].address.hasPrefix(futureString) {
+                i += 1
+            }
+            if i != favorites.count {
+                favNameContainer.isHidden = false
+                selectedFavNameLabel.text = favorites[i].name
+            } else {
+                selectedFavNameLabel.text = ""
+                favNameContainer.isHidden = true
+            }
+            
         case passwordTextfield:
             if !(amountTextfield.text?.isEmpty ?? true) &&
                 !(enterAddressTextfield.text?.isEmpty ?? true) &&
@@ -277,7 +305,6 @@ Retriable {
         let index = textFields.index(of: textField) ?? 0
         separators[index].backgroundColor = WalletColors.greySeparator.color()
         textField.textColor = WalletColors.defaultText.color()
-        
         
         if textField == amountTextfield {
             guard let _ = Float((amountTextfield.text ?? "")) else {
@@ -425,5 +452,14 @@ Retriable {
     // MARK: Retriable
     func retryExisitngTransaction() {
         nextButtonTapped(self)
+    }
+}
+
+
+extension SendTokenViewController: CellSelectedProtocol {
+    func didSelectCell(model: FavoriteModel) {
+        self.selectedFavNameLabel.text = model.name
+        self.enterAddressTextfield.text = model.address
+        self.selectedFavNameLabel.isHidden = false
     }
 }
