@@ -108,20 +108,16 @@ FavoriteSelectionDelegate {
     var transactionInitialDiff = 0
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         itemsArray = ["TopLogoCell",
-                      "WalletIsReadyCell",
                       "CurrentWalletInfoCell",
                       "TransactionHistoryCell",//]
-                      "FavouritesTitleCell",
-                      "FavouritesListWithCollectionCell"]
+            "FavouritesTitleCell",
+            "FavouritesListWithCollectionCell"]
         
-        if let name = keyService.selectedWallet()?.name, let isWalletNew = UserDefaults.standard.value(forKey: "isWallet\(name)New") as? Bool, !isWalletNew {
-            itemsArray = ["TopLogoCell",
-                          "CurrentWalletInfoCell",
-                          "TransactionHistoryCell",//]
-                "FavouritesTitleCell",
-                "FavouritesListWithCollectionCell"]
+        if let isWalletNew = UserDefaults.standard.value(forKey: "isWalletNew") as? Bool, isWalletNew  {
+            itemsArray.insert("WalletIsReadyCell", at: 1)
+        } else if UserDefaults.standard.value(forKey: "isWalletNew") == nil {
+            itemsArray.insert("WalletIsReadyCell", at: 1)
         }
         
         putTransactionsInfoIntoItemsArray()
@@ -235,7 +231,6 @@ extension MainInfoController: CloseNewWalletNotifDelegate {
         putTransactionsInfoIntoItemsArray()
         tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
         
-        guard let name = keyService.selectedWallet()?.name else { return }
-        UserDefaults.standard.set(false, forKey: "isWallet\(name)New")
+        UserDefaults.standard.set(false, forKey: "isWalletNew")
     }
 }
