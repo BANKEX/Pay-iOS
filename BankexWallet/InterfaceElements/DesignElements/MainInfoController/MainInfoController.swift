@@ -80,7 +80,8 @@ FavoriteSelectionDelegate {
 //                      "FavouritesTitleCell",
 //                      "FavouritesListWithCollectionCell"]
     
-    var isWalletNew = false
+    let keyService = SingleKeyServiceImplementation()
+    
     
     
     override func viewDidLoad() {
@@ -114,15 +115,38 @@ FavoriteSelectionDelegate {
                       "TransactionHistoryCell",//]
                       "FavouritesTitleCell",
                       "FavouritesListWithCollectionCell"]
-        if !isWalletNew {
+        
+        if let name = keyService.selectedWallet()?.name, let isWalletNew = UserDefaults.standard.value(forKey: "isWallet\(name)New") as? Bool, !isWalletNew {
             itemsArray = ["TopLogoCell",
                           "CurrentWalletInfoCell",
                           "TransactionHistoryCell",//]
                 "FavouritesTitleCell",
                 "FavouritesListWithCollectionCell"]
-            
         }
         
+        putTransactionsInfoIntoItemsArray()
+        tableView.reloadData()
+    }
+    
+    
+    @IBAction func unwind(segue:UIStoryboardSegue) { }
+    
+    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? AddressQRCodeController {
+            let keyService: GlobalWalletsService = SingleKeyServiceImplementation()
+            controller.addressToGenerateQR = keyService.selectedAddress()
+        } else if let controller = segue.destination as? SendTokenViewController {
+            controller.selectedFavoriteAddress = selectedFavAddress
+            controller.selectedFavoriteName = selectedFavName
+            selectedFavAddress = nil
+            selectedFavName = nil
+        }
+    }
+    
+    //MARK: - Helpers
+    func putTransactionsInfoIntoItemsArray() {
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
@@ -135,7 +159,7 @@ FavoriteSelectionDelegate {
             arrayOfTransactions = ["EmptyLastTransactionsCell"]
         case 1:
             arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell","BottomRoundedCell"]
-
+            
         default:
             arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "BottomRoundedCell"]
         }
@@ -143,21 +167,6 @@ FavoriteSelectionDelegate {
         let index = itemsArray.index{$0 == "TransactionHistoryCell"} ?? 0
         transactionInitialDiff = index + 2
         itemsArray.insert(contentsOf: arrayOfTransactions, at: index + 1)
-        tableView.reloadData()
-    }
-    
-    @IBAction func unwind(segue:UIStoryboardSegue) { }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? AddressQRCodeController {
-            let keyService: GlobalWalletsService = SingleKeyServiceImplementation()
-            controller.addressToGenerateQR = keyService.selectedAddress()
-        } else if let controller = segue.destination as? SendTokenViewController {
-            controller.selectedFavoriteAddress = selectedFavAddress
-            controller.selectedFavoriteName = selectedFavName
-            selectedFavAddress = nil
-            selectedFavName = nil
-        }
     }
 
     // MARK: - Table view data source
@@ -222,7 +231,11 @@ extension MainInfoController: CloseNewWalletNotifDelegate {
                       "TransactionHistoryCell",//]
             "FavouritesTitleCell",
             "FavouritesListWithCollectionCell"]
-        tableView.reloadData()
-        isWalletNew = false
+        
+        putTransactionsInfoIntoItemsArray()
+        tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
+        
+        guard let name = keyService.selectedWallet()?.name else { return }
+        UserDefaults.standard.set(false, forKey: "isWallet\(name)New")
     }
 }
