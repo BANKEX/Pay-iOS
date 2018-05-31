@@ -68,9 +68,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
                                       gasLimit: UInt,
                                       completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            
-            let destinationEthAddress = EthereumAddress(destinationAddressString)
-            if !destinationEthAddress.isValid {
+            guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.invalidDestinationAddress))
                 }
@@ -91,9 +89,11 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
             var options = Web3Options.defaultOptions()
 //            options.gasLimit = BigUInt(55000)
 //            options.gasPrice = BigUInt(250000000)
-            
             options.from = EthereumAddress(self.keysService.selectedAddress()!)
-            guard let intermediate = web3.eth.sendERC20tokensWithNaturalUnits(tokenAddress: EthereumAddress(token), from: EthereumAddress(self.keysService.selectedAddress()!),
+            guard let tokenAddress = EthereumAddress(token),
+                let fromAddress = EthereumAddress(self.keysService.selectedAddress()!),
+                let intermediate = web3.eth.sendERC20tokensWithNaturalUnits(tokenAddress: tokenAddress,
+                                                                              from: fromAddress,
                                                                               to: destinationEthAddress,
                                                                               amount: amountString)
                 
@@ -168,9 +168,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
     private func contract(for address: String) -> web3.web3contract? {
         let web3 = WalletWeb3Factory.web3()
         web3.addKeystoreManager(self.keysService.keystoreManager())
-        
-        let ethAddress = EthereumAddress(address)
-        guard ethAddress.isValid else {
+        guard let ethAddress = EthereumAddress(address) else {
             return nil
         }
         return web3.contract(Web3.Utils.erc20ABI, at: ethAddress)

@@ -81,9 +81,7 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
                     completion: @escaping (SendEthResult<BigUInt>) -> Void) {
         completion(SendEthResult.Success(self.localGetBalance(for: token, address: address)))
         DispatchQueue.global(qos: .userInitiated).async {
-            
-            let ethAddress = EthereumAddress(address)
-            guard ethAddress.isValid else {
+            guard let ethAddress = EthereumAddress(address) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(UtilTransactionsErrors.invalidAddress))
                 }
@@ -114,9 +112,7 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
     private func contract(for address: String) -> web3.web3contract? {
         let web3 = WalletWeb3Factory.web3()
         web3.addKeystoreManager(self.keysService.keystoreManager())
-        
-        let ethAddress = EthereumAddress(address)
-        guard ethAddress.isValid else {
+        guard let ethAddress = EthereumAddress(address) else {
             return nil
         }
         return web3.contract(Web3.Utils.erc20ABI, at: ethAddress)

@@ -51,8 +51,8 @@ class UtilTransactionsServiceImplementation: UtilTransactionsService {
         completion(SendEthResult.Success(self.localGetBalance(for: token, address: address)))
         DispatchQueue.global().async {
             let web3 = WalletWeb3Factory.web3()
-            let ethAddress = EthereumAddress(address)
-            guard ethAddress.isValid else {
+            
+            guard let ethAddress = EthereumAddress(address) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(UtilTransactionsErrors.invalidAddress))
                 }
