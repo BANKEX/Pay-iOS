@@ -73,7 +73,7 @@ Retriable {
         nextButton.isEnabled = false
 
         favNameContainer.removeFromSuperview()
-        dataTopEmptyView.removeFromSuperview()
+        //dataTopEmptyView.removeFromSuperview()
         additionalDataView.removeFromSuperview()
         additionalDataSeparator.removeFromSuperview()
         nextButton.backgroundColor = WalletColors.disableButtonBackground.color()
@@ -161,6 +161,19 @@ Retriable {
             self.dimmingView.isHidden = true
             self.containerView.isHidden = true
         }
+    }
+    
+    @IBAction func getFreeETHButtonTapped(_ sender: Any) {
+        let alertController = UIAlertController(title: "Free Eth", message: "You will be reditected to the https://faucet.rinkeby.io, where you will receive a further instructions", preferredStyle: UIAlertControllerStyle.alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let ok = UIAlertAction(title: "Continue", style: .default) { _ in
+            guard let url = URL(string: "https://faucet.rinkeby.io") else { return }
+            UIApplication.shared.openURL(url)
+        }
+        
+        alertController.addAction(cancel)
+        alertController.addAction(ok)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
