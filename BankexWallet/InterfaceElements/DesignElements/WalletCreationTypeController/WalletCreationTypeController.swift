@@ -11,11 +11,15 @@ import UIKit
 class WalletCreationTypeController: UIViewController {
 
     @IBOutlet weak var backButton: UIButton!
+    var isBackButtonHidden: Bool?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if (navigationController?.viewControllers.count ?? 0) > 1 {
             backButton.isHidden = false
+        }
+        if let isHidded = isBackButtonHidden {
+            backButton.isHidden = isHidded
         }
     }
     // MARK: - Navigation
