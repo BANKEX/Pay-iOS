@@ -12,10 +12,14 @@ import UIKit
 class CircleView: UIView {
 
     
-    @IBInspectable var filled: Bool = true
+    @IBInspectable var filled: Bool = true {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
     @IBInspectable var strokeWidth: CGFloat = 2.7
-    @IBInspectable var strokeColor: UIColor = #colorLiteral(red: 0.7568627451, green: 0.7921568627, blue: 0.8235294118, alpha: 1)
-    @IBInspectable var fillColor: UIColor = #colorLiteral(red: 0.6117647059, green: 0.6509803922, blue: 0.6862745098, alpha: 1)
+    @IBInspectable var strokeColor: UIColor = WalletColors.greySeparator.color()
+    @IBInspectable var fillColor: UIColor = WalletColors.defaultGreyText.color()
     
     override func draw(_ rect: CGRect) {
         let bezierPath = UIBezierPath(circleIn: rect)

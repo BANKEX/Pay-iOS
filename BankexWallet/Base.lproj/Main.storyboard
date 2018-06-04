@@ -14,10 +14,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Standart View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="gAS-z9-dn5">
             <objects>
-                <viewController id="Ha3-I4-Z72" customClass="ERC20StandartViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Ha3-I4-Z72" customClass="OnboardingViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VJS-hm-Pzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,18 +31,18 @@
                                             <color key="titleColor" red="0.61176470588235299" green="0.65098039215686276" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="M7A-D7-jHu" kind="show" identifier="skipSegue" id="e8R-AA-GU9"/>
+                                            <action selector="skipButtonTapped:" destination="Ha3-I4-Z72" eventType="touchUpInside" id="r3I-SB-9zP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B99-bH-oND">
                                         <rect key="frame" x="303" y="41" width="32" height="30"/>
                                         <state key="normal" title="Next"/>
                                         <connections>
-                                            <segue destination="TzY-Lk-RVc" kind="show" id="ped-q2-nyB"/>
+                                            <action selector="nextButtonTapped:" destination="Ha3-I4-Z72" eventType="touchUpInside" id="jDp-TP-RMW"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MH3-LW-2Ir">
-                                        <rect key="frame" x="167.5" y="51" width="40" height="10"/>
+                                        <rect key="frame" x="167.5" y="50.5" width="40" height="10"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vjg-r4-CxS" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
@@ -71,13 +71,36 @@
                                             </view>
                                         </subviews>
                                     </stackView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tp5-cW-W6N">
+                                        <rect key="frame" x="40" y="43.5" width="295" height="44.5"/>
+                                        <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="4ts-D8-uuG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <state key="normal" title="Get started">
+                                            <color key="titleColor" red="0.88235294119999996" green="0.95686274510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="getStartedButtonTapped:" destination="Ha3-I4-Z72" eventType="touchUpInside" id="FuQ-Yx-PrD"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.97647058823529409" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Tp5-cW-W6N" firstAttribute="leading" secondItem="aaX-Zk-3x9" secondAttribute="leading" constant="40" id="15v-gM-LIv"/>
                                     <constraint firstItem="MH3-LW-2Ir" firstAttribute="centerX" secondItem="aaX-Zk-3x9" secondAttribute="centerX" id="8iO-x4-74u"/>
+                                    <constraint firstItem="MH3-LW-2Ir" firstAttribute="centerY" secondItem="aaX-Zk-3x9" secondAttribute="centerY" id="96r-bn-Rwe"/>
                                     <constraint firstItem="Vyz-6z-tPH" firstAttribute="centerY" secondItem="aaX-Zk-3x9" secondAttribute="centerY" id="BW8-j0-kTh"/>
                                     <constraint firstAttribute="trailing" secondItem="B99-bH-oND" secondAttribute="trailing" constant="40" id="J9S-j2-MJ6"/>
-                                    <constraint firstItem="MH3-LW-2Ir" firstAttribute="centerY" secondItem="Vyz-6z-tPH" secondAttribute="centerY" id="Sxz-m9-Pzp"/>
+                                    <constraint firstItem="Tp5-cW-W6N" firstAttribute="centerX" secondItem="aaX-Zk-3x9" secondAttribute="centerX" id="JlY-Pc-PZm"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tp5-cW-W6N" secondAttribute="trailing" constant="40" id="a3D-bj-cRs"/>
+                                    <constraint firstItem="Tp5-cW-W6N" firstAttribute="centerY" secondItem="aaX-Zk-3x9" secondAttribute="centerY" constant="10" id="ffU-3c-rDg"/>
                                     <constraint firstItem="B99-bH-oND" firstAttribute="centerY" secondItem="aaX-Zk-3x9" secondAttribute="centerY" id="hh1-nf-AOL"/>
                                     <constraint firstItem="Vyz-6z-tPH" firstAttribute="leading" secondItem="aaX-Zk-3x9" secondAttribute="leading" constant="40" id="nbV-Mw-9sd"/>
                                 </constraints>
@@ -110,9 +133,11 @@
                                         <constraints>
                                             <constraint firstItem="LtU-rL-On4" firstAttribute="top" secondItem="RtC-79-6Hc" secondAttribute="bottom" constant="8" id="9AR-C2-M78"/>
                                             <constraint firstAttribute="trailing" secondItem="RtC-79-6Hc" secondAttribute="trailing" id="D30-2N-q8J"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NZE-Fn-fhh" secondAttribute="trailing" constant="6" id="K1T-IC-Wly"/>
                                             <constraint firstAttribute="bottom" secondItem="NZE-Fn-fhh" secondAttribute="bottom" id="Kvj-XG-Ywh"/>
                                             <constraint firstItem="NZE-Fn-fhh" firstAttribute="top" secondItem="LtU-rL-On4" secondAttribute="bottom" constant="8" id="O0B-2c-Pwt"/>
                                             <constraint firstItem="LtU-rL-On4" firstAttribute="centerX" secondItem="JwP-1a-Lm7" secondAttribute="centerX" id="Zkh-jg-7uW"/>
+                                            <constraint firstItem="NZE-Fn-fhh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JwP-1a-Lm7" secondAttribute="leading" constant="6" id="ad2-ez-b4Y"/>
                                             <constraint firstItem="RtC-79-6Hc" firstAttribute="leading" secondItem="JwP-1a-Lm7" secondAttribute="leading" id="jkA-Qb-meG"/>
                                             <constraint firstItem="NZE-Fn-fhh" firstAttribute="centerX" secondItem="JwP-1a-Lm7" secondAttribute="centerX" id="nKz-xr-OtD"/>
                                             <constraint firstItem="RtC-79-6Hc" firstAttribute="top" secondItem="JwP-1a-Lm7" secondAttribute="top" constant="8" id="yKT-tb-dcw"/>
@@ -143,279 +168,24 @@
                         <viewLayoutGuide key="safeArea" id="I1F-Wu-snn"/>
                     </view>
                     <navigationItem key="navigationItem" id="Yb0-Wm-ke2"/>
+                    <connections>
+                        <outlet property="circlesContainerCenterConstraint" destination="96r-bn-Rwe" id="Ydu-b9-EDC"/>
+                        <outlet property="circlesStack" destination="MH3-LW-2Ir" id="fng-Z6-aRb"/>
+                        <outlet property="descriptionLabel" destination="NZE-Fn-fhh" id="ndd-xA-R4S"/>
+                        <outlet property="getStartedButton" destination="Tp5-cW-W6N" id="L2Z-9E-XEu"/>
+                        <outlet property="imageView" destination="RtC-79-6Hc" id="IDX-9r-6oM"/>
+                        <outlet property="nameLabel" destination="LtU-rL-On4" id="oxJ-dj-YlS"/>
+                        <outlet property="nextButton" destination="B99-bH-oND" id="vhp-cD-nPu"/>
+                        <outlet property="skipButton" destination="Vyz-6z-tPH" id="Ah9-E5-sXZ"/>
+                        <outletCollection property="circles" destination="Vjg-r4-CxS" collectionClass="NSMutableArray" id="Luj-QF-kVf"/>
+                        <outletCollection property="circles" destination="zAL-gb-BSf" collectionClass="NSMutableArray" id="9b1-Oa-OJg"/>
+                        <outletCollection property="circles" destination="zbq-eD-Fzy" collectionClass="NSMutableArray" id="sxJ-Is-GQL"/>
+                        <segue destination="M7A-D7-jHu" kind="show" identifier="showWalletCreationScreen" id="5QZ-KN-yBo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yIA-rG-Hgq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4270" y="2259"/>
-        </scene>
-        <!--Custom Network View Controller-->
-        <scene sceneID="EL2-VO-CwR">
-            <objects>
-                <viewController id="TzY-Lk-RVc" customClass="CustomNetworkViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aXN-ph-f4z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBL-lV-rKJ">
-                                <rect key="frame" x="0.0" y="556" width="375" height="111"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-ci-VCE">
-                                        <rect key="frame" x="40" y="40.5" width="33" height="30"/>
-                                        <state key="normal" title="SKIP">
-                                            <color key="titleColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="M7A-D7-jHu" kind="show" identifier="skipSegue" id="q1f-kO-bYh"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ro-Ij-ieJ">
-                                        <rect key="frame" x="303" y="40.5" width="32" height="30"/>
-                                        <state key="normal" title="Next"/>
-                                        <connections>
-                                            <segue destination="Qhh-Gy-emD" kind="show" id="f0A-h0-nO7"/>
-                                        </connections>
-                                    </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6uz-5z-Wg1">
-                                        <rect key="frame" x="167.5" y="50" width="40" height="10"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqg-LG-YsI" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="10" id="Fqd-kG-Mwq"/>
-                                                    <constraint firstAttribute="height" constant="10" id="gp6-wE-wl6"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="NO"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzW-je-uc6" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
-                                                <rect key="frame" x="15" y="0.0" width="10" height="10"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bg3-bn-CO9" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="0.0" width="10" height="10"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="NO"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96862745100000003" green="0.97647058819999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="F1g-ci-VCE" firstAttribute="leading" secondItem="UBL-lV-rKJ" secondAttribute="leading" constant="40" id="3E4-tW-Tuz"/>
-                                    <constraint firstItem="0ro-Ij-ieJ" firstAttribute="centerY" secondItem="UBL-lV-rKJ" secondAttribute="centerY" id="HH7-mJ-EmW"/>
-                                    <constraint firstItem="6uz-5z-Wg1" firstAttribute="centerX" secondItem="UBL-lV-rKJ" secondAttribute="centerX" id="I6j-xM-9qX"/>
-                                    <constraint firstAttribute="trailing" secondItem="0ro-Ij-ieJ" secondAttribute="trailing" constant="40" id="Ko9-17-h2p"/>
-                                    <constraint firstItem="6uz-5z-Wg1" firstAttribute="centerY" secondItem="F1g-ci-VCE" secondAttribute="centerY" id="NbN-Pg-XYV"/>
-                                    <constraint firstItem="F1g-ci-VCE" firstAttribute="centerY" secondItem="UBL-lV-rKJ" secondAttribute="centerY" id="mn5-r9-2Jz"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85U-3W-jA5">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="556"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daj-1i-eyq">
-                                        <rect key="frame" x="6" y="107" width="364" height="342"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Custom network" translatesAutoresizingMaskIntoConstraints="NO" id="Fkn-1H-Vln">
-                                                <rect key="frame" x="0.0" y="8" width="364" height="258"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Custom network" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSM-xJ-P8S">
-                                                <rect key="frame" x="115.5" y="274" width="133" height="21.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <color key="textColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add your network and work with tokens right inside wallet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z20-Q8-zGT">
-                                                <rect key="frame" x="20.5" y="303.5" width="323.5" height="38.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="z20-Q8-zGT" firstAttribute="top" secondItem="TSM-xJ-P8S" secondAttribute="bottom" constant="8" id="2JI-en-aOS"/>
-                                            <constraint firstAttribute="bottom" secondItem="z20-Q8-zGT" secondAttribute="bottom" id="3wT-Qv-FN4"/>
-                                            <constraint firstItem="z20-Q8-zGT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="daj-1i-eyq" secondAttribute="leading" constant="20" id="7cV-Ym-dIx"/>
-                                            <constraint firstItem="Fkn-1H-Vln" firstAttribute="top" secondItem="daj-1i-eyq" secondAttribute="top" constant="8" id="9Tf-dV-DLh"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z20-Q8-zGT" secondAttribute="trailing" constant="20" id="Hdt-Yu-7rK"/>
-                                            <constraint firstAttribute="trailing" secondItem="Fkn-1H-Vln" secondAttribute="trailing" id="LYC-wT-Gc7"/>
-                                            <constraint firstItem="TSM-xJ-P8S" firstAttribute="centerX" secondItem="daj-1i-eyq" secondAttribute="centerX" id="chU-uO-MZC"/>
-                                            <constraint firstItem="Fkn-1H-Vln" firstAttribute="leading" secondItem="daj-1i-eyq" secondAttribute="leading" id="lyZ-Hz-non"/>
-                                            <constraint firstItem="z20-Q8-zGT" firstAttribute="centerX" secondItem="daj-1i-eyq" secondAttribute="centerX" id="sMd-89-4OC"/>
-                                            <constraint firstItem="TSM-xJ-P8S" firstAttribute="top" secondItem="Fkn-1H-Vln" secondAttribute="bottom" constant="8" id="x8i-wk-lbJ"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="daj-1i-eyq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="85U-3W-jA5" secondAttribute="topMargin" id="Iza-ZU-Sc9"/>
-                                    <constraint firstItem="daj-1i-eyq" firstAttribute="centerY" secondItem="85U-3W-jA5" secondAttribute="centerY" id="nfy-HB-nb4"/>
-                                    <constraint firstItem="daj-1i-eyq" firstAttribute="centerX" secondItem="85U-3W-jA5" secondAttribute="centerX" id="sQa-1G-nQZ"/>
-                                    <constraint firstItem="daj-1i-eyq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="85U-3W-jA5" secondAttribute="leading" constant="6" id="wWZ-GW-rPi"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="daj-1i-eyq" secondAttribute="trailing" constant="6" id="ydn-zP-me7"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="UBL-lV-rKJ" firstAttribute="trailing" secondItem="8HI-5l-5bu" secondAttribute="trailing" id="1Vi-ZE-EDl"/>
-                            <constraint firstItem="UBL-lV-rKJ" firstAttribute="top" secondItem="85U-3W-jA5" secondAttribute="bottom" id="1od-U0-mAX"/>
-                            <constraint firstItem="85U-3W-jA5" firstAttribute="leading" secondItem="8HI-5l-5bu" secondAttribute="leading" id="5LR-Y7-ydb"/>
-                            <constraint firstItem="UBL-lV-rKJ" firstAttribute="top" secondItem="85U-3W-jA5" secondAttribute="bottom" id="8PQ-ko-Bxd"/>
-                            <constraint firstItem="UBL-lV-rKJ" firstAttribute="leading" secondItem="8HI-5l-5bu" secondAttribute="leading" id="Lzv-UQ-sbC"/>
-                            <constraint firstItem="85U-3W-jA5" firstAttribute="top" secondItem="aXN-ph-f4z" secondAttribute="top" id="Pjx-46-SFv"/>
-                            <constraint firstItem="85U-3W-jA5" firstAttribute="trailing" secondItem="8HI-5l-5bu" secondAttribute="trailing" id="Sca-eu-yP7"/>
-                            <constraint firstItem="UBL-lV-rKJ" firstAttribute="bottom" secondItem="aXN-ph-f4z" secondAttribute="bottom" id="lHD-KI-aq0"/>
-                            <constraint firstItem="UBL-lV-rKJ" firstAttribute="top" secondItem="85U-3W-jA5" secondAttribute="bottom" id="pTM-sk-CV4"/>
-                            <constraint firstItem="UBL-lV-rKJ" firstAttribute="height" secondItem="85U-3W-jA5" secondAttribute="height" multiplier="1:5" id="zdl-4l-eTR"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="8HI-5l-5bu"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OGy-yT-suw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3244" y="2259"/>
-        </scene>
-        <!--Get Started View Controller-->
-        <scene sceneID="8hP-Om-fhJ">
-            <objects>
-                <viewController id="Qhh-Gy-emD" customClass="GetStartedViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ntw-2D-gAR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rx7-mE-93D">
-                                <rect key="frame" x="0.0" y="556" width="375" height="111"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkn-6A-F0W" customClass="RoundedButton" customModule="BankexWallet" customModuleProvider="target">
-                                        <rect key="frame" x="40" y="43" width="295" height="44.5"/>
-                                        <color key="backgroundColor" red="0.13725490196078433" green="0.50980392156862742" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                        <state key="normal" title="Get started">
-                                            <color key="titleColor" red="0.88235294117647056" green="0.95686274509803915" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="M7A-D7-jHu" kind="show" id="W9Q-ep-TKC"/>
-                                        </connections>
-                                    </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RbM-R0-ihr">
-                                        <rect key="frame" x="167" y="21" width="40" height="10"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCd-E7-jVb" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="10" id="9yc-sd-mUR"/>
-                                                    <constraint firstAttribute="width" constant="10" id="DK6-qU-xo1"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="NO"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Osl-Tg-KL6" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
-                                                <rect key="frame" x="15" y="0.0" width="10" height="10"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="NO"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pza-bv-F9O" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="0.0" width="10" height="10"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96862745100000003" green="0.97647058819999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="lkn-6A-F0W" firstAttribute="top" secondItem="RbM-R0-ihr" secondAttribute="bottom" constant="12" id="0qW-1I-7kC"/>
-                                    <constraint firstItem="lkn-6A-F0W" firstAttribute="leading" secondItem="Rx7-mE-93D" secondAttribute="leading" constant="40" id="RDX-Rn-0S3"/>
-                                    <constraint firstItem="lkn-6A-F0W" firstAttribute="centerY" secondItem="Rx7-mE-93D" secondAttribute="centerY" constant="10" id="TKN-U6-hGP"/>
-                                    <constraint firstItem="lkn-6A-F0W" firstAttribute="height" secondItem="Rx7-mE-93D" secondAttribute="height" multiplier="1/2.5" id="cW0-mW-hGh"/>
-                                    <constraint firstAttribute="trailing" secondItem="lkn-6A-F0W" secondAttribute="trailing" constant="40" id="qPx-BG-G0K"/>
-                                    <constraint firstItem="RbM-R0-ihr" firstAttribute="centerX" secondItem="Rx7-mE-93D" secondAttribute="centerX" id="rHi-1G-vYt"/>
-                                    <constraint firstItem="lkn-6A-F0W" firstAttribute="centerX" secondItem="Rx7-mE-93D" secondAttribute="centerX" id="rOX-qy-DtE"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dng-5e-4jN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="556"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dbg-gE-eHq">
-                                        <rect key="frame" x="37" y="117.5" width="302" height="322"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Favorites" translatesAutoresizingMaskIntoConstraints="NO" id="XBm-62-kZ4">
-                                                <rect key="frame" x="0.0" y="8.5" width="302" height="238"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Favorites" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVy-EK-eIg">
-                                                <rect key="frame" x="114.5" y="254.5" width="73" height="21.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <color key="textColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBb-hE-CZ0">
-                                                <rect key="frame" x="19.5" y="284" width="264" height="38.5"/>
-                                                <string key="text">Add your contacts in the Favorite list
- for quick access to them.</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="aBb-hE-CZ0" firstAttribute="top" secondItem="HVy-EK-eIg" secondAttribute="bottom" constant="8" id="723-v4-Mqo"/>
-                                            <constraint firstItem="XBm-62-kZ4" firstAttribute="leading" secondItem="Dbg-gE-eHq" secondAttribute="leading" id="HoS-z0-T6z"/>
-                                            <constraint firstItem="HVy-EK-eIg" firstAttribute="top" secondItem="XBm-62-kZ4" secondAttribute="bottom" constant="8" id="JKS-8d-67I"/>
-                                            <constraint firstItem="HVy-EK-eIg" firstAttribute="centerX" secondItem="Dbg-gE-eHq" secondAttribute="centerX" id="LXu-ua-UEY"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aBb-hE-CZ0" secondAttribute="trailing" constant="16" id="WT1-rY-ekC"/>
-                                            <constraint firstAttribute="trailing" secondItem="XBm-62-kZ4" secondAttribute="trailing" id="dDu-VQ-u94"/>
-                                            <constraint firstItem="XBm-62-kZ4" firstAttribute="top" secondItem="Dbg-gE-eHq" secondAttribute="top" constant="8" id="oRx-kZ-mBf"/>
-                                            <constraint firstItem="aBb-hE-CZ0" firstAttribute="centerX" secondItem="Dbg-gE-eHq" secondAttribute="centerX" id="tfy-IG-Q9A"/>
-                                            <constraint firstAttribute="bottom" secondItem="aBb-hE-CZ0" secondAttribute="bottom" id="uOG-jC-Jp5"/>
-                                            <constraint firstItem="aBb-hE-CZ0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dbg-gE-eHq" secondAttribute="leading" constant="16" id="x6Y-V4-ohB"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Dbg-gE-eHq" firstAttribute="centerY" secondItem="Dng-5e-4jN" secondAttribute="centerY" id="C5E-EH-FJU"/>
-                                    <constraint firstItem="Dbg-gE-eHq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dng-5e-4jN" secondAttribute="leading" constant="6" id="Rv7-QT-r2a"/>
-                                    <constraint firstItem="Dbg-gE-eHq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Dng-5e-4jN" secondAttribute="topMargin" id="h6h-mF-hg4"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dbg-gE-eHq" secondAttribute="trailing" constant="6" id="kkN-Ca-YW1"/>
-                                    <constraint firstItem="Dbg-gE-eHq" firstAttribute="centerX" secondItem="Dng-5e-4jN" secondAttribute="centerX" id="lMV-L2-0EW"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Rx7-mE-93D" firstAttribute="top" secondItem="Dng-5e-4jN" secondAttribute="bottom" id="4P4-Gx-71H"/>
-                            <constraint firstItem="Rx7-mE-93D" firstAttribute="top" secondItem="Dng-5e-4jN" secondAttribute="bottom" id="4Xv-3g-NPc"/>
-                            <constraint firstItem="Rx7-mE-93D" firstAttribute="trailing" secondItem="CIk-K8-AmV" secondAttribute="trailing" id="6Do-jS-uCk"/>
-                            <constraint firstItem="Dng-5e-4jN" firstAttribute="trailing" secondItem="CIk-K8-AmV" secondAttribute="trailing" id="FPX-o7-C3f"/>
-                            <constraint firstItem="Rx7-mE-93D" firstAttribute="height" secondItem="Dng-5e-4jN" secondAttribute="height" multiplier="1:5" id="H6S-iD-c6v"/>
-                            <constraint firstItem="Rx7-mE-93D" firstAttribute="leading" secondItem="CIk-K8-AmV" secondAttribute="leading" id="Ki3-KO-TgF"/>
-                            <constraint firstItem="Dng-5e-4jN" firstAttribute="leading" secondItem="CIk-K8-AmV" secondAttribute="leading" id="V6K-il-j6j"/>
-                            <constraint firstItem="Dng-5e-4jN" firstAttribute="top" secondItem="ntw-2D-gAR" secondAttribute="top" id="VgL-Fh-4xx"/>
-                            <constraint firstItem="Rx7-mE-93D" firstAttribute="top" secondItem="Dng-5e-4jN" secondAttribute="bottom" id="ZBw-WJ-p8b"/>
-                            <constraint firstItem="Rx7-mE-93D" firstAttribute="top" secondItem="Dng-5e-4jN" secondAttribute="bottom" id="uAq-dQ-xoe"/>
-                            <constraint firstItem="Rx7-mE-93D" firstAttribute="bottom" secondItem="ntw-2D-gAR" secondAttribute="bottom" id="z0s-HJ-1mU"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="CIk-K8-AmV"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kdl-GN-dac" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2442" y="2259"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hgm-Hn-E6n">
@@ -845,7 +615,7 @@
                                 <rect key="frame" x="18" y="111" width="339" height="483"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TokensListCell" rowHeight="104" id="6TS-fz-QtD" customClass="TokensListCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TokensListCell" rowHeight="104" id="6TS-fz-QtD" customClass="TokensListCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="339" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6TS-fz-QtD" id="LoG-o3-RXN">
@@ -1849,7 +1619,7 @@ to find token</string>
                                 <rect key="frame" x="24" y="101" width="327" height="542"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletsListCell" rowHeight="80" id="GK3-zF-JyN" customClass="WalletsListCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletsListCell" rowHeight="80" id="GK3-zF-JyN" customClass="WalletsListCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="327" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GK3-zF-JyN" id="BCU-Ix-QSw">
@@ -2059,7 +1829,7 @@ to find token</string>
                                 <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FavoritesListCell" rowHeight="72" id="w7W-qs-2ZL" customClass="FavoritesListCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FavoritesListCell" rowHeight="72" id="w7W-qs-2ZL" customClass="FavoritesListCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w7W-qs-2ZL" id="cOf-rv-2id">
@@ -3616,7 +3386,7 @@ minutes, please wait ...</string>
                                 <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TransactionHistoryCell" rowHeight="65" id="vGR-Jg-CZa" customClass="TransactionHistoryCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TransactionHistoryCell" rowHeight="65" id="vGR-Jg-CZa" customClass="TransactionHistoryCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vGR-Jg-CZa" id="JY2-Wk-Y9j">
@@ -5847,7 +5617,7 @@ successfully</string>
                                 <rect key="frame" x="24" y="101" width="327" height="542"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NetworksListCell" rowHeight="80" id="Avn-Pu-PRr" customClass="NetworksListCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NetworksListCell" rowHeight="80" id="Avn-Pu-PRr" customClass="NetworksListCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="327" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Avn-Pu-PRr" id="gG0-H8-nWs">
@@ -6065,12 +5835,10 @@ minutes, please wait ...</string>
         <image name="Bankex_wallet_logo" width="245" height="30"/>
         <image name="Copy" width="64" height="64"/>
         <image name="Create_wallet" width="62" height="74"/>
-        <image name="Custom network" width="272" height="258"/>
         <image name="Done" width="64" height="64"/>
         <image name="ERC20" width="308" height="250"/>
         <image name="Edit" width="32" height="32"/>
         <image name="Eye open" width="16" height="10"/>
-        <image name="Favorites" width="302" height="238"/>
         <image name="Favorites_new_contact" width="40" height="40"/>
         <image name="Home" width="18" height="18"/>
         <image name="Import_wallet" width="62" height="59"/>
@@ -6106,8 +5874,8 @@ minutes, please wait ...</string>
         <segue reference="zcW-e5-SSf"/>
         <segue reference="Z9p-MY-jvY"/>
         <segue reference="bDG-Xv-WCD"/>
-        <segue reference="I0X-hu-WYJ"/>
+        <segue reference="Uws-Ci-KnS"/>
         <segue reference="zl4-lC-AqZ"/>
-        <segue reference="e8R-AA-GU9"/>
+        <segue reference="5QZ-KN-yBo"/>
     </inferredMetricsTieBreakers>
 </document>
