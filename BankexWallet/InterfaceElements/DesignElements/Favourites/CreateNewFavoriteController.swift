@@ -66,8 +66,8 @@ class CreateNewFavoriteController: UIViewController,
     
     let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     @IBAction func saveContact(_ sender: Any) {
-        let ethAddress = EthereumAddress(addressTextfield.text ?? "")
-        guard ethAddress.isValid else {
+        
+        guard let ethAddress = EthereumAddress(addressTextfield.text ?? "") else {
                 return
         }
         guard let address = addressTextfield.text,
@@ -128,8 +128,8 @@ class CreateNewFavoriteController: UIViewController,
             addressTextfield.text = parsed.address.address
         }
         else  {
-            let address = EthereumAddress(value)
-            if address.isValid {
+            
+            if let address = EthereumAddress(value) {
                 addressTextfield.text = value
             }
         }

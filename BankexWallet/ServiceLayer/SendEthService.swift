@@ -170,8 +170,7 @@ class SendEthServiceImplementation: SendEthService {
                                       gasLimit: UInt = 21000,
                                       completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
         DispatchQueue.global().async {
-            let destinationEthAddress = EthereumAddress(destinationAddressString)
-            if !destinationEthAddress.isValid {
+            guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.invalidDestinationAddress))
                 }

@@ -119,7 +119,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     
     private func makeOnlineSearchToken(with address: String, completion: @escaping (SendEthResult<ERC20TokenModel>) -> Void) {
         
-        guard EthereumAddress(address).isValid else {
+        guard let _ = EthereumAddress(address) else {
             completion(SendEthResult.Error(CustomTokenError.undefinedError))
             return
         }
