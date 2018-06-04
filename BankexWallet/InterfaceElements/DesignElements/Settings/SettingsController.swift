@@ -59,9 +59,6 @@ MFMailComposeViewControllerDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: settingsToShow[indexPath.row], for: indexPath)
-        if settingsToShow[indexPath.row] == "WalletsListCell" {
-            cell.accessibilityIdentifier = "WalletsListCell"
-        }
         if let cell = cell as? SettingsCellWithParameter,
             settingsParameters.count > indexPath.row {
             let parameter = settingsParameters[indexPath.row]
