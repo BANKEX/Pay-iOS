@@ -51,10 +51,6 @@ class CreateNewFavoriteController: UIViewController,
                                                object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollViewHeightConstraint.constant = -76 // 76 is top part
@@ -70,8 +66,8 @@ class CreateNewFavoriteController: UIViewController,
     
     let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     @IBAction func saveContact(_ sender: Any) {
-        let ethAddress = EthereumAddress(addressTextfield.text ?? "")
-        guard ethAddress.isValid else {
+        
+        guard let ethAddress = EthereumAddress(addressTextfield.text ?? "") else {
                 return
         }
         guard let address = addressTextfield.text,
@@ -84,7 +80,7 @@ class CreateNewFavoriteController: UIViewController,
     }
     
     func addContact(with address: String) {
-        addressTextfield.text = address
+        selectedFavoriteAddress = address
     }
     
     @IBAction func deleteContact(_ sender: Any) {
@@ -132,8 +128,8 @@ class CreateNewFavoriteController: UIViewController,
             addressTextfield.text = parsed.address.address
         }
         else  {
-            let address = EthereumAddress(value)
-            if address.isValid {
+            
+            if let address = EthereumAddress(value) {
                 addressTextfield.text = value
             }
         }

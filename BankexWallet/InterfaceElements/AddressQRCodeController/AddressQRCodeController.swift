@@ -36,7 +36,9 @@ class AddressQRCodeController: UIViewController {
             return nil
         }
         
-        let code = Web3.EIP67Code(address: string).toString()
+        guard let code = Web3.EIP67Code(address: string)?.toString() else {
+            return nil
+        }
         
         let data = code.data(using: String.Encoding.ascii)
         

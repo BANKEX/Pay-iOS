@@ -60,7 +60,7 @@ class SingleKeyServiceImplementation: SingleKeyService {
     
     init(defaultPassword: String = "BANKEXFOUNDATION") {
         self.defaultPassword = defaultPassword
-        selectedLocalWallet = selectedWalletFromDB()
+        selectedLocalWallet = selectedLocalWallet ?? selectedWalletFromDB()
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
             self.selectedLocalWallet = self.selectedWalletFromDB()
         }
@@ -71,7 +71,7 @@ class SingleKeyServiceImplementation: SingleKeyService {
         guard let allKeys = try? db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isHD == %@", NSNumber(value: false)))) else {
             return nil
         }
-        return allKeys.flatMap({ (wallet) -> String in
+        return allKeys.compactMap({ (wallet) -> String in
             return wallet.address ?? ""
         })
     }

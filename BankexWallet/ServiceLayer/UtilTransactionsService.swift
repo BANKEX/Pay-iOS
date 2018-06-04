@@ -51,8 +51,8 @@ class UtilTransactionsServiceImplementation: UtilTransactionsService {
         completion(SendEthResult.Success(self.localGetBalance(for: token, address: address)))
         DispatchQueue.global().async {
             let web3 = WalletWeb3Factory.web3()
-            let ethAddress = EthereumAddress(address)
-            guard ethAddress.isValid else {
+            
+            guard let ethAddress = EthereumAddress(address) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(UtilTransactionsErrors.invalidAddress))
                 }
@@ -88,7 +88,7 @@ class UtilTransactionsServiceImplementation: UtilTransactionsService {
         do {
             try DBStorage.db.operation({ (context, save) in
                 
-                if let storedBalance = try? context.fetch(FetchRequest<TokenBalance>().filtered(with: NSPredicate(format: "token.address == %@ && wallet.address == %@  && networkUrl == %@", token, address, self.networkUrl))).first, storedBalance != nil {
+                if let storedBalance = try? context.fetch(FetchRequest<TokenBalance>().filtered(with: NSPredicate(format: "token == nil && wallet.address == %@  && networkUrl == %@", address, self.networkUrl))).first, storedBalance != nil {
                     //We already have the data only need to update
                     storedBalance?.balance = balance.description
                 } else {

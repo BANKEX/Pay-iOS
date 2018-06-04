@@ -318,8 +318,7 @@ Retriable {
             }
         }
         else  {
-            let address = EthereumAddress(value)
-            if address.isValid {
+            if let address = EthereumAddress(value) {
                 enterAddressTextfield.text = value
             }
         }
