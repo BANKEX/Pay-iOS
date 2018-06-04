@@ -22,7 +22,7 @@ class SendTokenTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testSendingToken() {
         let app = XCUIApplication()
         app.launch()
         //Importing first wallet
@@ -42,17 +42,18 @@ class SendTokenTests: XCTestCase {
         let walletNamePassphraseTextfield = elementsQuery/*@START_MENU_TOKEN@*/.textFields["WalletNameTextFieldPassphrase"]/*[[".textFields[\"Name your wallet\"]",".textFields[\"WalletNameTextFieldPassphrase\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         walletNamePassphraseTextfield.tap()
         walletNamePassphraseTextfield.typeText("FirstWallet")
-        nextButton.tap()
+        //nextButton.tap()
         
         let walletPasswordPassphraseTextfield = elementsQuery/*@START_MENU_TOKEN@*/.secureTextFields["WalletPasswordTextFieldPassphrase"]/*[[".secureTextFields[\"Password\"]",".secureTextFields[\"WalletPasswordTextFieldPassphrase\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         walletPasswordPassphraseTextfield.tap()
         walletPasswordPassphraseTextfield.typeText("123456")
-        nextButton.tap()
+        //nextButton.tap()
+        
         
         let walletPasswordRepeatPassphraseTextfield = elementsQuery/*@START_MENU_TOKEN@*/.secureTextFields["WalletPasswordRepeatPassphrase"]/*[[".secureTextFields[\"Repeat Password\"]",".secureTextFields[\"WalletPasswordRepeatPassphrase\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         walletPasswordRepeatPassphraseTextfield.tap()
         walletPasswordRepeatPassphraseTextfield.typeText("123456")
-        nextButton.tap()
+        app.buttons["CreateWalletButtonPassphrase"].tap()
         let label = app.staticTexts["AmountLabel"]
         let exists = NSPredicate(format: "exists == 1 && label != \"0\"")
         
@@ -62,7 +63,11 @@ class SendTokenTests: XCTestCase {
         
         //Importing second wallet
         app.tabBars.buttons["Settings"].tap()
+        
+
         app.tables.cells["WalletsListCell"].children(matching: .other).element(boundBy: 0).tap()
+        
+        
         app/*@START_MENU_TOKEN@*/.buttons["AddWalletBtn"]/*[[".buttons[\"Add\"]",".buttons[\"AddWalletBtn\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         importwalletbtnButton.tap()
         app.buttons["PassphraseBtn"].tap()

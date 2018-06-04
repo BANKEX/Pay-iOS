@@ -141,5 +141,7 @@ class SettingsCellWithParameter: UITableViewCell {
     
     func configureCell(with text: String) {
         parameterLabel.text = text
+        accessibilityIdentifier = "WalletsListCell"
+        isAccessibilityElement = true
     }
 }
