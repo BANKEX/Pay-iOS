@@ -66,8 +66,8 @@ class CreateNewFavoriteController: UIViewController,
     
     let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     @IBAction func saveContact(_ sender: Any) {
-        let ethAddress = EthereumAddress(addressTextfield.text ?? "")
-        guard ethAddress.isValid else {
+        
+        guard let ethAddress = EthereumAddress(addressTextfield.text ?? "") else {
                 return
         }
         guard let address = addressTextfield.text,
@@ -75,7 +75,9 @@ class CreateNewFavoriteController: UIViewController,
             !favoritesService.contains(address: addressTextfield.text ?? "") else {
                 return
         }
-        favoritesService.store(address: address, with: name)
+        favoritesService.store(address: address, with: name) { (error) in
+            print(error?.localizedDescription ?? "")
+        }
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -90,7 +92,9 @@ class CreateNewFavoriteController: UIViewController,
         let alert = UIAlertController(title: "Are you sure?", message: "You're going to remove this favorite contact.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (Target) in
-            self.favoritesService.delete(with: self.addressTextfield.text ?? "")
+            self.favoritesService.delete(with: self.addressTextfield.text ?? "") {
+                
+            }
             self.navigationController?.popViewController(animated: true)
         }
         alert.addAction(cancelAction)
@@ -128,8 +132,8 @@ class CreateNewFavoriteController: UIViewController,
             addressTextfield.text = parsed.address.address
         }
         else  {
-            let address = EthereumAddress(value)
-            if address.isValid {
+            
+            if let address = EthereumAddress(value) {
                 addressTextfield.text = value
             }
         }
