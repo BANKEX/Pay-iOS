@@ -22,7 +22,7 @@ class FavouritesListWithCollectionCell: UITableViewCell,
     @IBOutlet weak var collectionView: UICollectionView?
     
     let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
-    var allFavorites: [(String, String)]?
+    var allFavorites: [FavoriteModel]?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -44,7 +44,7 @@ class FavouritesListWithCollectionCell: UITableViewCell,
             selectionDelegate?.didSelectAddNewFavorite()
         }
         else if let selected = allFavorites?[indexPath.row - 1] {
-            selectionDelegate?.didSelectFavorite(with: selected.0, address: selected.1)
+            selectionDelegate?.didSelectFavorite(with: selected.name, address: selected.address)
         }
     }
     

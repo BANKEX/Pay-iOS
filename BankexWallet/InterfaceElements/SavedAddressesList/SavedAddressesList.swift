@@ -16,7 +16,7 @@ class SavedAddressesList: UIViewController, UITableViewDelegate, UITableViewData
 
     let addressesListService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     
-    var addressesList: [(String, String)]?
+    var addressesList: [FavoriteModel]?
     
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var tableView: UITableView?
@@ -50,14 +50,16 @@ class SavedAddressesList: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "SubtitleCell")
-        let (name, address) = (addressesList?[indexPath.row])!
+        //let (name, address) = (addressesList?[indexPath.row])!
+        let name = addressesList?[indexPath.row].name
+        let address = addressesList?[indexPath.row].address
         cell.textLabel?.text = name
         cell.detailTextLabel?.text = address
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let (_, address) = addressesList?[indexPath.row] else {
+        guard let address = addressesList?[indexPath.row].address else {
             return
         }
         selectionAddressDelegate?.didSelect(address: address)
