@@ -57,3 +57,21 @@ class FavouritesListWithCollectionCell: UITableViewCell,
         return cell
     }
 }
+
+class FavoriteContactCell: UITableViewCell {
+    @IBOutlet weak var contactImageView: UIImageView!
+    @IBOutlet weak var contactNameLabel: UILabel!
+    @IBOutlet weak var nameFirstLetterLabel: UILabel!
+    @IBOutlet weak var separator: UIView!
+    
+    func configureCell(withName name: String, isLast: Bool) {
+        if isLast {
+            separator.isHidden = true
+        }
+        contactNameLabel.text = name
+        let firstLetter = (name as NSString).substring(to: 1)
+        nameFirstLetterLabel.text = firstLetter.capitalized
+        contactImageView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
+        contactImageView.layer.cornerRadius = 8.0
+    }
+}

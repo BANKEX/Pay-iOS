@@ -74,18 +74,28 @@ class MainInfoController: UITableViewController,
     UITabBarControllerDelegate,
 FavoriteSelectionDelegate {
     
-    var itemsArray = ["TopLogoCell",
+    
+    var itemsArray = [
                       "CurrentWalletInfoCell",
                       "TransactionHistoryCell"]
 //                      "FavouritesTitleCell",
 //                      "FavouritesListWithCollectionCell"]
     
     let keyService = SingleKeyServiceImplementation()
+    var ethLabel: UILabel!
     
+    var favorites: [FavoriteModel]?
+    var favService:RecipientsAddressesService = RecipientsAddressesServiceImplementation()
+    var favoritesToShow = [FavoriteModel]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavBar()
+        configureRefreshControl()
+        favorites = favService.getAllStoredAddresses()
+        
+        
         let conversionService = FiatServiceImplementation.service
         conversionService.updateConversionRate(for: tokensService.selectedERC20Token().symbol) { (rate) in
             print(rate)
@@ -108,11 +118,11 @@ FavoriteSelectionDelegate {
     var transactionInitialDiff = 0
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        itemsArray = ["TopLogoCell",
+        navigationController?.isNavigationBarHidden = false
+        itemsArray = [
                       "CurrentWalletInfoCell",
                       "TransactionHistoryCell",//]
-            "FavouritesTitleCell",
-            "FavouritesListWithCollectionCell"]
+            "FavouritesTitleCell"]
         
         if let isWalletNew = UserDefaults.standard.value(forKey: "isWalletNew") as? Bool, isWalletNew  {
             itemsArray.insert("WalletIsReadyCell", at: 1)
@@ -130,6 +140,7 @@ FavoriteSelectionDelegate {
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        navigationController?.isNavigationBarHidden = true
         if let controller = segue.destination as? AddressQRCodeController {
             let keyService: GlobalWalletsService = SingleKeyServiceImplementation()
             controller.addressToGenerateQR = keyService.selectedAddress()
@@ -159,10 +170,56 @@ FavoriteSelectionDelegate {
         default:
             arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "BottomRoundedCell"]
         }
+        var arrayOfFavorites = [String]()
+        if let firstThree = favService.getAllStoredAddresses()?.prefix(3) {
+            favoritesToShow = Array(firstThree)
+        }
+        switch favoritesToShow.count {
+        case 1:
+            arrayOfFavorites = ["FavoriteContactCell"]
+        case 2:
+            arrayOfFavorites = ["FavoriteContactCell", "FavoriteContactCell"]
+        case 3:
+            arrayOfFavorites = ["FavoriteContactCell", "FavoriteContactCell", "FavoriteContactCell"]
+        default:
+            break
+        }
         
         let index = itemsArray.index{$0 == "TransactionHistoryCell"} ?? 0
         transactionInitialDiff = index + 2
         itemsArray.insert(contentsOf: arrayOfTransactions, at: index + 1)
+        itemsArray.append(contentsOf: arrayOfFavorites)
+    }
+    
+    func configureNavBar() {
+        navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.topItem?.title = "Home"
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        }
+        
+        
+        ethLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 200, height: 90))
+        ethLabel.text = "Ethereum\n0.00089797896897213"
+        ethLabel.numberOfLines = 2
+        ethLabel.textAlignment = .right
+        let circle = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 8))
+        circle.layer.cornerRadius = 4
+        circle.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.6980392157, blue: 0.1294117647, alpha: 1)
+        navigationController?.navigationBar.topItem?.setRightBarButtonItems([UIBarButtonItem(customView: circle), UIBarButtonItem(customView: ethLabel)], animated: true)
+    }
+    
+    func configureRefreshControl() {
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
+        }
+    }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        //TODO: - Update the data here
+        print("Refreshing")
+        
+        refreshControl.endRefreshing()
     }
 
     // MARK: - Table view data source
@@ -190,6 +247,12 @@ FavoriteSelectionDelegate {
         if let cell = cell as? WalletIsReadyCell {
             cell.delegate = self
             return cell
+        }
+        
+        if let cell = cell as? FavoriteContactCell {
+            let favToShowCount = favoritesToShow.count
+            let name = favoritesToShow[favToShowCount - (itemsArray.count - indexPath.row)].name
+            cell.configureCell(withName: name, isLast: indexPath.row + 1 == itemsArray.count)
         }
         return cell
     }
@@ -222,7 +285,7 @@ FavoriteSelectionDelegate {
 
 extension MainInfoController: CloseNewWalletNotifDelegate {
     func didClose() {
-        itemsArray = ["TopLogoCell",
+        itemsArray = [
                       "CurrentWalletInfoCell",
                       "TransactionHistoryCell",//]
             "FavouritesTitleCell",

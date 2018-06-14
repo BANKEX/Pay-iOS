@@ -16,7 +16,7 @@ class CurrentWalletInfoCell: UITableViewCell {
     
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var amountInDollars: UILabel!
-    
+    @IBOutlet weak var addressLabel: UILabel!
     let keyService = SingleKeyServiceImplementation()
     
     var utilsService: UtilTransactionsService!
@@ -46,6 +46,7 @@ class CurrentWalletInfoCell: UITableViewCell {
         // Initialization code
         tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         walletNameLabel.text = keyService.selectedWallet()?.name
+        addressLabel.text = keyService.selectedWallet()?.address
         symbolLabel.text = tokensService.selectedERC20Token().symbol.capitalized
 
     }
