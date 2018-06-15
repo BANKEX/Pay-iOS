@@ -118,11 +118,9 @@ FavoriteSelectionDelegate {
     var transactionInitialDiff = 0
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let bounds = navigationController?.navigationBar.bounds else { return }
         
-        navigationController?.navigationBar.bounds = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height * 2)
-        print(navigationController?.navigationBar.frame)
         navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.topItem?.prompt = "   "
         itemsArray = [
                       "CurrentWalletInfoCell",
                       "TransactionHistoryCell",//]
@@ -195,6 +193,7 @@ FavoriteSelectionDelegate {
         itemsArray.append(contentsOf: arrayOfFavorites)
     }
     
+    
     func configureNavBar() {
         navigationController?.isNavigationBarHidden = false
         let nameLabel = UILabel()
@@ -220,7 +219,8 @@ FavoriteSelectionDelegate {
         attachment.image = image
         let circleImageString = NSAttributedString(attachment: attachment)
         fullString.append(circleImageString)
-        fullString.append(NSAttributedString(string: " Ethereum\n0.00089797896897213"))
+        fullString.append(NSAttributedString(string: " Ethereum\n"))
+        fullString.append(NSAttributedString(string: "54 234 432"))
         
         ethLabel.attributedText = fullString
         ethLabel.numberOfLines = 2
@@ -320,3 +320,4 @@ extension MainInfoController: CloseNewWalletNotifDelegate {
         UserDefaults.standard.set(false, forKey: "isWalletNew")
     }
 }
+
