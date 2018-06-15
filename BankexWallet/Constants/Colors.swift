@@ -40,9 +40,9 @@ enum WalletColors {
         case .defaultLightBlueButton:
             return UIColor(red: 13/255, green: 169/255, blue: 255/255, alpha: 1)
         case .redText:
-            return UIColor(red: 239/255, green: 134/255, blue: 167/255, alpha: 1)
+            return UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 1.0)
         case .lightGreenText:
-            return UIColor(red: 74/255, green: 200/255, blue: 174/255, alpha: 1)
+            return UIColor(red: 3/255, green: 178/255, blue: 33/255, alpha: 1.0)
 
         }
     }

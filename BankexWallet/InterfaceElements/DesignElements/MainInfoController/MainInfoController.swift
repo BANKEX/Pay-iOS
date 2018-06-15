@@ -118,6 +118,10 @@ FavoriteSelectionDelegate {
     var transactionInitialDiff = 0
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let bounds = navigationController?.navigationBar.bounds else { return }
+        
+        navigationController?.navigationBar.bounds = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height * 2)
+        print(navigationController?.navigationBar.frame)
         navigationController?.isNavigationBarHidden = false
         itemsArray = [
                       "CurrentWalletInfoCell",
@@ -193,20 +197,36 @@ FavoriteSelectionDelegate {
     
     func configureNavBar() {
         navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.topItem?.title = "Home"
+        let nameLabel = UILabel()
+        
+        nameLabel.text = "Home"
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
+        
+        
+        //navigationController?.navigationBar.topItem?.title = "Home"
         if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
+            //navigationController?.navigationBar.prefersLargeTitles = true
         }
         
         
         ethLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 200, height: 90))
-        ethLabel.text = "Ethereum\n0.00089797896897213"
+        
+        let fullString = NSMutableAttributedString(string: "")
+        let attachment = NSTextAttachment()
+        
+        let image = UIImage(named: "GreenCircle")
+        
+        attachment.image = image
+        let circleImageString = NSAttributedString(attachment: attachment)
+        fullString.append(circleImageString)
+        fullString.append(NSAttributedString(string: " Ethereum\n0.00089797896897213"))
+        
+        ethLabel.attributedText = fullString
         ethLabel.numberOfLines = 2
         ethLabel.textAlignment = .right
-        let circle = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 8))
-        circle.layer.cornerRadius = 4
-        circle.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.6980392157, blue: 0.1294117647, alpha: 1)
-        navigationController?.navigationBar.topItem?.setRightBarButtonItems([UIBarButtonItem(customView: circle), UIBarButtonItem(customView: ethLabel)], animated: true)
+        
+        navigationController?.navigationBar.topItem?.setRightBarButtonItems([UIBarButtonItem(customView: ethLabel)], animated: true)
     }
     
     func configureRefreshControl() {
@@ -218,8 +238,11 @@ FavoriteSelectionDelegate {
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //TODO: - Update the data here
         print("Refreshing")
-        
-        refreshControl.endRefreshing()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            if #available(iOS 10.0, *) {
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
     }
 
     // MARK: - Table view data source
