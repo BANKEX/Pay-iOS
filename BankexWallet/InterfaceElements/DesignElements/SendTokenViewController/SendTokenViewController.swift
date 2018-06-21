@@ -159,6 +159,11 @@ Retriable {
     
     var sendingProcess: SendingResultInformation?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ChooseFeeViewController {
+            guard let senderDict = sender as? [String: String] else {return}
+            vc.configure(senderDict)
+            vc.sendEthService = self.sendEthService
+        }
         guard segue.identifier == "showSending",
             let confirmation = segue.destination as? SendingResultInformation else {
                 return
@@ -200,16 +205,18 @@ Retriable {
             let destinationAddress = enterAddressTextfield.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
                 return
         }
-        performSegue(withIdentifier: "showSending", sender: nil)
-        sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in
-            switch result {
-            case .Success(let transaction):
-                self.showConfirmation(forSending: amount, destinationAddress: destinationAddress, transaction: transaction)
-            case .Error(let error):
-                self.performSegue(withIdentifier: "showError", sender: self)
-                print("\(error)")
-            }
-        }
+        let info = ["amount": amount, "destinationAddress": destinationAddress]
+        performSegue(withIdentifier: "ShowChooseFee", sender: info)
+//        performSegue(withIdentifier: "showSending", sender: nil)
+//        sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in
+//            switch result {
+//            case .Success(let transaction):
+//                self.showConfirmation(forSending: amount, destinationAddress: destinationAddress, transaction: transaction)
+//            case .Error(let error):
+//                self.performSegue(withIdentifier: "showError", sender: self)
+//                print("\(error)")
+//            }
+//        }
     }
     
     
