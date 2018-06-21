@@ -142,7 +142,6 @@ FavoriteSelectionDelegate {
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        navigationController?.isNavigationBarHidden = true
         if let controller = segue.destination as? AddressQRCodeController {
             let keyService: GlobalWalletsService = SingleKeyServiceImplementation()
             controller.addressToGenerateQR = keyService.selectedAddress()

@@ -28,15 +28,20 @@ Retriable {
 
     @IBOutlet weak var additionalDataView: UIView!
     @IBOutlet weak var dataTopEmptyView: UIView!
-    @IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var topTokenSymbolLabel: UILabel!
-    @IBOutlet weak var tokenIconImageView: UIImageView!
+
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet var favNameContainer: UIView!
     
     @IBOutlet weak var selectedFavNameLabel: UILabel!
     
     @IBOutlet weak var enterAddressTextfield: UITextField!
+    
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var currencySymbolLabel: UILabel!
+    @IBOutlet weak var walletNameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    
+    
     
     @IBOutlet weak var memoTextfield: UITextField!
     @IBOutlet weak var amountTextfield: UITextField!
@@ -71,9 +76,8 @@ Retriable {
     override func viewDidLoad() {
         super.viewDidLoad()
         nextButton.isEnabled = false
-
-        favNameContainer.removeFromSuperview()
-        dataTopEmptyView.removeFromSuperview()
+        configureWalletInfo()
+        
         additionalDataView.removeFromSuperview()
         additionalDataSeparator.removeFromSuperview()
         nextButton.backgroundColor = WalletColors.disableButtonBackground.color()
@@ -97,6 +101,7 @@ Retriable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
+        navigationItem.title = "Send"
     }
     
     func updateTopLayout() {
@@ -107,6 +112,33 @@ Retriable {
         utilsService = tokensService.selectedERC20Token().address.isEmpty ? UtilTransactionsServiceImplementation() :
             CustomTokenUtilsServiceImplementation()
         updateBalance()
+    }
+    
+    func configureWalletInfo() {
+        let keyService = SingleKeyServiceImplementation()
+        utilsService = UtilTransactionsServiceImplementation()
+        addressLabel.text = keyService.selectedWallet()?.address
+        walletNameLabel.text = keyService.selectedWallet()?.name
+        tokenSymbolLabel.text = tokensService.selectedERC20Token().symbol.capitalized
+        
+        guard let selectedAddress = keyService.selectedAddress() else {
+            return
+        }
+        utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in
+            switch result {
+            case .Success(let response):
+                // TODO: it shouldn't be here anyway and also, lets move to background thread
+                let formattedAmount = Web3.Utils.formatToEthereumUnits(response,
+                                                                       toUnits: .eth,
+                                                                       decimals: 4,
+                                                                       fallbackToScientific: true)
+                self.amountLabel.text = formattedAmount!
+            case .Error(let error):
+                self.amountLabel.text = "..."
+                
+                print("\(error)")
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -200,6 +232,39 @@ Retriable {
         readerVC.modalPresentationStyle = .formSheet
         present(readerVC, animated: true, completion: nil)
     }
+    
+    @IBAction func getFreeEthButtonTapped(_ sender: Any) {
+        let network = tokensService.networksService.preferredNetwork()
+        guard let networkName = network.networkName else { return }
+        switch networkName {
+        case "rinkeby", "ropsten":
+            let urlString = networkName == "rinkeby" ? "https://faucet.rinkeby.io" : "http://faucet.ropsten.be:3001/"
+            
+            let alertController = UIAlertController(title: "Free Eth", message: "You will be reditected to the \(urlString), where you will receive a further instructions", preferredStyle: UIAlertControllerStyle.alert)
+            let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            let ok = UIAlertAction(title: "Continue", style: .default) { _ in
+                guard let url = URL(string: urlString) else { return }
+                UIApplication.shared.openURL(url)
+            }
+            
+            alertController.addAction(cancel)
+            alertController.addAction(ok)
+            self.present(alertController, animated: true, completion: nil)
+        default:
+            let alertController = UIAlertController(title: "You can not do it", message: "You are on the wrong network now. Please change the network to rinkeby or ropsten to get test Ether.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(ok)
+            present(alertController, animated: true, completion: nil)
+            
+            
+            
+        
+        }
+        
+        
+        
+    }
+    
     
     @IBAction func addFromFavouritesTapped(_ sender: Any) {
         // TODO: Open favs list
@@ -335,11 +400,8 @@ Retriable {
     // MARK: Balance
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     func updateBalance() {
-        topTokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
         tokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
-        self.balanceLabel.text = "..."
 
-        tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         guard let selectedAddress = keysService.selectedAddress() else {
             return
         }
@@ -349,7 +411,6 @@ Retriable {
                 print("\(response)")
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
                 let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
-                self.balanceLabel.text = formattedAmount!
             case .Error(let error):
                 print("\(error)")
             }
