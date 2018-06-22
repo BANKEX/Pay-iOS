@@ -89,6 +89,8 @@ class ChooseFeeViewController: UIViewController {
     
     func configureFee() {
         
+        
+        
         guard let gasLimitInt = transaction.options?.gasLimit else { return }
         guard let gasPriceInt = transaction.options?.gasPrice else { return }
 
@@ -106,6 +108,8 @@ class ChooseFeeViewController: UIViewController {
         gasLimitSlider.maximumValue = 10000000
         gasLimitSlider.value = initialGasLimit
         gasLimitTextField.text = String(describing: initialGasLimit)
+        gasPriceTextField.placeholder = String(describing: gasPriceSlider.minimumValue) + "-" + String(describing: gasPriceSlider.maximumValue)
+        gasLimitTextField.placeholder = String(describing: gasLimitSlider.minimumValue) + "-" + String(describing: gasLimitSlider.maximumValue)
     }
     
     // MARK: Keyboard
