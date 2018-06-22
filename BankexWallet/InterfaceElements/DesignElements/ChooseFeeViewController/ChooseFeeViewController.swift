@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import web3swift
+import BigInt
 
 class ChooseFeeViewController: UIViewController {
     //MARK: - Outlets
@@ -16,11 +18,13 @@ class ChooseFeeViewController: UIViewController {
     @IBOutlet weak var gasLimitTextField: UITextField!
     @IBOutlet weak var gasLimitSlider: UISlider!
     
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var textFields: [UITextField]!
     
     //MARK: - Variables
     var amount: String!
     var destinationAddress: String!
+    var transaction: TransactionIntermediate!
     
     //MARK: - Services
     var sendEthService: SendEthService!
@@ -29,7 +33,9 @@ class ChooseFeeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addObservers()
+        configureFee()
         
+        _ = textFields.map { $0.delegate = self }
     }
     
     var sendingProcess: SendingResultInformation?
@@ -41,6 +47,17 @@ class ChooseFeeViewController: UIViewController {
         sendingProcess =  confirmation
     }
     //MARK: - Actions
+    
+    @IBAction func gasPriceSliderValueChanged(_ sender: UISlider) {
+        gasPriceTextField.text = String(describing: Int(sender.value))
+    }
+    
+    
+    @IBAction func gasLimitSliderValueChanged(_ sender: UISlider) {
+        gasLimitTextField.text = String(describing: Int(sender.value))
+    }
+    
+    
     @IBAction func sendButtonTapped(_ sender: Any) {
         //Here should final confirmation controller appears
         
@@ -49,10 +66,14 @@ class ChooseFeeViewController: UIViewController {
         
     }
     
+    @IBAction func emptySpaceTapped(_ sender: Any) {
+        view.endEditing(true)
+    }
     //MARK: - Helpers
-    func configure(_ sender: [String: String]) {
-        amount = sender["amount"]
-        destinationAddress = sender["destinationAddress"]
+    func configure(_ sender: [String: Any]) {
+        amount = sender["amount"] as? String
+        destinationAddress = sender["destinationAddress"] as? String
+        transaction = sender["transaction"] as? TransactionIntermediate
     }
     
     func addObservers() {
@@ -64,6 +85,27 @@ class ChooseFeeViewController: UIViewController {
                                                selector: #selector(self.keyboardDidHide(notification:)),
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
+    }
+    
+    func configureFee() {
+        
+        guard let gasLimitInt = transaction.options?.gasLimit else { return }
+        guard let gasPriceInt = transaction.options?.gasPrice else { return }
+
+        let initialGasPrice: Float = Float(gasPriceInt / BigUInt(pow(10.0, 9.0)))
+        
+        let initialGasLimit: Float = Float(gasLimitInt)
+        
+        gasPriceSlider.minimumValue = 0.5
+        gasPriceSlider.maximumValue = 200
+        gasPriceSlider.value = initialGasPrice
+        gasPriceTextField.text = String(describing: initialGasPrice)
+        
+        
+        gasLimitSlider.minimumValue = 0
+        gasLimitSlider.maximumValue = 10000000
+        gasLimitSlider.value = initialGasLimit
+        gasLimitTextField.text = String(describing: initialGasLimit)
     }
     
     // MARK: Keyboard
@@ -118,4 +160,56 @@ class ChooseFeeViewController: UIViewController {
                            completion: nil)
         }
     }
+    
+    
 }
+
+extension ChooseFeeViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.returnKeyType == .done && sendButton.isEnabled {
+            sendButtonTapped(self)
+        } else if textField.returnKeyType == .next {
+            let index = textFields.index(of: textField) ?? 0
+            let nextIndex = (index == textFields.count - 1) ? 0 : index + 1
+            textFields[nextIndex].becomeFirstResponder()
+        } else {
+            view.endEditing(true)
+        }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text ?? "")  as NSString
+        let futureString = currentText.replacingCharacters(in: range, with: string) as String
+        sendButton.isEnabled = false
+        
+        switch textField {
+        case gasPriceTextField:
+            if !futureString.isEmpty && !(gasLimitTextField.text?.isEmpty ?? true) {
+                sendButton.isEnabled = true
+            }
+            
+            if let floatRepresentation = Float(futureString) {
+                gasPriceSlider.value = floatRepresentation
+            }
+        case gasLimitTextField:
+            if !futureString.isEmpty && !(gasPriceTextField.text?.isEmpty ?? true) {
+                sendButton.isEnabled = true
+            }
+            
+            if let floatRepresentation = Float(futureString) {
+                gasLimitSlider.value = floatRepresentation
+            }
+
+        default:
+            sendButton.isEnabled = false
+        }
+        
+        sendButton.backgroundColor = sendButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
+        textField.returnKeyType = sendButton.isEnabled ? UIReturnKeyType.done : .next
+        
+        return true
+    }
+}
+
+

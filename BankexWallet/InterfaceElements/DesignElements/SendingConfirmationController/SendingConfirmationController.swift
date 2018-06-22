@@ -57,7 +57,6 @@ class SendingConfirmationController: UIViewController, Retriable {
                                                    date: Date(),
                                                    token: token,
                                                    key: keysService.selectedKey()!)
-
         
         performSegue(withIdentifier: "showSending", sender: self)
         sendEthService.send(transactionModel: transactionModel,

@@ -77,6 +77,7 @@ Retriable {
         super.viewDidLoad()
         nextButton.isEnabled = false
         configureWalletInfo()
+        addTokensButton()
         
         additionalDataView.removeFromSuperview()
         additionalDataSeparator.removeFromSuperview()
@@ -141,6 +142,14 @@ Retriable {
         }
     }
     
+    func addTokensButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ETH", style: .plain, target: self, action: #selector(showTokensButtonTapped))
+    }
+    
+    @objc func showTokensButtonTapped() {
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let fixedFrame = view.convert(stackView.frame, from: stackView.superview)
@@ -160,7 +169,7 @@ Retriable {
     var sendingProcess: SendingResultInformation?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ChooseFeeViewController {
-            guard let senderDict = sender as? [String: String] else {return}
+            guard let senderDict = sender as? [String: Any] else {return}
             vc.configure(senderDict)
             vc.sendEthService = self.sendEthService
         }
@@ -205,18 +214,19 @@ Retriable {
             let destinationAddress = enterAddressTextfield.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
                 return
         }
-        let info = ["amount": amount, "destinationAddress": destinationAddress]
-        performSegue(withIdentifier: "ShowChooseFee", sender: info)
-//        performSegue(withIdentifier: "showSending", sender: nil)
-//        sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in
-//            switch result {
-//            case .Success(let transaction):
-//                self.showConfirmation(forSending: amount, destinationAddress: destinationAddress, transaction: transaction)
-//            case .Error(let error):
-//                self.performSegue(withIdentifier: "showError", sender: self)
-//                print("\(error)")
-//            }
-//        }
+        
+        performSegue(withIdentifier: "showSending", sender: nil)
+        sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in
+            switch result {
+            case .Success(let transaction):
+                //self.showConfirmation(forSending: amount, destinationAddress: destinationAddress, transaction: transaction)
+                let info = ["amount": amount, "destinationAddress": destinationAddress, "transaction": transaction] as [String : Any]
+                self.performSegue(withIdentifier: "ShowChooseFee", sender: info)
+            case .Error(let error):
+                self.performSegue(withIdentifier: "showError", sender: self)
+                print("\(error)")
+            }
+        }
     }
     
     
