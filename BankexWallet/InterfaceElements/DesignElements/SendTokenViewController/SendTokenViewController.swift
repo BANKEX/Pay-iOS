@@ -78,6 +78,7 @@ Retriable {
         nextButton.isEnabled = false
         configureWalletInfo()
         addTokensButton()
+        addBackButton()
         
         additionalDataView.removeFromSuperview()
         additionalDataSeparator.removeFromSuperview()
@@ -143,11 +144,31 @@ Retriable {
     }
     
     func addTokensButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "ETH", style: .plain, target: self, action: #selector(showTokensButtonTapped))
+        
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "Arrow Down"), for: .normal)
+        button.setTitle("ETH", for: .normal)
+        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        button.addTarget(self, action: #selector(showTokensButtonTapped), for: .touchUpInside)
+        
+    }
+    
+    func addBackButton() {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "BackArrow"), for: .normal)
+        button.setTitle("  Home", for: .normal)
+        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     @objc func showTokensButtonTapped() {
-        
+        print("Hello")
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -273,13 +294,7 @@ Retriable {
             alertController.addAction(ok)
             present(alertController, animated: true, completion: nil)
             
-            
-            
-        
         }
-        
-        
-        
     }
     
     

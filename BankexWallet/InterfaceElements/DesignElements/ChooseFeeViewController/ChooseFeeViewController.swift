@@ -32,8 +32,10 @@ class ChooseFeeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = false
         addObservers()
         configureFee()
+        addBackButton()
         
         _ = textFields.map { $0.delegate = self }
     }
@@ -46,8 +48,8 @@ class ChooseFeeViewController: UIViewController {
         }
         sendingProcess =  confirmation
     }
-    //MARK: - Actions
     
+    //MARK: - Actions
     @IBAction func gasPriceSliderValueChanged(_ sender: UISlider) {
         gasPriceTextField.text = String(describing: Int(sender.value))
     }
@@ -89,13 +91,10 @@ class ChooseFeeViewController: UIViewController {
     
     func configureFee() {
         
-        
-        
         guard let gasLimitInt = transaction.options?.gasLimit else { return }
         guard let gasPriceInt = transaction.options?.gasPrice else { return }
 
         let initialGasPrice: Float = Float(gasPriceInt / BigUInt(pow(10.0, 9.0)))
-        
         let initialGasLimit: Float = Float(gasLimitInt)
         
         gasPriceSlider.minimumValue = 0.5
@@ -110,6 +109,19 @@ class ChooseFeeViewController: UIViewController {
         gasLimitTextField.text = String(describing: initialGasLimit)
         gasPriceTextField.placeholder = String(describing: gasPriceSlider.minimumValue) + "-" + String(describing: gasPriceSlider.maximumValue)
         gasLimitTextField.placeholder = String(describing: gasLimitSlider.minimumValue) + "-" + String(describing: gasLimitSlider.maximumValue)
+    }
+    
+    func addBackButton() {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "BackArrow"), for: .normal)
+        button.setTitle("  Home", for: .normal)
+        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     // MARK: Keyboard

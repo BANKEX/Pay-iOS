@@ -51,6 +51,7 @@ SendingResultInformation {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         processTitleLabel?.text = "Retrieving data"
+        navigationController?.navigationBar.isHidden = true
     }
     
     var transactionAmount: String?
