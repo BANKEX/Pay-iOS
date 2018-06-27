@@ -28,6 +28,7 @@
 		81C43341201B7327008D3343 /* WalletState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43340201B7327008D3343 /* WalletState.swift */; };
 		81C43343201B7BDA008D3343 /* Keystores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43342201B7BDA008D3343 /* Keystores.swift */; };
 		C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */; };
+		E2DBE35220E3EABF00E7BB14 /* TokensListCellNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBE35120E3EABF00E7BB14 /* TokensListCellNew.swift */; };
 		F004A1F020691FE300E3970A /* SelectNetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F004A1EF20691FE300E3970A /* SelectNetworkController.swift */; };
 		F00E460B2073CFA300387B96 /* WalletCreationTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E460A2073CFA300387B96 /* WalletCreationTypeController.swift */; };
 		F00E460E2073CFDB00387B96 /* WalletSingleKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E460D2073CFDB00387B96 /* WalletSingleKeyController.swift */; };
@@ -136,6 +137,7 @@
 		CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.release.xcconfig"; sourceTree = "<group>"; };
+		E2DBE35120E3EABF00E7BB14 /* TokensListCellNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensListCellNew.swift; sourceTree = "<group>"; };
 		F004A1EF20691FE300E3970A /* SelectNetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkController.swift; sourceTree = "<group>"; };
 		F00E460A2073CFA300387B96 /* WalletCreationTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreationTypeController.swift; sourceTree = "<group>"; };
 		F00E460D2073CFDB00387B96 /* WalletSingleKeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSingleKeyController.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 			children = (
 				F0B1B4CC205AABF2009D76D5 /* TokensListController.swift */,
 				F0B1B4CE205AAC08009D76D5 /* TokensListCell.swift */,
+				E2DBE35120E3EABF00E7BB14 /* TokensListCellNew.swift */,
 			);
 			path = TokensList;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 				F02CA72320AB1C570042160C /* DefaultTokensService.swift in Sources */,
 				F0FF1C7A20568F0A0051D894 /* KeysListController.swift in Sources */,
 				F05C59FB209E19B400F22E3F /* FiatService.swift in Sources */,
+				E2DBE35220E3EABF00E7BB14 /* TokensListCellNew.swift in Sources */,
 				F0FF1C652054E77E0051D894 /* CustomNetwork.swift in Sources */,
 				F0B1B4CA20594D53009D76D5 /* CustomTokenUtilsServiceImplementation.swift in Sources */,
 				F00E46312084677B00387B96 /* BackupPassphraseController.swift in Sources */,
@@ -1066,7 +1070,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U8FZ3UYF69;
+				DEVELOPMENT_TEAM = 8DB897QKJA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1075,7 +1079,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.FoundationWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.FoundationWallet1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1092,7 +1096,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U8FZ3UYF69;
+				DEVELOPMENT_TEAM = 8DB897QKJA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1100,7 +1104,7 @@
 				INFOPLIST_FILE = BankexWallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.FoundationWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = org.bankexfoundation.FoundationWallet1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

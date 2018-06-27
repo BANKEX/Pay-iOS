@@ -10,26 +10,26 @@ import UIKit
 import web3swift
 
 class TokensListCell: UITableViewCell {
-
+    
     @IBOutlet weak var selectedTokenImageView: UIImageView?
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var symbolLabel: UILabel!
     
     @IBOutlet weak var tokenNameLabel: UILabel?
-
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     @IBOutlet weak var theOnlyBackgroundView: UIView?
     @IBOutlet weak var lastCellBackgroundView: UIView?
     @IBOutlet weak var firstCellBackgroundView: UIView?
     @IBOutlet weak var checkmarkImage: UIImageView!
     @IBOutlet weak var separatorView: UIView?
     @IBOutlet weak var tokenIconImageView: UIImageView!
-
+    
     var selectedToken: ERC20TokenModel?
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     var didChangeToken = false
@@ -44,7 +44,7 @@ class TokensListCell: UITableViewCell {
             didChangeToken = true
         }
         let service: UtilTransactionsService = !token.address.isEmpty ? CustomTokenUtilsServiceImplementation() : UtilTransactionsServiceImplementation()
-
+        
         didCallCompletion = false
         service.getBalance(for: token.address, address: keysService.selectedAddress() ?? "") { (result) in
             self.didCallCompletion = true
@@ -72,10 +72,10 @@ class TokensListCell: UITableViewCell {
         symbolLabel.text = token.symbol
         tokenNameLabel?.text = token.name
         tokenIconImageView.image = PredefinedTokens(with: token.symbol).image()
-
+        
     }
-
-
+    
+    
     
     func configure(with token: ERC20TokenModel) {
     }

@@ -11,6 +11,9 @@ import UIKit
 class TokensListController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editButton: UIButton!
+    
+    private var editEnabled: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,17 +31,51 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.reloadData()
     }
 
-    // MARK:
+    // MARK: Table view methods
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (tokens?.count ?? 0)
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return 0
+        } else {
+            return (tokens?.count ?? 0)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TokensListCell", for: indexPath) as! TokensListCell
-        let token = tokens![indexPath.row]
-        let isSelected = token.address == service.selectedERC20Token().address
-        cell.configure(with: token, isSelected: isSelected, isFirstCell: indexPath.row == 0, isLastCell: indexPath.row == (tokens?.count ?? 0) - 1)
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TokensListCellNew", for: indexPath) as! TokensListCellNew
+            let token = tokens![indexPath.row]
+            let isSelected = token.address == service.selectedERC20Token().address
+            cell.configure(with: token, isSelected: isSelected, isFirstSection: true, isEditing: false)
+            return cell
+        } else if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TokensListCellNew", for: indexPath) as! TokensListCellNew
+            let token = tokens![indexPath.row]
+            let isSelected = token.address == service.selectedERC20Token().address
+            cell.configure(with: token, isSelected: isSelected, isFirstSection: false, isEditing: editEnabled)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TokensListCellNew", for: indexPath) as! TokensListCellNew
+            return cell
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 116
+        } else if indexPath.section == 1 {
+            return 53
+        } else {
+            return 127
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -50,4 +87,22 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
         tokens = service.availableTokensList()
         tableView.reloadData()
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Ethereum"
+        } else if section == 1 {
+            return "Recent Transactions"
+        } else {
+            return "Tokens"
+        }
+    }
+    
+    @IBAction func editButtonTouched(_ sender: UIButton) {
+        editEnabled = !editEnabled
+        editButton.setTitle(editEnabled ? "Cancel" : "Edit", for: .normal)
+        tableView.reloadData()
+    }
+    
+    
 }
