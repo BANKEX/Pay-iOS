@@ -41,6 +41,7 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc func dismissView(_ sender: UIGestureRecognizer) {
+        navigationController?.navigationBar.isHidden = false
         self.performSegue(withIdentifier: "unwindToSend", sender: nil)
     }
 
@@ -66,8 +67,9 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
         tokens = service.availableTokensList()
         tableView.reloadData()
         if self.canPerformSegue(id: "unwindToSend") {
-            self.performSegue(withIdentifier: "unwindToSend", sender: nil)
             navigationController?.navigationBar.isHidden = false
+            self.performSegue(withIdentifier: "unwindToSend", sender: nil)
+            
         }
         
     }

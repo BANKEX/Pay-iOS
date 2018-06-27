@@ -145,6 +145,7 @@ Retriable {
     }
     
     @objc func showTokensButtonTapped() {
+        navigationController?.navigationBar.isHidden = true
         self.performSegue(withIdentifier: "ShowTokensList", sender: nil)
     }
     
