@@ -43,6 +43,7 @@ extension SECP256K1 {
         return (nil, nil)
     }
     
+    
     static func privateToPublic(privateKey: Data, compressed: Bool = false) -> Data? {
         if (privateKey.count != 32) {return nil}
         guard var publicKey = SECP256K1.privateKeyToPublicKey(privateKey: privateKey) else {return nil}
