@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TokenSelectionsProtocol {
+    func didSelectToken(_ token: ERC20TokenModel)
+}
+
 class TokensListController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
@@ -16,6 +20,14 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
 
     let service: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
@@ -26,6 +38,10 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewWillAppear(animated)
         tokens = service.availableTokensList()
         tableView.reloadData()
+    }
+    
+    @objc func dismissView(_ sender: UIGestureRecognizer) {
+        self.performSegue(withIdentifier: "unwindToSend", sender: nil)
     }
 
     // MARK:
@@ -49,5 +65,19 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
         service.updateSelectedToken(to: address)
         tokens = service.availableTokensList()
         tableView.reloadData()
+        if self.canPerformSegue(id: "unwindToSend") {
+            self.performSegue(withIdentifier: "unwindToSend", sender: nil)
+            navigationController?.navigationBar.isHidden = false
+        }
+        
+    }
+}
+
+
+extension UIViewController {
+    func canPerformSegue(id: String) -> Bool {
+        let segues = self.value(forKey: "storyboardSegueTemplates") as? [NSObject]
+        let filtered = segues?.filter({ $0.value(forKey: "identifier") as? String == id })
+        return ((filtered?.count)! > 0) 
     }
 }

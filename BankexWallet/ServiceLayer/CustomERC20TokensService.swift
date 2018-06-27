@@ -50,7 +50,7 @@ class DBStorage {
     }()
 }
 
-protocol CustomERC20TokensService {
+protocol CustomERC20TokensService: class {
     func addNewCustomToken(with address: String,
                            name: String,
                            decimals: String,
