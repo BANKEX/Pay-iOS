@@ -41,12 +41,22 @@ class ChooseFeeViewController: UIViewController {
     }
     
     var sendingProcess: SendingResultInformation?
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "ConfirmSegue" else { return }
+        guard let confirmVC = segue.destination as? ConfirmViewController else { return }
+        guard let gasPrice = gasPriceTextField.text else { return }
+        guard let gasLimit = gasLimitTextField.text else { return }
+        let dict:[String:Any] = ["gasPrice":gasPrice,"gasLimit":gasLimit,"transaction":transaction,"amount":amount]
+        confirmVC.configure(dict)
         guard segue.identifier == "showSending",
             let confirmation = segue.destination as? SendingResultInformation else {
                 return
         }
         sendingProcess =  confirmation
+        
     }
     
     //MARK: - Actions
@@ -62,11 +72,14 @@ class ChooseFeeViewController: UIViewController {
     
     @IBAction func sendButtonTapped(_ sender: Any) {
         //Here should final confirmation controller appears
-        
         guard let gasPrice = gasPriceTextField.text, let gasLimitString = gasLimitTextField.text, let gasLimit = UInt(gasLimitString) else { return }
-        
-        
+
     }
+    
+    
+
+    
+    
     
     @IBAction func emptySpaceTapped(_ sender: Any) {
         view.endEditing(true)
@@ -77,6 +90,7 @@ class ChooseFeeViewController: UIViewController {
         destinationAddress = sender["destinationAddress"] as? String
         transaction = sender["transaction"] as? TransactionIntermediate
     }
+    
     
     func addObservers() {
         NotificationCenter.default.addObserver(self,
@@ -176,6 +190,8 @@ class ChooseFeeViewController: UIViewController {
                            completion: nil)
         }
     }
+    
+    
     
     
 }

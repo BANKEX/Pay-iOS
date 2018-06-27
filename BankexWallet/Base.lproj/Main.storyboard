@@ -1788,8 +1788,8 @@ to find token</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="nextButtonTapped:" destination="dxz-2H-Uh6" eventType="touchUpInside" id="Cxe-3j-sHO"/>
-                                                            <action selector="sendButtonTapped:" destination="cDM-Jh-bCc" eventType="touchUpInside" id="dHK-rn-afI"/>
+                                                            <action selector="sendButtonTapped:" destination="cDM-Jh-bCc" eventType="touchUpInside" id="Wmu-6S-YgI"/>
+                                                            <segue destination="RWz-vE-6br" kind="show" identifier="ConfirmSegue" id="6Tx-Pf-uP9"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -2115,6 +2115,9 @@ to find token</string>
                                                                     <integer key="value" value="8"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="sendTapped" destination="RWz-vE-6br" eventType="touchUpInside" id="k5c-xa-4ET"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2147,10 +2150,22 @@ to find token</string>
                             <outlet property="delegate" destination="RWz-vE-6br" id="sUA-Zt-gyR"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="amountLabel" destination="g1x-5T-esJ" id="SYN-gB-Bw6"/>
+                        <outlet property="feeLabel" destination="xnY-lb-ypW" id="AoM-J2-HhX"/>
+                        <outlet property="fromLabel" destination="128-is-Hxg" id="Pi0-mS-NDy"/>
+                        <outlet property="gasLimitLabel" destination="6ea-TG-i6s" id="iBE-5B-Utq"/>
+                        <outlet property="gasPriceLabel" destination="2PL-6K-X1w" id="rb7-GP-kSk"/>
+                        <outlet property="toLabel" destination="xo6-PQ-mdj" id="rt9-fm-vUY"/>
+                        <outlet property="totalLabel" destination="eCY-Hw-dI6" id="gdI-kp-aqC"/>
+                        <segue destination="sAg-Vp-s64" kind="show" identifier="showError1" id="c8a-gg-hhv"/>
+                        <segue destination="5w2-uu-h6s" kind="show" identifier="waitSegue" id="6L4-5Q-eHX"/>
+                        <segue destination="ygp-st-s37" kind="show" identifier="successSegue" id="qjw-ue-d50"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5j-9h-9nY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="658" y="6250"/>
+            <point key="canvasLocation" x="969" y="6313"/>
         </scene>
         <!--Favorites List Controller-->
         <scene sceneID="r0F-Rl-uUs">
@@ -3695,17 +3710,17 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOE-8F-NVo">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="516"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="473"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xd-qC-sge">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="516"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="473"/>
                                         <connections>
                                             <action selector="emptySpaceTapped:" destination="9N0-3K-f0j" eventType="touchUpInside" id="Mc4-UM-t3j"/>
                                             <action selector="emptySpaceTapped:" destination="aYE-8c-Ufz" eventType="touchUpInside" id="m2Q-PG-Zsu"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x3M-aK-D9K">
-                                        <rect key="frame" x="28" y="0.0" width="319" height="390"/>
+                                        <rect key="frame" x="28" y="0.0" width="319" height="347"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-K3-P9M" userLabel="top empty view">
                                                 <rect key="frame" x="0.0" y="0.0" width="319" height="32"/>
@@ -3844,7 +3859,7 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-8B-5pa">
-                                                <rect key="frame" x="0.0" y="224" width="319" height="93"/>
+                                                <rect key="frame" x="0.0" y="224" width="319" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sal-QD-Ca0">
                                                         <rect key="frame" x="279" y="0.0" width="40" height="40"/>
@@ -3881,14 +3896,14 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0x-Pn-amR" userLabel="sep3">
-                                                <rect key="frame" x="0.0" y="317" width="319" height="1"/>
+                                                <rect key="frame" x="0.0" y="264" width="319" height="1"/>
                                                 <color key="backgroundColor" red="0.75686274509999996" green="0.79215686269999996" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="y1z-5t-brA"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAi-r5-UVz">
-                                                <rect key="frame" x="0.0" y="318" width="319" height="31"/>
+                                                <rect key="frame" x="0.0" y="265" width="319" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwords don't match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7js-k0-dqB">
                                                         <rect key="frame" x="0.0" y="4" width="131.5" height="14.5"/>
@@ -3905,7 +3920,7 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wd7-27-dFs">
-                                                <rect key="frame" x="0.0" y="349" width="319" height="40"/>
+                                                <rect key="frame" x="0.0" y="296" width="319" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Tl-O1-yhG">
                                                         <rect key="frame" x="0.0" y="0.0" width="129" height="40"/>
@@ -3927,7 +3942,7 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0cD-6l-YnN" userLabel="sep4">
-                                                <rect key="frame" x="0.0" y="389" width="319" height="1"/>
+                                                <rect key="frame" x="0.0" y="346" width="319" height="1"/>
                                                 <color key="backgroundColor" red="0.75686274509999996" green="0.79215686269999996" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Quv-qq-cot"/>
@@ -3937,7 +3952,7 @@ minutes, please wait ...</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </stackView>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNr-ML-6r6">
-                                        <rect key="frame" x="28" y="420" width="319" height="56"/>
+                                        <rect key="frame" x="28" y="377" width="319" height="56"/>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.97647058819999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="Q6j-fQ-ce2"/>
@@ -4367,7 +4382,7 @@ be able to restore your wallet!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0c3-a0-7BH">
-                                                <rect key="frame" x="0.0" y="208" width="319" height="40"/>
+                                                <rect key="frame" x="0.0" y="208" width="319" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JV-af-3qh">
                                                         <rect key="frame" x="279" y="0.0" width="40" height="40"/>
@@ -4403,14 +4418,14 @@ be able to restore your wallet!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1vl-ei-5AF" userLabel="sep3">
-                                                <rect key="frame" x="0.0" y="248" width="319" height="1"/>
+                                                <rect key="frame" x="0.0" y="258" width="319" height="1"/>
                                                 <color key="backgroundColor" red="0.75686274509999996" green="0.79215686269999996" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="cDQ-14-6Hy"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKV-dk-li3">
-                                                <rect key="frame" x="0.0" y="249" width="319" height="31"/>
+                                                <rect key="frame" x="0.0" y="259" width="319" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwords don't match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEd-33-v9m">
                                                         <rect key="frame" x="0.0" y="4" width="131.5" height="14.5"/>
@@ -4427,7 +4442,7 @@ be able to restore your wallet!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZq-JJ-Rai">
-                                                <rect key="frame" x="0.0" y="280" width="319" height="50"/>
+                                                <rect key="frame" x="0.0" y="290" width="319" height="40"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nVq-Sl-5QJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="319" height="40"/>
@@ -5224,7 +5239,7 @@ successfully</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10S-ls-J8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-42" y="4767"/>
+            <point key="canvasLocation" x="1854" y="3995"/>
         </scene>
         <!--Sending Error View Controller-->
         <scene sceneID="Sol-li-be7">
@@ -6018,11 +6033,12 @@ minutes, please wait ...</string>
         <image name="qr code" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3SJ-h0-gVt"/>
-        <segue reference="JaH-wa-aDn"/>
-        <segue reference="9uL-PK-B2Z"/>
+        <segue reference="vrZ-w3-HnB"/>
+        <segue reference="c8a-gg-hhv"/>
+        <segue reference="mKc-JC-UU5"/>
+        <segue reference="qjw-ue-d50"/>
         <segue reference="zQJ-7M-ML2"/>
-        <segue reference="bDG-Xv-WCD"/>
+        <segue reference="6L4-5Q-eHX"/>
         <segue reference="6XE-pt-w3G"/>
         <segue reference="zl4-lC-AqZ"/>
         <segue reference="890-Uf-GGI"/>
