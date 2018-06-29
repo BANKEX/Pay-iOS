@@ -37,6 +37,7 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tokens = service.availableTokensList()
+        
         tableView.reloadData()
     }
     

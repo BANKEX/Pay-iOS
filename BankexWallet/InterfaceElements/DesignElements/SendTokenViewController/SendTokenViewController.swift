@@ -61,6 +61,8 @@ Retriable {
     @IBOutlet weak var interDataAndBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var additionalDataSeparator: UIView!
     
+    var button: UIButton!
+    
     // MARK: Services
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
@@ -126,7 +128,7 @@ Retriable {
     
     func addTokensButton() {
         
-        let button = UIButton(type: .system)
+        button = UIButton(type: .system)
         button.setImage(UIImage(named: "Arrow Down"), for: .normal)
         button.setTitle("ETH", for: .normal)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
@@ -416,6 +418,7 @@ Retriable {
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     func updateBalance() {
         currencySymbolLabel.text = tokensService.selectedERC20Token().symbol.uppercased()
+        button.setTitle(tokensService.selectedERC20Token().symbol.uppercased(), for: .normal) 
 
         guard let selectedAddress = keysService.selectedAddress() else {
             return
