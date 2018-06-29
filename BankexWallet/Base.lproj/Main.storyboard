@@ -3522,6 +3522,7 @@ minutes, please wait ...</string>
                         <segue destination="sAg-Vp-s64" kind="show" identifier="showError" id="JaH-wa-aDn"/>
                         <segue destination="5w2-uu-h6s" kind="show" identifier="showSending" id="bDG-Xv-WCD"/>
                         <segue destination="cDM-Jh-bCc" kind="show" identifier="ShowChooseFee" id="Xjg-Kf-4e4"/>
+                        <segue destination="ERV-QR-BP4" kind="show" identifier="ShowTokensList" customClass="ShowTokensSegue" customModule="BankexWallet" customModuleProvider="target" id="4Xs-zL-3U1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PgD-J7-QUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5235,9 +5236,11 @@ successfully</string>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="K2v-Ub-Dro" id="Mo6-4w-RTt"/>
+                        <segue destination="OYh-gc-kDI" kind="unwind" identifier="unwindToSend" customClass="UnwindFavoritesSegue" customModule="BankexWallet" customModuleProvider="target" unwindAction="backWithSegue:" id="fj5-Hr-Z6u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10S-ls-J8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="OYh-gc-kDI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1854" y="3995"/>
         </scene>

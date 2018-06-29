@@ -61,12 +61,18 @@ class ChooseFeeViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func gasPriceSliderValueChanged(_ sender: UISlider) {
-        gasPriceTextField.text = String(describing: Int(sender.value))
+        let y = yFunc(x: sender.value)
+        gasPriceTextField.text = String(describing: y.roundToDecimals())
+    }
+    
+    func yFunc(x: Float) -> Float {
+        return x * x
     }
     
     
     @IBAction func gasLimitSliderValueChanged(_ sender: UISlider) {
-        gasLimitTextField.text = String(describing: Int(sender.value))
+        let y = yFunc(x: sender.value)
+        gasLimitTextField.text = String(describing: Int(y))
     }
     
     
@@ -111,16 +117,16 @@ class ChooseFeeViewController: UIViewController {
         let initialGasPrice: Float = Float(gasPriceInt / BigUInt(pow(10.0, 9.0)))
         let initialGasLimit: Float = Float(gasLimitInt)
         
-        gasPriceSlider.minimumValue = 0.5
-        gasPriceSlider.maximumValue = 200
-        gasPriceSlider.value = initialGasPrice
+        gasPriceSlider.minimumValue = sqrt(0.5)
+        gasPriceSlider.maximumValue = sqrt(200)
+        gasPriceSlider.value = sqrt(initialGasPrice)
         gasPriceTextField.text = String(describing: initialGasPrice)
         
         
         gasLimitSlider.minimumValue = 0
-        gasLimitSlider.maximumValue = 10000000
-        gasLimitSlider.value = initialGasLimit
-        gasLimitTextField.text = String(describing: initialGasLimit)
+        gasLimitSlider.maximumValue = sqrt(10000000)
+        gasLimitSlider.value = sqrt(initialGasLimit)
+        gasLimitTextField.text = String(describing: Int(initialGasLimit))
         gasPriceTextField.placeholder = String(describing: gasPriceSlider.minimumValue) + "-" + String(describing: gasPriceSlider.maximumValue)
         gasLimitTextField.placeholder = String(describing: gasLimitSlider.minimumValue) + "-" + String(describing: gasLimitSlider.maximumValue)
     }
@@ -243,5 +249,13 @@ extension ChooseFeeViewController: UITextFieldDelegate {
         return true
     }
 }
+
+public extension Float {
+    func roundToDecimals(decimals: Int = 2) -> Float {
+        let multiplier = Float(10^decimals)
+        return (multiplier * self).rounded() / multiplier
+    }
+}
+
 
 

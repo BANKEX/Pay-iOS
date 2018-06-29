@@ -61,6 +61,8 @@ Retriable {
     @IBOutlet weak var interDataAndBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var additionalDataSeparator: UIView!
     
+    var button: UIButton!
+    
     // MARK: Services
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
@@ -76,9 +78,9 @@ Retriable {
     override func viewDidLoad() {
         super.viewDidLoad()
         nextButton.isEnabled = false
-        configureWalletInfo()
         addTokensButton()
         addBackButton()
+        
         
         additionalDataView.removeFromSuperview()
         additionalDataSeparator.removeFromSuperview()
@@ -86,7 +88,6 @@ Retriable {
 
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
             self.updateTopLayout()
-            self.hideTokensList(self)
 
         }
         updateTopLayout()
@@ -104,6 +105,7 @@ Retriable {
         super.viewWillAppear(animated)
         enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
         navigationItem.title = "Send"
+        configureWalletInfo()
     }
     
     func updateTopLayout() {
@@ -118,34 +120,15 @@ Retriable {
     
     func configureWalletInfo() {
         let keyService = SingleKeyServiceImplementation()
-        utilsService = UtilTransactionsServiceImplementation()
         addressLabel.text = keyService.selectedWallet()?.address
         walletNameLabel.text = keyService.selectedWallet()?.name
-        tokenSymbolLabel.text = tokensService.selectedERC20Token().symbol.capitalized
         
-        guard let selectedAddress = keyService.selectedAddress() else {
-            return
-        }
-        utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in
-            switch result {
-            case .Success(let response):
-                // TODO: it shouldn't be here anyway and also, lets move to background thread
-                let formattedAmount = Web3.Utils.formatToEthereumUnits(response,
-                                                                       toUnits: .eth,
-                                                                       decimals: 4,
-                                                                       fallbackToScientific: true)
-                self.amountLabel.text = formattedAmount!
-            case .Error(let error):
-                self.amountLabel.text = "..."
-                
-                print("\(error)")
-            }
-        }
+
     }
     
     func addTokensButton() {
         
-        let button = UIButton(type: .system)
+        button = UIButton(type: .system)
         button.setImage(UIImage(named: "Arrow Down"), for: .normal)
         button.setTitle("ETH", for: .normal)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
@@ -164,7 +147,8 @@ Retriable {
     }
     
     @objc func showTokensButtonTapped() {
-        print("Hello")
+        navigationController?.navigationBar.isHidden = true
+        self.performSegue(withIdentifier: "ShowTokensList", sender: nil)
     }
     
     @objc func backButtonTapped() {
@@ -194,6 +178,7 @@ Retriable {
             vc.configure(senderDict)
             vc.sendEthService = self.sendEthService
         }
+        
         guard segue.identifier == "showSending",
             let confirmation = segue.destination as? SendingResultInformation else {
                 return
@@ -205,30 +190,30 @@ Retriable {
     // MARK: Actions
     @IBOutlet weak var dimmingView: UIView!
     @IBOutlet weak var containerView: UIView!
-    @IBAction func showTokensList(_ sender: UIButton) {
-        guard (CustomERC20TokensServiceImplementation().availableTokensList()?.count ?? 1) > 1 else {
-            return
-        }
-        dimmingView.alpha = 0
-        containerView.alpha = 0
-        dimmingView.isHidden = false
-        containerView.isHidden = false
-        UIView.animate(withDuration: 0.3) {
-            self.dimmingView.alpha = 1
-            self.containerView.alpha = 1
-        }
-    }
-    
-
-    @IBAction func hideTokensList(_ sender: Any) {
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
-            self.dimmingView.alpha = 0
-            self.containerView.alpha = 0
-        }) { (_) in
-            self.dimmingView.isHidden = true
-            self.containerView.isHidden = true
-        }
-    }
+//    @IBAction func showTokensList(_ sender: UIButton) {
+//        guard (CustomERC20TokensServiceImplementation().availableTokensList()?.count ?? 1) > 1 else {
+//            return
+//        }
+//        dimmingView.alpha = 0
+//        containerView.alpha = 0
+//        dimmingView.isHidden = false
+//        containerView.isHidden = false
+//        UIView.animate(withDuration: 0.3) {
+//            self.dimmingView.alpha = 1
+//            self.containerView.alpha = 1
+//        }
+//    }
+//    
+//
+//    @IBAction func hideTokensList(_ sender: Any) {
+//        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+//            self.dimmingView.alpha = 0
+//            self.containerView.alpha = 0
+//        }) { (_) in
+//            self.dimmingView.isHidden = true
+//            self.containerView.isHidden = true
+//        }
+//    }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         guard let amount = amountTextfield.text,
@@ -432,7 +417,8 @@ Retriable {
     // MARK: Balance
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     func updateBalance() {
-        tokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
+        currencySymbolLabel.text = tokensService.selectedERC20Token().symbol.uppercased()
+        button.setTitle(tokensService.selectedERC20Token().symbol.uppercased(), for: .normal) 
 
         guard let selectedAddress = keysService.selectedAddress() else {
             return
@@ -443,6 +429,7 @@ Retriable {
                 print("\(response)")
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
                 let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
+                self.amountLabel.text = formattedAmount
             case .Error(let error):
                 print("\(error)")
             }
