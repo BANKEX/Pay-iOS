@@ -97,9 +97,10 @@ class ConfirmViewController: UITableViewController {
     }
     //Just try to send the transaction. (Just a test)
     @IBAction func sendTapped() {
+        var sendEthService:SendEthService = tokenService.selectedERC20Token().address.isEmpty ? SendEthServiceImplementation() : ERC20TokenContractMethodsServiceImplementation()
+        let token  = tokenService.selectedERC20Token()
+        let model = ETHTransactionModel(from: fromAddr, to: toLabel.text ?? "", amount: amount, date: Date(), token: token, key:keyService.selectedKey()!)
         self.performSegue(withIdentifier: "waitSegue", sender: nil)
-        var sendEthService = SendEthServiceImplementation()
-        let model = ETHTransactionModel(from: fromAddr, to: toLabel.text!, amount: amount, date: Date(), token: tokenService.selectedERC20Token(), key: keyService.selectedKey()!)
         sendEthService.send(transactionModel: model, transaction: transaction) { (result) in
             switch result {
             case .Success(let result):
