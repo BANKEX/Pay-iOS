@@ -19,7 +19,6 @@ class ConfirmViewController: UITableViewController {
     @IBOutlet weak var amountLabel:UILabel!
     @IBOutlet weak var feeLabel:UILabel!
     @IBOutlet weak var gasLimitLabel:UILabel!
-    @IBOutlet weak var totalLabel:UILabel!
     
     
     //Properties
@@ -32,11 +31,10 @@ class ConfirmViewController: UITableViewController {
     var gasPrice:String!
     var gasLimit:String!
     var transaction:TransactionIntermediate!
-    var fee:String!
-    var amount:String!
-    var totalFee:String {
-        return String(formattedTotalFee())
+    var fee:Double {
+        return formattedFee()
     }
+    var amount:String!
     
     let tokenService = CustomERC20TokensServiceImplementation()
     let keyService = SingleKeyServiceImplementation()
@@ -76,7 +74,7 @@ class ConfirmViewController: UITableViewController {
         toLabel.text = transaction.transaction.to.address
         amountLabel.text = amount
         fromLabel.text = fromAddr
-        totalLabel.text = totalFee
+        feeLabel.text = String(fee)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,9 +90,9 @@ class ConfirmViewController: UITableViewController {
         return addr
     }
     
-    func formattedTotalFee() -> Int {
-        guard let gasPrice = Int(self.gasPrice) else { return 0 }
-        guard let gasLimit = Int(self.gasLimit) else { return 0 }
+    func formattedFee() -> Double {
+        guard let gasPrice = Double(self.gasPrice) else { return 0 }
+        guard let gasLimit = Double(self.gasLimit) else { return 0 }
         return gasPrice * gasLimit
     }
     //Just try to send the transaction. (Just a test)

@@ -2079,66 +2079,30 @@ to find token</string>
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="239.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGY-hp-ZhY">
-                                                    <rect key="frame" x="15" y="10" width="65" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dja-cq-PqH">
-                                                    <rect key="frame" x="15" y="59" width="33" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0001442" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCY-Hw-dI6">
-                                                    <rect key="frame" x="15" y="33" width="84" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HM-vQ-yl2" userLabel="ContainerBtn">
-                                                    <rect key="frame" x="0.0" y="80" width="375" height="159.5"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cO5-Jy-yQJ">
-                                                            <rect key="frame" x="45" y="54" width="285" height="50"/>
-                                                            <color key="backgroundColor" red="0.13725490196078433" green="0.50980392156862742" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="Wg9-e4-2uC"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                            <state key="normal" title="Send">
-                                                                <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </state>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                    <integer key="value" value="8"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="sendTapped" destination="RWz-vE-6br" eventType="touchUpInside" id="k5c-xa-4ET"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cO5-Jy-yQJ">
+                                                    <rect key="frame" x="61" y="94" width="253" height="50"/>
+                                                    <color key="backgroundColor" red="0.13725490196078433" green="0.50980392156862742" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="cO5-Jy-yQJ" firstAttribute="centerY" secondItem="6HM-vQ-yl2" secondAttribute="centerY" id="nJR-XJ-ZOJ"/>
-                                                        <constraint firstItem="cO5-Jy-yQJ" firstAttribute="leading" secondItem="6HM-vQ-yl2" secondAttribute="leading" constant="45" id="xGD-N6-hwQ"/>
-                                                        <constraint firstAttribute="trailing" secondItem="cO5-Jy-yQJ" secondAttribute="trailing" constant="45" id="znJ-0R-b1d"/>
+                                                        <constraint firstAttribute="height" constant="50" id="Wg9-e4-2uC"/>
                                                     </constraints>
-                                                </view>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <state key="normal" title="Send">
+                                                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="sendTapped" destination="RWz-vE-6br" eventType="touchUpInside" id="k5c-xa-4ET"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="VGY-hp-ZhY" firstAttribute="top" secondItem="KhX-mJ-vWg" secondAttribute="top" constant="10" id="0ka-F0-1dk"/>
-                                                <constraint firstAttribute="bottom" secondItem="6HM-vQ-yl2" secondAttribute="bottom" id="185-nn-1ec"/>
-                                                <constraint firstItem="dja-cq-PqH" firstAttribute="top" secondItem="eCY-Hw-dI6" secondAttribute="bottom" constant="5" id="b2l-tg-8ja"/>
-                                                <constraint firstItem="eCY-Hw-dI6" firstAttribute="top" secondItem="VGY-hp-ZhY" secondAttribute="bottom" constant="5" id="koC-cN-WQh"/>
-                                                <constraint firstItem="eCY-Hw-dI6" firstAttribute="leading" secondItem="KhX-mJ-vWg" secondAttribute="leading" constant="15" id="myg-Pd-yL2"/>
-                                                <constraint firstItem="6HM-vQ-yl2" firstAttribute="leading" secondItem="KhX-mJ-vWg" secondAttribute="leading" id="nds-lW-XjQ"/>
-                                                <constraint firstItem="VGY-hp-ZhY" firstAttribute="leading" secondItem="KhX-mJ-vWg" secondAttribute="leading" constant="15" id="rfP-fL-YbV"/>
-                                                <constraint firstItem="dja-cq-PqH" firstAttribute="leading" secondItem="KhX-mJ-vWg" secondAttribute="leading" constant="15" id="shX-g3-Lfd"/>
-                                                <constraint firstAttribute="trailing" secondItem="6HM-vQ-yl2" secondAttribute="trailing" id="vf0-ee-5O3"/>
-                                                <constraint firstItem="6HM-vQ-yl2" firstAttribute="top" secondItem="dja-cq-PqH" secondAttribute="bottom" id="zSJ-S4-lxO"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="cO5-Jy-yQJ" secondAttribute="trailing" constant="45" id="5nN-sF-mbf"/>
+                                                <constraint firstItem="cO5-Jy-yQJ" firstAttribute="leading" secondItem="KhX-mJ-vWg" secondAttribute="leadingMargin" constant="45" id="D2c-9z-O7A"/>
+                                                <constraint firstItem="cO5-Jy-yQJ" firstAttribute="centerY" secondItem="KhX-mJ-vWg" secondAttribute="centerY" id="OkT-NT-YUq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2157,7 +2121,6 @@ to find token</string>
                         <outlet property="gasLimitLabel" destination="6ea-TG-i6s" id="iBE-5B-Utq"/>
                         <outlet property="gasPriceLabel" destination="2PL-6K-X1w" id="rb7-GP-kSk"/>
                         <outlet property="toLabel" destination="xo6-PQ-mdj" id="rt9-fm-vUY"/>
-                        <outlet property="totalLabel" destination="eCY-Hw-dI6" id="gdI-kp-aqC"/>
                         <segue destination="sAg-Vp-s64" kind="show" identifier="showError1" id="c8a-gg-hhv"/>
                         <segue destination="5w2-uu-h6s" kind="show" identifier="waitSegue" id="6L4-5Q-eHX"/>
                         <segue destination="ygp-st-s37" kind="show" identifier="successSegue" id="qjw-ue-d50"/>
