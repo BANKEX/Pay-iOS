@@ -27,9 +27,10 @@ class GenericWalletCreationContainer: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = walletCreationMode.title()
-        privateKeyLabel.borderWidth = 3
-        passphraseLabel.borderWidth = 3
-        
+//        privateKeyLabel.borderWidth = 3
+//        passphraseLabel.borderWidth = 3
+        privateKeyLabel.layer.borderWidth = 3
+        passphraseLabel.layer.borderWidth = 3
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,9 +44,11 @@ class GenericWalletCreationContainer: UIViewController {
         }
         privateKeyButton.isSelected = false
         passphraseButton.isSelected = true
-        privateKeyLabel.borderColor = UIColor.clear
+        //privateKeyLabel.borderColor = UIColor.clear
+        privateKeyLabel.layer.borderColor = UIColor.clear.cgColor
         privateKeyLabel.textColor = WalletColors.defaultGreyText.color()
-        passphraseLabel.borderColor = WalletColors.defaultDarkBlueButton.color()
+        //passphraseLabel.borderColor = WalletColors.defaultDarkBlueButton.color()
+        passphraseLabel.layer.borderColor = WalletColors.defaultDarkBlueButton.color().cgColor
         passphraseLabel.textColor = WalletColors.blueText.color()
         importPrivateKeyContainer.isHidden = true
         importPassphraseContainer.isHidden = false
@@ -58,9 +61,11 @@ class GenericWalletCreationContainer: UIViewController {
         }
         privateKeyButton.isSelected = true
         passphraseButton.isSelected = false
-        passphraseLabel.borderColor = UIColor.clear
+        //passphraseLabel.borderColor = UIColor.clear
+        passphraseLabel.layer.borderColor = UIColor.clear.cgColor
         passphraseLabel.textColor = WalletColors.defaultGreyText.color()
-        privateKeyLabel.borderColor = WalletColors.defaultDarkBlueButton.color()
+        //privateKeyLabel.borderColor = WalletColors.defaultDarkBlueButton.color()
+        privateKeyLabel.layer.borderColor = WalletColors.defaultDarkBlueButton.color().cgColor
         privateKeyLabel.textColor = WalletColors.blueText.color()
         importPrivateKeyContainer.isHidden = false
         importPassphraseContainer.isHidden = true
