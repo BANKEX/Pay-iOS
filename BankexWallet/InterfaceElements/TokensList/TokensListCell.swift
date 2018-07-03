@@ -24,9 +24,8 @@ class TokensListCell: UITableViewCell {
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var keyLabel: UILabel!
     
-    @IBOutlet weak var infoButton: TokensListCellButtonInfo!
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var tokensListCellInfoButton: TokensListCellButtonInfo!
+    @IBOutlet weak var deleteButton: TokensListCellButton!
+    @IBOutlet weak var tokensListCellInfoButton: TokensListCellButton!
     
     var selectedToken: ERC20TokenModel?
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
@@ -92,12 +91,12 @@ class TokensListCell: UITableViewCell {
         deleteButton.setTitle(token.address, for: .normal)
         deleteButton.titleLabel?.isHidden = true
         
+        deleteButton.chosenToken = token
         tokensListCellInfoButton.chosenToken = token
     }
 }
 
-class TokensListCellButtonInfo: UIButton {
+class TokensListCellButton: UIButton {
     var chosenToken: ERC20TokenModel? = nil
-    
 }
 

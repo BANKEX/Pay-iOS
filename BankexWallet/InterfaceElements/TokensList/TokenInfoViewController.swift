@@ -8,12 +8,16 @@
 
 import UIKit
 
-class TokenInfoViewController: UIViewController{
+class TokenInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-
-    var interactor:Interactor? = nil
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var walletName: UILabel!
     
-    var tokenInfo: [String:String] = [:]
+    let keysService: SingleKeyService  = SingleKeyServiceImplementation()
+    
+    var interactor:Interactor?
+    
+    var token: ERC20TokenModel?
     
     @IBAction func close(sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -47,6 +51,39 @@ class TokenInfoViewController: UIViewController{
             break
         }
     }
+    
+    override func viewDidLoad() {
+        if token == nil {
+            walletName.text = "Error in token"
+        } else if keysService.selectedWallet()?.name == nil {
+            walletName.text = "Error in wallet"
+        } else {
+            walletName.text = keysService.selectedWallet()?.name
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (token != nil) ? 3 : 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TokenInfoListCell") as! TokenInfoListCell
+        guard token != nil else {return cell}
+        switch indexPath.row {
+        case TokenInfoRaws.address.rawValue :
+            cell.configure(with: "Address", value: token?.address)
+        case TokenInfoRaws.currency.rawValue :
+            cell.configure(with: "Currency", value: token?.name)
+        case TokenInfoRaws.decimals.rawValue :
+            cell.configure(with: "Decimals", value: token?.decimals)
+        default:
+            break
+        }
+        return cell
+        
+    }
+    
+    
   
     
 }

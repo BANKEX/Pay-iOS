@@ -28,6 +28,40 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var walletData = WalletData()
     
+    var chosenToken: ERC20TokenModel?
+    
+    @IBAction func editButtonTouched(_ sender: UIButton) {
+        editEnabled = !editEnabled
+        editButton.setTitle(editEnabled ? "Cancel" : "Edit", for: .normal)
+        tableView.reloadData()
+    }
+    
+    @IBAction func deleteTokenTouched(_ sender: TokensListCellButton) {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete",
+                                      style: .destructive,
+                                      handler: { (action) in
+                                        guard let address = sender.chosenToken?.address else { return }
+                                        // TODO: it's not working
+                                        print("delete tapped")
+                                        self.service.deleteToken(with: address)
+                                        self.updateTableView()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel",
+                                      style: .cancel,
+                                      handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
+    }
+    
+    @IBAction func infoTokenTouched(_ sender: TokensListCellButton) {
+        guard let tokenForInfo = sender.chosenToken else { return }
+        chosenToken = tokenForInfo
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -63,6 +97,14 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 
             })
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? TokenInfoViewController {
+            destinationViewController.transitioningDelegate = self
+            destinationViewController.token = chosenToken ?? nil
+            destinationViewController.interactor = interactor
         }
     }
 
@@ -160,50 +202,6 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return headerView
 
-    }
-    
-    // MARK: Table view methods
-    
-    @IBAction func editButtonTouched(_ sender: UIButton) {
-        editEnabled = !editEnabled
-        editButton.setTitle(editEnabled ? "Cancel" : "Edit", for: .normal)
-        tableView.reloadData()
-    }
-    
-    @IBAction func deleteTokenTouched(_ sender: UIButton) {
-        
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Delete",
-                                      style: .destructive,
-                                      handler: { (action) in
-            guard let address = sender.titleLabel?.text else { return }
-            // TODO: it's not working
-            print("delete tapped")
-            self.service.deleteToken(with: address)
-            self.updateTableView()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel",
-                                      style: .cancel,
-                                      handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-
-        
-    }
-    
-    @IBAction func infoTokenTouched(_ sender: TokensListCellButtonInfo) {
-        guard let address = sender.chosenToken else { return }
-        print(address)
-        
-
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? TokenInfoViewController {
-            destinationViewController.transitioningDelegate = self
-            //destinationViewController.tokenInfo = ["Address":"]
-            destinationViewController.interactor = interactor
-        }
     }
     
 }

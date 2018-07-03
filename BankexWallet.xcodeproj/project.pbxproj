@@ -34,6 +34,7 @@
 		E23B5AEA20EA8DE800DC7F32 /* DismessAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23B5AE920EA8DE800DC7F32 /* DismessAnimator.swift */; };
 		E23B5AEC20EA90A900DC7F32 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23B5AEB20EA90A900DC7F32 /* Interactor.swift */; };
 		E23B5AEE20EA95EF00DC7F32 /* TokenInfoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23B5AED20EA95EF00DC7F32 /* TokenInfoListCell.swift */; };
+		E23B5AF020EB7CAA00DC7F32 /* TokensListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23B5AEF20EB7CA900DC7F32 /* TokensListService.swift */; };
 		E2DBE35220E3EABF00E7BB14 /* TokensListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DBE35120E3EABF00E7BB14 /* TokensListCell.swift */; };
 		F004A1F020691FE300E3970A /* SelectNetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F004A1EF20691FE300E3970A /* SelectNetworkController.swift */; };
 		F00E460B2073CFA300387B96 /* WalletCreationTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E460A2073CFA300387B96 /* WalletCreationTypeController.swift */; };
@@ -142,12 +143,13 @@
 		CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.release.xcconfig"; sourceTree = "<group>"; };
-		E23B5AC820E653CE00DC7F32 /* WalletTabService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTabService.swift; sourceTree = "<group>"; };
+		E23B5AC820E653CE00DC7F32 /* WalletTabService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WalletTabService.swift; path = ../../../WalletTabService.swift; sourceTree = "<group>"; };
 		E23B5ACA20E67B8000DC7F32 /* WalletData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletData.swift; sourceTree = "<group>"; };
 		E23B5AE620EA8D5C00DC7F32 /* TokenInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInfoViewController.swift; sourceTree = "<group>"; };
 		E23B5AE920EA8DE800DC7F32 /* DismessAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismessAnimator.swift; sourceTree = "<group>"; };
 		E23B5AEB20EA90A900DC7F32 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		E23B5AED20EA95EF00DC7F32 /* TokenInfoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInfoListCell.swift; sourceTree = "<group>"; };
+		E23B5AEF20EB7CA900DC7F32 /* TokensListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensListService.swift; sourceTree = "<group>"; };
 		E2DBE35120E3EABF00E7BB14 /* TokensListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensListCell.swift; sourceTree = "<group>"; };
 		F004A1EF20691FE300E3970A /* SelectNetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkController.swift; sourceTree = "<group>"; };
 		F00E460A2073CFA300387B96 /* WalletCreationTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreationTypeController.swift; sourceTree = "<group>"; };
@@ -372,9 +374,10 @@
 		E23B5AC320E645D000DC7F32 /* TokensList */ = {
 			isa = PBXGroup;
 			children = (
-				E2DBE35120E3EABF00E7BB14 /* TokensListCell.swift */,
 				E23B5AE620EA8D5C00DC7F32 /* TokenInfoViewController.swift */,
 				E23B5AED20EA95EF00DC7F32 /* TokenInfoListCell.swift */,
+				E2DBE35120E3EABF00E7BB14 /* TokensListCell.swift */,
+				E23B5AEF20EB7CA900DC7F32 /* TokensListService.swift */,
 			);
 			path = TokensList;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				F0FF1C73205551350051D894 /* RecipientsAddressesService.swift in Sources */,
 				F05C59FE20A38C4600F22E3F /* FavoritesCollectionViewCell.swift in Sources */,
 				F00E46202076195C00387B96 /* FavouritesListWithCollectionCell.swift in Sources */,
+				E23B5AF020EB7CAA00DC7F32 /* TokensListService.swift in Sources */,
 				F0B1B4C5205944E1009D76D5 /* CustomERC20TokensService.swift in Sources */,
 				F0B1B4D2205AAC95009D76D5 /* CreateTokenController.swift in Sources */,
 				E23B5AEE20EA95EF00DC7F32 /* TokenInfoListCell.swift in Sources */,
