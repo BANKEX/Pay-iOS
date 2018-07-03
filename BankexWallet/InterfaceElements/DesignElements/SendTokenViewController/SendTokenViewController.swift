@@ -17,6 +17,7 @@ protocol FavoriteInputController: class {
 
 }
 
+
 class SendTokenViewController: UIViewController,
 UITextFieldDelegate,
 QRCodeReaderViewControllerDelegate,
@@ -72,11 +73,14 @@ Retriable {
     var selectedFavoriteName: String?
     var selectedFavoriteAddress: String?
     
+    let touchMe = TouchIDAuthentication()
+    
     // MARK: Lifecycle
     @IBAction func back(segue:UIStoryboardSegue) { }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         nextButton.isEnabled = false
         addTokensButton()
         addBackButton()
@@ -296,6 +300,26 @@ Retriable {
 
     @IBAction func emptySpaceTapped(_ sender: Any) {
         view.endEditing(false)
+    }
+    
+    @IBAction func getPasswordByTouchID(_ sender: Any) {
+        if #available(iOS 11.0, *) {
+            touchMe.authenticateUser { (message) in
+                if let message = message {
+                    let alertView = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
+                    alertView.addAction(okAction)
+                    self.present(alertView, animated: true, completion: nil)
+                } else {
+                    //TODO: - Retrieve password from keystore here, for example
+                }
+            }
+        } else {
+            let alertView = UIAlertController(title: "Error", message: "Not avalible on current iOS version", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertView.addAction(okAction)
+            self.present(alertView, animated: true, completion: nil)
+        }
     }
     
     // MARK: TextField Delegate
