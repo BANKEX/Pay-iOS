@@ -158,8 +158,8 @@ FavoriteSelectionDelegate {
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
-        if let firstTwo = sendEthService.getAllTransactions()?.prefix(2) {
-            transactionsToShow = Array(firstTwo)
+        if let firstThree = sendEthService.getAllTransactions()?.prefix(3) {
+            transactionsToShow = Array(firstThree)
         }
         var arrayOfTransactions = [String]()
         switch transactionsToShow.count {
@@ -167,9 +167,11 @@ FavoriteSelectionDelegate {
             arrayOfTransactions = ["EmptyLastTransactionsCell"]
         case 1:
             arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell","BottomRoundedCell"]
+        case 2:
+            arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "BottomRoundedCell"]
             
         default:
-            arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "BottomRoundedCell"]
+            arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "BottomRoundedCell"]
         }
         var arrayOfFavorites = [String]()
         if let firstThree = favService.getAllStoredAddresses()?.prefix(3) {
