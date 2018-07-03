@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-@IBDesignable extension UIView {
+extension UIView {
     
     /* The color of the shadow. Defaults to opaque black. Colors created
      * from patterns are currently NOT supported. Animatable. */
