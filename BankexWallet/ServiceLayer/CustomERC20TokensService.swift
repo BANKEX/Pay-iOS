@@ -219,7 +219,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
         do {
             try self.db.operation { (context, save) in
                 if let token = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address == %@", address))).first {
-                    token.isAdded = true
+                    token.isAdded = false
                 }
                 save()
             }
