@@ -9,7 +9,7 @@
 import UIKit
 import SugarRecord
 protocol RecipientsAddressesService {
-    func store(address: String, with name: String, completionHandler: @escaping (Error?) -> Void)
+    func store(address: String, with name: String, isEditing: Bool, completionHandler: @escaping (Error?) -> Void)
     func getAllStoredAddresses() -> [FavoriteModel]?
     func clearAllSavedAddresses()
     func delete(with address: String, completionHandler: (() -> Void)?)
@@ -32,16 +32,38 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         return false
     }
     
-    func store(address: String, with name: String, completionHandler: @escaping (Error?) -> Void) {
+    func store(address: String, with name: String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void) {
         do {
             try db.operation({ (context, save) in
                 
-                if let _ = try context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "name == %@", name))).first {
-                    DispatchQueue.main.async {
-                        let error = NameError(errorDescription: "Name already exists in the database")
-                        completionHandler(error)
+                if let contact = try context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "address == %@", address))).first {
+                    if editing {
+                        contact.address = address
+                        contact.name = name
+                        save()
+                        DispatchQueue.main.async {
+                            completionHandler(nil)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            let error = NameError(errorDescription: "Address already exists in the database")
+                            completionHandler(error)
+                        }
                     }
-                    
+                } else if let contact = try context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "name == %@", name))).first {
+                    if editing {
+                        contact.address = address
+                        contact.name = name
+                        save()
+                        DispatchQueue.main.async {
+                            completionHandler(nil)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            let error = NameError(errorDescription: "Name already exists in the database")
+                            completionHandler(error)
+                        }
+                    }
                 } else {
                     let recepientAddress: FavoritesAddress = try context.new()
                     recepientAddress.name = name
@@ -53,8 +75,6 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
                         completionHandler(nil)
                     }
                 }
-                
-                
             })
         } catch {
            completionHandler(error)

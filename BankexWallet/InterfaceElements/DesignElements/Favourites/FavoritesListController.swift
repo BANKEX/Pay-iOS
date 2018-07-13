@@ -37,6 +37,9 @@ FavoritesHandling {
             selectedName = nil
             selectedAddress = nil
         }
+        if let controller = segue.destination as? CreateNewFavoriteController {
+            controller.editingContact = true
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
