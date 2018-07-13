@@ -67,11 +67,21 @@ class CreateNewFavoriteController: UIViewController,
     let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     @IBAction func saveContact(_ sender: Any) {
         
+        guard let name = nameTextfield.text, !name.isEmpty else {
+            nameTextfield.attributedPlaceholder = NSAttributedString(string: "Please, enter the name of the contact", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
+            UIView.animate(withDuration: 0.5, animations: {
+                self.nameTextfield.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            }) { (_) in
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.nameTextfield.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                })
+            }
+            return
+        }
         guard let ethAddress = EthereumAddress(addressTextfield.text ?? "") else {
                 return
         }
         guard let address = addressTextfield.text,
-            let name = nameTextfield.text,
             !favoritesService.contains(address: addressTextfield.text ?? "") else {
                 return
         }
