@@ -91,9 +91,9 @@ MFMailComposeViewControllerDelegate {
         }
         else if settingToShow == "TwitterCell" {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(URL(string: "https://twitter.com/BankExProtocol")!, options: [:], completionHandler: nil)
+                UIApplication.shared.open(URL(string: "https://twitter.com/BANKEX")!, options: [:], completionHandler: nil)
             } else {
-                UIApplication.shared.openURL(URL(string: "https://twitter.com/BankExProtocol")!)
+                UIApplication.shared.openURL(URL(string: "https://twitter.com/BANKEX")!)
             }
         }
         else if settingToShow == "FacebookCell" {

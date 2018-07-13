@@ -34,6 +34,8 @@ class CreateNewFavoriteController: UIViewController,
     // MARK: Inputs
     var selectedFavoriteName: String?
     var selectedFavoriteAddress: String?
+    
+    var editingContact: Bool = false //if first creating account
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,16 +81,18 @@ class CreateNewFavoriteController: UIViewController,
             return
         }
         guard let ethAddress = EthereumAddress(addressTextfield.text ?? "") else {
-                return
+            return
         }
         guard let address = addressTextfield.text,
             !favoritesService.contains(address: addressTextfield.text ?? "") else {
                 return
         }
-        favoritesService.store(address: address, with: name) { (error) in
+        favoritesService.store(address: address, with: name, isEditing: editingContact) { (error) in
             print(error?.localizedDescription ?? "")
         }
         navigationController?.popToRootViewController(animated: true)
+        
+        
     }
     
     func addContact(with address: String) {
