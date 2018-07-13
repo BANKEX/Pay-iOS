@@ -1,0 +1,14 @@
+language: swift
+osx_image: xcode9.4
+
+# execute any number of scripts before the test run, custom env's are available as variables
+before_script:
+  - sed -i '' 's@CRASHLYTICSTOKEN@$CRASHLYTICSTOKEN@' fastlane/Fastfile
+  - sed -i '' 's@CRASHLYTICSSECRET@$CRASHLYTICSSECRET@' fastlane/Fastfile
+
+script:
+  - fastlane build
+  - fastlane upload
+
+branches:
+  only: ["develop"]

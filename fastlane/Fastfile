@@ -1,0 +1,24 @@
+default_platform :ios
+
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+  desc "Build app"
+  lane :build do
+    gem(scheme: "BankexWallet",workspace: "BankexWallet.xcworkspace",export_method: "development",output_name: "bankexwallet.ipa",
+    export_options: {
+      provisioningProfiles: {
+        "com.bankex.pay" => "Profile_Development",
+        "com.bankex.pay" => "Profile_Distribution"
+      }
+    })
+  end
+
+  desc "Crashlytics upload"
+  lane :upload do
+    crashlytics(api_token: "CRASHLYTICSTOKEN",
+             build_secret: "CRASHLYTICSSECRET")
+  end
+end
