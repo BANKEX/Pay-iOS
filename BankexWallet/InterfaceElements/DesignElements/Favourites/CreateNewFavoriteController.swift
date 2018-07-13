@@ -80,17 +80,60 @@ class CreateNewFavoriteController: UIViewController,
             }
             return
         }
-        guard let ethAddress = EthereumAddress(addressTextfield.text ?? "") else {
+        guard let address = addressTextfield.text, !address.isEmpty else {
+            addressTextfield.attributedPlaceholder = NSAttributedString(string: "Please, enter the address of the contact", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
+            UIView.animate(withDuration: 0.5, animations: {
+                self.addressTextfield.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            }) { (_) in
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.addressTextfield.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                })
+            }
             return
         }
-        guard let address = addressTextfield.text,
-            !favoritesService.contains(address: addressTextfield.text ?? "") else {
-                return
+        guard let ethAddress = EthereumAddress(addressTextfield.text ?? "") else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.addressTextfield.textColor = WalletColors.redText.color()
+                self.addressTextfield.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            }) { (_) in
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.addressTextfield.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    self.addressTextfield.textColor = WalletColors.defaultText.color()
+                })
+            }
+            return
         }
         favoritesService.store(address: address, with: name, isEditing: editingContact) { (error) in
-            print(error?.localizedDescription ?? "")
+            if error?.localizedDescription == "Address already exists in the database" {
+                self.addressTextfield.text = ""
+                self.addressTextfield.attributedPlaceholder = NSAttributedString(string: "Address already exists in the database", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.addressTextfield.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                }) { (_) in
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.addressTextfield.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    })
+                }
+                return
+            } else if error?.localizedDescription == "Name already exists in the database" {
+                self.nameTextfield.text = ""
+                self.nameTextfield.attributedPlaceholder = NSAttributedString(string: "Name already exists in the database", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.nameTextfield.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                }) { (_) in
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.nameTextfield.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    })
+                }
+                return
+            } else if error != nil {
+                return
+            } else {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            
         }
-        navigationController?.popToRootViewController(animated: true)
+        
         
         
     }
