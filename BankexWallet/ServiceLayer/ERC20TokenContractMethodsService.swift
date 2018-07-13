@@ -15,7 +15,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
     func send(transactionModel: ETHTransactionModel,
               transaction: TransactionIntermediate,
               with password: String,
-              completion: @escaping (SendEthResult<[String : String]>) -> Void) {
+              completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let result = transaction.send(password: password,
                                           options: transaction.options)

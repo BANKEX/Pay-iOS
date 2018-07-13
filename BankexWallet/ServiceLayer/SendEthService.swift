@@ -52,11 +52,11 @@ protocol SendEthService {
     func send(transactionModel: ETHTransactionModel,
               transaction: TransactionIntermediate,
               with password: String,
-              completion: @escaping (SendEthResult<[String: String]>) -> Void)
+              completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
     
     func send(transactionModel: ETHTransactionModel,
               transaction: TransactionIntermediate, completion:
-        @escaping (SendEthResult<[String: String]>) -> Void)
+        @escaping (SendEthResult<TransactionSendingResult>) -> Void)
     
     func getAllTransactions() -> [ETHTransactionModel]?
     
@@ -66,7 +66,7 @@ protocol SendEthService {
 extension SendEthService {
     func send(transactionModel: ETHTransactionModel,
               transaction: TransactionIntermediate,
-              completion: @escaping (SendEthResult<[String: String]>) -> Void)  {
+              completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)  {
         send(transactionModel: transactionModel,
              transaction: transaction,
              with: "BANKEXFOUNDATION",
@@ -84,7 +84,7 @@ extension SendEthService {
 // TODO: check that correct address will be used
 class SendEthServiceImplementation: SendEthService {
     
-    func send(transactionModel: ETHTransactionModel, transaction: TransactionIntermediate, with password: String, completion: @escaping (SendEthResult<[String : String]>) -> Void) {
+    func send(transactionModel: ETHTransactionModel, transaction: TransactionIntermediate, with password: String, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let result = transaction.send(password: password, options: nil)
             if let error = result.error {
@@ -161,7 +161,7 @@ class SendEthServiceImplementation: SendEthService {
     let db = DBStorage.db    
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
-    func send(transaction: TransactionIntermediate, with password: String = "BANKEXFOUNDATION", completion: @escaping (SendEthResult<[String: String]>) -> Void) {
+    func send(transaction: TransactionIntermediate, with password: String = "BANKEXFOUNDATION", completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         
     }
     
