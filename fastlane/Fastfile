@@ -2,12 +2,31 @@ default_platform :ios
 
 platform :ios do
 
+
+
+#Building
 lane :build do
- setup_travis
- match(type: "development")
- #scan
- gym(clean:true,scheme:"BankexWallet",configuration:"Debug",export_method:"development")
- crashlytics(api_token: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13",
-          build_secret: "2825448f1135487bf64ad36e2b0416ff2d3bf067540a9089c397a793d62d73b7") 
+  setup_travis
+  match(type: "development")
+  #scan
+  gym(clean:true,scheme:"BankexWallet",configuration:"Debug",export_method:"development")
+  crashlytics(api_token: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13",
+           build_secret: "2825448f1135487bf64ad36e2b0416ff2d3bf067540a9089c397a793d62d73b7") 
 end
+
+#after_all do |lane|
+     #This block is called, only if the executed lane was successful
+
+   # slack(
+   #   message: "Task successfully finished.Just verification😉😉😉",slack_url:"https://hooks.slack.com/services/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"
+   # )
+#end
+
+#error do |lane, exception|
+#    slack(
+#      message: exception.message,
+#      success: false,slack_url:"https://hooks.slack.com/services/T6EUZ4QCE/BBP9LHZ1P/#wihvgmn6AtnyERPZrxtgOBrz"
+#    )
+#end
 end
+
