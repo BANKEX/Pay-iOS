@@ -270,7 +270,7 @@ ScreenWithInputs {
     @IBAction func createWalletButtonTapped(_ sender: Any) {
         if mode == .createKey {
             service.createNewSingleAddressWallet(with: walletNameTextField.text,
-                                                 password: enterPrivateTextField.text!,
+                                                 password: passwordTextField.text!,
                                                  completion: { (error) in
                                                     
                                                     guard let _ = error else {

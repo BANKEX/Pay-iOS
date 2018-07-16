@@ -71,29 +71,41 @@ MFMailComposeViewControllerDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let settingToShow = settingsToShow[indexPath.row]
         if settingToShow == "WriteUsCell" {
-            guard (MFMailComposeViewController.canSendMail()) else {
-                return
+            
+            if (MFMailComposeViewController.canSendMail()){
+                let toRecipents = ["wallet@bankexfoundation.org"]
+                let mc: MFMailComposeViewController = MFMailComposeViewController()
+                mc.mailComposeDelegate = self
+                mc.setToRecipients(toRecipents)
+                present(mc, animated: true, completion: nil)
+            } else {
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Sorry :(", message: "You don't have any emails registered on your phone", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alertController.addAction(action)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
             }
-            let toRecipents = ["wallet@bankexfoundation.org"]
-            let mc: MFMailComposeViewController = MFMailComposeViewController()
-            mc.mailComposeDelegate = self
-            mc.setToRecipients(toRecipents)
-            present(mc, animated: true, completion: nil)
+            
         }
         
         else if settingToShow == "RateUsCell" {
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-            } else {
-                // TODO: Don't Forget App Id
-                rateApp(appId: "")
+            DispatchQueue.main.async {
+                if #available(iOS 10.3, *) {
+                    SKStoreReviewController.requestReview()
+                } else {
+                    // TODO: Don't Forget App Id
+                    self.rateApp(appId: "id1411403963")
+                }
             }
+            
         }
         else if settingToShow == "TwitterCell" {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(URL(string: "https://twitter.com/BankExProtocol")!, options: [:], completionHandler: nil)
+                UIApplication.shared.open(URL(string: "https://twitter.com/BANKEX")!, options: [:], completionHandler: nil)
             } else {
-                UIApplication.shared.openURL(URL(string: "https://twitter.com/BankExProtocol")!)
+                UIApplication.shared.openURL(URL(string: "https://twitter.com/BANKEX")!)
             }
         }
         else if settingToShow == "FacebookCell" {

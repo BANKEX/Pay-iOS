@@ -22,11 +22,11 @@ enum CustomTokenError: Error {
 class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
     
     func name(for token: String, completion: @escaping (SendEthResult<String>) -> Void) {
-//        DispatchQueue.global(qos: .userInitiated).async {
-            let contract = self.contract(for: token)
+        //        DispatchQueue.global(qos: .userInitiated).async {
+        let contract = self.contract(for: token)
         if let transaction = contract?.method("name", parameters: [AnyObject](), options: self.defaultOptions()) {
-        
-            transaction.call(options: self.defaultOptions(), onBlock: "latest", callback: { (result) in
+            DispatchQueue.global().async {
+                let result = transaction.call(options: self.defaultOptions(), onBlock: "latest")
                 DispatchQueue.main.async {
                     if let name = result.value?["0"] as? String, !name.isEmpty {
                         completion(SendEthResult.Success(name))
@@ -35,7 +35,7 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
                         completion(SendEthResult.Error(CustomTokenError.badNameError))
                     }
                 }
-            })
+            }
         } else {
             completion(SendEthResult.Error(CustomTokenError.badNameError))
         }
