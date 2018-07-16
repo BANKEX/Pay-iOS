@@ -14,6 +14,143 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="pWT-Ki-qbg">
+            <objects>
+                <viewController id="tIR-RD-pJ7" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dLa-oo-1Nb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0o-XF-oaQ">
+                                <rect key="frame" x="0.0" y="556" width="375" height="111"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="R04-81-t6x">
+                                        <rect key="frame" x="158" y="8" width="59" height="16"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOR-u9-EYf">
+                                                <rect key="frame" x="0.0" y="0.0" width="39" height="16"/>
+                                                <state key="normal" title="NEXT">
+                                                    <color key="titleColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow next" translatesAutoresizingMaskIntoConstraints="NO" id="4tZ-OV-MtC">
+                                                <rect key="frame" x="43" y="0.0" width="16" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="nFt-ye-LRN"/>
+                                                    <constraint firstAttribute="width" constant="16" id="r5Z-QK-3pS"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="R04-81-t6x" firstAttribute="top" secondItem="C0o-XF-oaQ" secondAttribute="top" constant="8" id="JfU-x9-Aal"/>
+                                    <constraint firstItem="R04-81-t6x" firstAttribute="centerX" secondItem="C0o-XF-oaQ" secondAttribute="centerX" id="hhP-yn-5Ob"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OlK-gQ-Ppl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="556"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S28-9N-cVp">
+                                        <rect key="frame" x="66.5" y="151.5" width="243" height="333.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ERC20" translatesAutoresizingMaskIntoConstraints="NO" id="yr6-Em-ZNX">
+                                                <rect key="frame" x="0.0" y="8.5" width="243" height="161"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="ERC20 standart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzQ-Sn-i55">
+                                                <rect key="frame" x="39.5" y="244.5" width="164" height="26.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0aW-eX-Gmg">
+                                                <rect key="frame" x="14.5" y="295" width="213" height="38.5"/>
+                                                <string key="text">Support for any tokens within
+ the Ether network.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GdE-rX-YEr">
+                                                <rect key="frame" x="101.5" y="209.5" width="40" height="10"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWS-Kd-c5X" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="10" id="09f-gW-GiP"/>
+                                                            <constraint firstAttribute="height" constant="10" id="SBE-jl-deT"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCI-cE-E7J" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
+                                                        <rect key="frame" x="15" y="0.0" width="10" height="10"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="NO"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qbj-sq-pfx" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
+                                                        <rect key="frame" x="30" y="0.0" width="10" height="10"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="NO"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="yr6-Em-ZNX" firstAttribute="leading" secondItem="S28-9N-cVp" secondAttribute="leading" id="2jD-LY-O66"/>
+                                            <constraint firstItem="tzQ-Sn-i55" firstAttribute="top" secondItem="GdE-rX-YEr" secondAttribute="bottom" constant="25" id="5Rd-qK-tvr"/>
+                                            <constraint firstItem="0aW-eX-Gmg" firstAttribute="top" secondItem="tzQ-Sn-i55" secondAttribute="bottom" constant="24" id="5tu-5S-SNR"/>
+                                            <constraint firstItem="GdE-rX-YEr" firstAttribute="centerX" secondItem="S28-9N-cVp" secondAttribute="centerX" id="ET2-Jr-006"/>
+                                            <constraint firstItem="GdE-rX-YEr" firstAttribute="top" secondItem="yr6-Em-ZNX" secondAttribute="bottom" constant="40" id="Fo7-Ta-d1d"/>
+                                            <constraint firstAttribute="trailing" secondItem="yr6-Em-ZNX" secondAttribute="trailing" id="Mu0-Mc-v1k"/>
+                                            <constraint firstAttribute="bottom" secondItem="0aW-eX-Gmg" secondAttribute="bottom" id="Tuh-1t-hbZ"/>
+                                            <constraint firstItem="0aW-eX-Gmg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="S28-9N-cVp" secondAttribute="leading" constant="6" id="q5f-mD-861"/>
+                                            <constraint firstItem="0aW-eX-Gmg" firstAttribute="centerX" secondItem="S28-9N-cVp" secondAttribute="centerX" id="udA-xX-j3v"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0aW-eX-Gmg" secondAttribute="trailing" constant="6" id="w8m-X4-HRa"/>
+                                            <constraint firstItem="yr6-Em-ZNX" firstAttribute="top" secondItem="S28-9N-cVp" secondAttribute="top" constant="8" id="ws1-CS-YtC"/>
+                                            <constraint firstItem="tzQ-Sn-i55" firstAttribute="centerX" secondItem="S28-9N-cVp" secondAttribute="centerX" id="x4G-C2-oob"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="S28-9N-cVp" secondAttribute="trailing" constant="6" id="DxM-TF-oZt"/>
+                                    <constraint firstItem="S28-9N-cVp" firstAttribute="centerY" secondItem="OlK-gQ-Ppl" secondAttribute="centerY" constant="40" id="els-E0-nU7"/>
+                                    <constraint firstItem="S28-9N-cVp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OlK-gQ-Ppl" secondAttribute="topMargin" id="rtY-aZ-mcK"/>
+                                    <constraint firstItem="S28-9N-cVp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OlK-gQ-Ppl" secondAttribute="leading" constant="6" id="sFf-QT-kPc"/>
+                                    <constraint firstItem="S28-9N-cVp" firstAttribute="centerX" secondItem="OlK-gQ-Ppl" secondAttribute="centerX" id="xEt-xb-ZCR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="trailing" secondItem="PBJ-d9-wl3" secondAttribute="trailing" id="Gwg-ug-IXF"/>
+                            <constraint firstItem="OlK-gQ-Ppl" firstAttribute="top" secondItem="dLa-oo-1Nb" secondAttribute="top" id="K7l-xF-72j"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="leading" secondItem="PBJ-d9-wl3" secondAttribute="leading" id="SP3-Oh-U86"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="top" secondItem="OlK-gQ-Ppl" secondAttribute="bottom" id="ZWs-sy-uwQ"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="bottom" secondItem="PBJ-d9-wl3" secondAttribute="bottom" id="baG-kF-nmq"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="top" secondItem="OlK-gQ-Ppl" secondAttribute="bottom" id="h95-f8-KiA"/>
+                            <constraint firstItem="OlK-gQ-Ppl" firstAttribute="leading" secondItem="PBJ-d9-wl3" secondAttribute="leading" id="myB-7u-7zX"/>
+                            <constraint firstItem="OlK-gQ-Ppl" firstAttribute="trailing" secondItem="PBJ-d9-wl3" secondAttribute="trailing" id="rfs-lB-1Fp"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="height" secondItem="OlK-gQ-Ppl" secondAttribute="height" multiplier="1:5" id="uv8-ge-EQU"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="top" secondItem="OlK-gQ-Ppl" secondAttribute="bottom" id="zdu-Si-v5k"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PBJ-d9-wl3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8uH-eC-nY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2339" y="2336"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hgm-Hn-E6n">
             <objects>
@@ -3610,7 +3747,7 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuI-8B-5pa">
-                                                <rect key="frame" x="0.0" y="224" width="319" height="50"/>
+                                                <rect key="frame" x="0.0" y="224" width="319" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sal-QD-Ca0">
                                                         <rect key="frame" x="279" y="0.0" width="40" height="40"/>
@@ -3648,14 +3785,14 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0x-Pn-amR" userLabel="sep3">
-                                                <rect key="frame" x="0.0" y="274" width="319" height="1"/>
+                                                <rect key="frame" x="0.0" y="264" width="319" height="1"/>
                                                 <color key="backgroundColor" red="0.75686274509999996" green="0.79215686269999996" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="y1z-5t-brA"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAi-r5-UVz">
-                                                <rect key="frame" x="0.0" y="275" width="319" height="31"/>
+                                                <rect key="frame" x="0.0" y="265" width="319" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwords don't match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7js-k0-dqB">
                                                         <rect key="frame" x="0.0" y="4" width="131.5" height="14.5"/>
@@ -3672,7 +3809,7 @@ minutes, please wait ...</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wd7-27-dFs">
-                                                <rect key="frame" x="0.0" y="306" width="319" height="40"/>
+                                                <rect key="frame" x="0.0" y="296" width="319" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Tl-O1-yhG">
                                                         <rect key="frame" x="0.0" y="0.0" width="129" height="40"/>
@@ -4138,7 +4275,7 @@ be able to restore your wallet!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0c3-a0-7BH">
-                                                <rect key="frame" x="0.0" y="208" width="319" height="40"/>
+                                                <rect key="frame" x="0.0" y="208" width="319" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JV-af-3qh">
                                                         <rect key="frame" x="279" y="0.0" width="40" height="40"/>
@@ -4175,14 +4312,14 @@ be able to restore your wallet!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1vl-ei-5AF" userLabel="sep3">
-                                                <rect key="frame" x="0.0" y="248" width="319" height="1"/>
+                                                <rect key="frame" x="0.0" y="258" width="319" height="1"/>
                                                 <color key="backgroundColor" red="0.75686274509999996" green="0.79215686269999996" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="cDQ-14-6Hy"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKV-dk-li3">
-                                                <rect key="frame" x="0.0" y="249" width="319" height="31"/>
+                                                <rect key="frame" x="0.0" y="259" width="319" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwords don't match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEd-33-v9m">
                                                         <rect key="frame" x="0.0" y="4" width="131.5" height="14.5"/>
@@ -4199,7 +4336,7 @@ be able to restore your wallet!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZq-JJ-Rai">
-                                                <rect key="frame" x="0.0" y="280" width="319" height="50"/>
+                                                <rect key="frame" x="0.0" y="290" width="319" height="40"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nVq-Sl-5QJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="319" height="40"/>
@@ -5759,11 +5896,13 @@ minutes, please wait ...</string>
         <image name="Add_token_icon" width="63" height="55"/>
         <image name="Arrow back" width="20" height="14"/>
         <image name="Arrow down" width="14" height="9"/>
+        <image name="Arrow next" width="16" height="17"/>
         <image name="Bankex_wallet_logo" width="245" height="30"/>
         <image name="Close" width="32" height="32"/>
         <image name="Copy" width="64" height="64"/>
         <image name="Create_wallet" width="62" height="74"/>
         <image name="Done" width="64" height="64"/>
+        <image name="ERC20" width="243" height="161"/>
         <image name="Edit" width="32" height="32"/>
         <image name="Eye open" width="16" height="10"/>
         <image name="Favorites_new_contact" width="40" height="40"/>
