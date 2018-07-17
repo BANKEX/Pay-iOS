@@ -1,5 +1,5 @@
 //
-//  WalletSingleKeyController.swift
+//  SingleKeyWalletController.swift
 //  BankexWallet
 //
 //  Created by Vladislav on 17.07.2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WalletSingleKeyController: UITableViewController {
+class SingleKeyWalletController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
