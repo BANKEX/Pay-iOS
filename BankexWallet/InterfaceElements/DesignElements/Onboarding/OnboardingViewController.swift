@@ -51,12 +51,15 @@ class OnboardingViewController: UIViewController {
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         if circleSelected == 2 {
             self.performSegue(withIdentifier: "toNavigation", sender: nil)
-            //UserDefaults.standard.setValue(false, forKey: "isOnboardingNeeded")
+            UserDefaults.standard.setValue(false, forKey: "isOnboardingNeeded")
         } else {
             delegate?.nextButtonTapped()
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController = segue.destination
+    }
     func configure(with image: String, andCircleSelected circleSelected: Int) {
         self.image = UIImage(named: image)
         name = texts[image]?.0
