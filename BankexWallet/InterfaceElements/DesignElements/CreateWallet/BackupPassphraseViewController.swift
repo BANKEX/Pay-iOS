@@ -10,6 +10,9 @@ import UIKit
 
 class BackupPassphraseViewController: UIViewController {
     @IBOutlet weak var passphraseLabel: UILabel!
+    @IBOutlet weak var passphraseCopiedView: UIView!
+    @IBOutlet weak var nextButton: UIButton!
+    
     let service: HDWalletService = HDWalletServiceImplementation()
     var passphrase: String?
     
@@ -21,6 +24,8 @@ class BackupPassphraseViewController: UIViewController {
     
     @IBAction func copyButtonTapped(_ sender: Any) {
         UIPasteboard.general.string = passphrase
+        passphraseCopiedView.isHidden = false
+        nextButton.isEnabled = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
