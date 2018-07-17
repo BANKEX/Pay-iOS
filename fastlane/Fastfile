@@ -2,16 +2,39 @@ default_platform :ios
 
 platform :ios do
 
+#get access to certificates (new machine)
+lane :certificates do
+  match(app_identifier: ["com.bankex.pay", "com.bankex.pay.dev"], readonly: true)
+end
 
-
-#Building
-lane :build do
+#Link with Travis
+lane :travis do
   setup_travis
-  match(type: "development")
-  #scan
-  gym(clean:true,scheme:"BankexWallet",configuration:"Debug",export_method:"development")
+end
+#Access to Fabric
+lane :crashliticsLogIn do
   crashlytics(api_token: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13",
            build_secret: "2825448f1135487bf64ad36e2b0416ff2d3bf067540a9089c397a793d62d73b7") 
+end
+
+
+#Prod build
+lane :build_appStore do
+  travis
+  match(type: "appstore",app_identifier:"com.bankex.pay")
+  #scan
+  gym(clean:true,scheme:"BankexWallet",export_method:"app-store")
+  crashliticsLogIn
+end
+
+
+#Dev build
+lane :build_Dev do
+  travis
+  match(type: "development",app_identifier:"com.bankex.pay.dev")
+  #scan
+  gym(clean:true,scheme:"BankexWallet",configuration:"Debug",export_method:"development")
+  crashliticsLogIn
 end
 
 #after_all do |lane|
@@ -29,4 +52,5 @@ end
 #    )
 #end
 end
+
 
