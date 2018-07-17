@@ -12,10 +12,8 @@ class WalletBIP32Controller: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-     
+        
     }
-
-  
+    
 
 }
