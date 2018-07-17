@@ -9,8 +9,13 @@
 import UIKit
 
 class WalletCreationTypeController: UIViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        navigationController?.navigationBar.isHidden = false
         guard let controller = segue.destination as? GenericWalletCreationContainer else {
             return
         }

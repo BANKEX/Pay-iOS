@@ -3529,20 +3529,112 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="-2769" y="4562"/>
         </scene>
-        <!--View Controller-->
+        <!--Backup Passphrase View Controller-->
         <scene sceneID="fEM-gO-ISD">
             <objects>
-                <viewController id="Ptd-7b-8Z1" sceneMemberID="viewController">
+                <viewController id="Ptd-7b-8Z1" customClass="BackupPassphraseViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gX9-cb-DsA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AttentionIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ct0-Rf-GPH">
+                                <rect key="frame" x="80" y="114" width="160" height="57"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please copy your passphrase to a safe place. These words are the only way to restore your wallet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAE-W8-Pep">
+                                <rect key="frame" x="20" y="187" width="280" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeM-bQ-MYE">
+                                <rect key="frame" x="30" y="270" width="260" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-ez-tzX">
+                                <rect key="frame" x="40" y="414.5" width="240" height="39.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase copied to clipboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79Q-LU-lZQ">
+                                        <rect key="frame" x="25.5" y="24" width="190.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CopiedIcon" translatesAutoresizingMaskIntoConstraints="NO" id="3YO-89-Bcf">
+                                        <rect key="frame" x="108.5" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="AED-Ne-hiC"/>
+                                            <constraint firstAttribute="height" constant="24" id="RXb-qP-S1c"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="3YO-89-Bcf" firstAttribute="centerX" secondItem="bcL-ez-tzX" secondAttribute="centerX" id="8ya-8n-QMH"/>
+                                    <constraint firstItem="79Q-LU-lZQ" firstAttribute="centerX" secondItem="bcL-ez-tzX" secondAttribute="centerX" id="LIt-9u-GcG"/>
+                                    <constraint firstItem="79Q-LU-lZQ" firstAttribute="top" secondItem="3YO-89-Bcf" secondAttribute="bottom" id="QNt-Ep-osa"/>
+                                    <constraint firstItem="3YO-89-Bcf" firstAttribute="top" secondItem="bcL-ez-tzX" secondAttribute="top" id="aJ5-ma-qZe"/>
+                                    <constraint firstItem="79Q-LU-lZQ" firstAttribute="top" secondItem="3YO-89-Bcf" secondAttribute="bottom" id="bG6-h7-O5J"/>
+                                    <constraint firstAttribute="bottom" secondItem="79Q-LU-lZQ" secondAttribute="bottom" id="h89-n8-oIB"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="oIl-NG-7h4">
+                                <rect key="frame" x="20" y="478" width="280" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbA-t0-Y4q">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.5" height="50"/>
+                                        <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="INq-yt-5dZ"/>
+                                        </constraints>
+                                        <state key="normal" title="Copy">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="copyButtonTapped:" destination="Ptd-7b-8Z1" eventType="touchUpInside" id="Jba-tF-GoL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qm4-Eu-4In">
+                                        <rect key="frame" x="152.5" y="0.0" width="127.5" height="50"/>
+                                        <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ct0-Rf-GPH" firstAttribute="top" secondItem="1Wu-Qq-hAz" secondAttribute="top" constant="50" id="5YK-zD-0Eh"/>
+                            <constraint firstItem="AeM-bQ-MYE" firstAttribute="top" secondItem="UAE-W8-Pep" secondAttribute="bottom" constant="40" id="9JN-BW-gus"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="AeM-bQ-MYE" secondAttribute="trailing" constant="30" id="EQu-zq-QBJ"/>
+                            <constraint firstItem="bcL-ez-tzX" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="40" id="Hym-Oj-C33"/>
+                            <constraint firstItem="UAE-W8-Pep" firstAttribute="top" secondItem="ct0-Rf-GPH" secondAttribute="bottom" constant="16" id="Pbr-kK-3AY"/>
+                            <constraint firstItem="ct0-Rf-GPH" firstAttribute="centerX" secondItem="gX9-cb-DsA" secondAttribute="centerX" id="XMB-EC-ypA"/>
+                            <constraint firstItem="AeM-bQ-MYE" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="30" id="dtf-MJ-Qrz"/>
+                            <constraint firstItem="ct0-Rf-GPH" firstAttribute="width" secondItem="gX9-cb-DsA" secondAttribute="width" multiplier="0.5" id="fVK-gL-kuc"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="bottom" secondItem="oIl-NG-7h4" secondAttribute="bottom" constant="40" id="h9s-pd-wl4"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="oIl-NG-7h4" secondAttribute="trailing" constant="20" id="kdq-OD-CYd"/>
+                            <constraint firstItem="oIl-NG-7h4" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="20" id="lN7-nF-dSN"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="UAE-W8-Pep" secondAttribute="trailing" constant="20" id="nJh-FR-VrR"/>
+                            <constraint firstItem="UAE-W8-Pep" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="20" id="sB9-Wo-mME"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="bcL-ez-tzX" secondAttribute="trailing" constant="40" id="suU-mb-lPn"/>
+                            <constraint firstItem="oIl-NG-7h4" firstAttribute="top" secondItem="bcL-ez-tzX" secondAttribute="bottom" constant="24" id="yVD-sC-TPI"/>
+                            <constraint firstItem="ct0-Rf-GPH" firstAttribute="height" secondItem="gX9-cb-DsA" secondAttribute="height" multiplier="0.1" id="yt9-FQ-e2e"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="1Wu-Qq-hAz"/>
                     </view>
+                    <connections>
+                        <outlet property="nextButton" destination="Qm4-Eu-4In" id="lQ4-bl-KOr"/>
+                        <outlet property="passphraseCopiedView" destination="bcL-ez-tzX" id="jkH-7C-Vhv"/>
+                        <outlet property="passphraseLabel" destination="AeM-bQ-MYE" id="Zw1-z3-45B"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3h3-iI-TT4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1192" y="2676"/>
+            <point key="canvasLocation" x="1190.625" y="2675.7042253521126"/>
         </scene>
         <!--Sending Success View Controller-->
         <scene sceneID="wZG-eG-xWt">
@@ -4973,8 +5065,11 @@ minutes, please wait ...</string>
         <image name="Arrow back" width="20" height="14"/>
         <image name="Arrow down" width="14" height="9"/>
         <image name="Arrow next" width="16" height="17"/>
+        <image name="AttentionIcon" width="99" height="84"/>
         <image name="BANKEXlogo" width="272" height="76"/>
         <image name="Close" width="32" height="32"/>
+        <image name="CopiedIcon" width="25" height="24"/>
+        <image name="Copy" width="64" height="64"/>
         <image name="Done" width="64" height="64"/>
         <image name="ERC20" width="243" height="161"/>
         <image name="Edit" width="32" height="32"/>

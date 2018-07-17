@@ -6,4 +6,9 @@
 //  Copyright © 2018 Alexander Vlasov. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+
+class WalletCreatedViewController: UIViewController {
+    
+}
