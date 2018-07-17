@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isOnboardingNeeded = UserDefaults.standard.value(forKey: "isOnboardingNeeded")
         if isOnboardingNeeded == nil  {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            let onboarding = storyboard.instantiateViewController(withIdentifier: "Onboarding")
+            let onboarding = storyboard.instantiateViewController(withIdentifier: "OnboardingPage")
             window?.rootViewController = onboarding
         }
         guard let navigationController = window?.rootViewController as? UINavigationController else {

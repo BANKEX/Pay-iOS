@@ -14,10 +14,18 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Onboarding Page View Controller-->
+        <scene sceneID="2vw-n7-wxy">
+            <objects>
+                <pageViewController storyboardIdentifier="OnboardingPage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="bcr-Ar-xN5" customClass="OnboardingPageViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3rC-w1-T6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3098" y="2239"/>
+        </scene>
+        <!--Onboarding View Controller-->
         <scene sceneID="pWT-Ki-qbg">
             <objects>
-                <viewController id="tIR-RD-pJ7" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Onboarding" id="tIR-RD-pJ7" customClass="OnboardingViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dLa-oo-1Nb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,6 +41,9 @@
                                                 <state key="normal" title="NEXT">
                                                     <color key="titleColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="nextButtonTapped:" destination="tIR-RD-pJ7" eventType="touchUpInside" id="XhZ-j7-Ga8"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow next" translatesAutoresizingMaskIntoConstraints="NO" id="4tZ-OV-MtC">
                                                 <rect key="frame" x="43" y="0.0" width="16" height="16"/>
@@ -146,10 +157,22 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PBJ-d9-wl3"/>
                     </view>
+                    <connections>
+                        <outlet property="arrowNext" destination="4tZ-OV-MtC" id="Nol-fl-P4K"/>
+                        <outlet property="circlesStack" destination="GdE-rX-YEr" id="oer-t5-Blj"/>
+                        <outlet property="descriptionLabel" destination="0aW-eX-Gmg" id="2a8-g7-tM5"/>
+                        <outlet property="imageView" destination="yr6-Em-ZNX" id="TQc-43-8d5"/>
+                        <outlet property="nameLabel" destination="tzQ-Sn-i55" id="FYk-Km-sYt"/>
+                        <outlet property="nextButton" destination="sOR-u9-EYf" id="PTK-bz-38v"/>
+                        <outletCollection property="circles" destination="hWS-Kd-c5X" collectionClass="NSMutableArray" id="hxd-Qc-PNB"/>
+                        <outletCollection property="circles" destination="qCI-cE-E7J" collectionClass="NSMutableArray" id="BtY-QL-wdB"/>
+                        <outletCollection property="circles" destination="Qbj-sq-pfx" collectionClass="NSMutableArray" id="XEs-w3-wsN"/>
+                        <segue destination="OXJ-tk-feF" kind="show" identifier="toNavigation" id="ui0-Ra-hSh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8uH-eC-nY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2339" y="2336"/>
+            <point key="canvasLocation" x="-2412" y="2239"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hgm-Hn-E6n">
@@ -165,7 +188,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89C-4i-6ZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1205" y="2340"/>
+            <point key="canvasLocation" x="-1538" y="2259"/>
         </scene>
         <!--Wallet Creation Type Controller-->
         <scene sceneID="SFe-o1-xOp">
@@ -5943,6 +5966,6 @@ minutes, please wait ...</string>
         <segue reference="bDG-Xv-WCD"/>
         <segue reference="Uws-Ci-KnS"/>
         <segue reference="zl4-lC-AqZ"/>
-        <segue reference="890-Uf-GGI"/>
+        <segue reference="0M5-ZF-71X"/>
     </inferredMetricsTieBreakers>
 </document>
