@@ -10,26 +10,36 @@ import UIKit
 
 class GenericImportViewController: UIViewController {
 
+    @IBOutlet weak var segmentedControl:UISegmentedControl! //I dont know how to name
+    @IBOutlet weak var privateKeyContainer:UIView!
+    @IBOutlet weak var passphraseContainer:UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        title = "Importing Wallet"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
     }
-    */
+    
+    
+    @IBAction func segmentedControlerTapped(_ sender:UISegmentedControl) {
+        updateUI()
+    }
+    
+    func updateUI() {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            privateKeyContainer.isHidden = false
+            passphraseContainer.isHidden = true
+        }else {
+            privateKeyContainer.isHidden = true
+            passphraseContainer.isHidden = false
+        }
+    }
+
+    
 
 }

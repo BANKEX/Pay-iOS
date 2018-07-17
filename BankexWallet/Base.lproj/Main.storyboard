@@ -272,6 +272,9 @@
                                     <segment title="Private Key"/>
                                     <segment title="Passphrase"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentedControlerTapped:" destination="7ST-Xq-jOz" eventType="valueChanged" id="TIF-57-HuZ"/>
+                                </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uth-qE-4i7">
                                 <rect key="frame" x="0.0" y="182" width="320" height="386"/>
@@ -302,6 +305,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IS9-Fd-wHn"/>
                     </view>
+                    <connections>
+                        <outlet property="passphraseContainer" destination="m62-vk-V3q" id="eQo-R9-lSS"/>
+                        <outlet property="privateKeyContainer" destination="uth-qE-4i7" id="qVw-r0-ORN"/>
+                        <outlet property="segmentedControl" destination="Ne5-Eb-jRR" id="8ig-Lo-4Qq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qM1-1n-vL5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -452,7 +460,7 @@
                                     <constraint firstAttribute="height" constant="1" id="edc-nb-tYa"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gda-yG-5fI">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gda-yG-5fI" userLabel="ContainerView">
                                 <rect key="frame" x="15" y="49" width="305" height="93"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OVl-0c-dto">
