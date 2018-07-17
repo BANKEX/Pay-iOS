@@ -22,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
         Fabric.with([Crashlytics.self])
         let initialRouter = InitialLogicRouter()
+        let isOnboardingNeeded = UserDefaults.standard.value(forKey: "isOnboardingNeeded")
+        if isOnboardingNeeded == nil  {
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let onboarding = storyboard.instantiateViewController(withIdentifier: "OnboardingPage")
+            window?.rootViewController = onboarding
+        }
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return true
         }
