@@ -9,8 +9,10 @@
 import UIKit
 
 class RepeatPassphraseViewController: UIViewController {
+    
     var passphrase: String?
     var service: HDWalletService!
+    
     // Managers of collection views
     var wordsAfterManager: CollectionViewAfterManager!
     var wordsBeforeManager: CollectionViewBeforeManager!
@@ -69,12 +71,6 @@ class RepeatPassphraseViewController: UIViewController {
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         setupManagers()
         
-//        let neededHeight = beforeCheckCollectionView.collectionViewLayout.collectionViewContentSize.height
-//        let currentHeight = beforeCheckView.frame.size.height
-//        if  currentHeight < neededHeight {
-//            let multiplier = neededHeight / (sumHeight - neededHeight)
-//            heightConstraing = heightConstraing.setMultiplier(multiplier: multiplier)
-//        }
     }
     
     // Helpers
