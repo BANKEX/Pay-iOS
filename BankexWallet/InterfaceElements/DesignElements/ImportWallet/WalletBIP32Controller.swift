@@ -8,88 +8,157 @@
 
 import UIKit
 
-class WalletBIP32Controller: UITableViewController {
+class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol,UITextViewDelegate {
+    
+    
+    //MARK: - IBOutlets
+    @IBOutlet weak var importButton:UIButton!
+    @IBOutlet var textFields:[UITextField]!
+    @IBOutlet var separators:[UIView]!
+    @IBOutlet weak var separator1:UIView!
+    @IBOutlet weak var passwordTextField:UITextField!
+    @IBOutlet weak var repeatPasswordTextField:UITextField!
+    @IBOutlet weak var passphraseTextView:UITextView!
+    
+    
+    //MARK: - Properties
+    let service = HDWalletServiceImplementation()
 
+    
+    //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        importButton.isEnabled = false
+        textFields.forEach { $0.delegate = self }
+        passphraseTextView.delegate = self
+        passphraseTextView.contentInset.bottom = 10.0
+        passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    
+    //MARK: - Methods
+    func clearTextFields() {
+        textFields.forEach {
+            $0.text = ""
+        }
+        view.endEditing(true)
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    func moveCursorToStart(_ textView:UITextView) {
+        DispatchQueue.main.async {
+            textView.selectedRange = NSMakeRange(0, 0)
+        }
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+    
+    
+    @objc func keyboardHide(_ notification:Notification) {
+        //TODO
+    }
+    
+    @objc func keyboardShow(_ notification:Notification) {
+        //TODO
+    }
+    
+    //MARK: - IBActions
+    @IBAction func changeVisibility(_ sender:Any) {
+        //TODO
+    }
+    
+    //MARK: - Delegate_TextField
+    func textFieldDidBeginEditing(_ textField: UITextField)  {
+        textField.returnKeyType = importButton.isEnabled ? .done : .next
+        let index = textFields.index(of: textField) ?? 0
+        separators[index].backgroundColor = WalletColors.blueText.color()
+    }
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let index = textFields.index(of: textField) ?? 0
+        let currentSeparator = separators[index]
+        currentSeparator.backgroundColor = WalletColors.greySeparator.color()
+        
+        guard textField == passwordTextField || textField == repeatPasswordTextField else { return  }
+        
+        if !(passwordTextField.text?.isEmpty ?? true) && !(repeatPasswordTextField.text?.isEmpty ?? true) && passwordTextField.text != repeatPasswordTextField.text {
+            let indexPswTF = textFields.index(of: passwordTextField) ?? 0
+            let indexRepeatPswTF = textFields.index(of: repeatPasswordTextField) ?? 0
+            separators[indexPswTF].backgroundColor = WalletColors.errorRed.color()
+            separators[indexRepeatPswTF].backgroundColor = WalletColors.errorRed.color()
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.returnKeyType == .done && importButton.isEnabled {
+            //Create Wallet
+        }else if textField.returnKeyType == .next {
+            let indexTF = textFields.index(of: textField) ?? 0
+            let nextIndex = (textFields.count - 1) == indexTF ? 0 : indexTF + 1
+            textFields[nextIndex].becomeFirstResponder()
+        }else {
+            view.endEditing(true)
+        }
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        separator1.backgroundColor = WalletColors.blueText.color()
         return true
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    //MARK: - TextViewDelegate
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        guard textView == passphraseTextView else { return  }
+        guard textView.text == "Enter your passphrase" else { return  }
+        moveCursorToStart(textView)
     }
-    */
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newLength = textView.text.utf16.count + text.utf16.count - range.length
+        if newLength > 0 {
+            if textView == passphraseTextView && textView.text == "Enter your passphrase" {
+                if text.utf16.count == 0 {
+                    return false
+                }
+                textView.applyNotHolder()
+            }
+            return true
+        }else {
+            textView.applyPlaceHolderText(with: "Enter your passphrase")
+            moveCursorToStart(textView)
+            return false
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        separator1.backgroundColor = WalletColors.greySeparator.color()
+    }
+    
+    
+    
+    
 
+}
+
+extension UITextView {
+    func applyPlaceHolderText(with placeholder:String) {
+        self.text = placeholder
+        self.textColor = UIColor.lightGray
+    }
+    
+    func applyNotHolder() {
+        self.text = ""
+        self.textColor = UIColor.black
+    }
 }
