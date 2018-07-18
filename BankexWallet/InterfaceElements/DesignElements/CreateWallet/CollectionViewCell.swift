@@ -14,21 +14,23 @@ class CollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        layer.borderWidth = 2
-        layer.cornerRadius = frame.height / 2
-        layer.borderColor = #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
-        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        initialConfiguration()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer.borderWidth = 2
-        layer.cornerRadius = frame.height / 2
-        layer.borderColor = #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
+        initialConfiguration()
     }
 
     func configureCell(withText text: String) {
         wordLabel.text = text
         wordLabel.textColor = #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
+    }
+    
+    private func initialConfiguration() {
+        layer.borderWidth = 2
+        layer.cornerRadius = frame.height / 2
+        layer.borderColor = #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
 }
