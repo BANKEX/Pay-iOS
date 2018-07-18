@@ -10,6 +10,7 @@ import UIKit
 
 class EditWalletNameController: UIViewController {
     
+    @IBOutlet weak var walletNameTextField: UITextField!
 }
 
 

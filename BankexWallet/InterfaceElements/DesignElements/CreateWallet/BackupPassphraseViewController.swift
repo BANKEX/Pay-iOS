@@ -29,7 +29,7 @@ class BackupPassphraseViewController: UIViewController {
         passphraseCopiedView.alpha = 0.0
         if passphrase != UIPasteboard.general.string {
             nextButton.isEnabled = false
-            nextButton.backgroundColor = WalletColors.unabledGreyButton.color()
+            nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         }
         
         
