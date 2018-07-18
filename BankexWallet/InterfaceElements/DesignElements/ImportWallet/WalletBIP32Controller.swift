@@ -22,6 +22,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     
     //MARK: - Properties
     let service = HDWalletServiceImplementation()
+    let router = WalletCreationTypeRouterImplementation()
 
     
     //MARK: - LifeCircle
@@ -51,6 +52,14 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         view.endEditing(true)
     }
     
+    func showCreationAlert() {
+        let alertViewController = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
+        alertViewController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(alertViewController, animated: true)
+    }
+    
+    
+    
     
     
     
@@ -59,6 +68,19 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
         clearButton.isHidden = true
         passphraseTextView.moveCursorToStart()
+        importButton.isEnabled = false
+        importButton.backgroundColor = WalletColors.defaultGreyText.color()
+    }
+    
+    @IBAction func createWalletTapped(_ sender:Any) {
+        let generatedPassphrase = passphraseTextView.text!
+        service.createNewHDWallet(with: nameTextField.text ?? "", mnemonics: generatedPassphrase, mnemonicsPassword: "", walletPassword: "") { (_, error) in
+            guard error == nil else {
+                self.showCreationAlert()
+                return
+            }
+            self.router.exitFromTheScreen()
+        }
     }
     
     
@@ -76,7 +98,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.returnKeyType == .done && importButton.isEnabled {
-            //Create Wallet
+            createWalletTapped(self)
         }else if textField.returnKeyType == .next {
             passphraseTextView.becomeFirstResponder()
         }else {
@@ -104,6 +126,9 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
+            importButton.isEnabled = true
+            textView.returnKeyType = importButton.isEnabled ? .done : .next
+            importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color():WalletColors.defaultGreyText.color()
             clearButton.isHidden = false
             if textView == passphraseTextView && textView.text == "Enter your passphrase" {
                 if text.utf16.count == 0 {
@@ -113,6 +138,8 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
             }
             return true
         }else {
+            importButton.backgroundColor = WalletColors.defaultGreyText.color()
+            importButton.isEnabled = false
             clearButton.isHidden = true
             textView.applyPlaceHolderText(with: "Enter your passphrase")
             passphraseTextView.moveCursorToStart()
