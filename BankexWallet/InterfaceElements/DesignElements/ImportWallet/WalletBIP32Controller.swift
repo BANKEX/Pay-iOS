@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol {
+class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol,UITextViewDelegate {
     
     
     //MARK: - IBOutlets
@@ -18,6 +18,8 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     @IBOutlet weak var separator1:UIView!
     @IBOutlet weak var passwordTextField:UITextField!
     @IBOutlet weak var repeatPasswordTextField:UITextField!
+    @IBOutlet weak var passphraseTextView:UITextView!
+    
     
     //MARK: - Properties
     let service = HDWalletServiceImplementation()
@@ -28,8 +30,9 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         super.viewDidLoad()
         importButton.isEnabled = false
         textFields.forEach { $0.delegate = self }
-        
-        
+        passphraseTextView.delegate = self
+        passphraseTextView.contentInset.bottom = 10.0
+        passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -52,6 +55,13 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         }
         view.endEditing(true)
     }
+    
+    func moveCursorToStart(_ textView:UITextView) {
+        DispatchQueue.main.async {
+            textView.selectedRange = NSMakeRange(0, 0)
+        }
+    }
+    
     
     @objc func keyboardHide(_ notification:Notification) {
         //TODO
@@ -102,6 +112,53 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         return true
     }
     
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        separator1.backgroundColor = WalletColors.blueText.color()
+        return true
+    }
+    
+    //MARK: - TextViewDelegate
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        guard textView == passphraseTextView else { return  }
+        guard textView.text == "Enter your passphrase" else { return  }
+        moveCursorToStart(textView)
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newLength = textView.text.utf16.count + text.utf16.count - range.length
+        if newLength > 0 {
+            if textView == passphraseTextView && textView.text == "Enter your passphrase" {
+                if text.utf16.count == 0 {
+                    return false
+                }
+                textView.applyNotHolder()
+            }
+            return true
+        }else {
+            textView.applyPlaceHolderText(with: "Enter your passphrase")
+            moveCursorToStart(textView)
+            return false
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        separator1.backgroundColor = WalletColors.greySeparator.color()
+    }
+    
+    
+    
     
 
+}
+
+extension UITextView {
+    func applyPlaceHolderText(with placeholder:String) {
+        self.text = placeholder
+        self.textColor = UIColor.lightGray
+    }
+    
+    func applyNotHolder() {
+        self.text = ""
+        self.textColor = UIColor.black
+    }
 }
