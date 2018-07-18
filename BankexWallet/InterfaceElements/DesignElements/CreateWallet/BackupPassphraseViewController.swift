@@ -15,22 +15,45 @@ class BackupPassphraseViewController: UIViewController {
     
     let service: HDWalletService = HDWalletServiceImplementation()
     var passphrase: String?
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.title = "Creating Wallet"
+        passphrase = service.generateMnemonics()
+        passphraseLabel.text = passphrase
+        
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        passphrase = service.generateMnemonics(bitsOfEntropy: 128)
-        passphraseLabel.text = passphrase
+        passphraseCopiedView.alpha = 0.0
+        if passphrase != UIPasteboard.general.string {
+            nextButton.isEnabled = false
+            nextButton.backgroundColor = WalletColors.unabledGreyButton.color()
+        }
+        
+        
     }
     
     @IBAction func copyButtonTapped(_ sender: Any) {
         UIPasteboard.general.string = passphrase
-        passphraseCopiedView.isHidden = false
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.passphraseCopiedView.alpha = 1.0
+            self.nextButton.backgroundColor = WalletColors.blueText.color()
+        }) { (_) in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.passphraseCopiedView.alpha = 0.0
+            }, completion: nil)
+        }
+        
         nextButton.isEnabled = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let repeatPasshraseVC = segue.destination as? RepeatPassphraseViewController {
             repeatPasshraseVC.passphrase = passphrase
+            repeatPasshraseVC.service = service
         }
     }
 }

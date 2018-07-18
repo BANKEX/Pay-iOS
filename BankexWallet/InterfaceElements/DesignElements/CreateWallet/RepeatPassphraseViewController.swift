@@ -10,6 +10,9 @@ import UIKit
 
 class RepeatPassphraseViewController: UIViewController {
     var passphrase: String?
+    var service: HDWalletService!
+    
+    
 }
 
 
