@@ -33,6 +33,9 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         passphraseTextView.contentInset.bottom = 10.0
         passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
         clearButton.isHidden = true
+        passphraseTextView.autocorrectionType = .no
+        passphraseTextView.autocapitalizationType = .none
+        nameTextField.autocorrectionType = .no
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -48,19 +51,17 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         view.endEditing(true)
     }
     
-    func moveCursorToStart(_ textView:UITextView) {
-        DispatchQueue.main.async {
-            textView.selectedRange = NSMakeRange(0, 0)
-        }
-    }
+    
     
     
     //MARK: - IBActions
     @IBAction func clearTextView(_ sender:Any) {
         passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
         clearButton.isHidden = true
-        moveCursorToStart(passphraseTextView)
+        passphraseTextView.moveCursorToStart()
     }
+    
+    
     
     //MARK: - Delegate_TextField
     func textFieldDidBeginEditing(_ textField: UITextField)  {
@@ -84,16 +85,20 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         return true
     }
     
+    
+    
+    //MARK: - TextViewDelegate
+    
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         separator1.backgroundColor = WalletColors.blueText.color()
         return true
     }
     
-    //MARK: - TextViewDelegate
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         guard textView == passphraseTextView else { return  }
         guard textView.text == "Enter your passphrase" else { return  }
-        moveCursorToStart(textView)
+        passphraseTextView.moveCursorToStart()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -110,7 +115,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         }else {
             clearButton.isHidden = true
             textView.applyPlaceHolderText(with: "Enter your passphrase")
-            moveCursorToStart(textView)
+            passphraseTextView.moveCursorToStart()
             return false
         }
     }
@@ -118,7 +123,6 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     func textViewDidEndEditing(_ textView: UITextView) {
         separator1.backgroundColor = WalletColors.greySeparator.color()
     }
-    
     
     
     
@@ -134,5 +138,11 @@ extension UITextView {
     func applyNotHolder() {
         self.text = ""
         self.textColor = UIColor.black
+    }
+    
+    func moveCursorToStart() {
+        DispatchQueue.main.async {
+            self.selectedRange = NSMakeRange(0, 0)
+        }
     }
 }
