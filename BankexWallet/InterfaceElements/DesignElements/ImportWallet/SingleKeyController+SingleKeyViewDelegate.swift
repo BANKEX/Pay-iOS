@@ -32,7 +32,9 @@ extension SingleKeyWalletController:SingleKeyViewDelegate {
     }
     
     func scanDidTapped(_ scan: UIButton) {
-        
+        readerVC.delegate = self
+        self.readerVC.modalPresentationStyle = .formSheet
+        self.present(readerVC, animated: true)
     }
     
     func bufferDidTapped() {

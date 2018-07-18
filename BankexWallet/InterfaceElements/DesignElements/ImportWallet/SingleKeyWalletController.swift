@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import QRCodeReader
 
-class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol,UITextViewDelegate {
+class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol {
     
     
     
@@ -28,6 +29,12 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     var privateKeyView = SingleKeyView()
     var service = SingleKeyServiceImplementation()
+    lazy var readerVC:QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes:[.qr],captureDevicePosition: .back)
+        }
+        return QRCodeReaderViewController(builder: builder)
+    }()
     
     
     //MARK: - LifeCircle
@@ -68,51 +75,12 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     
     
-    //MARK: - Delegate_TextField
-    
     
     //MARK: - TextViewDelegate
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        separator1.backgroundColor = WalletColors.blueText.color()
-        return true
-    }
     
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        guard textView == privateKeyTextView else { return  }
-        guard textView.text == "Enter your private key" else { return  }
-        privateKeyTextView.moveCursorToStart()
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let newLength = textView.text.utf16.count + text.utf16.count - range.length
-        if newLength > 0 {
-            importButton.isEnabled = true
-            importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
-            textView.returnKeyType = importButton.isEnabled ? .done : .next
-            clearButton.isHidden = false
-            if textView == privateKeyTextView && textView.text == "Enter your private key" {
-                if text.utf16.count == 0 {
-                    return false
-                }
-                textView.applyNotHolder()
-            }
-            return true
-        }else {
-            importButton.isEnabled = false
-            importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
-            clearButton.isHidden = true
-            textView.applyPlaceHolderText(with: "Enter your private key")
-            privateKeyTextView.moveCursorToStart()
-            return false
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        separator1.backgroundColor = WalletColors.greySeparator.color()
-    }
     
     
 }
+
 
 
