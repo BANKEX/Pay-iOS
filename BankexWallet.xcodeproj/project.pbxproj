@@ -11,6 +11,9 @@
 		003D4BBC20FCE7AE0096FEBA /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D4BBB20FCE7AE0096FEBA /* CircleView.swift */; };
 		003D4BBE20FCE7E20096FEBA /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D4BBD20FCE7E20096FEBA /* OnboardingViewController.swift */; };
 		003D4BC020FDCA200096FEBA /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D4BBF20FDCA200096FEBA /* OnboardingPageViewController.swift */; };
+		003D4BC420FF3B820096FEBA /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D4BC220FF3B820096FEBA /* CollectionViewCell.swift */; };
+		003D4BC820FF44D30096FEBA /* CollectionViewAfterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D4BC720FF44D30096FEBA /* CollectionViewAfterManager.swift */; };
+		003D4BCA20FF44E20096FEBA /* CollectionViewBeforeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D4BC920FF44E20096FEBA /* CollectionViewBeforeManager.swift */; };
 		62AC3C13B9AE98E37A41F993 /* Pods_BankexWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */; };
 		66366B4820BD71CF00863C70 /* AddNewWalletWithPrivateKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66366B4720BD71CF00863C70 /* AddNewWalletWithPrivateKeyTests.swift */; };
 		66366B4B20BE8C3700863C70 /* AddAndSearchNewTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66366B4A20BE8C3700863C70 /* AddAndSearchNewTokenTests.swift */; };
@@ -118,6 +121,9 @@
 		003D4BBB20FCE7AE0096FEBA /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		003D4BBD20FCE7E20096FEBA /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		003D4BBF20FDCA200096FEBA /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		003D4BC220FF3B820096FEBA /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		003D4BC720FF44D30096FEBA /* CollectionViewAfterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewAfterManager.swift; sourceTree = "<group>"; };
+		003D4BC920FF44E20096FEBA /* CollectionViewBeforeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewBeforeManager.swift; sourceTree = "<group>"; };
 		64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWalletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66366B4720BD71CF00863C70 /* AddNewWalletWithPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWalletWithPrivateKeyTests.swift; sourceTree = "<group>"; };
 		66366B4A20BE8C3700863C70 /* AddAndSearchNewTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndSearchNewTokenTests.swift; sourceTree = "<group>"; };
@@ -255,6 +261,15 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		003D4BC620FF44B50096FEBA /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				003D4BC720FF44D30096FEBA /* CollectionViewAfterManager.swift */,
+				003D4BC920FF44E20096FEBA /* CollectionViewBeforeManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		34C573DBC09792B63DAD18FA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,8 +397,10 @@
 			children = (
 				86A6CAE920FE3367002C19AA /* BackupPassphraseViewController.swift */,
 				86A6CAEB20FE338B002C19AA /* RepeatPassphraseViewController.swift */,
+				003D4BC620FF44B50096FEBA /* Managers */,
 				86A6CAED20FE33A1002C19AA /* WalletCreatedViewController.swift */,
 				86A6CAEF20FE33BE002C19AA /* EditWalletNameViewController.swift */,
+				003D4BC220FF3B820096FEBA /* CollectionViewCell.swift */,
 			);
 			path = CreateWallet;
 			sourceTree = "<group>";
@@ -898,6 +915,7 @@
 				F00E461E207617BC00387B96 /* InitialLogicRouter.swift in Sources */,
 				86A6CAF620FE34A6002C19AA /* WalletBIP32Controller.swift in Sources */,
 				81C4333E201B3BE5008D3343 /* CommonExtensions.swift in Sources */,
+				003D4BC820FF44D30096FEBA /* CollectionViewAfterManager.swift in Sources */,
 				F00E461A2075212900387B96 /* MainInfoController.swift in Sources */,
 				F00E461520751D1E00387B96 /* WalletCreationTypeRouter.swift in Sources */,
 				813D5905203924EE003D9175 /* ConfirmTransactionTableViewController.swift in Sources */,
@@ -910,12 +928,14 @@
 				86A6CAF220FE345B002C19AA /* GenericImportViewController.swift in Sources */,
 				F09FAEB520A5A4FA008D6AD7 /* CreateNewFavoriteController.swift in Sources */,
 				86A6CAEA20FE3367002C19AA /* BackupPassphraseViewController.swift in Sources */,
+				003D4BCA20FF44E20096FEBA /* CollectionViewBeforeManager.swift in Sources */,
 				8104B050201F368200AE94B5 /* Web3.swift in Sources */,
 				F004A1F020691FE300E3970A /* SelectNetworkController.swift in Sources */,
 				F00E46112073CFFD00387B96 /* WalletBIP32KeyController.swift in Sources */,
 				F075A453204BFA34001949A9 /* TransactionsHistoryPresenter.swift in Sources */,
 				F0B1B4CF205AAC08009D76D5 /* TokensListCell.swift in Sources */,
 				86A6CAEC20FE338B002C19AA /* RepeatPassphraseViewController.swift in Sources */,
+				003D4BC420FF3B820096FEBA /* CollectionViewCell.swift in Sources */,
 				F075A44F204BF4B8001949A9 /* TransactionsHistoryController.swift in Sources */,
 				F02CA72320AB1C570042160C /* DefaultTokensService.swift in Sources */,
 				F0FF1C7A20568F0A0051D894 /* KeysListController.swift in Sources */,
