@@ -85,7 +85,7 @@ class RepeatPassphraseViewController: UIViewController {
         wordsAfterManager = CollectionViewAfterManager(collectionView: afterCheckCollectionView, wordsInCorrectOrder: wordsInCorrectOrder)
         wordsAfterManager.delegate = self
         
-        wordsBefore = wordsInCorrectOrder
+        wordsBefore = wordsInCorrectOrder.shuffled()
     }
     
 
