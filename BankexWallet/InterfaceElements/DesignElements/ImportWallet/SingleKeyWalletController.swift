@@ -57,6 +57,8 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
         clearButton.isHidden = true
         privateKeyTextView.moveCursorToStart()
+        importButton.isEnabled = false
+        importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
     }
     
     @IBAction func textFromBuffer(_ sender:Any) {
@@ -65,6 +67,8 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
             clearButton.isHidden = false
         }
     }
+    
+    
     
     //MARK: - Delegate_TextField
     
@@ -85,6 +89,9 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
+            importButton.isEnabled = true
+            importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
+            textView.returnKeyType = importButton.isEnabled ? .done : .next
             clearButton.isHidden = false
             if textView == privateKeyTextView && textView.text == "Enter your private key" {
                 if text.utf16.count == 0 {
@@ -94,6 +101,8 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
             }
             return true
         }else {
+            importButton.isEnabled = false
+            importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
             clearButton.isHidden = true
             textView.applyPlaceHolderText(with: "Enter your private key")
             privateKeyTextView.moveCursorToStart()
