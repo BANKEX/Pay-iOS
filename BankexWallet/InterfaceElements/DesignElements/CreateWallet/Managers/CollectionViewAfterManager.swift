@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewAfterManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+class CollectionViewAfterManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var collectionView: UICollectionView!
     weak var delegate: CollectionViewAfterDelegate?
@@ -17,6 +17,14 @@ class CollectionViewAfterManager: NSObject, UICollectionViewDataSource, UICollec
             collectionView.reloadData()
         }
     }
+    
+    
+    //Just a label for further calculations in flow layout
+    lazy var label: UILabel = {
+        let label = UILabel(frame: CGRect.zero)
+        label.font = UIFont(name: "System", size: 16)
+        return label
+    }()
 
     var wordsInCorrectOrder = [String]()
     init(collectionView: UICollectionView, wordsInCorrectOrder: [String]) {
@@ -46,9 +54,18 @@ class CollectionViewAfterManager: NSObject, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.didDiselectItem(at: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        label.text = words[indexPath.row]
+        let width: CGFloat = label.intrinsicContentSize.width + 12
+        let height: CGFloat = 33
+        return CGSize(width: width, height: height)
+    }
+    
 }
 
 protocol CollectionViewAfterDelegate: class {
     func didDiselectItem(at indexPath: IndexPath)
 }
+
 

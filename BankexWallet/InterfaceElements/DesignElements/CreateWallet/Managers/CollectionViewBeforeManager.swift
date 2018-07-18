@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewBeforeManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+class CollectionViewBeforeManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var collectionView: UICollectionView!
     weak var delegate: CollectionViewBeforeDelegate?
@@ -17,6 +17,13 @@ class CollectionViewBeforeManager: NSObject, UICollectionViewDataSource, UIColle
             collectionView.reloadData()
         }
     }
+    
+    //Just a label for further calculations in flow layout
+    lazy var label: UILabel = {
+        let label = UILabel(frame: CGRect.zero)
+        label.font = UIFont(name: "System", size: 16)
+        return label
+    }()
     
     init(collectionView: UICollectionView, words: [String]) {
         super.init()
@@ -41,6 +48,15 @@ class CollectionViewBeforeManager: NSObject, UICollectionViewDataSource, UIColle
         delegate?.didSelectItem(at: indexPath)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        label.text = words[indexPath.row]
+        label.sizeToFit()
+        label.layoutIfNeeded()
+        
+        let width: CGFloat = label.intrinsicContentSize.width + 12
+        let height: CGFloat = 33
+        return CGSize(width: width, height: height)
+    }
 }
 
 
