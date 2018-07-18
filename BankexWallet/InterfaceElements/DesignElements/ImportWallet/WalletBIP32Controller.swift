@@ -19,6 +19,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     @IBOutlet weak var passwordTextField:UITextField!
     @IBOutlet weak var repeatPasswordTextField:UITextField!
     @IBOutlet weak var passphraseTextView:UITextView!
+    @IBOutlet weak var clearButton:UIButton!
     
     
     //MARK: - Properties
@@ -33,19 +34,13 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         passphraseTextView.delegate = self
         passphraseTextView.contentInset.bottom = 10.0
         passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        clearButton.isHidden = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
     
     
     //MARK: - Methods
@@ -63,17 +58,11 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     }
     
     
-    @objc func keyboardHide(_ notification:Notification) {
-        //TODO
-    }
-    
-    @objc func keyboardShow(_ notification:Notification) {
-        //TODO
-    }
-    
     //MARK: - IBActions
-    @IBAction func changeVisibility(_ sender:Any) {
-        //TODO
+    @IBAction func clearTextView(_ sender:Any) {
+        passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
+        clearButton.isHidden = true
+        moveCursorToStart(passphraseTextView)
     }
     
     //MARK: - Delegate_TextField
@@ -127,6 +116,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
+            clearButton.isHidden = false
             if textView == passphraseTextView && textView.text == "Enter your passphrase" {
                 if text.utf16.count == 0 {
                     return false
@@ -135,6 +125,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
             }
             return true
         }else {
+            clearButton.isHidden = true
             textView.applyPlaceHolderText(with: "Enter your passphrase")
             moveCursorToStart(textView)
             return false
