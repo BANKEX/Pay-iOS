@@ -13,11 +13,9 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     
     //MARK: - IBOutlets
     @IBOutlet weak var importButton:UIButton!
-    @IBOutlet var textFields:[UITextField]!
-    @IBOutlet var separators:[UIView]!
+    @IBOutlet weak var nameTextField:UITextField!
+    @IBOutlet weak var separator2:UIView!
     @IBOutlet weak var separator1:UIView!
-    @IBOutlet weak var passwordTextField:UITextField!
-    @IBOutlet weak var repeatPasswordTextField:UITextField!
     @IBOutlet weak var passphraseTextView:UITextView!
     @IBOutlet weak var clearButton:UIButton!
     
@@ -30,7 +28,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     override func viewDidLoad() {
         super.viewDidLoad()
         importButton.isEnabled = false
-        textFields.forEach { $0.delegate = self }
+        nameTextField.delegate = self
         passphraseTextView.delegate = self
         passphraseTextView.contentInset.bottom = 10.0
         passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
@@ -45,9 +43,8 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     
     //MARK: - Methods
     func clearTextFields() {
-        textFields.forEach {
-            $0.text = ""
-        }
+        nameTextField.text = ""
+        passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
         view.endEditing(true)
     }
     
@@ -68,33 +65,19 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     //MARK: - Delegate_TextField
     func textFieldDidBeginEditing(_ textField: UITextField)  {
         textField.returnKeyType = importButton.isEnabled ? .done : .next
-        let index = textFields.index(of: textField) ?? 0
-        separators[index].backgroundColor = WalletColors.blueText.color()
+        separator2.backgroundColor = WalletColors.blueText.color()
     }
     
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let index = textFields.index(of: textField) ?? 0
-        let currentSeparator = separators[index]
-        currentSeparator.backgroundColor = WalletColors.greySeparator.color()
-        
-        guard textField == passwordTextField || textField == repeatPasswordTextField else { return  }
-        
-        if !(passwordTextField.text?.isEmpty ?? true) && !(repeatPasswordTextField.text?.isEmpty ?? true) && passwordTextField.text != repeatPasswordTextField.text {
-            let indexPswTF = textFields.index(of: passwordTextField) ?? 0
-            let indexRepeatPswTF = textFields.index(of: repeatPasswordTextField) ?? 0
-            separators[indexPswTF].backgroundColor = WalletColors.errorRed.color()
-            separators[indexRepeatPswTF].backgroundColor = WalletColors.errorRed.color()
-        }
+        separator2.backgroundColor = WalletColors.greySeparator.color()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.returnKeyType == .done && importButton.isEnabled {
             //Create Wallet
         }else if textField.returnKeyType == .next {
-            let indexTF = textFields.index(of: textField) ?? 0
-            let nextIndex = (textFields.count - 1) == indexTF ? 0 : indexTF + 1
-            textFields[nextIndex].becomeFirstResponder()
+            passphraseTextView.becomeFirstResponder()
         }else {
             view.endEditing(true)
         }
