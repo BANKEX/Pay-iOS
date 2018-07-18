@@ -18,7 +18,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     //MARK: - IBOutlets
     @IBOutlet weak var clearButton:UIButton!
     @IBOutlet weak var privateKeyTextView:UITextView!
-    @IBOutlet weak var singleKeyView:UIView!
+    @IBOutlet weak var singleKeyView:SingleKeyView!
     @IBOutlet weak var separator1:UIView!
     @IBOutlet weak var separator2:UIView!
     @IBOutlet weak var importButton:UIButton!
@@ -26,6 +26,8 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     //MARK: - Properties
     
+    var privateKeyView = SingleKeyView()
+    var service = SingleKeyServiceImplementation()
     
     
     //MARK: - LifeCircle
@@ -33,6 +35,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         super.viewDidLoad()
         importButton.isEnabled = false
         privateKeyTextView.delegate = self
+        singleKeyView.delegate = self
         privateKeyTextView.contentInset.bottom = 10.0
         privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
         clearButton.isHidden = true
@@ -61,12 +64,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
     }
     
-    @IBAction func textFromBuffer(_ sender:Any) {
-        if let string = UIPasteboard.general.string {
-            privateKeyTextView.text = string
-            clearButton.isHidden = false
-        }
-    }
+    
     
     
     
@@ -116,3 +114,5 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     
 }
+
+

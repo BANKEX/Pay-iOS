@@ -41,6 +41,8 @@
 		86A6CAF220FE345B002C19AA /* GenericImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A6CAF120FE345B002C19AA /* GenericImportViewController.swift */; };
 		86A6CAF620FE34A6002C19AA /* WalletBIP32Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A6CAF520FE34A6002C19AA /* WalletBIP32Controller.swift */; };
 		86CECE0D20FFD7CE00595B05 /* SingleKeyWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CECE0C20FFD7CE00595B05 /* SingleKeyWalletController.swift */; };
+		86CECE1020FFF70900595B05 /* SingleKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CECE0F20FFF70900595B05 /* SingleKeyView.swift */; };
+		86CECE1220FFFBA200595B05 /* SingleKeyWalletControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CECE1120FFFBA200595B05 /* SingleKeyWalletControllerDelegate.swift */; };
 		C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */; };
 		F004A1F020691FE300E3970A /* SelectNetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F004A1EF20691FE300E3970A /* SelectNetworkController.swift */; };
 		F00E460B2073CFA300387B96 /* WalletCreationTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E460A2073CFA300387B96 /* WalletCreationTypeController.swift */; };
@@ -160,6 +162,8 @@
 		86A6CAF120FE345B002C19AA /* GenericImportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericImportViewController.swift; sourceTree = "<group>"; };
 		86A6CAF520FE34A6002C19AA /* WalletBIP32Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBIP32Controller.swift; sourceTree = "<group>"; };
 		86CECE0C20FFD7CE00595B05 /* SingleKeyWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKeyWalletController.swift; sourceTree = "<group>"; };
+		86CECE0F20FFF70900595B05 /* SingleKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKeyView.swift; sourceTree = "<group>"; };
+		86CECE1120FFFBA200595B05 /* SingleKeyWalletControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKeyWalletControllerDelegate.swift; sourceTree = "<group>"; };
 		BD1E76CD13960E44B2411D0D /* Pods-BankexWalletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,12 +412,22 @@
 		86A6CAE820FE330C002C19AA /* ImportWallet */ = {
 			isa = PBXGroup;
 			children = (
+				86CECE0E20FFF6F900595B05 /* View */,
 				86A6CAF120FE345B002C19AA /* GenericImportViewController.swift */,
 				86A6CAF520FE34A6002C19AA /* WalletBIP32Controller.swift */,
 				86CECE0C20FFD7CE00595B05 /* SingleKeyWalletController.swift */,
 				8686784F20FEA02E00A4CC9F /* ScreenWithContentProtocol.swift */,
+				86CECE1120FFFBA200595B05 /* SingleKeyWalletControllerDelegate.swift */,
 			);
 			path = ImportWallet;
+			sourceTree = "<group>";
+		};
+		86CECE0E20FFF6F900595B05 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				86CECE0F20FFF70900595B05 /* SingleKeyView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D9242BFE1AD22F65352D9039 /* Frameworks */ = {
@@ -903,6 +917,7 @@
 			files = (
 				F0FF1C7C205693480051D894 /* UtilTransactionsService.swift in Sources */,
 				F00E4628207A354900387B96 /* SendingConfirmationController.swift in Sources */,
+				86CECE1020FFF70900595B05 /* SingleKeyView.swift in Sources */,
 				F0B1B4CD205AABF2009D76D5 /* TokensListController.swift in Sources */,
 				F0D66121208EBB2600AD338F /* SettingsController.swift in Sources */,
 				003D4BBE20FCE7E20096FEBA /* OnboardingViewController.swift in Sources */,
@@ -948,6 +963,7 @@
 				F00E460E2073CFDB00387B96 /* WalletSingleKeyController.swift in Sources */,
 				0006753820C7C89A007FE20A /* WalletIsReadyCell.swift in Sources */,
 				81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */,
+				86CECE1220FFFBA200595B05 /* SingleKeyWalletControllerDelegate.swift in Sources */,
 				003D4BC020FDCA200096FEBA /* OnboardingPageViewController.swift in Sources */,
 				81C4333C201B3B5C008D3343 /* Constants.swift in Sources */,
 				81C43341201B7327008D3343 /* WalletState.swift in Sources */,

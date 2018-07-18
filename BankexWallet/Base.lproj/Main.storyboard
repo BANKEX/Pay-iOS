@@ -440,7 +440,7 @@
                                     <constraint firstAttribute="height" constant="1" id="edc-nb-tYa"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gda-yG-5fI" userLabel="ContainerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gda-yG-5fI" userLabel="ContainerView" customClass="SingleKeyView" customModule="BankexWallet" customModuleProvider="target">
                                 <rect key="frame" x="15" y="49" width="305" height="93"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OVl-0c-dto">
@@ -459,6 +459,9 @@
                                             <constraint firstAttribute="height" constant="28" id="OK0-K7-CWC"/>
                                         </constraints>
                                         <state key="normal" image="QR"/>
+                                        <connections>
+                                            <action selector="scanTapped:" destination="Gda-yG-5fI" eventType="touchUpInside" id="VVf-wd-DS2"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWb-Io-1BB">
                                         <rect key="frame" x="75" y="11" width="140" height="28"/>
@@ -468,7 +471,7 @@
                                         </constraints>
                                         <state key="normal" image="Paste button"/>
                                         <connections>
-                                            <action selector="textFromBuffer:" destination="NQv-6V-bIF" eventType="touchUpInside" id="QLg-LU-n24"/>
+                                            <action selector="textFromBuffer:" destination="Gda-yG-5fI" eventType="touchUpInside" id="qft-Z6-ADy"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -482,6 +485,9 @@
                                     <constraint firstItem="aWb-Io-1BB" firstAttribute="top" secondItem="Gda-yG-5fI" secondAttribute="top" constant="11" id="vhb-WO-ZeQ"/>
                                     <constraint firstItem="0Fg-76-J5l" firstAttribute="leading" secondItem="Gda-yG-5fI" secondAttribute="leading" constant="5" id="xvs-3J-hDn"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="nameWalletTextField" destination="OVl-0c-dto" id="TGf-o9-Vz0"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h59-ee-e7z">
                                 <rect key="frame" x="15" y="142" width="305" height="1"/>
