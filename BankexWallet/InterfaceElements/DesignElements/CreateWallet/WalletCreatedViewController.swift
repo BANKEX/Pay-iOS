@@ -23,7 +23,9 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         walletAddressLabel.text = address
+        navigationItem.title = "Creating Wallet"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
+        self.navigationItem.leftBarButtonItem = nil
     }
     
     @objc func editButtonTapped() {

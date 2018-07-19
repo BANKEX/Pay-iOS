@@ -22,9 +22,12 @@ class CollectionViewCell: UICollectionViewCell {
         initialConfiguration()
     }
 
-    func configureCell(withText text: String) {
+    func configureCell(withText text: String, isCellRed: Bool = false) {
         wordLabel.text = text
-        wordLabel.textColor = #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
+        wordLabel.textColor = isCellRed ? #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 1) : #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
+        backgroundColor = isCellRed ? #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 0.7) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        layer.borderColor = isCellRed ? #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 1) : #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
+        
     }
     
     private func initialConfiguration() {

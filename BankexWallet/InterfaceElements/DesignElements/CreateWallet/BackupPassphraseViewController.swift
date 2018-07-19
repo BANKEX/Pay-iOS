@@ -26,6 +26,7 @@ class BackupPassphraseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
         passphraseCopiedView.alpha = 0.0
         if passphrase != UIPasteboard.general.string {
             nextButton.isEnabled = false

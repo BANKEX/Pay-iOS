@@ -21,6 +21,9 @@ class RepeatPassphraseViewController: UIViewController {
     @IBOutlet weak var heightConstraing: NSLayoutConstraint!
     @IBOutlet weak var afterCheckView: UIView!
     @IBOutlet weak var beforeCheckView: UIView!
+    @IBOutlet weak var afterCheckCollectionView: UICollectionView!
+    @IBOutlet weak var beforeCheckCollectionView: UICollectionView!
+    @IBOutlet weak var nextButton: UIButton!
     // Data sources for collection views
     var wordsAfter = [String]() {
         didSet {
@@ -60,14 +63,19 @@ class RepeatPassphraseViewController: UIViewController {
         return afterCheckView.frame.size.height + beforeCheckView.frame.height
     }()
     
-    // Outlets
-    @IBOutlet weak var afterCheckCollectionView: UICollectionView!
-    @IBOutlet weak var beforeCheckCollectionView: UICollectionView!
-    @IBOutlet weak var nextButton: UIButton!
+    lazy var spinner: UIActivityIndicatorView = {
+        let s = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        s.frame = CGRect(x: UIScreen.main.bounds.width / 2, y: nextButton.frame.origin.y - 40, width: s.frame.width, height: s.frame.height)
+        return s
+    }()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //nextButton.isEnabled = false
+        navigationItem.title = "Creating Wallet"
+
+        nextButton.isEnabled = false
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         setupManagers()
         
@@ -76,13 +84,19 @@ class RepeatPassphraseViewController: UIViewController {
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         guard let passphrase = passphrase else { return }
-        service.createNewHDWallet(with: "ETH Wallet Name", mnemonics: passphrase, mnemonicsPassword: "", walletPassword: "") { _, error in
-            if let error = error {
-                self.showWalletCreationAllert(withError: error)
-            } else {
-                self.performSegue(withIdentifier: "toWalletCreated", sender: nil)
+        sender.isEnabled = false
+        spinner.startAnimating()
+        view.addSubview(spinner)
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.service.createNewHDWallet(with: "ETH Wallet Name", mnemonics: passphrase, mnemonicsPassword: "", walletPassword: "") { _, error in
+                self.spinner.stopAnimating()
+                self.spinner.removeFromSuperview()
+                sender.isEnabled = true
+                error == nil ? self.performSegue(withIdentifier: "toWalletCreated", sender: nil) :
+                    self.showWalletCreationAllert()
             }
         }
+        
     }
     
     
@@ -99,9 +113,11 @@ class RepeatPassphraseViewController: UIViewController {
     }
     
     
-    //TODO: - create an allert
-    func showWalletCreationAllert(withError error: Error) {
-        
+    func showWalletCreationAllert() {
+        let alert = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

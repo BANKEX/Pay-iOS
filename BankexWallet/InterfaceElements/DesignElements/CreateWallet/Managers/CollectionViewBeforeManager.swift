@@ -49,10 +49,8 @@ class CollectionViewBeforeManager: NSObject, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        label.text = words[indexPath.row]
-        label.sizeToFit()
-        label.layoutIfNeeded()
         
+        label.text = words[indexPath.row]
         let width: CGFloat = label.intrinsicContentSize.width + 12
         let height: CGFloat = 33
         return CGSize(width: width, height: height)
