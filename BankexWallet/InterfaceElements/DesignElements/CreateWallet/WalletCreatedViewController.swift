@@ -44,4 +44,6 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
         }
     }
     
+    @IBAction func nextButtonTapped(_ sender: Any) {
+    }
 }
