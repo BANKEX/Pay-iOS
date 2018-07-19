@@ -40,10 +40,12 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
         walletNameLabel.text = name
         guard let address = address else { return }
         service.updateWalletName(walletAddress: address, newName: name) { (error) in
-            print(error)
+            print(error as Any)
+            //TODO: - Alert!
         }
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
+        WalletCreationTypeRouterImplementation().exitFromTheScreen()
     }
 }
