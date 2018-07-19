@@ -35,6 +35,8 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         }
         return QRCodeReaderViewController(builder: builder)
     }()
+    let router = WalletCreationTypeRouterImplementation()
+
     
     
     //MARK: - LifeCircle
@@ -73,6 +75,12 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         }
     }
     
+    func showCreationAlert() {
+        let alertViewController = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
+        alertViewController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(alertViewController, animated: true)
+    }
+    
     //MARK: - IBActions
     @IBAction func clearTextView(_ sender:Any) {
         privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
@@ -82,12 +90,17 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
     }
     
+    @IBAction func createPrivateKeyWallet(_ sender:Any) {
+        service.createNewSingleAddressWallet(with: singleKeyView.nameWalletTextField.text, fromText: privateKeyTextView.text, password: nil) { (error) in
+            if let _ = error {
+                self.showCreationAlert()
+            }
+            self.router.exitFromTheScreen()
+        }
+        
+    }
     
     
-    
-    
-    
-    //MARK: - TextViewDelegate
     
     
     

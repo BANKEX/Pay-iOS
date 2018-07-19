@@ -13,7 +13,7 @@ extension SingleKeyWalletController:SingleKeyViewDelegate {
     
     func tfShouldReturn(_ textField: UITextField) -> Bool {
         if textField.returnKeyType == .done && importButton.isEnabled {
-            //Create Wallet
+            createPrivateKeyWallet(self)
         }else if textField.returnKeyType == .next {
             privateKeyTextView.becomeFirstResponder()
         }else {
