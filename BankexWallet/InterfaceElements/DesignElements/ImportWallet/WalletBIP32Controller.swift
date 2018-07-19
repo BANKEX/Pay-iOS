@@ -46,13 +46,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameTextField.delegate = self
-        passphraseTextView.delegate = self
-        passphraseTextView.contentInset.bottom = 10.0
-        passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
-        passphraseTextView.autocorrectionType = .no
-        passphraseTextView.autocapitalizationType = .none
-        nameTextField.autocorrectionType = .no
+        configure()
         state = .notAvailable
     }
     
@@ -70,6 +64,16 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         if passphraseTextView.text.utf16.count > 0  {
             state = .notAvailable
         }
+    }
+    
+    func configure() {
+        nameTextField.delegate = self
+        passphraseTextView.delegate = self
+        passphraseTextView.contentInset.bottom = 10.0
+        passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
+        passphraseTextView.autocorrectionType = .no
+        passphraseTextView.autocapitalizationType = .none
+        nameTextField.autocorrectionType = .no
     }
     
 
@@ -122,6 +126,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     //MARK: - TextViewDelegate
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        textView.returnKeyType = importButton.isEnabled ? .done : .next
         separator1.backgroundColor = WalletColors.blueText.color()
         return true
     }
@@ -152,6 +157,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
             return false
         }
     }
+    
     
     func textViewDidEndEditing(_ textView: UITextView) {
         separator1.backgroundColor = WalletColors.greySeparator.color()

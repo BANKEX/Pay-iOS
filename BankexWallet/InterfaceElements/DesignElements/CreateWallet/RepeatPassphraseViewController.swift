@@ -74,7 +74,7 @@ class RepeatPassphraseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBarSetup()
-        //nextButton.isEnabled = false
+        nextButton.isEnabled = false
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         setupManagers()
         

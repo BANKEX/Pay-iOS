@@ -41,9 +41,7 @@ extension SingleKeyWalletController:SingleKeyViewDelegate {
         if let string = UIPasteboard.general.string  {
             privateKeyTextView.text = string
             privateKeyTextView.textColor = .black
-            clearButton.isHidden = false
-            importButton.isEnabled = true
-            importButton.backgroundColor = WalletColors.blueText.color()
+            state = .available
         }
     }
     

@@ -29,8 +29,8 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     //MARK: - Properties
     
-    var privateKeyView = SingleKeyView()
-    var service = SingleKeyServiceImplementation()
+    let privateKeyView = SingleKeyView()
+    let service = SingleKeyServiceImplementation()
     lazy var readerVC:QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes:[.qr],captureDevicePosition: .back)
@@ -57,12 +57,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
-        privateKeyTextView.delegate = self
-        singleKeyView.delegate = self
-        privateKeyTextView.contentInset.bottom = 10.0
-        privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
-        privateKeyTextView.autocorrectionType = .no
-        privateKeyTextView.autocapitalizationType = .none
+        configure()
         state = .notAvailable
     }
     
@@ -79,6 +74,15 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
         view.endEditing(true)
         state = .notAvailable
+    }
+    
+    func configure() {
+        privateKeyTextView.delegate = self
+        singleKeyView.delegate = self
+        privateKeyTextView.contentInset.bottom = 10.0
+        privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
+        privateKeyTextView.autocorrectionType = .no
+        privateKeyTextView.autocapitalizationType = .none
     }
     
    
