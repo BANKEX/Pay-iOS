@@ -67,11 +67,25 @@ class RepeatPassphraseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nextButton.isEnabled = false
+        //nextButton.isEnabled = false
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         setupManagers()
         
     }
+    
+    
+    @IBAction func nextButtonTapped(_ sender: UIButton) {
+        guard let passphrase = passphrase else { return }
+        service.createNewHDWallet(with: "ETH Wallet Name", mnemonics: passphrase, mnemonicsPassword: "", walletPassword: "") { _, error in
+            if let error = error {
+                self.showWalletCreationAllert(withError: error)
+            } else {
+                self.performSegue(withIdentifier: "toWalletCreated", sender: nil)
+            }
+        }
+    }
+    
+    
     
     // Helpers
     func setupManagers() {
@@ -82,6 +96,20 @@ class RepeatPassphraseViewController: UIViewController {
         wordsAfterManager.delegate = self
         
         wordsBefore = wordsInCorrectOrder.shuffled()
+    }
+    
+    
+    //TODO: - create an allert
+    func showWalletCreationAllert(withError error: Error) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let address = service.selectedAddress() else { return }
+        if let vc = segue.destination as? WalletCreatedViewController {
+            vc.address = address
+            vc.service = service
+        }
     }
     
 
