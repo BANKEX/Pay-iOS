@@ -14,14 +14,14 @@ end
 #Access to Fabric
 lane :crashliticsLogIn do
   crashlytics(api_token: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13",
-           build_secret: "2825448f1135487bf64ad36e2b0416ff2d3bf067540a9089c397a793d62d73b7") 
+           build_secret: "2825448f1135487bf64ad36e2b0416ff2d3bf067540a9089c397a793d62d73b7",group:"testers") 
 end
 
 
 #Prod build
 lane :build_appStore do
   travis
-  match(type: "appstore",app_identifier:"com.bankex.pay")
+  match(type: "appstore",app_identifier:"com.bankex.pay",force_for_new_devices:true)
   #scan
   gym(clean:true,scheme:"BankexWallet",export_method:"app-store")
   crashliticsLogIn
@@ -31,12 +31,6 @@ end
 #Dev build
 lane :build_Dev do
   travis
-  register_devices(
-  devices: {
-    "iphone_17.03_1" => "5428f97bd9908faf415167a09e18f8176e674943",
-    "iphone_17.03_2" => "db1ad0cfd7f3c441e6368be411068cb3e7472621",
-    "iphone_17.03_3" => "c0c128abe0312588c6cb750ed8c86083da0ad091"
-  })
   match(type: "development",app_identifier:"com.bankex.pay.dev")
   #scan
   gym(clean:true,scheme:"BankexWallet",configuration:"Debug",export_method:"development")
