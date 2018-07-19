@@ -24,10 +24,8 @@ extension SingleKeyWalletController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
-            importButton.isEnabled = true
-            importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
+            state = .available
             textView.returnKeyType = importButton.isEnabled ? .done : .next
-            clearButton.isHidden = false
             if textView == privateKeyTextView && textView.text == "Enter your private key" {
                 if text.utf16.count == 0 {
                     return false
@@ -36,9 +34,7 @@ extension SingleKeyWalletController: UITextViewDelegate {
             }
             return true
         }else {
-            importButton.isEnabled = false
-            importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
-            clearButton.isHidden = true
+            state = .notAvailable
             textView.applyPlaceHolderText(with: "Enter your private key")
             privateKeyTextView.moveCursorToStart()
             return false

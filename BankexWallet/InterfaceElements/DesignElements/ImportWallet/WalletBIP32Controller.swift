@@ -72,16 +72,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         }
     }
     
-    func showCreationAlert() {
-        let alertViewController = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
-        alertViewController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        self.present(alertViewController, animated: true)
-    }
-    
-    
-  
-    
-    
+
     
     //MARK: - IBActions
     @IBAction func clearTextView(_ sender:Any) {
@@ -187,3 +178,4 @@ extension UITextView {
         }
     }
 }
+

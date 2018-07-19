@@ -13,7 +13,9 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     
     
-    
+    enum State {
+        case notAvailable,available
+    }
     
     
     //MARK: - IBOutlets
@@ -36,20 +38,32 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         return QRCodeReaderViewController(builder: builder)
     }()
     let router = WalletCreationTypeRouterImplementation()
+    var state:State = .notAvailable {
+        didSet {
+            if state == .notAvailable {
+                clearButton.isHidden = true
+                importButton.isEnabled = false
+                importButton.backgroundColor = WalletColors.defaultGreyText.color()
+            }else {
+                clearButton.isHidden = false
+                importButton.isEnabled = true
+                importButton.backgroundColor = WalletColors.blueText.color()
+            }
+        }
+    }
 
     
     
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
-        importButton.isEnabled = false
         privateKeyTextView.delegate = self
         singleKeyView.delegate = self
         privateKeyTextView.contentInset.bottom = 10.0
         privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
-        clearButton.isHidden = true
         privateKeyTextView.autocorrectionType = .no
         privateKeyTextView.autocapitalizationType = .none
+        state = .notAvailable
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -64,30 +78,16 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         singleKeyView.nameWalletTextField.text = ""
         privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
         view.endEditing(true)
-        updateUI()
+        state = .notAvailable
     }
     
-    func updateUI() {
-        if privateKeyTextView.text.utf16.count > 0  {
-            clearButton.isHidden = true
-            importButton.isEnabled = false
-            importButton.backgroundColor = WalletColors.defaultGreyText.color()
-        }
-    }
-    
-    func showCreationAlert() {
-        let alertViewController = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
-        alertViewController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        self.present(alertViewController, animated: true)
-    }
+   
     
     //MARK: - IBActions
     @IBAction func clearTextView(_ sender:Any) {
         privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
-        clearButton.isHidden = true
         privateKeyTextView.moveCursorToStart()
-        importButton.isEnabled = false
-        importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color() : WalletColors.defaultGreyText.color()
+        state = .notAvailable
     }
     
     @IBAction func createPrivateKeyWallet(_ sender:Any) {
