@@ -9,6 +9,7 @@
 import UIKit
 
 class BackupPassphraseViewController: UIViewController {
+    
     @IBOutlet weak var passphraseLabel: UILabel!
     @IBOutlet weak var passphraseCopiedView: UIView!
     @IBOutlet weak var nextButton: UIButton!
@@ -17,7 +18,6 @@ class BackupPassphraseViewController: UIViewController {
     var passphrase: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Creating Wallet"
         passphrase = service.generateMnemonics()
         passphraseLabel.text = passphrase
         
@@ -26,13 +26,12 @@ class BackupPassphraseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = false
+        navigationBarSetup()
         passphraseCopiedView.alpha = 0.0
         if passphrase != UIPasteboard.general.string {
             nextButton.isEnabled = false
             nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         }
-        
         
     }
     
@@ -49,6 +48,11 @@ class BackupPassphraseViewController: UIViewController {
         }
         
         nextButton.isEnabled = true
+    }
+    
+    func navigationBarSetup() {
+        navigationItem.title = "Creating Wallet"
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -15,14 +15,20 @@ class EditWalletNameController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Wallet Name"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
+        navigationBarSetup()
     }
     
     @objc func saveButtonTapped() {
         guard let name = walletNameTextField.text, name != "" else { return }
         delegate?.nameChanged(to: name)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func navigationBarSetup() {
+        navigationItem.title = "Wallet Name"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
+        let button = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.topItem?.backBarButtonItem = button
     }
     
 }

@@ -23,13 +23,18 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         walletAddressLabel.text = address
-        navigationItem.title = "Creating Wallet"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
-        self.navigationItem.leftBarButtonItem = nil
+        navigationBarSetup()
+
     }
     
     @objc func editButtonTapped() {
         performSegue(withIdentifier: "showEdit", sender: nil)
+    }
+    
+    func navigationBarSetup() {
+        navigationItem.title = "Creating Wallet"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
+        navigationItem.setHidesBackButton(true, animated: false)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,9 +47,15 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
         walletNameLabel.text = name
         guard let address = address else { return }
         service.updateWalletName(walletAddress: address, newName: name) { (error) in
-            print(error as Any)
-            //TODO: - Alert!
+            if error != nil { self.showAlert() }
         }
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "Error", message: "Could not rename the wallet", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
