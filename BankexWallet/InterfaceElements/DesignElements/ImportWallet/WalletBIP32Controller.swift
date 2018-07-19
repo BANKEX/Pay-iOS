@@ -50,6 +50,15 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         nameTextField.text = ""
         passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
         view.endEditing(true)
+        updateUI()
+    }
+    
+    func updateUI() {
+        if passphraseTextView.text.utf16.count > 0  {
+            clearButton.isHidden = true
+            importButton.isEnabled = false
+            importButton.backgroundColor = WalletColors.defaultGreyText.color()
+        }
     }
     
     func showCreationAlert() {

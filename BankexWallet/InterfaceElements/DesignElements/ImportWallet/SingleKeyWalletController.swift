@@ -59,7 +59,18 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     //MARK: - Methods
     
     func clearTextFields() {
-        //TODO
+        singleKeyView.nameWalletTextField.text = ""
+        privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
+        view.endEditing(true)
+        updateUI()
+    }
+    
+    func updateUI() {
+        if privateKeyTextView.text.utf16.count > 0  {
+            clearButton.isHidden = true
+            importButton.isEnabled = false
+            importButton.backgroundColor = WalletColors.defaultGreyText.color()
+        }
     }
     
     //MARK: - IBActions
