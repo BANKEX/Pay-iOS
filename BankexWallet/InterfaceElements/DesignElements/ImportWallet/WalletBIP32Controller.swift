@@ -11,6 +11,11 @@ import UIKit
 class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol,UITextViewDelegate {
     
     
+    enum State {
+        case notAvailable,available
+    }
+    
+    
     //MARK: - IBOutlets
     @IBOutlet weak var importButton:UIButton!
     @IBOutlet weak var nameTextField:UITextField!
@@ -23,20 +28,32 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     //MARK: - Properties
     let service = HDWalletServiceImplementation()
     let router = WalletCreationTypeRouterImplementation()
+    var state:State = .notAvailable {
+        didSet {
+            if state == .notAvailable {
+                clearButton.isHidden = true
+                importButton.isEnabled = false
+                importButton.backgroundColor = WalletColors.defaultGreyText.color()
+            }else {
+                clearButton.isHidden = false
+                importButton.isEnabled = true
+                importButton.backgroundColor = WalletColors.blueText.color()
+            }
+        }
+    }
 
     
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
-        importButton.isEnabled = false
         nameTextField.delegate = self
         passphraseTextView.delegate = self
         passphraseTextView.contentInset.bottom = 10.0
         passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
-        clearButton.isHidden = true
         passphraseTextView.autocorrectionType = .no
         passphraseTextView.autocapitalizationType = .none
         nameTextField.autocorrectionType = .no
+        state = .notAvailable
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -50,14 +67,8 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         nameTextField.text = ""
         passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
         view.endEditing(true)
-        updateUI()
-    }
-    
-    func updateUI() {
         if passphraseTextView.text.utf16.count > 0  {
-            clearButton.isHidden = true
-            importButton.isEnabled = false
-            importButton.backgroundColor = WalletColors.defaultGreyText.color()
+            state = .notAvailable
         }
     }
     
@@ -68,17 +79,15 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     }
     
     
-    
+  
     
     
     
     //MARK: - IBActions
     @IBAction func clearTextView(_ sender:Any) {
         passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
-        clearButton.isHidden = true
+        state = .notAvailable
         passphraseTextView.moveCursorToStart()
-        importButton.isEnabled = false
-        importButton.backgroundColor = WalletColors.defaultGreyText.color()
     }
     
     @IBAction func createWalletTapped(_ sender:Any) {
@@ -135,10 +144,8 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
-            importButton.isEnabled = true
             textView.returnKeyType = importButton.isEnabled ? .done : .next
-            importButton.backgroundColor = importButton.isEnabled ? WalletColors.blueText.color():WalletColors.defaultGreyText.color()
-            clearButton.isHidden = false
+            state = .available
             if textView == passphraseTextView && textView.text == "Enter your passphrase" {
                 if text.utf16.count == 0 {
                     return false
@@ -147,9 +154,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
             }
             return true
         }else {
-            importButton.backgroundColor = WalletColors.defaultGreyText.color()
-            importButton.isEnabled = false
-            clearButton.isHidden = true
+            state = .notAvailable
             textView.applyPlaceHolderText(with: "Enter your passphrase")
             passphraseTextView.moveCursorToStart()
             return false
