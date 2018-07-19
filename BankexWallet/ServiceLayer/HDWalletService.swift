@@ -166,6 +166,7 @@ protocol HDWalletService: GlobalWalletsService {
                            key: HDKey,
                            password: String,
                            completion: @escaping (String?, Error?) -> Void)
+    func updateWalletName(walletAddress: String, newName: String, completion: @escaping (Error?) -> Void)
 }
 
 extension HDWalletService {
@@ -283,6 +284,24 @@ class HDWalletServiceImplementation: HDWalletService {
             }
             
         }
+    }
+    
+    func updateWalletName(walletAddress: String, newName: String, completion: @escaping (Error?) -> Void) {
+        do {
+            try DBStorage.db.operation { (context, save) in
+                let currentSelected = try context.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "address == %@", walletAddress))).first
+                currentSelected?.name = newName
+                save()
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        } catch {
+            DispatchQueue.main.async {
+                completion(error)
+            }
+        }
+            
     }
     
     

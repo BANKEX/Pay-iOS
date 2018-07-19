@@ -18,7 +18,6 @@ class CollectionViewAfterManager: NSObject, UICollectionViewDataSource, UICollec
         }
     }
     
-    
     //Just a label for further calculations in flow layout
     lazy var label: UILabel = {
         let label = UILabel(frame: CGRect.zero)
@@ -27,6 +26,7 @@ class CollectionViewAfterManager: NSObject, UICollectionViewDataSource, UICollec
     }()
 
     var wordsInCorrectOrder = [String]()
+    
     init(collectionView: UICollectionView, wordsInCorrectOrder: [String]) {
         super.init()
         self.wordsInCorrectOrder = wordsInCorrectOrder
@@ -41,12 +41,8 @@ class CollectionViewAfterManager: NSObject, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "justCell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
-        cell.configureCell(withText: words[indexPath.row])
-        if words[indexPath.row] != wordsInCorrectOrder[indexPath.row] {
-            cell.backgroundColor = #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 0.7)
-            cell.layer.borderColor = #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 1)
-            cell.wordLabel.textColor = #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 1)
-        }
+        cell.configureCell(withText: words[indexPath.row], isCellRed: words[indexPath.row] != wordsInCorrectOrder[indexPath.row])
+        
         return cell
         
     }
@@ -56,6 +52,7 @@ class CollectionViewAfterManager: NSObject, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         label.text = words[indexPath.row]
         let width: CGFloat = label.intrinsicContentSize.width + 12
         let height: CGFloat = 33
@@ -67,5 +64,4 @@ class CollectionViewAfterManager: NSObject, UICollectionViewDataSource, UICollec
 protocol CollectionViewAfterDelegate: class {
     func didDiselectItem(at indexPath: IndexPath)
 }
-
 
