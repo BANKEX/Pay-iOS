@@ -50,4 +50,8 @@ enum WalletColors {
 
         }
     }
+    
+    static func setColorForTextViewPlaceholder() -> UIColor  {
+        return UIColor.gray.withAlphaComponent(0.5)
+    }
 }

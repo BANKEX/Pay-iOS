@@ -97,10 +97,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
             }
             self.router.exitFromTheScreen()
         }
-        
     }
-    
-    
     
     
     

@@ -83,7 +83,8 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     
     @IBAction func createWalletTapped(_ sender:Any) {
         let generatedPassphrase = passphraseTextView.text!
-        service.createNewHDWallet(with: nameTextField.text ?? "", mnemonics: generatedPassphrase, mnemonicsPassword: "", walletPassword: "") { (_, error) in
+        let nameWallet = nameTextField.text ?? ""
+        service.createNewHDWallet(with: nameWallet, mnemonics: generatedPassphrase, mnemonicsPassword: "", walletPassword: "") { (_, error) in
             guard error == nil else {
                 self.showCreationAlert()
                 return
@@ -164,7 +165,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
 extension UITextView {
     func applyPlaceHolderText(with placeholder:String) {
         self.text = placeholder
-        self.textColor = UIColor.lightGray
+        self.textColor = WalletColors.setColorForTextViewPlaceholder()
     }
     
     func applyNotHolder() {
