@@ -36,6 +36,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
             $0.reader = QRCodeReader(metadataObjectTypes:[.qr],captureDevicePosition: .back)
         }
         return QRCodeReaderViewController(builder: builder)
+        builder.showSwitchCameraButton = false
     }()
     let router = WalletCreationTypeRouterImplementation()
     var state:State = .notAvailable {
