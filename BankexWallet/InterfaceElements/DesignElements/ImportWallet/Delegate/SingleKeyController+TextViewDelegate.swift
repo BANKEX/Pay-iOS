@@ -26,7 +26,6 @@ extension SingleKeyWalletController: UITextViewDelegate {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
             state = .available
-            textView.returnKeyType = importButton.isEnabled ? .done : .next
             if textView == privateKeyTextView && textView.text == "Enter your private key" {
                 if text.utf16.count == 0 {
                     return false

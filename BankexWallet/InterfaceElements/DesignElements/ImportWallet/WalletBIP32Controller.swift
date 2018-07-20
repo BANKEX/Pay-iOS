@@ -34,10 +34,12 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
                 clearButton.isHidden = true
                 importButton.isEnabled = false
                 importButton.backgroundColor = WalletColors.defaultGreyText.color()
+                passphraseTextView.returnKeyType = .next
             }else {
                 clearButton.isHidden = false
                 importButton.isEnabled = true
                 importButton.backgroundColor = WalletColors.blueText.color()
+                passphraseTextView.returnKeyType = .done
             }
         }
     }
@@ -51,6 +53,11 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let text = passphraseTextView.text {
+            if text == "\n" {
+                passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
+            }
+        }
         view.endEditing(true)
     }
     
@@ -114,9 +121,8 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         if textField.returnKeyType == .done && importButton.isEnabled {
             createWalletTapped(self)
         }else if textField.returnKeyType == .next {
+            passphraseTextView.applyNotHolder()
             passphraseTextView.becomeFirstResponder()
-        }else {
-            view.endEditing(true)
         }
         return true
     }
@@ -126,7 +132,6 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     //MARK: - TextViewDelegate
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        textView.returnKeyType = importButton.isEnabled ? .done : .next
         separator1.backgroundColor = WalletColors.blueText.color()
         return true
     }
@@ -141,7 +146,6 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
-            textView.returnKeyType = importButton.isEnabled ? .done : .next
             state = .available
             if textView == passphraseTextView && textView.text == "Enter your passphrase" {
                 if text.utf16.count == 0 {

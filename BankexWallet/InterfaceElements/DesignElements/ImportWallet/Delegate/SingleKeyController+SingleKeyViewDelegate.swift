@@ -15,12 +15,12 @@ extension SingleKeyWalletController:SingleKeyViewDelegate {
         if textField.returnKeyType == .done && importButton.isEnabled {
             createPrivateKeyWallet(self)
         }else if textField.returnKeyType == .next {
+            privateKeyTextView.applyNotHolder()
             privateKeyTextView.becomeFirstResponder()
-        }else {
-            view.endEditing(true)
         }
         return true
     }
+    
     
     func tfDidBeginEditing(_ textField: UITextField) {
         separator2.backgroundColor = WalletColors.blueText.color()

@@ -44,10 +44,12 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
                 clearButton.isHidden = true
                 importButton.isEnabled = false
                 importButton.backgroundColor = WalletColors.defaultGreyText.color()
+                privateKeyTextView.returnKeyType = .next
             }else {
                 clearButton.isHidden = false
                 importButton.isEnabled = true
                 importButton.backgroundColor = WalletColors.blueText.color()
+                privateKeyTextView.returnKeyType = .done
             }
         }
     }
@@ -62,6 +64,11 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let text = privateKeyTextView.text {
+            if text == "\n" {
+                privateKeyTextView.applyPlaceHolderText(with: "Enter your passphrase")
+            }
+        }
         view.endEditing(true)
     }
     
