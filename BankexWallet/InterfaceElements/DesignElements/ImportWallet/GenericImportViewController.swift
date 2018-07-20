@@ -23,12 +23,17 @@ class GenericImportViewController: UIViewController {
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Importing Wallet"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupNavBar()
         updateUI()
+    }
+    
+    func setupNavBar() {
+        title = "Importing Wallet"
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
