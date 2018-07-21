@@ -570,7 +570,7 @@
         <!--Settings-->
         <scene sceneID="UUo-TQ-OMY">
             <objects>
-                <tableViewController id="qQO-1J-iXi" sceneMemberID="viewController">
+                <tableViewController id="qQO-1J-iXi" customClass="SettingsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="dgA-1k-mcU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -843,10 +843,28 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="1Vw-nb-Ghk"/>
+                    <connections>
+                        <segue destination="0Uf-R9-bZe" kind="show" id="AnP-VM-Uv4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YkV-yB-ASf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2012" y="5578.5607196401807"/>
+            <point key="canvasLocation" x="-3182" y="5902"/>
+        </scene>
+        <!--Networks View Controller-->
+        <scene sceneID="qlF-13-w0o">
+            <objects>
+                <viewController id="0Uf-R9-bZe" customClass="NetworksViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pmG-d1-sZ9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="1YV-BH-FyT"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q0D-A7-Ozm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2185" y="5556"/>
         </scene>
         <!--Tokens-->
         <scene sceneID="LEY-fS-us0">
@@ -5424,7 +5442,7 @@ successfully</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdy-PK-bRS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1774" y="6314"/>
+            <point key="canvasLocation" x="-271" y="6427"/>
         </scene>
         <!--Sending In Process View Controller-->
         <scene sceneID="ttd-FO-4vY">
@@ -5484,11 +5502,11 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="4701" y="2855"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="nf5-Ow-KDC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uo0-Ua-Fxy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="1qP-Kv-JEf"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Setting" id="1qP-Kv-JEf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="mfJ-k5-5hl">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
@@ -5501,7 +5519,7 @@ minutes, please wait ...</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJb-1y-F0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2951.1999999999998" y="5578.5607196401807"/>
+            <point key="canvasLocation" x="-4169" y="5903"/>
         </scene>
     </scenes>
     <resources>
@@ -5535,6 +5553,7 @@ minutes, please wait ...</string>
         <image name="Send" width="32" height="32"/>
         <image name="Sending" width="252" height="264"/>
         <image name="Sent" width="40" height="40"/>
+        <image name="Setting" width="18" height="18"/>
         <image name="Success" width="320" height="270"/>
         <image name="Tokens" width="19" height="18"/>
         <image name="Transaction history  are empty" width="48" height="48"/>

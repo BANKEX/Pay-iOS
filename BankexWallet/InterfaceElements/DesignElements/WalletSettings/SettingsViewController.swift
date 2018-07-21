@@ -12,6 +12,7 @@ import UIKit
 class SettingsViewController: UITableViewController {
     
     
+    
     let managerReferences = ManagerReferences()
 
     override func viewDidLoad() {
