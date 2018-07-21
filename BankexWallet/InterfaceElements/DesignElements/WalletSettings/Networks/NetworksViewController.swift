@@ -8,12 +8,16 @@
 
 import UIKit
 
+protocol NetworkDelegate:class {
+    func didTapped(with network:CustomNetwork)
+}
+
 class NetworksViewController: UIViewController {
     
     @IBOutlet weak var tableView:UITableView!
     
     
-    
+    weak var delegate:NetworkDelegate?
     
     var selectedNetwork:CustomNetwork {
         return networkService.preferredNetwork()
@@ -31,7 +35,9 @@ class NetworksViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        listNetworks = networkService.currentNetworksList()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.listNetworks = self.networkService.currentNetworksList()
+        }
         title = "Connection"
         navigationController?.navigationBar.isHidden = false
     }

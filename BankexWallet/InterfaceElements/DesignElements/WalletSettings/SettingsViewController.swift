@@ -9,7 +9,13 @@
 import UIKit
 
 
-class SettingsViewController: UITableViewController {
+class SettingsViewController: UITableViewController,NetworkDelegate {
+    func didTapped(with network: CustomNetwork) {
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     
     @IBOutlet weak var nameWalletLabel:UILabel!
     @IBOutlet weak var nameNetworkLabel:UILabel!
@@ -38,6 +44,13 @@ class SettingsViewController: UITableViewController {
     }
 
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "networkSegue" {
+            let dest = segue.destination as! NetworksViewController
+            dest.delegate = self
+        }
+    }
     
     
 }
