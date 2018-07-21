@@ -34,6 +34,9 @@
 		81C43341201B7327008D3343 /* WalletState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43340201B7327008D3343 /* WalletState.swift */; };
 		81C43343201B7BDA008D3343 /* Keystores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C43342201B7BDA008D3343 /* Keystores.swift */; };
 		862872832100D24D0004CCCF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862872822100D24D0004CCCF /* UIViewController+Extensions.swift */; };
+		8631569A2103940300914F31 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863156992103940300914F31 /* SettingsViewController.swift */; };
+		8631569C2103944600914F31 /* ManagerReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631569B2103944600914F31 /* ManagerReferences.swift */; };
+		8631569E21039E9700914F31 /* UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631569D21039E9700914F31 /* UITableViewDataSource.swift */; };
 		8686785020FEA02E00A4CC9F /* ScreenWithContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8686784F20FEA02E00A4CC9F /* ScreenWithContentProtocol.swift */; };
 		86A6CAEA20FE3367002C19AA /* BackupPassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A6CAE920FE3367002C19AA /* BackupPassphraseViewController.swift */; };
 		86A6CAEC20FE338B002C19AA /* RepeatPassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A6CAEB20FE338B002C19AA /* RepeatPassphraseViewController.swift */; };
@@ -158,6 +161,9 @@
 		84DEF2425AC575B94C445B85 /* Pods-BankexWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		84EEC64EB525553C3FF4EBC1 /* Pods-BankexWalletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests.release.xcconfig"; sourceTree = "<group>"; };
 		862872822100D24D0004CCCF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		863156992103940300914F31 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8631569B2103944600914F31 /* ManagerReferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerReferences.swift; sourceTree = "<group>"; };
+		8631569D21039E9700914F31 /* UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewDataSource.swift; sourceTree = "<group>"; };
 		8686784F20FEA02E00A4CC9F /* ScreenWithContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenWithContentProtocol.swift; sourceTree = "<group>"; };
 		86A6CAE920FE3367002C19AA /* BackupPassphraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPassphraseViewController.swift; sourceTree = "<group>"; };
 		86A6CAEB20FE338B002C19AA /* RepeatPassphraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatPassphraseViewController.swift; sourceTree = "<group>"; };
@@ -413,6 +419,16 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
+		86315698210393E700914F31 /* WalletSettings */ = {
+			isa = PBXGroup;
+			children = (
+				863156992103940300914F31 /* SettingsViewController.swift */,
+				8631569B2103944600914F31 /* ManagerReferences.swift */,
+				8631569D21039E9700914F31 /* UITableViewDataSource.swift */,
+			);
+			path = WalletSettings;
+			sourceTree = "<group>";
+		};
 		86A6CAE720FE3303002C19AA /* CreateWallet */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,6 +484,7 @@
 		F00E46082073CEBB00387B96 /* DesignElements */ = {
 			isa = PBXGroup;
 			children = (
+				86315698210393E700914F31 /* WalletSettings */,
 				86A6CAE820FE330C002C19AA /* ImportWallet */,
 				86A6CAE720FE3303002C19AA /* CreateWallet */,
 				003D4BBA20FCE78F0096FEBA /* Onboarding */,
@@ -940,6 +957,7 @@
 				003D4BBE20FCE7E20096FEBA /* OnboardingViewController.swift in Sources */,
 				F0FF1C5A204BFB610051D894 /* TransactionsHistoryProtocols.swift in Sources */,
 				F0FF1C73205551350051D894 /* RecipientsAddressesService.swift in Sources */,
+				8631569A2103940300914F31 /* SettingsViewController.swift in Sources */,
 				F05C59FE20A38C4600F22E3F /* FavoritesCollectionViewCell.swift in Sources */,
 				F00E46202076195C00387B96 /* FavouritesListWithCollectionCell.swift in Sources */,
 				F0B1B4C5205944E1009D76D5 /* CustomERC20TokensService.swift in Sources */,
@@ -966,6 +984,7 @@
 				F00E46112073CFFD00387B96 /* WalletBIP32KeyController.swift in Sources */,
 				F075A453204BFA34001949A9 /* TransactionsHistoryPresenter.swift in Sources */,
 				F0B1B4CF205AAC08009D76D5 /* TokensListCell.swift in Sources */,
+				8631569C2103944600914F31 /* ManagerReferences.swift in Sources */,
 				86A6CAEC20FE338B002C19AA /* RepeatPassphraseViewController.swift in Sources */,
 				003D4BC420FF3B820096FEBA /* CollectionViewCell.swift in Sources */,
 				F075A44F204BF4B8001949A9 /* TransactionsHistoryController.swift in Sources */,
@@ -1001,6 +1020,7 @@
 				F0D66123208ECE0E00AD338F /* SettingsWalletsListController.swift in Sources */,
 				F00E460B2073CFA300387B96 /* WalletCreationTypeController.swift in Sources */,
 				F00E4625207A353300387B96 /* SendTokenViewController.swift in Sources */,
+				8631569E21039E9700914F31 /* UITableViewDataSource.swift in Sources */,
 				F0FF1C772056528D0051D894 /* SendEthService.swift in Sources */,
 				F0FF1C6F20554B240051D894 /* HDWalletService.swift in Sources */,
 				F0FF1C6D20551A110051D894 /* KeysService.swift in Sources */,
