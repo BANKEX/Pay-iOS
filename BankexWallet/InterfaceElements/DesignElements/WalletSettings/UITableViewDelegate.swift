@@ -13,7 +13,7 @@ extension SettingsViewController {
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
-                //Network
+                performSegue(withIdentifier: "networkSegue", sender: self)
             }else if indexPath.row == 1 {
                 //Wallets
             }else {

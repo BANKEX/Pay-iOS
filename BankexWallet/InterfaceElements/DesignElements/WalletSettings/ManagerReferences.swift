@@ -11,7 +11,7 @@ import StoreKit
 import MessageUI
 
 class ManagerReferences {
-    private enum references {
+    enum references {
         case twitter,telegram,facebook,bankex,appStore
         func getRef() -> String {
             switch self {
