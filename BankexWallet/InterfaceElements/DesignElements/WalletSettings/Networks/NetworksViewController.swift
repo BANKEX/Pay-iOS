@@ -40,6 +40,10 @@ class NetworksViewController: UIViewController {
         }
         title = "Connection"
         navigationController?.navigationBar.isHidden = false
+        
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
+            self.tableView.reloadData()
+        }
     }
 
     

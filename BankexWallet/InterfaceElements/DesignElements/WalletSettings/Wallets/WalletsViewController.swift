@@ -31,6 +31,9 @@ class WalletsViewController: UIViewController {
         tableView.delegate = self
         listWallets = (service.fullHDKeysList() ?? [HDKey]()) + (service.fullListOfSingleEthereumAddresses() ?? [HDKey]())
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { _ in
+            self.tableView.reloadData()
+        }
     }
     
     @objc func goBack(_ sender:UIButton) {
@@ -80,5 +83,6 @@ extension WalletsViewController:UITableViewDelegate {
             tableView.reloadData()
             delegate?.didTapped(with: wallet)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

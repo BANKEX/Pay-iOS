@@ -196,14 +196,14 @@
             <objects>
                 <viewController id="M7A-D7-jHu" customClass="WalletCreationTypeController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5cA-co-zbv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BANKEXlogo" translatesAutoresizingMaskIntoConstraints="NO" id="jfa-7I-5Lw">
-                                <rect key="frame" x="94" y="60" width="187.5" height="76"/>
+                                <rect key="frame" x="94" y="40" width="187.5" height="76"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="J47-g9-ucF">
-                                <rect key="frame" x="40" y="497" width="295" height="120"/>
+                                <rect key="frame" x="40" y="433" width="295" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncR-Ov-TWm">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
@@ -263,11 +263,11 @@
             <objects>
                 <viewController id="7ST-Xq-jOz" customClass="GenericImportViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ogw-hm-B6z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ne5-Eb-jRR">
-                                <rect key="frame" x="15" y="45" width="345" height="29"/>
+                                <rect key="frame" x="15" y="25" width="345" height="29"/>
                                 <segments>
                                     <segment title="Private Key"/>
                                     <segment title="Passphrase"/>
@@ -277,13 +277,13 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uth-qE-4i7">
-                                <rect key="frame" x="0.0" y="138" width="375" height="529"/>
+                                <rect key="frame" x="0.0" y="118" width="375" height="485"/>
                                 <connections>
                                     <segue destination="NQv-6V-bIF" kind="embed" id="3Es-ip-Avo"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m62-vk-V3q">
-                                <rect key="frame" x="0.0" y="138" width="375" height="529"/>
+                                <rect key="frame" x="0.0" y="118" width="375" height="485"/>
                                 <connections>
                                     <segue destination="zgF-bs-7XP" kind="embed" id="Axi-28-c3N"/>
                                 </connections>
@@ -320,7 +320,7 @@
             <objects>
                 <viewController id="zgF-bs-7XP" customClass="WalletBIP32Controller" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W3j-xf-8ev">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="529"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="485"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your passphrase" translatesAutoresizingMaskIntoConstraints="NO" id="UsK-Jd-mN2">
@@ -356,7 +356,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B9-kC-WYr">
-                                <rect key="frame" x="44" y="415" width="287" height="50"/>
+                                <rect key="frame" x="44" y="371" width="287" height="50"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NJJ-m9-yH4"/>
@@ -426,7 +426,7 @@
             <objects>
                 <viewController id="NQv-6V-bIF" customClass="SingleKeyWalletController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mOs-aW-oc9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="529"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="485"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your private key" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JGw-Ba-1Is">
@@ -502,7 +502,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6i-Sg-uPe">
-                                <rect key="frame" x="44" y="415" width="287" height="50"/>
+                                <rect key="frame" x="44" y="371" width="287" height="50"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="yzP-24-Myz"/>
@@ -570,7 +570,7 @@
         <!--Settings-->
         <scene sceneID="UUo-TQ-OMY">
             <objects>
-                <tableViewController id="qQO-1J-iXi" customClass="SettingsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Settings" id="qQO-1J-iXi" customClass="SettingsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="dgA-1k-mcU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -842,7 +842,7 @@
                             <outlet property="delegate" destination="qQO-1J-iXi" id="vUX-Qn-cxP"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="Jzc-3t-aFH"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Setting" id="Jzc-3t-aFH"/>
                     <navigationItem key="navigationItem" title="Settings" id="1Vw-nb-Ghk"/>
                     <connections>
                         <outlet property="nameNetworkLabel" destination="tlb-dS-iiN" id="Wkc-TX-Xn3"/>
@@ -3547,26 +3547,26 @@ minutes, please wait ...</string>
             <objects>
                 <viewController id="Ptd-7b-8Z1" customClass="BackupPassphraseViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gX9-cb-DsA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AttentionIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ct0-Rf-GPH">
-                                <rect key="frame" x="94" y="70" width="187.5" height="100"/>
+                                <rect key="frame" x="94" y="50" width="187.5" height="90.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please copy your passphrase to a safe place. These words are the only way to restore your wallet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAE-W8-Pep">
-                                <rect key="frame" x="20" y="186" width="335" height="54"/>
+                                <rect key="frame" x="20" y="156.5" width="335" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeM-bQ-MYE">
-                                <rect key="frame" x="30" y="320" width="315" height="17"/>
+                                <rect key="frame" x="30" y="290.5" width="315" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-ez-tzX">
-                                <rect key="frame" x="40" y="513.5" width="295" height="39.5"/>
+                                <rect key="frame" x="40" y="449.5" width="295" height="39.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase copied to clipboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79Q-LU-lZQ">
                                         <rect key="frame" x="53" y="24" width="190.5" height="16"/>
@@ -3593,7 +3593,7 @@ minutes, please wait ...</string>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="oIl-NG-7h4">
-                                <rect key="frame" x="20" y="577" width="335" height="50"/>
+                                <rect key="frame" x="20" y="513" width="335" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbA-t0-Y4q">
                                         <rect key="frame" x="0.0" y="0.0" width="155" height="50"/>
@@ -3667,11 +3667,11 @@ minutes, please wait ...</string>
             <objects>
                 <viewController id="pnU-Fl-U4y" customClass="RepeatPassphraseViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dbV-qK-hfV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ou-vL-T35">
-                                <rect key="frame" x="44" y="577" width="287" height="50"/>
+                                <rect key="frame" x="44" y="513" width="287" height="50"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="7qf-so-mic"/>
@@ -3689,16 +3689,16 @@ minutes, please wait ...</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please repeat the passphrase by tapping the words in the right order." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yhp-jc-sg7">
-                                <rect key="frame" x="38" y="53" width="299" height="36"/>
+                                <rect key="frame" x="38" y="33" width="299" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dh-3i-Zqx">
-                                <rect key="frame" x="16" y="119" width="343" height="71.5"/>
+                                <rect key="frame" x="16" y="99" width="343" height="63"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wgq-hB-4vF">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="71.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="63"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="ji9-2e-7qv">
                                             <size key="itemSize" width="76" height="31"/>
@@ -3744,10 +3744,10 @@ minutes, please wait ...</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGr-bk-yqC">
-                                <rect key="frame" x="40" y="250.5" width="295" height="286.5"/>
+                                <rect key="frame" x="40" y="222" width="295" height="251"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vFr-lL-G5w">
-                                        <rect key="frame" x="0.0" y="0.0" width="295" height="286.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="295" height="251"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="rjd-Qh-eI5">
                                             <size key="itemSize" width="76" height="31"/>
@@ -3793,14 +3793,14 @@ minutes, please wait ...</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFQ-9i-LeS">
-                                <rect key="frame" x="16" y="194" width="359" height="1"/>
+                                <rect key="frame" x="16" y="165.5" width="359" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="d9v-Ap-pJD"/>
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong order Please try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igo-na-Rvf">
-                                <rect key="frame" x="136.5" y="203" width="102" height="40"/>
+                                <rect key="frame" x="136.5" y="174.5" width="102" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="hMc-a5-tpP"/>
                                     <constraint firstAttribute="width" constant="102" id="qCz-ul-G9q"/>
@@ -3854,20 +3854,20 @@ minutes, please wait ...</string>
             <objects>
                 <viewController id="a3J-Y6-DtH" customClass="WalletCreatedViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J2S-WQ-nkd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="Wallet Created" translatesAutoresizingMaskIntoConstraints="NO" id="VQx-mb-tba">
-                                <rect key="frame" x="64" y="162" width="247.5" height="160"/>
+                                <rect key="frame" x="64" y="98" width="247.5" height="160"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Created!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUS-an-WGX">
-                                <rect key="frame" x="100" y="349" width="175" height="29"/>
+                                <rect key="frame" x="100" y="285" width="175" height="29"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                 <color key="textColor" red="0.55686274509803924" green="0.85882352941176465" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAC-II-JHc">
-                                <rect key="frame" x="44" y="577" width="287" height="50"/>
+                                <rect key="frame" x="44" y="513" width="287" height="50"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="VR6-rC-zMU"/>
@@ -3885,25 +3885,25 @@ minutes, please wait ...</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbS-T0-1sL">
-                                <rect key="frame" x="16" y="418" width="89" height="17"/>
+                                <rect key="frame" x="16" y="354" width="89" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="ETH Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcm-SJ-pEb">
-                                <rect key="frame" x="16" y="443" width="113" height="17"/>
+                                <rect key="frame" x="16" y="379" width="113" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Wallet Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLI-qR-wfT">
-                                <rect key="frame" x="16" y="485" width="108" height="17"/>
+                                <rect key="frame" x="16" y="421" width="108" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="f0X-Ac-2ve">
-                                <rect key="frame" x="16" y="510" width="343" height="17"/>
+                                <rect key="frame" x="16" y="446" width="343" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -3948,11 +3948,11 @@ minutes, please wait ...</string>
             <objects>
                 <viewController id="RPO-E3-gdZ" customClass="EditWalletNameController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nLn-Dg-aVu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvC-ib-3Mu">
-                                <rect key="frame" x="0.0" y="75" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzS-F0-EaS">
                                         <rect key="frame" x="16" y="12" width="97" height="21"/>
@@ -5636,6 +5636,7 @@ minutes, please wait ...</string>
         <image name="Send" width="32" height="32"/>
         <image name="Sending" width="252" height="264"/>
         <image name="Sent" width="40" height="40"/>
+        <image name="Setting" width="18" height="18"/>
         <image name="Success" width="320" height="270"/>
         <image name="Tokens" width="19" height="18"/>
         <image name="Transaction history  are empty" width="48" height="48"/>
@@ -5660,6 +5661,6 @@ minutes, please wait ...</string>
         <segue reference="3db-qf-zKB"/>
         <segue reference="OXd-vi-azc"/>
         <segue reference="Uws-Ci-KnS"/>
-        <segue reference="ZCX-JO-N3t"/>
+        <segue reference="0M5-ZF-71X"/>
     </inferredMetricsTieBreakers>
 </document>

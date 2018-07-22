@@ -34,13 +34,19 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        }
         updateUI()
     }
     
+
+
 
     
     func updateUI() {
@@ -58,6 +64,9 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
         }else if segue.identifier == "walletSegue" {
             let dest = segue.destination as! WalletsViewController
             dest.delegate = self
+        }
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
         }
     }
     
