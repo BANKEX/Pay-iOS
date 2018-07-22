@@ -14,6 +14,7 @@ class InitialLogicRouter {
     let keysService = SingleKeyServiceImplementation()
     
     func navigateToMainControllerIfNeeded(rootControler: UINavigationController) {
+        
         guard let _ = keysService.selectedWallet() else {
             return
         }

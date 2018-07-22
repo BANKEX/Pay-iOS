@@ -35,6 +35,7 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.topItem?.title = "Settings"
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +46,16 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
         updateUI()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        }
+    }
+    
 
+    
+    
 
 
     
@@ -64,9 +74,6 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
         }else if segue.identifier == "walletSegue" {
             let dest = segue.destination as! WalletsViewController
             dest.delegate = self
-        }
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = false
         }
     }
     
