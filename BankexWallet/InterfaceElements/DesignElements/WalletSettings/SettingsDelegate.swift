@@ -15,7 +15,7 @@ extension SettingsViewController {
             if indexPath.row == 0 {
                 performSegue(withIdentifier: "networkSegue", sender: self)
             }else if indexPath.row == 1 {
-                //Wallets
+                performSegue(withIdentifier: "walletSegue", sender: self)
             }else {
                 //security
             }

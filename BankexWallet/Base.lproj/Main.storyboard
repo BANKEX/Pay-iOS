@@ -842,16 +842,83 @@
                             <outlet property="delegate" destination="qQO-1J-iXi" id="vUX-Qn-cxP"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="Jzc-3t-aFH"/>
                     <navigationItem key="navigationItem" title="Settings" id="1Vw-nb-Ghk"/>
                     <connections>
                         <outlet property="nameNetworkLabel" destination="tlb-dS-iiN" id="Wkc-TX-Xn3"/>
                         <outlet property="nameWalletLabel" destination="Iat-gY-4ly" id="31X-b0-be9"/>
                         <segue destination="0Uf-R9-bZe" kind="show" identifier="networkSegue" id="AnP-VM-Uv4"/>
+                        <segue destination="2hH-TX-0h2" kind="show" identifier="walletSegue" id="cjv-fL-ghI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YkV-yB-ASf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3182" y="5902"/>
+        </scene>
+        <!--Wallets View Controller-->
+        <scene sceneID="9in-QS-g9s">
+            <objects>
+                <viewController id="2hH-TX-0h2" customClass="WalletsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JRl-0E-xFe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ihI-ft-ZZn">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" rowHeight="62" id="qby-pv-EVX" customClass="WalletCell" customModule="BankexWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="62"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qby-pv-EVX" id="Ruh-BB-lf4">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="61.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="827-HY-a1m">
+                                                    <rect key="frame" x="16" y="10" width="128" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nf-t0-upk">
+                                                    <rect key="frame" x="16" y="32" width="340" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="827-HY-a1m" firstAttribute="leading" secondItem="Ruh-BB-lf4" secondAttribute="leading" constant="16" id="49k-Pr-GGu"/>
+                                                <constraint firstItem="4nf-t0-upk" firstAttribute="top" secondItem="827-HY-a1m" secondAttribute="bottom" constant="1" id="CSp-Cc-vr4"/>
+                                                <constraint firstItem="827-HY-a1m" firstAttribute="top" secondItem="Ruh-BB-lf4" secondAttribute="top" constant="10" id="MA9-KO-OQv"/>
+                                                <constraint firstItem="4nf-t0-upk" firstAttribute="leading" secondItem="Ruh-BB-lf4" secondAttribute="leading" constant="16" id="c1D-iJ-JvF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addressWalletLabel" destination="4nf-t0-upk" id="pRA-AI-o6c"/>
+                                            <outlet property="nameWalletLabel" destination="827-HY-a1m" id="Nq3-eX-g3F"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ihI-ft-ZZn" firstAttribute="leading" secondItem="QBJ-f3-MFh" secondAttribute="leading" id="6Y0-ss-cSe"/>
+                            <constraint firstItem="QBJ-f3-MFh" firstAttribute="bottom" secondItem="ihI-ft-ZZn" secondAttribute="bottom" id="7mf-Fh-kfi"/>
+                            <constraint firstItem="ihI-ft-ZZn" firstAttribute="top" secondItem="QBJ-f3-MFh" secondAttribute="top" id="R8C-eI-Mg7"/>
+                            <constraint firstItem="QBJ-f3-MFh" firstAttribute="trailing" secondItem="ihI-ft-ZZn" secondAttribute="trailing" id="jtp-Og-5gb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QBJ-f3-MFh"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="ihI-ft-ZZn" id="PYF-zV-HfV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jcy-WG-pjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2186" y="6358"/>
         </scene>
         <!--Networks View Controller-->
         <scene sceneID="qlF-13-w0o">
@@ -862,7 +929,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="FF7-B1-CUc">
-                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="cNL-Hx-6D9" style="IBUITableViewCellStyleDefault" id="ofK-ZN-bqi">
@@ -3469,7 +3536,7 @@ minutes, please wait ...</string>
                     <connections>
                         <segue destination="rBc-RO-cZM" kind="relationship" relationship="viewControllers" id="t59-xY-wsG"/>
                         <segue destination="9XE-iL-Mq3" kind="relationship" relationship="viewControllers" id="Hpi-41-MCA"/>
-                        <segue destination="uo0-Ua-Fxy" kind="relationship" relationship="viewControllers" id="2BC-JD-jOC"/>
+                        <segue destination="qQO-1J-iXi" kind="relationship" relationship="viewControllers" id="aXV-cA-FJX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dkp-GR-ZZb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5538,25 +5605,6 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="4701" y="2855"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="nf5-Ow-KDC">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uo0-Ua-Fxy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="Setting" id="1qP-Kv-JEf"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="mfJ-k5-5hl">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="qQO-1J-iXi" kind="relationship" relationship="rootViewController" id="QL2-RT-Lvn"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AJb-1y-F0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-4169" y="5903"/>
-        </scene>
     </scenes>
     <resources>
         <image name="Add" width="16" height="16"/>
@@ -5589,7 +5637,6 @@ minutes, please wait ...</string>
         <image name="Send" width="32" height="32"/>
         <image name="Sending" width="252" height="264"/>
         <image name="Sent" width="40" height="40"/>
-        <image name="Setting" width="18" height="18"/>
         <image name="Success" width="320" height="270"/>
         <image name="Tokens" width="19" height="18"/>
         <image name="Transaction history  are empty" width="48" height="48"/>
