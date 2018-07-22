@@ -9,7 +9,13 @@
 import UIKit
 
 
-class SettingsViewController: UITableViewController,NetworkDelegate {
+class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDelegate {
+    func didTapped(with wallet: HDKey) {
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     func didTapped(with network: CustomNetwork) {
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
@@ -48,6 +54,9 @@ class SettingsViewController: UITableViewController,NetworkDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "networkSegue" {
             let dest = segue.destination as! NetworksViewController
+            dest.delegate = self
+        }else if segue.identifier == "walletSegue" {
+            let dest = segue.destination as! WalletsViewController
             dest.delegate = self
         }
     }

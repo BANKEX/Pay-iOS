@@ -22,13 +22,19 @@ class WalletCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        prepareAddressLabel()
     }
     
     
     func configure(wallet:HDKey) {
         nameWalletLabel.text = wallet.name
         addressWalletLabel.text = wallet.address
+    }
+    
+    func prepareAddressLabel() {
+        addressWalletLabel.adjustsFontSizeToFitWidth = true
+        addressWalletLabel.numberOfLines = 1
+        addressWalletLabel.font = UIFont.systemFont(ofSize: 14.0)
     }
 
 }

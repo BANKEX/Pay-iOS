@@ -8,15 +8,21 @@
 
 import UIKit
 
+protocol WalletsDelegate:class  {
+    func didTapped(with wallet:HDKey)
+}
+
 class WalletsViewController: UIViewController {
     
     @IBOutlet weak var tableView:UITableView!
     
     let service: GlobalWalletsService = HDWalletServiceImplementation()
     var listWallets = [HDKey]()
-//    var selectedWallet:HDKey? {
-//        return service KeyWalletModel
-//    }
+    var selectedWallet:HDKey? {
+        return service.selectedKey()
+    }
+    
+    weak var delegate:WalletsDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +30,11 @@ class WalletsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         listWallets = (service.fullHDKeysList() ?? [HDKey]()) + (service.fullListOfSingleEthereumAddresses() ?? [HDKey]())
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))
+    }
+    
+    @objc func goBack(_ sender:UIButton) {
+        performSegue(withIdentifier: "backSegue", sender: nil)
     }
 
     
@@ -42,8 +53,8 @@ extension WalletsViewController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WalletCell.identifier, for: indexPath) as! WalletCell
         switch indexPath.section {
-        //case 0:
-           // cell.configure(wallet: selectedWallet)
+        case 0:
+            cell.configure(wallet: selectedWallet!)
         case 1:
             let currentWallet = listWallets[indexPath.row]
             cell.configure(wallet: currentWallet)
@@ -62,5 +73,12 @@ extension WalletsViewController:UITableViewDataSource {
 }
 
 extension WalletsViewController:UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let wallet = listWallets[indexPath.row]
+            service.updateSelected(address: wallet.address)
+            tableView.reloadData()
+            delegate?.didTapped(with: wallet)
+        }
+    }
 }
