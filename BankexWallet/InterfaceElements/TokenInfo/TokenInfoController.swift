@@ -54,6 +54,9 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewDidLoad() {
+        
+        tableView.tableFooterView = UIView() //removing extra cells
+        
         if token == nil {
             walletName.text = "Error in token"
         } else if keysService.selectedWallet()?.name == nil {

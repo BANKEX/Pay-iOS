@@ -5531,9 +5531,18 @@ minutes, please wait ...</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzK-Fx-RhQ">
+                                        <rect key="frame" x="0.0" y="86" width="375" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="q8W-c6-092"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="kzK-Fx-RhQ" firstAttribute="leading" secondItem="NhQ-3b-rrc" secondAttribute="leading" id="7oA-DA-gb7"/>
+                                    <constraint firstAttribute="bottom" secondItem="kzK-Fx-RhQ" secondAttribute="bottom" id="c49-QS-vlw"/>
                                     <constraint firstItem="2sp-y1-W6i" firstAttribute="leading" secondItem="NhQ-3b-rrc" secondAttribute="leading" constant="10" id="dsH-7v-Dst"/>
                                     <constraint firstItem="AWw-yg-jAm" firstAttribute="centerY" secondItem="2sp-y1-W6i" secondAttribute="centerY" constant="2" id="emp-f5-Kj0"/>
                                     <constraint firstAttribute="trailing" secondItem="AWw-yg-jAm" secondAttribute="trailing" constant="10" id="hdF-Sg-aQk"/>
@@ -5541,7 +5550,13 @@ minutes, please wait ...</string>
                                     <constraint firstItem="1gR-rp-d89" firstAttribute="top" secondItem="2sp-y1-W6i" secondAttribute="bottom" constant="10" id="kYo-jL-lxg"/>
                                     <constraint firstItem="2sp-y1-W6i" firstAttribute="top" secondItem="NhQ-3b-rrc" secondAttribute="top" constant="10" id="pS2-xV-nyv"/>
                                     <constraint firstAttribute="bottom" secondItem="1gR-rp-d89" secondAttribute="bottom" constant="10" id="pV8-Zi-vOu"/>
+                                    <constraint firstAttribute="trailing" secondItem="kzK-Fx-RhQ" secondAttribute="trailing" id="wff-wO-Z4P"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nw0-1m-5Oa">
                                 <rect key="frame" x="0.0" y="107" width="375" height="511"/>
@@ -5783,6 +5798,11 @@ minutes, please wait ...</string>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="0WB-Lg-Tul" id="rtr-VL-NA1"/>
                                     <outlet property="delegate" destination="0WB-Lg-Tul" id="MTm-SY-9jK"/>
@@ -5820,12 +5840,17 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bf2-cD-pfY">
-                                <rect key="frame" x="159.5" y="45" width="55" height="4"/>
+                                <rect key="frame" x="169" y="45" width="36" height="4"/>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.90196078431372551" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="bsD-bz-nW7"/>
-                                    <constraint firstAttribute="width" constant="55" id="gCT-jX-C7J"/>
+                                    <constraint firstAttribute="width" constant="36" id="gCT-jX-C7J"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rP9-Jk-rmE">
                                 <rect key="frame" x="331" y="67.5" width="24" height="24"/>
@@ -5834,14 +5859,14 @@ minutes, please wait ...</string>
                                     <constraint firstAttribute="width" secondItem="rP9-Jk-rmE" secondAttribute="height" multiplier="1:1" id="Vru-Vu-moh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" image="Close"/>
+                                <state key="normal" image="close_btn"/>
                                 <connections>
                                     <action selector="closeWithSender:" destination="RU3-RG-C31" eventType="touchUpInside" id="a7m-vl-hxf"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v6B-Di-6jd">
                                 <rect key="frame" x="0.0" y="120" width="375" height="547"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoListCell" rowHeight="83" id="GcG-oQ-joU" customClass="TokenInfoListCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="83"/>
@@ -5982,6 +6007,7 @@ minutes, please wait ...</string>
         <image name="attention" width="16" height="16"/>
         <image name="check" width="16" height="12"/>
         <image name="clear" width="42" height="42"/>
+        <image name="close_btn" width="100" height="100"/>
         <image name="delete" width="17" height="18"/>
         <image name="delete text" width="16" height="16"/>
         <image name="logo_main_screen" width="112" height="40"/>
