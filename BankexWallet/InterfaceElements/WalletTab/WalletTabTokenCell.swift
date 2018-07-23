@@ -91,10 +91,13 @@ class WalletTabTokenCell: UITableViewCell {
         deleteButton.titleLabel?.isHidden = true
         
         deleteButton.chosenToken = token
+        
         tokensListCellInfoButton.chosenToken = token
+        tokensListCellInfoButton.amount = self.amountLabel.text
     }
 }
 
 class TokensListCellButton: UIButton {
     var chosenToken: ERC20TokenModel? = nil
+    var amount: String? = nil
 }

@@ -27,6 +27,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     var walletData = WalletData()
     
     var chosenToken: ERC20TokenModel?
+    var chosenTokenAmount: String?
     
     @IBAction func editButtonTouched(_ sender: UIButton) {
         editEnabled = !editEnabled
@@ -58,11 +59,15 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func infoTokenTouched(_ sender: TokensListCellButton) {
         guard let tokenForInfo = sender.chosenToken else { return }
         chosenToken = tokenForInfo
+        chosenTokenAmount = sender.amount
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         let conversionService = FiatServiceImplementation.service
         conversionService.updateConversionRate(for: service.selectedERC20Token().symbol) { (rate) in
             print(rate)
@@ -103,6 +108,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
             destinationViewController.transitioningDelegate = self
             destinationViewController.token = chosenToken ?? nil
             destinationViewController.interactor = interactor
+            destinationViewController.amount = chosenTokenAmount
         }
     }
     

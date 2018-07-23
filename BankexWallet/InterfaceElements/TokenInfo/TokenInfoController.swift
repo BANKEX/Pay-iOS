@@ -18,6 +18,7 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
     var interactor:Interactor?
     
     var token: ERC20TokenModel?
+    var amount: String?
     
     @IBAction func close(sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -73,7 +74,7 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
         case TokenInfoRaws.address.rawValue :
             cell.configure(with: "Address", value: token?.address)
         case TokenInfoRaws.currency.rawValue :
-            cell.configure(with: "Currency", value: token?.name)
+            cell.configure(with: "Currency", value:  (amount ?? "Error in amount of token") + " " +  (token?.name ?? ""))
         case TokenInfoRaws.decimals.rawValue :
             cell.configure(with: "Decimals", value: token?.decimals)
         default:

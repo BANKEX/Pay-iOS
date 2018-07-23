@@ -5532,7 +5532,7 @@ minutes, please wait ...</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="2sp-y1-W6i" firstAttribute="leading" secondItem="NhQ-3b-rrc" secondAttribute="leading" constant="10" id="dsH-7v-Dst"/>
                                     <constraint firstItem="AWw-yg-jAm" firstAttribute="centerY" secondItem="2sp-y1-W6i" secondAttribute="centerY" constant="2" id="emp-f5-Kj0"/>
@@ -5613,6 +5613,13 @@ minutes, please wait ...</string>
                                                                         <constraint firstAttribute="height" constant="32" id="dK7-uY-wL7"/>
                                                                     </constraints>
                                                                 </stackView>
+                                                                <imageView userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right_icon" translatesAutoresizingMaskIntoConstraints="NO" id="nzH-mn-3UL">
+                                                                    <rect key="frame" x="320" y="107.5" width="15" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="nzH-mn-3UL" secondAttribute="height" multiplier="1:1" id="bp1-bl-EkN"/>
+                                                                        <constraint firstAttribute="width" constant="15" id="zGc-bI-6GN"/>
+                                                                    </constraints>
+                                                                </imageView>
                                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXY-8R-alA" customClass="TokensListCellButton" customModule="BankexWallet" customModuleProvider="target">
                                                                     <rect key="frame" x="340" y="-5" width="20" height="20"/>
                                                                     <color key="backgroundColor" red="0.99876421689999995" green="0.23334953189999999" blue="0.18812304739999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -5629,15 +5636,14 @@ minutes, please wait ...</string>
                                                                         <action selector="deleteTokenTouched:" destination="0WB-Lg-Tul" eventType="touchUpInside" id="XeC-rD-L52"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button opaque="NO" alpha="0.55000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNV-Qz-gnM" customClass="TokensListCellButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNV-Qz-gnM" customClass="TokensListCellButton" customModule="BankexWallet" customModuleProvider="target">
                                                                     <rect key="frame" x="255" y="104" width="100" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="100" id="MX6-RL-ymz"/>
                                                                         <constraint firstAttribute="height" constant="22" id="vFt-re-VNx"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                    <inset key="imageEdgeInsets" minX="70" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                    <state key="normal" title="Info" image="Cross"/>
+                                                                    <state key="normal" title="Info"/>
                                                                     <connections>
                                                                         <action selector="infoTokenTouched:" destination="0WB-Lg-Tul" eventType="touchUpInside" id="7cW-dR-iBk"/>
                                                                         <segue destination="RU3-RG-C31" kind="presentation" identifier="showTokenInfo" id="IFE-1O-AwI"/>
@@ -5653,6 +5659,7 @@ minutes, please wait ...</string>
                                                                 <constraint firstAttribute="trailing" secondItem="5an-y2-NUD" secondAttribute="trailing" constant="20" id="Hf7-0Z-fIv"/>
                                                                 <constraint firstItem="hzc-JP-rJf" firstAttribute="top" secondItem="tiS-hA-u2x" secondAttribute="bottom" constant="10" id="MSo-fC-TAS"/>
                                                                 <constraint firstItem="YXY-8R-alA" firstAttribute="centerY" secondItem="NeP-Sm-bKQ" secondAttribute="top" constant="5" id="Mee-Bc-drt"/>
+                                                                <constraint firstItem="nzH-mn-3UL" firstAttribute="trailing" secondItem="5an-y2-NUD" secondAttribute="trailing" id="O9z-al-b1i"/>
                                                                 <constraint firstAttribute="trailing" secondItem="aNV-Qz-gnM" secondAttribute="trailing" id="PPI-HQ-3xZ"/>
                                                                 <constraint firstItem="aNV-Qz-gnM" firstAttribute="top" secondItem="zHp-1a-NEH" secondAttribute="bottom" constant="5" id="Rwd-6v-WRp"/>
                                                                 <constraint firstItem="Iq3-Gl-idh" firstAttribute="leading" secondItem="NeP-Sm-bKQ" secondAttribute="leading" constant="10" id="UY7-gD-yWJ"/>
@@ -5664,10 +5671,11 @@ minutes, please wait ...</string>
                                                                 <constraint firstItem="hzc-JP-rJf" firstAttribute="leading" secondItem="wm4-p3-EVd" secondAttribute="leading" id="jH7-ff-1JI"/>
                                                                 <constraint firstItem="5an-y2-NUD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wm4-p3-EVd" secondAttribute="trailing" constant="10" id="prc-Zv-lLt"/>
                                                                 <constraint firstItem="wm4-p3-EVd" firstAttribute="top" secondItem="NeP-Sm-bKQ" secondAttribute="top" constant="15" id="xQz-Tv-TbX"/>
+                                                                <constraint firstItem="nzH-mn-3UL" firstAttribute="centerY" secondItem="aNV-Qz-gnM" secondAttribute="centerY" id="zKe-l5-u1k"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                    <integer key="value" value="16"/>
+                                                                    <integer key="value" value="6"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
@@ -5801,7 +5809,7 @@ minutes, please wait ...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrR-FU-iU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3193" y="5433"/>
+            <point key="canvasLocation" x="-3194.4000000000001" y="5431.9340329835086"/>
         </scene>
         <!--Token Info Controller-->
         <scene sceneID="TKh-cs-4Dc">
@@ -5812,65 +5820,64 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bf2-cD-pfY">
-                                <rect key="frame" x="159.5" y="30" width="55" height="4"/>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="159.5" y="45" width="55" height="4"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.90196078431372551" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="bsD-bz-nW7"/>
                                     <constraint firstAttribute="width" constant="55" id="gCT-jX-C7J"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rP9-Jk-rmE">
-                                <rect key="frame" x="331" y="40" width="24" height="24"/>
+                                <rect key="frame" x="331" y="67.5" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="DOY-DH-EJ4"/>
                                     <constraint firstAttribute="width" secondItem="rP9-Jk-rmE" secondAttribute="height" multiplier="1:1" id="Vru-Vu-moh"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" image="Close"/>
                                 <connections>
                                     <action selector="closeWithSender:" destination="RU3-RG-C31" eventType="touchUpInside" id="a7m-vl-hxf"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v6B-Di-6jd">
-                                <rect key="frame" x="0.0" y="125" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoListCell" rowHeight="60" id="GcG-oQ-joU" customClass="TokenInfoListCell" customModule="BankexWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoListCell" rowHeight="83" id="GcG-oQ-joU" customClass="TokenInfoListCell" customModule="BankexWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GcG-oQ-joU" id="e9u-gR-Rf3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="93H-Nj-FfJ">
-                                                    <rect key="frame" x="15" y="5" width="74.5" height="40"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="93H-Nj-FfJ">
+                                                    <rect key="frame" x="15" y="8" width="74.5" height="60"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R82-lM-tXI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="74.5" height="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Parameter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R82-lM-tXI">
+                                                            <rect key="frame" x="0.0" y="0.0" width="74.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gh-jl-f7q">
-                                                            <rect key="frame" x="0.0" y="23" width="35.5" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gh-jl-f7q">
+                                                            <rect key="frame" x="0.0" y="43" width="35.5" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="S3q-2a-kZp"/>
+                                                        <constraint firstAttribute="height" constant="60" id="S3q-2a-kZp"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="93H-Nj-FfJ" secondAttribute="trailing" constant="15" id="1x0-qj-uh3"/>
-                                                <constraint firstItem="93H-Nj-FfJ" firstAttribute="top" secondItem="e9u-gR-Rf3" secondAttribute="top" constant="5" id="Jg7-By-31r"/>
+                                                <constraint firstItem="93H-Nj-FfJ" firstAttribute="top" secondItem="e9u-gR-Rf3" secondAttribute="top" constant="8" id="Jg7-By-31r"/>
                                                 <constraint firstAttribute="bottom" secondItem="93H-Nj-FfJ" secondAttribute="bottom" constant="15" id="Sa7-RI-u0N"/>
                                                 <constraint firstItem="93H-Nj-FfJ" firstAttribute="leading" secondItem="e9u-gR-Rf3" secondAttribute="leading" constant="15" id="u9U-Q0-BRc"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="parameterLabel" destination="R82-lM-tXI" id="SMr-ls-bMf"/>
                                             <outlet property="valueLabel" destination="9gh-jl-f7q" id="MOt-bp-961"/>
@@ -5883,7 +5890,7 @@ minutes, please wait ...</string>
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUW-nb-XSk">
-                                <rect key="frame" x="15" y="74" width="132.5" height="21"/>
+                                <rect key="frame" x="15" y="69" width="132.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="UWg-rI-0L7"/>
                                 </constraints>
@@ -5892,17 +5899,17 @@ minutes, please wait ...</string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Bf2-cD-pfY" firstAttribute="top" secondItem="USi-sq-9sM" secondAttribute="top" constant="10" id="46U-uZ-V2s"/>
-                            <constraint firstItem="rP9-Jk-rmE" firstAttribute="top" secondItem="USi-sq-9sM" secondAttribute="top" constant="20" id="DuA-Cc-IF5"/>
+                            <constraint firstItem="Bf2-cD-pfY" firstAttribute="top" secondItem="USi-sq-9sM" secondAttribute="top" constant="25" id="46U-uZ-V2s"/>
+                            <constraint firstItem="rP9-Jk-rmE" firstAttribute="centerY" secondItem="hUW-nb-XSk" secondAttribute="centerY" id="IBm-Xg-FvU"/>
                             <constraint firstItem="USi-sq-9sM" firstAttribute="trailing" secondItem="rP9-Jk-rmE" secondAttribute="trailing" constant="20" id="JN3-jT-oh3"/>
-                            <constraint firstItem="hUW-nb-XSk" firstAttribute="top" secondItem="rP9-Jk-rmE" secondAttribute="bottom" constant="10" id="OLy-5C-n1d"/>
                             <constraint firstItem="hUW-nb-XSk" firstAttribute="leading" secondItem="v6B-Di-6jd" secondAttribute="leading" constant="15" id="S3p-KA-qEo"/>
                             <constraint firstItem="v6B-Di-6jd" firstAttribute="top" secondItem="hUW-nb-XSk" secondAttribute="bottom" constant="30" id="aai-gY-ROa"/>
                             <constraint firstItem="v6B-Di-6jd" firstAttribute="leading" secondItem="USi-sq-9sM" secondAttribute="leading" id="ddh-Xl-YCv"/>
                             <constraint firstItem="Bf2-cD-pfY" firstAttribute="centerX" secondItem="USi-sq-9sM" secondAttribute="centerX" id="fsz-0q-hOK"/>
+                            <constraint firstItem="hUW-nb-XSk" firstAttribute="top" secondItem="Bf2-cD-pfY" secondAttribute="bottom" constant="20" id="hOh-Sq-hjI"/>
                             <constraint firstItem="USi-sq-9sM" firstAttribute="bottom" secondItem="v6B-Di-6jd" secondAttribute="bottom" id="mkA-kZ-unA"/>
                             <constraint firstItem="USi-sq-9sM" firstAttribute="trailing" secondItem="v6B-Di-6jd" secondAttribute="trailing" id="yAv-8T-VW1"/>
                         </constraints>
@@ -5971,6 +5978,7 @@ minutes, please wait ...</string>
         <image name="Wallet Created" width="240" height="160"/>
         <image name="Wallet_ready" width="48" height="48"/>
         <image name="Warning- Error" width="278" height="261"/>
+        <image name="arrow_right_icon" width="256" height="256"/>
         <image name="attention" width="16" height="16"/>
         <image name="check" width="16" height="12"/>
         <image name="clear" width="42" height="42"/>
