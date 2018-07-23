@@ -125,13 +125,6 @@ FavoriteSelectionDelegate {
             "CurrentWalletInfoCell",
             "TransactionHistoryCell",//]
             "FavouritesTitleCell"]
-        
-        //        if let isWalletNew = UserDefaults.standard.value(forKey: "isWalletNew") as? Bool, isWalletNew  {
-        //            itemsArray.insert("WalletIsReadyCell", at: 1)
-        //        } else if UserDefaults.standard.value(forKey: "isWalletNew") == nil {
-        //            itemsArray.insert("WalletIsReadyCell", at: 1)
-        //        }
-        
         putTransactionsInfoIntoItemsArray()
         tableView.reloadData()
     }
@@ -140,6 +133,13 @@ FavoriteSelectionDelegate {
     @IBAction func unwind(segue:UIStoryboardSegue) { }
     
     
+    @IBAction func seeOrAddContactsButtonTapped(_ sender: UIButton) {
+        if sender.title(for: .normal) == "See All" {
+            //TODO: - perform segue to contacts screes
+        } else {
+            //TODO: - perform segue to add contact screen
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationController?.isNavigationBarHidden = true
@@ -159,8 +159,8 @@ FavoriteSelectionDelegate {
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
-        if let firstTwo = sendEthService.getAllTransactions()?.prefix(2) {
-            transactionsToShow = Array(firstTwo)
+        if let firstThree = sendEthService.getAllTransactions()?.prefix(3) {
+            transactionsToShow = Array(firstThree)
         }
         var arrayOfTransactions = [String]()
         switch transactionsToShow.count {
@@ -168,23 +168,25 @@ FavoriteSelectionDelegate {
             arrayOfTransactions = ["EmptyLastTransactionsCell"]
         case 1:
             arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell","BottomRoundedCell"]
-            
-        default:
+        case 2:
             arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "BottomRoundedCell"]
+        default:
+            arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "BottomRoundedCell"]
         }
         var arrayOfFavorites = [String]()
         if let firstThree = favService.getAllStoredAddresses()?.prefix(3) {
             favoritesToShow = Array(firstThree)
         }
         switch favoritesToShow.count {
+        case 0:
+            arrayOfFavorites = ["EmptyLastContactsCell"]
         case 1:
             arrayOfFavorites = ["FavoriteContactCell"]
         case 2:
             arrayOfFavorites = ["FavoriteContactCell", "FavoriteContactCell"]
-        case 3:
-            arrayOfFavorites = ["FavoriteContactCell", "FavoriteContactCell", "FavoriteContactCell"]
         default:
-            break
+            arrayOfFavorites = ["FavoriteContactCell", "FavoriteContactCell", "FavoriteContactCell"]
+            
         }
         
         let index = itemsArray.index{$0 == "TransactionHistoryCell"} ?? 0
@@ -231,17 +233,21 @@ FavoriteSelectionDelegate {
     
     func configureRefreshControl() {
         if #available(iOS 10.0, *) {
+            tableView.refreshControl = UIRefreshControl()
             tableView.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
         }
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //TODO: - Update the data here
-        print("Refreshing")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            if #available(iOS 10.0, *) {
-                self.tableView.refreshControl?.endRefreshing()
-            }
+        itemsArray = [
+            "CurrentWalletInfoCell",
+            "TransactionHistoryCell",//]
+            "FavouritesTitleCell"]
+        putTransactionsInfoIntoItemsArray()
+        tableView.reloadData()
+        if #available(iOS 10.0, *) {
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
     
