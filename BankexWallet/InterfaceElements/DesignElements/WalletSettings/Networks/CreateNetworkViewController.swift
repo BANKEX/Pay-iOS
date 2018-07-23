@@ -116,10 +116,10 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if joinButton.isEnabled {
-            textField.returnKeyType = .done
+        if networkNameTextField.text == "" || networkURLTextField.text == "" {
+            state = .unavailable
         }else {
-            textField.returnKeyType = .next
+            state = .available
         }
     }
     

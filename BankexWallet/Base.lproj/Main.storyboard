@@ -340,7 +340,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ca2-qI-28c">
-                                <rect key="frame" x="15" y="69" width="360" height="48"/>
+                                <rect key="frame" x="15" y="130" width="360" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="K5Q-H2-MoN"/>
                                 </constraints>
@@ -349,7 +349,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nK-oM-Q9C">
-                                <rect key="frame" x="15" y="117" width="360" height="1"/>
+                                <rect key="frame" x="15" y="178" width="360" height="1"/>
                                 <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="nRy-27-pNF"/>
@@ -385,14 +385,26 @@
                                     <action selector="clearTextView:" destination="zgF-bs-7XP" eventType="touchUpInside" id="kXp-5h-Lne"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-WJ-80e">
+                                <rect key="frame" x="16" y="77" width="140" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="8rN-GF-i9h"/>
+                                    <constraint firstAttribute="width" constant="140" id="soe-9s-ota"/>
+                                </constraints>
+                                <state key="normal" image="Paste button"/>
+                                <connections>
+                                    <action selector="stringFromBuffer:" destination="zgF-bs-7XP" eventType="touchUpInside" id="m0u-CT-dIj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="2f2-WJ-80e" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="16" id="3Bu-OD-RgR"/>
                             <constraint firstItem="ca2-qI-28c" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="15" id="68M-83-KGa"/>
                             <constraint firstItem="ALn-bm-ReB" firstAttribute="top" secondItem="gHq-h3-oUr" secondAttribute="top" constant="7" id="6RO-FY-zXq"/>
+                            <constraint firstItem="ca2-qI-28c" firstAttribute="top" secondItem="2f2-WJ-80e" secondAttribute="bottom" constant="25" id="7gp-FB-aGc"/>
                             <constraint firstItem="ALn-bm-ReB" firstAttribute="leading" secondItem="UsK-Jd-mN2" secondAttribute="trailing" id="G1l-28-nkt"/>
                             <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="UsK-Jd-mN2" secondAttribute="trailing" constant="30" id="GJg-sk-zeF"/>
-                            <constraint firstItem="1nK-oM-Q9C" firstAttribute="top" secondItem="ca2-qI-28c" secondAttribute="bottom" id="HjT-c3-JVi"/>
                             <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="I7g-mL-nV1" secondAttribute="trailing" id="N3S-7c-xjX"/>
                             <constraint firstItem="gHq-h3-oUr" firstAttribute="bottom" secondItem="9B9-kC-WYr" secondAttribute="bottom" constant="64" id="QZt-of-QG1"/>
                             <constraint firstItem="I7g-mL-nV1" firstAttribute="top" secondItem="UsK-Jd-mN2" secondAttribute="bottom" id="T9f-wy-yHZ"/>
@@ -401,8 +413,9 @@
                             <constraint firstItem="1nK-oM-Q9C" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="15" id="eSE-hE-mfp"/>
                             <constraint firstItem="9B9-kC-WYr" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="44" id="h2N-hG-wrD"/>
                             <constraint firstItem="UsK-Jd-mN2" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="11" id="iDF-7I-cLh"/>
+                            <constraint firstItem="1nK-oM-Q9C" firstAttribute="top" secondItem="ca2-qI-28c" secondAttribute="bottom" id="jE7-To-2av"/>
+                            <constraint firstItem="2f2-WJ-80e" firstAttribute="top" secondItem="I7g-mL-nV1" secondAttribute="bottom" constant="8" id="nxs-mx-ykX"/>
                             <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="9B9-kC-WYr" secondAttribute="trailing" constant="44" id="pLA-Tl-mzw"/>
-                            <constraint firstItem="ca2-qI-28c" firstAttribute="top" secondItem="I7g-mL-nV1" secondAttribute="bottom" id="uJ7-la-UEa"/>
                             <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="1nK-oM-Q9C" secondAttribute="trailing" id="umj-kB-Qve"/>
                             <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="ca2-qI-28c" secondAttribute="trailing" id="xuN-sT-7TT"/>
                         </constraints>
