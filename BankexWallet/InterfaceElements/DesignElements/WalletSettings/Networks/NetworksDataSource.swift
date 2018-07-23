@@ -25,7 +25,7 @@ extension NetworksViewController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 1 {
             return "CHOOSE A NETWORK..."
-        }else if section == 2 {
+        }else if section == 2 && listCustomNetworks.count > 0 {
             return "CUSTOM NETWORK"
         }else {
             return ""
