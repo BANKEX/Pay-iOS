@@ -27,14 +27,36 @@ class SecurityViewController: UITableViewController {
     
     @IBAction func switchTouchID(_ sender:UISwitch) {
         delegate?.switchTouchIDTapped(self)
+        if TouchManager.canAuth() {
+            TouchManager.authenticateBioMetrics(success: {
+                print("Success")
+            }) { (error) in
+                print(error.getErrorMessage())
+            }
+        }
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
         delegate?.switchTouchIDSendFunds(self)
+        if TouchManager.canAuth() {
+            TouchManager.authenticateBioMetrics(success: {
+                print("Success")
+            }) { (error) in
+                print(error.getErrorMessage())
+            }
+        }
     }
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
         delegate?.switchTouchIDMultitask(self)
+        if TouchManager.canAuth() {
+            TouchManager.authenticateBioMetrics(success: {
+                print("Success")
+            }) { (error) in
+                print(error.getErrorMessage())
+
+            }
+        }
     }
     
     
