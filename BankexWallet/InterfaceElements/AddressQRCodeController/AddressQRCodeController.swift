@@ -29,7 +29,7 @@ class AddressQRCodeController: UIViewController {
         setNavigationBar()
         super.viewWillAppear(animated)
         imageView.image = generateQRCode(from: addressToGenerateQR)
-        addressLabel.text = addressToGenerateQR
+        addressLabel.text = addressToGenerateQR?.lowercased()
         walletNameLabel.text = keysService.selectedWallet()?.name
         copiedIcon.alpha = 0
         copiedLabel.alpha = 0

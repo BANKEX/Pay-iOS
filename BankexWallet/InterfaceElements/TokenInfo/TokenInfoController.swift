@@ -75,11 +75,11 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
         guard token != nil else {return cell}
         switch indexPath.row {
         case TokenInfoRaws.address.rawValue :
-            cell.configure(with: "Address", value: token?.address)
+            cell.configure(with: "Address", value: token?.address, measurment: nil)
         case TokenInfoRaws.currency.rawValue :
-            cell.configure(with: "Currency", value:  (amount ?? "Error in amount of token") + " " +  (token?.name ?? ""))
+            cell.configure(with: "Currency", value:  (amount ?? "Error in amount of token"), measurment: (token?.name ?? ""))
         case TokenInfoRaws.decimals.rawValue :
-            cell.configure(with: "Decimals", value: token?.decimals)
+            cell.configure(with: "Decimals", value: token?.decimals, measurment: nil)
         default:
             break
         }

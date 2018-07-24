@@ -46,7 +46,7 @@ class CurrentWalletInfoCell: UITableViewCell {
         tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         walletNameLabel.text = keyService.selectedWallet()?.name
         addressLabel.text = keyService.selectedWallet()?.address
-        symbolLabel.text = tokensService.selectedERC20Token().symbol.capitalized
+        symbolLabel.text = tokensService.selectedERC20Token().symbol.uppercased()
         
     }
     func updateBalance() {
