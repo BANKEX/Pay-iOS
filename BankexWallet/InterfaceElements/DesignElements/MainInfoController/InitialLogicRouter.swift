@@ -14,6 +14,7 @@ class InitialLogicRouter {
     let keysService = SingleKeyServiceImplementation()
     
     func navigateToMainControllerIfNeeded(rootControler: UINavigationController) {
+        print(UserDefaults.standard.string(forKey: "Passcode"))
         if UserDefaults.standard.string(forKey: "Passcode") == nil || keysService.selectedWallet() == nil {
             keysService.delete() { (error) in
                 if let _ = error {

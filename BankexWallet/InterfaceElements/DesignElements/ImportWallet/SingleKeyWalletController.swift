@@ -120,6 +120,12 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? PasscodeLockController {
+            destinationViewController.newWallet = false
+        }
+    }
+    
     
 }
 

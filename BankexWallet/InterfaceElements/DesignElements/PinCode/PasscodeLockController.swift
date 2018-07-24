@@ -32,6 +32,10 @@ class PasscodeLockController: UIViewController {
     let service = SingleKeyServiceImplementation()
     let router = WalletCreationTypeRouterImplementation()
     
+    var address: String?
+    var HDservice: HDWalletService?
+    var newWallet: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         changePasscodeStatus(.new)
@@ -54,7 +58,12 @@ class PasscodeLockController: UIViewController {
     func createWallet() {
         UserDefaults.standard.set(passcode, forKey: "Passcode")
         UserDefaults.standard.synchronize()
-        self.router.exitFromTheScreen()
+        if newWallet {
+            self.performSegue(withIdentifier: "fromPinToWalletCreated", sender: nil)
+        } else {
+            self.router.exitFromTheScreen()
+        }
+        
     }
     
     func changeNumsIcons(_ nums: Int) {
@@ -125,6 +134,14 @@ class PasscodeLockController: UIViewController {
                 repeatedPasscode.removeLast()
                 changeNumsIcons(repeatedPasscode.count)
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let address = address else { return }
+        if let vc = segue.destination as? WalletCreatedViewController {
+            vc.address = address
+            vc.service = HDservice!
         }
     }
     

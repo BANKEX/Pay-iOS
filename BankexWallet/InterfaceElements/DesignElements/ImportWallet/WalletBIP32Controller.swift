@@ -171,7 +171,11 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         separator1.backgroundColor = WalletColors.greySeparator.color()
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? PasscodeLockController {
+            destinationViewController.newWallet = false
+        }
+    }
     
 
 }

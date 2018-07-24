@@ -86,8 +86,14 @@ class RepeatPassphraseViewController: UIViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             self.service.createNewHDWallet(with: "ETH Wallet Name", mnemonics: passphrase, mnemonicsPassword: "", walletPassword: "BANKEXFOUNDATION") { _, error in
                 sender.isEnabled = true
-                error == nil ? self.performSegue(withIdentifier: "toWalletCreated", sender: nil) :
-                    self.showWalletCreationAllert()
+                
+                if UserDefaults.standard.string(forKey: "Passcode") == nil {
+                    error == nil ? self.performSegue(withIdentifier: "goToPinFromCreate", sender: nil) :
+                        self.showWalletCreationAllert()
+                } else {
+                    error == nil ? self.performSegue(withIdentifier: "toWalletCreated", sender: nil) : self.showWalletCreationAllert()
+                }
+                
             }
         }
         
@@ -121,9 +127,14 @@ class RepeatPassphraseViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let address = service.selectedAddress() else { return }
+        if let vc = segue.destination as? PasscodeLockController {
+            vc.address = address
+            vc.HDservice = service
+            vc.newWallet = true
+        }
         if let vc = segue.destination as? WalletCreatedViewController {
             vc.address = address
-            vc.service = service
+            vc.service = service!
         }
     }
     
