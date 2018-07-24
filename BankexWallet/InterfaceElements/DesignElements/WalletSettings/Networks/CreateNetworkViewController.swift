@@ -45,6 +45,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
         state = .unavailable
         [networkNameTextField,networkURLTextField].forEach { (tf) in
             tf?.delegate = self
+            tf?.autocorrectionType = .no
         }
         navigationItem.title = "New Network"
         tableView.separatorStyle = .none
@@ -127,7 +128,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text ?? "")  as NSString
         let futureString = currentText.replacingCharacters(in: range, with: string) as String
-        if networkURLTextField.text != "" && networkNameTextField.text != "" {
+        if (textField == networkNameTextField && !futureString.isEmpty && !(networkURLTextField.text?.isEmpty)!) || (textField == networkURLTextField && !futureString.isEmpty && !(networkNameTextField.text?.isEmpty)!) {
             state = .available
         }else {
             state = .unavailable
