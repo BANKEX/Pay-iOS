@@ -417,6 +417,7 @@
                         <outlet property="passphraseTextView" destination="UsK-Jd-mN2" id="tE1-CC-sFW"/>
                         <outlet property="separator1" destination="I7g-mL-nV1" id="ATb-MB-5vv"/>
                         <outlet property="separator2" destination="1nK-oM-Q9C" id="agM-qd-ndI"/>
+                        <segue destination="ieh-eS-frZ" kind="show" identifier="goToPinFromImportPassphrase" id="pT1-5S-qPI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFv-ts-Cdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -563,11 +564,280 @@
                         <outlet property="separator1" destination="3vd-OQ-DBo" id="ZB4-S6-dE7"/>
                         <outlet property="separator2" destination="h59-ee-e7z" id="EEj-qH-lHO"/>
                         <outlet property="singleKeyView" destination="Gda-yG-5fI" id="AMj-dt-yBP"/>
+                        <segue destination="ieh-eS-frZ" kind="show" identifier="goToPinFromImportSingleKey" id="qly-rG-0HJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yza-R7-FuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2179" y="278"/>
+            <point key="canvasLocation" x="2254" y="275"/>
+        </scene>
+        <!--Passcode Lock Controller-->
+        <scene sceneID="yCt-66-WPY">
+            <objects>
+                <viewController id="ieh-eS-frZ" customClass="PasscodeLockController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s9V-Fv-Xze">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="485"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nc3-EK-bI9">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passcode Lock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPl-4m-g0t">
+                                        <rect key="frame" x="127.5" y="12.5" width="119.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="GPl-4m-g0t" firstAttribute="centerX" secondItem="nc3-EK-bI9" secondAttribute="centerX" id="0H4-qr-jYb"/>
+                                    <constraint firstAttribute="height" constant="44" id="2rY-C3-tmS"/>
+                                    <constraint firstItem="GPl-4m-g0t" firstAttribute="centerY" secondItem="nc3-EK-bI9" secondAttribute="centerY" id="dQI-5l-edV"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztH-lz-z4f">
+                                <rect key="frame" x="0.0" y="64" width="375" height="421"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify your passcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUM-zI-rhZ">
+                                        <rect key="frame" x="116" y="48" width="144" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="q9r-xG-oVS">
+                                        <rect key="frame" x="103.5" y="138" width="168" height="24"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_pin_code" translatesAutoresizingMaskIntoConstraints="NO" id="yXF-0n-2qk">
+                                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="yXF-0n-2qk" secondAttribute="height" multiplier="1:1" id="0YV-eg-Gus"/>
+                                                    <constraint firstAttribute="width" constant="24" id="W7c-tp-9ht"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_pin_code" translatesAutoresizingMaskIntoConstraints="NO" id="QV2-BS-1G5">
+                                                <rect key="frame" x="48" y="0.0" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="EDE-Hi-8Tc"/>
+                                                    <constraint firstAttribute="width" secondItem="QV2-BS-1G5" secondAttribute="height" multiplier="1:1" id="hV5-RR-lFY"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_pin_code" translatesAutoresizingMaskIntoConstraints="NO" id="4Bf-gp-yRh">
+                                                <rect key="frame" x="96" y="0.0" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="8PP-qI-sG1"/>
+                                                    <constraint firstAttribute="width" secondItem="4Bf-gp-yRh" secondAttribute="height" multiplier="1:1" id="PrT-BX-4NO"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_pin_code" translatesAutoresizingMaskIntoConstraints="NO" id="oLa-bn-Q6G">
+                                                <rect key="frame" x="144" y="0.0" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="44m-LI-3uW"/>
+                                                    <constraint firstAttribute="width" secondItem="oLa-bn-Q6G" secondAttribute="height" multiplier="1:1" id="stZ-Hg-IeO"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="oLa-bn-Q6G" firstAttribute="width" secondItem="oLa-bn-Q6G" secondAttribute="height" multiplier="1:1" id="6Cv-of-ELm"/>
+                                            <constraint firstItem="oLa-bn-Q6G" firstAttribute="width" secondItem="oLa-bn-Q6G" secondAttribute="height" multiplier="1:1" id="6PE-ls-8Dg"/>
+                                            <constraint firstItem="QV2-BS-1G5" firstAttribute="width" secondItem="QV2-BS-1G5" secondAttribute="height" multiplier="1:1" id="7Oa-i2-c34"/>
+                                            <constraint firstItem="4Bf-gp-yRh" firstAttribute="width" secondItem="4Bf-gp-yRh" secondAttribute="height" multiplier="1:1" id="ZgQ-LI-zTh"/>
+                                            <constraint firstItem="oLa-bn-Q6G" firstAttribute="width" secondItem="oLa-bn-Q6G" secondAttribute="height" multiplier="1:1" id="db2-zx-ef2"/>
+                                            <constraint firstItem="4Bf-gp-yRh" firstAttribute="width" secondItem="4Bf-gp-yRh" secondAttribute="height" multiplier="1:1" id="oAX-UG-u9y"/>
+                                        </constraints>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="npn-8f-uzG">
+                                        <rect key="frame" x="0.0" y="205" width="375" height="216"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="2Oc-jG-GKY">
+                                                <rect key="frame" x="6" y="6" width="363" height="151.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="OEr-fv-908">
+                                                        <rect key="frame" x="0.0" y="0.0" width="363" height="46.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bf5-Xr-F6q" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="117" height="46.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="1"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="point" keyPath="shadowOffset">
+                                                                        <point key="value" x="0.0" y="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="Skf-kK-X3r"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1r-Ov-v5t" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="123" y="0.0" width="117" height="46.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="2"/>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="2SI-mW-B18"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yax-UF-kF2" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="246" y="0.0" width="117" height="46.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="3"/>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="3pk-Cf-fWp"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="2XJ-Do-Jht">
+                                                        <rect key="frame" x="0.0" y="52.5" width="363" height="46.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RE-o0-KpH" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="117" height="46.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="4"/>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="eNs-HL-1ah"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgu-mm-d3c" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="123" y="0.0" width="117" height="46.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="5"/>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="6OV-Ed-dyp"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5Y-6C-tIH" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="246" y="0.0" width="117" height="46.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="6"/>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="Erp-yB-e6d"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="y6y-n5-4dr">
+                                                        <rect key="frame" x="0.0" y="105" width="363" height="46.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1w-1a-efT" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="117" height="46.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="7"/>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="yWF-lb-TFe"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKA-fV-sXL" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="123" y="0.0" width="117" height="46.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="8"/>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="7Pm-Wu-ex9"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1F-Hm-mzy" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="246" y="0.0" width="117" height="46.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="9"/>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="Sh6-Ln-zP7"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRr-33-TtD" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                <rect key="frame" x="129" y="163.5" width="117" height="46.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <state key="normal" title="0"/>
+                                                <connections>
+                                                    <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="e3r-M5-BNS"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDC-hH-xdl">
+                                                <rect key="frame" x="252" y="163.5" width="117" height="46.5"/>
+                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <state key="normal" title="&lt;]">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="deletePressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="KHr-4b-Fg1"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.83921568627450982" green="0.85098039215686272" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="YDC-hH-xdl" firstAttribute="height" secondItem="wRr-33-TtD" secondAttribute="height" id="5So-Nc-mBZ"/>
+                                            <constraint firstItem="2Oc-jG-GKY" firstAttribute="leading" secondItem="npn-8f-uzG" secondAttribute="leading" constant="6" id="DuD-a7-YHY"/>
+                                            <constraint firstAttribute="height" constant="216" id="Hs6-qP-OCK"/>
+                                            <constraint firstItem="YDC-hH-xdl" firstAttribute="top" secondItem="wRr-33-TtD" secondAttribute="top" id="NdG-Xc-lwv"/>
+                                            <constraint firstAttribute="trailing" secondItem="2Oc-jG-GKY" secondAttribute="trailing" constant="6" id="Q6o-oP-MMx"/>
+                                            <constraint firstItem="wRr-33-TtD" firstAttribute="height" secondItem="QKA-fV-sXL" secondAttribute="height" id="Uhk-03-7mX"/>
+                                            <constraint firstItem="wRr-33-TtD" firstAttribute="width" secondItem="QKA-fV-sXL" secondAttribute="width" id="WA2-SQ-Jfr"/>
+                                            <constraint firstItem="YDC-hH-xdl" firstAttribute="leading" secondItem="wRr-33-TtD" secondAttribute="trailing" constant="6" id="bNQ-O0-0Z2"/>
+                                            <constraint firstItem="2Oc-jG-GKY" firstAttribute="top" secondItem="npn-8f-uzG" secondAttribute="top" constant="6" id="e4F-0A-WA5"/>
+                                            <constraint firstAttribute="bottom" secondItem="wRr-33-TtD" secondAttribute="bottom" constant="6" id="iz3-hD-caL"/>
+                                            <constraint firstItem="wRr-33-TtD" firstAttribute="leading" secondItem="QKA-fV-sXL" secondAttribute="leading" id="kZJ-AT-AnQ"/>
+                                            <constraint firstItem="wRr-33-TtD" firstAttribute="top" secondItem="QKA-fV-sXL" secondAttribute="bottom" constant="6" id="mTc-ME-bff"/>
+                                            <constraint firstItem="YDC-hH-xdl" firstAttribute="width" secondItem="wRr-33-TtD" secondAttribute="width" id="xnt-AX-M0C"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="npn-8f-uzG" secondAttribute="trailing" id="3VQ-X7-jom"/>
+                                    <constraint firstAttribute="bottom" secondItem="npn-8f-uzG" secondAttribute="bottom" id="GtL-H9-Rft"/>
+                                    <constraint firstItem="q9r-xG-oVS" firstAttribute="centerX" secondItem="ztH-lz-z4f" secondAttribute="centerX" id="RRO-QU-baA"/>
+                                    <constraint firstItem="wUM-zI-rhZ" firstAttribute="top" secondItem="ztH-lz-z4f" secondAttribute="top" constant="48" id="a3D-cZ-ic7"/>
+                                    <constraint firstItem="npn-8f-uzG" firstAttribute="leading" secondItem="ztH-lz-z4f" secondAttribute="leading" id="hbY-Zj-ONd"/>
+                                    <constraint firstItem="wUM-zI-rhZ" firstAttribute="centerX" secondItem="ztH-lz-z4f" secondAttribute="centerX" id="rd4-d9-4RI"/>
+                                    <constraint firstItem="q9r-xG-oVS" firstAttribute="top" secondItem="wUM-zI-rhZ" secondAttribute="bottom" constant="72" id="zGT-jX-txQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nc3-EK-bI9" firstAttribute="top" secondItem="cxK-mk-eoO" secondAttribute="top" id="TAc-mg-Qr0"/>
+                            <constraint firstItem="nc3-EK-bI9" firstAttribute="trailing" secondItem="cxK-mk-eoO" secondAttribute="trailing" id="X1j-Fv-F0U"/>
+                            <constraint firstItem="cxK-mk-eoO" firstAttribute="trailing" secondItem="ztH-lz-z4f" secondAttribute="trailing" id="dk5-9J-Qb8"/>
+                            <constraint firstItem="cxK-mk-eoO" firstAttribute="bottom" secondItem="ztH-lz-z4f" secondAttribute="bottom" id="gFE-fz-Z4e"/>
+                            <constraint firstItem="nc3-EK-bI9" firstAttribute="leading" secondItem="cxK-mk-eoO" secondAttribute="leading" id="haS-I8-rEd"/>
+                            <constraint firstItem="ztH-lz-z4f" firstAttribute="top" secondItem="nc3-EK-bI9" secondAttribute="bottom" id="miO-ml-5Zo"/>
+                            <constraint firstItem="ztH-lz-z4f" firstAttribute="leading" secondItem="cxK-mk-eoO" secondAttribute="leading" id="zcd-Ae-rBh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cxK-mk-eoO"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstNum" destination="yXF-0n-2qk" id="wFT-2p-GQD"/>
+                        <outlet property="fourthNum" destination="oLa-bn-Q6G" id="9fB-V5-xNx"/>
+                        <outlet property="messageLabel" destination="wUM-zI-rhZ" id="hWn-KL-d2b"/>
+                        <outlet property="secondNum" destination="QV2-BS-1G5" id="usG-k2-86M"/>
+                        <outlet property="thirdNum" destination="4Bf-gp-yRh" id="UeT-0x-Vvt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="phY-9X-PxK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3189.5999999999999" y="490.70464767616198"/>
         </scene>
         <!--Tokens-->
         <scene sceneID="LEY-fS-us0">
@@ -2012,7 +2282,7 @@ to find token</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6Ti-Yo-yXc">
-                                                            <rect key="frame" x="67" y="91" width="280" height="12"/>
+                                                            <rect key="frame" x="67" y="91" width="38.5" height="12"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -2031,7 +2301,7 @@ to find token</string>
                                                         <constraint firstItem="65u-Ac-2XA" firstAttribute="centerY" secondItem="r11-Fp-jmU" secondAttribute="centerY" id="NEp-Cv-n56"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="QfK-B8-rh8"/>
                                                         <constraint firstItem="6Ti-Yo-yXc" firstAttribute="bottom" secondItem="u6U-L1-Ed9" secondAttribute="bottom" id="XDo-Vt-Cof"/>
-                                                        <constraint firstAttribute="trailing" secondItem="6Ti-Yo-yXc" secondAttribute="trailing" constant="8" id="XPi-wr-rNF"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Ti-Yo-yXc" secondAttribute="trailing" constant="8" id="XPi-wr-rNF"/>
                                                         <constraint firstAttribute="bottom" secondItem="u6U-L1-Ed9" secondAttribute="bottom" constant="16" id="Y4b-Yo-PMD"/>
                                                         <constraint firstItem="65u-Ac-2XA" firstAttribute="leading" secondItem="HKa-U3-NPc" secondAttribute="leading" id="ZRM-7I-WL5"/>
                                                         <constraint firstItem="65u-Ac-2XA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HKa-U3-NPc" secondAttribute="bottom" constant="4" id="cFu-XN-wLE"/>
@@ -3187,13 +3457,13 @@ minutes, please wait ...</string>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYq-ET-SxK">
-                                                            <rect key="frame" x="88" y="12" width="39.5" height="19.5"/>
+                                                            <rect key="frame" x="64" y="12" width="39.5" height="19.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxN-Lr-xuu">
-                                                            <rect key="frame" x="88" y="37.5" width="31" height="14.5"/>
+                                                            <rect key="frame" x="64" y="37.5" width="31" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.75686274509999996" green="0.79215686269999996" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -3205,7 +3475,7 @@ minutes, please wait ...</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sent" translatesAutoresizingMaskIntoConstraints="NO" id="ZeW-h2-0tV">
-                                                            <rect key="frame" x="24" y="12" width="48" height="40"/>
+                                                            <rect key="frame" x="24" y="12" width="24" height="40"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5903,7 +6173,7 @@ minutes, please wait ...</string>
         <image name="Reminder_backup" width="200" height="168"/>
         <image name="Retry" width="64" height="64"/>
         <image name="Sending" width="252" height="264"/>
-        <image name="Sent" width="48" height="48"/>
+        <image name="Sent" width="24" height="24"/>
         <image name="Setting" width="18" height="18"/>
         <image name="Setting_email_us" width="40" height="40"/>
         <image name="Setting_facebook" width="40" height="40"/>
@@ -5923,6 +6193,7 @@ minutes, please wait ...</string>
         <image name="close_btn" width="100" height="100"/>
         <image name="delete" width="17" height="18"/>
         <image name="delete text" width="16" height="16"/>
+        <image name="empty_pin_code" width="119" height="15"/>
         <image name="qr code" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
@@ -5932,6 +6203,7 @@ minutes, please wait ...</string>
         <segue reference="Oa7-Ma-Ndk"/>
         <segue reference="OXd-vi-azc"/>
         <segue reference="lfa-Bq-FhN"/>
+        <segue reference="pT1-5S-qPI"/>
         <segue reference="0M5-ZF-71X"/>
     </inferredMetricsTieBreakers>
 </document>
