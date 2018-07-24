@@ -91,7 +91,6 @@ FavoriteSelectionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavBar()
         configureRefreshControl()
         favorites = favService.getAllStoredAddresses()
         
@@ -118,6 +117,7 @@ FavoriteSelectionDelegate {
     var transactionInitialDiff = 0
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureNavBar()
         navigationController?.navigationBar.isHidden = false
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.topItem?.prompt = "   "

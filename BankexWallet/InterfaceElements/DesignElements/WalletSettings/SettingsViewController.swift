@@ -40,28 +40,16 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateUI()
-        configureNavBar(isAnother: false)
+        configureNavBar()
     }
     
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        configureNavBar(isAnother: true)
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    func configureNavBar(isAnother:Bool) {
+    func configureNavBar() {
         let nameLabel = UILabel()
         nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)
-        nameLabel.text = isAnother ? "Home" : "Settings"
+        nameLabel.text = "Settings"
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
 
 
