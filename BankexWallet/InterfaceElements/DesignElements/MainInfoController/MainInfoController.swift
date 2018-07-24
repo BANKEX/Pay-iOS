@@ -207,7 +207,7 @@ FavoriteSelectionDelegate {
         let nameLabel = UILabel()
         
         nameLabel.text = "Home"
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
         
         
@@ -233,6 +233,7 @@ FavoriteSelectionDelegate {
         ethLabel.attributedText = fullString
         ethLabel.numberOfLines = 2
         ethLabel.textAlignment = .right
+        ethLabel.font = UIFont.systemFont(ofSize: 12)
         
         navigationController?.navigationBar.topItem?.setRightBarButtonItems([UIBarButtonItem(customView: ethLabel)], animated: true)
     }
