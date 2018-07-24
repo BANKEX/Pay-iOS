@@ -100,7 +100,11 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
                 self.showCreationAlert()
                 return
             }
-            self.router.exitFromTheScreen()
+            if UserDefaults.standard.string(forKey: "Passcode") == nil {
+                self.performSegue(withIdentifier: "goToPinFromImportPassphrase", sender: self)
+            } else {
+                self.router.exitFromTheScreen()
+            }
         }
     }
     

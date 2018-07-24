@@ -10,8 +10,6 @@ import UIKit
 
 class PasscodeLockController: UIViewController {
     
-    var walletInfo: [String:String?] = [:]
-    
     enum passcodeStatus: String {
         case new = "Enter a passcode"
         case verify = "Verify your new passcode"

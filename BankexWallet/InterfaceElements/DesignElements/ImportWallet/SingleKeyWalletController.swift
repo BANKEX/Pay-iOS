@@ -120,14 +120,6 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? PasscodeLockController {
-            destinationViewController.walletInfo = ["name": singleKeyView.nameWalletTextField.text,
-                                                    "privateKey": privateKeyTextView.text,
-                                                    "password": nil]
-        }
-    }
-    
     
 }
 
