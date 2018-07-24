@@ -53,7 +53,8 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
         }
     }
     
-
+    
+    
     
     
 

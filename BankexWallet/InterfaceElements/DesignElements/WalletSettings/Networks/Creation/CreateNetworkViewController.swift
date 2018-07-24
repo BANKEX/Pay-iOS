@@ -65,6 +65,8 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     @objc func textFromBuffer() {
         if let text = UIPasteboard.general.string {
             networkURLTextField.text = text
+            guard networkNameTextField.text != "" && networkURLTextField.text != "" else { return }
+            state = .available
         }
     }
     

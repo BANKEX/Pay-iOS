@@ -25,24 +25,28 @@ class NetworksViewController: UIViewController {
     let networkService = NetworksServiceImplementation()
     var listNetworks:[CustomNetwork]!
     var listCustomNetworks:[CustomNetwork] {
-        var array = Array(listNetworks[4...])
-        return array
+        return Array(listNetworks[4...])
     }
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
+        configure()
         self.listNetworks = self.networkService.currentNetworksList()
-        navigationItem.title = "Connection"
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNetworkTapped(_:)))
+        
         
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
         }
+    }
+    
+    func configure() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        navigationItem.title = "Connection"
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNetworkTapped(_:)))
     }
     
     
