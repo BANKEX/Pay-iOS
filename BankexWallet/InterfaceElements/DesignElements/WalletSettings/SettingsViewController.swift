@@ -35,28 +35,34 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.topItem?.title = "Settings"
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-        }
         updateUI()
+        configureNavBar(isAnother: false)
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = false
-        }
+        configureNavBar(isAnother: true)
     }
     
     
     
     
     
+    
+    
+    
+    
+    func configureNavBar(isAnother:Bool) {
+        let nameLabel = UILabel()
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)
+        nameLabel.text = isAnother ? "Home" : "Settings"
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
+    }
 
 
     
