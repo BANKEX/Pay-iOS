@@ -8,11 +8,33 @@
 
 import UIKit
 
+protocol SecurityViewControllerProtocol:class {
+    func switchTouchIDTapped(_ securityViewController:SecurityViewController)
+    func switchTouchIDSendFunds(_ securityViewController:SecurityViewController)
+    func switchTouchIDMultitask(_ securityViewController:SecurityViewController)
+}
+
 class SecurityViewController: UITableViewController {
+    
+    weak var delegate:SecurityViewControllerProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Security"
+    }
+    
+    
+    
+    @IBAction func switchTouchID(_ sender:UISwitch) {
+        delegate?.switchTouchIDTapped(self)
+    }
+    
+    @IBAction func switchSendFunds(_ sender:UISwitch) {
+        delegate?.switchTouchIDSendFunds(self)
+    }
+    
+    @IBAction func switchMultitask(_ sender:UISwitch) {
+        delegate?.switchTouchIDMultitask(self)
     }
     
     
