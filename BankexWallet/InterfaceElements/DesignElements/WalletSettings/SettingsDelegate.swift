@@ -10,6 +10,7 @@ import UIKit
 
 extension SettingsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
@@ -17,7 +18,7 @@ extension SettingsViewController {
             }else if indexPath.row == 1 {
                 performSegue(withIdentifier: "walletSegue", sender: self)
             }else {
-                //security
+                performSegue(withIdentifier: "securitySegue", sender: self)
             }
         case 1:
             if indexPath.row == 0 {
