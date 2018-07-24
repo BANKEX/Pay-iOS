@@ -10,26 +10,25 @@ import UIKit
 import web3swift
 
 class CurrentWalletInfoCell: UITableViewCell {
+    
 
-    @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var symbolLabel: UILabel!
-    
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var amountInDollars: UILabel!
-    
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var tokenIconImageView: UIImageView!
     let keyService = SingleKeyServiceImplementation()
     
     var utilsService: UtilTransactionsService!
     let tokensService = CustomERC20TokensServiceImplementation()
     
-
-    @IBOutlet weak var tokenIconImageView: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         updateLayout()
     }
-
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         updateLayout()
@@ -46,8 +45,9 @@ class CurrentWalletInfoCell: UITableViewCell {
         // Initialization code
         tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         walletNameLabel.text = keyService.selectedWallet()?.name
-        symbolLabel.text = tokensService.selectedERC20Token().symbol.capitalized
-
+        addressLabel.text = keyService.selectedWallet()?.address
+        symbolLabel.text = tokensService.selectedERC20Token().symbol.uppercased()
+        
     }
     func updateBalance() {
         guard let selectedAddress = keyService.selectedAddress() else {
@@ -64,7 +64,7 @@ class CurrentWalletInfoCell: UITableViewCell {
                 self.amountLabel.text = formattedAmount!
             case .Error(let error):
                 self.amountLabel.text = "..."
-
+                
                 print("\(error)")
             }
         }

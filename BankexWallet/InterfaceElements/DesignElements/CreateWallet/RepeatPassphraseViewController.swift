@@ -84,7 +84,7 @@ class RepeatPassphraseViewController: UIViewController {
         guard let passphrase = passphrase else { return }
         sender.isEnabled = false
         DispatchQueue.global(qos: .userInitiated).async {
-            self.service.createNewHDWallet(with: "ETH Wallet Name", mnemonics: passphrase, mnemonicsPassword: "", walletPassword: "") { _, error in
+            self.service.createNewHDWallet(with: "ETH Wallet Name", mnemonics: passphrase, mnemonicsPassword: "", walletPassword: "BANKEXFOUNDATION") { _, error in
                 sender.isEnabled = true
                 error == nil ? self.performSegue(withIdentifier: "toWalletCreated", sender: nil) :
                     self.showWalletCreationAllert()
