@@ -67,9 +67,6 @@ class FavoriteContactCell: UITableViewCell {
     @IBOutlet weak var contactImageView: UIImageView!
     
     func configureCell(withName name: String, isLast: Bool) {
-        if isLast {
-            separator.isHidden = true
-        }
         contactNameLabel.text = name
         let firstLetter = (name as NSString).substring(to: 1)
         nameFirstLetterLabel.text = firstLetter.capitalized

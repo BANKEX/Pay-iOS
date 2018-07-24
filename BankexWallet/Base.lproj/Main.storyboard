@@ -2147,17 +2147,6 @@ to find token</string>
                                             <state key="normal" title="See All">
                                                 <color key="titleColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                    <real key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                    <color key="value" red="0.88235294119999996" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="16"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <segue destination="fG9-ep-RVk" kind="show" id="daQ-gD-5Zf"/>
                                             </connections>
@@ -2215,15 +2204,8 @@ to find token</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p95-SE-wHK" userLabel="InternalView">
-                                            <rect key="frame" x="18" y="0.0" width="339" height="65"/>
+                                            <rect key="frame" x="18" y="0.0" width="357" height="65"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7O-c9-8tD" userLabel="SeparatorView">
-                                                    <rect key="frame" x="24" y="64" width="291" height="1"/>
-                                                    <color key="backgroundColor" red="0.88235294119999996" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="0ZQ-D5-tjI"/>
-                                                    </constraints>
-                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Le2-7E-bok">
                                                     <rect key="frame" x="64" y="8" width="42" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2243,11 +2225,18 @@ to find token</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdG-te-kiY">
-                                                    <rect key="frame" x="281.5" y="10.5" width="33" height="16"/>
+                                                    <rect key="frame" x="299.5" y="10.5" width="33" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7O-c9-8tD" userLabel="SeparatorView">
+                                                    <rect key="frame" x="64" y="0.0" width="269" height="1"/>
+                                                    <color key="backgroundColor" red="0.73725490196078436" green="0.73333333333333328" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="0ZQ-D5-tjI"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -2258,11 +2247,11 @@ to find token</string>
                                                 <constraint firstItem="vdG-te-kiY" firstAttribute="centerY" secondItem="Le2-7E-bok" secondAttribute="centerY" id="CKo-6s-UxM"/>
                                                 <constraint firstItem="t8Z-xK-Sfk" firstAttribute="leading" secondItem="p95-SE-wHK" secondAttribute="leading" id="DbO-N4-VGR"/>
                                                 <constraint firstItem="t8Z-xK-Sfk" firstAttribute="top" secondItem="p95-SE-wHK" secondAttribute="top" constant="8" id="GB9-B3-x9u"/>
-                                                <constraint firstItem="c7O-c9-8tD" firstAttribute="centerX" secondItem="p95-SE-wHK" secondAttribute="centerX" id="M5c-RD-HRl"/>
+                                                <constraint firstItem="c7O-c9-8tD" firstAttribute="top" secondItem="p95-SE-wHK" secondAttribute="top" id="Obn-Oc-QFe"/>
+                                                <constraint firstAttribute="bottom" secondItem="t8Z-xK-Sfk" secondAttribute="bottom" constant="9" id="Omz-E8-idd"/>
                                                 <constraint firstItem="iWv-ip-CuF" firstAttribute="leading" secondItem="t8Z-xK-Sfk" secondAttribute="trailing" constant="16" id="aBe-MW-Xcc"/>
-                                                <constraint firstItem="c7O-c9-8tD" firstAttribute="top" secondItem="t8Z-xK-Sfk" secondAttribute="bottom" constant="8" id="rtR-Cq-ScI"/>
+                                                <constraint firstItem="c7O-c9-8tD" firstAttribute="leading" secondItem="Le2-7E-bok" secondAttribute="leading" id="qux-YC-QEO"/>
                                                 <constraint firstAttribute="trailing" secondItem="vdG-te-kiY" secondAttribute="trailing" constant="25" id="tfc-9f-4JO"/>
-                                                <constraint firstAttribute="bottom" secondItem="c7O-c9-8tD" secondAttribute="bottom" id="tjo-H8-zfg"/>
                                                 <constraint firstItem="vdG-te-kiY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Le2-7E-bok" secondAttribute="trailing" constant="10" id="xoQ-6r-j9a"/>
                                             </constraints>
                                         </view>
@@ -2271,7 +2260,7 @@ to find token</string>
                                     <constraints>
                                         <constraint firstItem="p95-SE-wHK" firstAttribute="leading" secondItem="izt-UX-iVR" secondAttribute="leading" constant="18" id="TtQ-Cy-Lgi"/>
                                         <constraint firstItem="p95-SE-wHK" firstAttribute="top" secondItem="izt-UX-iVR" secondAttribute="top" id="jxa-qR-HRc"/>
-                                        <constraint firstAttribute="trailing" secondItem="p95-SE-wHK" secondAttribute="trailing" constant="18" id="m76-GW-net"/>
+                                        <constraint firstAttribute="trailing" secondItem="p95-SE-wHK" secondAttribute="trailing" id="m76-GW-net"/>
                                         <constraint firstAttribute="bottom" secondItem="p95-SE-wHK" secondAttribute="bottom" id="rXS-1y-Tu9"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -2393,13 +2382,6 @@ to find token</string>
                                                 <constraint firstAttribute="width" constant="48" id="JXX-1q-kD6"/>
                                             </constraints>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ta-eP-rOZ">
-                                            <rect key="frame" x="82" y="64" width="293" height="1"/>
-                                            <color key="backgroundColor" red="0.73725490196078436" green="0.73333333333333328" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="6F3-tA-2LW"/>
-                                            </constraints>
-                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5i-AZ-Xdy">
                                             <rect key="frame" x="24" y="11" width="33" height="55"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="46"/>
@@ -2412,18 +2394,24 @@ to find token</string>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ta-eP-rOZ">
+                                            <rect key="frame" x="82" y="0.0" width="275" height="1"/>
+                                            <color key="backgroundColor" red="0.73725490196078436" green="0.73333333333333328" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="6F3-tA-2LW"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="zze-uI-Qxq" firstAttribute="centerY" secondItem="Rg6-8y-Yqt" secondAttribute="centerY" id="00J-Dt-C6o"/>
                                         <constraint firstItem="Z5i-AZ-Xdy" firstAttribute="centerX" secondItem="Rg6-8y-Yqt" secondAttribute="centerX" id="0ca-dB-Stl"/>
+                                        <constraint firstItem="4Ta-eP-rOZ" firstAttribute="top" secondItem="ytV-gY-w7Y" secondAttribute="top" id="6CC-0U-Kvu"/>
                                         <constraint firstItem="Z5i-AZ-Xdy" firstAttribute="top" secondItem="ytV-gY-w7Y" secondAttribute="topMargin" id="RUS-Qf-IYh"/>
-                                        <constraint firstItem="4Ta-eP-rOZ" firstAttribute="top" secondItem="Rg6-8y-Yqt" secondAttribute="bottom" constant="2" id="UHg-hU-WrY"/>
                                         <constraint firstItem="4Ta-eP-rOZ" firstAttribute="leading" secondItem="zze-uI-Qxq" secondAttribute="leading" id="boq-Gk-0Mt"/>
                                         <constraint firstItem="Rg6-8y-Yqt" firstAttribute="centerY" secondItem="ytV-gY-w7Y" secondAttribute="centerY" id="ibP-XM-vbj"/>
-                                        <constraint firstAttribute="trailing" secondItem="4Ta-eP-rOZ" secondAttribute="trailing" id="mtK-jU-SjD"/>
+                                        <constraint firstAttribute="trailing" secondItem="4Ta-eP-rOZ" secondAttribute="trailing" constant="18" id="mtK-jU-SjD"/>
                                         <constraint firstItem="Rg6-8y-Yqt" firstAttribute="leading" secondItem="ytV-gY-w7Y" secondAttribute="leadingMargin" id="pSz-Bf-AkK"/>
                                         <constraint firstItem="zze-uI-Qxq" firstAttribute="leading" secondItem="Rg6-8y-Yqt" secondAttribute="trailing" constant="18" id="qLb-dQ-KfL"/>
-                                        <constraint firstAttribute="bottom" secondItem="4Ta-eP-rOZ" secondAttribute="bottom" id="xOd-oP-74v"/>
                                         <constraint firstItem="Z5i-AZ-Xdy" firstAttribute="centerY" secondItem="Rg6-8y-Yqt" secondAttribute="centerY" id="xa1-Yx-Uuo"/>
                                     </constraints>
                                 </tableViewCellContentView>

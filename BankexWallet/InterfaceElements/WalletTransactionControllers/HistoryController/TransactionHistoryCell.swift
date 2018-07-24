@@ -31,13 +31,11 @@ class TransactionHistoryCell: UITableViewCell {
         guard let trans = withTransaction as? ETHTransactionModel else {
             return
         }
-        separatorView.isHidden = isLastCell
         let isSend = SingleKeyServiceImplementation().selectedAddress() == trans.from
         statusImageView.image = isSend ? #imageLiteral(resourceName: "Sent") : #imageLiteral(resourceName: "Received")
         transactionTypeLabel.text = isSend ? "Sent" : "Received"
         addressLabel.text = trans.to
         amountLabel.text = (isSend ? "- " : "+ ") + trans.amount
-        amountLabel.textColor = isSend ? WalletColors.redText.color() : WalletColors.lightGreenText.color()
     }
     
     override func awakeFromNib() {
