@@ -20,7 +20,6 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     var tokens = [ERC20TokenModel]()
     var sendEthService: SendEthService!
     var transactionsToShow = [ETHTransactionModel]()
-    let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     
     let interactor = Interactor()
     
@@ -66,8 +65,6 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         
         super.viewDidLoad()
         
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
         let conversionService = FiatServiceImplementation.service
         conversionService.updateConversionRate(for: service.selectedERC20Token().symbol) { (rate) in
             print(rate)
@@ -84,8 +81,14 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(animated)
         updateTableView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     func updateTableView() {

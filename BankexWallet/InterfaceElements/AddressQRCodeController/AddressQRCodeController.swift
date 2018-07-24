@@ -14,21 +14,63 @@ class AddressQRCodeController: UIViewController {
     var addressToGenerateQR: String?
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var walletNameLabel: UILabel!
+    @IBOutlet weak var copiedIcon: UIImageView!
+    @IBOutlet weak var copiedLabel: UILabel!
+    
+    let keysService: SingleKeyService  = SingleKeyServiceImplementation()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-
-    @IBOutlet weak var addressLabel: UILabel!
+    
     override func viewWillAppear(_ animated: Bool) {
+        setNavigationBar()
         super.viewWillAppear(animated)
         imageView.image = generateQRCode(from: addressToGenerateQR)
         addressLabel.text = addressToGenerateQR
+        walletNameLabel.text = keysService.selectedWallet()?.name
+        copiedIcon.alpha = 0
+        copiedLabel.alpha = 0
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func setNavigationBar() {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.navigationBar.topItem?.title = "Home"
+        let sendButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAddress(_:)))
+        self.navigationItem.rightBarButtonItem = sendButton
+        self.title = "Receive"
+    }
+    
+    @objc func shareAddress(_ sender : UIBarButtonItem) {
+        
+        let addressToShare: String = addressToGenerateQR ?? ""
+        
+        let itemsToShare = [ addressToShare ]
+        let activityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook, UIActivityType.mail, UIActivityType.message, UIActivityType.postToTwitter ]
+        
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
  
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = addressToGenerateQR
+        self.copiedIcon.alpha = 0.0
+        self.copiedLabel.alpha = 0.0
+        UIView.animate(withDuration: 1.0, animations: {
+            self.copiedIcon.alpha = 1.0
+            self.copiedLabel.alpha = 1.0
+        })
     }
     
     func generateQRCode(from string: String?) -> UIImage? {
