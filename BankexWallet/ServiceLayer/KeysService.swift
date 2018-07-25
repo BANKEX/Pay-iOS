@@ -34,6 +34,10 @@ enum WalletCreationError: Error {
     case creationError
 }
 
+enum WalletDeletingError: Error {
+    case deletingError
+}
+
 protocol SingleKeyService: GlobalWalletsService {
     
     func createNewSingleAddressWallet(with name: String?,
@@ -154,6 +158,26 @@ class SingleKeyServiceImplementation: SingleKeyService {
         catch {
             DispatchQueue.main.async {
                 completion(WalletCreationError.creationError)
+            }
+        }
+    }
+    
+    func delete(completion: @escaping (Error?)-> Void) {
+        do {
+            try db.operation({ (context, save) in
+                let wallets: [KeyWallet?] = try context.request(KeyWallet.self).fetch()
+                for wallet in wallets {
+                    try context.remove([wallet!])
+                }
+                save()
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            })
+        }
+        catch {
+            DispatchQueue.main.async {
+                completion(WalletDeletingError.deletingError)
             }
         }
     }

@@ -13,21 +13,33 @@ class InitialLogicRouter {
     
     let keysService = SingleKeyServiceImplementation()
     
+    var rootController: UINavigationController?
+    
     func navigateToMainControllerIfNeeded(rootControler: UINavigationController) {
+        self.rootController = rootControler
+        if UserDefaults.standard.string(forKey: "Passcode") == nil || keysService.selectedWallet() == nil {
+            keysService.delete() { (error) in
+                if let _ = error {
+                    print(error?.localizedDescription)
+                }
+                return
+            }
+        } else {
+            rootControler.performSegue(withIdentifier: "showEnterPin", sender: self)
+            
+//            rootControler.performSegue(withIdentifier: "showProcess", sender: self)
+//
+//            DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
+//
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let controller = storyboard.instantiateViewController(withIdentifier: "MainTabController")
+//
+//                rootControler.viewControllers = [controller]
+//            }
+        }
         
-        guard let _ = keysService.selectedWallet() else {
-            return
-        }
 //        useFaceIdToAuth(rootControler: rootControler)
-        rootControler.performSegue(withIdentifier: "showProcess", sender: self)
-
-        DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
-
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "MainTabController")
-
-            rootControler.viewControllers = [controller]
-        }
+        
     }
     
     func useFaceIdToAuth(rootControler: UINavigationController) {
