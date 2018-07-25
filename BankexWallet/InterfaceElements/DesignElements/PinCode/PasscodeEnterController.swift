@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class PasscodeEnterController: UIViewController {
     
@@ -47,19 +48,13 @@ class PasscodeEnterController: UIViewController {
     
     func enterWallet() {
         
-        self.performSegue(withIdentifier: "showProcessFromPinCode", sender: self)
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
-            
-            let tabController = storyboard.instantiateViewController(withIdentifier: "MainTabController")
-            let tabNavigation = UINavigationController(rootViewController: tabController)
-            
-            let appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-            appDelegate.window?.rootViewController = tabNavigation
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: "ProcessController")
+//            let appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+//            appDelegate.window?.rootViewController = controller
         }
-
     }
     
     func changeNumsIcons(_ nums: Int) {
@@ -118,6 +113,55 @@ class PasscodeEnterController: UIViewController {
         }
     }
     
+    @IBAction func biometricsPressed(_ sender: UIButton) {
+        
+        let touchManager = TouchManager()
+        
+        let context = LAContext()
+        var error: NSError?
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            var type = "Touch ID"
+            if #available(iOS 11, *) {
+                switch(context.biometryType) {
+                case .touchID:
+                    type = "Touch ID"
+                case .faceID:
+                    type = "Face ID"
+                case .none:
+                    type = "Error"
+                }
+            }
+            
+            let reason = "Authenticate with " + type
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
+                                   localizedReason: reason,
+                                   reply:
+                {(succes, error) in
+                    
+                    if succes {
+                        self.enterWallet()
+                    }
+                    else {
+                        self.showAlertController(type + " Authentication Failed. Try again or use Your Passcode")
+                    }
+                    
+            })
+        } else {
+            showAlertController("Biometrics are not available")
+        }
+    }
+    
+    func showAlertController(_ message: String) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? SendingInProcessViewController {
+            vc.fromEnterScreen = true
+        }
+    }
     
 }
 

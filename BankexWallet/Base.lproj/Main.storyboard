@@ -5242,7 +5242,7 @@ successfully</string>
         <!--Sending In Process View Controller-->
         <scene sceneID="ttd-FO-4vY">
             <objects>
-                <viewController id="iLc-LU-ReD" customClass="SendingInProcessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProcessController" id="iLc-LU-ReD" customClass="SendingInProcessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="08T-rQ-TzM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6023,7 +6023,7 @@ minutes, please wait ...</string>
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ujH-fs-x3m"/>
+                                                                    <action selector="biometricsPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="XkR-HL-hhY"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rg-Bp-lOR" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -6088,7 +6088,7 @@ minutes, please wait ...</string>
                         <outlet property="messageLabel" destination="7rE-CX-rHf" id="eAU-JK-3Lh"/>
                         <outlet property="secondNum" destination="6yR-z6-9X2" id="Dl4-sm-ZCi"/>
                         <outlet property="thirdNum" destination="nfR-AT-O3D" id="amw-V1-eia"/>
-                        <segue destination="iLc-LU-ReD" kind="show" identifier="showProcessFromPinCode" id="fos-eB-CcD"/>
+                        <segue destination="iLc-LU-ReD" kind="show" identifier="showProcessFromPin" id="94t-6M-Swp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xgU-gH-667" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6149,7 +6149,7 @@ minutes, please wait ...</string>
         <image name="white_touch_id" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fos-eB-CcD"/>
+        <segue reference="94t-6M-Swp"/>
         <segue reference="vrZ-w3-HnB"/>
         <segue reference="XCh-X3-sC4"/>
         <segue reference="9NG-uR-4bU"/>
