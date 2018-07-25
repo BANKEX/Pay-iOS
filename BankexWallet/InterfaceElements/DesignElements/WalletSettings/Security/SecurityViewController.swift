@@ -27,7 +27,6 @@ class SecurityViewController: UITableViewController {
     
     
     @IBAction func switchTouchID(_ sender:UISwitch) {
-        delegate?.switchTouchIDTapped(self)
         if TouchManager.canAuth() {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
@@ -35,10 +34,10 @@ class SecurityViewController: UITableViewController {
                 print(error.getErrorMessage())
             }
         }
+        delegate?.switchTouchIDTapped(self)
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
-        delegate?.switchTouchIDSendFunds(self)
         if TouchManager.canAuth() {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
@@ -46,10 +45,10 @@ class SecurityViewController: UITableViewController {
                 print(error.getErrorMessage())
             }
         }
+        delegate?.switchTouchIDSendFunds(self)
     }
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
-        delegate?.switchTouchIDMultitask(self)
         if TouchManager.canAuth() {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
@@ -57,6 +56,8 @@ class SecurityViewController: UITableViewController {
                 print(error.getErrorMessage())
             }
         }
+        delegate?.switchTouchIDMultitask(self)
+        
     }
     
     

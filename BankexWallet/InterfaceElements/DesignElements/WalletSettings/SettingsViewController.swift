@@ -34,7 +34,6 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.shadowImage = UIImage()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -50,6 +49,7 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
         nameLabel.text = "Settings"
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
         navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
 
 

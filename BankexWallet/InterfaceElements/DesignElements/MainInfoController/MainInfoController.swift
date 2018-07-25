@@ -204,6 +204,7 @@ FavoriteSelectionDelegate {
     
     func configureNavBar() {
         navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.shadowImage = nil
         let nameLabel = UILabel()
         
         nameLabel.text = "Home"
