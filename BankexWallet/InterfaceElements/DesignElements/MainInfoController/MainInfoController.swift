@@ -148,7 +148,6 @@ FavoriteSelectionDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        navigationController?.isNavigationBarHidden = true
         if let controller = segue.destination as? AddressQRCodeController {
             let keyService: GlobalWalletsService = SingleKeyServiceImplementation()
             controller.addressToGenerateQR = keyService.selectedAddress()
@@ -203,21 +202,14 @@ FavoriteSelectionDelegate {
     
     
     func configureNavBar() {
+        navigationController?.navigationBar.topItem?.title = nil
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.shadowImage = nil
-        let nameLabel = UILabel()
         
+        let nameLabel = UILabel()
         nameLabel.text = "Home"
         nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
-        
-        
-        //navigationController?.navigationBar.topItem?.title = "Home"
-        if #available(iOS 11.0, *) {
-            //navigationController?.navigationBar.prefersLargeTitles = true
-        }
-        
-        
         ethLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 200, height: 90))
         
         let fullString = NSMutableAttributedString(string: "")
