@@ -111,7 +111,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
             if UserDefaults.standard.string(forKey: "Passcode") == nil {
                 self.performSegue(withIdentifier: "goToPinFromImportPassphrase", sender: self)
             } else {
-                self.router.exitFromTheScreen()
+                self.performSegue(withIdentifier: "showProcessFromImportPassphrase", sender: self)
             }
         }
     }
@@ -183,8 +183,10 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         if let destinationViewController = segue.destination as? PasscodeLockController {
             destinationViewController.newWallet = false
         }
+        if let vc = segue.destination as? SendingInProcessViewController {
+            vc.fromEnterScreen = true
+        }
     }
-    
 
 }
 

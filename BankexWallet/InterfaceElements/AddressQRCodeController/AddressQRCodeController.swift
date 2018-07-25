@@ -26,8 +26,8 @@ class AddressQRCodeController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setNavigationBar()
         super.viewWillAppear(animated)
+        setNavigationBar()
         imageView.image = generateQRCode(from: addressToGenerateQR)
         addressLabel.text = addressToGenerateQR?.lowercased()
         walletNameLabel.text = keysService.selectedWallet()?.name
@@ -42,7 +42,6 @@ class AddressQRCodeController: UIViewController {
     
     func setNavigationBar() {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.navigationBar.topItem?.title = "Home"
         let sendButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAddress(_:)))
         self.navigationItem.rightBarButtonItem = sendButton
         self.title = "Receive"

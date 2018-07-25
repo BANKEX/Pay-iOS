@@ -113,9 +113,8 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
             if UserDefaults.standard.string(forKey: "Passcode") == nil {
                 self.performSegue(withIdentifier: "goToPinFromImportSingleKey", sender: self)
             } else {
-                self.router.exitFromTheScreen()
+                self.performSegue(withIdentifier: "showProcessFromImportSecretKey", sender: self)
             }
-            
         }
         
     }
@@ -123,6 +122,9 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? PasscodeLockController {
             destinationViewController.newWallet = false
+        }
+        if let vc = segue.destination as? SendingInProcessViewController {
+            vc.fromEnterScreen = true
         }
     }
     

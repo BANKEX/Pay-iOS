@@ -41,6 +41,9 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
         if let vc = segue.destination as? EditWalletNameController {
             vc.delegate = self
         }
+        if let vc = segue.destination as? SendingInProcessViewController {
+            vc.fromEnterScreen = true
+        }
     }
     
     func nameChanged(to name: String) {
@@ -59,6 +62,9 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        WalletCreationTypeRouterImplementation().exitFromTheScreen()
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "showProcessFromCreation", sender: self)
+        }
+        //WalletCreationTypeRouterImplementation().exitFromTheScreen()
     }
 }

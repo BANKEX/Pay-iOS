@@ -26,19 +26,7 @@ class InitialLogicRouter {
             }
         } else {
             rootControler.performSegue(withIdentifier: "showEnterPin", sender: self)
-            
-//            rootControler.performSegue(withIdentifier: "showProcess", sender: self)
-//
-//            DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
-//
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let controller = storyboard.instantiateViewController(withIdentifier: "MainTabController")
-//
-//                rootControler.viewControllers = [controller]
-//            }
         }
-        
-//        useFaceIdToAuth(rootControler: rootControler)
         
     }
     

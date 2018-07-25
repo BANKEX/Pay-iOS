@@ -157,5 +157,6 @@ class pinCodeNumberButton: UIButton {
         self.layer.shadowRadius = 0.0
         self.layer.masksToBounds = false
         self.layer.cornerRadius = 5.0
+        self.clipsToBounds = true
     }
 }
