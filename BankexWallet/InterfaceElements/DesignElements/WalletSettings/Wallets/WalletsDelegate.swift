@@ -14,7 +14,9 @@ extension WalletsViewController:UITableViewDelegate {
         if indexPath.section == 1 {
             let wallet = listWallets[indexPath.row]
             service.updateSelected(address: wallet.address)
-            delegate?.didTapped(with: wallet)
+            DispatchQueue.main.async {
+                self.delegate?.didTapped(with: wallet)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
