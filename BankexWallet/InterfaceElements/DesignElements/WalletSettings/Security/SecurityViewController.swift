@@ -10,9 +10,9 @@ import UIKit
 import LocalAuthentication
 
 protocol SecurityViewControllerProtocol:class {
-    func switchTouchIDTapped(_ securityViewController:SecurityViewController)
-    func switchTouchIDSendFunds(_ securityViewController:SecurityViewController)
-    func switchTouchIDMultitask(_ securityViewController:SecurityViewController)
+    func switchTouchIDTapped(_ securityViewController:SecurityViewController,with state:Bool)
+    func switchTouchIDSendFunds(_ securityViewController:SecurityViewController,with state:Bool)
+    func switchTouchIDMultitask(_ securityViewController:SecurityViewController,with state:Bool)
 }
 
 class SecurityViewController: UITableViewController {
@@ -29,35 +29,32 @@ class SecurityViewController: UITableViewController {
     @IBAction func switchTouchID(_ sender:UISwitch) {
         if TouchManager.canAuth() {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                print("Success")
+                self.delegate?.switchTouchIDTapped(self, with: sender.isOn)
             }) { (error) in
                 print(error.getErrorMessage())
             }
         }
-        delegate?.switchTouchIDTapped(self)
+        
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
         if TouchManager.canAuth() {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                print("Success")
+                self.delegate?.switchTouchIDSendFunds(self,with: sender.isOn)
             }) { (error) in
                 print(error.getErrorMessage())
             }
         }
-        delegate?.switchTouchIDSendFunds(self)
     }
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
         if TouchManager.canAuth() {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                print("Success")
+                self.delegate?.switchTouchIDMultitask(self,with: sender.isOn)
             }) { (error) in
                 print(error.getErrorMessage())
             }
         }
-        delegate?.switchTouchIDMultitask(self)
-        
     }
     
     

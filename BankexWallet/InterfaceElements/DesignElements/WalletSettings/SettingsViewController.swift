@@ -43,6 +43,8 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
     }
     
     
+     
+    
     func configureNavBar() {
         let nameLabel = UILabel()
         nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)

@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import MessageUI
 
-extension SettingsViewController {
+
+extension SettingsViewController:MFMailComposeViewControllerDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
@@ -22,7 +24,15 @@ extension SettingsViewController {
             }
         case 1:
             if indexPath.row == 0 {
-                managerReferences.writeToUs()
+                managerReferences.accessToBankexMail(delegate: self, failed: { (errorMessage) in
+                    DispatchQueue.main.async {
+                        let alertVC = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                        alertVC.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default))
+                        self.present(alertVC, animated: true)
+                    }
+                }) { (composeViewController) in
+                    self.present(composeViewController, animated: true)
+                }
             }else {
                 managerReferences.accessToAppStore()
             }
@@ -36,5 +46,9 @@ extension SettingsViewController {
             }
         default: break
         }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }

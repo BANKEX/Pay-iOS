@@ -10,7 +10,11 @@ import UIKit
 import StoreKit
 import MessageUI
 
+
+
+
 class ManagerReferences {
+    
     enum references {
         case twitter,telegram,facebook,bankex,appStore
         func getRef() -> String {
@@ -23,6 +27,23 @@ class ManagerReferences {
             }
         }
     }
+    
+    func accessToBankexMail(delegate:MFMailComposeViewControllerDelegate?, failed:@escaping ((String)->()),success:@escaping ((MFMailComposeViewController)->())) {
+        var errorMessage = ""
+        guard MFMailComposeViewController.canSendMail() else {
+            errorMessage += "Device is not available to send email.Please check your settings"
+            failed(errorMessage)
+            return
+        }
+        let mc = MFMailComposeViewController()
+        mc.mailComposeDelegate = delegate
+        mc.setToRecipients([references.bankex.getRef()])
+        mc.setSubject("TO BANKEX")
+        DispatchQueue.main.async {
+            success(mc)
+        }
+    }
+    
     
     
     func accessToTwitter() {
@@ -68,15 +89,6 @@ class ManagerReferences {
             }else {
                 self.estimateApp()
             }
-        }
-    }
-    
-    func writeToUs() {
-        if MFMailComposeViewController.canSendMail() {
-            let mailVC = MFMailComposeViewController()
-            mailVC.setToRecipients([references.bankex.getRef()])
-        }else {
-            //Show error later
         }
     }
     
