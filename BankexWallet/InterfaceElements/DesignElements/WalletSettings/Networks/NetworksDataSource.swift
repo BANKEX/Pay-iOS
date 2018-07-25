@@ -17,7 +17,7 @@ extension NetworksViewController:UITableViewDataSource {
         switch section {
         case 0: return 1
         case 1: return listNetworks.count
-        case 2: return listNetworks.count
+        case 2: return listCustomNetworks.count
         default: return 0
         }
     }
@@ -41,10 +41,6 @@ extension NetworksViewController:UITableViewDataSource {
         }else if indexPath.section == 2 {
             if listCustomNetworks.count > 0 {
                 cell.textLabel?.text = listCustomNetworks[indexPath.row].networkName
-            }else {
-                let indexSet = IndexSet(integer: indexPath.section)
-                tableView.deleteSections(indexSet, with: .none)
-                tableView.reloadData()  // change leter
             }
         }
         return cell
