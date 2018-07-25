@@ -124,7 +124,8 @@ class PasscodeEnterController: UIViewController {
 class enterPinCodeNumberButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.masksToBounds = false
-        self.layer.cornerRadius = self.layer.bounds.width/2
+        //self.layer.masksToBounds = false
+        self.layer.cornerRadius = self.bounds.size.width/2
+        //elf.clipsToBounds = true
     }
 }
