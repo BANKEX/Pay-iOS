@@ -92,6 +92,14 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         passphraseTextView.moveCursorToStart()
     }
     
+    @IBAction func stringFromBuffer(_ sender:UIButton) {
+        if let string = UIPasteboard.general.string  {
+            passphraseTextView.text = string
+            passphraseTextView.textColor = .black
+            state = .available
+        }
+    }
+    
     @IBAction func createWalletTapped(_ sender:Any) {
         let generatedPassphrase = passphraseTextView.text!
         let nameWallet = nameTextField.text ?? ""

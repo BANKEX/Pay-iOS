@@ -33,8 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
-        
-        
+        window?.backgroundColor = .white
         return true
     }
 
