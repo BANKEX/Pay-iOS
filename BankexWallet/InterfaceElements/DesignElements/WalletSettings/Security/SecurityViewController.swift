@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 protocol SecurityViewControllerProtocol:class {
     func switchTouchIDTapped(_ securityViewController:SecurityViewController)
@@ -28,7 +29,7 @@ class SecurityViewController: UITableViewController {
     @IBAction func switchTouchID(_ sender:UISwitch) {
         delegate?.switchTouchIDTapped(self)
         if TouchManager.canAuth() {
-            TouchManager.authenticateBioMetrics(success: {
+            TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
                 print(error.getErrorMessage())
@@ -39,7 +40,7 @@ class SecurityViewController: UITableViewController {
     @IBAction func switchSendFunds(_ sender:UISwitch) {
         delegate?.switchTouchIDSendFunds(self)
         if TouchManager.canAuth() {
-            TouchManager.authenticateBioMetrics(success: {
+            TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
                 print(error.getErrorMessage())
@@ -50,11 +51,10 @@ class SecurityViewController: UITableViewController {
     @IBAction func switchMultitask(_ sender:UISwitch) {
         delegate?.switchTouchIDMultitask(self)
         if TouchManager.canAuth() {
-            TouchManager.authenticateBioMetrics(success: {
+            TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
                 print(error.getErrorMessage())
-
             }
         }
     }
