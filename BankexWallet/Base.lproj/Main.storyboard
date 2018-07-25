@@ -432,6 +432,7 @@
                         <outlet property="separator1" destination="I7g-mL-nV1" id="ATb-MB-5vv"/>
                         <outlet property="separator2" destination="1nK-oM-Q9C" id="agM-qd-ndI"/>
                         <segue destination="ieh-eS-frZ" kind="show" identifier="goToPinFromImportPassphrase" id="pT1-5S-qPI"/>
+                        <segue destination="iLc-LU-ReD" kind="show" identifier="showProcessFromImportPassphrase" id="ijQ-jv-rc6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFv-ts-Cdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -579,6 +580,7 @@
                         <outlet property="separator2" destination="h59-ee-e7z" id="EEj-qH-lHO"/>
                         <outlet property="singleKeyView" destination="Gda-yG-5fI" id="AMj-dt-yBP"/>
                         <segue destination="ieh-eS-frZ" kind="show" identifier="goToPinFromImportSingleKey" id="qly-rG-0HJ"/>
+                        <segue destination="iLc-LU-ReD" kind="show" identifier="showProcessFromImportSecretKey" id="bbg-ak-3Up"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yza-R7-FuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3799,6 +3801,7 @@ minutes, please wait ...</string>
                         <outlet property="walletAddressLabel" destination="f0X-Ac-2ve" id="Jy7-SB-ggv"/>
                         <outlet property="walletNameLabel" destination="Gcm-SJ-pEb" id="4Mu-rt-8Ss"/>
                         <segue destination="RPO-E3-gdZ" kind="show" identifier="showEdit" id="oVN-c5-CvU"/>
+                        <segue destination="iLc-LU-ReD" kind="show" identifier="showProcessFromCreation" id="OdR-NC-3s9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y3i-mb-NGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5244,14 +5247,14 @@ successfully</string>
             <objects>
                 <viewController storyboardIdentifier="ProcessController" id="iLc-LU-ReD" customClass="SendingInProcessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="08T-rQ-TzM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vu5-xB-3LK">
-                                <rect key="frame" x="81" y="185" width="252" height="366"/>
+                                <rect key="frame" x="81" y="94" width="252" height="366"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DW4-9U-UJB">
-                                        <rect key="frame" x="11" y="327.66666666666663" width="230.66666666666666" height="38.333333333333314"/>
+                                        <rect key="frame" x="11" y="327.66666666666669" width="230.66666666666666" height="38.333333333333314"/>
                                         <string key="text">The operation may take several 
 minutes, please wait ...</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -6083,6 +6086,7 @@ minutes, please wait ...</string>
                         <viewLayoutGuide key="safeArea" id="a3d-QR-8TB"/>
                     </view>
                     <connections>
+                        <outlet property="biometricsButton" destination="dBr-dM-waA" id="whQ-N4-Odg"/>
                         <outlet property="firstNum" destination="s4n-Sd-z4K" id="kp6-Xi-ean"/>
                         <outlet property="fourthNum" destination="hKV-sP-Ga9" id="6AV-vv-CSG"/>
                         <outlet property="messageLabel" destination="7rE-CX-rHf" id="eAU-JK-3Lh"/>
@@ -6149,14 +6153,14 @@ minutes, please wait ...</string>
         <image name="white_touch_id" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="94t-6M-Swp"/>
+        <segue reference="bbg-ak-3Up"/>
         <segue reference="vrZ-w3-HnB"/>
         <segue reference="XCh-X3-sC4"/>
         <segue reference="9NG-uR-4bU"/>
         <segue reference="57D-OX-sbx"/>
         <segue reference="Oa7-Ma-Ndk"/>
         <segue reference="OXd-vi-azc"/>
-        <segue reference="pT1-5S-qPI"/>
+        <segue reference="qly-rG-0HJ"/>
         <segue reference="0M5-ZF-71X"/>
     </inferredMetricsTieBreakers>
 </document>

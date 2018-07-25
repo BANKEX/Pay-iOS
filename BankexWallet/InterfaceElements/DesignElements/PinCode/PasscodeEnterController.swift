@@ -27,12 +27,20 @@ class PasscodeEnterController: UIViewController {
     @IBOutlet weak var thirdNum: UIImageView!
     @IBOutlet weak var fourthNum: UIImageView!
     
+    @IBOutlet weak var biometricsButton: UIButton!
+    
     var numsIcons: [UIImageView]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         changePasscodeStatus(.enter)
         numsIcons = [firstNum, secondNum, thirdNum, fourthNum]
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        enterWithBiometrics()
+        
     }
     
     func changePasscodeStatus(_ newStatus: passcodeStatus) {
@@ -50,10 +58,6 @@ class PasscodeEnterController: UIViewController {
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let controller = storyboard.instantiateViewController(withIdentifier: "ProcessController")
-//            let appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-//            appDelegate.window?.rootViewController = controller
         }
     }
     
@@ -80,6 +84,12 @@ class PasscodeEnterController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(animated)
+        let context = LAContext()
+        var error: NSError?
+        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            biometricsButton.alpha = 0.0
+            biometricsButton.isUserInteractionEnabled = false
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -115,6 +125,10 @@ class PasscodeEnterController: UIViewController {
     
     @IBAction func biometricsPressed(_ sender: UIButton) {
         
+        enterWithBiometrics()
+    }
+    
+    func enterWithBiometrics() {
         let touchManager = TouchManager()
         
         let context = LAContext()
@@ -146,8 +160,6 @@ class PasscodeEnterController: UIViewController {
                     }
                     
             })
-        } else {
-            showAlertController("Biometrics are not available")
         }
     }
     
