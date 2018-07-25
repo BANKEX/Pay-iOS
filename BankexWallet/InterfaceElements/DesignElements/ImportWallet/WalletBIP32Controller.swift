@@ -108,7 +108,11 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
                 self.showCreationAlert()
                 return
             }
-            self.router.exitFromTheScreen()
+            if UserDefaults.standard.string(forKey: "Passcode") == nil {
+                self.performSegue(withIdentifier: "goToPinFromImportPassphrase", sender: self)
+            } else {
+                self.router.exitFromTheScreen()
+            }
         }
     }
     
@@ -175,7 +179,11 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         separator1.backgroundColor = WalletColors.greySeparator.color()
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? PasscodeLockController {
+            destinationViewController.newWallet = false
+        }
+    }
     
 
 }
