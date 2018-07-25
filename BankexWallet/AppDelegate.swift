@@ -28,12 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let onboarding = storyboard.instantiateViewController(withIdentifier: "OnboardingPage")
             window?.rootViewController = onboarding
         }
+        
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return true
         }
         initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
         
-//        
+        
         return true
     }
 
