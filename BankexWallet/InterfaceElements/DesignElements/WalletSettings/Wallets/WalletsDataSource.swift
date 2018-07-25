@@ -31,7 +31,7 @@ extension WalletsViewController:UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 1 ? "CHOOSE A WALLET..." : ""
+        return section == 1 ? "CHOOSE A WALLET..." : "CURRENT WALLET"
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
