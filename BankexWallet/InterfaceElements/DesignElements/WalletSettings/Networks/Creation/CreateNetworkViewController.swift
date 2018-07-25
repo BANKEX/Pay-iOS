@@ -20,6 +20,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     //MARK: - IBOutlets
     @IBOutlet weak var networkURLTextField:UITextField!
     @IBOutlet weak var networkNameTextField:UITextField!
+    @IBOutlet weak var networkIDTextField:UITextField!
     
     
     var joinButton = UIBarButtonItem(title: "Join", style: .done, target: self, action: #selector(joinToConnection))
@@ -27,12 +28,12 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
         didSet {
             if state == .available {
                 joinButton.isEnabled = true
-                [networkNameTextField,networkURLTextField].forEach { tf in
+                [networkNameTextField,networkURLTextField,networkIDTextField].forEach { tf in
                     tf?.returnKeyType = .done
                 }
             }else {
                 joinButton.isEnabled = false
-                [networkNameTextField,networkURLTextField].forEach { tf in
+                [networkNameTextField,networkURLTextField,networkIDTextField].forEach { tf in
                     tf?.returnKeyType = .next
                 }
             }
@@ -43,7 +44,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         state = .unavailable
-        [networkNameTextField,networkURLTextField].forEach { (tf) in
+        [networkNameTextField,networkURLTextField,networkIDTextField].forEach { (tf) in
             tf?.delegate = self
             tf?.autocorrectionType = .no
         }
@@ -65,13 +66,13 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     @objc func textFromBuffer() {
         if let text = UIPasteboard.general.string {
             networkURLTextField.text = text
-            guard networkNameTextField.text != "" && networkURLTextField.text != "" else { return }
+            guard networkNameTextField.text != "" && networkURLTextField.text != "" && networkIDTextField.text != "" else { return }
             state = .available
         }
     }
     
     @objc func resignTextFields() {
-        for tf in [networkURLTextField,networkNameTextField] {
+        for tf in [networkURLTextField,networkNameTextField,networkIDTextField] {
             tf?.resignFirstResponder()
         }
     }
@@ -81,7 +82,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func joinToConnection() {
+    @objc func joinToConnection(_ sender:Any) {
         //TODO
     }
 
@@ -107,7 +108,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.returnKeyType == .done && joinButton.isEnabled {
-            //Join
+            joinToConnection(self)
         }else if textField.returnKeyType == .next {
             if textField == networkURLTextField {
                 networkNameTextField.becomeFirstResponder()
@@ -119,7 +120,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if networkNameTextField.text == "" || networkURLTextField.text == "" {
+        if networkNameTextField.text == "" || networkURLTextField.text == "" || networkIDTextField.text == "" {
             state = .unavailable
         }else {
             state = .available
@@ -130,7 +131,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text ?? "")  as NSString
         let futureString = currentText.replacingCharacters(in: range, with: string) as String
-        if (textField == networkNameTextField && !futureString.isEmpty && !(networkURLTextField.text?.isEmpty)!) || (textField == networkURLTextField && !futureString.isEmpty && !(networkNameTextField.text?.isEmpty)!) {
+        if (textField == networkNameTextField && !futureString.isEmpty && !(networkURLTextField.text?.isEmpty)! && !(networkIDTextField.text?.isEmpty)!) || (textField == networkURLTextField && !futureString.isEmpty && !(networkNameTextField.text?.isEmpty)! && !(networkIDTextField.text?.isEmpty)!) || (textField == networkIDTextField && !futureString.isEmpty && !(networkNameTextField.text?.isEmpty)! && !(networkURLTextField.text?.isEmpty)!) {
             state = .available
         }else {
             state = .unavailable
