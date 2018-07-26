@@ -51,7 +51,7 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
                             completionHandler(error)
                         }
                     }
-                } else if let contact = try context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "firstName == %@", firstName))).first {
+                } else if let contact = try context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "(firstName == %@) AND (lastName == %@)", firstName,lastName))).first {
                     if editing {
                         contact.address = address
                         contact.firstName = firstName

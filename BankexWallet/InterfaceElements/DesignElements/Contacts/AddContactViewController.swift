@@ -32,13 +32,11 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
             }
         }
     }
-    
     var headerView:UIView!
     let heightOfRow:CGFloat = 47.0
-    
     var doneButton:UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(done))
-    
     var service = RecipientsAddressesServiceImplementation()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +67,8 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
             tf?.delegate = self
             tf?.autocorrectionType = .no
         }
+        firstNameTextField.autocapitalizationType = .words
+        lastNameTextField.autocapitalizationType = .words
     }
     
     func setupFooter() {
@@ -100,7 +100,6 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     }
     
     @objc func done() {
-        print("Done")
         guard let firstName = firstNameTextField?.text,let lastName = lastNameTextField?.text,let address = addressTextField?.text else { return }
         guard let ethAddress = EthereumAddress(addressTextField?.text ?? "") else {
             //Show error
@@ -108,26 +107,10 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         }
         service.store(address: address, with: firstName,lastName: lastName , isEditing: false) { (error) in
             if error?.localizedDescription == "Address already exists in the database" {
-                self.addressTextField.text = ""
-                self.addressTextField.attributedPlaceholder = NSAttributedString(string: "Address already exists in the database", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.addressTextField.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                }) { (_) in
-                    UIView.animate(withDuration: 0.5, animations: {
-                        self.addressTextField.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                    })
-                }
+                //Show alert
                 return
             } else if error?.localizedDescription == "Name already exists in the database" {
-                self.firstNameTextField.text = ""
-                self.firstNameTextField.attributedPlaceholder = NSAttributedString(string: "Name already exists in the database", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.firstNameTextField.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                }) { (_) in
-                    UIView.animate(withDuration: 0.5, animations: {
-                        self.firstNameTextField.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                    })
-                }
+                //Show alert
                 return
             } else if error != nil {
                 return
