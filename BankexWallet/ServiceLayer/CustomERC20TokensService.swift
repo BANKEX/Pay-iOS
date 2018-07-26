@@ -59,6 +59,8 @@ protocol CustomERC20TokensService {
     func searchForCustomToken(with address: String,
                               completion: @escaping (SendEthResult<ERC20TokenModel>) -> Void)
     
+    func getTokensList(with address: String, completion: @escaping (SendEthResult<[ERC20TokenModel]>) -> Void)
+    
     func selectedERC20Token() -> ERC20TokenModel
     
     func updateSelectedToken(to token: String)
@@ -206,6 +208,104 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
             }
         }
         
+    }
+    
+    func getTokensList(with address: String, completion: @escaping (SendEthResult<[ERC20TokenModel]>) -> Void) {
+        
+        var tokensList: [ERC20TokenModel] = []
+        do {
+            try db.operation({ (context, save) in
+                let tokens = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address == %@ || name CONTAINS[c] %@ || symbol CONTAINS[c] %@ && isSelected  == %@", address, address, address, NSNumber(value: false))))
+                if tokens.count != 0 {
+                    DispatchQueue.main.async {
+                        for token in tokens {
+                            let tokenModel = ERC20TokenModel(name: token.name ?? "",
+                                                             address: token.address ?? "",
+                                                             decimals: token.decimals ?? "",
+                                                             symbol: token.symbol ?? "",
+                                                             isSelected: false)
+                            tokensList.append(tokenModel)
+                        }
+                        completion(SendEthResult.Success(tokensList))
+                        return
+                    }
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        self.getOnlineTokensList(with: address, completion: completion)
+                    }
+                }
+            })
+        } catch {
+            DispatchQueue.main.async {
+                self.getOnlineTokensList(with: address, completion: completion)
+            }
+        }
+        
+    }
+    
+    private func getOnlineTokensList(with address: String, completion: @escaping (SendEthResult<[ERC20TokenModel]>) -> Void) {
+        
+        guard let _ = EthereumAddress(address) else {
+            completion(SendEthResult.Error(CustomTokenError.undefinedError))
+            return
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let dispatchGroup = DispatchGroup()
+            
+            dispatchGroup.enter()
+            var name: String = ""
+            self.tokensUtilService.name(for: address, completion: { (result) in
+                switch result {
+                case .Success(let localName):
+                    name = localName
+                case .Error(_):
+                    //TODO:
+                    print("error")
+                }
+                dispatchGroup.leave()
+            })
+            
+            dispatchGroup.enter()
+            var decimals: BigUInt = BigUInt()
+            self.tokensUtilService.decimals(for: address, completion: { (result) in
+                switch result {
+                case .Success(let localdecimals):
+                    decimals = localdecimals
+                case .Error(_):
+                    //TODO:
+                    print("error")
+                }
+                dispatchGroup.leave()
+            })
+            
+            dispatchGroup.enter()
+            var symbol: String = ""
+            self.tokensUtilService.symbol(for: address, completion: { (result) in
+                switch result {
+                case .Success(let localsymbol):
+                    symbol = localsymbol
+                case .Error( _):
+                    //TODO:
+                    print("error")
+                }
+                dispatchGroup.leave()
+            })
+            
+            dispatchGroup.notify(queue: .main) {
+                guard !name.isEmpty, !symbol.isEmpty else {
+                    completion(SendEthResult.Error(CustomTokenError.undefinedError))
+                    return
+                }
+                completion(SendEthResult.Success([ERC20TokenModel(name: name,
+                                                                 address: address,
+                                                                 decimals: decimals.description,
+                                                                 symbol: symbol,
+                                                                 isSelected: false)]))
+                
+            }
+        }
     }
     
     

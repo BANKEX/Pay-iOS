@@ -8,83 +8,118 @@
 
 import UIKit
 
-class CreateTokenController: UIViewController,
-UITextFieldDelegate {
+class CreateTokenController: UIViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var emptyView: UIView!
-    @IBOutlet weak var foundTokenView: UIView!
-    @IBOutlet weak var tokenDecimalsLabel: UILabel!
-    @IBOutlet weak var tokenSymbolLabel: UILabel!
-    @IBOutlet weak var tokenNameLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var messageLabel: UILabel!
     
-    @IBOutlet weak var findContractButton: UIButton!
-    @IBOutlet weak var contractAddressTextfield: UITextField!
-    
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var tokenSymbolImageView: UIImageView!
+    let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
+    var tokensList: [ERC20TokenModel]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableFooterView = UIView()
+        
+        self.hideKeyboardWhenTappedAround()
+        self.setupViewResizerOnKeyboardShown()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
 
-        contractAddressTextfield.becomeFirstResponder()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        activityIndicator.stopAnimating()
-        emptyView.isHidden = false
-        foundTokenView.isHidden = true
-        findContractButton.backgroundColor = WalletColors.disableButtonBackground.color()
+        setNavigationBar()
+        tableView.alpha = 0
+        tableView.isUserInteractionEnabled = false
     }
     
-    var hasFoundToken = false
-    let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
-    var foundModel: ERC20TokenModel?
-    
-    @IBAction func findContract(_ sender: Any) {
-        guard let foundModel = foundModel else {
-            return
-        }
-        tokensService.addNewCustomToken(with: foundModel.address,
-                                        name: foundModel.name,
-                                        decimals: foundModel.decimals,
-                                        symbol: foundModel.symbol)
-        navigationController?.popViewController(animated: true)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    // MARK: UITextField
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let tokenAddress = contractAddressTextfield.text, !tokenAddress.isEmpty else {
-            return true
-        }
-        textField.resignFirstResponder()
-        self.errorLabel.isHidden = true
-        self.emptyView.isHidden = false
-        self.foundTokenView.isHidden = true
-        self.findContractButton.setTitle("Find Token", for: .normal)
-        findContractButton.backgroundColor = WalletColors.disableButtonBackground.color()        
+    func setNavigationBar() {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.title = "Add New Token"
+    }
+    
+}
+
+extension CreateTokenController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
-        activityIndicator.startAnimating()
-        tokensService.searchForCustomToken(with: tokenAddress, completion: { (result) in
-            self.activityIndicator.stopAnimating()
-            switch result {
-            case .Success(let model):
-                self.tokenNameLabel.text = model.name
-                self.tokenDecimalsLabel.text = model.decimals
-                self.tokenSymbolLabel.text = model.symbol
-                self.hasFoundToken = true
-                self.findContractButton.setTitle("Add Contract", for: .normal)
-                self.foundModel = model
-                self.findContractButton.backgroundColor = WalletColors.defaultDarkBlueButton.color()
-                self.tokenSymbolImageView.image = PredefinedTokens(with: model.name).image()
-                self.emptyView.isHidden = true
-                self.foundTokenView.isHidden = false
-            case .Error(_):
-                self.errorLabel.isHidden = false
-            }
-        })
-        return true
+        return 1
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if tokensList != nil {
+            return (tokensList?.count)!
+        } else {
+            return 0
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CreateTokenCell", for: indexPath) as! CreateTokenCell
+        let token = tokensList![indexPath.row]
+        cell.configure(with: token)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+}
+
+extension CreateTokenController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text == nil || searchBar.text == "" {
+            
+            messageLabel.isHidden = false
+            
+            view.endEditing(true)
+            
+            tokensList = nil
+            
+            tableView.alpha = 0
+            tableView.isUserInteractionEnabled = false
+            
+            tableView.reloadData()
+            
+        } else {
+            
+            messageLabel.isHidden = true
+            
+            tableView.alpha = 1
+            tableView.isUserInteractionEnabled = true
+            
+            let tokenAddress = searchBar.text
+            
+            tokensService.getTokensList(with: tokenAddress!, completion: { (result) in
+                switch result {
+                case .Success(let list):
+                    self.tokensList = list
+                    self.tableView.reloadData()
+                case .Error(_):
+                    self.tokensList = nil
+                }
+            })
+            
+            
+        }
+    }
 }

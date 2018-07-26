@@ -81,8 +81,9 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         updateTableView()
     }
     
@@ -239,6 +240,12 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         headerView.addSubview(headerLabel)
         
         return headerView
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
     
