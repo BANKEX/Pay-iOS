@@ -125,9 +125,18 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         if section == WalletSections.ethereum.rawValue {
             return 1
         } else if section == WalletSections.recentTransations.rawValue {
-            return transactionsToShow.count
+            if transactionsToShow.count == 0 {
+                return 1
+            } else {
+                return transactionsToShow.count
+            }
+            
         } else {
-            return (tokens.count)
+            if tokens.count == 0 {
+                return 1
+            } else {
+                return tokens.count
+            }
         }
         
     }
@@ -142,16 +151,29 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
             return cell
             
         } else if indexPath.section == WalletSections.recentTransations.rawValue {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionHistoryCell", for: indexPath) as! TransactionHistoryCell
-            cell.configure(withTransaction: transactionsToShow[indexPath.row])
-            return cell
+            if transactionsToShow.count == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySectionCell", for: indexPath) as! EmptySectionCell
+                cell.configure(with: "Send or receive funds to see all your transaction history")
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionHistoryCell", for: indexPath) as! TransactionHistoryCell
+                cell.configure(withTransaction: transactionsToShow[indexPath.row])
+                return cell
+            }
+            
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WalletTabTokenCell", for: indexPath) as! WalletTabTokenCell
-            let token = tokens[indexPath.row]
-            let isSelected = token.address == service.selectedERC20Token().address
-            cell.configure(with: token, isSelected: isSelected, isEtherCoin: false, isEditing: editEnabled)
-            return cell
+            if tokens.count == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySectionCell", for: indexPath) as! EmptySectionCell
+                cell.configure(with: "Add tokens to see them here")
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "WalletTabTokenCell", for: indexPath) as! WalletTabTokenCell
+                let token = tokens[indexPath.row]
+                let isSelected = token.address == service.selectedERC20Token().address
+                cell.configure(with: token, isSelected: isSelected, isEtherCoin: false, isEditing: editEnabled)
+                return cell
+            }
         }
         
     }
@@ -160,9 +182,18 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         if indexPath.section == 0 {
             return 116
         } else if indexPath.section == 1 {
-            return 53
+            if transactionsToShow.count == 0 {
+                return 70
+            } else {
+                return 53
+            }
         } else {
-            return 127
+            if tokens.count == 0 {
+                return 70
+            } else {
+                return 127
+            }
+            
         }
     }
     

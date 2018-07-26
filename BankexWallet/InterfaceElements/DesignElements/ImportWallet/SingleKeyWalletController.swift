@@ -30,7 +30,10 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     //MARK: - Properties
     
     let privateKeyView = SingleKeyView()
+    
     let service = SingleKeyServiceImplementation()
+    let router = WalletCreationTypeRouterImplementation()
+    
     lazy var readerVC:QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes:[.qr],captureDevicePosition: .back)
@@ -38,7 +41,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         return QRCodeReaderViewController(builder: builder)
         builder.showSwitchCameraButton = false
     }()
-    let router = WalletCreationTypeRouterImplementation()
+    
     var state:State = .notAvailable {
         didSet {
             if state == .notAvailable {
@@ -107,10 +110,23 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
             if let _ = error {
                 self.showCreationAlert()
             }
-            self.router.exitFromTheScreen()
+            if UserDefaults.standard.string(forKey: "Passcode") == nil {
+                self.performSegue(withIdentifier: "goToPinFromImportSingleKey", sender: self)
+            } else {
+                self.performSegue(withIdentifier: "showProcessFromImportSecretKey", sender: self)
+            }
         }
+        
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? PasscodeLockController {
+            destinationViewController.newWallet = false
+        }
+        if let vc = segue.destination as? SendingInProcessViewController {
+            vc.fromEnterScreen = true
+        }
+    }
     
     
 }

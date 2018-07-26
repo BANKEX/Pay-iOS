@@ -115,8 +115,9 @@ FavoriteSelectionDelegate {
     
     var transactionsToShow = [ETHTransactionModel]()
     var transactionInitialDiff = 0
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         configureNavBar()
         navigationController?.navigationBar.isHidden = false
         navigationController?.isNavigationBarHidden = false
@@ -127,10 +128,6 @@ FavoriteSelectionDelegate {
             "FavouritesTitleCell"]
         putTransactionsInfoIntoItemsArray()
         tableView.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.topItem?.prompt = "   "
     }
