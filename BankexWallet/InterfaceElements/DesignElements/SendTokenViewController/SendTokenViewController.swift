@@ -58,8 +58,14 @@ Retriable {
     
     @IBOutlet weak var interDataAndBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var additionalDataSeparator: UIView!
+    @IBOutlet weak var tokenImageView: UIImageView!
     
     var button: UIButton!
+    lazy var blackBackgroundView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        view.backgroundColor = UIColor(red: 0.02, green: 0.02, blue: 0.06, alpha: 0.4)
+        return view
+    }()
     
     // MARK: Services
     var sendEthService: SendEthService!
@@ -76,12 +82,11 @@ Retriable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.topItem?.title = "Home"
         nextButton.isEnabled = false
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         
         addTokensButton()
-        //addBackButton()
+        addBackButton()
         
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
             self.updateTopLayout()
@@ -100,6 +105,7 @@ Retriable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //blackBackgroundView.isHidden = true
         enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
         navigationItem.title = "Send"
         configureWalletInfo()
@@ -124,13 +130,14 @@ Retriable {
     
     func addTokensButton() {
         button = UIButton(type: .system)
-        button.setImage(UIImage(named: "Arrow Down"), for: .normal)
-        button.setTitle("  ETH", for: .normal)
+//        button.setImage(UIImage(named: "Arrow Down"), for: .normal)
+//        button.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+        button.setTitle("ETH", for: .normal)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(showTokensButtonTapped), for: .touchUpInside)
     }
-    
+
     func addBackButton() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
@@ -145,9 +152,21 @@ Retriable {
         button.layer.borderColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
         button.layer.borderWidth = 2
     }
-    //TODO: - Create this function
+    
+    //MARK: - Popover
     @objc func showTokensButtonTapped() {
-        
+        guard let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "TokensListController") as? TokensListForPopoverViewController else { return }
+        popoverContent.tokens = tokensService.availableTokensList() ?? []
+        popoverContent.delegate = self
+        popoverContent.preferredContentSize = CGSize(width: 100, height: 150)
+        let nav = UINavigationController(rootViewController: popoverContent)
+        nav.modalPresentationStyle = .popover
+        guard let popover = nav.popoverPresentationController else { return }
+        popover.delegate = self
+        popover.barButtonItem = navigationItem.rightBarButtonItem
+        popover.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        self.present(nav, animated: true, completion: nil)
+
     }
     
     @objc func backButtonTapped() {
@@ -396,6 +415,7 @@ Retriable {
         guard let selectedAddress = keysService.selectedAddress() else {
             return
         }
+        tokenImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in
             switch result {
             case .Success(let response):
@@ -477,5 +497,20 @@ Retriable {
     // MARK: Retriable
     func retryExisitngTransaction() {
         nextButtonTapped(self)
+    }
+}
+
+extension SendTokenViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+}
+
+extension SendTokenViewController: ChooseTokenDelegate {
+    func didSelectToken(name: String) {
+        guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
+        tokensService.updateSelectedToken(to: token.address)
+        updateTopLayout()
     }
 }

@@ -32,6 +32,7 @@ class ChooseFeeViewController: UIViewController {
     var destinationAddress: String!
     var transaction: TransactionIntermediate!
     
+    @IBOutlet weak var tokenImageView: UIImageView!
     //MARK: - Services
     var sendEthService: SendEthService!
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
@@ -43,6 +44,7 @@ class ChooseFeeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
+        navigationItem.title = "Send"
         addObservers()
         configureFee()
         addBackButton()
@@ -111,6 +113,7 @@ class ChooseFeeViewController: UIViewController {
         }
         walletNameLabel.text = keysService.selectedWallet()?.name
         walletAddressLabel.text = selectedAddress
+        tokenImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in
             switch result {
             case .Success(let response):
