@@ -77,8 +77,10 @@ public class TouchManager:NSObject {
                 if success {
                     successBlock()
                 }else {
-                    let typeError = LocAError.initError(error as! LAError)
-                    failBlock(typeError)
+                    DispatchQueue.main.async {
+                        let typeError = LocAError.initError(error as! LAError)
+                        failBlock(typeError)
+                    }
                 }
             }
         }

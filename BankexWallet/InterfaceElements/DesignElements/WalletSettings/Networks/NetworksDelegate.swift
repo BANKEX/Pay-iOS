@@ -13,7 +13,9 @@ extension NetworksViewController:UITableViewDelegate {
         if indexPath.section == 1 {
             let new = listNetworks[indexPath.row]
             networkService.updatePreferredNetwork(customNetwork: new)
-            delegate?.didTapped(with: new)
+            DispatchQueue.main.async {
+                self.delegate?.didTapped(with: new)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
