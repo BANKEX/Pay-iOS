@@ -44,7 +44,7 @@ class FavouritesListWithCollectionCell: UITableViewCell,
             selectionDelegate?.didSelectAddNewFavorite()
         }
         else if let selected = allFavorites?[indexPath.row - 1] {
-            selectionDelegate?.didSelectFavorite(with: selected.name, address: selected.address)
+            selectionDelegate?.didSelectFavorite(with: selected.firstName, address: selected.address)
         }
     }
     
