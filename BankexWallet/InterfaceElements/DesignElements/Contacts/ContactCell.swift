@@ -20,8 +20,7 @@ class ContactCell: UITableViewCell {
     
     var contact:FavoriteModel! {
         didSet {
-            print(prepare())
-            nameContactLabel.text = prepare()
+            nameContactLabel.attributedText = prepare()
         }
     }
 
@@ -30,12 +29,12 @@ class ContactCell: UITableViewCell {
         
     }
     
-    func prepare() -> String {
-        let attrDict = [NSAttributedStringKey.font:UIFont.boldSystemFont(ofSize: 17.0)]
-        var string = contact.firstName
-        let lName = NSAttributedString(string: contact.lastname, attributes: attrDict)
-        string += " "
-        string += lName.string
+    func prepare() -> NSMutableAttributedString {
+        var string:NSMutableAttributedString = NSMutableAttributedString(string: contact.firstName)
+        string.append(NSMutableAttributedString(string: " "))
+        let attr = [NSAttributedStringKey.font:UIFont.boldSystemFont(ofSize: 17.0)]
+        let secondItem = NSMutableAttributedString(string: contact.lastname, attributes: attr)
+        string.append(secondItem)
         return string
     }
 

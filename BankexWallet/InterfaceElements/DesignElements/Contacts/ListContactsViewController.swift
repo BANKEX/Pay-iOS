@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ListContactsViewController: UIViewController {
+class ListContactsViewController: UIViewController,UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        //TODO
+    }
+    
     
     
     let service = RecipientsAddressesServiceImplementation()
@@ -30,6 +34,7 @@ class ListContactsViewController: UIViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView(frame: .zero)
         setupNavbar()
+        setupSearchVC()
         listContacts = service.getAllStoredAddresses()
     }
     
@@ -47,6 +52,17 @@ class ListContactsViewController: UIViewController {
         }
     }
     
+    func setupSearchVC() {
+        let searchViewController = UISearchController(searchResultsController: nil)
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchViewController
+            searchViewController.obscuresBackgroundDuringPresentation = false
+            searchViewController.dimsBackgroundDuringPresentation = false
+            searchViewController.searchResultsUpdater = self
+            definesPresentationContext = true
+        }
+    }
+    
     func setupNavbar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.title = "Contacts"
@@ -58,6 +74,7 @@ class ListContactsViewController: UIViewController {
         super.viewWillAppear(animated)
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController?.navigationItem.largeTitleDisplayMode = .never
         }
     }
     
@@ -74,7 +91,6 @@ class ListContactsViewController: UIViewController {
     }
     
 
-    
 
 }
 
