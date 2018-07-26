@@ -150,7 +150,9 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
 //         TODO: Select only transacions with selected token?
 //         TODO: Or show all of them??
 //         Make a setting
-        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().sorted(with: "date", ascending: false))
+        guard let address = self.keysService.selectedAddress() else { return [] }
+        
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "from == %@ || to == %@", address, address)).sorted(with: "date", ascending: false))
         return transactions.map({ (transaction) -> ETHTransactionModel in
             let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :
                 ERC20TokenModel(token: transaction.token!)

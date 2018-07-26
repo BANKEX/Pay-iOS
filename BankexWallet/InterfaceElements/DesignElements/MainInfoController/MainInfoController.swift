@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BigInt
 
 enum PredefinedTokens {
     case Bankex
@@ -145,7 +146,6 @@ FavoriteSelectionDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        navigationController?.isNavigationBarHidden = true
         if let controller = segue.destination as? AddressQRCodeController {
             let keyService: GlobalWalletsService = SingleKeyServiceImplementation()
             controller.addressToGenerateQR = keyService.selectedAddress()
@@ -199,24 +199,26 @@ FavoriteSelectionDelegate {
     }
     
     
+    
     func configureNavBar() {
+        navigationController?.navigationBar.topItem?.title = nil
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.shadowImage = nil
-        let nameLabel = UILabel()
         
+        let nameLabel = UILabel()
         nameLabel.text = "Home"
         nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
-        
-        
-        //navigationController?.navigationBar.topItem?.title = "Home"
-        if #available(iOS 11.0, *) {
-            //navigationController?.navigationBar.prefersLargeTitles = true
+        ethLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 200, height: 90))
+        getBlockNumber { (number) in
+            self.configureLabel(withNumber: number)
         }
         
-        
-        ethLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 200, height: 90))
-        
+        navigationController?.navigationBar.topItem?.setRightBarButtonItems(
+            [UIBarButtonItem(customView: ethLabel)], animated: true)
+    }
+    
+    func createStringWithBlockNumber(blockNumber: String) -> NSAttributedString? {
         let fullString = NSMutableAttributedString(string: "")
         let attachment = NSTextAttachment()
         
@@ -226,14 +228,47 @@ FavoriteSelectionDelegate {
         let circleImageString = NSAttributedString(attachment: attachment)
         fullString.append(circleImageString)
         fullString.append(NSAttributedString(string: " Ethereum\n"))
-        fullString.append(NSAttributedString(string: "54 234 432"))
+        fullString.append(NSAttributedString(string: String(blockNumber)))
+        return fullString
+    }
+    
+    func getBlockNumber(completion: @escaping (String) -> Void) {
+        DispatchQueue.global().async {
+            let web3 = WalletWeb3Factory.web3()
+            let res = web3.eth.getBlockNumber()
+            switch res {
+            case .failure(let error):
+                print(error)
+                DispatchQueue.main.async {
+                    completion("-")
+                }
+            case .success(let number):
+                DispatchQueue.main.async {
+                    completion(number.description)
+                }
+            }
+        }
+    }
+    
+    func configureLabel(withNumber number: String) {
         
-        ethLabel.attributedText = fullString
-        ethLabel.numberOfLines = 2
-        ethLabel.textAlignment = .right
-        ethLabel.font = UIFont.systemFont(ofSize: 12)
-        
-        navigationController?.navigationBar.topItem?.setRightBarButtonItems([UIBarButtonItem(customView: ethLabel)], animated: true)
+        self.ethLabel.attributedText = self.createStringWithBlockNumber(blockNumber: formatNumber(number: number))
+        self.ethLabel.numberOfLines = 2
+        self.ethLabel.textAlignment = .right
+        self.ethLabel.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    func formatNumber(number: String) -> String {
+        var formattedNumber = ""
+        var numberOfSpaces = 0
+        for el in number.reversed() {
+            formattedNumber += String(el)
+            if (formattedNumber.count - numberOfSpaces) % 3 == 0 {
+                formattedNumber += " "
+                numberOfSpaces += 1
+            }
+        }
+        return String(formattedNumber.reversed())
     }
     
     func configureRefreshControl() {
@@ -245,15 +280,19 @@ FavoriteSelectionDelegate {
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //TODO: - Update the data here
-        itemsArray = [
-            "CurrentWalletInfoCell",
-            "TransactionHistoryCell",//]
-            "FavouritesTitleCell"]
-        putTransactionsInfoIntoItemsArray()
-        tableView.reloadData()
-        if #available(iOS 10.0, *) {
-            self.tableView.refreshControl?.endRefreshing()
+        getBlockNumber { (number) in
+            self.configureLabel(withNumber: number)
+            self.itemsArray = [
+                "CurrentWalletInfoCell",
+                "TransactionHistoryCell",//]
+                "FavouritesTitleCell"]
+            self.putTransactionsInfoIntoItemsArray()
+            self.tableView.reloadData()
+            if #available(iOS 10.0, *) {
+                self.tableView.refreshControl?.endRefreshing()
+            }
         }
+        
     }
     
     // MARK: - Table view data source
