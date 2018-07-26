@@ -9,6 +9,7 @@
 import UIKit
 
 class RoundedButton: UIButton {
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.cornerRadius = bounds.height / 2
