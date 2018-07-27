@@ -8,6 +8,7 @@
 
 import UIKit
 import web3swift
+import BigInt
 
 class ConfirmViewController: UITableViewController {
     
@@ -31,9 +32,7 @@ class ConfirmViewController: UITableViewController {
     var gasPrice:String!
     var gasLimit:String!
     var transaction:TransactionIntermediate!
-    var fee:Double {
-        return formattedFee()
-    }
+    lazy var fee: String? = self.formattedFee()
     var amount:String!
     var name: String!
     
@@ -76,7 +75,7 @@ class ConfirmViewController: UITableViewController {
         toLabel.text = transaction.transaction.to.address
         amountLabel.text = amount
         fromLabel.text = fromAddr
-        feeLabel.text = String(fee)
+        feeLabel.text = fee
         walletNameLabel.text = name
     }
     
@@ -93,23 +92,44 @@ class ConfirmViewController: UITableViewController {
         return addr
     }
     
-    func formattedFee() -> Double {
-        guard let gasPrice = Double(self.gasPrice) else { return 0 }
-        guard let gasLimit = Double(self.gasLimit) else { return 0 }
-        return gasPrice * gasLimit
+    func formattedFee() -> String? {
+        let gasPrice = BigUInt(Double(self.gasPrice)! * pow(10, 9))
+        guard let gasLimit = BigUInt(self.gasLimit) else { return "" }
+        return Web3.Utils.formatToEthereumUnits((gasPrice * gasLimit), toUnits: .eth, decimals: 10)
     }
-    //Just try to send the transaction. (Just a test)
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let successVC = segue.destination as? SendingSuccessViewController, let sentTrans = sender as? TransactionSendingResult {
+            
+            successVC.transactionAmount = Web3.Utils.formatToEthereumUnits(sentTrans.transaction.value, toUnits: .eth)
+            successVC.addressToSend = sentTrans.transaction.to.address
+        } else if let errorVC = segue.destination as? SendingErrorViewController {
+            guard let error = sender as? String else { return }
+            errorVC.error = error
+        }
+    }
+    
+    
     @IBAction func sendTapped() {
-        var sendEthService:SendEthService = tokenService.selectedERC20Token().address.isEmpty ? SendEthServiceImplementation() : ERC20TokenContractMethodsServiceImplementation()
+        let sendEthService: SendEthService = tokenService.selectedERC20Token().address.isEmpty ? SendEthServiceImplementation() : ERC20TokenContractMethodsServiceImplementation()
         let token  = tokenService.selectedERC20Token()
         let model = ETHTransactionModel(from: fromAddr, to: toLabel.text ?? "", amount: amount, date: Date(), token: token, key:keyService.selectedKey()!)
         self.performSegue(withIdentifier: "waitSegue", sender: nil)
         sendEthService.send(transactionModel: model, transaction: transaction) { (result) in
             switch result {
-            case .Success(let result):
-                self.performSegue(withIdentifier: "successSegue", sender: nil)
+            case .Success(let res):
+                self.performSegue(withIdentifier: "successSegue", sender: res)
             case .Error(let error):
-                self.performSegue(withIdentifier: "showError", sender: nil)
+                var valueToSend = ""
+                if let error = error as? Web3Error {
+                    switch error {
+                    case .nodeError(let text):
+                        valueToSend = text
+                    default:
+                        break
+                    }
+                }
+                self.performSegue(withIdentifier: "showError", sender: valueToSend)
             }
         }
     }

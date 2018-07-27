@@ -53,7 +53,6 @@ Retriable {
     
     @IBOutlet weak var tokenSymbolLabel: UILabel!
     
-    @IBOutlet weak var feeLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     
     @IBOutlet weak var interDataAndBottomConstraint: NSLayoutConstraint!
@@ -61,11 +60,7 @@ Retriable {
     @IBOutlet weak var tokenImageView: UIImageView!
     
     var button: UIButton!
-    lazy var blackBackgroundView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        view.backgroundColor = UIColor(red: 0.02, green: 0.02, blue: 0.06, alpha: 0.4)
-        return view
-    }()
+    
     
     // MARK: Services
     var sendEthService: SendEthService!
@@ -191,10 +186,14 @@ Retriable {
     
     var sendingProcess: SendingResultInformation?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let vc = segue.destination as? ChooseFeeViewController {
             guard let senderDict = sender as? [String: Any] else {return}
             vc.configure(senderDict)
             vc.sendEthService = self.sendEthService
+        } else if let errorVC = segue.destination as? SendingErrorViewController {
+            guard let error = sender as? String else { return }
+            errorVC.error = error
         }
         
         guard segue.identifier == "showSending",
@@ -245,7 +244,16 @@ Retriable {
                 let info = ["amount": amount, "destinationAddress": destinationAddress, "transaction": transaction] as [String : Any]
                 self.performSegue(withIdentifier: "ShowChooseFee", sender: info)
             case .Error(let error):
-                self.performSegue(withIdentifier: "showError", sender: self)
+                var textToSend = ""
+                if let error = error as? SendEthErrors {
+                    switch error {
+                    case .invalidDestinationAddress:
+                        textToSend = "invalidAddress"
+                    default:
+                        break
+                    }
+                }
+                self.performSegue(withIdentifier: "showError", sender: textToSend)
                 print("\(error)")
             }
         }

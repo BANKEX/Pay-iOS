@@ -62,7 +62,8 @@ class ChooseFeeViewController: UIViewController {
         guard let gasLimit = gasLimitTextField.text else { return }
         guard let name = walletNameLabel.text else { return }
         transaction.options?.gasLimit = BigUInt(gasLimit)
-        transaction.options?.gasPrice = BigUInt(gasPrice)
+        let gp = BigUInt(Double(gasPrice)! * pow(10, 9))
+        transaction.options?.gasPrice = BigUInt(gp)
         let dict:[String:Any] = ["gasPrice":gasPrice,"gasLimit":gasLimit,"transaction":transaction,"amount":amount, "name": name]
         confirmVC.configure(dict)
         guard segue.identifier == "showSending",

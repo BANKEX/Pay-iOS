@@ -13,13 +13,18 @@ class TokensListForPopoverViewController: UIViewController, UITableViewDelegate,
     var tokens = [ERC20TokenModel]()
     weak var delegate: ChooseTokenDelegate?
     
+    lazy var blackBackgroundView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        view.backgroundColor = UIColor(red: 0.02, green: 0.02, blue: 0.06, alpha: 0.4)
+        return view
+    }()
+    
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         navigationController?.isNavigationBarHidden = true
-        
     }
     
     
