@@ -16,32 +16,33 @@ class SendingErrorViewController: UIViewController {
     
     var error: String?
     
+    @IBOutlet weak var retryButton: UIButton!
+    @IBOutlet weak var errorMessageLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let error = error {
-            switch error {
-            case "invalidAddress":
-                print("address")
-            case "insufficient funds for gas * price + value":
-                print("insufficient funds for gas * price + value")
-                
-            default:
-                break
-            }
-        }
-        
         addBackButton()
     }
     
     @IBAction func retryTransaction(_ sender: Any) {
-        let count = navigationController?.viewControllers.count ?? 3
-        if  count >= 3, let previousController = navigationController?.viewControllers[count - 3] as? Retriable
-        {
-            previousController.retryExisitngTransaction()
-            navigationController?.popToViewController(previousController as! UIViewController, animated: false)
-
-        } else {
-            navigationController?.popToRootViewController(animated: false)
+        self.performSegue(withIdentifier:"unwindToSend", sender: error)
+//        let count = navigationController?.viewControllers.count ?? 3
+//
+//        if  count >= 3, let previousController = navigationController?.viewControllers[count - 3] as? SendTokenViewController
+//        {
+//            //previousController.retryExisitngTransaction()
+//            navigationController?.popToViewController(previousController as UIViewController, animated: false)
+//
+//        } else {
+//            navigationController?.popToRootViewController(animated: false)
+//        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? SendTokenViewController {
+            if error == nil {
+                vc.retryExisitngTransaction()
+            }
+            vc.errorMessage = error
         }
     }
     

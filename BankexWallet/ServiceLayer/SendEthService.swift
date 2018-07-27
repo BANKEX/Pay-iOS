@@ -51,11 +51,11 @@ protocol SendEthService {
     
     func send(transactionModel: ETHTransactionModel,
               transaction: TransactionIntermediate,
-              with password: String,
+              with password: String,options: Web3Options?,
               completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
     
     func send(transactionModel: ETHTransactionModel,
-              transaction: TransactionIntermediate, completion:
+              transaction: TransactionIntermediate, options: Web3Options?, completion:
         @escaping (SendEthResult<TransactionSendingResult>) -> Void)
     
     func getAllTransactions() -> [ETHTransactionModel]?
@@ -65,11 +65,11 @@ protocol SendEthService {
 
 extension SendEthService {
     func send(transactionModel: ETHTransactionModel,
-              transaction: TransactionIntermediate,
+              transaction: TransactionIntermediate, options: Web3Options? = nil,
               completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)  {
         send(transactionModel: transactionModel,
              transaction: transaction,
-             with: "BANKEXFOUNDATION",
+             with: "BANKEXFOUNDATION", options: options,
              completion: completion)
     }
     
@@ -84,9 +84,9 @@ extension SendEthService {
 // TODO: check that correct address will be used
 class SendEthServiceImplementation: SendEthService {
     
-    func send(transactionModel: ETHTransactionModel, transaction: TransactionIntermediate, with password: String, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
+    func send(transactionModel: ETHTransactionModel, transaction: TransactionIntermediate, with password: String, options: Web3Options? = nil, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let result = transaction.send(password: password, options: nil)
+            let result = transaction.send(password: password, options: options)
             if let error = result.error {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(error))

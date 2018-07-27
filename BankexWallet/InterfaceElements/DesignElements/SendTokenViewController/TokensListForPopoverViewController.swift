@@ -40,12 +40,13 @@ class TokensListForPopoverViewController: UIViewController, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         delegate?.didSelectToken(name: tokens[indexPath.row].symbol.uppercased())
     }
 }
 
-//tokenCell
 
+//tokenCell
 class TokenCell: UITableViewCell {
     @IBOutlet weak var tokenNameLabel: UILabel!
     

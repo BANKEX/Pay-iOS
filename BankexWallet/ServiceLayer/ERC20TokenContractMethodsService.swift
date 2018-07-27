@@ -14,7 +14,7 @@ import SugarRecord
 class ERC20TokenContractMethodsServiceImplementation: SendEthService {
     func send(transactionModel: ETHTransactionModel,
               transaction: TransactionIntermediate,
-              with password: String,
+              with password: String,options: Web3Options? = nil,
               completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let result = transaction.send(password: password,

@@ -19,48 +19,36 @@ protocol FavoriteInputController: class {
 
 
 class SendTokenViewController: UIViewController,
-    UITextFieldDelegate,
     QRCodeReaderViewControllerDelegate,
     FavoriteInputController,
 Retriable {
     
     //MARK: Outlets
     @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var additionalDataView: UIView!
     @IBOutlet weak var dataTopEmptyView: UIView!
-    
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet var favNameContainer: UIView!
-    
     @IBOutlet weak var selectedFavNameLabel: UILabel!
-    
     @IBOutlet weak var enterAddressTextfield: UITextField!
-    
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var currencySymbolLabel: UILabel!
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    
     @IBOutlet weak var memoTextfield: UITextField!
     @IBOutlet weak var amountTextfield: UITextField!
     @IBOutlet var textFields: [UITextField]!
-    
     @IBOutlet var separators: [UIView]!
     @IBOutlet var additionalInputContainerView: UIView!
-    
     @IBOutlet weak var insertFromClipboardButton: UIButton!
-    
     @IBOutlet weak var tokenSymbolLabel: UILabel!
-    
     @IBOutlet weak var nextButton: UIButton!
-    
     @IBOutlet weak var interDataAndBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var additionalDataSeparator: UIView!
     @IBOutlet weak var tokenImageView: UIImageView!
     
     var button: UIButton!
-    
+    var errorMessage: String?
     
     // MARK: Services
     var sendEthService: SendEthService!
@@ -79,31 +67,32 @@ Retriable {
         super.viewDidLoad()
         nextButton.isEnabled = false
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
-        
         addTokensButton()
         addBackButton()
-        
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
-            self.updateTopLayout()
-            
-        }
+        setupNotifications()
         updateTopLayout()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardNotification(notification:)),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardDidHide(notification:)),
-                                               name: NSNotification.Name.UIKeyboardWillHide,
-                                               object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //blackBackgroundView.isHidden = true
+        handleErrorMessage()
         enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
         navigationItem.title = "Send"
         configureWalletInfo()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
+    
+    //MARK: - Helpers
+    func configureWalletInfo() {
+        let keyService = SingleKeyServiceImplementation()
+        addressLabel.text = keyService.selectedWallet()?.address
+        walletNameLabel.text = keyService.selectedWallet()?.name
+        
     }
     
     func updateTopLayout() {
@@ -116,19 +105,15 @@ Retriable {
         updateBalance()
     }
     
-    func configureWalletInfo() {
-        let keyService = SingleKeyServiceImplementation()
-        addressLabel.text = keyService.selectedWallet()?.address
-        walletNameLabel.text = keyService.selectedWallet()?.name
-        
-    }
-    
     func addTokensButton() {
-        button = UIButton(type: .system)
-//        button.setImage(UIImage(named: "Arrow Down"), for: .normal)
-//        button.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+        button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "Arrow Down"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0)
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
         button.setTitle("ETH", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(showTokensButtonTapped), for: .touchUpInside)
     }
@@ -138,14 +123,44 @@ Retriable {
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
         button.setTitle("  Home", for: .normal)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
-    private func configureButton(_ button: UIButton) {
-        button.layer.cornerRadius = 14
-        button.layer.borderColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
-        button.layer.borderWidth = 2
+
+    
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
+            self.updateTopLayout()
+            
+        }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardNotification(notification:)),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardDidHide(notification:)),
+                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+    }
+    
+    func handleErrorMessage() {
+        if let message = errorMessage {
+            errorMessage = nil
+            switch message {
+            case "invalidAddress":
+                enterAddressTextfield.textColor = WalletColors.errorRed.color()
+                
+            case "insufficient funds for gas * price + value":
+                print("well")
+                amountTextfield.textColor = WalletColors.errorRed.color()
+                
+            default:
+                break
+            }
+        }
     }
     
     //MARK: - Popover
@@ -204,32 +219,6 @@ Retriable {
         
     }
     
-    // MARK: Actions
-    //    @IBAction func showTokensList(_ sender: UIButton) {
-    //        guard (CustomERC20TokensServiceImplementation().availableTokensList()?.count ?? 1) > 1 else {
-    //            return
-    //        }
-    //        dimmingView.alpha = 0
-    //        containerView.alpha = 0
-    //        dimmingView.isHidden = false
-    //        containerView.isHidden = false
-    //        UIView.animate(withDuration: 0.3) {
-    //            self.dimmingView.alpha = 1
-    //            self.containerView.alpha = 1
-    //        }
-    //    }
-    //
-    //
-    //    @IBAction func hideTokensList(_ sender: Any) {
-    //        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
-    //            self.dimmingView.alpha = 0
-    //            self.containerView.alpha = 0
-    //        }) { (_) in
-    //            self.dimmingView.isHidden = true
-    //            self.containerView.isHidden = true
-    //        }
-    //    }
-    
     @IBAction func nextButtonTapped(_ sender: Any) {
         guard let amount = amountTextfield.text,
             let destinationAddress = enterAddressTextfield.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
@@ -261,8 +250,6 @@ Retriable {
     
     @IBAction func scanQRTapped(_ sender: Any) {
         readerVC.delegate = self
-        
-        // Presents the readerVC as modal form sheet
         readerVC.modalPresentationStyle = .formSheet
         present(readerVC, animated: true, completion: nil)
     }
@@ -273,14 +260,12 @@ Retriable {
         switch networkName {
         case "rinkeby", "ropsten":
             let urlString = networkName == "rinkeby" ? "https://faucet.rinkeby.io" : "http://faucet.ropsten.be:3001/"
-            
             let alertController = UIAlertController(title: "Free Eth", message: "You will be reditected to the \(urlString), where you will receive a further instructions", preferredStyle: UIAlertControllerStyle.alert)
             let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
             let ok = UIAlertAction(title: "Continue", style: .default) { _ in
                 guard let url = URL(string: urlString) else { return }
                 UIApplication.shared.openURL(url)
             }
-            
             alertController.addAction(cancel)
             alertController.addAction(ok)
             self.present(alertController, animated: true, completion: nil)
@@ -306,71 +291,7 @@ Retriable {
         view.endEditing(false)
     }
     
-    // MARK: TextField Delegate
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.returnKeyType = nextButton.isEnabled ? UIReturnKeyType.done : .next
-        let index = textFields.index(of: textField) ?? 0
-        separators[index].backgroundColor = WalletColors.blueText.color()
-        textField.textColor = WalletColors.blueText.color()
-        return true
-    }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = (textField.text ?? "")  as NSString
-        let futureString = currentText.replacingCharacters(in: range, with: string) as String
-        nextButton.isEnabled = false
-        
-        switch textField {
-        case enterAddressTextfield:
-            if  !(amountTextfield.text?.isEmpty ?? true) &&
-                !futureString.isEmpty {
-                nextButton.isEnabled = (Float((amountTextfield.text ?? "")) != nil)
-            }
-        case amountTextfield:
-            if !(enterAddressTextfield.text?.isEmpty ?? true) &&
-                !futureString.isEmpty
-            {
-                nextButton.isEnabled =  (Float((futureString)) != nil)
-            }
-        default:
-            nextButton.isEnabled = false
-        }
-        
-        nextButton.backgroundColor = nextButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
-        textField.returnKeyType = nextButton.isEnabled ? UIReturnKeyType.done : .next
-        
-        return true
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.returnKeyType == .done && nextButton.isEnabled {
-            nextButtonTapped(self)
-        } else if textField.returnKeyType == .next {
-            let index = textFields.index(of: textField) ?? 0
-            let nextIndex = (index == textFields.count - 1) ? 0 : index + 1
-            textFields[nextIndex].becomeFirstResponder()
-        } else {
-            view.endEditing(true)
-        }
-        return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        let index = textFields.index(of: textField) ?? 0
-        separators[index].backgroundColor = WalletColors.greySeparator.color()
-        textField.textColor = WalletColors.defaultText.color()
-        
-        
-        if textField == amountTextfield {
-            guard let _ = Float((amountTextfield.text ?? "")) else {
-                let amountIndex = textFields.index(of: amountTextfield) ?? 0
-                separators[amountIndex].backgroundColor = WalletColors.errorRed.color()
-                amountTextfield.textColor = WalletColors.errorRed.color()
-                return true
-            }
-        }
-        return true
-    }
     
     // MARK: QR Code scan
     lazy var readerVC: QRCodeReaderViewController = {
@@ -400,7 +321,7 @@ Retriable {
             }
         }
         else  {
-            if let address = EthereumAddress(value) {
+            if let _ = EthereumAddress(value) {
                 enterAddressTextfield.text = value
             }
         }
@@ -508,17 +429,87 @@ Retriable {
     }
 }
 
+//MARK: - Popover Delegate
 extension SendTokenViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
-    
 }
 
+//MARK: - Choose Token Delegate
 extension SendTokenViewController: ChooseTokenDelegate {
     func didSelectToken(name: String) {
         guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
         tokensService.updateSelectedToken(to: token.address)
         updateTopLayout()
+    }
+}
+
+// MARK: TextField Delegate
+extension SendTokenViewController: UITextFieldDelegate {
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.returnKeyType = nextButton.isEnabled ? UIReturnKeyType.done : .next
+        //let index = textFields.index(of: textField) ?? 0
+        //separators[index].backgroundColor = UIColor.black
+        textField.textColor = UIColor.black
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text ?? "")  as NSString
+        let futureString = currentText.replacingCharacters(in: range, with: string) as String
+        nextButton.isEnabled = false
+        
+        switch textField {
+        case enterAddressTextfield:
+            if  !(amountTextfield.text?.isEmpty ?? true) &&
+                !futureString.isEmpty {
+                nextButton.isEnabled = (Float((amountTextfield.text ?? "")) != nil)
+            }
+        case amountTextfield:
+            if !(enterAddressTextfield.text?.isEmpty ?? true) &&
+                !futureString.isEmpty
+            {
+                nextButton.isEnabled =  (Float((futureString)) != nil)
+            }
+        default:
+            nextButton.isEnabled = false
+        }
+        
+        nextButton.backgroundColor = nextButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
+        textField.returnKeyType = nextButton.isEnabled ? UIReturnKeyType.done : .next
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.returnKeyType == .done && nextButton.isEnabled {
+            nextButtonTapped(self)
+        } else if textField.returnKeyType == .next {
+            let index = textFields.index(of: textField) ?? 0
+            let nextIndex = (index == textFields.count - 1) ? 0 : index + 1
+            textFields[nextIndex].becomeFirstResponder()
+        } else {
+            view.endEditing(true)
+        }
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        //let index = textFields.index(of: textField) ?? 0
+        //separators[index].backgroundColor = WalletColors.greySeparator.color()
+        textField.textColor = WalletColors.defaultText.color()
+        
+        
+        if textField == amountTextfield {
+            guard let _ = Float((amountTextfield.text ?? "")) else {
+                //let amountIndex = textFields.index(of: amountTextfield) ?? 0
+                //separators[amountIndex].backgroundColor = WalletColors.errorRed.color()
+                amountTextfield.textColor = WalletColors.errorRed.color()
+                return true
+            }
+        }
+        return true
     }
 }
