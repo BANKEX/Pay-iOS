@@ -17,44 +17,54 @@ protocol SecurityViewControllerProtocol:class {
 
 class SecurityViewController: UITableViewController {
     
+    @IBOutlet weak var openSwitch:UISwitch!
+    @IBOutlet weak var sendSwitch:UISwitch!
+    @IBOutlet weak var multitaskSwitch:UISwitch!
+    
     weak var delegate:SecurityViewControllerProtocol?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Security"
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        [openSwitch,sendSwitch,multitaskSwitch].forEach { item in
+            item?.isEnabled = TouchManager.canAuth() ? true : false
+        }
+    }
+    
     
     
     @IBAction func switchTouchID(_ sender:UISwitch) {
-        if TouchManager.canAuth() {
+        if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                self.delegate?.switchTouchIDTapped(self, with: sender.isOn)
+                print("Success")
             }) { (error) in
-                print(error.getErrorMessage())
             }
         }
-        
+        delegate?.switchTouchIDTapped(self, with: sender.isOn)
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
-        if TouchManager.canAuth() {
+        if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                self.delegate?.switchTouchIDSendFunds(self,with: sender.isOn)
+                print("Success")
             }) { (error) in
-                print(error.getErrorMessage())
             }
         }
+        delegate?.switchTouchIDSendFunds(self, with: sender.isOn)
     }
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
-        if TouchManager.canAuth() {
+        if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                self.delegate?.switchTouchIDMultitask(self,with: sender.isOn)
+                print("Success")
             }) { (error) in
-                print(error.getErrorMessage())
             }
         }
+        delegate?.switchTouchIDMultitask(self, with: sender.isOn)
     }
     
     
@@ -79,5 +89,5 @@ class SecurityViewController: UITableViewController {
         return section == 0 ? 67.0 : 54.0
     }
     
-
+    
 }

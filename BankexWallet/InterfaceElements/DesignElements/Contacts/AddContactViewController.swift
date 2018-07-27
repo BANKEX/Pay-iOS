@@ -104,15 +104,15 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     @objc func done() {
         guard let firstName = firstNameTextField?.text,let lastName = lastNameTextField?.text,let address = addressTextField?.text else { return }
         guard let ethAddress = EthereumAddress(addressTextField?.text ?? "") else {
-            //Show error
+            showAlert(with: "Incorrect address", message: "Please enter valid address")
             return
         }
         service.store(address: address, with: firstName,lastName: lastName , isEditing: false) { (error) in
             if error?.localizedDescription == "Address already exists in the database" {
-                //Show alert
+                self.showAlert(with: "Same Address", message: "Address already exists in your contacts")
                 return
             } else if error?.localizedDescription == "Name already exists in the database" {
-                //Show alert
+                self.showAlert(with: "Same Name", message: "Name already exists in your contacts")
                 return
             } else if error != nil {
                 return
@@ -183,6 +183,12 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
             }
         }
         
+    }
+    
+    func showAlert(with title:String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
     // MARK: - Table view data source

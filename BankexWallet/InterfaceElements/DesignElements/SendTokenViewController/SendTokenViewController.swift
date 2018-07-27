@@ -14,23 +14,22 @@ import web3swift
 protocol FavoriteInputController: class {
     var selectedFavoriteName: String? {get set}
     var selectedFavoriteAddress: String? {get set}
-
+    
 }
 
-class SendTokenViewController: UIViewController,
-UITextFieldDelegate,
-QRCodeReaderViewControllerDelegate,
-FavoriteInputController,
-Retriable {
 
+class SendTokenViewController: UIViewController,
+    UITextFieldDelegate,
+    QRCodeReaderViewControllerDelegate,
+    FavoriteInputController,
+Retriable {
+    
     //MARK: Outlets
     @IBOutlet weak var scrollView: UIScrollView!
-
+    
     @IBOutlet weak var additionalDataView: UIView!
     @IBOutlet weak var dataTopEmptyView: UIView!
-    @IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var topTokenSymbolLabel: UILabel!
-    @IBOutlet weak var tokenIconImageView: UIImageView!
+    
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet var favNameContainer: UIView!
     
@@ -38,12 +37,16 @@ Retriable {
     
     @IBOutlet weak var enterAddressTextfield: UITextField!
     
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var currencySymbolLabel: UILabel!
+    @IBOutlet weak var walletNameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    
     @IBOutlet weak var memoTextfield: UITextField!
     @IBOutlet weak var amountTextfield: UITextField!
     @IBOutlet var textFields: [UITextField]!
     
     @IBOutlet var separators: [UIView]!
-    @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet var additionalInputContainerView: UIView!
     
     @IBOutlet weak var insertFromClipboardButton: UIButton!
@@ -55,33 +58,39 @@ Retriable {
     
     @IBOutlet weak var interDataAndBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var additionalDataSeparator: UIView!
+    @IBOutlet weak var tokenImageView: UIImageView!
+    
+    var button: UIButton!
+    lazy var blackBackgroundView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        view.backgroundColor = UIColor(red: 0.02, green: 0.02, blue: 0.06, alpha: 0.4)
+        return view
+    }()
     
     // MARK: Services
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
     var utilsService: UtilTransactionsService!
-
+    
     // MARK: Inputs
     var selectedFavoriteName: String?
     var selectedFavoriteAddress: String?
     
+    
     // MARK: Lifecycle
     @IBAction func back(segue:UIStoryboardSegue) { }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nextButton.isEnabled = false
-
-        favNameContainer.removeFromSuperview()
-        dataTopEmptyView.removeFromSuperview()
-        additionalDataView.removeFromSuperview()
-        additionalDataSeparator.removeFromSuperview()
-        nextButton.backgroundColor = WalletColors.disableButtonBackground.color()
-
+        nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
+        
+        addTokensButton()
+        addBackButton()
+        
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
             self.updateTopLayout()
-            self.hideTokensList(self)
-
+            
         }
         updateTopLayout()
         NotificationCenter.default.addObserver(self,
@@ -93,10 +102,13 @@ Retriable {
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //blackBackgroundView.isHidden = true
         enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
+        navigationItem.title = "Send"
+        configureWalletInfo()
     }
     
     func updateTopLayout() {
@@ -107,6 +119,58 @@ Retriable {
         utilsService = tokensService.selectedERC20Token().address.isEmpty ? UtilTransactionsServiceImplementation() :
             CustomTokenUtilsServiceImplementation()
         updateBalance()
+    }
+    
+    func configureWalletInfo() {
+        let keyService = SingleKeyServiceImplementation()
+        addressLabel.text = keyService.selectedWallet()?.address
+        walletNameLabel.text = keyService.selectedWallet()?.name
+        
+    }
+    
+    func addTokensButton() {
+        button = UIButton(type: .system)
+//        button.setImage(UIImage(named: "Arrow Down"), for: .normal)
+//        button.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+        button.setTitle("ETH", for: .normal)
+        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        button.addTarget(self, action: #selector(showTokensButtonTapped), for: .touchUpInside)
+    }
+
+    func addBackButton() {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "BackArrow"), for: .normal)
+        button.setTitle("  Home", for: .normal)
+        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+    
+    private func configureButton(_ button: UIButton) {
+        button.layer.cornerRadius = 14
+        button.layer.borderColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+        button.layer.borderWidth = 2
+    }
+    
+    //MARK: - Popover
+    @objc func showTokensButtonTapped() {
+        guard let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "TokensListController") as? TokensListForPopoverViewController else { return }
+        popoverContent.tokens = tokensService.availableTokensList() ?? []
+        popoverContent.delegate = self
+        popoverContent.preferredContentSize = CGSize(width: 100, height: 150)
+        let nav = UINavigationController(rootViewController: popoverContent)
+        nav.modalPresentationStyle = .popover
+        guard let popover = nav.popoverPresentationController else { return }
+        popover.delegate = self
+        popover.barButtonItem = navigationItem.rightBarButtonItem
+        popover.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        self.present(nav, animated: true, completion: nil)
+
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -127,6 +191,12 @@ Retriable {
     
     var sendingProcess: SendingResultInformation?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ChooseFeeViewController {
+            guard let senderDict = sender as? [String: Any] else {return}
+            vc.configure(senderDict)
+            vc.sendEthService = self.sendEthService
+        }
+        
         guard segue.identifier == "showSending",
             let confirmation = segue.destination as? SendingResultInformation else {
                 return
@@ -134,45 +204,46 @@ Retriable {
         sendingProcess =  confirmation
         
     }
-
-    // MARK: Actions
-    @IBOutlet weak var dimmingView: UIView!
-    @IBOutlet weak var containerView: UIView!
-    @IBAction func showTokensList(_ sender: UIButton) {
-        guard (CustomERC20TokensServiceImplementation().availableTokensList()?.count ?? 1) > 1 else {
-            return
-        }
-        dimmingView.alpha = 0
-        containerView.alpha = 0
-        dimmingView.isHidden = false
-        containerView.isHidden = false
-        UIView.animate(withDuration: 0.3) {
-            self.dimmingView.alpha = 1
-            self.containerView.alpha = 1
-        }
-    }
     
-
-    @IBAction func hideTokensList(_ sender: Any) {
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
-            self.dimmingView.alpha = 0
-            self.containerView.alpha = 0
-        }) { (_) in
-            self.dimmingView.isHidden = true
-            self.containerView.isHidden = true
-        }
-    }
+    // MARK: Actions
+    //    @IBAction func showTokensList(_ sender: UIButton) {
+    //        guard (CustomERC20TokensServiceImplementation().availableTokensList()?.count ?? 1) > 1 else {
+    //            return
+    //        }
+    //        dimmingView.alpha = 0
+    //        containerView.alpha = 0
+    //        dimmingView.isHidden = false
+    //        containerView.isHidden = false
+    //        UIView.animate(withDuration: 0.3) {
+    //            self.dimmingView.alpha = 1
+    //            self.containerView.alpha = 1
+    //        }
+    //    }
+    //
+    //
+    //    @IBAction func hideTokensList(_ sender: Any) {
+    //        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+    //            self.dimmingView.alpha = 0
+    //            self.containerView.alpha = 0
+    //        }) { (_) in
+    //            self.dimmingView.isHidden = true
+    //            self.containerView.isHidden = true
+    //        }
+    //    }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         guard let amount = amountTextfield.text,
             let destinationAddress = enterAddressTextfield.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
                 return
         }
+        
         performSegue(withIdentifier: "showSending", sender: nil)
         sendEthService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amount) { (result) in
             switch result {
             case .Success(let transaction):
-                self.showConfirmation(forSending: amount, destinationAddress: destinationAddress, transaction: transaction)
+                //self.showConfirmation(forSending: amount, destinationAddress: destinationAddress, transaction: transaction)
+                let info = ["amount": amount, "destinationAddress": destinationAddress, "transaction": transaction] as [String : Any]
+                self.performSegue(withIdentifier: "ShowChooseFee", sender: info)
             case .Error(let error):
                 self.performSegue(withIdentifier: "showError", sender: self)
                 print("\(error)")
@@ -180,26 +251,40 @@ Retriable {
         }
     }
     
-    
-    @IBAction func switchPasswordVisibility(_ sender: UIButton) {
-        passwordTextfield.isSecureTextEntry = !passwordTextfield.isSecureTextEntry
-        sender.setImage(passwordTextfield.isSecureTextEntry ? #imageLiteral(resourceName: "Eye open") : #imageLiteral(resourceName: "Eye closed"), for: .normal)
-    }
-    
-    @IBAction func clearAddressTapped(_ sender: Any) {
-        enterAddressTextfield.text = ""
-    }
-    
     @IBAction func scanQRTapped(_ sender: Any) {
         readerVC.delegate = self
-        
-        // Or by using the closure pattern
-        readerVC.completionBlock = { (result: QRCodeReaderResult?) in        }
         
         // Presents the readerVC as modal form sheet
         readerVC.modalPresentationStyle = .formSheet
         present(readerVC, animated: true, completion: nil)
     }
+    
+    @IBAction func getFreeEthButtonTapped(_ sender: Any) {
+        let network = tokensService.networksService.preferredNetwork()
+        guard let networkName = network.networkName else { return }
+        switch networkName {
+        case "rinkeby", "ropsten":
+            let urlString = networkName == "rinkeby" ? "https://faucet.rinkeby.io" : "http://faucet.ropsten.be:3001/"
+            
+            let alertController = UIAlertController(title: "Free Eth", message: "You will be reditected to the \(urlString), where you will receive a further instructions", preferredStyle: UIAlertControllerStyle.alert)
+            let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            let ok = UIAlertAction(title: "Continue", style: .default) { _ in
+                guard let url = URL(string: urlString) else { return }
+                UIApplication.shared.openURL(url)
+            }
+            
+            alertController.addAction(cancel)
+            alertController.addAction(ok)
+            self.present(alertController, animated: true, completion: nil)
+        default:
+            let alertController = UIAlertController(title: "You can not do it", message: "You are on the wrong network now. Please change the network to rinkeby or ropsten to get test Ether.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(ok)
+            present(alertController, animated: true, completion: nil)
+            
+        }
+    }
+    
     
     @IBAction func addFromFavouritesTapped(_ sender: Any) {
         // TODO: Open favs list
@@ -209,9 +294,6 @@ Retriable {
         enterAddressTextfield.text = UIPasteboard.general.string
     }
     
-    @IBAction func deleteSelectedFavTapped(_ sender: Any) {
-    }
-
     @IBAction func emptySpaceTapped(_ sender: Any) {
         view.endEditing(false)
     }
@@ -224,28 +306,20 @@ Retriable {
         textField.textColor = WalletColors.blueText.color()
         return true
     }
-
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text ?? "")  as NSString
         let futureString = currentText.replacingCharacters(in: range, with: string) as String
         nextButton.isEnabled = false
-
+        
         switch textField {
         case enterAddressTextfield:
             if  !(amountTextfield.text?.isEmpty ?? true) &&
-                !(passwordTextfield.text?.isEmpty ?? true) &&
                 !futureString.isEmpty {
                 nextButton.isEnabled = (Float((amountTextfield.text ?? "")) != nil)
             }
-        case passwordTextfield:
-            if !(amountTextfield.text?.isEmpty ?? true) &&
-                !(enterAddressTextfield.text?.isEmpty ?? true) &&
-                !futureString.isEmpty {
-                    nextButton.isEnabled =  (Float((amountTextfield.text ?? "")) != nil)
-            }
         case amountTextfield:
-            if !(passwordTextfield.text?.isEmpty ?? true) &&
-                !(enterAddressTextfield.text?.isEmpty ?? true) &&
+            if !(enterAddressTextfield.text?.isEmpty ?? true) &&
                 !futureString.isEmpty
             {
                 nextButton.isEnabled =  (Float((futureString)) != nil)
@@ -256,7 +330,7 @@ Retriable {
         
         nextButton.backgroundColor = nextButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
         textField.returnKeyType = nextButton.isEnabled ? UIReturnKeyType.done : .next
-
+        
         return true
     }
     
@@ -322,11 +396,11 @@ Retriable {
                 enterAddressTextfield.text = value
             }
         }
-
+        
         dismiss(animated: true, completion: nil)
     }
     
-
+    
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
         reader.stopScanning()
         dismiss(animated: true, completion: nil)
@@ -335,21 +409,20 @@ Retriable {
     // MARK: Balance
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     func updateBalance() {
-        topTokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
-        tokenSymbolLabel.text = tokensService.selectedERC20Token().symbol
-        self.balanceLabel.text = "..."
-
-        tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
+        currencySymbolLabel.text = tokensService.selectedERC20Token().symbol.uppercased()
+        button.setTitle(tokensService.selectedERC20Token().symbol.uppercased(), for: .normal)
+        
         guard let selectedAddress = keysService.selectedAddress() else {
             return
         }
+        tokenImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
         utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in
             switch result {
             case .Success(let response):
                 print("\(response)")
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
                 let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
-                self.balanceLabel.text = formattedAmount!
+                self.amountLabel.text = formattedAmount
             case .Error(let error):
                 print("\(error)")
             }
@@ -357,14 +430,14 @@ Retriable {
     }
     
     // MARK: Confirmation
-//    var amountToSend: String?
-//    var destinationAddressToSend: String?
-//    var transactionToSend: TransactionIntermediate?
+    //    var amountToSend: String?
+    //    var destinationAddressToSend: String?
+    //    var transactionToSend: TransactionIntermediate?
     func showConfirmation(forSending amount: String,
                           destinationAddress:String,
                           transaction: TransactionIntermediate) {
-        sendingProcess?.transactionCanProceed(withAmount: amount, address: destinationAddress, transactionToSend: transaction, password: passwordTextfield.text ?? "")
-//        performSegue(withIdentifier: "showSending", sender: self)
+        sendingProcess?.transactionCanProceed(withAmount: amount, address: destinationAddress, transactionToSend: transaction, password: "BANKEXFOUNDATION")
+        //        performSegue(withIdentifier: "showSending", sender: self)
     }
     
     // MARK: Keyboard
@@ -424,5 +497,20 @@ Retriable {
     // MARK: Retriable
     func retryExisitngTransaction() {
         nextButtonTapped(self)
+    }
+}
+
+extension SendTokenViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+}
+
+extension SendTokenViewController: ChooseTokenDelegate {
+    func didSelectToken(name: String) {
+        guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
+        tokensService.updateSelectedToken(to: token.address)
+        updateTopLayout()
     }
 }
