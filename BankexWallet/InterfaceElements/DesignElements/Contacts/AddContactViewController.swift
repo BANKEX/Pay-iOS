@@ -36,7 +36,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     let heightOfRow:CGFloat = 47.0
     var doneButton:UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(done))
     var service = RecipientsAddressesServiceImplementation()
-    
+    let radius:CGFloat = 43.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,10 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         setupNavBar()
         setupHeader()
         setupFooter()
+
+        
+        
+        
     }
     
     
@@ -129,24 +133,44 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     
     fileprivate func createCircle() {
         guard let header = headerView else { return }
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x:header.bounds.midX, y: header.bounds.midY), radius: 43.0, startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x:header.bounds.midX, y: header.bounds.midY), radius: radius, startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
         let shapelayer = CAShapeLayer()
         shapelayer.path = circlePath.cgPath
         shapelayer.fillColor = UIColor.white.cgColor
         shapelayer.lineWidth = 0.8
         shapelayer.strokeColor = UIColor.lightGray.cgColor
         let heightPhotoLabe:CGFloat = 15.0
-        let textLayer = CATextLayer()
-        textLayer.string = "add photo"
-        textLayer.fontSize = 12.0
-        textLayer.isWrapped = true
-        textLayer.foregroundColor = WalletColors.blueText.color().cgColor
-        textLayer.frame.origin = CGPoint(x: (shapelayer.path?.boundingBox.minX)!, y: (shapelayer.path?.boundingBox.midY)! - heightPhotoLabe/2)
-        textLayer.frame.size = CGSize(width: (shapelayer.path?.boundingBox.width)! - 2, height: heightPhotoLabe)
-        textLayer.alignmentMode = "center"
+        let label = UILabel()
+        label.text = "add photo"
+        label.textColor = WalletColors.blueText.color()
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 14.0)
+        label.sizeToFit()
+        label.frame.origin = CGPoint(x:(shapelayer.path?.boundingBox.minX)! + shapelayer.lineWidth, y: header.bounds.midY - label.bounds.height/2)
+        label.frame.size = CGSize(width: (shapelayer.path?.boundingBox.width)! - 2, height: heightPhotoLabe)
+        
+        
+        
+        let button = UIButton(type: .custom)
+        button.frame.size = CGSize(width: radius*2, height: radius*2)
+        button.backgroundColor = UIColor.clear
+        button.frame.origin = CGPoint(x: (shapelayer.path?.boundingBox.minX)!, y: (shapelayer.path?.boundingBox.minY)!)
+        button.layer.cornerRadius = radius
+        button.addTarget(self, action: #selector(callImagePicker), for: .touchUpInside)
+
         headerView.layer.addSublayer(shapelayer)
-        headerView.layer.addSublayer(textLayer)
+        headerView.addSubview(label)
+        headerView.addSubview(button)
+        
+        
+        
     }
+    
+    @objc func callImagePicker( ) {
+        //TODO
+    }
+    
     
     
     @objc func importFromBuffer(_ sender:Any) {
@@ -205,6 +229,16 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
             state = .noAvailable
         }
         return true
+    }
+}
+
+extension AddContactViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        //TODO
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        //TODO
     }
 }
 
