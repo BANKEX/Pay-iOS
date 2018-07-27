@@ -74,9 +74,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     func setupFooter() {
         var heightOfFooter:CGFloat!
         if #available(iOS 11.0, *) {
-            if let bottomInset = UIApplication.shared.keyWindow?.safeAreaInsets.bottom,let topInset = UIApplication.shared.keyWindow?.safeAreaInsets.top {
-                heightOfFooter = UIScreen.main.bounds.height - (heightOfRow * 3) - headerView.bounds.height - (navigationController?.navigationBar.bounds.height)! - topInset - bottomInset
-            }
+            heightOfFooter = UIScreen.main.bounds.height - (heightOfRow * 3) - headerView.bounds.height - (navigationController?.navigationBar.bounds.height)! + 30
         }else {
             heightOfFooter = UIScreen.main.bounds.height - (heightOfRow * 3) - headerView.bounds.height - (navigationController?.navigationBar.bounds.height)!
         }

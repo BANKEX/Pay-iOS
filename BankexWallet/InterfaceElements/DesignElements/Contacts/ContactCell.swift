@@ -23,11 +23,6 @@ class ContactCell: UITableViewCell {
             nameContactLabel.attributedText = prepare()
         }
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
     
     func prepare() -> NSMutableAttributedString {
         var string:NSMutableAttributedString = NSMutableAttributedString(string: contact.firstName)

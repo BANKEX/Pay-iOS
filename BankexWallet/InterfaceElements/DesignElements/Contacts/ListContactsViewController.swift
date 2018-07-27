@@ -9,12 +9,9 @@
 import UIKit
 
 class ListContactsViewController: UIViewController,UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        //TODO
-    }
     
     
-    
+    //MARK: - Properties
     let service = RecipientsAddressesServiceImplementation()
     var listContacts:[FavoriteModel]? {
         didSet {
@@ -22,13 +19,18 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
             self.tableView.reloadData()
         }
     }
+    var filteredContacts = [FavoriteModel]()
     var dictContacts:[String:[FavoriteModel]] = [:]
     var sectionsTitles:[String] = []
+    var searchViewController:UISearchController = UISearchController(searchResultsController: nil)
     
     
+    //MARK: - IBOutlets
     @IBOutlet weak var tableView:UITableView!
     
 
+    
+    //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -38,37 +40,6 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
         listContacts = service.getAllStoredAddresses()
     }
     
-    func updateArray() {
-        guard let contacts = listContacts else { return }
-        for contact in contacts {
-            let word = String(contact.lastname.prefix(1))
-            let singleWord = word.capitalized
-            if dictContacts[singleWord] == nil {
-                dictContacts[singleWord] = [contact]
-                sectionsTitles.append(singleWord)
-            }else {
-                dictContacts[singleWord]?.append(contact)
-            }
-        }
-    }
-    
-    func setupSearchVC() {
-        let searchViewController = UISearchController(searchResultsController: nil)
-        if #available(iOS 11.0, *) {
-            navigationItem.searchController = searchViewController
-            searchViewController.obscuresBackgroundDuringPresentation = false
-            searchViewController.dimsBackgroundDuringPresentation = false
-            searchViewController.searchResultsUpdater = self
-            definesPresentationContext = true
-        }
-    }
-    
-    func setupNavbar() {
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationItem.title = "Contacts"
-        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(transitionToAddContact)), animated: false)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: nil)
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,38 +57,76 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     }
     
     
+    //MARK: - Methods
+    
+    
+    
+    func updateArray() {
+        guard let contacts = listContacts else { return }
+        for contact in contacts {
+            let word = String(contact.lastname.prefix(1))
+            let singleWord = word.capitalized
+            if dictContacts[singleWord] == nil {
+                dictContacts[singleWord] = [contact]
+                sectionsTitles.append(singleWord)
+            }else {
+                dictContacts[singleWord]?.append(contact)
+            }
+        }
+    }
+    
+    
+
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchViewController.searchBar.text?.isEmpty ?? true
+    }
+    
+    
+    func isFiltering() -> Bool {
+        return !searchBarIsEmpty() && searchViewController.isActive
+    }
+    
+    
+    func filterContentForSearchText(_ searchText:String) {
+        if let contacts = listContacts {
+            filteredContacts = contacts.filter({ (contact:FavoriteModel) -> Bool in
+                return contact.firstName.lowercased().contains(searchText.lowercased()) || contact.lastname.lowercased().contains(searchText.lowercased())
+            })
+            tableView.reloadData()
+        }
+    }
+
+    
+    func setupSearchVC() {
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchViewController
+            searchViewController.obscuresBackgroundDuringPresentation = false
+            searchViewController.searchResultsUpdater = self
+            definesPresentationContext = true
+        }else {
+            //TODO
+        }
+    }
+    
+    func setupNavbar() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationItem.title = "Contacts"
+        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(transitionToAddContact)), animated: false)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: nil)
+    }
+    
+    
+    
+    
     @objc func transitionToAddContact() {
         performSegue(withIdentifier: "addContactSegue", sender: self)
     }
     
-
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 
 }
 
-extension ListContactsViewController:UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionsTitles.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let nameofSection = sectionsTitles[section]
-        return (dictContacts[nameofSection]?.count)!
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier:ContactCell.identifier, for: indexPath) as? ContactCell {
-            guard let currentContacts = dictContacts[sectionsTitles[indexPath.section]] else { return UITableViewCell() }
-            cell.contact = currentContacts[indexPath.row]
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionsTitles[section]
-    }
-    
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return sectionsTitles
-    }
-}
+
