@@ -27,6 +27,11 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate {
         super.viewDidLoad()
         configureTextField()
         configureTableView()
+        configureNavBar()
+    }
+    
+    func configureNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(switchEditState))
     }
     
     func configureTableView() {
@@ -49,6 +54,11 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate {
     
     func updateUI() {
         addressTextField?.text = selectedContact.address
+    }
+    
+    
+    @objc func switchEditState() {
+        state = (state == .Editable) ? .notEditable : .Editable
     }
     
     @IBAction func sendFunds() {
