@@ -2050,6 +2050,34 @@ to find token</string>
             </objects>
             <point key="canvasLocation" x="-3399" y="3035"/>
         </scene>
+        <!--Profile Contact View Controller-->
+        <scene sceneID="qpR-yu-5JI">
+            <objects>
+                <tableViewController id="9qS-m2-auy" customClass="ProfileContactViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ywP-tN-e3a">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="nbc-pa-zUZ">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nbc-pa-zUZ" id="4mY-7e-qhX">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9qS-m2-auy" id="1l8-1Q-Xna"/>
+                            <outlet property="delegate" destination="9qS-m2-auy" id="LGx-0v-1fF"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kwF-1P-Imi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3326" y="3795"/>
+        </scene>
         <!--List Contacts View Controller-->
         <scene sceneID="sOS-Pp-9aG">
             <objects>
@@ -2100,6 +2128,7 @@ to find token</string>
                     <connections>
                         <outlet property="tableView" destination="nKx-PB-0gh" id="otN-BJ-uit"/>
                         <segue destination="xIk-xj-TA6" kind="show" identifier="addContactSegue" id="FRN-yh-beo"/>
+                        <segue destination="9qS-m2-auy" kind="show" identifier="ProfileContact" id="a4T-3T-HAK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cRc-8G-XKE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5656,7 +5685,7 @@ minutes, please wait ...</string>
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-3678" y="6595"/>
+            <point key="canvasLocation" x="-3920" y="6485"/>
         </scene>
         <!--Passcode Enter Controller-->
         <scene sceneID="a8g-7P-G0U">

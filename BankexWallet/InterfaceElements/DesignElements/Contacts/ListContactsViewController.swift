@@ -34,6 +34,7 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.tableFooterView = UIView(frame: .zero)
         setupNavbar()
         setupSearchVC()
@@ -126,7 +127,28 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProfileContact" {
+            guard let destVC = segue.destination as? ProfileContactViewController else { return }
+            guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
+            if isFiltering() {
+                destVC.selectedContact = filteredContacts[selectedIndexPath.row]
+            }else {
+                let currentTitleSection = sectionsTitles[selectedIndexPath.section]
+                guard let currentContacts = dictContacts[currentTitleSection] else { return }
+                destVC.selectedContact = currentContacts[selectedIndexPath.row]
+            }
+        }
+    }
+    
 
+}
+
+extension ListContactsViewController:UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ProfileContact", sender: nil)
+    }
 }
 
 
