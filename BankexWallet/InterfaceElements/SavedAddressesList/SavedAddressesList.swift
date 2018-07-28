@@ -51,7 +51,7 @@ class SavedAddressesList: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "SubtitleCell")
         //let (name, address) = (addressesList?[indexPath.row])!
-        let name = addressesList?[indexPath.row].name
+        let name = addressesList?[indexPath.row].firstName
         let address = addressesList?[indexPath.row].address
         cell.textLabel?.text = name
         cell.detailTextLabel?.text = address

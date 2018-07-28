@@ -31,7 +31,7 @@ class FavoritesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var shortNameLabel: UILabel!
     
     func configure(with contact: FavoriteModel) {
-        let name = contact.name
+        let name = contact.firstName
         nameLabel.text = name
         let firstLetter = (name as NSString).substring(to: 1)
         
@@ -55,7 +55,7 @@ class FavoritesListCell: UITableViewCell {
     var name, address: String?
     
     func configure(with contact: FavoriteModel, selectionDelegate: FavoritesHandling) {
-        name = contact.name
+        name = contact.firstName
         address = contact.address
         nameLabel.text = name
         let firstLetter = ((name ?? "") as NSString).substring(to: 1)

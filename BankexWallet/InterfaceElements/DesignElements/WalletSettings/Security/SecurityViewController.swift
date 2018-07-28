@@ -42,7 +42,6 @@ class SecurityViewController: UITableViewController {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
-                print(error.getErrorMessage())
             }
         }
         delegate?.switchTouchIDTapped(self, with: sender.isOn)
@@ -53,7 +52,6 @@ class SecurityViewController: UITableViewController {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
-                print(error.getErrorMessage())
             }
         }
         delegate?.switchTouchIDSendFunds(self, with: sender.isOn)
@@ -64,7 +62,6 @@ class SecurityViewController: UITableViewController {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
-                print(error.getErrorMessage())
             }
         }
         delegate?.switchTouchIDMultitask(self, with: sender.isOn)

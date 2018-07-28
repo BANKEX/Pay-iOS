@@ -324,7 +324,7 @@ FavoriteSelectionDelegate {
         
         if let cell = cell as? FavoriteContactCell {
             let favToShowCount = favoritesToShow.count
-            let name = favoritesToShow[favToShowCount - (itemsArray.count - indexPath.row)].name
+            let name = favoritesToShow[favToShowCount - (itemsArray.count - indexPath.row)].firstName
             cell.configureCell(withName: name, isLast: indexPath.row + 1 == itemsArray.count)
         }
         return cell

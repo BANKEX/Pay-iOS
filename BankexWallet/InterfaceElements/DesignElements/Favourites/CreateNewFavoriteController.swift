@@ -103,7 +103,7 @@ class CreateNewFavoriteController: UIViewController,
             }
             return
         }
-        favoritesService.store(address: address, with: name, isEditing: editingContact) { (error) in
+        favoritesService.store(address: address, with: name,lastName: "Last", isEditing: editingContact) { (error) in
             if error?.localizedDescription == "Address already exists in the database" {
                 self.addressTextfield.text = ""
                 self.addressTextfield.attributedPlaceholder = NSAttributedString(string: "Address already exists in the database", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
