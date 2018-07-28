@@ -18,7 +18,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         case Editable,notEditable
     }
     
-    
+    let service = RecipientsAddressesServiceImplementation()
     var selectedNote:String!
     var selectedContact:FavoriteModel!
     var state:State = .notEditable {
@@ -127,7 +127,10 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     }
     
     @IBAction func removeContact() {
-        //TODO
+        guard let address = addressTextField?.text,service.contains(address: address) else { return }
+        service.delete(with: address) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     

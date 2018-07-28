@@ -38,17 +38,19 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
         tableView.tableFooterView = UIView(frame: .zero)
         setupNavbar()
         setupSearchVC()
-        listContacts = service.getAllStoredAddresses()
     }
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        listContacts = service.getAllStoredAddresses()
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.navigationItem.largeTitleDisplayMode = .never
         }
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -63,6 +65,8 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     
     
     func updateArray() {
+        sectionsTitles.removeAll()
+        dictContacts.removeAll()
         guard let contacts = listContacts else { return }
         for contact in contacts {
             let word = String(contact.lastname.prefix(1))
