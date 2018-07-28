@@ -22,6 +22,9 @@ class SecurityViewController: UITableViewController {
     @IBOutlet weak var multitaskSwitch:UISwitch!
     
     weak var delegate:SecurityViewControllerProtocol?
+    enum SecuritySections:Int {
+        case First = 0,Second
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,15 +81,15 @@ class SecurityViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 2 : 1
+        return section == SecuritySections.First.rawValue ? 2 : 1
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "USE TOUCH ID WHEN" : "LOCK APP"
+        return section == SecuritySections.First.rawValue ? "USE TOUCH ID WHEN" : "LOCK APP"
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 67.0 : 54.0
+        return section == SecuritySections.First.rawValue ? 67.0 : 54.0
     }
     
     

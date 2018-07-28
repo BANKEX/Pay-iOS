@@ -14,7 +14,7 @@ extension SettingsViewController:MFMailComposeViewControllerDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
-        case 0:
+        case SettingsSections.Main.rawValue:
             if indexPath.row == 0 {
                 performSegue(withIdentifier: "networkSegue", sender: self)
             }else if indexPath.row == 1 {
@@ -22,7 +22,7 @@ extension SettingsViewController:MFMailComposeViewControllerDelegate {
             }else {
                 performSegue(withIdentifier: "securitySegue", sender: self)
             }
-        case 1:
+        case SettingsSections.AppStore.rawValue:
             if indexPath.row == 0 {
                 managerReferences.accessToBankexMail(delegate: self, failed: { (errorMessage) in
                     DispatchQueue.main.async {
@@ -36,7 +36,7 @@ extension SettingsViewController:MFMailComposeViewControllerDelegate {
             }else {
                 managerReferences.accessToAppStore()
             }
-        case 2:
+        case SettingsSections.SocialNetwork.rawValue:
             if indexPath.row == 0 {
                 managerReferences.accessToTwitter()
             }else if indexPath.row == 1 {

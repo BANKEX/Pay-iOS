@@ -27,7 +27,9 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
     @IBOutlet weak var nameNetworkLabel:UILabel!
     
     
-    
+    enum SettingsSections:Int {
+        case Main = 0,AppStore,SocialNetwork
+    }
     let managerReferences = ManagerReferences()
     let walletService = SingleKeyServiceImplementation()
     let networkService = NetworksServiceImplementation()

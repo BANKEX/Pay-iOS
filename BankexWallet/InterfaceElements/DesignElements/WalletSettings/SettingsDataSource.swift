@@ -16,6 +16,6 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 1 ? 2 : 3
+        return section == SettingsSections.AppStore.rawValue ? 2 : 3
     }
 }
