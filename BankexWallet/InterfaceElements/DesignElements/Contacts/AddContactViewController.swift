@@ -61,7 +61,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     
     func setupNavBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationItem.title = "Title"
+        navigationItem.title = "New Contact"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(back))
         navigationItem.rightBarButtonItem = doneButton
     }
