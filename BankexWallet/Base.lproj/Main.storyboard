@@ -2054,25 +2054,145 @@ to find token</string>
         <scene sceneID="qpR-yu-5JI">
             <objects>
                 <tableViewController id="9qS-m2-auy" customClass="ProfileContactViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ywP-tN-e3a">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ywP-tN-e3a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="nbc-pa-zUZ">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nbc-pa-zUZ" id="4mY-7e-qhX">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                        <sections>
+                            <tableViewSection id="x4m-2t-zxl">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="nbc-pa-zUZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nbc-pa-zUZ" id="4mY-7e-qhX">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.666666666666671"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2l-cR-Jkj">
+                                                    <rect key="frame" x="16" y="6" width="63" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="59q-cO-UcP">
+                                                    <rect key="frame" x="16" y="29" width="388" height="42"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="42" id="sId-rD-uXn"/>
+                                                    </constraints>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="59q-cO-UcP" firstAttribute="leading" secondItem="4mY-7e-qhX" secondAttribute="leading" constant="16" id="Cy0-O5-Hgp"/>
+                                                <constraint firstItem="59q-cO-UcP" firstAttribute="top" secondItem="T2l-cR-Jkj" secondAttribute="bottom" constant="2" id="OOY-cj-bkN"/>
+                                                <constraint firstItem="T2l-cR-Jkj" firstAttribute="top" secondItem="4mY-7e-qhX" secondAttribute="top" constant="6" id="huv-nU-YbV"/>
+                                                <constraint firstAttribute="trailing" secondItem="59q-cO-UcP" secondAttribute="trailing" constant="10" id="okf-TE-hph"/>
+                                                <constraint firstItem="T2l-cR-Jkj" firstAttribute="leading" secondItem="4mY-7e-qhX" secondAttribute="leading" constant="16" id="xEh-P2-I61"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="NIc-Ms-rj5">
+                                        <rect key="frame" x="0.0" y="80" width="414" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NIc-Ms-rj5" id="JBy-yY-he3">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="59.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nBB-I0-oes">
+                                                    <rect key="frame" x="16" y="9" width="388" height="40.666666666666664"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nBB-I0-oes" firstAttribute="leading" secondItem="JBy-yY-he3" secondAttribute="leading" constant="16" id="QFe-Po-6R7"/>
+                                                <constraint firstAttribute="trailing" secondItem="nBB-I0-oes" secondAttribute="trailing" constant="10" id="fNO-Q8-PyV"/>
+                                                <constraint firstItem="nBB-I0-oes" firstAttribute="top" secondItem="JBy-yY-he3" secondAttribute="top" constant="9" id="g36-bN-c99"/>
+                                                <constraint firstAttribute="bottom" secondItem="nBB-I0-oes" secondAttribute="bottom" constant="10" id="lnT-gj-drh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gfv-lt-Wxh">
+                                        <rect key="frame" x="0.0" y="140" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gfv-lt-Wxh" id="3nP-WI-3ns">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81Y-eC-c4E">
+                                                    <rect key="frame" x="16" y="7" width="74" height="30"/>
+                                                    <state key="normal" title="Send Fund"/>
+                                                    <connections>
+                                                        <action selector="sendFunds" destination="9qS-m2-auy" eventType="touchUpInside" id="HLM-7L-MPp"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="81Y-eC-c4E" firstAttribute="leading" secondItem="3nP-WI-3ns" secondAttribute="leading" constant="16" id="D8W-0d-8Te"/>
+                                                <constraint firstItem="81Y-eC-c4E" firstAttribute="centerY" secondItem="3nP-WI-3ns" secondAttribute="centerY" id="bch-mL-QDd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="j86-1h-9Dz">
+                                        <rect key="frame" x="0.0" y="184" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j86-1h-9Dz" id="bPL-e6-ogV">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88a-Z0-znN">
+                                                    <rect key="frame" x="16" y="6" width="96" height="30"/>
+                                                    <state key="normal" title="Share contact"/>
+                                                    <connections>
+                                                        <action selector="shareContact" destination="9qS-m2-auy" eventType="touchUpInside" id="GdJ-XY-H7a"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="88a-Z0-znN" firstAttribute="centerY" secondItem="bPL-e6-ogV" secondAttribute="centerY" id="3vy-Bv-6Eb"/>
+                                                <constraint firstItem="88a-Z0-znN" firstAttribute="leading" secondItem="bPL-e6-ogV" secondAttribute="leading" constant="16" id="WQP-eH-ZFJ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7Dg-CI-Nnq">
+                                        <rect key="frame" x="0.0" y="228" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Dg-CI-Nnq" id="LVG-hW-ltr">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ak5-82-lDJ">
+                                                    <rect key="frame" x="16" y="6" width="103" height="30"/>
+                                                    <state key="normal" title="Delete Contact">
+                                                        <color key="titleColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="removeContact" destination="9qS-m2-auy" eventType="touchUpInside" id="5D8-LV-DrQ"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ak5-82-lDJ" firstAttribute="leading" secondItem="LVG-hW-ltr" secondAttribute="leading" constant="16" id="he8-bI-ICi"/>
+                                                <constraint firstItem="Ak5-82-lDJ" firstAttribute="centerY" secondItem="LVG-hW-ltr" secondAttribute="centerY" id="x2i-Zl-jaP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
                         <connections>
                             <outlet property="dataSource" destination="9qS-m2-auy" id="1l8-1Q-Xna"/>
                             <outlet property="delegate" destination="9qS-m2-auy" id="LGx-0v-1fF"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="addressTextField" destination="59q-cO-UcP" id="x8k-Yc-usd"/>
+                        <outlet property="noteTextView" destination="nBB-I0-oes" id="pzI-gE-v4U"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kwF-1P-Imi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

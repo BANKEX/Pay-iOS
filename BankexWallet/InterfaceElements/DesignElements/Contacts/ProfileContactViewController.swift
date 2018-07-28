@@ -10,11 +10,30 @@ import UIKit
 
 class ProfileContactViewController: UITableViewController {
     
+    @IBOutlet weak var addressTextField:UITextField?
+    @IBOutlet weak var noteTextView:UITextView?
+    
+    
+    
+    
     var selectedContact:FavoriteModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Selected contact - \(selectedContact.firstName)")
+        tableView.tableFooterView = UIView(frame: .zero)
     }
+    
+    @IBAction func sendFunds() {
+        
+    }
+    
+    @IBAction func shareContact() {
+        
+    }
+    
+    @IBAction func removeContact() {
+        
+    }
+    
 
 }
