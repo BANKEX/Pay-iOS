@@ -107,8 +107,9 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     }
     
     @IBAction func sendFunds() {
-        //TODO
+        performSegue(withIdentifier: "showSendSegue", sender: self)
     }
+    
     
     @IBAction func shareContact() {
         let firstActivityItem = "Text"
@@ -124,6 +125,12 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         ]
         
         present(activityViewController, animated: true)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let address = addressTextField?.text,service.contains(address: address) else { return }
+        if let controller = segue.destination as? SendTokenViewController {
+             controller.selectedFavoriteAddress = address
+        }
     }
     
     @IBAction func removeContact() {
