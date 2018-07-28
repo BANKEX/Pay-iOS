@@ -139,6 +139,9 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
                 guard let currentContacts = dictContacts[currentTitleSection] else { return }
                 destVC.selectedContact = currentContacts[selectedIndexPath.row]
             }
+            let button = UIBarButtonItem()
+            button.title = "Contacts"
+            navigationItem.backBarButtonItem = button
         }
     }
     
