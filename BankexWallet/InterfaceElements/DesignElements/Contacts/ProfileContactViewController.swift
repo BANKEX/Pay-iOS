@@ -203,10 +203,20 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     
     
     @IBAction func removeContact() {
-        guard let address = addressTextField?.text,service.contains(address: address) else { return }
-        service.delete(with: address) {
+        
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let delButton = UIAlertAction(title:"Delete", style: .destructive) { _ in
+            guard let address = self.addressTextField?.text,self.service.contains(address: address) else { return }
+            self.service.delete(with: address) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        alertVC.addAction(delButton)
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alertVC, animated: true) {
             self.navigationController?.popViewController(animated: true)
         }
+        
     }
     
     //MARK: - TextFieldDelegate
