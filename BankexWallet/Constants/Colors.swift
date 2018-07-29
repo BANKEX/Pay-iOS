@@ -21,6 +21,7 @@ enum WalletColors {
     case redText
     case lightGreenText
     case disabledGreyButton
+    case headerView
     
 
     func color() -> UIColor {
@@ -47,7 +48,8 @@ enum WalletColors {
             return UIColor(red: 74/255, green: 200/255, blue: 174/255, alpha: 1)
         case .disabledGreyButton:
             return UIColor(red: 0.78, green: 0.8, blue: 0.8, alpha: 1)
-
+        case .headerView:
+            return UIColor(red: 251/255, green: 250/255, blue: 255/255, alpha: 1)
         }
     }
     
