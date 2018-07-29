@@ -72,6 +72,14 @@ extension UIView {
         }
     }
     
+    func bottomBorder() {
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor(red: 188/255, green: 187/255, blue: 193/255, alpha: 1).cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 0.6)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 0.0
+    }
+    
     /* The blur radius used to create the shadow. Defaults to 3. Animatable. */
     @IBInspectable var shadowRadius: CGFloat {
         set {

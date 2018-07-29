@@ -21,6 +21,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     let service = RecipientsAddressesServiceImplementation()
     var selectedNote:String!
     var selectedContact:FavoriteModel!
+    let heightNameLabel:CGFloat = 36.0
     var state:State = .notEditable {
         didSet{
             if state == .notEditable {
@@ -32,6 +33,13 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
             }
         }
     }
+    lazy var nameContactLabel:UILabel = {
+       let label = UILabel()
+        label.numberOfLines = 1
+        label.sizeToFit()
+        label.textAlignment = .center
+        return label
+    }()
     let heightHeader:CGFloat = 160.0
     
     override func viewDidLoad() {
@@ -69,13 +77,13 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         let headerView = UIView()
         headerView.frame.size = CGSize(width: tableView.bounds.width, height: heightHeader)
         headerView.backgroundColor = UIColor(red: 251/255, green: 250/255, blue: 255/255, alpha: 1)
-        headerView.layer.masksToBounds = false
-        headerView.layer.shadowColor = UIColor(red: 188/255, green: 187/255, blue: 193/255, alpha: 1).cgColor
-        headerView.layer.shadowOffset = CGSize(width: 0.0, height: 0.6)
-        headerView.layer.shadowOpacity = 1.0
-        headerView.layer.shadowRadius = 0.0
+        headerView.bottomBorder()
+        nameContactLabel.frame.size = CGSize(width: tableView.bounds.width, height: heightNameLabel)
+        nameContactLabel.frame.origin = CGPoint(x: 0, y: headerView.bounds.maxY - 28.0 - heightNameLabel)
+        headerView.addSubview(nameContactLabel)
         tableView.tableHeaderView = headerView
     }
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,6 +107,20 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         }else {
             noteTextView.text = selectedNote
         }
+        nameContactLabel.attributedText = prepareText()
+    }
+    
+    func prepareText() -> NSAttributedString {
+        let firstString = selectedContact.firstName
+        let lastString = selectedContact.lastname
+        let firstAttr = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 30.0)]
+        let attrFirstString = NSAttributedString(string: firstString, attributes: firstAttr)
+        let secondAttr = [NSAttributedStringKey.font:UIFont.boldSystemFont(ofSize: 30.0)]
+        let attrSecondString = NSAttributedString(string: lastString, attributes: secondAttr)
+        var attrString = NSMutableAttributedString(attributedString: attrFirstString)
+        attrString.append(NSAttributedString(string: " "))
+        attrString.append(attrSecondString)
+        return attrString
     }
     
     
