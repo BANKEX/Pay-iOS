@@ -56,7 +56,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
                 navigationItem.rightBarButtonItem?.title = "Edit"
             }else {
                 addressTextField?.becomeFirstResponder()
-                navigationItem.rightBarButtonItem?.title = "Cancel"
+                navigationItem.rightBarButtonItem?.title = "Save"
             }
         }
     }
@@ -203,7 +203,6 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     
     
     @IBAction func removeContact() {
-        
         let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let delButton = UIAlertAction(title:"Delete", style: .destructive) { _ in
             guard let address = self.addressTextField?.text,self.service.contains(address: address) else { return }

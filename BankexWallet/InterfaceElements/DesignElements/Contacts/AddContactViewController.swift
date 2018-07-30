@@ -15,6 +15,8 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     @IBOutlet weak var firstNameTextField:UITextField!
     @IBOutlet weak var lastNameTextField:UITextField!
     @IBOutlet weak var addressTextField:UITextField!
+    @IBOutlet var textFields:[UITextField]!
+    @IBOutlet weak var pasteButton:UIButton!
     
     
     
@@ -44,10 +46,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeBecomeResponser)))
         setupTextFields()
         setupNavBar()
-        setupHeader()
-        setupFooter()
-
-        
+        setupHeader()        
         
         
     }
@@ -73,22 +72,6 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         }
         firstNameTextField.autocapitalizationType = .words
         lastNameTextField.autocapitalizationType = .words
-    }
-    
-    func setupFooter() {
-        var heightOfFooter:CGFloat!
-        if #available(iOS 11.0, *) {
-            heightOfFooter = UIScreen.main.bounds.height - (heightOfRow * 3) - headerView.bounds.height - (navigationController?.navigationBar.bounds.height)! + 30
-        }else {
-            heightOfFooter = UIScreen.main.bounds.height - (heightOfRow * 3) - headerView.bounds.height - (navigationController?.navigationBar.bounds.height)!
-        }
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: heightOfFooter))
-        let pasteButton = UIButton(frame: CGRect(x: 16, y: 15, width: 140.0, height: 28.0))
-        pasteButton.setImage(#imageLiteral(resourceName: "Paste button"), for: .normal)
-        pasteButton.addTarget(self, action: #selector(importFromBuffer(_:)), for: .touchUpInside)
-        footerView.addSubview(pasteButton)
-        footerView.backgroundColor = .white
-        tableView.tableFooterView = footerView
     }
     
     func setupHeader() {
@@ -173,7 +156,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     
     
     
-    @objc func importFromBuffer(_ sender:Any) {
+    @IBAction func importFromBuffer(_ sender:Any) {
         if let text = UIPasteboard.general.string {
             addressTextField?.text = text
             if !(firstNameTextField?.text?.isEmpty ?? true) && !(lastNameTextField?.text?.isEmpty ?? true) {
@@ -198,15 +181,24 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 3 {
+            if let heightOfNavBar = navigationController?.navigationBar.frame.height {
+                let heightStatusbar = UIApplication.shared.statusBarFrame.height //Default 20.0
+                let restRect = heightOfRow * 3 + headerView.bounds.height + heightOfNavBar + heightStatusbar
+                return UIScreen.main.bounds.height - restRect
+            }
+        }
         return heightOfRow
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.0001
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.returnKeyType = state == .available ? .done : .next
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -234,6 +226,19 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         default:
             state = .noAvailable
         }
+        textField.returnKeyType = state == .available ? .done : .next
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard textField.returnKeyType == .done else {
+            guard let currentIndex = textFields.index(of: textField) else { return false }
+            var nextIndex:Int
+            nextIndex = textField == addressTextField ? 0 : currentIndex + 1
+            textFields[nextIndex].becomeFirstResponder()
+            return true
+        }
+        done()
         return true
     }
 }

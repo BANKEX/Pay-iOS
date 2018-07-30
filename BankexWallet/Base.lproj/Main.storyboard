@@ -4212,7 +4212,7 @@ successfully</string>
                         <sections>
                             <tableViewSection id="wNm-ok-ST1">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCell" id="oF8-b6-5ad" customClass="ContactCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCell" id="oF8-b6-5ad">
                                         <rect key="frame" x="0.0" y="35" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oF8-b6-5ad" id="wXi-R0-gWv">
@@ -4256,10 +4256,10 @@ successfully</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="6P2-CN-7Vm">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addressCell" id="6P2-CN-7Vm">
                                         <rect key="frame" x="0.0" y="123" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6P2-CN-7Vm" id="hKI-wF-RBv">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6P2-CN-7Vm" id="hKI-wF-RBv">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -4278,6 +4278,31 @@ successfully</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="S6Q-zg-U8f">
+                                        <rect key="frame" x="0.0" y="167" width="414" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S6Q-zg-U8f" id="Qi4-K6-Zc3">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="149.66666666666666"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddi-ak-Exu">
+                                                    <rect key="frame" x="16" y="16" width="140" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="wfx-RL-SII"/>
+                                                        <constraint firstAttribute="width" constant="140" id="xQ3-LK-KHG"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Paste button"/>
+                                                    <connections>
+                                                        <action selector="importFromBuffer:" destination="xIk-xj-TA6" eventType="touchUpInside" id="TEt-Gj-7LR"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ddi-ak-Exu" firstAttribute="leading" secondItem="Qi4-K6-Zc3" secondAttribute="leading" constant="16" id="PTI-lf-aEE"/>
+                                                <constraint firstItem="ddi-ak-Exu" firstAttribute="top" secondItem="Qi4-K6-Zc3" secondAttribute="top" constant="16" id="ZR5-c3-l7k"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -4290,6 +4315,10 @@ successfully</string>
                         <outlet property="addressTextField" destination="Aaz-p9-qd1" id="JRn-zB-BRv"/>
                         <outlet property="firstNameTextField" destination="ClL-5v-Jdn" id="dvV-Tr-FMr"/>
                         <outlet property="lastNameTextField" destination="qwm-aw-PUL" id="hxU-4v-psT"/>
+                        <outlet property="pasteButton" destination="ddi-ak-Exu" id="oJ9-Ht-au9"/>
+                        <outletCollection property="textFields" destination="ClL-5v-Jdn" collectionClass="NSMutableArray" id="gvY-3H-QaJ"/>
+                        <outletCollection property="textFields" destination="qwm-aw-PUL" collectionClass="NSMutableArray" id="7W2-ld-Gj7"/>
+                        <outletCollection property="textFields" destination="Aaz-p9-qd1" collectionClass="NSMutableArray" id="kAp-xd-UV1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3C-Sr-0Y8" userLabel="First Responder" sceneMemberID="firstResponder"/>
