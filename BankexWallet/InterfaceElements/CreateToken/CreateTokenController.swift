@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QRCodeReader
 
 class CreateTokenController: UIViewController {
 
@@ -18,6 +19,13 @@ class CreateTokenController: UIViewController {
     var tokensList: [ERC20TokenModel]?
     var tokensAvailability: [Bool]?
     var walletData = WalletData()
+    
+    lazy var readerVC:QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes:[.qr],captureDevicePosition: .back)
+        }
+        return QRCodeReaderViewController(builder: builder)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,107 +60,20 @@ class CreateTokenController: UIViewController {
         self.title = "Add New Token"
     }
     
+    @IBAction func scanTapped(_ sender:UIButton) {
+        readerVC.delegate = self
+        self.readerVC.modalPresentationStyle = .formSheet
+        self.present(readerVC, animated: true)
+    }
+    
+    @IBAction func textFromBuffer(_ sender:Any) {
+        if let string = UIPasteboard.general.string  {
+            searchBar.text = string
+            DispatchQueue.main.async {
+                self.searchBar(self.searchBar, textDidChange: string)
+            }
+        }
+    }
+    
 }
 
-extension CreateTokenController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if tokensList != nil {
-            return (tokensList?.count)!
-        } else {
-            return 0
-        }
-        
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CreateTokenCell", for: indexPath) as! CreateTokenCell
-        let token = tokensList![indexPath.row]
-        let available = tokensAvailability![indexPath.row]
-        cell.configure(with: token, isAvailable: available)
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-    }
-}
-
-extension CreateTokenController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        if searchBar.text == nil || searchBar.text == "" {
-            
-            messageLabel.isHidden = false
-            
-            view.endEditing(true)
-            
-            tokensList = nil
-            
-            tableView.alpha = 0
-            tableView.isUserInteractionEnabled = false
-            
-            tableView.reloadData()
-            
-        } else {
-            
-            messageLabel.isHidden = true
-            
-            tableView.alpha = 1
-            tableView.isUserInteractionEnabled = true
-            
-            let tokenAddress = searchBar.text
-            
-            tokensService.getTokensList(with: tokenAddress!, completion: { (result) in
-                switch result {
-                case .Success(let list):
-                    self.tokensAvailability = []
-                    self.tokensList = list
-                    for i in 0...list.count-1 {
-                        self.tokensAvailability?.append(false)
-                    }
-                    self.tableView.reloadData()
-                    self.updateListForAlreadyAddedTokens()
-                case .Error(_):
-                    self.tokensList = nil
-                }
-            })
-            
-        }
-    }
-    
-    func updateListForAlreadyAddedTokens() {
-        let dataQueue = DispatchQueue.global(qos: .background)
-        dataQueue.async {
-            self.walletData.update(callback: { (etherToken, transactions, availableTokens) in
-                if self.tokensList != nil{
-                    var i = 0
-                    for token in self.tokensList! {
-                        for availableToken in availableTokens {
-                            if token == availableToken {
-                                self.tokensAvailability![i] = true
-                                break
-                            }
-                        }
-                        i += 1
-                    }
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-                
-            })
-        }
-    }
-    
-}

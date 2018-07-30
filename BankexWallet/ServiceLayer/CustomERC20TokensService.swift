@@ -220,12 +220,12 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
         
     }
     
-    func getTokensList(with address: String, completion: @escaping (SendEthResult<[ERC20TokenModel]>) -> Void) {
+    func getTokensList(with searchString: String, completion: @escaping (SendEthResult<[ERC20TokenModel]>) -> Void) {
         
         var tokensList: [ERC20TokenModel] = []
         do {
             try db.operation({ (context, save) in
-                let tokens = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address == %@ || name CONTAINS[c] %@ || symbol CONTAINS[c] %@ && isSelected  == %@", address, address, address, NSNumber(value: false))))
+                let tokens = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address CONTAINS[c] %@ || name CONTAINS[c] %@ || symbol CONTAINS[c] %@ && isSelected  == %@", searchString, searchString, searchString, NSNumber(value: false))))
                 if tokens.count != 0 {
                     DispatchQueue.main.async {
                         for token in tokens {
@@ -242,13 +242,13 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                     
                 } else {
                     DispatchQueue.main.async {
-                        self.getOnlineTokensList(with: address, completion: completion)
+                        self.getOnlineTokensList(with: searchString, completion: completion)
                     }
                 }
             })
         } catch {
             DispatchQueue.main.async {
-                self.getOnlineTokensList(with: address, completion: completion)
+                self.getOnlineTokensList(with: searchString, completion: completion)
             }
         }
         
