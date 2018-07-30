@@ -28,3 +28,14 @@ enum DataChangeNotifications: String {
 }
 
 
+enum SwitchChangeNotifications: String {
+    case didChangeOpenSwitch = "didChangeOpenSwitch"
+    case didChangeSendSwitch = "didChangeSendSwitch"
+    case didChangeMultiSwitch = "didChangeMultiSwitch"
+    
+    func notificationName() -> NSNotification.Name {
+        return NSNotification.Name(self.rawValue)
+    }
+}
+
+

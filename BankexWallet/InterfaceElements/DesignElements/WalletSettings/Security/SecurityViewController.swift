@@ -9,11 +9,7 @@
 import UIKit
 import LocalAuthentication
 
-protocol SecurityViewControllerProtocol:class {
-    func switchTouchIDTapped(_ securityViewController:SecurityViewController,with state:Bool)
-    func switchTouchIDSendFunds(_ securityViewController:SecurityViewController,with state:Bool)
-    func switchTouchIDMultitask(_ securityViewController:SecurityViewController,with state:Bool)
-}
+
 
 class SecurityViewController: UITableViewController {
     
@@ -21,7 +17,6 @@ class SecurityViewController: UITableViewController {
     @IBOutlet weak var sendSwitch:UISwitch!
     @IBOutlet weak var multitaskSwitch:UISwitch!
     
-    weak var delegate:SecurityViewControllerProtocol?
     enum SecuritySections:Int {
         case First = 0,Second
     }
@@ -47,7 +42,7 @@ class SecurityViewController: UITableViewController {
             }) { (error) in
             }
         }
-        delegate?.switchTouchIDTapped(self, with: sender.isOn)
+        NotificationCenter.default.post(name:SwitchChangeNotifications.didChangeOpenSwitch.notificationName(), object: self, userInfo:["state":sender.isOn])
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
@@ -57,7 +52,7 @@ class SecurityViewController: UITableViewController {
             }) { (error) in
             }
         }
-        delegate?.switchTouchIDSendFunds(self, with: sender.isOn)
+        NotificationCenter.default.post(name:SwitchChangeNotifications.didChangeSendSwitch.notificationName(), object: self, userInfo:["state":sender.isOn])
     }
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
@@ -67,7 +62,7 @@ class SecurityViewController: UITableViewController {
             }) { (error) in
             }
         }
-        delegate?.switchTouchIDMultitask(self, with: sender.isOn)
+        NotificationCenter.default.post(name:SwitchChangeNotifications.didChangeMultiSwitch.notificationName(), object: self, userInfo:["state":sender.isOn])
     }
     
     
