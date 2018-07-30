@@ -1638,6 +1638,7 @@
                         <outlet property="messageLabel" destination="al0-ql-5kn" id="jK8-Oz-g9K"/>
                         <outlet property="searchBar" destination="nTp-zX-f6P" id="r0k-Xy-iKr"/>
                         <outlet property="tableView" destination="sZs-7n-VW9" id="ejc-Jx-wt6"/>
+                        <segue destination="RU3-RG-C31" kind="presentation" identifier="addChosenToken" id="D6y-HS-Xet"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgF-7x-LNM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5486,7 +5487,7 @@ minutes, please wait ...</string>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v6B-Di-6jd">
-                                <rect key="frame" x="0.0" y="120" width="414" height="616"/>
+                                <rect key="frame" x="0.0" y="120" width="414" height="462"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoListCell" rowHeight="83" id="GcG-oQ-joU" customClass="TokenInfoListCell" customModule="BankexWallet" customModuleProvider="target">
@@ -5562,11 +5563,34 @@ minutes, please wait ...</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHb-k6-elD">
+                                <rect key="frame" x="63" y="602" width="288" height="50"/>
+                                <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5Xp-Li-DMV"/>
+                                    <constraint firstAttribute="width" constant="288" id="X0L-NM-HLf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Add">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addTokenAction:" destination="RU3-RG-C31" eventType="touchUpInside" id="CaG-Aa-aiu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Bf2-cD-pfY" firstAttribute="top" secondItem="USi-sq-9sM" secondAttribute="top" constant="25" id="46U-uZ-V2s"/>
+                            <constraint firstItem="GHb-k6-elD" firstAttribute="top" secondItem="v6B-Di-6jd" secondAttribute="bottom" constant="20" id="7s3-fe-s2I"/>
+                            <constraint firstItem="GHb-k6-elD" firstAttribute="centerX" secondItem="USi-sq-9sM" secondAttribute="centerX" id="Ajy-oZ-tXh"/>
+                            <constraint firstItem="USi-sq-9sM" firstAttribute="bottom" secondItem="GHb-k6-elD" secondAttribute="bottom" constant="84" id="I7F-MZ-6eb"/>
                             <constraint firstItem="rP9-Jk-rmE" firstAttribute="centerY" secondItem="hUW-nb-XSk" secondAttribute="centerY" id="IBm-Xg-FvU"/>
                             <constraint firstItem="USi-sq-9sM" firstAttribute="trailing" secondItem="rP9-Jk-rmE" secondAttribute="trailing" constant="15" id="JN3-jT-oh3"/>
                             <constraint firstItem="hUW-nb-XSk" firstAttribute="leading" secondItem="v6B-Di-6jd" secondAttribute="leading" constant="15" id="S3p-KA-qEo"/>
@@ -5574,7 +5598,6 @@ minutes, please wait ...</string>
                             <constraint firstItem="v6B-Di-6jd" firstAttribute="leading" secondItem="USi-sq-9sM" secondAttribute="leading" id="ddh-Xl-YCv"/>
                             <constraint firstItem="Bf2-cD-pfY" firstAttribute="centerX" secondItem="USi-sq-9sM" secondAttribute="centerX" id="fsz-0q-hOK"/>
                             <constraint firstItem="hUW-nb-XSk" firstAttribute="top" secondItem="Bf2-cD-pfY" secondAttribute="bottom" constant="20" id="hOh-Sq-hjI"/>
-                            <constraint firstItem="USi-sq-9sM" firstAttribute="bottom" secondItem="v6B-Di-6jd" secondAttribute="bottom" id="mkA-kZ-unA"/>
                             <constraint firstItem="USi-sq-9sM" firstAttribute="trailing" secondItem="v6B-Di-6jd" secondAttribute="trailing" id="yAv-8T-VW1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="USi-sq-9sM"/>
@@ -5583,6 +5606,7 @@ minutes, please wait ...</string>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="addingButton" destination="GHb-k6-elD" id="iuy-Y0-GqM"/>
                         <outlet property="tableView" destination="v6B-Di-6jd" id="HlF-PE-tVO"/>
                         <outlet property="walletName" destination="hUW-nb-XSk" id="eER-RZ-Pdu"/>
                     </connections>
@@ -5594,7 +5618,7 @@ minutes, please wait ...</string>
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-3678" y="6595"/>
+            <point key="canvasLocation" x="-3678.2608695652175" y="6594.29347826087"/>
         </scene>
         <!--Passcode Enter Controller-->
         <scene sceneID="a8g-7P-G0U">
@@ -5941,6 +5965,7 @@ minutes, please wait ...</string>
         <image name="white_touch_id" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="D6y-HS-Xet"/>
         <segue reference="bbg-ak-3Up"/>
         <segue reference="vrZ-w3-HnB"/>
         <segue reference="XCh-X3-sC4"/>

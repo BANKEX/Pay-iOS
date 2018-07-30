@@ -15,10 +15,15 @@ class CreateTokenController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var messageLabel: UILabel!
     
+    var chosenToken: ERC20TokenModel?
+    var chosenTokenAmount: String?
+    
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     var tokensList: [ERC20TokenModel]?
     var tokensAvailability: [Bool]?
     var walletData = WalletData()
+    
+    let interactor = Interactor()
     
     lazy var readerVC:QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
@@ -39,20 +44,34 @@ class CreateTokenController: UIViewController {
         tableView.dataSource = self
         
         searchBar.delegate = self
-        searchBar.returnKeyType = UIReturnKeyType.done
+        
+        
+        tableView.alpha = 0
+        tableView.isUserInteractionEnabled = false
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard let searchText = searchBar.text else {
+            return
+        }
+        DispatchQueue.main.async {
+            self.searchBar(self.searchBar, textDidChange: searchText)
+        }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar()
-        tableView.alpha = 0
-        tableView.isUserInteractionEnabled = false
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
     }
     
     func setNavigationBar() {
@@ -76,4 +95,15 @@ class CreateTokenController: UIViewController {
     }
     
 }
+
+extension CreateTokenController: UIViewControllerTransitioningDelegate {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissAnimator()
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+}
+
 

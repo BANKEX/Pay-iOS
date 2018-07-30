@@ -36,7 +36,22 @@ extension CreateTokenController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let tokenToAdd = self.tokensList![indexPath.row]
+        chosenToken = tokenToAdd
+        // TODO: - Add token amount
+        chosenTokenAmount = nil
+        performSegue(withIdentifier: "addChosenToken", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? TokenInfoController {
+            destinationViewController.transitioningDelegate = self
+            destinationViewController.token = chosenToken ?? nil
+            destinationViewController.interactor = interactor
+            destinationViewController.amount = chosenTokenAmount
+            destinationViewController.forAdding = true
+        }
     }
 }

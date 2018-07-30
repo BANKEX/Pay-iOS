@@ -58,7 +58,8 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func infoTokenTouched(_ sender: TokensListCellButton) {
         guard let tokenForInfo = sender.chosenToken else { return }
         chosenToken = tokenForInfo
-        chosenTokenAmount = sender.amount
+        // TODO: - Add token amount
+        chosenTokenAmount = nil
     }
     
     override func viewDidLoad() {
@@ -197,16 +198,6 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
             
         }
     }
-    
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //        guard let token = tokens?[indexPath.row] else {
-    //            return
-    //        }
-    //        let address = token.address
-    //        service.updateSelectedToken(to: address)
-    //        tokens = service.availableTokensList()
-    //        tableView.reloadData()
-    //    }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == WalletSections.ethereum.rawValue {

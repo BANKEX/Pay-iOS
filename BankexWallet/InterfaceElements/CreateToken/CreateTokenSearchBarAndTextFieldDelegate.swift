@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension CreateTokenController: UISearchBarDelegate {
+extension CreateTokenController: UISearchBarDelegate, UITextFieldDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
@@ -73,6 +73,17 @@ extension CreateTokenController: UISearchBarDelegate {
                 }
                 
             })
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print(searchBar.text)
+        if searchBar.text != nil && searchBar.text! != "" && (self.tokensList != nil) {
+            let tokenToAdd = self.tokensList?.first
+            chosenToken = tokenToAdd
+            // TODO: - Add token amount
+            chosenTokenAmount = nil
+            performSegue(withIdentifier: "addChosenToken", sender: self)
         }
     }
     
