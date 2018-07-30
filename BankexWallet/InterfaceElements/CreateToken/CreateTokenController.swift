@@ -7,84 +7,103 @@
 //
 
 import UIKit
+import QRCodeReader
 
-class CreateTokenController: UIViewController,
-UITextFieldDelegate {
+class CreateTokenController: UIViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var emptyView: UIView!
-    @IBOutlet weak var foundTokenView: UIView!
-    @IBOutlet weak var tokenDecimalsLabel: UILabel!
-    @IBOutlet weak var tokenSymbolLabel: UILabel!
-    @IBOutlet weak var tokenNameLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var messageLabel: UILabel!
     
-    @IBOutlet weak var findContractButton: UIButton!
-    @IBOutlet weak var contractAddressTextfield: UITextField!
+    var chosenToken: ERC20TokenModel?
+    var chosenTokenAmount: String?
     
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var tokenSymbolImageView: UIImageView!
+    let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
+    var tokensList: [ERC20TokenModel]?
+    var tokensAvailability: [Bool]?
+    var walletData = WalletData()
+    
+    let interactor = Interactor()
+    
+    lazy var readerVC:QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes:[.qr],captureDevicePosition: .back)
+        }
+        return QRCodeReaderViewController(builder: builder)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableFooterView = UIView()
+        
+        self.hideKeyboardWhenTappedAround()
+        self.setupViewResizerOnKeyboardShown()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        searchBar.delegate = self
+        
+        
+        tableView.alpha = 0
+        tableView.isUserInteractionEnabled = false
 
-        contractAddressTextfield.becomeFirstResponder()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard let searchText = searchBar.text else {
+            return
+        }
+        DispatchQueue.main.async {
+            self.searchBar(self.searchBar, textDidChange: searchText)
+        }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        activityIndicator.stopAnimating()
-        emptyView.isHidden = false
-        foundTokenView.isHidden = true
-        findContractButton.backgroundColor = WalletColors.disableButtonBackground.color()
+        setNavigationBar()
+
     }
     
-    var hasFoundToken = false
-    let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
-    var foundModel: ERC20TokenModel?
-    
-    @IBAction func findContract(_ sender: Any) {
-        guard let foundModel = foundModel else {
-            return
-        }
-        tokensService.addNewCustomToken(with: foundModel.address,
-                                        name: foundModel.name,
-                                        decimals: foundModel.decimals,
-                                        symbol: foundModel.symbol)
-        navigationController?.popViewController(animated: true)
-    }
-    
-    // MARK: UITextField
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let tokenAddress = contractAddressTextfield.text, !tokenAddress.isEmpty else {
-            return true
-        }
-        textField.resignFirstResponder()
-        self.errorLabel.isHidden = true
-        self.emptyView.isHidden = false
-        self.foundTokenView.isHidden = true
-        self.findContractButton.setTitle("Find Token", for: .normal)
-        findContractButton.backgroundColor = WalletColors.disableButtonBackground.color()        
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        activityIndicator.startAnimating()
-        tokensService.searchForCustomToken(with: tokenAddress, completion: { (result) in
-            self.activityIndicator.stopAnimating()
-            switch result {
-            case .Success(let model):
-                self.tokenNameLabel.text = model.name
-                self.tokenDecimalsLabel.text = model.decimals
-                self.tokenSymbolLabel.text = model.symbol
-                self.hasFoundToken = true
-                self.findContractButton.setTitle("Add Contract", for: .normal)
-                self.foundModel = model
-                self.findContractButton.backgroundColor = WalletColors.defaultDarkBlueButton.color()
-                self.tokenSymbolImageView.image = PredefinedTokens(with: model.name).image()
-                self.emptyView.isHidden = true
-                self.foundTokenView.isHidden = false
-            case .Error(_):
-                self.errorLabel.isHidden = false
+    }
+    
+    func setNavigationBar() {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.title = "Add New Token"
+    }
+    
+    @IBAction func scanTapped(_ sender:UIButton) {
+        readerVC.delegate = self
+        self.readerVC.modalPresentationStyle = .formSheet
+        self.present(readerVC, animated: true)
+    }
+    
+    @IBAction func textFromBuffer(_ sender:Any) {
+        if let string = UIPasteboard.general.string  {
+            searchBar.text = string
+            DispatchQueue.main.async {
+                self.searchBar(self.searchBar, textDidChange: string)
             }
-        })
-        return true
+        }
     }
     
 }
+
+extension CreateTokenController: UIViewControllerTransitioningDelegate {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissAnimator()
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+}
+
+

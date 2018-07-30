@@ -58,7 +58,8 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func infoTokenTouched(_ sender: TokensListCellButton) {
         guard let tokenForInfo = sender.chosenToken else { return }
         chosenToken = tokenForInfo
-        chosenTokenAmount = sender.amount
+        // TODO: - Add token amount
+        chosenTokenAmount = nil
     }
     
     override func viewDidLoad() {
@@ -81,8 +82,9 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         updateTableView()
     }
     
@@ -197,16 +199,6 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //        guard let token = tokens?[indexPath.row] else {
-    //            return
-    //        }
-    //        let address = token.address
-    //        service.updateSelectedToken(to: address)
-    //        tokens = service.availableTokensList()
-    //        tableView.reloadData()
-    //    }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == WalletSections.ethereum.rawValue {
             return "Ethereum"
@@ -239,6 +231,12 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         headerView.addSubview(headerLabel)
         
         return headerView
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
     
