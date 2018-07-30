@@ -16,6 +16,8 @@ class CreateTokenController: UIViewController {
     
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     var tokensList: [ERC20TokenModel]?
+    var tokensAvailability: [Bool]?
+    var walletData = WalletData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +74,9 @@ extension CreateTokenController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CreateTokenCell", for: indexPath) as! CreateTokenCell
         let token = tokensList![indexPath.row]
-        cell.configure(with: token)
+        let available = tokensAvailability![indexPath.row]
+        cell.configure(with: token, isAvailable: available)
+        
         return cell
     }
     
@@ -112,14 +116,43 @@ extension CreateTokenController: UISearchBarDelegate {
             tokensService.getTokensList(with: tokenAddress!, completion: { (result) in
                 switch result {
                 case .Success(let list):
+                    self.tokensAvailability = []
                     self.tokensList = list
+                    for i in 0...list.count-1 {
+                        self.tokensAvailability?.append(false)
+                    }
                     self.tableView.reloadData()
+                    self.updateListForAlreadyAddedTokens()
                 case .Error(_):
                     self.tokensList = nil
                 }
             })
             
-            
         }
     }
+    
+    func updateListForAlreadyAddedTokens() {
+        let dataQueue = DispatchQueue.global(qos: .background)
+        dataQueue.async {
+            self.walletData.update(callback: { (etherToken, transactions, availableTokens) in
+                if self.tokensList != nil{
+                    var i = 0
+                    for token in self.tokensList! {
+                        for availableToken in availableTokens {
+                            if token == availableToken {
+                                self.tokensAvailability![i] = true
+                                break
+                            }
+                        }
+                        i += 1
+                    }
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+                
+            })
+        }
+    }
+    
 }

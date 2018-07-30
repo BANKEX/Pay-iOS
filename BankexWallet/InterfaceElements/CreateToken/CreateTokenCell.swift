@@ -16,11 +16,11 @@ class CreateTokenCell: UITableViewCell {
     @IBOutlet weak var tokenAddressLabel: UILabel!
     @IBOutlet weak var tokenAddedImageView: UIImageView!
     
-    func configure(with token: ERC20TokenModel) {
+    func configure(with token: ERC20TokenModel, isAvailable: Bool = false) {
         tokenNameLabel.text = token.name + " (\(token.symbol))"
         tokenIconImageView.image = PredefinedTokens(with: token.symbol).image()
         tokenAddressLabel.text = token.address
-        
+        tokenAddedImageView.alpha = isAvailable ? 1.0 : 0.0
         
     }
 
