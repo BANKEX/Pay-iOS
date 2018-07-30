@@ -117,11 +117,9 @@ FavoriteSelectionDelegate {
     var transactionsToShow = [ETHTransactionModel]()
     var transactionInitialDiff = 0
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configureNavBar()
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.topItem?.prompt = "   "
         itemsArray = [
             "CurrentWalletInfoCell",
@@ -129,9 +127,8 @@ FavoriteSelectionDelegate {
             "FavouritesTitleCell"]
         putTransactionsInfoIntoItemsArray()
         tableView.reloadData()
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.topItem?.prompt = "   "
     }
+    
         
     @IBAction func unwind(segue:UIStoryboardSegue) { }
     

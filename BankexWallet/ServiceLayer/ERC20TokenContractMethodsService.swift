@@ -146,14 +146,23 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
 
     }
     
+    //Now that function returns transactions for selected token only.
     func getAllTransactions() -> [ETHTransactionModel]? {
-//         TODO: Select only transacions with selected token?
-//         TODO: Or show all of them??
-//         Make a setting
+
         guard let address = self.keysService.selectedAddress() else { return [] }
+        let selectedToken = CustomERC20TokensServiceImplementation().selectedERC20Token()
         
+        
+
         let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "from == %@ || to == %@", address, address)).sorted(with: "date", ascending: false))
-        return transactions.map({ (transaction) -> ETHTransactionModel in
+        let filteredTransactions = transactions.filter { (tr) -> Bool in
+            if let token = tr.token, let address = token.address {
+                return address == selectedToken.address
+            }
+            return false
+        }
+        
+        return filteredTransactions.map({ (transaction) -> ETHTransactionModel in
             let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :
                 ERC20TokenModel(token: transaction.token!)
             return ETHTransactionModel(from: transaction.from ?? "",
