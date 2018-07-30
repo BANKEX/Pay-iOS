@@ -5,7 +5,7 @@ target 'BankexWallet' do
   use_frameworks!
   # Pods for BankexWallet
   #pod 'web3swift', :path => '../web3swift'
-  pod 'web3swift', '~> 1.0.1'
+  pod 'web3swift'
   pod "SugarRecord/CoreData", '<= 3.1'
   pod 'QRCodeReader.swift', '~> 8.1.1'
 
