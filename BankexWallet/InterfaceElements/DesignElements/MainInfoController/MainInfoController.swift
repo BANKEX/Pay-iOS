@@ -268,6 +268,7 @@ FavoriteSelectionDelegate {
         return String(formattedNumber.reversed())
     }
     
+    //MARK: - Refresh Control
     func configureRefreshControl() {
         if #available(iOS 10.0, *) {
             tableView.refreshControl = UIRefreshControl()

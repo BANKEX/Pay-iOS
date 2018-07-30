@@ -8,22 +8,26 @@
 
 import UIKit
 
-class TransactionHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TransactionHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChooseTokenDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tokensButton: UIButton!
     
-    let sendEthService: SendEthService = SendEthServiceImplementation()
+    
+    var sendEthService: SendEthService = SendEthServiceImplementation()
+    let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     
     var transactionsToShow = [[ETHTransactionModel]]()
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTransactions()
+        configureRefreshControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.isNavigationBarHidden = true
     }
     
@@ -31,11 +35,45 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
     }
+    
+    //MARK: - Refresh Control
+    func configureRefreshControl() {
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = UIRefreshControl()
+            tableView.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
+        }
+    }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        //TODO: - Update the data here
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+        
+    }
+    
+    //MARK: - IBActions
     @IBAction func backButtonTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func showTokensListButtonTapped(_ sender: Any) {
+        guard let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "TokensListController") as? TokensListForPopoverViewController else { return }
+        popoverContent.tokens = tokensService.availableTokensList() ?? []
+        popoverContent.delegate = self
+        popoverContent.preferredContentSize = CGSize(width: 100, height: 150)
+        let nav = UINavigationController(rootViewController: popoverContent)
+        nav.modalPresentationStyle = .popover
+        guard let popover = nav.popoverPresentationController else { return }
+        popover.delegate = self
+        popover.sourceView = view
+        
+        let x = tokensButton.frame.origin.x - 100
+        let y = tokensButton.frame.origin.y + tokensButton.frame.height + 100
+        
+        popover.sourceRect = CGRect(x: x, y: y, width: 100, height: 120)
+        popover.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        
+        self.present(nav, animated: true, completion: nil)
         
     }
     
@@ -56,6 +94,18 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         tableView.reloadData()
     }
     
+    //MARK: - Choose Token Delegate
+    func didSelectToken(name: String) {
+        if name.uppercased() == "ETH" {
+            sendEthService = SendEthServiceImplementation()
+        } else {
+            sendEthService = ERC20TokenContractMethodsServiceImplementation()
+        }
+        updateTransactions()
+        tableView.reloadData()
+    }
+    
+    //MARK: - TableView Delegate/Datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return transactionsToShow[section].count
     }
@@ -65,8 +115,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 32, height: 46))
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 32, height: 22))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 46))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 22))
         label.text = getDateForPrint(date: transactionsToShow[section][0].date)
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         view.backgroundColor = UIColor.white
@@ -85,6 +135,12 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         return cell
     }
     
+    //MARK: Popover Delegate
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    //MARK: - Helpers
     private func getFormattedDate(date: Date) -> (day: Int, month: Int, year: Int) {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
