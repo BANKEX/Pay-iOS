@@ -145,9 +145,6 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         headerView.addSubview(circleView)
     }
     
-    @objc func callImagePicker( ) {
-        //TODO
-    }
     
     
     
@@ -212,6 +209,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
             }else {
                 state = .noAvailable
             }
+            wordLabel.text = futureString.prefix(1).uppercased()
         case addressTextField:
             if !futureString.isEmpty && !(firstNameTextField?.text?.isEmpty ?? true) && !(lastNameTextField?.text?.isEmpty ?? true) {
                 state = .available
@@ -224,6 +222,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         textField.returnKeyType = state == .available ? .done : .next
         return true
     }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard textField.returnKeyType == .done else {
