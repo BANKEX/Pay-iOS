@@ -66,9 +66,13 @@ class AddressQRCodeController: UIViewController {
         UIPasteboard.general.string = addressToGenerateQR
         self.copiedIcon.alpha = 0.0
         self.copiedLabel.alpha = 0.0
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 2.0, animations: {
             self.copiedIcon.alpha = 1.0
             self.copiedLabel.alpha = 1.0
+        })
+        UIView.animate(withDuration: 2.0, animations: {
+            self.copiedIcon.alpha = 0.0
+            self.copiedLabel.alpha = 0.0
         })
     }
     

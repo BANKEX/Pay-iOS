@@ -155,9 +155,6 @@ class PasscodeEnterController: UIViewController {
                     if succes {
                         self.enterWallet()
                     }
-                    else {
-                        self.showAlertController(type + " Authentication Failed. Try again or use Your Passcode")
-                    }
                     
             })
         }
