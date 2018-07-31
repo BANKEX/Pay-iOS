@@ -40,6 +40,7 @@ class SecurityViewController: UITableViewController {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
+                sender.setOn(false, animated: false)
             }
         }
         NotificationCenter.default.post(name:SwitchChangeNotifications.didChangeOpenSwitch.notificationName(), object: self, userInfo:["state":sender.isOn])
@@ -50,6 +51,7 @@ class SecurityViewController: UITableViewController {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
+                sender.setOn(false, animated: false)
             }
         }
         NotificationCenter.default.post(name:SwitchChangeNotifications.didChangeSendSwitch.notificationName(), object: self, userInfo:["state":sender.isOn])
@@ -60,6 +62,7 @@ class SecurityViewController: UITableViewController {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
+                sender.setOn(false, animated: false)
             }
         }
         NotificationCenter.default.post(name:SwitchChangeNotifications.didChangeMultiSwitch.notificationName(), object: self, userInfo:["state":sender.isOn])
