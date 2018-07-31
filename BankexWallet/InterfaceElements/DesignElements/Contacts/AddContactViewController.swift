@@ -38,7 +38,24 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     let heightOfRow:CGFloat = 47.0
     var doneButton:UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(done))
     var service = RecipientsAddressesServiceImplementation()
-    let radius:CGFloat = 43.0
+    var radius:CGFloat = 43.0
+    var circleView:UIView = {
+       var view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 43.0
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 0.75
+        return view
+    }()
+    lazy var wordLabel:UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 48.0)
+        label.numberOfLines = 1
+        label.sizeToFit()
+        label.textAlignment = .center
+        label.textColor = UIColor.black
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,8 +93,15 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     
     func setupHeader() {
         headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 160.0))
-        tableView.tableHeaderView = headerView
         createCircle()
+        addWordLabel()
+        tableView.tableHeaderView = headerView
+    }
+    
+    func addWordLabel() {
+        wordLabel.frame.origin = CGPoint(x: 19.0, y: 15.0)
+        wordLabel.frame.size = CGSize(width: 48.0, height: 57.0)
+        circleView.addSubview(wordLabel)
     }
     
     @objc func back() {
@@ -115,39 +139,10 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     }
     
     fileprivate func createCircle() {
-        guard let header = headerView else { return }
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x:header.bounds.midX, y: header.bounds.midY), radius: radius, startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
-        let shapelayer = CAShapeLayer()
-        shapelayer.path = circlePath.cgPath
-        shapelayer.fillColor = UIColor.white.cgColor
-        shapelayer.lineWidth = 0.8
-        shapelayer.strokeColor = UIColor.lightGray.cgColor
-        let heightPhotoLabe:CGFloat = 15.0
-        let label = UILabel()
-        label.text = "add photo"
-        label.textColor = WalletColors.blueText.color()
-        label.numberOfLines = 1
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14.0)
-        label.sizeToFit()
-        label.frame.origin = CGPoint(x:(shapelayer.path?.boundingBox.minX)! + shapelayer.lineWidth, y: header.bounds.midY - label.bounds.height/2)
-        label.frame.size = CGSize(width: (shapelayer.path?.boundingBox.width)! - 2, height: heightPhotoLabe)
-        
-        
-        
-        let button = UIButton(type: .custom)
-        button.frame.size = CGSize(width: radius*2, height: radius*2)
-        button.backgroundColor = UIColor.clear
-        button.frame.origin = CGPoint(x: (shapelayer.path?.boundingBox.minX)!, y: (shapelayer.path?.boundingBox.minY)!)
-        button.layer.cornerRadius = radius
-        button.addTarget(self, action: #selector(callImagePicker), for: .touchUpInside)
-
-        headerView.layer.addSublayer(shapelayer)
-        headerView.addSubview(label)
-        headerView.addSubview(button)
-        
-        
-        
+        let circleX = headerView.bounds.midX - radius - 0.75
+        circleView.frame.origin = CGPoint(x:circleX, y:22.0)
+        circleView.frame.size = CGSize(width: radius*2, height: radius*2)
+        headerView.addSubview(circleView)
     }
     
     @objc func callImagePicker( ) {
