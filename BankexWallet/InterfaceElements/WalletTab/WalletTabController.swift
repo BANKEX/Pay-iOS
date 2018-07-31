@@ -59,6 +59,8 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         guard let tokenForInfo = sender.chosenToken else { return }
         chosenToken = tokenForInfo
         chosenTokenAmount = sender.amount
+        // TODO: - Add token amount
+        chosenTokenAmount = nil
     }
     
     override func viewDidLoad() {
@@ -81,8 +83,8 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         updateTableView()
     }
     
@@ -239,6 +241,12 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         headerView.addSubview(headerLabel)
         
         return headerView
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
     

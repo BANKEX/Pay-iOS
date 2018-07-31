@@ -12,13 +12,16 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var walletName: UILabel!
+    @IBOutlet weak var addingButton: UIButton!
     
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
+    let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     
     var interactor:Interactor?
     
     var token: ERC20TokenModel?
     var amount: String?
+    var forAdding: Bool = false
     
     @IBAction func close(sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -64,6 +67,10 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             walletName.text = keysService.selectedWallet()?.name
         }
+        
+        if !forAdding {
+            addingButton.isHidden = true
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,5 +93,17 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
         
     }
+    
+    @IBAction func addTokenAction(_ sender: UIButton) {
+        guard let foundModel = token else {
+            return
+        }
+        tokensService.addNewCustomToken(with: foundModel.address,
+                                        name: foundModel.name,
+                                        decimals: foundModel.decimals,
+                                        symbol: foundModel.symbol)
+        dismiss(animated: true, completion: nil)
+    }
+    
     
 }
