@@ -82,6 +82,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.shadowImage = nil
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
