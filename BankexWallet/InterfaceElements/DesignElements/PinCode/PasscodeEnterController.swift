@@ -42,6 +42,10 @@ class PasscodeEnterController: UIViewController {
         enterWithBiometrics()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     func changePasscodeStatus(_ newStatus: passcodeStatus) {
         status = newStatus
         messageLabel.text = status.rawValue
