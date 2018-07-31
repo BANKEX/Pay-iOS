@@ -38,10 +38,12 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
                     newTask.from = transactionModel.from
                     newTask.date = transactionModel.date
                     newTask.amount = transactionModel.amount
+                    newTask.networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
                     // TODO: Now we suppose that we can have only one with given address
                     let selectedTokenModel = CustomERC20TokensServiceImplementation().selectedERC20Token()
                     let token = try context.fetch(FetchRequest<ERC20Token>().filtered(with: "address", equalTo: selectedTokenModel.address))
                     newTask.token = token.first
+                    newTask.trHash = result.value?.transaction.txhash
                     try context.insert(newTask)
                     save()
                 }
@@ -151,10 +153,10 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
 
         guard let address = self.keysService.selectedAddress() else { return [] }
         let selectedToken = CustomERC20TokensServiceImplementation().selectedERC20Token()
-        
+        let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
         
 
-        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "from == %@ || to == %@", address, address)).sorted(with: "date", ascending: false))
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@)",NSNumber(value: networkId), address, address)).sorted(with: "date", ascending: false))
         let filteredTransactions = transactions.filter { (tr) -> Bool in
             if let token = tr.token, let address = token.address {
                 return address == selectedToken.address

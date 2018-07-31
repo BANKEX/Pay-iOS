@@ -2868,7 +2868,7 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jtp-9m-itp">
-                                <rect key="frame" x="16" y="132" width="382" height="29"/>
+                                <rect key="frame" x="16" y="36" width="382" height="29"/>
                                 <segments>
                                     <segment title="All"/>
                                     <segment title="Received"/>
@@ -2880,7 +2880,7 @@ minutes, please wait ...</string>
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="58" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tll-nS-pNB">
-                                <rect key="frame" x="16" y="186" width="374" height="550"/>
+                                <rect key="frame" x="16" y="90" width="374" height="646"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionHistoryCell" rowHeight="58" id="e7I-1u-CMt" customClass="TransactionHistoryCell" customModule="BankexWallet" customModuleProvider="target">
@@ -2952,87 +2952,21 @@ minutes, please wait ...</string>
                                     <outlet property="delegate" destination="8WB-rZ-FB6" id="B2K-6x-YIR"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Feo-uh-D86">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="116"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaD-Sz-uc0">
-                                        <rect key="frame" x="371" y="30.666666666666671" width="33" height="27"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="1YZ-zL-gL5"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="27" id="dt1-uv-Xlg"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="ETH"/>
-                                        <connections>
-                                            <action selector="editButtonTouched:" destination="0WB-Lg-Tul" eventType="touchUpInside" id="7Oh-jW-4Rd"/>
-                                            <action selector="showTokensListButtonTapped:" destination="8WB-rZ-FB6" eventType="touchUpInside" id="wWN-xy-Wh6"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9P-jX-hbY">
-                                        <rect key="frame" x="10" y="31" width="57" height="22"/>
-                                        <state key="normal" title=" Back" image="BackArrow">
-                                            <color key="titleColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="backButtonTapped:" destination="8WB-rZ-FB6" eventType="touchUpInside" id="hhK-e4-Ngf"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUh-Pl-ZWd">
-                                        <rect key="frame" x="10" y="76" width="205" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="7ec-Sc-DsR"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Z34-Ma-CpJ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pbf-TF-1TJ">
-                                        <rect key="frame" x="0.0" y="115" width="414" height="1"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="6Tm-aL-Bz9"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="E9P-jX-hbY" firstAttribute="leading" secondItem="Feo-uh-D86" secondAttribute="leading" constant="10" id="BFZ-ny-PxD"/>
-                                    <constraint firstItem="Pbf-TF-1TJ" firstAttribute="leading" secondItem="Feo-uh-D86" secondAttribute="leading" id="Dpk-QR-x5o"/>
-                                    <constraint firstAttribute="bottom" secondItem="Pbf-TF-1TJ" secondAttribute="bottom" id="OXc-z9-rUc"/>
-                                    <constraint firstAttribute="trailing" secondItem="Pbf-TF-1TJ" secondAttribute="trailing" id="RvA-dQ-gZl"/>
-                                    <constraint firstItem="E9P-jX-hbY" firstAttribute="top" secondItem="Feo-uh-D86" secondAttribute="top" constant="31" id="Ss1-wc-pSk"/>
-                                    <constraint firstItem="IUh-Pl-ZWd" firstAttribute="leading" secondItem="E9P-jX-hbY" secondAttribute="leading" id="e0u-yD-l8U"/>
-                                    <constraint firstItem="PaD-Sz-uc0" firstAttribute="centerY" secondItem="E9P-jX-hbY" secondAttribute="centerY" constant="2" id="lUg-1n-2L3"/>
-                                    <constraint firstAttribute="bottom" secondItem="IUh-Pl-ZWd" secondAttribute="bottom" constant="10" id="qhC-1e-iJU"/>
-                                    <constraint firstAttribute="height" constant="116" id="tWa-ml-yqC"/>
-                                    <constraint firstAttribute="trailing" secondItem="PaD-Sz-uc0" secondAttribute="trailing" constant="10" id="vX0-bz-ssk"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Jtp-9m-itp" firstAttribute="leading" secondItem="XY1-et-eTM" secondAttribute="leading" constant="16" id="0N5-DZ-3YT"/>
                             <constraint firstItem="XY1-et-eTM" firstAttribute="bottom" secondItem="Tll-nS-pNB" secondAttribute="bottom" id="ABy-zI-1Iu"/>
+                            <constraint firstItem="Jtp-9m-itp" firstAttribute="top" secondItem="XY1-et-eTM" secondAttribute="top" constant="16" id="Axb-tj-0Os"/>
                             <constraint firstItem="XY1-et-eTM" firstAttribute="trailing" secondItem="Tll-nS-pNB" secondAttribute="trailing" constant="24" id="RHE-Xg-qAZ"/>
-                            <constraint firstItem="Feo-uh-D86" firstAttribute="leading" secondItem="XY1-et-eTM" secondAttribute="leading" id="ZMY-9N-k4p"/>
                             <constraint firstItem="Tll-nS-pNB" firstAttribute="leading" secondItem="XY1-et-eTM" secondAttribute="leading" constant="16" id="b6J-8z-yIn"/>
-                            <constraint firstItem="Feo-uh-D86" firstAttribute="top" secondItem="V3u-Rd-03s" secondAttribute="top" id="bh3-zb-BVC"/>
-                            <constraint firstItem="Feo-uh-D86" firstAttribute="trailing" secondItem="XY1-et-eTM" secondAttribute="trailing" id="efA-ld-lCx"/>
                             <constraint firstItem="Tll-nS-pNB" firstAttribute="top" secondItem="Jtp-9m-itp" secondAttribute="bottom" constant="26" id="fbn-PD-HAn"/>
-                            <constraint firstItem="Jtp-9m-itp" firstAttribute="top" secondItem="Feo-uh-D86" secondAttribute="bottom" constant="16" id="kUz-7C-Eg0"/>
                             <constraint firstItem="XY1-et-eTM" firstAttribute="trailing" secondItem="Jtp-9m-itp" secondAttribute="trailing" constant="16" id="vnV-vG-4zO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XY1-et-eTM"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Tll-nS-pNB" id="GZn-90-L1Y"/>
-                        <outlet property="tokensButton" destination="PaD-Sz-uc0" id="fTx-Xb-wRA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iW7-FR-ZhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6058,7 +5992,6 @@ minutes, please wait ...</string>
         <image name="Arrow next" width="16" height="17"/>
         <image name="AttentionIcon" width="99" height="84"/>
         <image name="BANKEXlogo" width="272" height="76"/>
-        <image name="BackArrow" width="12" height="21"/>
         <image name="Connection_icon" width="87" height="88"/>
         <image name="ContactsSmallIcon" width="20" height="16"/>
         <image name="CopiedIcon" width="25" height="24"/>

@@ -89,7 +89,6 @@ FavoriteSelectionDelegate {
     var favService:RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     var favoritesToShow = [FavoriteModel]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureRefreshControl()

@@ -11,8 +11,7 @@ import UIKit
 class TransactionHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChooseTokenDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tokensButton: UIButton!
-    
+    var tokensButton: UIButton!
     
     var sendEthService: SendEthService = SendEthServiceImplementation()
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
@@ -24,16 +23,28 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         super.viewDidLoad()
         updateTransactions()
         configureRefreshControl()
+        addTokensButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationItem.title = "Transactions"
+        } else {
+            // Fallback on earlier versions
+        }
+        //navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        } else {
+            // Fallback on earlier versions
+        }
+
     }
     
     //MARK: - Refresh Control
@@ -56,7 +67,20 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func showTokensListButtonTapped(_ sender: Any) {
+    func addTokensButton() {
+        tokensButton = UIButton(type: .custom)
+        tokensButton.setImage(UIImage(named: "Arrow Down"), for: .normal)
+        tokensButton.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0)
+        tokensButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        tokensButton.setTitle("ETH", for: .normal)
+        tokensButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        tokensButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        tokensButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: tokensButton)
+        tokensButton.addTarget(self, action: #selector(showTokensButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func showTokensButtonTapped(_ sender: Any) {
         guard let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "TokensListController") as? TokensListForPopoverViewController else { return }
         popoverContent.tokens = tokensService.availableTokensList() ?? []
         popoverContent.delegate = self
@@ -65,12 +89,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         nav.modalPresentationStyle = .popover
         guard let popover = nav.popoverPresentationController else { return }
         popover.delegate = self
-        popover.sourceView = view
-        
-        let x = tokensButton.frame.origin.x - 100
-        let y = tokensButton.frame.origin.y + tokensButton.frame.height + 100
-        
-        popover.sourceRect = CGRect(x: x, y: y, width: 100, height: 120)
+        popover.barButtonItem = navigationItem.rightBarButtonItem
+        popover.permittedArrowDirections = .up
         popover.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
         
         self.present(nav, animated: true, completion: nil)

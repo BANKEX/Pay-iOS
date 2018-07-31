@@ -174,6 +174,7 @@ Retriable {
         guard let popover = nav.popoverPresentationController else { return }
         popover.delegate = self
         popover.barButtonItem = navigationItem.rightBarButtonItem
+        popover.permittedArrowDirections = .up
         popover.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
         self.present(nav, animated: true, completion: nil)
 
