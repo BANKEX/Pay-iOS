@@ -15,6 +15,11 @@ class CreateTokenController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var messageLabel: UILabel!
     
+    @IBOutlet weak var tokenAddedIcon: UIImageView!
+    @IBOutlet weak var tokenAddedLabel: UILabel!
+    
+    var needAddTokenAnimation = false
+    
     var chosenToken: ERC20TokenModel?
     var chosenTokenAmount: String?
     
@@ -45,10 +50,11 @@ class CreateTokenController: UIViewController {
         
         searchBar.delegate = self
         
-        
         tableView.alpha = 0
         tableView.isUserInteractionEnabled = false
         
+        tokenAddedIcon.alpha = 0
+        tokenAddedLabel.alpha = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,6 +63,20 @@ class CreateTokenController: UIViewController {
             return
         }
         DispatchQueue.main.async {
+            if self.needAddTokenAnimation {
+                self.needAddTokenAnimation = false
+                self.tokenAddedIcon.alpha = 0.0
+                self.tokenAddedLabel.alpha = 0.0
+                UIView.animate(withDuration: 2.0, animations: {
+                    self.tokenAddedIcon.alpha = 1.0
+                    self.tokenAddedLabel.alpha = 1.0
+                })
+                UIView.animate(withDuration: 2.0, animations: {
+                    self.tokenAddedIcon.alpha = 0.0
+                    self.tokenAddedLabel.alpha = 0.0
+                })
+            }
+            
             self.searchBar(self.searchBar, textDidChange: searchText)
         }
         
@@ -91,6 +111,12 @@ class CreateTokenController: UIViewController {
             DispatchQueue.main.async {
                 self.searchBar(self.searchBar, textDidChange: string)
             }
+        }
+    }
+    
+    @IBAction func unwindFromAddVC(_ sender: UIStoryboardSegue) {
+        if sender.source is TokenInfoController {
+            self.needAddTokenAnimation = true
         }
     }
     

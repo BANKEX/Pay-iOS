@@ -73,7 +73,7 @@ class WalletTabTokenCell: UITableViewCell {
         }
         
         // Cell is different for first and other positions
-        topConstraint?.constant = isEtherCoin ? 15 : 5
+        topConstraint?.constant = isEtherCoin ? 20 : 7
         
         //configure labels
         tokenShortNameLabel?.text = token.symbol.uppercased()

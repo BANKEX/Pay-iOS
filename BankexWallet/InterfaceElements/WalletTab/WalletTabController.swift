@@ -182,32 +182,22 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 116
+            return 136
         } else if indexPath.section == 1 {
             if transactionsToShow.count == 0 {
-                return 70
+                return 112
             } else {
-                return 53
+                return 55
             }
         } else {
             if tokens.count == 0 {
-                return 70
+                return 112
             } else {
-                return 127
+                return 147
             }
             
         }
     }
-    
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //        guard let token = tokens?[indexPath.row] else {
-    //            return
-    //        }
-    //        let address = token.address
-    //        service.updateSelectedToken(to: address)
-    //        tokens = service.availableTokensList()
-    //        tableView.reloadData()
-    //    }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == WalletSections.ethereum.rawValue {
@@ -220,11 +210,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if tableView.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {
-            return 0
-        } else {
-            return 40
-        }
+        return 60
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -232,12 +218,12 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         let headerView = UIView()
         headerView.backgroundColor = UIColor.white
         
-        let headerLabel = UILabel(frame: CGRect(x: 10, y: 10, width:
-            tableView.bounds.size.width, height: tableView.bounds.size.height))
+        let headerLabel = UILabel(frame: CGRect(x: 15, y: 32, width:
+            tableView.bounds.size.width, height: 22))
         headerLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         headerLabel.textColor = UIColor.black
         headerLabel.text = self.tableView(self.tableView, titleForHeaderInSection: section)
-        headerLabel.sizeToFit()
+        
         headerView.addSubview(headerLabel)
         
         return headerView

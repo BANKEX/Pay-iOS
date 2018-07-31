@@ -102,7 +102,7 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
                                         name: foundModel.name,
                                         decimals: foundModel.decimals,
                                         symbol: foundModel.symbol)
-        dismiss(animated: true, completion: nil)
+        
     }
     
     
