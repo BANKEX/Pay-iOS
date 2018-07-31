@@ -33,7 +33,10 @@
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="from" attributeType="String" syncable="YES"/>
+        <attribute name="isPending" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="networkId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="to" attributeType="String" syncable="YES"/>
+        <attribute name="trHash" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="keywallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="transactions" inverseEntity="KeyWallet" syncable="YES"/>
         <relationship name="token" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ERC20Token" inverseName="transactions" inverseEntity="ERC20Token" syncable="YES"/>
     </entity>
@@ -47,7 +50,7 @@
         <element name="ERC20Token" positionX="-63" positionY="9" width="128" height="180"/>
         <element name="FavoritesAddress" positionX="-18" positionY="135" width="128" height="105"/>
         <element name="KeyWallet" positionX="-54" positionY="54" width="128" height="180"/>
-        <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="195"/>
         <element name="TokenBalance" positionX="-54" positionY="90" width="128" height="105"/>
     </elements>
 </model>

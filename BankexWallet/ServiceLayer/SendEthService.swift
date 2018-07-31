@@ -99,6 +99,7 @@ class SendEthServiceImplementation: SendEthService {
                 }
                 return
             }
+            
             do {
                 try self.db.operation { (context, save) in
                     let newTask: SendEthTransaction = try context.new()
@@ -111,6 +112,8 @@ class SendEthServiceImplementation: SendEthService {
                     newTask.amount = transactionModel.amount
                     newTask.keywallet = selectedKey
                     newTask.token = selectedToken
+                    newTask.networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
+                    newTask.trHash = result.value?.transaction.txhash
                     try context.insert(newTask)
                     save()
                 }
@@ -145,7 +148,9 @@ class SendEthServiceImplementation: SendEthService {
     // TODO: They're not optional! 
     func getAllTransactions() -> [ETHTransactionModel]? {
         guard let address = self.keysService.selectedAddress() else { return [] }
-        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "from == %@ || to == %@",address, address )).sorted(with: "date", ascending: false))
+        let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
+
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@)", NSNumber(value: networkId), address, address)).sorted(with: "date", ascending: false))
         
         return transactions.map({ (transaction) -> ETHTransactionModel in
             let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :

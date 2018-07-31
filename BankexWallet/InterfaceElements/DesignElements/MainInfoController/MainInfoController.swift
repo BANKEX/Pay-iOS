@@ -89,7 +89,6 @@ FavoriteSelectionDelegate {
     var favService:RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     var favoritesToShow = [FavoriteModel]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureRefreshControl()
@@ -117,11 +116,9 @@ FavoriteSelectionDelegate {
     var transactionsToShow = [ETHTransactionModel]()
     var transactionInitialDiff = 0
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configureNavBar()
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.topItem?.prompt = "   "
         itemsArray = [
             "CurrentWalletInfoCell",
@@ -129,9 +126,8 @@ FavoriteSelectionDelegate {
             "FavouritesTitleCell"]
         putTransactionsInfoIntoItemsArray()
         tableView.reloadData()
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.topItem?.prompt = "   "
     }
+    
         
     @IBAction func unwind(segue:UIStoryboardSegue) { }
     
@@ -271,6 +267,7 @@ FavoriteSelectionDelegate {
         return String(formattedNumber.reversed())
     }
     
+    //MARK: - Refresh Control
     func configureRefreshControl() {
         if #available(iOS 10.0, *) {
             tableView.refreshControl = UIRefreshControl()
