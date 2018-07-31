@@ -110,7 +110,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
             if let _ = error {
                 self.showCreationAlert()
             }
-            if UserDefaults.standard.string(forKey: "Passcode") == nil {
+            if !UserDefaults.standard.bool(forKey: "passcodeExists") {
                 self.performSegue(withIdentifier: "goToPinFromImportSingleKey", sender: self)
             } else {
                 self.performSegue(withIdentifier: "showProcessFromImportSecretKey", sender: self)

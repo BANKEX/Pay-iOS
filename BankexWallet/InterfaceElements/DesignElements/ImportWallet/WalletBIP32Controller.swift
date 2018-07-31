@@ -108,7 +108,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
                 self.showCreationAlert()
                 return
             }
-            if UserDefaults.standard.string(forKey: "Passcode") == nil {
+            if !UserDefaults.standard.bool(forKey: "passcodeExists") {
                 self.performSegue(withIdentifier: "goToPinFromImportPassphrase", sender: self)
             } else {
                 self.performSegue(withIdentifier: "showProcessFromImportPassphrase", sender: self)
