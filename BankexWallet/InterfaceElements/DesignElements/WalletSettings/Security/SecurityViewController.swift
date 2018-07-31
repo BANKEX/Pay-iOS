@@ -9,9 +9,15 @@
 import UIKit
 import LocalAuthentication
 
-
+public enum Keys:String {
+    case openSwitch = "open"
+    case sendSwitch = "send"
+    case multiSwitch = "multi"
+}
 
 class SecurityViewController: UITableViewController {
+    
+    
     
     @IBOutlet weak var openSwitch:UISwitch!
     @IBOutlet weak var sendSwitch:UISwitch!
@@ -28,11 +34,19 @@ class SecurityViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateUI()
         [openSwitch,sendSwitch,multitaskSwitch].forEach { item in
             item?.isEnabled = TouchManager.canAuth() ? true : false
         }
     }
     
+    
+    
+    func updateUI() {
+        openSwitch.isOn = UserDefaults.standard.value(forKey:Keys.openSwitch.rawValue) as? Bool ?? true
+        sendSwitch.isOn = UserDefaults.standard.value(forKey:Keys.sendSwitch.rawValue) as? Bool ?? true
+        multitaskSwitch.isOn = UserDefaults.standard.value(forKey:Keys.multiSwitch.rawValue) as? Bool ?? true
+    }
     
     
     @IBAction func switchTouchID(_ sender:UISwitch) {
@@ -41,9 +55,10 @@ class SecurityViewController: UITableViewController {
                 print("Success")
             }) { (error) in
                 sender.setOn(false, animated: false)
+                UserDefaults.standard.set(false, forKey: Keys.openSwitch.rawValue)
             }
         }
-        NotificationCenter.default.post(name:SwitchChangeNotifications.didChangeOpenSwitch.notificationName(), object: self, userInfo:["state":sender.isOn])
+        UserDefaults.standard.set(sender.isOn, forKey: Keys.openSwitch.rawValue)
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
@@ -52,9 +67,10 @@ class SecurityViewController: UITableViewController {
                 print("Success")
             }) { (error) in
                 sender.setOn(false, animated: false)
+                UserDefaults.standard.set(false, forKey: Keys.sendSwitch.rawValue)
             }
         }
-        NotificationCenter.default.post(name:SwitchChangeNotifications.didChangeSendSwitch.notificationName(), object: self, userInfo:["state":sender.isOn])
+        UserDefaults.standard.set(sender.isOn, forKey: Keys.sendSwitch.rawValue)
     }
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
@@ -63,9 +79,10 @@ class SecurityViewController: UITableViewController {
                 print("Success")
             }) { (error) in
                 sender.setOn(false, animated: false)
+                UserDefaults.standard.set(false, forKey:Keys.multiSwitch.rawValue)
             }
         }
-        NotificationCenter.default.post(name:SwitchChangeNotifications.didChangeMultiSwitch.notificationName(), object: self, userInfo:["state":sender.isOn])
+        UserDefaults.standard.set(sender.isOn, forKey: Keys.multiSwitch.rawValue)
     }
     
     

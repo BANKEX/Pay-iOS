@@ -40,7 +40,6 @@ class PasscodeEnterController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         enterWithBiometrics()
-        
     }
     
     func changePasscodeStatus(_ newStatus: passcodeStatus) {
@@ -86,7 +85,7 @@ class PasscodeEnterController: UIViewController {
         super.viewWillAppear(animated)
         let context = LAContext()
         var error: NSError?
-        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) || !UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue) {
             biometricsButton.alpha = 0.0
             biometricsButton.isUserInteractionEnabled = false
         }

@@ -29,7 +29,7 @@ public class TouchManager:NSObject {
     
     
     /// Check for authentication
-    class func authenticateBioMetrics(reason:String,cancelString:String? = nil,fallbackString:String? = nil,success:@escaping SuccessCallback, failure:@escaping FailureCallback) {
+    class func authenticateBioMetrics(reason:String,cancelString:String? = nil,fallbackString:String? = "",success:@escaping SuccessCallback, failure:@escaping FailureCallback) {
         
         let stringReason:String = reason.isEmpty ? TouchManager.shared.defaultReason() : reason
         
