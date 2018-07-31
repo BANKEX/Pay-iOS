@@ -22,6 +22,8 @@ class PasscodeLockController: UIViewController {
     var repeatedPasscode: String = ""
     var status: passcodeStatus = .new
     
+    var passcodeItems: [KeychainPasswordItem] = []
+    
     @IBOutlet weak var firstNum: UIImageView!
     @IBOutlet weak var secondNum: UIImageView!
     @IBOutlet weak var thirdNum: UIImageView!
@@ -56,7 +58,16 @@ class PasscodeLockController: UIViewController {
     }
     
     func createWallet() {
-        UserDefaults.standard.set(passcode, forKey: "Passcode")
+        do {
+            let passcodeItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+                                                    account: "BANKEXFOUNDATION",
+                                                    accessGroup: KeychainConfiguration.accessGroup)
+            try passcodeItem.savePassword(passcode)
+        } catch {
+            fatalError("Error updating keychain - \(error)")
+        }
+        
+        UserDefaults.standard.set(true, forKey: "passcodeExists")
         UserDefaults.standard.synchronize()
         if newWallet {
             self.performSegue(withIdentifier: "fromPinToWalletCreated", sender: nil)

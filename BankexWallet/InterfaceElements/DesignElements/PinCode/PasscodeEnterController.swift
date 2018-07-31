@@ -18,7 +18,6 @@ class PasscodeEnterController: UIViewController {
     }
     
     @IBOutlet weak var messageLabel: UILabel!
-    var rightPasscode = UserDefaults.standard.string(forKey: "Passcode")! // we already shure that it exists
     var passcode: String = ""
     var status: passcodeStatus = .enter
     
@@ -54,6 +53,18 @@ class PasscodeEnterController: UIViewController {
             changeNumsIcons(0)
         } else if status == .ready {
             enterWallet()
+        }
+    }
+    
+    func checkPin(_ passcode: String) -> Bool {
+        do {
+            let passcodeItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+                                                    account: "BANKEXFOUNDATION",
+                                                    accessGroup: KeychainConfiguration.accessGroup)
+            let keychainPasscode = try passcodeItem.readPassword()
+            return passcode == keychainPasscode
+        } catch {
+            fatalError("Error reading password from keychain - \(error)")
         }
     }
     
@@ -108,7 +119,7 @@ class PasscodeEnterController: UIViewController {
             passcode += number
             changeNumsIcons(passcode.count)
             if passcode.count == 4 {
-                let newStatus: passcodeStatus = passcode == rightPasscode ? .ready : .wrong
+                let newStatus: passcodeStatus = checkPin(passcode) ? .ready : .wrong
                 changePasscodeStatus(newStatus)
             }
         } else if status == .wrong {

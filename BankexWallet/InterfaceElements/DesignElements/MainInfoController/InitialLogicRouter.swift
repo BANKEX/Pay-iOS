@@ -17,7 +17,7 @@ class InitialLogicRouter {
     
     func navigateToMainControllerIfNeeded(rootControler: UINavigationController) {
         self.rootController = rootControler
-        if UserDefaults.standard.string(forKey: "Passcode") == nil || keysService.selectedWallet() == nil {
+        if !UserDefaults.standard.bool(forKey: "passcodeExists") || keysService.selectedWallet() == nil {
             keysService.delete() { (error) in
                 if let _ = error {
                     print(error?.localizedDescription)
