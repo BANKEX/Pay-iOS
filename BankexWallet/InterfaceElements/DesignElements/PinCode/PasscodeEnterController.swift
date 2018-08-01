@@ -38,7 +38,9 @@ class PasscodeEnterController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        enterWithBiometrics()
+        if UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue) == true {
+            enterWithBiometrics()
+        } 
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
