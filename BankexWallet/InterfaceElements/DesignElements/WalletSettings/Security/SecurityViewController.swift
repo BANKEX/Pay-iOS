@@ -35,7 +35,7 @@ class SecurityViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateUI()
-        [openSwitch,sendSwitch,multitaskSwitch].forEach { item in
+        [openSwitch,sendSwitch].forEach { item in
             item?.isEnabled = TouchManager.canAuth() ? true : false
         }
     }
