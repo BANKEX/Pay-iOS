@@ -21,6 +21,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     @IBOutlet weak var networkURLTextField:UITextField!
     @IBOutlet weak var networkNameTextField:UITextField!
     @IBOutlet weak var networkIDTextField:UITextField!
+    @IBOutlet var textFields:[UITextField]!
     
     
     var joinButton = UIBarButtonItem(title: "Join", style: .done, target: self, action: #selector(joinToConnection))
@@ -110,11 +111,15 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
         if textField.returnKeyType == .done && joinButton.isEnabled {
             joinToConnection(self)
         }else if textField.returnKeyType == .next {
-            if textField == networkURLTextField {
-                networkNameTextField.becomeFirstResponder()
+            var nextIndex:Int
+            guard textFields.contains(textField) else { return false }
+            var currentIndex:Int = textFields.index(of: textField) ?? 0
+            if textField == networkIDTextField {
+                nextIndex = 0
             }else {
-                networkURLTextField.becomeFirstResponder()
+                nextIndex = currentIndex + 1
             }
+            textFields[nextIndex].becomeFirstResponder()
         }
         return true
     }
