@@ -12,6 +12,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     
     @IBOutlet weak var tableView: UITableView!
     var tokensButton: UIButton!
+    var popover: UIPopoverPresentationController!
     
     var sendEthService: SendEthService = SendEthServiceImplementation()
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
@@ -87,7 +88,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         popoverContent.preferredContentSize = CGSize(width: 100, height: 150)
         let nav = UINavigationController(rootViewController: popoverContent)
         nav.modalPresentationStyle = .popover
-        guard let popover = nav.popoverPresentationController else { return }
+        popover = nav.popoverPresentationController
         popover.delegate = self
         popover.barButtonItem = navigationItem.rightBarButtonItem
         popover.permittedArrowDirections = .up
@@ -116,6 +117,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     
     //MARK: - Choose Token Delegate
     func didSelectToken(name: String) {
+        tokensButton.setTitle(name.uppercased(), for: .normal)
+        popover.dismissalTransitionDidEnd(true)
         if name.uppercased() == "ETH" {
             sendEthService = SendEthServiceImplementation()
         } else {
