@@ -28,7 +28,7 @@ class TransactionHistoryCell: UITableViewCell {
     
     
     func configure(withTransaction trans: ETHTransactionModel, isLastCell: Bool = false) {
-        let isSend = SingleKeyServiceImplementation().selectedAddress() == trans.from
+        let isSend = SingleKeyServiceImplementation().selectedAddress()?.lowercased() == trans.from
         statusImageView.image = isSend ? #imageLiteral(resourceName: "Sent") : #imageLiteral(resourceName: "Received")
         transactionTypeLabel.text = isSend ? "Sent" : "Received"
         addressLabel.text = isSend ? "To: \(trans.to)" : "From: \(trans.from)"
