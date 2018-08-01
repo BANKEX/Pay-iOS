@@ -149,8 +149,8 @@ class SendEthServiceImplementation: SendEthService {
     func getAllTransactions() -> [ETHTransactionModel]? {
         guard let address = self.keysService.selectedAddress() else { return [] }
         let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
-
-        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@)", NSNumber(value: networkId), address, address)).sorted(with: "date", ascending: false))
+        
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@)", NSNumber(value: networkId), address.lowercased(), address.lowercased())).sorted(with: "date", ascending: false))
         
         return transactions.map({ (transaction) -> ETHTransactionModel in
             let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :

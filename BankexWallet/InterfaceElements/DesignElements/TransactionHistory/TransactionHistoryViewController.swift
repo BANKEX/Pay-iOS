@@ -16,8 +16,11 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     
     var sendEthService: SendEthService = SendEthServiceImplementation()
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
+    let transactionsService = TransactionsService()
+    let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
     var transactionsToShow = [[ETHTransactionModel]]()
+    var currentState: TransactionStatus = .all
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -58,9 +61,14 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //TODO: - Update the data here
-        tableView.reloadData()
-        refreshControl.endRefreshing()
-        
+        guard let selectedAddress = keysService.selectedAddress() else { return }
+        transactionsService.refreshTransactionsInSelectedNetwork(forAddress: selectedAddress) { (success) in
+            if success {
+                self.updateTransactions()
+                self.tableView.reloadData()
+            }
+            refreshControl.endRefreshing()
+        }
     }
     
     //MARK: - IBActions
@@ -124,7 +132,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         } else {
             sendEthService = ERC20TokenContractMethodsServiceImplementation()
         }
-        updateTransactions()
+        updateTransactions(status: currentState)
         tableView.reloadData()
     }
     
@@ -183,14 +191,15 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     private func updateTransactions(status: TransactionStatus = .all) {
         var transactions: [ETHTransactionModel]
         transactionsToShow.removeAll()
+        currentState = status
         guard let selectedAddress = SingleKeyServiceImplementation().selectedAddress() else { return }
         switch status {
         case .all:
             transactions = sendEthService.getAllTransactions()!
         case .sent:
-            transactions = sendEthService.getAllTransactions()!.filter{ $0.from == selectedAddress }
+            transactions = sendEthService.getAllTransactions()!.filter{ $0.from == selectedAddress.lowercased() }
         case .received:
-            transactions = sendEthService.getAllTransactions()!.filter{ $0.from != selectedAddress }
+            transactions = sendEthService.getAllTransactions()!.filter{ $0.from != selectedAddress.lowercased() }
         case .confirming:
             transactions = []
         }

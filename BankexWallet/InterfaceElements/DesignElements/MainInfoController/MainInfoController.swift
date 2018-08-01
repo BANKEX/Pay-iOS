@@ -284,10 +284,23 @@ FavoriteSelectionDelegate {
                 "TransactionHistoryCell",//]
                 "FavouritesTitleCell"]
             self.putTransactionsInfoIntoItemsArray()
-            self.tableView.reloadData()
-            if #available(iOS 10.0, *) {
-                self.tableView.refreshControl?.endRefreshing()
+            if let address = self.keyService.selectedAddress() {
+                TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
+                    print(tr)
+                    self.transactionsToShow = self.sendEthService.getAllTransactions()!
+                    self.tableView.reloadData()
+                    if #available(iOS 10.0, *) {
+                        self.tableView.refreshControl?.endRefreshing()
+                    }
+                }
+            } else {
+                if #available(iOS 10.0, *) {
+                    self.tableView.refreshControl?.endRefreshing()
+                } else {
+                    // Fallback on earlier versions
+                }
             }
+            
         }
         
     }
