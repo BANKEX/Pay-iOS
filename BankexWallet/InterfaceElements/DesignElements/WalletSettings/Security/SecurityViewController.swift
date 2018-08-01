@@ -13,6 +13,7 @@ public enum Keys:String {
     case openSwitch = "open"
     case sendSwitch = "send"
     case multiSwitch = "multi"
+    case isChanged = "isChanged"
 }
 
 class SecurityViewController: UITableViewController {
@@ -50,6 +51,7 @@ class SecurityViewController: UITableViewController {
     
     
     @IBAction func switchTouchID(_ sender:UISwitch) {
+        UserDefaults.standard.set(true, forKey: Keys.isChanged.rawValue)
         if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
@@ -62,6 +64,7 @@ class SecurityViewController: UITableViewController {
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
+        UserDefaults.standard.set(true, forKey: Keys.isChanged.rawValue)
         if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
@@ -74,6 +77,7 @@ class SecurityViewController: UITableViewController {
     }
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
+        UserDefaults.standard.set(true, forKey: Keys.isChanged.rawValue)
         if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
