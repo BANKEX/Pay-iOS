@@ -12,11 +12,15 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     
     @IBOutlet weak var tableView: UITableView!
     var tokensButton: UIButton!
+    var popover: UIPopoverPresentationController!
     
     var sendEthService: SendEthService = SendEthServiceImplementation()
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
+    let transactionsService = TransactionsService()
+    let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
     var transactionsToShow = [[ETHTransactionModel]]()
+    var currentState: TransactionStatus = .all
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -57,9 +61,14 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //TODO: - Update the data here
-        tableView.reloadData()
-        refreshControl.endRefreshing()
-        
+        guard let selectedAddress = keysService.selectedAddress() else { return }
+        transactionsService.refreshTransactionsInSelectedNetwork(forAddress: selectedAddress) { (success) in
+            if success {
+                self.updateTransactions()
+                self.tableView.reloadData()
+            }
+            refreshControl.endRefreshing()
+        }
     }
     
     //MARK: - IBActions
@@ -87,7 +96,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         popoverContent.preferredContentSize = CGSize(width: 100, height: 150)
         let nav = UINavigationController(rootViewController: popoverContent)
         nav.modalPresentationStyle = .popover
-        guard let popover = nav.popoverPresentationController else { return }
+        popover = nav.popoverPresentationController
         popover.delegate = self
         popover.barButtonItem = navigationItem.rightBarButtonItem
         popover.permittedArrowDirections = .up
@@ -116,12 +125,14 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     
     //MARK: - Choose Token Delegate
     func didSelectToken(name: String) {
+        tokensButton.setTitle(name.uppercased(), for: .normal)
+        popover.dismissalTransitionDidEnd(true)
         if name.uppercased() == "ETH" {
             sendEthService = SendEthServiceImplementation()
         } else {
             sendEthService = ERC20TokenContractMethodsServiceImplementation()
         }
-        updateTransactions()
+        updateTransactions(status: currentState)
         tableView.reloadData()
     }
     
@@ -180,14 +191,15 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     private func updateTransactions(status: TransactionStatus = .all) {
         var transactions: [ETHTransactionModel]
         transactionsToShow.removeAll()
+        currentState = status
         guard let selectedAddress = SingleKeyServiceImplementation().selectedAddress() else { return }
         switch status {
         case .all:
             transactions = sendEthService.getAllTransactions()!
         case .sent:
-            transactions = sendEthService.getAllTransactions()!.filter{ $0.from == selectedAddress }
+            transactions = sendEthService.getAllTransactions()!.filter{ $0.from == selectedAddress.lowercased() }
         case .received:
-            transactions = sendEthService.getAllTransactions()!.filter{ $0.from != selectedAddress }
+            transactions = sendEthService.getAllTransactions()!.filter{ $0.from != selectedAddress.lowercased() }
         case .confirming:
             transactions = []
         }
