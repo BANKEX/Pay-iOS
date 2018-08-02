@@ -16,11 +16,11 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
     
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
+    let conversionService = FiatServiceImplementation.service
     
     var interactor:Interactor?
     
     var token: ERC20TokenModel?
-    var amount: String?
     var forAdding: Bool = false
     
     @IBAction func close(sender: UIButton) {
@@ -84,7 +84,8 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
         case TokenInfoRaws.address.rawValue :
             cell.configure(with: "Address", value: token?.address, measurment: nil)
         case TokenInfoRaws.currency.rawValue :
-            cell.configure(with: "Currency", value:  (amount ?? "Error in amount of token"), measurment: (token?.name ?? ""))
+            let rate = token != nil ? "\(conversionService.currentConversionRate(for: (token?.symbol.uppercased())!))$" : "Error in amount of token"
+            cell.configure(with: "Currency", value: rate, measurment: (token?.name ?? ""))
         case TokenInfoRaws.decimals.rawValue :
             cell.configure(with: "Decimals", value: token?.decimals, measurment: nil)
         default:

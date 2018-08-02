@@ -38,8 +38,6 @@ extension CreateTokenController: UITableViewDelegate, UITableViewDataSource {
         
         let tokenToAdd = self.tokensList![indexPath.row]
         chosenToken = tokenToAdd
-        // TODO: - Add token amount
-        chosenTokenAmount = nil
         performSegue(withIdentifier: "addChosenToken", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -50,7 +48,6 @@ extension CreateTokenController: UITableViewDelegate, UITableViewDataSource {
             destinationViewController.transitioningDelegate = self
             destinationViewController.token = chosenToken ?? nil
             destinationViewController.interactor = interactor
-            destinationViewController.amount = chosenTokenAmount
             destinationViewController.forAdding = true
         }
     }

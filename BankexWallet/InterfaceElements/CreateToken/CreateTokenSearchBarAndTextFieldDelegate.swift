@@ -81,8 +81,6 @@ extension CreateTokenController: UISearchBarDelegate, UITextFieldDelegate {
         if searchBar.text != nil && searchBar.text! != "" && (self.tokensList != nil) {
             let tokenToAdd = self.tokensList?.first
             chosenToken = tokenToAdd
-            // TODO: - Add token amount
-            chosenTokenAmount = nil
             performSegue(withIdentifier: "addChosenToken", sender: self)
         }
     }

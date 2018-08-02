@@ -21,7 +21,6 @@ class CreateTokenController: UIViewController {
     var needAddTokenAnimation = false
     
     var chosenToken: ERC20TokenModel?
-    var chosenTokenAmount: String?
     
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     var tokensList: [ERC20TokenModel]?
