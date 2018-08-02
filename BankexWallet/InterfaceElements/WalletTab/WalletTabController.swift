@@ -93,6 +93,8 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         service.updateConversions()
+        editEnabled = false
+        editButton.setTitle(editEnabled ? "Cancel" : "Edit", for: .normal)
         updateTableView()
     }
     

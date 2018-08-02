@@ -5268,6 +5268,17 @@ minutes, please wait ...</string>
                                                                         <segue destination="lkK-o0-Lf8" kind="presentation" identifier="showTokenInfo" id="ECv-xb-uvS"/>
                                                                     </connections>
                                                                 </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YG3-vG-gpI" customClass="TokensListCellButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                    <rect key="frame" x="245" y="-5" width="50" height="50"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="50" id="Jmc-Rs-89V"/>
+                                                                        <constraint firstAttribute="width" constant="50" id="yXs-kN-dsd"/>
+                                                                    </constraints>
+                                                                    <inset key="titleEdgeInsets" minX="100" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                    <connections>
+                                                                        <action selector="deleteTokenTouched:" destination="0WB-Lg-Tul" eventType="touchUpInside" id="Hjw-FC-441"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.25490196078431371" green="0.50196078431372548" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
@@ -5283,8 +5294,10 @@ minutes, please wait ...</string>
                                                                 <constraint firstAttribute="trailing" secondItem="aNV-Qz-gnM" secondAttribute="trailing" id="PPI-HQ-3xZ"/>
                                                                 <constraint firstItem="aNV-Qz-gnM" firstAttribute="top" secondItem="zHp-1a-NEH" secondAttribute="bottom" constant="8" id="Rwd-6v-WRp"/>
                                                                 <constraint firstItem="Iq3-Gl-idh" firstAttribute="leading" secondItem="NeP-Sm-bKQ" secondAttribute="leading" constant="5" id="UY7-gD-yWJ"/>
+                                                                <constraint firstItem="YG3-vG-gpI" firstAttribute="trailing" secondItem="YXY-8R-alA" secondAttribute="trailing" id="V9N-gu-hXQ"/>
                                                                 <constraint firstItem="tiS-hA-u2x" firstAttribute="leading" secondItem="wm4-p3-EVd" secondAttribute="leading" id="WSH-6T-JPN"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tiS-hA-u2x" secondAttribute="trailing" constant="10" id="a1b-Bv-2c5"/>
+                                                                <constraint firstItem="YG3-vG-gpI" firstAttribute="top" secondItem="YXY-8R-alA" secondAttribute="top" id="a5d-kE-iIh"/>
                                                                 <constraint firstItem="Iq3-Gl-idh" firstAttribute="top" secondItem="NeP-Sm-bKQ" secondAttribute="top" constant="26" id="cJS-xT-JbZ"/>
                                                                 <constraint firstItem="wm4-p3-EVd" firstAttribute="leading" secondItem="Iq3-Gl-idh" secondAttribute="trailing" constant="8" id="dhV-6E-ZU3"/>
                                                                 <constraint firstItem="hzc-JP-rJf" firstAttribute="leading" secondItem="wm4-p3-EVd" secondAttribute="leading" id="jH7-ff-1JI"/>
@@ -5327,7 +5340,8 @@ minutes, please wait ...</string>
                                             <outlet property="amountInDollarLabel" destination="tiS-hA-u2x" id="RgO-YK-4Is"/>
                                             <outlet property="amountLabel" destination="wm4-p3-EVd" id="ANc-Qi-L0g"/>
                                             <outlet property="bottomBackgroundView" destination="70p-5s-AGc" id="bXP-b6-Xy8"/>
-                                            <outlet property="deleteButton" destination="YXY-8R-alA" id="yJW-WJ-4nd"/>
+                                            <outlet property="deleteButtonBottom" destination="YXY-8R-alA" id="lWx-BW-tLk"/>
+                                            <outlet property="deleteButtonTop" destination="YG3-vG-gpI" id="cRN-zi-0XC"/>
                                             <outlet property="keyLabel" destination="zHp-1a-NEH" id="74J-UF-kg8"/>
                                             <outlet property="tokenIconImageView" destination="Iq3-Gl-idh" id="X4C-Tj-5L2"/>
                                             <outlet property="tokenShortNameLabel" destination="5an-y2-NUD" id="w7m-rU-RM0"/>
@@ -5460,7 +5474,7 @@ minutes, please wait ...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrR-FU-iU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3534.7826086956525" y="5192.934782608696"/>
+            <point key="canvasLocation" x="-3536.25" y="5191.9014084507044"/>
         </scene>
         <!--Token Info Controller-->
         <scene sceneID="TKh-cs-4Dc">

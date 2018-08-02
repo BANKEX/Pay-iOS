@@ -23,7 +23,8 @@ class WalletTabTokenCell: UITableViewCell {
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var keyLabel: UILabel!
     
-    @IBOutlet weak var deleteButton: TokensListCellButton!
+    @IBOutlet weak var deleteButtonBottom: TokensListCellButton!
+    @IBOutlet weak var deleteButtonTop: TokensListCellButton!
     @IBOutlet weak var tokensListCellInfoButton: TokensListCellButton!
     
     var selectedToken: ERC20TokenModel?
@@ -85,13 +86,18 @@ class WalletTabTokenCell: UITableViewCell {
         
         //configure image and buttons
         tokenIconImageView.image = PredefinedTokens(with: token.symbol).image()
-        deleteButton.layer.cornerRadius = deleteButton.bounds.size.width / 2
-        deleteButton.isHidden = isEditing ? false : true
+        deleteButtonBottom.layer.cornerRadius = deleteButtonBottom.bounds.size.width / 2
+        deleteButtonBottom.isHidden = isEditing ? false : true
+        deleteButtonTop.layer.cornerRadius = deleteButtonTop.bounds.size.width / 2
+        deleteButtonTop.isHidden = isEditing ? false : true
         
-        deleteButton.setTitle(token.address, for: .normal)
-        deleteButton.titleLabel?.isHidden = true
+        deleteButtonBottom.setTitle(token.address, for: .normal)
+        deleteButtonBottom.titleLabel?.isHidden = true
+        deleteButtonTop.setTitle(token.address, for: .normal)
+        deleteButtonTop.titleLabel?.isHidden = true
         
-        deleteButton.chosenToken = token
+        deleteButtonBottom.chosenToken = token
+        deleteButtonTop.chosenToken = token
         
         tokensListCellInfoButton.chosenToken = token
         tokensListCellInfoButton.amount = self.amountLabel.text
