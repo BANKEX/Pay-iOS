@@ -84,8 +84,23 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
         case TokenInfoRaws.address.rawValue :
             cell.configure(with: "Address", value: token?.address, measurment: nil)
         case TokenInfoRaws.currency.rawValue :
-            let rate = token != nil ? "\(conversionService.currentConversionRate(for: (token?.symbol.uppercased())!))$" : "Error in amount of token"
-            cell.configure(with: "Currency", value: rate, measurment: (token?.name ?? ""))
+            var tokenIsAvailable = false
+            if token != nil {
+                for availableToken in tokensService.availableTokensList()! {
+                    if self.token! == availableToken {
+                        tokenIsAvailable = true
+                    }
+                }
+                if tokenIsAvailable {
+                    let rate = token != nil ? "\(conversionService.currentConversionRate(for: (token?.symbol.uppercased())!))$" : "Error currency of token"
+                    cell.configure(with: "Currency", value: rate, measurment: (token?.name ?? ""))
+                } else {
+                    cell.configure(with: "Currency", value: "Add token to load its currency", measurment: (token?.name ?? ""))
+                }
+            } else {
+                cell.configure(with: "Currency", value: "Error in token", measurment: (token?.name ?? ""))
+            }
+            
         case TokenInfoRaws.decimals.rawValue :
             cell.configure(with: "Decimals", value: token?.decimals, measurment: nil)
         default:
