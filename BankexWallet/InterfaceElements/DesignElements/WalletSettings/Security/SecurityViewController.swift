@@ -23,7 +23,9 @@ class SecurityViewController: UITableViewController {
     @IBOutlet weak var openSwitch:UISwitch!
     @IBOutlet weak var sendSwitch:UISwitch!
     @IBOutlet weak var multitaskSwitch:UISwitch!
-    
+    static var isEnabled = true
+    static var isEnabledMulti = true
+    static var isEnabledSend = true    //  Let it be for now
     enum SecuritySections:Int {
         case First = 0,Second
     }
@@ -51,42 +53,45 @@ class SecurityViewController: UITableViewController {
     
     
     @IBAction func switchTouchID(_ sender:UISwitch) {
-        UserDefaults.standard.set(true, forKey: Keys.isChanged.rawValue)
         if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
                 sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey: Keys.openSwitch.rawValue)
+                SecurityViewController.isEnabled = false
             }
         }
         UserDefaults.standard.set(sender.isOn, forKey: Keys.openSwitch.rawValue)
+        SecurityViewController.isEnabled = sender.isOn
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
-        UserDefaults.standard.set(true, forKey: Keys.isChanged.rawValue)
         if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
                 sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey: Keys.sendSwitch.rawValue)
+                SecurityViewController.isEnabledSend = false
             }
         }
         UserDefaults.standard.set(sender.isOn, forKey: Keys.sendSwitch.rawValue)
+        SecurityViewController.isEnabledSend = sender.isOn
     }
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
-        UserDefaults.standard.set(true, forKey: Keys.isChanged.rawValue)
         if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
                 print("Success")
             }) { (error) in
                 sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey:Keys.multiSwitch.rawValue)
+                SecurityViewController.isEnabledMulti = false
             }
         }
         UserDefaults.standard.set(sender.isOn, forKey: Keys.multiSwitch.rawValue)
+        SecurityViewController.isEnabledMulti = sender.isOn
     }
     
     
