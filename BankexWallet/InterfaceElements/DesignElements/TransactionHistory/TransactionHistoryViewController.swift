@@ -24,7 +24,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         .cornerRadius(8.0)
     ]
     
-    var sendEthService: SendEthService = SendEthServiceImplementation()
+    var sendEthService: SendEthService!
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     let transactionsService = TransactionsService()
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
@@ -35,6 +35,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSendEthService()
         updateTransactions()
         configureRefreshControl()
         addTokensButton()
@@ -53,7 +54,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
         }
-
     }
     
     //MARK: - Refresh Control
@@ -121,12 +121,9 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     //MARK: - Choose Token Delegate
     func didSelectToken(name: String) {
         popover.dismiss()
+        guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
+        tokensService.updateSelectedToken(to: token.address)
         tokensButton.setTitle(name.uppercased(), for: .normal)
-        if name.uppercased() == "ETH" {
-            sendEthService = SendEthServiceImplementation()
-        } else {
-            sendEthService = ERC20TokenContractMethodsServiceImplementation()
-        }
         updateTransactions(status: currentState)
         tableView.reloadData()
     }
@@ -172,7 +169,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         tokensButton.setImage(UIImage(named: "Arrow Down"), for: .normal)
         tokensButton.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0)
         tokensButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
-        tokensButton.setTitle("ETH", for: .normal)
+        let title = tokensService.selectedERC20Token().symbol.uppercased()
+        tokensButton.setTitle(title, for: .normal)
         tokensButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         tokensButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
         tokensButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
@@ -200,6 +198,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         var transactions: [ETHTransactionModel]
         transactionsToShow.removeAll()
         currentState = status
+        configureSendEthService()
         guard let selectedAddress = SingleKeyServiceImplementation().selectedAddress() else { return }
         switch status {
         case .all:
@@ -225,6 +224,10 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
                 }
             }
         }
+    }
+    
+    private func configureSendEthService() {
+        sendEthService = tokensService.selectedERC20Token().symbol.uppercased() == "ETH" ? SendEthServiceImplementation() :  ERC20TokenContractMethodsServiceImplementation()
     }
 }
 

@@ -283,11 +283,9 @@ FavoriteSelectionDelegate {
                 "CurrentWalletInfoCell",
                 "TransactionHistoryCell",//]
                 "FavouritesTitleCell"]
-            self.putTransactionsInfoIntoItemsArray()
             if let address = self.keyService.selectedAddress() {
                 TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
-                    print(tr)
-                    self.transactionsToShow = self.sendEthService.getAllTransactions()!
+                    self.putTransactionsInfoIntoItemsArray()
                     self.tableView.reloadData()
                     if #available(iOS 10.0, *) {
                         self.tableView.refreshControl?.endRefreshing()
@@ -296,8 +294,6 @@ FavoriteSelectionDelegate {
             } else {
                 if #available(iOS 10.0, *) {
                     self.tableView.refreshControl?.endRefreshing()
-                } else {
-                    // Fallback on earlier versions
                 }
             }
             
@@ -335,7 +331,8 @@ FavoriteSelectionDelegate {
         if let cell = cell as? FavoriteContactCell {
             let favToShowCount = favoritesToShow.count
             let name = favoritesToShow[favToShowCount - (itemsArray.count - indexPath.row)].firstName
-            cell.configureCell(withName: name, isLast: indexPath.row + 1 == itemsArray.count)
+            let surname = favoritesToShow[favToShowCount - (itemsArray.count - indexPath.row)].lastname
+            cell.configureCell(withName: name, andSurname: surname, isLast: indexPath.row + 1 == itemsArray.count)
         }
         return cell
     }

@@ -156,7 +156,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
         let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
         
 
-        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@)",NSNumber(value: networkId), address, address)).sorted(with: "date", ascending: false))
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@)",NSNumber(value: networkId), address.lowercased(), address.lowercased())).sorted(with: "date", ascending: false))
         let filteredTransactions = transactions.filter { (tr) -> Bool in
             if let token = tr.token, let address = token.address {
                 return address == selectedToken.address

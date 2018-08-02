@@ -85,6 +85,7 @@ class TransactionsService {
                             newTask.isPending = false
                             newTask.to = newTask.to?.lowercased()
                             newTask.from = newTask.from?.lowercased()
+                            newTask.networkId = self.networkId
                             save()
                         } else {
                             let newTask: SendEthTransaction = try context.new()

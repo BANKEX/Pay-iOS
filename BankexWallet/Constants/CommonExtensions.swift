@@ -198,3 +198,21 @@ extension Sequence {
         return result
     }
 }
+
+extension NSMutableAttributedString {
+    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
+        let attrs: [NSAttributedStringKey: Any] = [.font: UIFont.boldSystemFont(ofSize: 17)]
+        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(boldString)
+        
+        return self
+    }
+    
+    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
+        let attrs: [NSAttributedStringKey: Any] = [.font: UIFont.systemFont(ofSize: 17)]
+        let normal = NSAttributedString(string: text, attributes: attrs)
+        append(normal)
+        
+        return self
+    }
+}
