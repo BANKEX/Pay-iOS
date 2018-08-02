@@ -191,6 +191,10 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
 }
 
 extension UITextView {
+    var isPlaceholder:Bool {
+        return self.text == "Notes" && self.textColor == WalletColors.setColorForTextViewPlaceholder()
+    }
+    
     func applyPlaceHolderText(with placeholder:String) {
         self.text = placeholder
         self.textColor = WalletColors.setColorForTextViewPlaceholder()

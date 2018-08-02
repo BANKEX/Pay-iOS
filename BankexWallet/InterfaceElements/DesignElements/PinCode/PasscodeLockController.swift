@@ -58,6 +58,7 @@ class PasscodeLockController: UIViewController {
     }
     
     func createWallet() {
+        UserDefaults.standard.set(true, forKey: "isNotFirst")
         do {
             let passcodeItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
                                                     account: "BANKEXFOUNDATION",
