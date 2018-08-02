@@ -205,7 +205,7 @@ FavoriteSelectionDelegate {
         nameLabel.text = "Home"
         nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
-        ethLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 200, height: 90))
+        ethLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 130, height: 90))
         getBlockNumber { (number) in
             self.configureLabel(withNumber: number)
         }

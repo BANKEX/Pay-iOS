@@ -64,7 +64,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         guard let selectedAddress = keysService.selectedAddress() else { return }
         transactionsService.refreshTransactionsInSelectedNetwork(forAddress: selectedAddress) { (success) in
             if success {
-                self.updateTransactions()
+                self.updateTransactions(status: self.currentState)
                 self.tableView.reloadData()
             }
             refreshControl.endRefreshing()

@@ -59,6 +59,8 @@ class TransactionsService {
                     try self.db.operation({ (context, save) in
                         if let newTask = try context.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "trHash == %@", transaction.trHash))).first {
                             newTask.isPending = false
+                            newTask.to = newTask.to?.lowercased()
+                            newTask.from = newTask.from?.lowercased()
                             save()
                         } else {
                             let newTask: SendEthTransaction = try context.new()

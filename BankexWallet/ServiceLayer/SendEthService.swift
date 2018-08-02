@@ -106,8 +106,8 @@ class SendEthServiceImplementation: SendEthService {
                     let selectedKey = try context.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).first
                     let tokenModel = CustomERC20TokensServiceImplementation().selectedERC20Token()
                     let selectedToken = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address == %@", tokenModel.address))).first
-                    newTask.to = transactionModel.to
-                    newTask.from = transactionModel.from
+                    newTask.to = transactionModel.to.lowercased()
+                    newTask.from = transactionModel.from.lowercased()
                     newTask.date = transactionModel.date as Date
                     newTask.amount = transactionModel.amount
                     newTask.keywallet = selectedKey
