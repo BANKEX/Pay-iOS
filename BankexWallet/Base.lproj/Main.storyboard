@@ -1869,17 +1869,28 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzO-6Q-kBl" customClass="SearchFooter" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Lwa-gU-cXQ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="l6j-zk-cjw" firstAttribute="bottom" secondItem="lzO-6Q-kBl" secondAttribute="bottom" id="2TU-6c-a06"/>
                             <constraint firstItem="l6j-zk-cjw" firstAttribute="bottom" secondItem="nKx-PB-0gh" secondAttribute="bottom" id="OcG-mL-eV0"/>
                             <constraint firstItem="l6j-zk-cjw" firstAttribute="trailing" secondItem="nKx-PB-0gh" secondAttribute="trailing" id="Xev-vM-kSi"/>
                             <constraint firstItem="nKx-PB-0gh" firstAttribute="top" secondItem="l6j-zk-cjw" secondAttribute="top" id="aKE-Oh-yfN"/>
+                            <constraint firstItem="lzO-6Q-kBl" firstAttribute="trailing" secondItem="l6j-zk-cjw" secondAttribute="trailing" id="dlN-au-6xn"/>
+                            <constraint firstItem="lzO-6Q-kBl" firstAttribute="leading" secondItem="l6j-zk-cjw" secondAttribute="leading" id="pBv-jY-MKl"/>
                             <constraint firstItem="nKx-PB-0gh" firstAttribute="leading" secondItem="l6j-zk-cjw" secondAttribute="leading" id="xJ6-cp-98w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l6j-zk-cjw"/>
                     </view>
                     <connections>
+                        <outlet property="searchFooter" destination="lzO-6Q-kBl" id="SGR-6A-Oco"/>
                         <outlet property="tableView" destination="nKx-PB-0gh" id="otN-BJ-uit"/>
                         <segue destination="xIk-xj-TA6" kind="show" identifier="addContactSegue" id="FRN-yh-beo"/>
                         <segue destination="9qS-m2-auy" kind="show" identifier="ProfileContact" id="a4T-3T-HAK"/>
@@ -6206,7 +6217,7 @@ minutes, please wait ...</string>
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-3678.2608695652175" y="6594.29347826087"/>
+            <point key="canvasLocation" x="-3184" y="6738"/>
         </scene>
     </scenes>
     <resources>
@@ -6260,7 +6271,7 @@ minutes, please wait ...</string>
         <segue reference="4bl-zo-1Ji"/>
         <segue reference="jmi-Ci-Lfa"/>
         <segue reference="XCh-X3-sC4"/>
-        <segue reference="YYB-KE-9nn"/>
+        <segue reference="FRN-yh-beo"/>
         <segue reference="75X-cE-nQ5"/>
         <segue reference="57D-OX-sbx"/>
         <segue reference="Oa7-Ma-Ndk"/>
