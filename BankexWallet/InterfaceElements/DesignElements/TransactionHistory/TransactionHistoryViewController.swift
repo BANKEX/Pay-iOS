@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import Popover
 
 class TransactionHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChooseTokenDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var tokensButton: UIButton!
-    var popover: UIPopoverPresentationController!
+    var popover: Popover!
+    
+    var tokensTableViewManager = TokensTableViewManager()
+    
+    fileprivate var popoverOptions: [PopoverOption] = [
+        .type(.down),
+        .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6)),
+        .arrowSize(CGSize(width: 29, height: 16)),
+        .cornerRadius(8.0)
+    ]
     
     var sendEthService: SendEthService = SendEthServiceImplementation()
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
@@ -71,33 +81,23 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         navigationController?.popViewController(animated: true)
     }
     
-    func addTokensButton() {
-        tokensButton = UIButton(type: .custom)
-        tokensButton.setImage(UIImage(named: "Arrow Down"), for: .normal)
-        tokensButton.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0)
-        tokensButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
-        tokensButton.setTitle("ETH", for: .normal)
-        tokensButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        tokensButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
-        tokensButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: tokensButton)
-        tokensButton.addTarget(self, action: #selector(showTokensButtonTapped), for: .touchUpInside)
-    }
-    
+    //MARK: - Popover magic
     @objc func showTokensButtonTapped(_ sender: Any) {
-        guard let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "TokensListController") as? TokensListForPopoverViewController else { return }
-        popoverContent.tokens = tokensService.availableTokensList() ?? []
-        popoverContent.delegate = self
-        popoverContent.preferredContentSize = CGSize(width: 100, height: 150)
-        let nav = UINavigationController(rootViewController: popoverContent)
-        nav.modalPresentationStyle = .popover
-        popover = nav.popoverPresentationController
-        popover.delegate = self
-        popover.barButtonItem = navigationItem.rightBarButtonItem
-        popover.permittedArrowDirections = .up
-        popover.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        popover = Popover(options: self.popoverOptions)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 10, width: 100, height: 150), style: .plain)
+        tableView.separatorStyle = .none
+        tableView.clipsToBounds = true
+        tableView.layer.cornerRadius = 8.0
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 160))
+        aView.clipsToBounds = true
+        aView.addSubview(tableView)
+        aView.backgroundColor = UIColor.clear
         
-        self.present(nav, animated: true, completion: nil)
+        let point = CGPoint(x: UIScreen.main.bounds.width - 30, y: 50)
+        tokensTableViewManager.delegate = self
+        tableView.delegate = tokensTableViewManager
+        tableView.dataSource = tokensTableViewManager
+        self.popover.show(aView, point: point)
         
     }
     
@@ -120,8 +120,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     
     //MARK: - Choose Token Delegate
     func didSelectToken(name: String) {
+        popover.dismiss()
         tokensButton.setTitle(name.uppercased(), for: .normal)
-        popover.dismissalTransitionDidEnd(true)
         if name.uppercased() == "ETH" {
             sendEthService = SendEthServiceImplementation()
         } else {
@@ -167,6 +167,19 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     }
     
     //MARK: - Helpers
+    private func addTokensButton() {
+        tokensButton = UIButton(type: .custom)
+        tokensButton.setImage(UIImage(named: "Arrow Down"), for: .normal)
+        tokensButton.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0)
+        tokensButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        tokensButton.setTitle("ETH", for: .normal)
+        tokensButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        tokensButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        tokensButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: tokensButton)
+        tokensButton.addTarget(self, action: #selector(showTokensButtonTapped), for: .touchUpInside)
+    }
+    
     private func getFormattedDate(date: Date) -> (day: Int, month: Int, year: Int) {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
@@ -179,7 +192,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     private func getDateForPrint(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM dd, yyyy"
-        
+        dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.string(from: date)
     }
     
@@ -214,6 +227,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         }
     }
 }
+
 
 enum TransactionStatus {
     case all

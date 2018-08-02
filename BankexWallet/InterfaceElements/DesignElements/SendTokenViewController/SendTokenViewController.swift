@@ -10,6 +10,7 @@ import UIKit
 import QRCodeReader
 import AVFoundation
 import web3swift
+import Popover
 
 protocol FavoriteInputController: class {
     var selectedFavoriteName: String? {get set}
@@ -49,11 +50,18 @@ Retriable {
     
     var button: UIButton!
     var errorMessage: String?
-    
+    var popover: Popover!
+    fileprivate var popoverOptions: [PopoverOption] = [
+        .type(.down),
+        .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6)),
+        .arrowSize(CGSize(width: 29, height: 16)),
+        .cornerRadius(8.0)
+    ]
     // MARK: Services
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
     var utilsService: UtilTransactionsService!
+    var tokensTableViewManager = TokensTableViewManager()
     
     // MARK: Inputs
     var selectedFavoriteName: String?
@@ -165,18 +173,19 @@ Retriable {
     
     //MARK: - Popover
     @objc func showTokensButtonTapped() {
-        guard let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "TokensListController") as? TokensListForPopoverViewController else { return }
-        popoverContent.tokens = tokensService.availableTokensList() ?? []
-        popoverContent.delegate = self
-        popoverContent.preferredContentSize = CGSize(width: 100, height: 150)
-        let nav = UINavigationController(rootViewController: popoverContent)
-        nav.modalPresentationStyle = .popover
-        guard let popover = nav.popoverPresentationController else { return }
-        popover.delegate = self
-        popover.barButtonItem = navigationItem.rightBarButtonItem
-        popover.permittedArrowDirections = .up
-        popover.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
-        self.present(nav, animated: true, completion: nil)
+        popover = Popover(options: self.popoverOptions)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 10, width: 100, height: 150), style: .plain)
+        tableView.separatorStyle = .none
+        tableView.clipsToBounds = true
+        tableView.layer.cornerRadius = 8.0
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 160))
+        aView.clipsToBounds = true
+        aView.addSubview(tableView)
+        let point = CGPoint(x: UIScreen.main.bounds.width - 30, y: 50)
+        tokensTableViewManager.delegate = self
+        tableView.delegate = tokensTableViewManager
+        tableView.dataSource = tokensTableViewManager
+        self.popover.show(aView, point: point)
 
     }
     
@@ -440,6 +449,7 @@ extension SendTokenViewController: UIPopoverPresentationControllerDelegate {
 //MARK: - Choose Token Delegate
 extension SendTokenViewController: ChooseTokenDelegate {
     func didSelectToken(name: String) {
+        popover.dismiss()
         guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
         tokensService.updateSelectedToken(to: token.address)
         updateTopLayout()
