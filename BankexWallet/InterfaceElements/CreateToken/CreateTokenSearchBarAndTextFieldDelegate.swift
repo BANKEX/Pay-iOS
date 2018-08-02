@@ -46,6 +46,8 @@ extension CreateTokenController: UISearchBarDelegate, UITextFieldDelegate {
                     self.updateListForAlreadyAddedTokens()
                 case .Error(_):
                     self.tokensList = nil
+                    self.tokensAvailability = nil
+                    self.tableView.reloadData()
                 }
             })
             

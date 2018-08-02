@@ -96,6 +96,18 @@ class WalletTabTokenCell: UITableViewCell {
         tokensListCellInfoButton.chosenToken = token
         tokensListCellInfoButton.amount = self.amountLabel.text
     }
+    
+    override func prepareForReuse()
+    {
+        super.prepareForReuse()
+        
+        self.amountLabel.text = ""
+        self.amountInDollarLabel.text = ""
+        self.tokenShortNameLabel.text = ""
+        self.walletNameLabel.text = ""
+        self.keyLabel.text = ""
+        self.tokenIconImageView.image = UIImage(named: "AppIcon")
+    }
 }
 
 class TokensListCellButton: UIButton {
