@@ -35,18 +35,13 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationItem.title = "Transactions"
-        } else {
-            // Fallback on earlier versions
         }
-        //navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
-        } else {
-            // Fallback on earlier versions
         }
 
     }

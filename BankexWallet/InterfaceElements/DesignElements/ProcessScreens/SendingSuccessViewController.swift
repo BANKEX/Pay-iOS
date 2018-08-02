@@ -18,7 +18,6 @@ class SendingSuccessViewController: UIViewController {
     
     // MARK:  Outlets
     @IBOutlet weak var transactionSucceedLabel: UILabel!
-    @IBOutlet weak var addToFavoritesView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +27,6 @@ class SendingSuccessViewController: UIViewController {
     // MARK:
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if favoritesService.contains(address: addressToSend ?? "") {
-            addToFavoritesView.isHidden = true
-        }
         if let amount = transactionAmount {
             transactionSucceedLabel.text = "Your \(amount) \(tokenService.selectedERC20Token().symbol) has been sent successfully"
         }
