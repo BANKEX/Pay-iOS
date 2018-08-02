@@ -80,10 +80,15 @@ protocol CustomERC20TokensService {
     func availableTokensList() -> [ERC20TokenModel]?
     
     func resetSelectedToken()
+    
+    func updateConversions()
 }
 
 
 class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
+    
+    let conversionService = FiatServiceImplementation.service
+    
     func resetSelectedToken() {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
@@ -409,6 +414,21 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
         let isEtherSelected = try! db.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).isEmpty
 
         return ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: isEtherSelected)
+    }
+    
+    func updateConversions() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let availableTokens = self.availableTokensList() {
+                for token in availableTokens {
+                    self.conversionService.updateConversionRate(for: token.symbol.uppercased()) { (rate) in
+                        if token == availableTokens.last! {
+                            NotificationCenter.default.post(name: ReceiveRatesNotification.receivedAllRates.notificationName(), object: self, userInfo: nil)
+                        }
+                    }
+                }
+            }
+        }
+        
     }
     
 }
