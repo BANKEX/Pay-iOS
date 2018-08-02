@@ -36,7 +36,7 @@ class WalletTabTokenCell: UITableViewCell {
         // Initialization code
     }
     
-    func configure(with token: ERC20TokenModel, isSelected: Bool, isEtherCoin: Bool, isEditing: Bool) {
+    func configure(with token: ERC20TokenModel, isSelected: Bool, isEtherCoin: Bool, isEditing: Bool, withConversionRate: Double = 0) {
         
         // Just copypasted
         if token.address != selectedToken?.address {
@@ -64,8 +64,9 @@ class WalletTabTokenCell: UITableViewCell {
                                                                         toUnits: .eth,
                                                                         decimals: 4)
                 self.amountLabel.text = formattedAmount!
-                // TODO: convert to $
-                self.amountInDollarLabel.text = "$\(formattedAmount!) at the rate of Binance"
+                // convert to $
+                let convertedAmount = withConversionRate == 0.0 ? "No data from CryptoCompare" : "$\(withConversionRate * Double(formattedAmount!)!) at the rate of CryptoCompare"
+                self.amountInDollarLabel.text = convertedAmount
             case .Error( _):
                 self.amountLabel.text = "..."
                 

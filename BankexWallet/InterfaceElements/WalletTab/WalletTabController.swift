@@ -16,6 +16,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     var editEnabled: Bool = false
     
     let service: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
+    let conversionService = FiatServiceImplementation.service
     var etherToken: ERC20TokenModel?
     var tokens = [ERC20TokenModel]()
     var sendEthService: SendEthService!
@@ -67,10 +68,10 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         
         super.viewDidLoad()
         
-        let conversionService = FiatServiceImplementation.service
-        conversionService.updateConversionRate(for: service.selectedERC20Token().symbol) { (rate) in
-            print(rate)
+        NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
+            self.tableView.reloadData()
         }
+        
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
             self.updateTableView()
         }
@@ -82,9 +83,11 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        service.updateConversions()
         updateTableView()
     }
     
@@ -102,6 +105,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
                     self.transactionsToShow = transactions
                     self.tokens = availableTokens
                     self.tableView.reloadData()
+                    
                 }
                 
             })
@@ -149,7 +153,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = tableView.dequeueReusableCell(withIdentifier: "WalletTabTokenCell", for: indexPath) as! WalletTabTokenCell
             guard let token = etherToken else {return cell}
             let isSelected = token.address == service.selectedERC20Token().address
-            cell.configure(with: token, isSelected: isSelected, isEtherCoin: true, isEditing: false)
+            cell.configure(with: token, isSelected: isSelected, isEtherCoin: true, isEditing: false, withConversionRate: conversionService.currentConversionRate(for: token.symbol.uppercased()))
             return cell
             
         } else if indexPath.section == WalletSections.recentTransations.rawValue {
@@ -173,7 +177,8 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
                 let cell = tableView.dequeueReusableCell(withIdentifier: "WalletTabTokenCell", for: indexPath) as! WalletTabTokenCell
                 let token = tokens[indexPath.row]
                 let isSelected = token.address == service.selectedERC20Token().address
-                cell.configure(with: token, isSelected: isSelected, isEtherCoin: false, isEditing: editEnabled)
+                //cell.configure(with: token, isSelected: isSelected, isEtherCoin: false, isEditing: editEnabled)
+                cell.configure(with: token, isSelected: isSelected, isEtherCoin: false, isEditing: editEnabled, withConversionRate: conversionService.currentConversionRate(for: token.symbol.uppercased()))
                 return cell
             }
         }

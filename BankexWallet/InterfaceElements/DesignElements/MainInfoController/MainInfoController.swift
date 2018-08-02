@@ -94,10 +94,10 @@ FavoriteSelectionDelegate {
         configureRefreshControl()
         favorites = favService.getAllStoredAddresses()
         
+        tokensService.updateConversions()
         
-        let conversionService = FiatServiceImplementation.service
-        conversionService.updateConversionRate(for: tokensService.selectedERC20Token().symbol) { (rate) in
-            print(rate)
+        NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
+            self.tableView.reloadData()
         }
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
             self.tableView.reloadData()

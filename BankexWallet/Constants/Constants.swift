@@ -38,4 +38,12 @@ enum SwitchChangeNotifications: String {
     }
 }
 
+enum ReceiveRatesNotification: String {
+    case receivedAllRates = "didReceivedAllRates"
+    
+    func notificationName() -> NSNotification.Name {
+        return NSNotification.Name(self.rawValue)
+    }
+}
+
 
