@@ -61,8 +61,11 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         
         NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
-            self.rate = self.conversionService.currentConversionRate(for: (self.token?.symbol.uppercased())!)
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.rate = self.conversionService.currentConversionRate(for: (self.token?.symbol.uppercased())!)
+                self.tableView.reloadData()
+            }
+            
         }
         
         tableView.tableFooterView = UIView() //removing extra cells
