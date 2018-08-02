@@ -49,6 +49,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     let heightNameLabel:CGFloat = 36.0
     let heightHeader:CGFloat = 160.0
     let heightCircle:CGFloat = 86.0
+    let placeholderString = "Notes"
     var state:State = .notEditable {
         didSet{
             if state == .notEditable {
@@ -67,6 +68,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(selectedContact.note)
         configureTextField()
         configureTableView()
         configureNavBar()
@@ -103,6 +105,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     func configureTextView() {
         noteTextView?.delegate = self
         noteTextView.font = UIFont.systemFont(ofSize: 15.0)
+        noteTextView.autocorrectionType = .no
     }
     
     func configureNavBar() {
@@ -150,10 +153,10 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     
     func updateUI() {
         addressTextField?.text = selectedContact.address
-        if selectedNote == nil {
-            noteTextView.applyPlaceHolderText(with: "Notes")
+        if let note = selectedContact.note {
+            noteTextView.text = note
         }else {
-            noteTextView.text = selectedNote
+            noteTextView.applyPlaceHolderText(with: placeholderString)
         }
         nameContactLabel.attributedText = prepareText()
         //If contact not have image
@@ -227,18 +230,17 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     
     
     
-    
     //MARK: - TextViewDelegate
     func textViewDidBeginEditing(_ textView: UITextView) {
         guard textView == noteTextView else { return  }
-        guard textView.text == "Notes" else { return  }
+        guard textView.text == placeholderString else { return  }
         noteTextView.moveCursorToStart()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
-            if textView == noteTextView && textView.text == "Notes" {
+            if textView == noteTextView && textView.text == placeholderString {
                 if text.utf16.count == 0 {
                     return false
                 }
@@ -246,7 +248,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
             }
             return true
         }else {
-            textView.applyPlaceHolderText(with: "Notes")
+            textView.applyPlaceHolderText(with: placeholderString)
             noteTextView.moveCursorToStart()
             return false
         }
@@ -254,6 +256,18 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         return state == .Editable ? true : false
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        guard !textView.text.isEmpty else { return }
+        if let address = addressTextField?.text {
+            if !textView.isPlaceholder {
+                service.updateNote(note: textView.text, byAddress: address)
+            }else {
+                service.updateNote(note: nil, byAddress: address)
+            }
+            
+        }
     }
     
     
