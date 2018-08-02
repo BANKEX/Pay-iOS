@@ -117,6 +117,11 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     func setupNavbar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.title = "Contacts"
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
         navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(transitionToAddContact)), animated: false)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: nil)
     }
