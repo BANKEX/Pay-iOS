@@ -94,7 +94,8 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
                 let fName = recepientAddress.firstName  ?? ""
                 let lName = recepientAddress.lastName ?? ""
                 let address = recepientAddress.address ?? ""
-                return FavoriteModel(firstName: fName, lastname: lName, address: address, lastUsageDate: nil)
+                let noteString = recepientAddress.note
+                return FavoriteModel(firstName: fName, lastname: lName, address: address, lastUsageDate: nil, note: noteString)
             })
             
             return sortedAddresses
@@ -151,6 +152,19 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         }
     }
     
+    func updateNote(note:String?,byAddress address:String) {
+        do {
+            try db.operation({ (context, save) in
+                if let data = try? context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "address == %@",address))).first {
+                    data?.note = note
+                    save()
+                }
+            })
+        }catch {
+            print(error)
+        }
+    }
+    
     func updateFirstName(newName name: String, byAddress address: String) {
         do {
             try db.operation { (context, save) in
@@ -184,6 +198,7 @@ struct FavoriteModel {
     var lastname: String
     var address: String
     var lastUsageDate: Date?
+    var note:String?
 }
 
 struct NameError: LocalizedError {
