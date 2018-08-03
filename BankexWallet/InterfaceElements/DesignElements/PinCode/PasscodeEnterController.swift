@@ -26,12 +26,15 @@ class PasscodeEnterController: UIViewController {
     @IBOutlet weak var thirdNum: UIImageView!
     @IBOutlet weak var fourthNum: UIImageView!
     
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var biometricsButton: UIButton!
     
     var numsIcons: [UIImageView]?
+    var instanciatedFromSend = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureBackground()
         changePasscodeStatus(.enter)
         numsIcons = [firstNum, secondNum, thirdNum, fourthNum]
     }
@@ -58,6 +61,11 @@ class PasscodeEnterController: UIViewController {
         }
     }
     
+    private func configureBackground() {
+        if instanciatedFromSend {
+            backgroundImageView.image = UIImage(named: "pin-greybackground")
+        }
+    }
     func checkPin(_ passcode: String) -> Bool {
         do {
             let passcodeItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
@@ -71,10 +79,16 @@ class PasscodeEnterController: UIViewController {
     }
     
     func enterWallet() {
-        
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+        if instanciatedFromSend {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "backToSend", sender: nil)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+            }
         }
+        
     }
     
     func changeNumsIcons(_ nums: Int) {
@@ -186,6 +200,8 @@ class PasscodeEnterController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? SendingInProcessViewController {
             vc.fromEnterScreen = true
+        } else if let vc = segue.destination as? ConfirmViewController {
+            vc.isPinAccepted = true
         }
     }
     

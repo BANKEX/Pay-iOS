@@ -21,7 +21,7 @@ class ConfirmViewController: UITableViewController {
     @IBOutlet weak var feeLabel:UILabel!
     @IBOutlet weak var gasLimitLabel:UILabel!
     @IBOutlet weak var walletNameLabel: UILabel!
-    
+
     //Properties
     
     
@@ -36,10 +36,12 @@ class ConfirmViewController: UITableViewController {
     var amount:String!
     var name: String!
     var isAuth:Bool = true
-    
+    var isPinAccepted = false
     let tokenService = CustomERC20TokensServiceImplementation()
     let keyService = SingleKeyServiceImplementation()
     
+    @IBAction func unwindBackToConfirm(segue:UIStoryboardSegue) { }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
@@ -83,8 +85,11 @@ class ConfirmViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if isPinAccepted { self.sendFunds() }
         updateUI()
     }
+    
+    
     
     //Helper
     
@@ -108,6 +113,8 @@ class ConfirmViewController: UITableViewController {
         } else if let errorVC = segue.destination as? SendingErrorViewController {
             guard let error = sender as? String else { return }
             errorVC.error = error
+        } else if let vc = segue.destination as? PasscodeEnterController {
+            vc.instanciatedFromSend = true
         }
     }
     
@@ -142,18 +149,25 @@ class ConfirmViewController: UITableViewController {
         }
     }
     
-    
+    //TODO: - show PIN here
     @IBAction func sendTapped() {
         if isAuth {
-            TouchManager.authenticateBioMetrics(reason: "", success: {
+            if isPinAccepted {
                 self.sendFunds()
-            }) { (error) in
-                print(error.getErrorMessage())
+            } else {
+                self.performSegue(withIdentifier: "showPIN", sender: nil)
             }
+//            TouchManager.authenticateBioMetrics(reason: "", success: {
+//                self.sendFunds()
+//            }) { (error) in
+//                print(error.getErrorMessage())
+//            }
         }else {
             self.sendFunds()
         }
-        
     }
+    
+    
+    
     
 }

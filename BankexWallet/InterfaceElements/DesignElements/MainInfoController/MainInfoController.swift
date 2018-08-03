@@ -292,9 +292,10 @@ FavoriteSelectionDelegate {
                 "CurrentWalletInfoCell",
                 "TransactionHistoryCell",//]
                 "FavouritesTitleCell"]
+            self.putTransactionsInfoIntoItemsArray()
+
             if let address = self.keyService.selectedAddress() {
                 TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
-                    self.putTransactionsInfoIntoItemsArray()
                     self.tableView.reloadData()
                     if #available(iOS 10.0, *) {
                         self.tableView.refreshControl?.endRefreshing()
