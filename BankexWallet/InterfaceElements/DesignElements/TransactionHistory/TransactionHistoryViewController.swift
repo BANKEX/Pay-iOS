@@ -122,10 +122,12 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     func didSelectToken(name: String) {
         popover.dismiss()
         guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
-        tokensService.updateSelectedToken(to: token.address)
-        tokensButton.setTitle(name.uppercased(), for: .normal)
-        updateTransactions(status: currentState)
-        tableView.reloadData()
+        tokensService.updateSelectedToken(to: token.address, completion: {
+            self.tokensButton.setTitle(name.uppercased(), for: .normal)
+            self.updateTransactions(status: self.currentState)
+            self.tableView.reloadData()
+        })
+        
     }
     
     //MARK: - TableView Delegate/Datasource
@@ -227,6 +229,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     }
     
     private func configureSendEthService() {
+        print(tokensService.selectedERC20Token().symbol.uppercased())
         sendEthService = tokensService.selectedERC20Token().symbol.uppercased() == "ETH" ? SendEthServiceImplementation() :  ERC20TokenContractMethodsServiceImplementation()
     }
 }

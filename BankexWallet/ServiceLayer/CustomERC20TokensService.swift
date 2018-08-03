@@ -73,7 +73,7 @@ protocol CustomERC20TokensService {
     
     func selectedERC20Token() -> ERC20TokenModel
     
-    func updateSelectedToken(to token: String)
+    func updateSelectedToken(to token: String, completion: (() -> Void)? )
     
     func deleteToken(with address: String)
     
@@ -360,9 +360,12 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                isSelected: token.isSelected)
     }
     
-    func updateSelectedToken(to token: String) {
+    func updateSelectedToken(to token: String, completion: (() -> Void)? = nil) {
         if token.isEmpty {
             resetSelectedToken()
+            DispatchQueue.main.async {
+                completion?()
+            }
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: DataChangeNotifications.didChangeToken.notificationName(), object: self, userInfo: ["token": token])
             }
@@ -373,11 +376,17 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                 try self.db.operation { (context, save) in
                     
                     guard let newSelectedToken = try context.fetch(FetchRequest<ERC20Token>().filtered(with: "address", equalTo: token)).first else {
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                         return
                     }
                     guard let oldSelectedToken = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).first else {
                         newSelectedToken.isSelected = true
                         save()
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: DataChangeNotifications.didChangeToken.notificationName(), object: self, userInfo: ["token": token])
                         }
@@ -387,10 +396,16 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                     newSelectedToken.isSelected = true
                     save()
                     DispatchQueue.main.async {
+                        completion?()
+                    }
+                    DispatchQueue.main.async {
                         NotificationCenter.default.post(name: DataChangeNotifications.didChangeToken.notificationName(), object: self, userInfo: ["token": token])
                     }
                 }
             } catch {
+                DispatchQueue.main.async {
+                    completion?()
+                }
                 //TODO: There was an error in the operation
             }
             
