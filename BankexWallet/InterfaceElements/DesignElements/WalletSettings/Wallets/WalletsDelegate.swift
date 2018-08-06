@@ -11,7 +11,7 @@ import UIKit
 
 extension WalletsViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        if indexPath.section == WalletsSections.RestWallets.rawValue {
             let wallet = listWallets[indexPath.row]
             service.updateSelected(address: wallet.address)
             DispatchQueue.main.async {

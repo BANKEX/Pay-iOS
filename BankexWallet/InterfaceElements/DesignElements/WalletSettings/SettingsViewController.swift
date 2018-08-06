@@ -27,8 +27,14 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
     @IBOutlet weak var nameNetworkLabel:UILabel!
     
     
-    enum SettingsSections:Int {
+    enum SettingsSections:Int,CounableProtocol {
         case Main = 0,AppStore,SocialNetwork
+        
+        static var count: Int = {
+            var max = 0
+            while let _ = SettingsSections(rawValue: max) { max += 1 }
+            return max
+        }()
     }
     let managerReferences = ManagerReferences()
     let walletService = SingleKeyServiceImplementation()

@@ -17,6 +17,16 @@ class WalletsViewController: UIViewController {
     
     @IBOutlet weak var tableView:UITableView!
     
+    enum WalletsSections:Int,CounableProtocol {
+        static var count: Int = {
+            var max:Int = 0
+            while let _ = WalletsSections(rawValue: max) { max += 1 }
+            return max
+        }()
+        
+        case CurrentWallet = 0,RestWallets
+    }
+    
     
     
     

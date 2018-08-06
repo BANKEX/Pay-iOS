@@ -10,22 +10,22 @@ import UIKit
 
 extension NetworksViewController:UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return NetworksSections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return 1
-        case 1: return listNetworks.count
-        case 2: return listCustomNetworks.count
+        case NetworksSections.CurrentNetwork.rawValue: return 1
+        case NetworksSections.DefaultNetwork.rawValue: return listNetworks.count
+        case NetworksSections.CustomNetwork.rawValue: return listCustomNetworks.count
         default: return 0
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
+        if section == NetworksSections.DefaultNetwork.rawValue {
             return "CHOOSE A NETWORK..."
-        }else if section == 2 && listCustomNetworks.count > 0 {
+        }else if section == NetworksSections.CustomNetwork.rawValue && listCustomNetworks.count > 0 {
             return "CUSTOM NETWORK"
         }else {
             return ""
@@ -34,11 +34,11 @@ extension NetworksViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        if indexPath.section == 0 && indexPath.row == 0 {
+        if indexPath.section == NetworksSections.CurrentNetwork.rawValue && indexPath.row == 0 {
             cell.textLabel?.text = selectedNetwork.networkName ?? selectedNetwork.fullNetworkUrl.absoluteString
-        }else if indexPath.section == 1 {
+        }else if indexPath.section == NetworksSections.DefaultNetwork.rawValue{
             cell.textLabel?.text = listNetworks[indexPath.row].networkName
-        }else if indexPath.section == 2 {
+        }else if indexPath.section == NetworksSections.CustomNetwork.rawValue{
             if listCustomNetworks.count > 0 {
                 cell.textLabel?.text = listCustomNetworks[indexPath.row].networkName
             }
@@ -46,3 +46,4 @@ extension NetworksViewController:UITableViewDataSource {
         return cell
     }
 }
+

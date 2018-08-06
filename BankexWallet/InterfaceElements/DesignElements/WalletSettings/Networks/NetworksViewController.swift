@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import Foundation
+
+protocol CounableProtocol {
+    static var count:Int { get }
+}
 
 protocol NetworkDelegate:class {
     func didTapped(with network:CustomNetwork)
@@ -16,6 +21,16 @@ class NetworksViewController: UIViewController {
     
     @IBOutlet weak var tableView:UITableView!
     
+    
+    enum NetworksSections:Int,CounableProtocol {
+        case CurrentNetwork = 0,DefaultNetwork,CustomNetwork
+        
+        static let count: Int = {
+            var max: Int = 0
+            while let _ = NetworksSections(rawValue: max) { max += 1 }
+            return max
+        }()
+    }
     
     weak var delegate:NetworkDelegate?
     
