@@ -50,9 +50,9 @@ class TransactionsService {
         var url: URL
         switch type {
         case .ETH:
-            url = URL(string: "https://api\(urlPart).etherscan.io/api?module=account&action=txlist&address=\(address)&startblock=0&endblock=99999999&sort=asc&apikey=S1XHDZ1XJ2H4KR7G32RZJIS5DZIAVS1171")!
+            url = URL(string: "https://api\(urlPart).etherscan.io/api?module=account&action=txlist&address=\(address)&startblock=0&endblock=99999999&sort=asc")!
         case .Tokens:
-            url = URL(string: "https://api\(urlPart).etherscan.io/api?module=account&action=tokentx&address=\(address)&startblock=0&endblock=99999999&sort=asc&apikey=S1XHDZ1XJ2H4KR7G32RZJIS5DZIAVS1171")!
+            url = URL(string: "https://api\(urlPart).etherscan.io/api?module=account&action=tokentx&address=\(address)&startblock=0&endblock=99999999&sort=asc")!
             
         }
         var request = URLRequest(url: url)
