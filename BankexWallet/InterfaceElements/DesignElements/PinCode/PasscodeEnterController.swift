@@ -146,7 +146,7 @@ class PasscodeEnterController: UIViewController {
     }
     
     func enterWithBiometrics() {
-        let touchManager = TouchManager()
+        let touchManager = TouchManager()  //WTF!!!
         
         let context = LAContext()
         var error: NSError?
