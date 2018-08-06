@@ -71,9 +71,15 @@ class PasscodeEnterController: UIViewController {
     }
     
     func enterWallet() {
-        
         DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            if let vc = currentPasscodeViewController, vc.navigationController == nil {
+                vc.dismiss(animated: true, completion: nil)
+                currentPasscodeViewController = nil
+            } else {
+                self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+            }
+            
         }
     }
     

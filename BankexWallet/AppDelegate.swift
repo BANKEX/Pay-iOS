@@ -16,6 +16,8 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var navigationVC:UINavigationController?
+    var currentViewController:UIViewController?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -111,12 +113,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func showPasscode() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController {
-            window?.rootViewController = vc
-            window?.makeKeyAndVisible()
+            currentPasscodeViewController = vc
+            window?.rootViewController?.present(vc, animated: true, completion: nil)
         }
     }
-
 }
+
+var currentPasscodeViewController: PasscodeEnterController?
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
