@@ -65,17 +65,26 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
         
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
-            self.updateTableView()
+            DispatchQueue.main.async {
+                self.updateTableView()
+            }
+            
         }
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
-            self.updateTableView()
+            DispatchQueue.main.async {
+                self.updateTableView()
+            }
         }
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
-            self.updateTableView()
+            DispatchQueue.main.async {
+                self.updateTableView()
+            }
         }
     }
     
@@ -84,6 +93,8 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         service.updateConversions()
+        editEnabled = false
+        editButton.setTitle(editEnabled ? "Cancel" : "Edit", for: .normal)
         updateTableView()
     }
     

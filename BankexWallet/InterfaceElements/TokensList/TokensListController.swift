@@ -46,7 +46,7 @@ class TokensListController: UIViewController, UITableViewDelegate, UITableViewDa
             return
         }
         let address = token.address
-        service.updateSelectedToken(to: address)
+        service.updateSelectedToken(to: address, completion: nil)
         tokens = service.availableTokensList()
         tableView.reloadData()
     }

@@ -21,6 +21,8 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
     var interactor:Interactor?
     
     var token: ERC20TokenModel?
+    var rate: Double? = nil
+    
     var forAdding: Bool = false
     
     @IBAction func close(sender: UIButton) {
@@ -58,6 +60,14 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         
+        NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.rate = self.conversionService.currentConversionRate(for: (self.token?.symbol.uppercased())!)
+                self.tableView.reloadData()
+            }
+            
+        }
+        
         tableView.tableFooterView = UIView() //removing extra cells
         
         if token == nil {
@@ -66,6 +76,7 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
             walletName.text = "Error in wallet"
         } else {
             walletName.text = keysService.selectedWallet()?.name
+            tokensService.getNewConversion(for: (token?.symbol.uppercased())!)
         }
         
         if !forAdding {
@@ -84,23 +95,12 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
         case TokenInfoRaws.address.rawValue :
             cell.configure(with: "Address", value: token?.address, measurment: nil)
         case TokenInfoRaws.currency.rawValue :
-            var tokenIsAvailable = false
             if token != nil {
-                for availableToken in tokensService.availableTokensList()! {
-                    if self.token! == availableToken {
-                        tokenIsAvailable = true
-                    }
-                }
-                if tokenIsAvailable {
-                    let rate = token != nil ? "\(conversionService.currentConversionRate(for: (token?.symbol.uppercased())!))$" : "Error currency of token"
-                    cell.configure(with: "Currency", value: rate, measurment: (token?.name ?? ""))
-                } else {
-                    cell.configure(with: "Currency", value: "Add token to load its currency", measurment: (token?.name ?? ""))
-                }
+                let rate = "\(conversionService.currentConversionRate(for: (self.token?.symbol.uppercased())!))$"
+                cell.configure(with: "Currency", value: rate, measurment: (token?.name ?? ""))
             } else {
                 cell.configure(with: "Currency", value: "Error in token", measurment: (token?.name ?? ""))
             }
-            
         case TokenInfoRaws.decimals.rawValue :
             cell.configure(with: "Decimals", value: token?.decimals, measurment: nil)
         default:

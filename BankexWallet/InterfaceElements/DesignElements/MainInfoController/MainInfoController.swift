@@ -97,16 +97,25 @@ FavoriteSelectionDelegate {
         tokensService.updateConversions()
         
         NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
         }
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -283,9 +292,10 @@ FavoriteSelectionDelegate {
                 "CurrentWalletInfoCell",
                 "TransactionHistoryCell",//]
                 "FavouritesTitleCell"]
+            self.putTransactionsInfoIntoItemsArray()
+
             if let address = self.keyService.selectedAddress() {
                 TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
-                    self.putTransactionsInfoIntoItemsArray()
                     self.tableView.reloadData()
                     if #available(iOS 10.0, *) {
                         self.tableView.refreshControl?.endRefreshing()

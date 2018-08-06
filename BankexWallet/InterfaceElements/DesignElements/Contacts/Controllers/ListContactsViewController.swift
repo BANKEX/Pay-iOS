@@ -23,6 +23,7 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     var dictContacts:[String:[FavoriteModel]] = [:]
     var sectionsTitles:[String] = []
     var searchViewController:UISearchController = UISearchController(searchResultsController: nil)
+    @IBOutlet weak var searchFooter:SearchFooter!
     
     
     //MARK: - IBOutlets
@@ -35,7 +36,7 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.tableFooterView = UIView(frame: .zero)
+        tableView.tableFooterView = searchFooter
         setupNavbar()
         setupSearchVC()
     }

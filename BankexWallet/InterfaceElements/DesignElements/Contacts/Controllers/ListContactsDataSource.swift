@@ -19,11 +19,12 @@ extension ListContactsViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
+            searchFooter.establishFiltering(filteringCount: filteredContacts.count, total: listContacts?.count ?? 0)
             return filteredContacts.count
-        }else {
-            let nameofSection = sectionsTitles[section]
-            return (dictContacts[nameofSection]?.count)!
         }
+        searchFooter.establishNotFiltering()
+        let nameofSection = sectionsTitles[section]
+        return (dictContacts[nameofSection]?.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -73,7 +73,7 @@ protocol CustomERC20TokensService {
     
     func selectedERC20Token() -> ERC20TokenModel
     
-    func updateSelectedToken(to token: String)
+    func updateSelectedToken(to token: String, completion: (() -> Void)? )
     
     func deleteToken(with address: String)
     
@@ -82,6 +82,8 @@ protocol CustomERC20TokensService {
     func resetSelectedToken()
     
     func updateConversions()
+    
+    func getNewConversion(for token: String)
 }
 
 
@@ -344,7 +346,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     }
     
     let tokensUtilService: UtilTransactionsService = CustomTokenUtilsServiceImplementation()
-
+    
     // TODO: I'm not sure how it'll be used
     func selectedERC20Token() -> ERC20TokenModel {
         // TODO: Add check, that this token can work together with selected network
@@ -358,9 +360,12 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                isSelected: token.isSelected)
     }
     
-    func updateSelectedToken(to token: String) {
+    func updateSelectedToken(to token: String, completion: (() -> Void)? = nil) {
         if token.isEmpty {
             resetSelectedToken()
+            DispatchQueue.main.async {
+                completion?()
+            }
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: DataChangeNotifications.didChangeToken.notificationName(), object: self, userInfo: ["token": token])
             }
@@ -371,11 +376,17 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                 try self.db.operation { (context, save) in
                     
                     guard let newSelectedToken = try context.fetch(FetchRequest<ERC20Token>().filtered(with: "address", equalTo: token)).first else {
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                         return
                     }
                     guard let oldSelectedToken = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).first else {
                         newSelectedToken.isSelected = true
                         save()
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: DataChangeNotifications.didChangeToken.notificationName(), object: self, userInfo: ["token": token])
                         }
@@ -385,13 +396,19 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                     newSelectedToken.isSelected = true
                     save()
                     DispatchQueue.main.async {
+                        completion?()
+                    }
+                    DispatchQueue.main.async {
                         NotificationCenter.default.post(name: DataChangeNotifications.didChangeToken.notificationName(), object: self, userInfo: ["token": token])
                     }
                 }
             } catch {
+                DispatchQueue.main.async {
+                    completion?()
+                }
                 //TODO: There was an error in the operation
             }
-
+            
         }
     }
     
@@ -412,7 +429,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     
     private func etherModel() -> ERC20TokenModel {
         let isEtherSelected = try! db.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).isEmpty
-
+        
         return ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: isEtherSelected)
     }
     
@@ -429,6 +446,14 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
             }
         }
         
+    }
+    
+    func getNewConversion(for token: String) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.conversionService.updateConversionRate(for: token.uppercased()) { (rate) in
+                NotificationCenter.default.post(name: ReceiveRatesNotification.receivedAllRates.notificationName(), object: self, userInfo: nil)
+            }
+        }
     }
     
 }

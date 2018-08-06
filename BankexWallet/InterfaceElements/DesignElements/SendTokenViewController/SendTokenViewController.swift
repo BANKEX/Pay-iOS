@@ -48,9 +48,12 @@ Retriable {
     @IBOutlet weak var additionalDataSeparator: UIView!
     @IBOutlet weak var tokenImageView: UIImageView!
     
+    @IBOutlet weak var amountInDollarsLabel: UILabel!
+    
     var button: UIButton!
     var errorMessage: String?
     var popover: Popover!
+    let conversionService = FiatServiceImplementation.service
     fileprivate var popoverOptions: [PopoverOption] = [
         .type(.down),
         .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6)),
@@ -362,10 +365,14 @@ Retriable {
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
                 let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
                 self.amountLabel.text = formattedAmount
+                let conversionRate = self.conversionService.currentConversionRate(for: self.tokensService.selectedERC20Token().symbol.uppercased())
+                let convertedAmount = conversionRate == 0.0 ? "No data from CryptoCompare" : "$\(conversionRate * Double(formattedAmount!)!) at the rate of CryptoCompare"
+                self.amountInDollarsLabel.text = convertedAmount
             case .Error(let error):
                 print("\(error)")
             }
         }
+        
     }
     
     // MARK: Confirmation
