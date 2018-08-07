@@ -91,7 +91,6 @@ FavoriteSelectionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavBar()
         
         configureRefreshControl()
         favorites = favService.getAllStoredAddresses()
@@ -130,7 +129,7 @@ FavoriteSelectionDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        configureNavBar()
         navigationController?.navigationBar.topItem?.prompt = "   "
         itemsArray = [
             "CurrentWalletInfoCell",
@@ -138,6 +137,11 @@ FavoriteSelectionDelegate {
             "FavouritesTitleCell"]
         putTransactionsInfoIntoItemsArray()
         tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
         

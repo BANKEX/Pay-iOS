@@ -21,19 +21,24 @@ class AddressQRCodeController: UIViewController {
     
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setNavigationBar()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setNavigationBar()
         imageView.image = generateQRCode(from: addressToGenerateQR)
         addressLabel.text = addressToGenerateQR?.lowercased()
         walletNameLabel.text = keysService.selectedWallet()?.name
         copiedIcon.alpha = 0
         copiedLabel.alpha = 0
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func setNavigationBar() {
