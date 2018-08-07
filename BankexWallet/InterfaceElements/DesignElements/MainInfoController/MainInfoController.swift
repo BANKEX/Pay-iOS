@@ -91,6 +91,8 @@ FavoriteSelectionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavBar()
+        
         configureRefreshControl()
         favorites = favService.getAllStoredAddresses()
         
@@ -125,9 +127,10 @@ FavoriteSelectionDelegate {
     var transactionsToShow = [ETHTransactionModel]()
     var transactionInitialDiff = 0
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureNavBar()
+        
         navigationController?.navigationBar.topItem?.prompt = "   "
         itemsArray = [
             "CurrentWalletInfoCell",
