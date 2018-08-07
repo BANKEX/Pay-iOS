@@ -27,22 +27,12 @@ class TransactionHistoryCell: UITableViewCell {
     }()
     
     
-    func configure(withTransaction: Any, isLastCell: Bool = false) {
-        guard let trans = withTransaction as? ETHTransactionModel else {
-            return
-        }
-        separatorView.isHidden = isLastCell
-        let isSend = SingleKeyServiceImplementation().selectedAddress() == trans.from
+    func configure(withTransaction trans: ETHTransactionModel, isLastCell: Bool = false) {
+        let isSend = SingleKeyServiceImplementation().selectedAddress()?.lowercased() == trans.from
         statusImageView.image = isSend ? #imageLiteral(resourceName: "Sent") : #imageLiteral(resourceName: "Received")
         transactionTypeLabel.text = isSend ? "Sent" : "Received"
-        addressLabel.text = trans.to
-        amountLabel.text = (isSend ? "- " : "+ ") + trans.amount
-        amountLabel.textColor = isSend ? WalletColors.redText.color() : WalletColors.lightGreenText.color()
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+        addressLabel.text = isSend ? "To: \(trans.to)" : "From: \(trans.from)"
+        amountLabel.text = (isSend ? "- " : "+ ") + trans.amount + " " + trans.token.symbol.uppercased()
     }
 }
 

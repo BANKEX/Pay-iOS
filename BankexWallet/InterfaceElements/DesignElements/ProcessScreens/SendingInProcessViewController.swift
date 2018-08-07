@@ -28,6 +28,8 @@ SendingResultInformation {
     var transactionToSend: TransactionIntermediate?
     var inputtedPassword: String?
     
+    var fromEnterScreen = false
+    
     @IBOutlet weak var processTitleLabel: UILabel?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,8 +52,30 @@ SendingResultInformation {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         processTitleLabel?.text = "Retrieving data"
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        if fromEnterScreen {
+            DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let tabController = storyboard.instantiateViewController(withIdentifier: "MainTabController")
+                let tabNavigation = UINavigationController(rootViewController: tabController)
+
+                let appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+                appDelegate.window?.rootViewController = tabNavigation
+            }
+        }
+    }
+    
     
     var transactionAmount: String?
     var recipientAddress: String?

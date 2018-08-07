@@ -8,41 +8,40 @@
 
 import Foundation
 import BigInt
+import PromiseKit
 
+
+/// A web3 instance bound to provider. All further functionality is provided under web.*. namespaces.
 public class web3: Web3OptionsInheritable {
     public var provider : Web3Provider
     public var options : Web3Options = Web3Options.defaultOptions()
     public var defaultBlock = "latest"
-    public var queue: OperationQueue
-    var dispatcher: OperationDispatcher
+    public var requestDispatcher: JSONRPCrequestDispatcher
     
-    public func send(request: JSONRPCrequest) -> [String: Any]? {
-        return self.provider.send(request: request)
+    /// Add a provider request to the dispatch queue.
+    public func dispatch(_ request: JSONRPCrequest) -> Promise<JSONRPCresponse> {
+        return self.requestDispatcher.addToQueue(request: request)
     }
 
-    public init(provider prov: Web3Provider, queue: OperationQueue? = nil, dispatcher: OperationDispatcher? = nil) {
-        provider = prov
-        if queue == nil {
-            self.queue = OperationQueue.init()
-            self.queue.maxConcurrentOperationCount = 32
-            self.queue.underlyingQueue = DispatchQueue.global(qos: .userInteractive)
-            
+    /// Raw initializer using a Web3Provider protocol object, dispatch queue and request dispatcher.
+    public init(provider prov: Web3Provider, queue: OperationQueue? = nil, requestDispatcher: JSONRPCrequestDispatcher? = nil) {
+        provider = prov        
+        if requestDispatcher == nil {
+            self.requestDispatcher = JSONRPCrequestDispatcher(provider: provider, queue: DispatchQueue.global(qos: .userInteractive), policy: .Batch(32))
         } else {
-            self.queue = queue!
-        }
-        if dispatcher == nil {
-            self.dispatcher = OperationDispatcher(provider: provider, queue: self.queue, policy: .Batch(16))
-        } else {
-            self.dispatcher = dispatcher!
+            self.requestDispatcher = requestDispatcher!
         }
     }
     
-    
+    /// Keystore manager can be bound to Web3 instance. If some manager is bound all further account related functions, such
+    /// as account listing, transaction signing, etc. are done locally using private keys and accounts found in a manager.
     public func addKeystoreManager(_ manager: KeystoreManager?) {
         self.provider.attachedKeystoreManager = manager
     }
     
     var ethInstance: web3.Eth?
+    
+    /// Public web3.eth.* namespace.
     public var eth: web3.Eth {
         if (self.ethInstance != nil) {
             return self.ethInstance!
@@ -65,6 +64,8 @@ public class web3: Web3OptionsInheritable {
     }
     
     var personalInstance: web3.Personal?
+    
+    /// Public web3.personal.* namespace.
     public var personal: web3.Personal {
         if (self.personalInstance != nil) {
             return self.personalInstance!
@@ -87,6 +88,8 @@ public class web3: Web3OptionsInheritable {
     }
 
     var walletInstance: web3.Web3Wallet?
+    
+    /// Public web3.wallet.* namespace.
     public var wallet: web3.Web3Wallet {
         if (self.walletInstance != nil) {
             return self.walletInstance!
@@ -106,7 +109,9 @@ public class web3: Web3OptionsInheritable {
     }
     
     var browserFunctionsInstance: web3.BrowserFunctions?
-    public var browserFunctionsFunctions: web3.BrowserFunctions {
+    
+    /// Public web3.browserFunctions.* namespace.
+    public var browserFunctions: web3.BrowserFunctions {
         if (self.browserFunctionsInstance != nil) {
             return self.browserFunctionsInstance!
         }

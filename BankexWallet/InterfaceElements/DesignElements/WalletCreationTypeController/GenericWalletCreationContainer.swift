@@ -26,7 +26,7 @@ class GenericWalletCreationContainer: UIViewController {
     @IBOutlet weak var passphraseLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = walletCreationMode.title()
+        //titleLabel.text = walletCreationMode.title()
         privateKeyLabel.borderWidth = 3
         passphraseLabel.borderWidth = 3
         

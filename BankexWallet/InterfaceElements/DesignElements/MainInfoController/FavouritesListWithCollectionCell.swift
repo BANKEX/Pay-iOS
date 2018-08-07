@@ -22,7 +22,7 @@ class FavouritesListWithCollectionCell: UITableViewCell,
     @IBOutlet weak var collectionView: UICollectionView?
     
     let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
-    var allFavorites: [(String, String)]?
+    var allFavorites: [FavoriteModel]?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -44,7 +44,7 @@ class FavouritesListWithCollectionCell: UITableViewCell,
             selectionDelegate?.didSelectAddNewFavorite()
         }
         else if let selected = allFavorites?[indexPath.row - 1] {
-            selectionDelegate?.didSelectFavorite(with: selected.0, address: selected.1)
+            selectionDelegate?.didSelectFavorite(with: selected.firstName, address: selected.address)
         }
     }
     
@@ -55,5 +55,24 @@ class FavouritesListWithCollectionCell: UITableViewCell,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoritesCollectionViewCell", for: indexPath) as! FavoritesCollectionViewCell
         cell.configure(with: allFavorites![indexPath.row - 1])
         return cell
+    }
+}
+
+class FavoriteContactCell: UITableViewCell {
+    
+    @IBOutlet weak var separator: UIView!
+    @IBOutlet weak var nameFirstLetterLabel: UILabel!
+    @IBOutlet weak var contactNameLabel: UILabel!
+    
+    @IBOutlet weak var contactImageView: UIImageView!
+    
+    func configureCell(withName name: String,andSurname surname: String, isLast: Bool) {
+        let text = NSMutableAttributedString()
+        text.normal(name + " ").bold(surname)
+        contactNameLabel.attributedText = text
+        let firstLetter = (surname as NSString).substring(to: 1)
+        nameFirstLetterLabel.text = firstLetter.capitalized
+        contactImageView.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
+        contactImageView.layer.cornerRadius = 8.0
     }
 }

@@ -51,12 +51,12 @@ protocol SendEthService {
     
     func send(transactionModel: ETHTransactionModel,
               transaction: TransactionIntermediate,
-              with password: String,
-              completion: @escaping (SendEthResult<[String: String]>) -> Void)
+              with password: String,options: Web3Options?,
+              completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
     
     func send(transactionModel: ETHTransactionModel,
-              transaction: TransactionIntermediate, completion:
-        @escaping (SendEthResult<[String: String]>) -> Void)
+              transaction: TransactionIntermediate, options: Web3Options?, completion:
+        @escaping (SendEthResult<TransactionSendingResult>) -> Void)
     
     func getAllTransactions() -> [ETHTransactionModel]?
     
@@ -65,11 +65,11 @@ protocol SendEthService {
 
 extension SendEthService {
     func send(transactionModel: ETHTransactionModel,
-              transaction: TransactionIntermediate,
-              completion: @escaping (SendEthResult<[String: String]>) -> Void)  {
+              transaction: TransactionIntermediate, options: Web3Options? = nil,
+              completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)  {
         send(transactionModel: transactionModel,
              transaction: transaction,
-             with: "BANKEXFOUNDATION",
+             with: "BANKEXFOUNDATION", options: options,
              completion: completion)
     }
     
@@ -84,9 +84,9 @@ extension SendEthService {
 // TODO: check that correct address will be used
 class SendEthServiceImplementation: SendEthService {
     
-    func send(transactionModel: ETHTransactionModel, transaction: TransactionIntermediate, with password: String, completion: @escaping (SendEthResult<[String : String]>) -> Void) {
+    func send(transactionModel: ETHTransactionModel, transaction: TransactionIntermediate, with password: String, options: Web3Options? = nil, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let result = transaction.send(password: password, options: nil)
+            let result = transaction.send(password: password, options: options)
             if let error = result.error {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(error))
@@ -99,18 +99,21 @@ class SendEthServiceImplementation: SendEthService {
                 }
                 return
             }
+            
             do {
                 try self.db.operation { (context, save) in
                     let newTask: SendEthTransaction = try context.new()
                     let selectedKey = try context.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).first
                     let tokenModel = CustomERC20TokensServiceImplementation().selectedERC20Token()
                     let selectedToken = try context.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "address == %@", tokenModel.address))).first
-                    newTask.to = transactionModel.to
-                    newTask.from = transactionModel.from
+                    newTask.to = transactionModel.to.lowercased()
+                    newTask.from = transactionModel.from.lowercased()
                     newTask.date = transactionModel.date as Date
                     newTask.amount = transactionModel.amount
                     newTask.keywallet = selectedKey
                     newTask.token = selectedToken
+                    newTask.networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
+                    newTask.trHash = result.value?.transaction.txhash
                     try context.insert(newTask)
                     save()
                 }
@@ -144,7 +147,11 @@ class SendEthServiceImplementation: SendEthService {
     
     // TODO: They're not optional! 
     func getAllTransactions() -> [ETHTransactionModel]? {
-        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().sorted(with: "date", ascending: false))
+        guard let address = self.keysService.selectedAddress() else { return [] }
+        let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
+        
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@) && token == nil", NSNumber(value: networkId), address.lowercased(), address.lowercased())).sorted(with: "date", ascending: false))
+        
         return transactions.map({ (transaction) -> ETHTransactionModel in
             let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :
                 ERC20TokenModel(token: transaction.token!)
@@ -161,7 +168,7 @@ class SendEthServiceImplementation: SendEthService {
     let db = DBStorage.db    
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
-    func send(transaction: TransactionIntermediate, with password: String = "BANKEXFOUNDATION", completion: @escaping (SendEthResult<[String: String]>) -> Void) {
+    func send(transaction: TransactionIntermediate, with password: String = "BANKEXFOUNDATION", completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         
     }
     

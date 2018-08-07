@@ -16,17 +16,26 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var navigationVC:UINavigationController?
+    var currentViewController:UIViewController?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
         Fabric.with([Crashlytics.self])
         let initialRouter = InitialLogicRouter()
+        let isOnboardingNeeded = UserDefaults.standard.value(forKey: "isOnboardingNeeded")
+        if isOnboardingNeeded == nil  {
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let onboarding = storyboard.instantiateViewController(withIdentifier: "OnboardingPage")
+            window?.rootViewController = onboarding
+        }
+        
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return true
         }
         initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
-        
-//        
+        window?.backgroundColor = .white
         return true
     }
 
@@ -41,7 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        if SecurityViewController.isEnabledMulti && UserDefaults.standard.bool(forKey: "isNotFirst")  {
+            showPasscode()
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -98,6 +109,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
 //    }
+    
+    func showPasscode() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController {
+            currentPasscodeViewController = vc
+            window?.rootViewController?.present(vc, animated: true, completion: nil)
+        }
+    }
+}
 
+var currentPasscodeViewController: PasscodeEnterController?
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func setupViewResizerOnKeyboardShown() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(UIViewController.keyboardWillShowForResizing),
+                                               name: Notification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(UIViewController.keyboardWillHideForResizing),
+                                               name: Notification.Name.UIKeyboardWillHide,
+                                               object: nil)
+    }
+    
+    @objc func keyboardWillShowForResizing(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let window = self.view.window?.frame {
+            // We're not just minusing the kb height from the view height because
+            // the view could already have been resized for the keyboard before
+            self.view.frame = CGRect(x: self.view.frame.origin.x,
+                                     y: self.view.frame.origin.y,
+                                     width: self.view.frame.width,
+                                     height: window.origin.y + window.height - keyboardSize.height)
+        } else {
+            debugPrint("We're showing the keyboard and either the keyboard size or window is nil: panic widely.")
+        }
+    }
+    
+    @objc func keyboardWillHideForResizing(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let viewHeight = self.view.frame.height
+            self.view.frame = CGRect(x: self.view.frame.origin.x,
+                                     y: self.view.frame.origin.y,
+                                     width: self.view.frame.width,
+                                     height: viewHeight + keyboardSize.height)
+        } else {
+            debugPrint("We're about to hide the keyboard and the keyboard size is nil. Now is the rapture.")
+        }
+    }
 }
 

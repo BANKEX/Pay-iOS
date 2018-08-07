@@ -9,30 +9,30 @@
 import Foundation
 import BigInt
 import Result
+import class PromiseKit.Promise
 
-public protocol Web3Provider {
-    func send(request: JSONRPCrequest) -> [String:Any]?
-    func send(requests: [JSONRPCrequest]) -> [[String: Any]?]?
-    func sendWithRawResult(request: JSONRPCrequest) -> Data?
-    var network: Networks? {get set}
-    var attachedKeystoreManager: KeystoreManager? {get set}
-    var url: URL {get}
-}
-
+/// Protocol for generic Ethereum event parsing results
 public protocol EventParserResultProtocol {
     var eventName: String {get}
     var decodedResult: [String:Any] {get}
     var contractAddress: EthereumAddress {get}
     var transactionReceipt: TransactionReceipt? {get}
+    var eventLog: EventLog? {get}
 }
 
+/// Protocol for generic Ethereum event parser
 public protocol EventParserProtocol {
     func parseTransaction(_ transaction: EthereumTransaction) -> Result<[EventParserResultProtocol], Web3Error>
     func parseTransactionByHash(_ hash: Data) -> Result<[EventParserResultProtocol], Web3Error>
     func parseBlock(_ block: Block) -> Result<[EventParserResultProtocol], Web3Error>
     func parseBlockByNumber(_ blockNumber: UInt64) -> Result<[EventParserResultProtocol], Web3Error>
+    func parseTransactionPromise(_ transaction: EthereumTransaction) -> Promise<[EventParserResultProtocol]>
+    func parseTransactionByHashPromise(_ hash: Data) -> Promise<[EventParserResultProtocol]>
+    func parseBlockByNumberPromise(_ blockNumber: UInt64) -> Promise<[EventParserResultProtocol]>
+    func parseBlockPromise(_ block: Block) -> Promise<[EventParserResultProtocol]>
 }
 
+/// Enum for the most-used Ethereum networks. Network ID is crucial for EIP155 support
 public enum Networks {
     case Rinkeby
     case Mainnet

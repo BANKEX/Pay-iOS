@@ -62,7 +62,7 @@ class SendingConfirmationController: UIViewController, Retriable {
         performSegue(withIdentifier: "showSending", sender: self)
         sendEthService.send(transactionModel: transactionModel,
                             transaction: transaction!,
-                            with: inputtedPassword ?? "") { (result) in
+                            with: inputtedPassword ?? "", options: nil) { (result) in
                                 switch result {
                                 case .Success(_):
                                     self.transactionCompletionDelegate?.transactionDidSucceed(withAmount: self.amount ?? "", address: self.destinationAddress ?? "")

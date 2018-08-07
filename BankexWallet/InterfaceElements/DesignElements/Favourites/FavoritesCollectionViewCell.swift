@@ -14,12 +14,12 @@ class FavouritesTitleCell: UITableViewCell {
     let minFavoritesToShow = 1
     override func awakeFromNib() {
         super.awakeFromNib()
-        showMoreButton.isHidden = (favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow
+        showMoreButton.setTitle((favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow ? "Add Contact" : "See All", for: .normal)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        showMoreButton.isHidden = (favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow
+        showMoreButton.setTitle((favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow ? "Add Contact" : "See All", for: .normal)
     }
 }
 
@@ -30,8 +30,8 @@ class FavoritesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var shortNameLabel: UILabel!
     
-    func configure(with contact: (String, String)) {
-        let (name, _) = contact
+    func configure(with contact: FavoriteModel) {
+        let name = contact.firstName
         nameLabel.text = name
         let firstLetter = (name as NSString).substring(to: 1)
         
@@ -54,9 +54,9 @@ class FavoritesListCell: UITableViewCell {
     
     var name, address: String?
     
-    func configure(with contact: (String, String), selectionDelegate: FavoritesHandling) {
-        name = contact.0
-        address = contact.1
+    func configure(with contact: FavoriteModel, selectionDelegate: FavoritesHandling) {
+        name = contact.firstName
+        address = contact.address
         nameLabel.text = name
         let firstLetter = ((name ?? "") as NSString).substring(to: 1)
         self.selectionDelegate = selectionDelegate

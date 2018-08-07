@@ -20,7 +20,7 @@ UITableViewDataSource,
 FavoritesHandling {
     
     let favService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
-    var allFavorites:[(String, String)]?
+    var allFavorites:[FavoriteModel]?
     @IBOutlet weak var tableView: UITableView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,6 +36,9 @@ FavoritesHandling {
             controller.selectedFavoriteAddress = selectedAddress
             selectedName = nil
             selectedAddress = nil
+        }
+        if let controller = segue.destination as? CreateNewFavoriteController {
+            controller.editingContact = true
         }
     }
 
