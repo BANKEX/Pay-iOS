@@ -89,37 +89,6 @@ FavoriteSelectionDelegate {
     var favService:RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     var favoritesToShow = [FavoriteModel]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        configureRefreshControl()
-        favorites = favService.getAllStoredAddresses()
-        
-        tokensService.updateConversions()
-        
-        NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-        }
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
     
@@ -127,14 +96,20 @@ FavoriteSelectionDelegate {
     var transactionInitialDiff = 0
     
     
+    //MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateDataOnTheScreen()
+        configureRefreshControl()
+        favorites = favService.getAllStoredAddresses()
+        tokensService.updateConversions()
+        configureNotifications()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavBar()
         navigationController?.navigationBar.topItem?.prompt = "   "
-        itemsArray = [
-            "CurrentWalletInfoCell",
-            "TransactionHistoryCell",//]
-            "FavouritesTitleCell"]
         putTransactionsInfoIntoItemsArray()
         tableView.reloadData()
     }
@@ -150,7 +125,6 @@ FavoriteSelectionDelegate {
     
     @IBAction func seeOrAddContactsButtonTapped(_ sender: UIButton) {
         if sender.title(for: .normal) == "See All" {
-            //TODO: - perform segue to contacts screes
             self.performSegue(withIdentifier: "seeAllFavorites", sender: nil)
         } else {
             self.performSegue(withIdentifier: "addNewFavorite", sender: nil)
@@ -174,6 +148,10 @@ FavoriteSelectionDelegate {
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
+        self.itemsArray = [
+            "CurrentWalletInfoCell",
+            "TransactionHistoryCell",//]
+            "FavouritesTitleCell"]
         if let firstThree = sendEthService.getAllTransactions()?.prefix(3) {
             transactionsToShow = Array(firstThree)
         }
@@ -210,9 +188,7 @@ FavoriteSelectionDelegate {
         itemsArray.append(contentsOf: arrayOfFavorites)
     }
     
-    
-    
-    func configureNavBar() {
+    private func configureNavBar() {
         navigationController?.navigationBar.topItem?.title = nil
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.shadowImage = nil
@@ -230,7 +206,7 @@ FavoriteSelectionDelegate {
             [UIBarButtonItem(customView: ethLabel)], animated: true)
     }
     
-    func createStringWithBlockNumber(blockNumber: String) -> NSAttributedString? {
+    private func createStringWithBlockNumber(blockNumber: String) -> NSAttributedString? {
         let fullString = NSMutableAttributedString(string: "")
         let attachment = NSTextAttachment()
         
@@ -244,7 +220,7 @@ FavoriteSelectionDelegate {
         return fullString
     }
     
-    func getBlockNumber(completion: @escaping (String) -> Void) {
+    private func getBlockNumber(completion: @escaping (String) -> Void) {
         DispatchQueue.global().async {
             let web3 = WalletWeb3Factory.web3()
             let res = web3.eth.getBlockNumber()
@@ -262,7 +238,7 @@ FavoriteSelectionDelegate {
         }
     }
     
-    func configureLabel(withNumber number: String) {
+    private func configureLabel(withNumber number: String) {
         
         self.ethLabel.attributedText = self.createStringWithBlockNumber(blockNumber: formatNumber(number: number))
         self.ethLabel.numberOfLines = 2
@@ -270,7 +246,7 @@ FavoriteSelectionDelegate {
         self.ethLabel.font = UIFont.systemFont(ofSize: 12)
     }
     
-    func formatNumber(number: String) -> String {
+    private func formatNumber(number: String) -> String {
         var formattedNumber = ""
         var numberOfSpaces = 0
         for el in number.reversed() {
@@ -283,26 +259,36 @@ FavoriteSelectionDelegate {
         return String(formattedNumber.reversed())
     }
     
-    //MARK: - Refresh Control
-    func configureRefreshControl() {
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = UIRefreshControl()
-            tableView.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
+    private func configureNotifications() {
+        NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+        }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        //TODO: - Update the data here
+    private func updateDataOnTheScreen() {
         getBlockNumber { (number) in
             self.configureLabel(withNumber: number)
-            self.itemsArray = [
-                "CurrentWalletInfoCell",
-                "TransactionHistoryCell",//]
-                "FavouritesTitleCell"]
-            self.putTransactionsInfoIntoItemsArray()
-
             if let address = self.keyService.selectedAddress() {
                 TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
+                    self.putTransactionsInfoIntoItemsArray()
                     self.tableView.reloadData()
                     if #available(iOS 10.0, *) {
                         self.tableView.refreshControl?.endRefreshing()
@@ -313,9 +299,19 @@ FavoriteSelectionDelegate {
                     self.tableView.refreshControl?.endRefreshing()
                 }
             }
-            
         }
-        
+    }
+    
+    //MARK: - Refresh Control
+    func configureRefreshControl() {
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = UIRefreshControl()
+            tableView.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
+        }
+    }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        updateDataOnTheScreen()
     }
     
     // MARK: - Table view data source
