@@ -18,6 +18,7 @@ class AddressQRCodeController: UIViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var copiedIcon: UIImageView!
     @IBOutlet weak var copiedLabel: UILabel!
+    @IBOutlet weak var copyAddressButton: UIButton!
     
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     
@@ -65,16 +66,34 @@ class AddressQRCodeController: UIViewController {
  
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = addressToGenerateQR
-        self.copiedIcon.alpha = 0.0
-        self.copiedLabel.alpha = 0.0
-        UIView.animate(withDuration: 2.0, animations: {
-            self.copiedIcon.alpha = 1.0
-            self.copiedLabel.alpha = 1.0
-        })
-        UIView.animate(withDuration: 2.0, animations: {
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.1,
+                           animations: {
+                            self.copyAddressButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.1) {
+                    self.copyAddressButton.transform = CGAffineTransform.identity
+                    
+                }
+            })
+        }
+        
+        DispatchQueue.main.async {
             self.copiedIcon.alpha = 0.0
             self.copiedLabel.alpha = 0.0
-        })
+            UIView.animate(withDuration: 1.0,
+                           animations: {
+                self.copiedIcon.alpha = 1.0
+                self.copiedLabel.alpha = 1.0
+            }, completion: { _ in
+                UIView.animate(withDuration: 2.0, animations: {
+                    self.copiedIcon.alpha = 0.0
+                    self.copiedLabel.alpha = 0.0
+                })
+            })
+        }
+        
     }
     
     func generateQRCode(from string: String?) -> UIImage? {
