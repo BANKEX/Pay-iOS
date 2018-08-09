@@ -66,12 +66,8 @@ SendingResultInformation {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         if fromEnterScreen {
             DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let tabController = storyboard.instantiateViewController(withIdentifier: "MainTabController")
-                let tabNavigation = UINavigationController(rootViewController: tabController)
-
-                let appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-                appDelegate.window?.rootViewController = tabNavigation
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.showTabBar()
             }
         }
     }
