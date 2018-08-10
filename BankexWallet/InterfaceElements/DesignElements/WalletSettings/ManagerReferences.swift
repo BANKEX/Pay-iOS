@@ -20,7 +20,7 @@ class ManagerReferences {
         func getRef() -> String {
             switch self {
             case .facebook: return "https://www.facebook.com/BankExchange/"
-            case .telegram: return "https://t.me/bankex"
+            case .telegram: return "https://t.me/bankexpay"
             case .twitter: return "https://twitter.com/BANKEX"
             case .appStore: return "itms-apps://itunes.apple.com/app/BANKEX-Pay/id1411403963"  //Change later
             case .bankex: return "wallet@bankexfoundation.org"
