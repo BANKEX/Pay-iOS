@@ -5,6 +5,11 @@
  
  <br>
 Welcome to BANKEX's open source iOS app!
+<br>
+<p>
+<a href="https://itunes.apple.com/ru/app/bankex-pay/id1411403963?l=en&mt=8"><img src="https://img.shields.io/badge/platform-4.0-green.svg"/></a>
+</p>
+
 
 ## Getting Started
 
