@@ -1,5 +1,9 @@
 # BANKEX Wallet - Ethereum Wallet for iOS
-
+<p align="center">
+ <a href="https://itunes.apple.com/ru/app/bankex-pay/id1411403963?l=en&mt=8"><img src="file:///Users/vladislav/Downloads/Download-on-the-App-Store/US/Download_on_App_Store/Black_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"/></a>
+ </p>
+ 
+ <br>
 Welcome to BANKEX's open source iOS app!
 
 ## Getting Started
