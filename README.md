@@ -4,11 +4,13 @@
  </p>
  
  <br>
-Welcome to BANKEX's open source iOS app!
+ 
+[![Swift](https://img.shields.io/badge/Swift-4.0-blue.svg)](https://swift.org/)
+[![Platform](https://img.shields.io/badge/Platform-iOS%2B9.0-purple.svg)](https://developer.apple.com/swift)
+
 <br>
-<p>
-<a href="https://itunes.apple.com/ru/app/bankex-pay/id1411403963?l=en&mt=8"><img src="https://img.shields.io/badge/platform-4.0-green.svg"/></a>
-</p>
+Welcome to BANKEX's open source iOS app!
+
 
 
 ## Getting Started
