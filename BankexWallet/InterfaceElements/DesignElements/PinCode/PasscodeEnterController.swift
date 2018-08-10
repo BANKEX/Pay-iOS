@@ -168,6 +168,13 @@ class PasscodeEnterController: UIViewController {
         }
     }
     
+    @IBAction func touchDragInside(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
+    
     
     @IBAction func deletePressed(_ sender: UIButton) {
         DispatchQueue.main.async {

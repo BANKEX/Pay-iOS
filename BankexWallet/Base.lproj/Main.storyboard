@@ -240,6 +240,7 @@
                                             <action selector="buttonTouchedDown:" destination="M7A-D7-jHu" eventType="touchDown" id="72K-V6-4f0"/>
                                             <action selector="buttonTouchedUpInside:" destination="M7A-D7-jHu" eventType="touchUpInside" id="SZv-BO-and"/>
                                             <action selector="touchAborted:" destination="M7A-D7-jHu" eventType="touchDragOutside" id="axg-ci-L28"/>
+                                            <action selector="touchDragInside:" destination="M7A-D7-jHu" eventType="touchDragInside" id="KQW-cH-lMX"/>
                                             <segue destination="7ST-Xq-jOz" kind="show" identifier="importWallet" id="WPL-y5-Qa2"/>
                                         </connections>
                                     </button>
@@ -259,6 +260,7 @@
                                             <action selector="buttonTouchedDown:" destination="M7A-D7-jHu" eventType="touchDown" id="Xy6-KR-uTF"/>
                                             <action selector="buttonTouchedUpInside:" destination="M7A-D7-jHu" eventType="touchUpInside" id="VpI-bX-fix"/>
                                             <action selector="touchAborted:" destination="M7A-D7-jHu" eventType="touchDragOutside" id="9nc-oi-5gQ"/>
+                                            <action selector="touchDragInside:" destination="M7A-D7-jHu" eventType="touchDragInside" id="2DW-xf-6yL"/>
                                             <segue destination="Ptd-7b-8Z1" kind="show" identifier="createWallet" id="VHm-vx-gY6"/>
                                         </connections>
                                     </button>
@@ -2011,6 +2013,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="touchDown:" destination="rBc-RO-cZM" eventType="touchDown" id="3Gs-Gg-k1Z"/>
+                                                        <action selector="touchDragInside:" destination="rBc-RO-cZM" eventType="touchDragInside" id="3GR-B1-FEm"/>
                                                         <action selector="touchDragOutside:" destination="rBc-RO-cZM" eventType="touchDragOutside" id="XQU-DQ-8lw"/>
                                                         <action selector="touchUpInside:" destination="rBc-RO-cZM" eventType="touchUpInside" id="mTn-tf-22M"/>
                                                         <segue destination="dxz-2H-Uh6" kind="show" id="Oa7-Ma-Ndk"/>
@@ -2033,6 +2036,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="touchDown:" destination="rBc-RO-cZM" eventType="touchDown" id="8B9-SS-h8C"/>
+                                                        <action selector="touchDragInside:" destination="rBc-RO-cZM" eventType="touchDragInside" id="XfQ-wB-Lw1"/>
                                                         <action selector="touchDragOutside:" destination="rBc-RO-cZM" eventType="touchDragOutside" id="cmj-et-7bO"/>
                                                         <action selector="touchUpInside:" destination="rBc-RO-cZM" eventType="touchUpInside" id="EL7-1T-Ngt"/>
                                                         <segue destination="vp6-20-0hl" kind="show" id="odB-ke-Ua6"/>
@@ -5520,6 +5524,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="QSX-r7-GAv"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="eY4-Xl-m66"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="HWp-wR-DjP"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="ly0-RO-lpa"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAZ-kD-hgh" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5534,6 +5539,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="yK5-of-tpG"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="9Cx-eF-bA4"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="Ht5-9c-d9G"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="255-SU-rqr"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bA4-U9-HmO" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5548,6 +5554,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="eab-Uh-oee"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="HvE-RH-6xZ"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="Rlm-ci-OG0"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="Eeu-gf-NpL"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -5567,6 +5574,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ha1-cC-z7D"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="Qc4-3U-twP"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="xv2-ty-deu"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="Vna-kS-QGR"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IsY-ca-iQy" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5581,6 +5589,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ZRu-pb-GkC"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="p6j-Z3-gng"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="BjV-qq-MiG"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="bcF-D3-283"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCb-UU-i5h" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5595,6 +5604,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="LLx-Ob-eiV"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="Ffz-D0-EeS"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="5qC-Ua-hQL"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="MyJ-zC-TbG"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -5614,6 +5624,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ZqX-dn-WWZ"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="LZu-g0-Zbm"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="HOS-wX-emg"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="KHz-G0-oKw"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvK-Ga-Oua" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5628,6 +5639,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="qqa-6J-M2t"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="b4v-6o-xmg"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="SKh-vQ-8w4"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="ZWy-AB-A6a"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7GD-70-kBm" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5642,6 +5654,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="dXL-oA-hgH"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="1Ka-ZA-a8E"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="zmm-1H-Rss"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="PTh-BN-0Fp"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -5659,6 +5672,7 @@ minutes, please wait ...</string>
                                                                     <action selector="biometricsPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="XkR-HL-hhY"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="Omj-BY-NpX"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="cXp-o2-Unz"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="zio-4Q-axE"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rg-Bp-lOR" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5673,6 +5687,7 @@ minutes, please wait ...</string>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="uiW-0f-PY7"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="bzj-Ic-vgS"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="zf4-gT-wve"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="9hx-QL-tSH"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hhr-hH-JPH">
@@ -5686,6 +5701,7 @@ minutes, please wait ...</string>
                                                                     <action selector="deletePressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="xQv-eo-fX2"/>
                                                                     <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="xYb-1A-dIn"/>
                                                                     <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="nET-FY-ONV"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="Q23-BR-3Rr"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
