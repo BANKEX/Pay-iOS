@@ -98,19 +98,39 @@ class PasscodeLockController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        super.viewWillAppear(animated)
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    @IBAction func numberTouchedDown(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
+    
+    @IBAction func touchAborted(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05) {
+            sender.transform = CGAffineTransform.identity
+        }
+    }
+    
+    @IBAction func touchDragInside(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
     
     @IBAction func numberPressed(_ sender: pinCodeNumberButton) {
         let number = sender.currentTitle!
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
+        }
         
         if status == .new {
             passcode += number
@@ -135,6 +155,11 @@ class PasscodeLockController: UIViewController {
     }
     
     @IBAction func deletePressed(_ sender: UIButton) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
+        }
         switch status {
         case .new:
             if passcode != "" {

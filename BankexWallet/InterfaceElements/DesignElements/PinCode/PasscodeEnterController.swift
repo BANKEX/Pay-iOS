@@ -43,7 +43,7 @@ class PasscodeEnterController: UIViewController {
         super.viewDidAppear(animated)
         if SecurityViewController.isEnabled {
             enterWithBiometrics()
-        } 
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -129,9 +129,23 @@ class PasscodeEnterController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    @IBAction func numberTouchedDown(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
+    
+    
     
     @IBAction func numberPressed(_ sender: enterPinCodeNumberButton) {
         let number = sender.currentTitle!
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
+        }
         
         if status == .enter {
             passcode += number
@@ -148,7 +162,26 @@ class PasscodeEnterController: UIViewController {
         
     }
     
+    @IBAction func touchAborted(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05) {
+            sender.transform = CGAffineTransform.identity
+        }
+    }
+    
+    @IBAction func touchDragInside(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
+    
+    
     @IBAction func deletePressed(_ sender: UIButton) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
+        }
         if passcode != "" {
             passcode.removeLast()
             changeNumsIcons(passcode.count)
@@ -156,7 +189,11 @@ class PasscodeEnterController: UIViewController {
     }
     
     @IBAction func biometricsPressed(_ sender: UIButton) {
-        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
+        }
         enterWithBiometrics()
     }
     
