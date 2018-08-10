@@ -41,9 +41,6 @@
                                                 <state key="normal" title="NEXT">
                                                     <color key="titleColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="nextButtonTapped:" destination="tIR-RD-pJ7" eventType="touchUpInside" id="XhZ-j7-Ga8"/>
-                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow next" translatesAutoresizingMaskIntoConstraints="NO" id="4tZ-OV-MtC">
                                                 <rect key="frame" x="43" y="0.0" width="16" height="16"/>
@@ -54,11 +51,24 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qiu-wH-wa6">
+                                        <rect key="frame" x="53" y="0.0" width="270" height="48"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="tIR-RD-pJ7" eventType="touchUpInside" id="DoA-te-oM8"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="Qiu-wH-wa6" firstAttribute="leading" secondItem="C0o-XF-oaQ" secondAttribute="leading" id="IxJ-9T-AUD"/>
                                     <constraint firstItem="R04-81-t6x" firstAttribute="top" secondItem="C0o-XF-oaQ" secondAttribute="top" constant="8" id="JfU-x9-Aal"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qiu-wH-wa6" secondAttribute="trailing" id="Tpt-P6-aYy"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qiu-wH-wa6" secondAttribute="bottom" id="XjL-wT-vbb"/>
                                     <constraint firstItem="R04-81-t6x" firstAttribute="centerX" secondItem="C0o-XF-oaQ" secondAttribute="centerX" id="hhP-yn-5Ob"/>
+                                    <constraint firstItem="Qiu-wH-wa6" firstAttribute="top" secondItem="C0o-XF-oaQ" secondAttribute="top" id="zyg-sj-Dff"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OlK-gQ-Ppl">
@@ -172,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8uH-eC-nY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2412" y="2239"/>
+            <point key="canvasLocation" x="-2412" y="2238.530734632684"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hgm-Hn-E6n">
