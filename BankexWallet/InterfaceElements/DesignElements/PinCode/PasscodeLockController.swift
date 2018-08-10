@@ -116,6 +116,13 @@ class PasscodeLockController: UIViewController {
         }
     }
     
+    @IBAction func touchDragInside(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
+    
     @IBAction func numberPressed(_ sender: pinCodeNumberButton) {
         let number = sender.currentTitle!
         
