@@ -14,6 +14,26 @@ class WalletCreationTypeController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    @IBAction func buttonTouchedDown(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
+    
+    
+    @IBAction func buttonTouchedUpInside(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05) {
+            sender.transform = CGAffineTransform.identity
+        }
+    }
+    @IBAction func buttonTouchedUpOutside(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05) {
+            sender.transform = CGAffineTransform.identity
+        }
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationController?.navigationBar.isHidden = false
         guard let controller = segue.destination as? GenericWalletCreationContainer else {
