@@ -123,6 +123,23 @@ FavoriteSelectionDelegate {
     @IBAction func unwind(segue:UIStoryboardSegue) { }
     
     
+    @IBAction func touchDown(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
+    @IBAction func touchDragOutside(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05) {
+            sender.transform = CGAffineTransform.identity
+        }
+    }
+    @IBAction func touchUpInside(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05) {
+            sender.transform = CGAffineTransform.identity
+        }
+    }
+    
     @IBAction func seeOrAddContactsButtonTapped(_ sender: UIButton) {
         if sender.title(for: .normal) == "See All" {
             self.performSegue(withIdentifier: "seeAllFavorites", sender: nil)
