@@ -1,9 +1,5 @@
-language: objective-c
-osx_image: xcode9.0
-install:
-  - bundle install
-script:
-  - fastlane crashliticsLogIn
-branches:
-  only: ["feature/CI"]
-
+language: objective-c 
+osx_image: xcode6.4
+xcode_project: BankexWallet.xcworkspace
+xcode_scheme: BankexWallet
+xcode_sdk: iphonesimulator8.4
