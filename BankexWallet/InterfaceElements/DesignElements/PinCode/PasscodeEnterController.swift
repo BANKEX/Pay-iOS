@@ -142,15 +142,9 @@ class PasscodeEnterController: UIViewController {
         let number = sender.currentTitle!
         
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05,
-                           animations: {
-                            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.05) {
-                    sender.transform = CGAffineTransform.identity
-                    
-                }
-            })
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
         }
         
         if status == .enter {
@@ -168,19 +162,18 @@ class PasscodeEnterController: UIViewController {
         
     }
     
+    @IBAction func touchAborted(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05) {
+            sender.transform = CGAffineTransform.identity
+        }
+    }
     
     
     @IBAction func deletePressed(_ sender: UIButton) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05,
-                           animations: {
-                            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.05) {
-                    sender.transform = CGAffineTransform.identity
-                    
-                }
-            })
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
         }
         if passcode != "" {
             passcode.removeLast()
@@ -190,15 +183,9 @@ class PasscodeEnterController: UIViewController {
     
     @IBAction func biometricsPressed(_ sender: UIButton) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05,
-                           animations: {
-                            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.05) {
-                    sender.transform = CGAffineTransform.identity
-                    
-                }
-            })
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
         }
         enterWithBiometrics()
     }

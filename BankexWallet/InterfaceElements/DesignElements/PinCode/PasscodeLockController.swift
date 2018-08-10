@@ -110,19 +110,19 @@ class PasscodeLockController: UIViewController {
                        completion: nil)
     }
     
+    @IBAction func touchAborted(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05) {
+            sender.transform = CGAffineTransform.identity
+        }
+    }
+    
     @IBAction func numberPressed(_ sender: pinCodeNumberButton) {
         let number = sender.currentTitle!
         
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05,
-                           animations: {
-                            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.05) {
-                    sender.transform = CGAffineTransform.identity
-                    
-                }
-            })
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
         }
         
         if status == .new {
@@ -149,15 +149,9 @@ class PasscodeLockController: UIViewController {
     
     @IBAction func deletePressed(_ sender: UIButton) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05,
-                           animations: {
-                            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.05) {
-                    sender.transform = CGAffineTransform.identity
-                    
-                }
-            })
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
         }
         switch status {
         case .new:

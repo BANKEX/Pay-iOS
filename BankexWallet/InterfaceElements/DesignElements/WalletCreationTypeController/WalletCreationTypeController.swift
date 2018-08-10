@@ -27,7 +27,7 @@ class WalletCreationTypeController: UIViewController {
             sender.transform = CGAffineTransform.identity
         }
     }
-    @IBAction func buttonTouchedUpOutside(_ sender: UIButton) {
+    @IBAction func touchAborted(_ sender: UIButton) {
         UIView.animate(withDuration: 0.05) {
             sender.transform = CGAffineTransform.identity
         }
