@@ -55,9 +55,12 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
             if state == .notEditable {
                 unselectKeyboard()
                 navigationItem.rightBarButtonItem?.title = "Edit"
+                navigationItem.hidesBackButton = false
+                navigationItem.setHidesBackButton(false, animated: true)
             }else {
                 addressTextField?.becomeFirstResponder()
                 navigationItem.rightBarButtonItem?.title = "Save"
+                navigationItem.setHidesBackButton(true, animated: true)
             }
         }
     }
@@ -68,7 +71,6 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(selectedContact.note)
         configureTextField()
         configureTableView()
         configureNavBar()

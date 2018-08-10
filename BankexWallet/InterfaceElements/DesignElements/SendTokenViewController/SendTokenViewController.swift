@@ -76,10 +76,11 @@ Retriable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Send"
         nextButton.isEnabled = false
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         addTokensButton()
-        addBackButton()
+        //addBackButton()
         setupNotifications()
         updateTopLayout()
         
@@ -89,7 +90,6 @@ Retriable {
         super.viewWillAppear(animated)
         handleErrorMessage()
         enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
-        navigationItem.title = "Send"
         configureWalletInfo()
     }
     

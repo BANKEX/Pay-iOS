@@ -39,7 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func showInitialVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialNav = storyboard.instantiateInitialViewController() as? UINavigationController
-        window?.rootViewController = initialNav
+        UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.window?.rootViewController = initialNav
+        })
         window?.makeKeyAndVisible()
     }
     
@@ -52,7 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func showTabBar() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tabBar = storyboard.instantiateViewController(withIdentifier: "MainTabController") as? UITabBarController
-        window?.rootViewController = tabBar
+        UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.window?.rootViewController = tabBar
+        })
         window?.makeKeyAndVisible()
     }
 
@@ -186,4 +190,5 @@ extension UIViewController {
         }
     }
 }
+
 

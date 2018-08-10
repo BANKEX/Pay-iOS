@@ -143,6 +143,11 @@ FavoriteSelectionDelegate {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        title = "Home"
+    }
+    
     //MARK: - Helpers
     func putTransactionsInfoIntoItemsArray() {
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
@@ -189,9 +194,9 @@ FavoriteSelectionDelegate {
     }
     
     private func configureNavBar() {
+        title = nil
         navigationController?.navigationBar.topItem?.title = nil
         navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.shadowImage = nil
         
         let nameLabel = UILabel()
         nameLabel.text = "Home"

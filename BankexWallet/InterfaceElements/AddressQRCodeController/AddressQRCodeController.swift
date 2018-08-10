@@ -36,11 +36,6 @@ class AddressQRCodeController: UIViewController {
         copiedLabel.alpha = 0
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
     func setNavigationBar() {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         let sendButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAddress(_:)))
