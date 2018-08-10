@@ -61,9 +61,8 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+        title = "Wallet"
         NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
             DispatchQueue.main.async {
                 self.tableView.reloadData()

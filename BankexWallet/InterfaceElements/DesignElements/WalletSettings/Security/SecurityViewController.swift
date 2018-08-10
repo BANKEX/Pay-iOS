@@ -32,7 +32,16 @@ class SecurityViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavbar()
+    }
+    
+    func setupNavbar() {
         navigationItem.title = "Security"
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

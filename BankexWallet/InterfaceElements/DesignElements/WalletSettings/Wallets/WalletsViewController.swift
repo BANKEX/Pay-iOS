@@ -55,11 +55,17 @@ class WalletsViewController: UIViewController {
     
     
     @objc func goBack(_ sender:UIButton) {
-        performSegue(withIdentifier: "backSegue", sender: nil)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.showInitialVC()
     }
     
     func configure() {
         navigationItem.title = "Wallets"
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        } else {
+            // Fallback on earlier versions
+        }
         tableView.dataSource = self
         tableView.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))

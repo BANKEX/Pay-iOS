@@ -54,11 +54,11 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
      
     
     func configureNavBar() {
-        let nameLabel = UILabel()
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)
-        nameLabel.text = "Settings"
-        navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            // Fallback on earlier versions
+        }
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
