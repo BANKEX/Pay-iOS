@@ -9,9 +9,11 @@
 import UIKit
 
 class WalletCreationTypeController: UIViewController {
+    var isFromInitial = true
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = isFromInitial
     }
     
     @IBAction func buttonTouchedDown(_ sender: UIButton) {

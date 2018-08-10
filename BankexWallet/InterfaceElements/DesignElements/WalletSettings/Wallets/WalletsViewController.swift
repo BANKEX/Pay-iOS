@@ -55,8 +55,14 @@ class WalletsViewController: UIViewController {
     
     
     @objc func goBack(_ sender:UIButton) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.showInitialVC()
+        performSegue(withIdentifier: "showAddWalletVC", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAddWalletVC" {
+            guard let destVC = segue.destination as? WalletCreationTypeController else { return }
+            destVC.isFromInitial = false
+        }
     }
     
     func configure() {
