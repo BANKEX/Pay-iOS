@@ -72,6 +72,6 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
-# Change-log
+## Change-log
 
 A brief summary of each Lovely release can be found on the [releases](https://github.com/BANKEX/BankexWalletIOS/releases).
