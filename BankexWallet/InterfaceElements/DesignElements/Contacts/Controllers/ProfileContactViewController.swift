@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UITextViewDelegate {
     
-    @IBOutlet weak var addressTextField:UITextField?
+    @IBOutlet weak var addressTextField:UITextField!
     @IBOutlet weak var noteTextView:UITextView!
     
     //MARK: - Properties
@@ -42,6 +42,31 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         label.textAlignment = .center
         label.textColor = UIColor.black
         return label
+    }()
+    lazy var activityViewController:UIActivityViewController = {
+        let activityViewController = UIActivityViewController(activityItems: [], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [
+            UIActivityType.postToTencentWeibo,
+            UIActivityType.print,
+            UIActivityType.assignToContact,
+            UIActivityType.saveToCameraRoll,
+            UIActivityType.addToReadingList,
+            UIActivityType.postToFlickr,
+            UIActivityType.postToVimeo
+        ]
+        return activityViewController
+    }()
+    lazy var alertViewController:UIAlertController = {
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let delButton = UIAlertAction(title:"Delete", style: .destructive) { _ in
+            guard let address = self.addressTextField?.text, self.service.contains(address: address) else { return }
+            self.service.delete(with: address) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        alertVC.addAction(delButton)
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .default))
+        return alertVC
     }()
     let service = RecipientsAddressesServiceImplementation()
     var selectedNote:String!
@@ -192,36 +217,26 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     
     
     @IBAction func shareContact() {
-        let firstActivityItem = "Text"
-        let activityViewController = UIActivityViewController(activityItems: [firstActivityItem], applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [
-            UIActivityType.postToTencentWeibo,
-            UIActivityType.print,
-            UIActivityType.assignToContact,
-            UIActivityType.saveToCameraRoll,
-            UIActivityType.addToReadingList,
-            UIActivityType.postToFlickr,
-            UIActivityType.postToVimeo
-        ]
-        
+        if let popOver = activityViewController.popoverPresentationController {
+            popOver.sourceView = tableView
+            popOver.sourceRect = CGRect(x: tableView.bounds.midX, y: tableView.bounds.maxY, width: 0, height: 0)
+            popOver.permittedArrowDirections = []
+            present(activityViewController, animated: true)
+            return
+        }
         present(activityViewController, animated: true)
     }
     
     
     @IBAction func removeContact() {
-        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let delButton = UIAlertAction(title:"Delete", style: .destructive) { _ in
-            guard let address = self.addressTextField?.text,self.service.contains(address: address) else { return }
-            self.service.delete(with: address) {
-                self.navigationController?.popViewController(animated: true)
-            }
+        if let popOver = alertViewController.popoverPresentationController {
+            popOver.sourceView = tableView
+            popOver.sourceRect = CGRect(x: tableView.bounds.midX, y: tableView.bounds.maxY, width: 0, height: 0)
+            popOver.permittedArrowDirections = []
+            present(alertViewController, animated: true)
+            return
         }
-        alertVC.addAction(delButton)
-        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(alertVC, animated: true) {
-            self.navigationController?.popViewController(animated: true)
-        }
-        
+        present(alertViewController, animated: true)
     }
     
     //MARK: - TextFieldDelegate
