@@ -44,6 +44,10 @@ behavior violating this base foundation of respect.
 ## Publishing your own pull request
 If you want to publish your own pull request, you might want to ask us before to avoid doing similar work.
 
+## Requirements
+- iOS 9.0+ SDK
+- Xcode 9 or later
+
 ## CocoaPods
 If you want to add you own pods or update existing, you need to install cocoapods.
 
