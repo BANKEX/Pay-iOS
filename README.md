@@ -76,6 +76,10 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+## Details
+More details (architecture, environments, tests, tools...) can be found on the [wiki](https://github.com/BANKEX/BankexWalletIOS/wiki).
+
 ## Change-log
 
 A brief summary of each Lovely release can be found on the [releases](https://github.com/BANKEX/BankexWalletIOS/releases).
