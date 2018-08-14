@@ -162,7 +162,7 @@ class ConfirmViewController: UITableViewController {
 //            }) { (error) in
 //                print(error.getErrorMessage())
 //            }
-        }else {
+        } else {
             self.sendFunds()
         }
     }
