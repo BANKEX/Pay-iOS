@@ -43,10 +43,6 @@ class WalletCreationTypeController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationController?.navigationBar.isHidden = false
-        guard let controller = segue.destination as? GenericWalletCreationContainer else {
-            return
-        }
-        controller.walletCreationMode = segue.identifier == "importWallet" ? WalletKeysMode.importKey : WalletKeysMode.createKey
     }
  
     
