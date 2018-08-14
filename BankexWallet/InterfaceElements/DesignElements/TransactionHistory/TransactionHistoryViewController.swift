@@ -39,6 +39,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         updateTransactions()
         configureRefreshControl()
         addTokensButton()
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
