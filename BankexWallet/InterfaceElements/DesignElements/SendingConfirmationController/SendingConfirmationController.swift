@@ -56,7 +56,7 @@ class SendingConfirmationController: UIViewController, Retriable {
                                                    amount: (amount ?? "") + " " + token.symbol,
                                                    date: Date(),
                                                    token: token,
-                                                   key: keysService.selectedKey()!)
+                                                   key: keysService.selectedKey()!, isPending: true)
 
         
         performSegue(withIdentifier: "showSending", sender: self)

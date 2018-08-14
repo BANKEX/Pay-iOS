@@ -34,6 +34,7 @@ struct ETHTransactionModel {
     let date: Date
     let token: ERC20TokenModel
     let key: HDKey
+    var isPending = false
 }
 
 protocol SendEthService {
@@ -58,7 +59,7 @@ protocol SendEthService {
               transaction: TransactionIntermediate, options: Web3Options?, completion:
         @escaping (SendEthResult<TransactionSendingResult>) -> Void)
     
-    func getAllTransactions() -> [ETHTransactionModel]?
+    func getAllTransactions() -> [ETHTransactionModel]
     
     func delete(transaction: ETHTransactionModel)
 }
@@ -114,6 +115,7 @@ class SendEthServiceImplementation: SendEthService {
                     newTask.token = selectedToken
                     newTask.networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
                     newTask.trHash = result.value?.transaction.txhash
+                    newTask.isPending = true
                     try context.insert(newTask)
                     save()
                 }
@@ -146,7 +148,7 @@ class SendEthServiceImplementation: SendEthService {
     
     
     // TODO: They're not optional! 
-    func getAllTransactions() -> [ETHTransactionModel]? {
+    func getAllTransactions() -> [ETHTransactionModel] {
         guard let address = self.keysService.selectedAddress() else { return [] }
         let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
         
@@ -161,7 +163,7 @@ class SendEthServiceImplementation: SendEthService {
                                        date: transaction.date!,
                                        token: token,
                                        key: HDKey(name: transaction.keywallet?.name,
-                                                  address: (transaction.keywallet?.address ?? "")))
+                                                  address: (transaction.keywallet?.address ?? "")), isPending: transaction.isPending)
         })
     }
     

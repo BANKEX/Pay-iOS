@@ -34,7 +34,7 @@ class PasscodeEnterController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController?.tabBar.isHidden = true
+        //tabBarController?.tabBar.isHidden = true
         configureBackground()
         changePasscodeStatus(.enter)
         numsIcons = [firstNum, secondNum, thirdNum, fourthNum]
@@ -45,11 +45,6 @@ class PasscodeEnterController: UIViewController {
         if SecurityViewController.isEnabled {
             enterWithBiometrics()
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        tabBarController?.tabBar.isHidden = true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -135,6 +130,8 @@ class PasscodeEnterController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        tabBarController?.tabBar.isHidden = false
+
     }
     
     @IBAction func numberTouchedDown(_ sender: UIButton) {

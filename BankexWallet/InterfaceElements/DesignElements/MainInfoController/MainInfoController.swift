@@ -180,9 +180,7 @@ FavoriteSelectionDelegate {
             "CurrentWalletInfoCell",
             "TransactionHistoryCell",//]
             "FavouritesTitleCell"]
-        if let firstThree = sendEthService.getAllTransactions()?.prefix(3) {
-            transactionsToShow = Array(firstThree)
-        }
+        transactionsToShow = Array(sendEthService.getAllTransactions().prefix(3))
         var arrayOfTransactions = [String]()
         switch transactionsToShow.count {
         case 0:

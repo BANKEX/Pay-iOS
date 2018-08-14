@@ -204,13 +204,13 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
         guard let selectedAddress = SingleKeyServiceImplementation().selectedAddress() else { return }
         switch status {
         case .all:
-            transactions = sendEthService.getAllTransactions()!
+            transactions = sendEthService.getAllTransactions()
         case .sent:
-            transactions = sendEthService.getAllTransactions()!.filter{ $0.from == selectedAddress.lowercased() }
+            transactions = sendEthService.getAllTransactions().filter{ $0.from == selectedAddress.lowercased() && !$0.isPending }
         case .received:
-            transactions = sendEthService.getAllTransactions()!.filter{ $0.from != selectedAddress.lowercased() }
+            transactions = sendEthService.getAllTransactions().filter{ $0.from != selectedAddress.lowercased() && !$0.isPending}
         case .confirming:
-            transactions = []
+            transactions = sendEthService.getAllTransactions().filter{ $0.isPending }
         }
         for transaction in transactions {
             let trDate = getFormattedDate(date: transaction.date)

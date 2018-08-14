@@ -31,9 +31,7 @@ class WalletData {
         sendEthService = service.selectedERC20Token().address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
-        if let firstThree = sendEthService.getAllTransactions()?.prefix(3) {
-            transactionsToShow = Array(firstThree)
-        }
+        transactionsToShow = Array(sendEthService.getAllTransactions().prefix(3))
         return transactionsToShow
     }
     

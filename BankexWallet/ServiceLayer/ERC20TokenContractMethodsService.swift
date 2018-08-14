@@ -149,7 +149,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
     }
     
     //Now that function returns transactions for selected token only.
-    func getAllTransactions() -> [ETHTransactionModel]? {
+    func getAllTransactions() -> [ETHTransactionModel] {
 
         guard let address = self.keysService.selectedAddress() else { return [] }
         let selectedToken = CustomERC20TokensServiceImplementation().selectedERC20Token()
@@ -173,7 +173,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
                                        date: transaction.date!,
                                        token: token,
                                        key: HDKey(name: transaction.keywallet?.name,
-                                                  address: (transaction.keywallet?.address ?? "")))
+                                                  address: (transaction.keywallet?.address ?? "")), isPending: transaction.isPending)
         })
     }
     
