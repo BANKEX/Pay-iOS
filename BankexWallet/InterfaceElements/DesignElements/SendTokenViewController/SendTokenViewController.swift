@@ -225,10 +225,12 @@ Retriable {
         }
         
         guard segue.identifier == "showSending",
-            let confirmation = segue.destination as? SendingResultInformation else {
+            let confirmation = segue.destination as? SendingResultInformation, let vc = segue.destination as? SendingInProcessViewController else {
                 return
         }
         sendingProcess =  confirmation
+        vc.textToShow = "Preparing transaction"
+        
         
     }
     

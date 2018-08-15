@@ -22,6 +22,9 @@ protocol SendingResultInformation: class {
 
 class SendingInProcessViewController: UIViewController,
 SendingResultInformation {
+    @IBOutlet weak var titleLabel: UILabel?
+    @IBOutlet weak var processTitleLabel: UILabel?
+
     
     var amountToSend: String?
     var destinationAddressToSend: String?
@@ -29,8 +32,8 @@ SendingResultInformation {
     var inputtedPassword: String?
     
     var fromEnterScreen = false
+    var textToShow: String?
     
-    @IBOutlet weak var processTitleLabel: UILabel?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? SendingSuccessViewController {
@@ -52,12 +55,13 @@ SendingResultInformation {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        titleLabel?.text = textToShow == nil ? "Sending funds" : textToShow!
         processTitleLabel?.text = "Retrieving data"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        textToShow = nil
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
