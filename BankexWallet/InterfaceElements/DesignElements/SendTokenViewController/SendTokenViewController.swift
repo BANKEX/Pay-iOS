@@ -310,8 +310,10 @@ Retriable {
     
     // MARK: QR Code scan
     lazy var readerVC: QRCodeReaderViewController = {
+        
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
+            $0.showSwitchCameraButton = false
         }
         
         return QRCodeReaderViewController(builder: builder)

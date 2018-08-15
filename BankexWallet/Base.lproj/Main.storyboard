@@ -2206,6 +2206,12 @@
                                                         <constraint firstAttribute="height" constant="1" id="0ZQ-D5-tjI"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQT-dL-xTO">
+                                                    <rect key="frame" x="318.5" y="44" width="26.5" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -2216,11 +2222,13 @@
                                                 <constraint firstItem="iWv-ip-CuF" firstAttribute="bottom" secondItem="t8Z-xK-Sfk" secondAttribute="bottom" id="8ME-gj-u9q"/>
                                                 <constraint firstItem="vdG-te-kiY" firstAttribute="centerY" secondItem="Le2-7E-bok" secondAttribute="centerY" id="CKo-6s-UxM"/>
                                                 <constraint firstItem="t8Z-xK-Sfk" firstAttribute="leading" secondItem="p95-SE-wHK" secondAttribute="leading" id="DbO-N4-VGR"/>
+                                                <constraint firstItem="jQT-dL-xTO" firstAttribute="centerY" secondItem="iWv-ip-CuF" secondAttribute="centerY" id="FRF-p4-W5V"/>
                                                 <constraint firstItem="t8Z-xK-Sfk" firstAttribute="top" secondItem="p95-SE-wHK" secondAttribute="top" constant="8" id="GB9-B3-x9u"/>
                                                 <constraint firstItem="c7O-c9-8tD" firstAttribute="top" secondItem="p95-SE-wHK" secondAttribute="top" id="Obn-Oc-QFe"/>
                                                 <constraint firstAttribute="bottom" secondItem="t8Z-xK-Sfk" secondAttribute="bottom" constant="9" id="Omz-E8-idd"/>
+                                                <constraint firstItem="jQT-dL-xTO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iWv-ip-CuF" secondAttribute="trailing" id="Tj5-Rc-ac6"/>
+                                                <constraint firstItem="jQT-dL-xTO" firstAttribute="trailing" secondItem="vdG-te-kiY" secondAttribute="trailing" id="jFN-W5-uyf"/>
                                                 <constraint firstItem="c7O-c9-8tD" firstAttribute="leading" secondItem="Le2-7E-bok" secondAttribute="leading" id="qux-YC-QEO"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iWv-ip-CuF" secondAttribute="trailing" constant="15" id="reW-vu-id7"/>
                                                 <constraint firstAttribute="trailing" secondItem="vdG-te-kiY" secondAttribute="trailing" constant="15" id="tfc-9f-4JO"/>
                                                 <constraint firstItem="vdG-te-kiY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Le2-7E-bok" secondAttribute="trailing" constant="10" id="xoQ-6r-j9a"/>
                                             </constraints>
@@ -2240,6 +2248,7 @@
                                     <outlet property="amountLabel" destination="vdG-te-kiY" id="qhV-v7-d3H"/>
                                     <outlet property="separatorView" destination="c7O-c9-8tD" id="dDY-lG-36c"/>
                                     <outlet property="statusImageView" destination="t8Z-xK-Sfk" id="RpL-Yx-Kpi"/>
+                                    <outlet property="transactionTime" destination="jQT-dL-xTO" id="KZl-c0-thd"/>
                                     <outlet property="transactionTypeLabel" destination="Le2-7E-bok" id="i4u-Su-AqU"/>
                                 </connections>
                             </tableViewCell>
@@ -2996,7 +3005,7 @@ minutes, please wait ...</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="YJP-Sq-wY4">
-                                                    <rect key="frame" x="58" y="41" width="277" height="12"/>
+                                                    <rect key="frame" x="58" y="41" width="26.5" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -3021,15 +3030,22 @@ minutes, please wait ...</string>
                                                         <constraint firstAttribute="height" constant="1" id="Lyb-xj-nfE"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="lt2-yi-vYr">
+                                                    <rect key="frame" x="308.5" y="41" width="26.5" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ssi-aK-n7x" firstAttribute="trailing" secondItem="dbS-xK-Yu0" secondAttribute="trailing" id="43Y-Af-4sg"/>
                                                 <constraint firstItem="uEg-Ra-wtL" firstAttribute="top" secondItem="ssi-aK-n7x" secondAttribute="bottom" constant="4" id="6QU-UA-ktT"/>
                                                 <constraint firstAttribute="bottom" secondItem="uEg-Ra-wtL" secondAttribute="bottom" constant="5" id="BH4-JY-ksV"/>
                                                 <constraint firstAttribute="trailing" secondItem="dbS-xK-Yu0" secondAttribute="trailing" id="G43-TF-def"/>
+                                                <constraint firstItem="lt2-yi-vYr" firstAttribute="centerY" secondItem="YJP-Sq-wY4" secondAttribute="centerY" id="M7v-t9-mQg"/>
                                                 <constraint firstItem="YJP-Sq-wY4" firstAttribute="leading" secondItem="qgQ-ZX-W0F" secondAttribute="leading" id="OHB-ts-OoX"/>
                                                 <constraint firstItem="ssi-aK-n7x" firstAttribute="leading" secondItem="qgQ-ZX-W0F" secondAttribute="leading" id="bcx-XJ-qy2"/>
-                                                <constraint firstAttribute="trailing" secondItem="YJP-Sq-wY4" secondAttribute="trailing" id="eTQ-Ny-IfO"/>
+                                                <constraint firstItem="lt2-yi-vYr" firstAttribute="trailing" secondItem="dbS-xK-Yu0" secondAttribute="trailing" id="jab-uJ-Xjd"/>
                                                 <constraint firstItem="qgQ-ZX-W0F" firstAttribute="top" secondItem="uEg-Ra-wtL" secondAttribute="top" id="rKi-8d-rMM"/>
                                                 <constraint firstItem="uEg-Ra-wtL" firstAttribute="leading" secondItem="3E1-NN-8id" secondAttribute="leading" id="s9i-r1-CQA"/>
                                                 <constraint firstItem="YJP-Sq-wY4" firstAttribute="bottom" secondItem="uEg-Ra-wtL" secondAttribute="bottom" id="sM9-EM-uk6"/>
@@ -3042,6 +3058,7 @@ minutes, please wait ...</string>
                                             <outlet property="addressLabel" destination="YJP-Sq-wY4" id="5DK-nw-p9p"/>
                                             <outlet property="amountLabel" destination="dbS-xK-Yu0" id="1Pu-Uf-sd0"/>
                                             <outlet property="statusImageView" destination="uEg-Ra-wtL" id="LAF-jM-24d"/>
+                                            <outlet property="transactionTime" destination="lt2-yi-vYr" id="Eu4-SR-g5F"/>
                                             <outlet property="transactionTypeLabel" destination="qgQ-ZX-W0F" id="kda-pL-ehe"/>
                                         </connections>
                                     </tableViewCell>
@@ -5218,25 +5235,33 @@ minutes, please wait ...</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: 0xd2332rewrk23j5353j2k5kl325" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sd-PR-bMP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="To: 0xd2332rewrk23j5353j2k5kl325" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sd-PR-bMP">
                                                     <rect key="frame" x="81" y="37" width="175.5" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdm-Fc-rED">
+                                                    <rect key="frame" x="334" y="37" width="21" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Qdm-Fc-rED" firstAttribute="centerY" secondItem="2sd-PR-bMP" secondAttribute="centerY" id="1vQ-tQ-JoP"/>
                                                 <constraint firstItem="x2n-3A-Ef9" firstAttribute="leading" secondItem="3Nz-3I-zni" secondAttribute="trailing" constant="13" id="5me-tU-Jcm"/>
                                                 <constraint firstItem="3Nz-3I-zni" firstAttribute="leading" secondItem="8BF-L6-9az" secondAttribute="leading" constant="20" id="6hN-wv-A5M"/>
                                                 <constraint firstAttribute="trailing" secondItem="pFb-v3-mj2" secondAttribute="trailing" constant="20" id="6zF-eR-HcJ"/>
                                                 <constraint firstItem="rxm-6j-nfM" firstAttribute="top" secondItem="8BF-L6-9az" secondAttribute="top" id="AEP-m3-DaW"/>
                                                 <constraint firstItem="pFb-v3-mj2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x2n-3A-Ef9" secondAttribute="trailing" constant="10" id="At7-VM-Khp"/>
+                                                <constraint firstItem="Qdm-Fc-rED" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2sd-PR-bMP" secondAttribute="trailing" constant="8" id="FMk-97-Utm"/>
                                                 <constraint firstAttribute="trailing" secondItem="rxm-6j-nfM" secondAttribute="trailing" constant="15" id="LOv-GJ-SIN"/>
                                                 <constraint firstItem="pFb-v3-mj2" firstAttribute="top" secondItem="x2n-3A-Ef9" secondAttribute="top" id="PxB-kc-Fxz"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2sd-PR-bMP" secondAttribute="trailing" constant="10" id="TLD-q6-c6s"/>
                                                 <constraint firstItem="3Nz-3I-zni" firstAttribute="centerY" secondItem="8BF-L6-9az" secondAttribute="centerY" id="cM3-5c-oWf"/>
                                                 <constraint firstItem="2sd-PR-bMP" firstAttribute="leading" secondItem="x2n-3A-Ef9" secondAttribute="leading" id="f02-CZ-wB2"/>
                                                 <constraint firstItem="x2n-3A-Ef9" firstAttribute="top" secondItem="8BF-L6-9az" secondAttribute="top" constant="8" id="hqn-hJ-f0U"/>
+                                                <constraint firstItem="Qdm-Fc-rED" firstAttribute="trailing" secondItem="pFb-v3-mj2" secondAttribute="trailing" id="n2N-Kl-ZHp"/>
                                                 <constraint firstItem="rxm-6j-nfM" firstAttribute="leading" secondItem="x2n-3A-Ef9" secondAttribute="leading" id="quN-m9-yJo"/>
                                                 <constraint firstItem="2sd-PR-bMP" firstAttribute="top" secondItem="x2n-3A-Ef9" secondAttribute="bottom" constant="8" id="zmP-1o-ivd"/>
                                             </constraints>
@@ -5246,6 +5271,7 @@ minutes, please wait ...</string>
                                             <outlet property="amountLabel" destination="pFb-v3-mj2" id="R1t-Cz-1AL"/>
                                             <outlet property="separatorView" destination="rxm-6j-nfM" id="Ffx-gf-1R8"/>
                                             <outlet property="statusImageView" destination="3Nz-3I-zni" id="4yY-hd-qF8"/>
+                                            <outlet property="transactionTime" destination="Qdm-Fc-rED" id="WxW-Nl-n6h"/>
                                             <outlet property="transactionTypeLabel" destination="x2n-3A-Ef9" id="syr-3d-lhy"/>
                                         </connections>
                                     </tableViewCell>
@@ -5308,7 +5334,7 @@ minutes, please wait ...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrR-FU-iU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2598" y="5121"/>
+            <point key="canvasLocation" x="-2599.1999999999998" y="5120.6896551724139"/>
         </scene>
         <!--Token Info Controller-->
         <scene sceneID="TKh-cs-4Dc">

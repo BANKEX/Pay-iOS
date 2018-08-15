@@ -218,9 +218,9 @@ FavoriteSelectionDelegate {
         title = nil
         navigationController?.navigationBar.topItem?.title = nil
         navigationController?.isNavigationBarHidden = false
-        
         let nameLabel = UILabel()
         nameLabel.text = "Home"
+        
         nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
         ethLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 130, height: 90))

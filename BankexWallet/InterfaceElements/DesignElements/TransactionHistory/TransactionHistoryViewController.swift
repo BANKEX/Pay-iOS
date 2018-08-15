@@ -157,7 +157,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDataSource,
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "transactionHistoryCell") as? TransactionHistoryCell else { return UITableViewCell() }
-        cell.configure(withTransaction: transactionsToShow[indexPath.section][indexPath.row])
+        cell.configure(withTransaction: transactionsToShow[indexPath.section][indexPath.row], forMain: false)
         return cell
     }
     

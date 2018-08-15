@@ -18,16 +18,24 @@ class TransactionHistoryCell: UITableViewCell {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var separatorView: UIView!
 
+    @IBOutlet weak var transactionTime: UILabel!
     @IBOutlet weak var transactionTypeLabel: UILabel!
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.YYYY"
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "dd MMMM, yyyy hh:MM:ss"
+        return formatter
+    }()
+    
+    let timeFormatter: DateFormatter = {
+       let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
         return formatter
     }()
     
     
-    func configure(withTransaction trans: ETHTransactionModel, isLastCell: Bool = false) {
+    func configure(withTransaction trans: ETHTransactionModel, isLastCell: Bool = false, forMain: Bool = true) {
         let isSend = SingleKeyServiceImplementation().selectedAddress()?.lowercased() == trans.from
         if trans.isPending {
             statusImageView.image = #imageLiteral(resourceName: "Confirming")
@@ -36,8 +44,15 @@ class TransactionHistoryCell: UITableViewCell {
             statusImageView.image = isSend ? #imageLiteral(resourceName: "Sent") : #imageLiteral(resourceName: "Received")
             transactionTypeLabel.text = isSend ? "Sent" : "Received"
         }
-        addressLabel.text = isSend ? "To: \(trans.to)" : "From: \(trans.from)"
+        addressLabel.text = isSend ? "To: \(getFormattedAddress(trans.to))" : "From: \(getFormattedAddress(trans.from))"
         amountLabel.text = (isSend ? "- " : "+ ") + trans.amount + " " + trans.token.symbol.uppercased()
+        transactionTime.text = forMain ? dateFormatter.string(from: trans.date) : timeFormatter.string(from: trans.date)
+    }
+    
+    private func getFormattedAddress(_ address: String) -> String {
+        let formatted = address[address.startIndex..<address.index(address.startIndex, offsetBy: 5)] + "..." + address[address.index(address.endIndex, offsetBy: -5)..<address.endIndex]
+        return String(formatted)
+        
     }
 }
 
