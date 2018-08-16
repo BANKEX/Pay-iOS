@@ -9,6 +9,8 @@ target 'BankexWallet' do
   pod "SugarRecord/CoreData", '<= 3.1'
   pod 'QRCodeReader.swift', '~> 8.1.1'
   pod 'Popover'
+  pod 'Amplitude-iOS', '~> 4.0.4'
+  
 
 
   target 'BankexWalletTests' do
