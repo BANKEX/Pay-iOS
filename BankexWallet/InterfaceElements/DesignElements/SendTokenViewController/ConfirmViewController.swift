@@ -9,6 +9,7 @@
 import UIKit
 import web3swift
 import BigInt
+import Amplitude_iOS
 
 class ConfirmViewController: UITableViewController {
     
@@ -133,6 +134,7 @@ class ConfirmViewController: UITableViewController {
         sendEthService.send(transactionModel: model, transaction: self.transaction, options: options) { (result) in
             switch result {
             case .Success(let res):
+                Amplitude.instance().logEvent("Transaction Sent")
                 self.performSegue(withIdentifier: "successSegue", sender: res)
             case .Error(let error):
                 var valueToSend = ""

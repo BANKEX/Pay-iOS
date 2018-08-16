@@ -9,6 +9,7 @@
 import UIKit
 import BigInt
 import web3swift
+import Amplitude_iOS
 
 struct CustomNetwork {
     //It's just beautiful identifier for the user
@@ -233,6 +234,7 @@ class NetworkSelectionSettings {
         let networkId = Web3SwiftNetworksAdapter().id(from: network)
         let serializedData = networkId.serialize()
         UserDefaults.standard.set(serializedData, forKey: savingNetworkIdKey)
+        Amplitude.instance().logEvent("Network Changed", withEventProperties: ["Network":networkId])
         NotificationCenter.default.post(name: DataChangeNotifications.didChangeNetwork.notificationName(), object: self, userInfo: ["network": network])
     }
 }
