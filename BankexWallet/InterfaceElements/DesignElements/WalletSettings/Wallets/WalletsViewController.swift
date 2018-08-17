@@ -12,8 +12,7 @@ protocol WalletsDelegate:class  {
     func didTapped(with wallet:HDKey)
 }
 
-class WalletsViewController: UIViewController {
-    
+class WalletsViewController: UIViewController, WalletSelectedDelegate {
     
     @IBOutlet weak var tableView:UITableView!
     
@@ -35,12 +34,9 @@ class WalletsViewController: UIViewController {
     var selectedWallet:HDKey? {
         return service.selectedKey()
     }
+    
     weak var delegate:WalletsDelegate?
 
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -53,7 +49,6 @@ class WalletsViewController: UIViewController {
     }
     
     
-    
     @objc func goBack(_ sender:UIButton) {
         performSegue(withIdentifier: "showAddWalletVC", sender: self)
     }
@@ -62,6 +57,8 @@ class WalletsViewController: UIViewController {
         if segue.identifier == "showAddWalletVC" {
             guard let destVC = segue.destination as? WalletCreationTypeController else { return }
             destVC.isFromInitial = false
+        } else if let walletInfoViewController = segue.destination as? WalletInfoViewController {
+            walletInfoViewController.publicAddress = sender as? String
         }
     }
     
@@ -76,10 +73,14 @@ class WalletsViewController: UIViewController {
         tableView.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))
     }
-
     
-
+    //MARK: - WalletSelectedDelegate
+    func didSelectWallet(withAddress address: String) {
+        self.performSegue(withIdentifier: "ShowWalletInfo", sender: address)
+    }
+    
 }
+
 
 
 

@@ -19,6 +19,7 @@ extension WalletsViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: WalletCell.identifier, for: indexPath) as! WalletCell
+        cell.delegate = self
         switch indexPath.section {
         case WalletsSections.CurrentWallet.rawValue:
             cell.configure(wallet: selectedWallet!)
