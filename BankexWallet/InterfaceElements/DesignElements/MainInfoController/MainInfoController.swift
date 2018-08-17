@@ -166,11 +166,6 @@ FavoriteSelectionDelegate {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        title = "Home"
-    }
-    
     //MARK: - Helpers
     func putTransactionsInfoIntoItemsArray() {
         sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
