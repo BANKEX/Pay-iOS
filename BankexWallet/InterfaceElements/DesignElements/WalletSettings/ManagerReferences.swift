@@ -23,7 +23,7 @@ class ManagerReferences {
             case .telegram: return "https://t.me/bankexpay"
             case .twitter: return "https://twitter.com/BANKEX"
             case .appStore: return "itms-apps://itunes.apple.com/app/BANKEX-Pay/id1411403963"  //Change later
-            case .bankex: return "wallet@bankexfoundation.org"
+            case .bankex: return "a.ingachev@bankex.com"
             }
         }
     }
