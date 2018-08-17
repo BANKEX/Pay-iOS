@@ -45,7 +45,9 @@ class WalletCell: UITableViewCell {
     }
     
     private func getFormattedAddress(_ address: String) -> String {
-        return address
+        let formatted = address[address.startIndex..<address.index(address.startIndex, offsetBy: 10)] + "..." + address[address.index(address.endIndex, offsetBy: -10)..<address.endIndex]
+        return String(formatted)
+        
     }
     
     func prepareAddressLabel() {

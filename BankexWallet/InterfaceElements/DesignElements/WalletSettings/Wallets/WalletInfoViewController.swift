@@ -12,14 +12,19 @@ class WalletInfoViewController: UITableViewController {
     
     var publicAddress: String?
     let walletsService: GlobalWalletsService = HDWalletServiceImplementation()
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
-        if section == 0 {
-            return view
-        } else {
-            return view
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            //TODO: - there are no such segues yes
+            case 0:
+                self.performSegue(withIdentifier: "toPassphrase", sender: nil)
+            case 1:
+                self.performSegue(withIdentifier: "toPrivateKey", sender: nil)
+            default:
+                print("Unreal")
+            }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
