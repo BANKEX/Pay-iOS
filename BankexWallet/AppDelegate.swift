@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Amplitude.instance().initializeApiKey("dae33377b6d6c29e03eacfa2e41e8900")
+        Amplitude.instance().initializeApiKey("27da55fc989fc196d40aa68b9a163e36")
         Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
         Fabric.with([Crashlytics.self])
         let initialRouter = InitialLogicRouter()
