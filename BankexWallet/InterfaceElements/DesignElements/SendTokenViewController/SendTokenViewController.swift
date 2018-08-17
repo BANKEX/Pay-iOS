@@ -80,7 +80,7 @@ Retriable {
         nextButton.isEnabled = false
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         addTokensButton()
-        //addBackButton()
+        addBackButton()
         setupNotifications()
         updateTopLayout()
         

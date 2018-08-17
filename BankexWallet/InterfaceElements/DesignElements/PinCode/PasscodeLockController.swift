@@ -100,7 +100,7 @@ class PasscodeLockController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     @IBAction func numberTouchedDown(_ sender: UIButton) {

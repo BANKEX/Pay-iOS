@@ -36,6 +36,26 @@ class AddressQRCodeController: UIViewController {
         copiedIcon.alpha = 0
         copiedLabel.alpha = 0
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addBackButton()
+    }
+    
+    func addBackButton() {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "BackArrow"), for: .normal)
+        button.setTitle("  Home", for: .normal)
+        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
+    }
 
     func setNavigationBar() {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
