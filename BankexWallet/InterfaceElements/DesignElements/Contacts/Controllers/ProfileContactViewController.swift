@@ -23,6 +23,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         let label = UILabel()
         label.numberOfLines = 1
         label.sizeToFit()
+        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         return label
     }()
