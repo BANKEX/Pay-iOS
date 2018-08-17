@@ -34,11 +34,27 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        addBackButton()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = searchFooter
         setupNavbar()
         setupSearchVC()
+    }
+    
+    func addBackButton() {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "BackArrow"), for: .normal)
+        button.setTitle("  Home", for: .normal)
+        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Amplitude_iOS
 
 class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol,UITextViewDelegate {
     
@@ -108,6 +109,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
                 self.showCreationAlert()
                 return
             }
+            Amplitude.instance().logEvent("Wallet Imported")
             if !UserDefaults.standard.bool(forKey: "passcodeExists") {
                 self.performSegue(withIdentifier: "goToPinFromImportPassphrase", sender: self)
             } else {

@@ -76,6 +76,7 @@ Retriable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Send"
         nextButton.isEnabled = false
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         addTokensButton()
@@ -89,7 +90,6 @@ Retriable {
         super.viewWillAppear(animated)
         handleErrorMessage()
         enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
-        navigationItem.title = "Send"
         configureWalletInfo()
     }
     
@@ -225,10 +225,12 @@ Retriable {
         }
         
         guard segue.identifier == "showSending",
-            let confirmation = segue.destination as? SendingResultInformation else {
+            let confirmation = segue.destination as? SendingResultInformation, let vc = segue.destination as? SendingInProcessViewController else {
                 return
         }
         sendingProcess =  confirmation
+        vc.textToShow = "Preparing transaction"
+        
         
     }
     
@@ -308,8 +310,10 @@ Retriable {
     
     // MARK: QR Code scan
     lazy var readerVC: QRCodeReaderViewController = {
+        
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
+            $0.showSwitchCameraButton = false
         }
         
         return QRCodeReaderViewController(builder: builder)

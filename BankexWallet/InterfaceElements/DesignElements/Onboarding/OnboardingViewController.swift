@@ -23,7 +23,7 @@ class OnboardingViewController: UIViewController {
     weak var delegate: OnboardingDelegate?
     
     var images = ["Favorites", "ERC20", "Custom network"]
-    let texts = ["ERC20": ("ERC20 standart", "Support for any tokens within the Ether network."), "Custom network": ("Custom network", "Add your network and work with tokens right inside wallet."), "Favorites": ("Favorites", "Add your contacts in the Favorite list for quick access to them.")]
+    let texts = ["ERC20": ("ERC20 standard", "Support for any tokens within the Ether network."), "Custom network": ("Custom network", "Add your network and work with tokens right inside wallet."), "Favorites": ("Favorites", "Add your contacts in the Favorite list for quick access to them.")]
     
     var image: UIImage?
     var name: String?

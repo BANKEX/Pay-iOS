@@ -43,7 +43,11 @@ class PasscodeEnterController: UIViewController {
         super.viewDidAppear(animated)
         if SecurityViewController.isEnabled {
             enterWithBiometrics()
-        } 
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -80,16 +84,18 @@ class PasscodeEnterController: UIViewController {
     
     func enterWallet() {
         DispatchQueue.main.async {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            if let vc = currentPasscodeViewController, vc.navigationController == nil {
-                vc.dismiss(animated: true, completion: nil)
-                currentPasscodeViewController = nil
+            if self.instanciatedFromSend {
+                self.performSegue(withIdentifier: "backToSend", sender: nil)
             } else {
-                self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+                if let vc = currentPasscodeViewController, vc.navigationController == nil {
+                    vc.dismiss(animated: true, completion: nil)
+                    currentPasscodeViewController = nil
+                } else {
+                    self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+                }
             }
-            
         }
-        
     }
     
     func changeNumsIcons(_ nums: Int) {
@@ -127,11 +133,27 @@ class PasscodeEnterController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        //tabBarController?.tabBar.isHidden = false
+
     }
+    
+    @IBAction func numberTouchedDown(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
+    
     
     
     @IBAction func numberPressed(_ sender: enterPinCodeNumberButton) {
         let number = sender.currentTitle!
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
+        }
         
         if status == .enter {
             passcode += number
@@ -148,7 +170,26 @@ class PasscodeEnterController: UIViewController {
         
     }
     
+    @IBAction func touchAborted(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05) {
+            sender.transform = CGAffineTransform.identity
+        }
+    }
+    
+    @IBAction func touchDragInside(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.05,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
+                       completion: nil)
+    }
+    
+    
     @IBAction func deletePressed(_ sender: UIButton) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
+        }
         if passcode != "" {
             passcode.removeLast()
             changeNumsIcons(passcode.count)
@@ -156,7 +197,11 @@ class PasscodeEnterController: UIViewController {
     }
     
     @IBAction func biometricsPressed(_ sender: UIButton) {
-        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                sender.transform = CGAffineTransform.identity
+            }
+        }
         enterWithBiometrics()
     }
     

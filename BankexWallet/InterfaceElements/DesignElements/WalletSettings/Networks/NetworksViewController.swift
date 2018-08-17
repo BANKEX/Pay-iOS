@@ -60,8 +60,12 @@ class NetworksViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         navigationItem.title = "Connection"
-        navigationController?.navigationBar.isHidden = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNetworkTapped(_:)))
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     

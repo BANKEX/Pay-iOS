@@ -44,11 +44,27 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
                                         // TODO: it's not working
                                         print("delete tapped")
                                         self.service.deleteToken(with: address)
+                                        if let viewWithTag = self.view.viewWithTag(777) {
+                                            viewWithTag.removeFromSuperview()
+                                        }
                                         self.updateTableView()
         }))
         alert.addAction(UIAlertAction(title: "Cancel",
                                       style: .cancel,
-                                      handler: nil))
+                                      handler: {action in
+                                        if let viewWithTag = self.view.viewWithTag(777) {
+                                            viewWithTag.removeFromSuperview()
+                                        }
+        }))
+        let darknessView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
+        darknessView.tag = 777
+        darknessView.backgroundColor = UIColor.gray
+        darknessView.alpha = 0.5
+        self.view.insertSubview(darknessView, at: self.view.subviews.count)
+        
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
+        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
         
         self.present(alert, animated: true, completion: nil)
         
@@ -61,9 +77,8 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+        title = "Wallet"
         NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
             DispatchQueue.main.async {
                 self.tableView.reloadData()

@@ -9,6 +9,7 @@
 import UIKit
 import web3swift
 import BigInt
+import Amplitude_iOS
 
 class ConfirmViewController: UITableViewController {
     
@@ -121,7 +122,7 @@ class ConfirmViewController: UITableViewController {
     func sendFunds() {
         let sendEthService: SendEthService = self.tokenService.selectedERC20Token().address.isEmpty ? SendEthServiceImplementation() : ERC20TokenContractMethodsServiceImplementation()
         let token  = self.tokenService.selectedERC20Token()
-        let model = ETHTransactionModel(from: self.fromAddr, to: self.toLabel.text ?? "", amount: self.amount, date: Date(), token: token, key:self.keyService.selectedKey()!)
+        let model = ETHTransactionModel(from: self.fromAddr, to: self.toLabel.text ?? "", amount: self.amount, date: Date(), token: token, key:self.keyService.selectedKey()!, isPending: true)
         self.performSegue(withIdentifier: "waitSegue", sender: nil)
         var options = Web3Options.defaultOptions()
         options.gasLimit = BigUInt(self.gasLimit)
@@ -133,6 +134,7 @@ class ConfirmViewController: UITableViewController {
         sendEthService.send(transactionModel: model, transaction: self.transaction, options: options) { (result) in
             switch result {
             case .Success(let res):
+                Amplitude.instance().logEvent("Transaction Sent")
                 self.performSegue(withIdentifier: "successSegue", sender: res)
             case .Error(let error):
                 var valueToSend = ""
@@ -162,7 +164,7 @@ class ConfirmViewController: UITableViewController {
 //            }) { (error) in
 //                print(error.getErrorMessage())
 //            }
-        }else {
+        } else {
             self.sendFunds()
         }
     }

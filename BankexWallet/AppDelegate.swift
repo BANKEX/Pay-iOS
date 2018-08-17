@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Fabric
 import Crashlytics
+import Amplitude_iOS
 
 
 @UIApplicationMain
@@ -21,22 +22,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Amplitude.instance().initializeApiKey("27da55fc989fc196d40aa68b9a163e36")
         Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
         Fabric.with([Crashlytics.self])
         let initialRouter = InitialLogicRouter()
         let isOnboardingNeeded = UserDefaults.standard.value(forKey: "isOnboardingNeeded")
         if isOnboardingNeeded == nil  {
-            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            let onboarding = storyboard.instantiateViewController(withIdentifier: "OnboardingPage")
-            window?.rootViewController = onboarding
+            showOnboarding()
         }
-        
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return true
         }
         initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
         window?.backgroundColor = .white
         return true
+    }
+    
+    func showInitialVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialNav = storyboard.instantiateInitialViewController() as? UINavigationController
+        UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.window?.rootViewController = initialNav
+        })
+        window?.makeKeyAndVisible()
+    }
+    
+    func showOnboarding() {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let onboarding = storyboard.instantiateViewController(withIdentifier: "OnboardingPage")
+        window?.rootViewController = onboarding
+    }
+    
+    func showTabBar() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabBar = storyboard.instantiateViewController(withIdentifier: "MainTabController") as? UITabBarController
+        UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.window?.rootViewController = tabBar
+        })
+        window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -169,4 +192,5 @@ extension UIViewController {
         }
     }
 }
+
 

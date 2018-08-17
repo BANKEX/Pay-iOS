@@ -8,6 +8,7 @@
 
 import UIKit
 import QRCodeReader
+import Amplitude_iOS
 
 class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol {
     
@@ -110,6 +111,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
             if let _ = error {
                 self.showCreationAlert()
             }
+            Amplitude.instance().logEvent("Wallet Imported")
             if !UserDefaults.standard.bool(forKey: "passcodeExists") {
                 self.performSegue(withIdentifier: "goToPinFromImportSingleKey", sender: self)
             } else {

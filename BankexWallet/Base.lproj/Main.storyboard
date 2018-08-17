@@ -20,7 +20,7 @@
                 <pageViewController storyboardIdentifier="OnboardingPage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="bcr-Ar-xN5" customClass="OnboardingPageViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rC-w1-T6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3098" y="2239"/>
+            <point key="canvasLocation" x="-3588" y="2230"/>
         </scene>
         <!--Onboarding View Controller-->
         <scene sceneID="pWT-Ki-qbg">
@@ -41,9 +41,6 @@
                                                 <state key="normal" title="NEXT">
                                                     <color key="titleColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="nextButtonTapped:" destination="tIR-RD-pJ7" eventType="touchUpInside" id="XhZ-j7-Ga8"/>
-                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow next" translatesAutoresizingMaskIntoConstraints="NO" id="4tZ-OV-MtC">
                                                 <rect key="frame" x="43" y="0.0" width="16" height="16"/>
@@ -54,11 +51,24 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qiu-wH-wa6">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="tIR-RD-pJ7" eventType="touchUpInside" id="DoA-te-oM8"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="Qiu-wH-wa6" firstAttribute="leading" secondItem="C0o-XF-oaQ" secondAttribute="leading" id="IxJ-9T-AUD"/>
                                     <constraint firstItem="R04-81-t6x" firstAttribute="top" secondItem="C0o-XF-oaQ" secondAttribute="top" constant="8" id="JfU-x9-Aal"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qiu-wH-wa6" secondAttribute="trailing" id="Tpt-P6-aYy"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qiu-wH-wa6" secondAttribute="bottom" id="XjL-wT-vbb"/>
                                     <constraint firstItem="R04-81-t6x" firstAttribute="centerX" secondItem="C0o-XF-oaQ" secondAttribute="centerX" id="hhP-yn-5Ob"/>
+                                    <constraint firstItem="Qiu-wH-wa6" firstAttribute="top" secondItem="C0o-XF-oaQ" secondAttribute="top" id="zyg-sj-Dff"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OlK-gQ-Ppl">
@@ -172,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8uH-eC-nY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2412" y="2239"/>
+            <point key="canvasLocation" x="-2412" y="2238.530734632684"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hgm-Hn-E6n">
@@ -195,7 +205,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89C-4i-6ZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1536" y="2239"/>
+            <point key="canvasLocation" x="-1481" y="2209"/>
         </scene>
         <!--Wallet Creation Type Controller-->
         <scene sceneID="SFe-o1-xOp">
@@ -209,7 +219,7 @@
                                 <rect key="frame" x="94" y="104" width="187.5" height="76"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="J47-g9-ucF">
-                                <rect key="frame" x="40" y="497" width="295" height="120"/>
+                                <rect key="frame" x="40" y="448" width="295" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncR-Ov-TWm">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
@@ -227,6 +237,10 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="buttonTouchedDown:" destination="M7A-D7-jHu" eventType="touchDown" id="72K-V6-4f0"/>
+                                            <action selector="buttonTouchedUpInside:" destination="M7A-D7-jHu" eventType="touchUpInside" id="SZv-BO-and"/>
+                                            <action selector="touchAborted:" destination="M7A-D7-jHu" eventType="touchDragOutside" id="axg-ci-L28"/>
+                                            <action selector="touchDragInside:" destination="M7A-D7-jHu" eventType="touchDragInside" id="KQW-cH-lMX"/>
                                             <segue destination="7ST-Xq-jOz" kind="show" identifier="importWallet" id="WPL-y5-Qa2"/>
                                         </connections>
                                     </button>
@@ -243,6 +257,10 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="buttonTouchedDown:" destination="M7A-D7-jHu" eventType="touchDown" id="Xy6-KR-uTF"/>
+                                            <action selector="buttonTouchedUpInside:" destination="M7A-D7-jHu" eventType="touchUpInside" id="VpI-bX-fix"/>
+                                            <action selector="touchAborted:" destination="M7A-D7-jHu" eventType="touchDragOutside" id="9nc-oi-5gQ"/>
+                                            <action selector="touchDragInside:" destination="M7A-D7-jHu" eventType="touchDragInside" id="2DW-xf-6yL"/>
                                             <segue destination="Ptd-7b-8Z1" kind="show" identifier="createWallet" id="VHm-vx-gY6"/>
                                         </connections>
                                     </button>
@@ -285,13 +303,13 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uth-qE-4i7">
-                                <rect key="frame" x="0.0" y="182" width="375" height="485"/>
+                                <rect key="frame" x="0.0" y="182" width="375" height="436"/>
                                 <connections>
                                     <segue destination="NQv-6V-bIF" kind="embed" id="3Es-ip-Avo"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m62-vk-V3q">
-                                <rect key="frame" x="0.0" y="182" width="375" height="485"/>
+                                <rect key="frame" x="0.0" y="182" width="375" height="436"/>
                                 <connections>
                                     <segue destination="zgF-bs-7XP" kind="embed" id="Axi-28-c3N"/>
                                 </connections>
@@ -328,11 +346,11 @@
             <objects>
                 <viewController id="zgF-bs-7XP" customClass="WalletBIP32Controller" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W3j-xf-8ev">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="485"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your passphrase" translatesAutoresizingMaskIntoConstraints="NO" id="UsK-Jd-mN2">
-                                <rect key="frame" x="11" y="20" width="334" height="48"/>
+                                <rect key="frame" x="11" y="0.0" width="334" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="zJ9-bE-ReN"/>
@@ -341,14 +359,14 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7g-mL-nV1">
-                                <rect key="frame" x="15" y="68" width="360" height="1"/>
+                                <rect key="frame" x="15" y="48" width="360" height="1"/>
                                 <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="win-Rx-zpG"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ca2-qI-28c">
-                                <rect key="frame" x="16" y="130" width="359" height="48"/>
+                                <rect key="frame" x="16" y="110" width="359" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="K5Q-H2-MoN"/>
                                 </constraints>
@@ -357,14 +375,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nK-oM-Q9C">
-                                <rect key="frame" x="15" y="178" width="360" height="1"/>
+                                <rect key="frame" x="15" y="158" width="360" height="1"/>
                                 <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="nRy-27-pNF"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B9-kC-WYr">
-                                <rect key="frame" x="44" y="371" width="287" height="50"/>
+                                <rect key="frame" x="44" y="322" width="287" height="50"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NJJ-m9-yH4"/>
@@ -383,7 +401,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALn-bm-ReB">
-                                <rect key="frame" x="345" y="27" width="16" height="16"/>
+                                <rect key="frame" x="345" y="7" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="19r-23-xIJ"/>
                                     <constraint firstAttribute="width" constant="16" id="nPY-V2-ckU"/>
@@ -394,7 +412,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-WJ-80e">
-                                <rect key="frame" x="16" y="77" width="140" height="28"/>
+                                <rect key="frame" x="16" y="57" width="140" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="8rN-GF-i9h"/>
                                     <constraint firstAttribute="width" constant="140" id="soe-9s-ota"/>
@@ -449,11 +467,11 @@
             <objects>
                 <viewController id="NQv-6V-bIF" customClass="SingleKeyWalletController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mOs-aW-oc9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="485"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your private key" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JGw-Ba-1Is">
-                                <rect key="frame" x="11" y="20" width="334" height="48"/>
+                                <rect key="frame" x="11" y="0.0" width="334" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="CdQ-UU-nVz"/>
@@ -462,14 +480,14 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vd-OQ-DBo">
-                                <rect key="frame" x="15" y="68" width="360" height="1"/>
+                                <rect key="frame" x="15" y="48" width="360" height="1"/>
                                 <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="edc-nb-tYa"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gda-yG-5fI" userLabel="ContainerView" customClass="SingleKeyView" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="69" width="359" height="109"/>
+                                <rect key="frame" x="16" y="49" width="359" height="109"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OVl-0c-dto">
                                         <rect key="frame" x="0.0" y="61" width="359" height="48"/>
@@ -529,7 +547,7 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6i-Sg-uPe">
-                                <rect key="frame" x="44" y="371" width="287" height="50"/>
+                                <rect key="frame" x="44" y="322" width="287" height="50"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="yzP-24-Myz"/>
@@ -548,7 +566,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TLz-RI-Hz8">
-                                <rect key="frame" x="345" y="26" width="16" height="16"/>
+                                <rect key="frame" x="345" y="6" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="11v-Cn-7Ns"/>
                                     <constraint firstAttribute="height" constant="16" id="cUh-pJ-aNb"/>
@@ -868,7 +886,6 @@
                             <outlet property="delegate" destination="qQO-1J-iXi" id="vUX-Qn-cxP"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="Setting" id="Jzc-3t-aFH"/>
                     <navigationItem key="navigationItem" title="Settings" id="1Vw-nb-Ghk"/>
                     <connections>
                         <outlet property="nameNetworkLabel" destination="tlb-dS-iiN" id="Wkc-TX-Xn3"/>
@@ -880,7 +897,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YkV-yB-ASf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3182" y="5902"/>
+            <point key="canvasLocation" x="-3370" y="5901"/>
         </scene>
         <!--Wallets View Controller-->
         <scene sceneID="9in-QS-g9s">
@@ -891,7 +908,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ihI-ft-ZZn">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" rowHeight="62" id="qby-pv-EVX" customClass="WalletCell" customModule="BankexWallet" customModuleProvider="target">
@@ -942,40 +959,23 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="ihI-ft-ZZn" id="PYF-zV-HfV"/>
-                        <segue destination="M7A-D7-jHu" kind="show" identifier="backSegue" id="ZCX-JO-N3t"/>
+                        <segue destination="M7A-D7-jHu" kind="show" identifier="showAddWalletVC" id="o2o-Af-M3V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcy-WG-pjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2186" y="6358"/>
+            <point key="canvasLocation" x="-1247.2" y="6357.571214392804"/>
         </scene>
-        <!--Passcode Lock Controller-->
+        <!--Passcode Lock-->
         <scene sceneID="yCt-66-WPY">
             <objects>
-                <viewController id="ieh-eS-frZ" customClass="PasscodeLockController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Passcode Lock" id="ieh-eS-frZ" customClass="PasscodeLockController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s9V-Fv-Xze">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="485"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nc3-EK-bI9">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passcode Lock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPl-4m-g0t">
-                                        <rect key="frame" x="128.5" y="12.5" width="119.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="GPl-4m-g0t" firstAttribute="centerX" secondItem="nc3-EK-bI9" secondAttribute="centerX" id="0H4-qr-jYb"/>
-                                    <constraint firstAttribute="height" constant="44" id="2rY-C3-tmS"/>
-                                    <constraint firstItem="GPl-4m-g0t" firstAttribute="centerY" secondItem="nc3-EK-bI9" secondAttribute="centerY" id="dQI-5l-edV"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztH-lz-z4f">
-                                <rect key="frame" x="0.0" y="64" width="375" height="421"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify your passcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUM-zI-rhZ">
                                         <rect key="frame" x="115.5" y="48" width="144" height="18"/>
@@ -1013,7 +1013,7 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="npn-8f-uzG">
-                                        <rect key="frame" x="0.0" y="205" width="375" height="216"/>
+                                        <rect key="frame" x="0.0" y="338" width="375" height="216"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="2Oc-jG-GKY">
                                                 <rect key="frame" x="6" y="6" width="363" height="151.5"/>
@@ -1034,6 +1034,9 @@
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="Skf-kK-X3r"/>
+                                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="dN8-Ux-rqW"/>
+                                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="0ha-JD-VU6"/>
+                                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="0uX-by-2lb"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1r-Ov-v5t" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -1044,6 +1047,9 @@
                                                                 <state key="normal" title="2"/>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="2SI-mW-B18"/>
+                                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="StI-jS-E7V"/>
+                                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="PG7-Ey-j2Y"/>
+                                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="1aL-oK-Y31"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yax-UF-kF2" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -1054,6 +1060,9 @@
                                                                 <state key="normal" title="3"/>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="3pk-Cf-fWp"/>
+                                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="CdX-nX-9mj"/>
+                                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="3dI-I2-nLE"/>
+                                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="gYM-JW-8xG"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1069,6 +1078,9 @@
                                                                 <state key="normal" title="4"/>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="eNs-HL-1ah"/>
+                                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="esc-SS-GYD"/>
+                                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="9Pf-RP-jkI"/>
+                                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="9Lt-dZ-E9Y"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgu-mm-d3c" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -1079,6 +1091,9 @@
                                                                 <state key="normal" title="5"/>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="6OV-Ed-dyp"/>
+                                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="pY3-hs-7HM"/>
+                                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="GMw-rB-80N"/>
+                                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="FTz-jP-iit"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5Y-6C-tIH" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -1089,6 +1104,9 @@
                                                                 <state key="normal" title="6"/>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="Erp-yB-e6d"/>
+                                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="eui-Es-khg"/>
+                                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="xNw-T2-tWp"/>
+                                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="aoL-cr-ydm"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1104,6 +1122,9 @@
                                                                 <state key="normal" title="7"/>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="yWF-lb-TFe"/>
+                                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="TPe-IY-Z2b"/>
+                                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="ay3-R9-Ajf"/>
+                                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="pPV-Zf-znv"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKA-fV-sXL" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -1114,6 +1135,9 @@
                                                                 <state key="normal" title="8"/>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="7Pm-Wu-ex9"/>
+                                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="T9i-ge-ktR"/>
+                                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="CnV-fx-7le"/>
+                                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="gPC-qJ-Wzo"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1F-Hm-mzy" customClass="pinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -1124,6 +1148,9 @@
                                                                 <state key="normal" title="9"/>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="Sh6-Ln-zP7"/>
+                                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="45x-Tq-LUk"/>
+                                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="dvo-5M-5xW"/>
+                                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="dbV-kv-WyL"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1138,6 +1165,9 @@
                                                 <state key="normal" title="0"/>
                                                 <connections>
                                                     <action selector="numberPressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="e3r-M5-BNS"/>
+                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="ePl-3N-VLP"/>
+                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="gnJ-CY-tqL"/>
+                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="8zn-JS-hDn"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDC-hH-xdl">
@@ -1148,6 +1178,9 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="deletePressed:" destination="ieh-eS-frZ" eventType="touchUpInside" id="KHr-4b-Fg1"/>
+                                                    <action selector="numberTouchedDown:" destination="ieh-eS-frZ" eventType="touchDown" id="7ik-gk-wAh"/>
+                                                    <action selector="touchAborted:" destination="ieh-eS-frZ" eventType="touchDragOutside" id="Igb-7Q-Vb3"/>
+                                                    <action selector="touchDragInside:" destination="ieh-eS-frZ" eventType="touchDragInside" id="eit-Ak-RS1"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1183,12 +1216,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nc3-EK-bI9" firstAttribute="top" secondItem="cxK-mk-eoO" secondAttribute="top" id="TAc-mg-Qr0"/>
-                            <constraint firstItem="nc3-EK-bI9" firstAttribute="trailing" secondItem="cxK-mk-eoO" secondAttribute="trailing" id="X1j-Fv-F0U"/>
                             <constraint firstItem="cxK-mk-eoO" firstAttribute="trailing" secondItem="ztH-lz-z4f" secondAttribute="trailing" id="dk5-9J-Qb8"/>
                             <constraint firstItem="cxK-mk-eoO" firstAttribute="bottom" secondItem="ztH-lz-z4f" secondAttribute="bottom" id="gFE-fz-Z4e"/>
-                            <constraint firstItem="nc3-EK-bI9" firstAttribute="leading" secondItem="cxK-mk-eoO" secondAttribute="leading" id="haS-I8-rEd"/>
-                            <constraint firstItem="ztH-lz-z4f" firstAttribute="top" secondItem="nc3-EK-bI9" secondAttribute="bottom" id="miO-ml-5Zo"/>
+                            <constraint firstItem="ztH-lz-z4f" firstAttribute="top" secondItem="cxK-mk-eoO" secondAttribute="top" id="miO-ml-5Zo"/>
                             <constraint firstItem="ztH-lz-z4f" firstAttribute="leading" secondItem="cxK-mk-eoO" secondAttribute="leading" id="zcd-Ae-rBh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cxK-mk-eoO"/>
@@ -1321,7 +1351,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3l9-5x-K3w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2222" y="7200"/>
+            <point key="canvasLocation" x="-1785" y="7150"/>
         </scene>
         <!--Networks View Controller-->
         <scene sceneID="qlF-13-w0o">
@@ -1332,7 +1362,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="FF7-B1-CUc">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="cNL-Hx-6D9" style="IBUITableViewCellStyleDefault" id="ofK-ZN-bqi">
@@ -1371,7 +1401,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0D-A7-Ozm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2343" y="5558"/>
+            <point key="canvasLocation" x="-464.80000000000001" y="5557.8710644677667"/>
         </scene>
         <!--Create Network View Controller-->
         <scene sceneID="DRW-GF-yiK">
@@ -1501,7 +1531,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bH0-wL-aff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1190" y="5565"/>
+            <point key="canvasLocation" x="687.20000000000005" y="5564.1679160419799"/>
         </scene>
         <!--Favorites List Controller-->
         <scene sceneID="r0F-Rl-uUs">
@@ -1830,7 +1860,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kwF-1P-Imi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3326" y="3795"/>
+            <point key="canvasLocation" x="-3369" y="3557"/>
         </scene>
         <!--List Contacts View Controller-->
         <scene sceneID="sOS-Pp-9aG">
@@ -1841,7 +1871,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nKx-PB-0gh">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" id="xS3-oO-FUb" customClass="ContactCell" customModule="BankexWallet" customModuleProvider="target">
@@ -1870,7 +1900,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzO-6Q-kBl" customClass="SearchFooter" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="574" width="375" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Lwa-gU-cXQ"/>
@@ -1994,6 +2024,10 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
+                                                        <action selector="touchDown:" destination="rBc-RO-cZM" eventType="touchDown" id="3Gs-Gg-k1Z"/>
+                                                        <action selector="touchDragInside:" destination="rBc-RO-cZM" eventType="touchDragInside" id="3GR-B1-FEm"/>
+                                                        <action selector="touchDragOutside:" destination="rBc-RO-cZM" eventType="touchDragOutside" id="XQU-DQ-8lw"/>
+                                                        <action selector="touchUpInside:" destination="rBc-RO-cZM" eventType="touchUpInside" id="mTn-tf-22M"/>
                                                         <segue destination="dxz-2H-Uh6" kind="show" id="Oa7-Ma-Ndk"/>
                                                     </connections>
                                                 </button>
@@ -2013,6 +2047,10 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
+                                                        <action selector="touchDown:" destination="rBc-RO-cZM" eventType="touchDown" id="8B9-SS-h8C"/>
+                                                        <action selector="touchDragInside:" destination="rBc-RO-cZM" eventType="touchDragInside" id="XfQ-wB-Lw1"/>
+                                                        <action selector="touchDragOutside:" destination="rBc-RO-cZM" eventType="touchDragOutside" id="cmj-et-7bO"/>
+                                                        <action selector="touchUpInside:" destination="rBc-RO-cZM" eventType="touchUpInside" id="EL7-1T-Ngt"/>
                                                         <segue destination="vp6-20-0hl" kind="show" id="odB-ke-Ua6"/>
                                                     </connections>
                                                 </button>
@@ -2168,6 +2206,12 @@
                                                         <constraint firstAttribute="height" constant="1" id="0ZQ-D5-tjI"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQT-dL-xTO">
+                                                    <rect key="frame" x="318.5" y="44" width="26.5" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -2178,11 +2222,13 @@
                                                 <constraint firstItem="iWv-ip-CuF" firstAttribute="bottom" secondItem="t8Z-xK-Sfk" secondAttribute="bottom" id="8ME-gj-u9q"/>
                                                 <constraint firstItem="vdG-te-kiY" firstAttribute="centerY" secondItem="Le2-7E-bok" secondAttribute="centerY" id="CKo-6s-UxM"/>
                                                 <constraint firstItem="t8Z-xK-Sfk" firstAttribute="leading" secondItem="p95-SE-wHK" secondAttribute="leading" id="DbO-N4-VGR"/>
+                                                <constraint firstItem="jQT-dL-xTO" firstAttribute="centerY" secondItem="iWv-ip-CuF" secondAttribute="centerY" id="FRF-p4-W5V"/>
                                                 <constraint firstItem="t8Z-xK-Sfk" firstAttribute="top" secondItem="p95-SE-wHK" secondAttribute="top" constant="8" id="GB9-B3-x9u"/>
                                                 <constraint firstItem="c7O-c9-8tD" firstAttribute="top" secondItem="p95-SE-wHK" secondAttribute="top" id="Obn-Oc-QFe"/>
                                                 <constraint firstAttribute="bottom" secondItem="t8Z-xK-Sfk" secondAttribute="bottom" constant="9" id="Omz-E8-idd"/>
+                                                <constraint firstItem="jQT-dL-xTO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iWv-ip-CuF" secondAttribute="trailing" id="Tj5-Rc-ac6"/>
+                                                <constraint firstItem="jQT-dL-xTO" firstAttribute="trailing" secondItem="vdG-te-kiY" secondAttribute="trailing" id="jFN-W5-uyf"/>
                                                 <constraint firstItem="c7O-c9-8tD" firstAttribute="leading" secondItem="Le2-7E-bok" secondAttribute="leading" id="qux-YC-QEO"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iWv-ip-CuF" secondAttribute="trailing" constant="15" id="reW-vu-id7"/>
                                                 <constraint firstAttribute="trailing" secondItem="vdG-te-kiY" secondAttribute="trailing" constant="15" id="tfc-9f-4JO"/>
                                                 <constraint firstItem="vdG-te-kiY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Le2-7E-bok" secondAttribute="trailing" constant="10" id="xoQ-6r-j9a"/>
                                             </constraints>
@@ -2202,6 +2248,7 @@
                                     <outlet property="amountLabel" destination="vdG-te-kiY" id="qhV-v7-d3H"/>
                                     <outlet property="separatorView" destination="c7O-c9-8tD" id="dDY-lG-36c"/>
                                     <outlet property="statusImageView" destination="t8Z-xK-Sfk" id="RpL-Yx-Kpi"/>
+                                    <outlet property="transactionTime" destination="jQT-dL-xTO" id="KZl-c0-thd"/>
                                     <outlet property="transactionTypeLabel" destination="Le2-7E-bok" id="i4u-Su-AqU"/>
                                 </connections>
                             </tableViewCell>
@@ -2349,6 +2396,7 @@
                                         <constraint firstItem="Z5i-AZ-Xdy" firstAttribute="centerX" secondItem="Rg6-8y-Yqt" secondAttribute="centerX" id="0ca-dB-Stl"/>
                                         <constraint firstItem="4Ta-eP-rOZ" firstAttribute="top" secondItem="ytV-gY-w7Y" secondAttribute="top" id="6CC-0U-Kvu"/>
                                         <constraint firstItem="Z5i-AZ-Xdy" firstAttribute="top" secondItem="ytV-gY-w7Y" secondAttribute="topMargin" id="RUS-Qf-IYh"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="zze-uI-Qxq" secondAttribute="trailing" constant="8" id="WJ7-yv-X1U"/>
                                         <constraint firstItem="4Ta-eP-rOZ" firstAttribute="leading" secondItem="zze-uI-Qxq" secondAttribute="leading" id="boq-Gk-0Mt"/>
                                         <constraint firstItem="Rg6-8y-Yqt" firstAttribute="centerY" secondItem="ytV-gY-w7Y" secondAttribute="centerY" id="ibP-XM-vbj"/>
                                         <constraint firstAttribute="trailing" secondItem="4Ta-eP-rOZ" secondAttribute="trailing" constant="18" id="mtK-jU-SjD"/>
@@ -2402,7 +2450,6 @@
                             <outlet property="delegate" destination="rBc-RO-cZM" id="u4S-rt-GMq"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Home" image="Home" id="O9b-Xn-KbE"/>
                     <navigationItem key="navigationItem" title="Root View Controller" id="c5G-1M-vRa"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
@@ -2413,7 +2460,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pgo-aG-xko" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1173.1884057971015" y="3866.576086956522"/>
+            <point key="canvasLocation" x="-2638" y="4227"/>
         </scene>
         <!--Sending In Process View Controller-->
         <scene sceneID="uFU-yy-1EF">
@@ -2458,10 +2505,10 @@ minutes, please wait ...</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7b-Fz-ncV">
-                                <rect key="frame" x="0.0" y="468.5" width="375" height="198.5"/>
+                                <rect key="frame" x="0.0" y="468.5" width="375" height="149.5"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Vef-ww-JI0">
-                                        <rect key="frame" x="169.5" y="80" width="37" height="37"/>
+                                        <rect key="frame" x="169.5" y="55.5" width="37" height="37"/>
                                         <color key="color" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -2484,13 +2531,14 @@ minutes, please wait ...</string>
                         <viewLayoutGuide key="safeArea" id="rAE-rD-6Fo"/>
                     </view>
                     <connections>
+                        <outlet property="titleLabel" destination="oXh-ad-Lv1" id="7ZH-lt-w7b"/>
                         <segue destination="ygp-st-s37" kind="show" identifier="showSuccess" id="75X-cE-nQ5"/>
                         <segue destination="sAg-Vp-s64" kind="show" identifier="showError" id="XCh-X3-sC4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsZ-Th-0fb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2513" y="4659"/>
+            <point key="canvasLocation" x="4391.1999999999998" y="4658.3208395802103"/>
         </scene>
         <!--Send Token View Controller-->
         <scene sceneID="4qr-QR-SJ5">
@@ -2501,7 +2549,7 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpH-Mb-YFp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="780"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="687"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LWM-xP-IzI">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="649"/>
@@ -2918,7 +2966,7 @@ minutes, please wait ...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PgD-J7-QUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-192.0289855072464" y="3922.826086956522"/>
+            <point key="canvasLocation" x="746.39999999999998" y="3922.0389805097452"/>
         </scene>
         <!--Transaction History View Controller-->
         <scene sceneID="jCU-oy-faZ">
@@ -2929,7 +2977,7 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jtp-9m-itp">
-                                <rect key="frame" x="16" y="36" width="343" height="29"/>
+                                <rect key="frame" x="16" y="80" width="343" height="29"/>
                                 <segments>
                                     <segment title="All"/>
                                     <segment title="Received"/>
@@ -2941,7 +2989,7 @@ minutes, please wait ...</string>
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="58" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tll-nS-pNB">
-                                <rect key="frame" x="16" y="90" width="335" height="577"/>
+                                <rect key="frame" x="16" y="134" width="335" height="484"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionHistoryCell" rowHeight="58" id="e7I-1u-CMt" customClass="TransactionHistoryCell" customModule="BankexWallet" customModuleProvider="target">
@@ -2958,7 +3006,7 @@ minutes, please wait ...</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="YJP-Sq-wY4">
-                                                    <rect key="frame" x="58" y="41" width="277" height="12"/>
+                                                    <rect key="frame" x="58" y="41" width="26.5" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2983,15 +3031,22 @@ minutes, please wait ...</string>
                                                         <constraint firstAttribute="height" constant="1" id="Lyb-xj-nfE"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="lt2-yi-vYr">
+                                                    <rect key="frame" x="308.5" y="41" width="26.5" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ssi-aK-n7x" firstAttribute="trailing" secondItem="dbS-xK-Yu0" secondAttribute="trailing" id="43Y-Af-4sg"/>
                                                 <constraint firstItem="uEg-Ra-wtL" firstAttribute="top" secondItem="ssi-aK-n7x" secondAttribute="bottom" constant="4" id="6QU-UA-ktT"/>
                                                 <constraint firstAttribute="bottom" secondItem="uEg-Ra-wtL" secondAttribute="bottom" constant="5" id="BH4-JY-ksV"/>
                                                 <constraint firstAttribute="trailing" secondItem="dbS-xK-Yu0" secondAttribute="trailing" id="G43-TF-def"/>
+                                                <constraint firstItem="lt2-yi-vYr" firstAttribute="centerY" secondItem="YJP-Sq-wY4" secondAttribute="centerY" id="M7v-t9-mQg"/>
                                                 <constraint firstItem="YJP-Sq-wY4" firstAttribute="leading" secondItem="qgQ-ZX-W0F" secondAttribute="leading" id="OHB-ts-OoX"/>
                                                 <constraint firstItem="ssi-aK-n7x" firstAttribute="leading" secondItem="qgQ-ZX-W0F" secondAttribute="leading" id="bcx-XJ-qy2"/>
-                                                <constraint firstAttribute="trailing" secondItem="YJP-Sq-wY4" secondAttribute="trailing" id="eTQ-Ny-IfO"/>
+                                                <constraint firstItem="lt2-yi-vYr" firstAttribute="trailing" secondItem="dbS-xK-Yu0" secondAttribute="trailing" id="jab-uJ-Xjd"/>
                                                 <constraint firstItem="qgQ-ZX-W0F" firstAttribute="top" secondItem="uEg-Ra-wtL" secondAttribute="top" id="rKi-8d-rMM"/>
                                                 <constraint firstItem="uEg-Ra-wtL" firstAttribute="leading" secondItem="3E1-NN-8id" secondAttribute="leading" id="s9i-r1-CQA"/>
                                                 <constraint firstItem="YJP-Sq-wY4" firstAttribute="bottom" secondItem="uEg-Ra-wtL" secondAttribute="bottom" id="sM9-EM-uk6"/>
@@ -3004,6 +3059,7 @@ minutes, please wait ...</string>
                                             <outlet property="addressLabel" destination="YJP-Sq-wY4" id="5DK-nw-p9p"/>
                                             <outlet property="amountLabel" destination="dbS-xK-Yu0" id="1Pu-Uf-sd0"/>
                                             <outlet property="statusImageView" destination="uEg-Ra-wtL" id="LAF-jM-24d"/>
+                                            <outlet property="transactionTime" destination="lt2-yi-vYr" id="Eu4-SR-g5F"/>
                                             <outlet property="transactionTypeLabel" destination="qgQ-ZX-W0F" id="kda-pL-ehe"/>
                                         </connections>
                                     </tableViewCell>
@@ -3045,14 +3101,14 @@ minutes, please wait ...</string>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="rBc-RO-cZM" kind="relationship" relationship="viewControllers" id="t59-xY-wsG"/>
-                        <segue destination="0WB-Lg-Tul" kind="relationship" relationship="viewControllers" id="V9k-cZ-8od"/>
-                        <segue destination="qQO-1J-iXi" kind="relationship" relationship="viewControllers" id="VqY-oB-NCW"/>
+                        <segue destination="7vp-Bd-etR" kind="relationship" relationship="viewControllers" id="t59-xY-wsG"/>
+                        <segue destination="isY-Tx-D8o" kind="relationship" relationship="viewControllers" id="V9k-cZ-8od"/>
+                        <segue destination="MuH-9v-MBg" kind="relationship" relationship="viewControllers" id="VqY-oB-NCW"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dkp-GR-ZZb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2769" y="4562"/>
+            <point key="canvasLocation" x="-5044" y="4511"/>
         </scene>
         <!--Backup Passphrase View Controller-->
         <scene sceneID="fEM-gO-ISD">
@@ -3066,13 +3122,13 @@ minutes, please wait ...</string>
                                 <rect key="frame" x="112.5" y="114" width="150" height="80"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeM-bQ-MYE">
-                                <rect key="frame" x="30" y="413.5" width="315" height="17"/>
+                                <rect key="frame" x="30" y="364.5" width="315" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-ez-tzX">
-                                <rect key="frame" x="40" y="505.5" width="295" height="47.5"/>
+                                <rect key="frame" x="40" y="456.5" width="295" height="47.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase copied to clipboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79Q-LU-lZQ">
                                         <rect key="frame" x="53" y="32" width="190.5" height="16"/>
@@ -3098,7 +3154,7 @@ minutes, please wait ...</string>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="oIl-NG-7h4">
-                                <rect key="frame" x="20" y="577" width="335" height="50"/>
+                                <rect key="frame" x="20" y="528" width="335" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbA-t0-Y4q">
                                         <rect key="frame" x="0.0" y="0.0" width="155" height="50"/>
@@ -3193,7 +3249,7 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ou-vL-T35">
-                                <rect key="frame" x="44" y="577" width="287" height="50"/>
+                                <rect key="frame" x="44" y="528" width="287" height="50"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="7qf-so-mic"/>
@@ -3218,10 +3274,10 @@ minutes, please wait ...</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dh-3i-Zqx">
-                                <rect key="frame" x="16" y="163" width="343" height="63"/>
+                                <rect key="frame" x="16" y="163" width="343" height="53"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wgq-hB-4vF">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="63"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="53"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="ji9-2e-7qv">
                                             <size key="itemSize" width="76" height="31"/>
@@ -3267,10 +3323,10 @@ minutes, please wait ...</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGr-bk-yqC">
-                                <rect key="frame" x="40" y="286" width="295" height="251"/>
+                                <rect key="frame" x="40" y="276" width="295" height="212"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vFr-lL-G5w">
-                                        <rect key="frame" x="0.0" y="0.0" width="295" height="251"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="295" height="212"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="rjd-Qh-eI5">
                                             <size key="itemSize" width="76" height="31"/>
@@ -3316,14 +3372,14 @@ minutes, please wait ...</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFQ-9i-LeS">
-                                <rect key="frame" x="16" y="230" width="359" height="1"/>
+                                <rect key="frame" x="16" y="220" width="359" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="d9v-Ap-pJD"/>
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong order Please try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igo-na-Rvf">
-                                <rect key="frame" x="136.5" y="239" width="102" height="40"/>
+                                <rect key="frame" x="136.5" y="229" width="102" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="hMc-a5-tpP"/>
                                     <constraint firstAttribute="width" constant="102" id="qCz-ul-G9q"/>
@@ -3378,20 +3434,20 @@ minutes, please wait ...</string>
             <objects>
                 <viewController id="a3J-Y6-DtH" customClass="WalletCreatedViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J2S-WQ-nkd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="485"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="Wallet Created" translatesAutoresizingMaskIntoConstraints="NO" id="VQx-mb-tba">
-                                <rect key="frame" x="64" y="30" width="247.5" height="110"/>
+                                <rect key="frame" x="64" y="113" width="247.5" height="160"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Created!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUS-an-WGX">
-                                <rect key="frame" x="100" y="167" width="175" height="29"/>
+                                <rect key="frame" x="100" y="300" width="175" height="29"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                 <color key="textColor" red="0.55686274509803924" green="0.85882352941176465" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAC-II-JHc">
-                                <rect key="frame" x="44" y="395" width="287" height="50"/>
+                                <rect key="frame" x="44" y="528" width="287" height="50"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="VR6-rC-zMU"/>
@@ -3410,25 +3466,25 @@ minutes, please wait ...</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbS-T0-1sL">
-                                <rect key="frame" x="16" y="236" width="89" height="17"/>
+                                <rect key="frame" x="16" y="369" width="89" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="ETH Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcm-SJ-pEb">
-                                <rect key="frame" x="16" y="261" width="113" height="17"/>
+                                <rect key="frame" x="16" y="394" width="113" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Wallet Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLI-qR-wfT">
-                                <rect key="frame" x="16" y="303" width="108" height="17"/>
+                                <rect key="frame" x="16" y="436" width="108" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="f0X-Ac-2ve">
-                                <rect key="frame" x="16" y="328" width="343" height="17"/>
+                                <rect key="frame" x="16" y="461" width="343" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -3467,18 +3523,18 @@ minutes, please wait ...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y3i-mb-NGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2880" y="2866.9014084507044"/>
+            <point key="canvasLocation" x="2844" y="2855"/>
         </scene>
         <!--Edit Wallet Name Controller-->
         <scene sceneID="JVB-HH-aOk">
             <objects>
                 <viewController id="RPO-E3-gdZ" customClass="EditWalletNameController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nLn-Dg-aVu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="485"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvC-ib-3Mu">
-                                <rect key="frame" x="0.0" y="75" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="119" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzS-F0-EaS">
                                         <rect key="frame" x="16" y="12" width="97" height="21"/>
@@ -3720,10 +3776,10 @@ be able to restore your wallet!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mML-7E-S3T">
-                                <rect key="frame" x="0.0" y="20" width="375" height="716"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="623"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0B1-Bg-Lbj">
-                                        <rect key="frame" x="64.5" y="211.5" width="246.5" height="293.5"/>
+                                        <rect key="frame" x="64.5" y="165" width="246.5" height="293.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ys1-Zl-Qe6">
                                                 <rect key="frame" x="0.0" y="252.5" width="246.5" height="41"/>
@@ -3759,7 +3815,7 @@ successfully</string>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0H-KD-l6x" userLabel="DoneButton">
-                                        <rect key="frame" x="50" y="616" width="275" height="50"/>
+                                        <rect key="frame" x="50" y="523" width="275" height="50"/>
                                         <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <accessibility key="accessibilityConfiguration" identifier="DoneButton"/>
                                         <constraints>
@@ -3807,7 +3863,7 @@ successfully</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mfj-3B-o4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857" y="4754"/>
+            <point key="canvasLocation" x="3735.1999999999998" y="4753.223388305847"/>
         </scene>
         <!--Add Contact View Controller-->
         <scene sceneID="Y9d-hG-he5">
@@ -3931,7 +3987,7 @@ successfully</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3C-Sr-0Y8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2052" y="5823"/>
+            <point key="canvasLocation" x="3930.4000000000001" y="5822.3388305847084"/>
         </scene>
         <!--AddressQR Code Controller-->
         <scene sceneID="WOg-BZ-rAj">
@@ -3942,7 +3998,7 @@ successfully</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Q3-a6-G0T">
-                                <rect key="frame" x="0.0" y="130" width="375" height="427"/>
+                                <rect key="frame" x="0.0" y="127.5" width="375" height="427"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="crX-5b-v1D">
                                         <rect key="frame" x="84.5" y="0.0" width="206" height="206"/>
@@ -4039,6 +4095,7 @@ successfully</string>
                         <outlet property="addressLabel" destination="lTY-n2-9CJ" id="Z8P-yH-7O5"/>
                         <outlet property="copiedIcon" destination="R77-I1-C29" id="VOB-Hh-Ywg"/>
                         <outlet property="copiedLabel" destination="Tbs-22-WwI" id="HG2-U1-nDG"/>
+                        <outlet property="copyAddressButton" destination="rSk-9a-V7H" id="u4L-cp-k7o"/>
                         <outlet property="imageView" destination="crX-5b-v1D" id="G9Q-fP-IXs"/>
                         <outlet property="walletNameLabel" destination="Stu-Ab-sXL" id="Fk8-Xf-HSW"/>
                     </connections>
@@ -4158,7 +4215,7 @@ successfully</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10S-ls-J8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-42" y="4767"/>
+            <point key="canvasLocation" x="1836" y="4766.266866566717"/>
         </scene>
         <!--Sending Error View Controller-->
         <scene sceneID="Sol-li-be7">
@@ -4169,10 +4226,10 @@ successfully</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7J-L8-6FQ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IA6-jx-dTL">
-                                        <rect key="frame" x="64" y="177.5" width="247" height="293.5"/>
+                                        <rect key="frame" x="64" y="131" width="247" height="293.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fund was not sent due to connection problems" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAu-Ev-52n">
                                                 <rect key="frame" x="0.0" y="252.5" width="247" height="41"/>
@@ -4206,7 +4263,7 @@ successfully</string>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="EFt-Hq-71N">
-                                        <rect key="frame" x="50" y="547" width="275" height="50"/>
+                                        <rect key="frame" x="50" y="454" width="275" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CET-86-9Ks" userLabel="Retry">
                                                 <rect key="frame" x="0.0" y="0.0" width="126" height="50"/>
@@ -4279,7 +4336,7 @@ successfully</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOe-cy-qvf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="j2E-ku-oHc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1152" y="4659"/>
+            <point key="canvasLocation" x="3029.5999999999999" y="4658.3208395802103"/>
         </scene>
         <!--Choose Fee View Controller-->
         <scene sceneID="VoD-AP-No0">
@@ -4290,7 +4347,7 @@ successfully</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="y1i-UI-xKO">
-                                <rect key="frame" x="0.0" y="20" width="320" height="680"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="587"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5eY-YV-oUY">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
@@ -4541,7 +4598,7 @@ successfully</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H11-tw-saW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="3852"/>
+            <point key="canvasLocation" x="1771.2" y="3851.8740629685162"/>
         </scene>
         <!--Confirm View Controller-->
         <scene sceneID="prn-aw-GzK">
@@ -4768,7 +4825,7 @@ successfully</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bq9-58-P4B">
-                                                    <rect key="frame" x="40" y="50" width="295" height="50"/>
+                                                    <rect key="frame" x="32" y="50" width="311" height="50"/>
                                                     <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="jOk-qg-f5o"/>
@@ -4818,18 +4875,18 @@ successfully</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbR-uA-fIf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2052" y="3923"/>
+            <point key="canvasLocation" x="2991.1999999999998" y="3922.4887556221893"/>
         </scene>
         <!--Sending In Process View Controller-->
         <scene sceneID="ttd-FO-4vY">
             <objects>
-                <viewController storyboardIdentifier="ProcessController" id="iLc-LU-ReD" customClass="SendingInProcessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProcessController" hidesBottomBarWhenPushed="YES" id="iLc-LU-ReD" customClass="SendingInProcessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="08T-rQ-TzM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vu5-xB-3LK">
-                                <rect key="frame" x="67.5" y="202.5" width="240" height="262"/>
+                                <rect key="frame" x="67.5" y="87" width="240" height="262"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DW4-9U-UJB">
                                         <rect key="frame" x="5" y="223.5" width="230.5" height="38.5"/>
@@ -4878,7 +4935,7 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="4701" y="2855"/>
         </scene>
-        <!--Wallet-->
+        <!--Wallet Tab Controller-->
         <scene sceneID="3Fh-Bb-mM6">
             <objects>
                 <viewController id="0WB-Lg-Tul" customClass="WalletTabController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
@@ -4887,7 +4944,7 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NhQ-3b-rrc">
-                                <rect key="frame" x="0.0" y="20" width="375" height="87"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="87"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWw-yg-jAm">
                                         <rect key="frame" x="335" y="12" width="30" height="27"/>
@@ -4951,7 +5008,7 @@ minutes, please wait ...</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nw0-1m-5Oa">
-                                <rect key="frame" x="0.0" y="107" width="375" height="511"/>
+                                <rect key="frame" x="0.0" y="151" width="375" height="467"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletTabTokenCell" rowHeight="148" id="6Mz-Fv-RaF" customClass="WalletTabTokenCell" customModule="BankexWallet" customModuleProvider="target">
@@ -5179,25 +5236,33 @@ minutes, please wait ...</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: 0xd2332rewrk23j5353j2k5kl325" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sd-PR-bMP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="To: 0xd2332rewrk23j5353j2k5kl325" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sd-PR-bMP">
                                                     <rect key="frame" x="81" y="37" width="175.5" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdm-Fc-rED">
+                                                    <rect key="frame" x="334" y="37" width="21" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Qdm-Fc-rED" firstAttribute="centerY" secondItem="2sd-PR-bMP" secondAttribute="centerY" id="1vQ-tQ-JoP"/>
                                                 <constraint firstItem="x2n-3A-Ef9" firstAttribute="leading" secondItem="3Nz-3I-zni" secondAttribute="trailing" constant="13" id="5me-tU-Jcm"/>
                                                 <constraint firstItem="3Nz-3I-zni" firstAttribute="leading" secondItem="8BF-L6-9az" secondAttribute="leading" constant="20" id="6hN-wv-A5M"/>
                                                 <constraint firstAttribute="trailing" secondItem="pFb-v3-mj2" secondAttribute="trailing" constant="20" id="6zF-eR-HcJ"/>
                                                 <constraint firstItem="rxm-6j-nfM" firstAttribute="top" secondItem="8BF-L6-9az" secondAttribute="top" id="AEP-m3-DaW"/>
                                                 <constraint firstItem="pFb-v3-mj2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x2n-3A-Ef9" secondAttribute="trailing" constant="10" id="At7-VM-Khp"/>
+                                                <constraint firstItem="Qdm-Fc-rED" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2sd-PR-bMP" secondAttribute="trailing" constant="8" id="FMk-97-Utm"/>
                                                 <constraint firstAttribute="trailing" secondItem="rxm-6j-nfM" secondAttribute="trailing" constant="15" id="LOv-GJ-SIN"/>
                                                 <constraint firstItem="pFb-v3-mj2" firstAttribute="top" secondItem="x2n-3A-Ef9" secondAttribute="top" id="PxB-kc-Fxz"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2sd-PR-bMP" secondAttribute="trailing" constant="10" id="TLD-q6-c6s"/>
                                                 <constraint firstItem="3Nz-3I-zni" firstAttribute="centerY" secondItem="8BF-L6-9az" secondAttribute="centerY" id="cM3-5c-oWf"/>
                                                 <constraint firstItem="2sd-PR-bMP" firstAttribute="leading" secondItem="x2n-3A-Ef9" secondAttribute="leading" id="f02-CZ-wB2"/>
                                                 <constraint firstItem="x2n-3A-Ef9" firstAttribute="top" secondItem="8BF-L6-9az" secondAttribute="top" constant="8" id="hqn-hJ-f0U"/>
+                                                <constraint firstItem="Qdm-Fc-rED" firstAttribute="trailing" secondItem="pFb-v3-mj2" secondAttribute="trailing" id="n2N-Kl-ZHp"/>
                                                 <constraint firstItem="rxm-6j-nfM" firstAttribute="leading" secondItem="x2n-3A-Ef9" secondAttribute="leading" id="quN-m9-yJo"/>
                                                 <constraint firstItem="2sd-PR-bMP" firstAttribute="top" secondItem="x2n-3A-Ef9" secondAttribute="bottom" constant="8" id="zmP-1o-ivd"/>
                                             </constraints>
@@ -5207,6 +5272,7 @@ minutes, please wait ...</string>
                                             <outlet property="amountLabel" destination="pFb-v3-mj2" id="R1t-Cz-1AL"/>
                                             <outlet property="separatorView" destination="rxm-6j-nfM" id="Ffx-gf-1R8"/>
                                             <outlet property="statusImageView" destination="3Nz-3I-zni" id="4yY-hd-qF8"/>
+                                            <outlet property="transactionTime" destination="Qdm-Fc-rED" id="WxW-Nl-n6h"/>
                                             <outlet property="transactionTypeLabel" destination="x2n-3A-Ef9" id="syr-3d-lhy"/>
                                         </connections>
                                     </tableViewCell>
@@ -5261,7 +5327,7 @@ minutes, please wait ...</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xQC-if-CDk"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Wallet" image="Wallet" id="rxh-yF-97x"/>
+                    <navigationItem key="navigationItem" id="fC0-x0-59n"/>
                     <connections>
                         <outlet property="editButton" destination="AWw-yg-jAm" id="4ge-1H-44A"/>
                         <outlet property="tableView" destination="Nw0-1m-5Oa" id="lL9-0W-dBU"/>
@@ -5269,7 +5335,7 @@ minutes, please wait ...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrR-FU-iU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3536.25" y="5191.9014084507044"/>
+            <point key="canvasLocation" x="-2599.1999999999998" y="5120.6896551724139"/>
         </scene>
         <!--Token Info Controller-->
         <scene sceneID="TKh-cs-4Dc">
@@ -5418,7 +5484,7 @@ minutes, please wait ...</string>
         <!--Passcode Enter Controller-->
         <scene sceneID="a8g-7P-G0U">
             <objects>
-                <viewController storyboardIdentifier="passcodeEnterController" id="7aw-h3-7Wt" customClass="PasscodeEnterController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="passcodeEnterController" hidesBottomBarWhenPushed="YES" id="7aw-h3-7Wt" customClass="PasscodeEnterController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HXw-0K-02Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5496,6 +5562,9 @@ minutes, please wait ...</string>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="QSX-r7-GAv"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="eY4-Xl-m66"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="HWp-wR-DjP"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="ly0-RO-lpa"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAZ-kD-hgh" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5508,6 +5577,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="yK5-of-tpG"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="9Cx-eF-bA4"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="Ht5-9c-d9G"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="255-SU-rqr"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bA4-U9-HmO" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5520,6 +5592,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="eab-Uh-oee"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="HvE-RH-6xZ"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="Rlm-ci-OG0"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="Eeu-gf-NpL"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -5537,6 +5612,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ha1-cC-z7D"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="Qc4-3U-twP"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="xv2-ty-deu"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="Vna-kS-QGR"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IsY-ca-iQy" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5549,6 +5627,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ZRu-pb-GkC"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="p6j-Z3-gng"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="BjV-qq-MiG"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="bcF-D3-283"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCb-UU-i5h" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5561,6 +5642,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="LLx-Ob-eiV"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="Ffz-D0-EeS"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="5qC-Ua-hQL"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="MyJ-zC-TbG"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -5578,6 +5662,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ZqX-dn-WWZ"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="LZu-g0-Zbm"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="HOS-wX-emg"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="KHz-G0-oKw"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvK-Ga-Oua" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5590,6 +5677,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="qqa-6J-M2t"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="b4v-6o-xmg"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="SKh-vQ-8w4"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="ZWy-AB-A6a"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7GD-70-kBm" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5602,6 +5692,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="dXL-oA-hgH"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="1Ka-ZA-a8E"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="zmm-1H-Rss"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="PTh-BN-0Fp"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -5617,6 +5710,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="biometricsPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="XkR-HL-hhY"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="Omj-BY-NpX"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="cXp-o2-Unz"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="zio-4Q-axE"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rg-Bp-lOR" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
@@ -5629,6 +5725,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="uiW-0f-PY7"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="bzj-Ic-vgS"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="zf4-gT-wve"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="9hx-QL-tSH"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hhr-hH-JPH">
@@ -5640,6 +5739,9 @@ minutes, please wait ...</string>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="deletePressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="xQv-eo-fX2"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="xYb-1A-dIn"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="nET-FY-ONV"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="Q23-BR-3Rr"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -5694,7 +5796,7 @@ minutes, please wait ...</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xgU-gH-667" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="BO2-E1-gif" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-319.19999999999999" y="1500.0000000000002"/>
+            <point key="canvasLocation" x="-129" y="1101"/>
         </scene>
         <!--Create Token Controller-->
         <scene sceneID="fUE-iV-9fx">
@@ -5705,7 +5807,7 @@ minutes, please wait ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search Token" translatesAutoresizingMaskIntoConstraints="NO" id="54I-a7-qHO">
-                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97647058819999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="6iX-Bj-IV3"/>
@@ -5717,7 +5819,7 @@ minutes, please wait ...</string>
                                 </scopeButtonTitles>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l26-fd-vqJ">
-                                <rect key="frame" x="9" y="92" width="54" height="28"/>
+                                <rect key="frame" x="9" y="136" width="54" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="4Fc-m9-gdo"/>
                                     <constraint firstAttribute="height" constant="28" id="M7S-58-tOq"/>
@@ -5728,7 +5830,7 @@ minutes, please wait ...</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eES-Ve-k39">
-                                <rect key="frame" x="79" y="92" width="140" height="28"/>
+                                <rect key="frame" x="79" y="136" width="140" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="KiC-3f-WEb"/>
                                     <constraint firstAttribute="height" constant="28" id="n5B-vu-Dkf"/>
@@ -5739,7 +5841,7 @@ minutes, please wait ...</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter token address or token name to search" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RD7-yR-13E">
-                                <rect key="frame" x="112.5" y="326.5" width="150" height="34"/>
+                                <rect key="frame" x="112.5" y="324" width="150" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="CwU-1I-0Jd"/>
                                     <constraint firstAttribute="height" constant="34" id="xSh-zH-tIu"/>
@@ -5749,7 +5851,7 @@ minutes, please wait ...</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jdL-P1-RdF">
-                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CreateTokenCell" rowHeight="53" id="Y3X-e5-Bbn" customClass="CreateTokenCell" customModule="BankexWallet" customModuleProvider="target">
@@ -5811,7 +5913,7 @@ minutes, please wait ...</string>
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token was added" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prg-N2-Bda">
-                                <rect key="frame" x="135" y="620" width="105" height="31"/>
+                                <rect key="frame" x="135" y="571" width="105" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="7UG-uD-btY"/>
                                 </constraints>
@@ -5820,7 +5922,7 @@ minutes, please wait ...</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CopiedIcon" translatesAutoresizingMaskIntoConstraints="NO" id="k4r-3U-gp3">
-                                <rect key="frame" x="176" y="596" width="24" height="24"/>
+                                <rect key="frame" x="176" y="547" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="YQc-Xq-H1L"/>
                                     <constraint firstAttribute="width" secondItem="k4r-3U-gp3" secondAttribute="height" multiplier="1:1" id="cFk-Tr-WQS"/>
@@ -5860,7 +5962,7 @@ minutes, please wait ...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rIo-Jl-Mwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-946" y="4739"/>
+            <point key="canvasLocation" x="932" y="4738.3808095952027"/>
         </scene>
         <!--Token Info Controller-->
         <scene sceneID="ExW-rJ-byV">
@@ -6031,6 +6133,63 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="-3184" y="6738"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="3Yw-bG-11s">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7vp-Bd-etR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="Home" id="O9b-Xn-KbE"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qg8-Fj-fIT">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rBc-RO-cZM" kind="relationship" relationship="rootViewController" id="fbY-h1-slJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Sp-LG-JoW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3689" y="4228"/>
+        </scene>
+        <!--Wallet-->
+        <scene sceneID="d3G-x8-72u">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="isY-Tx-D8o" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Wallet" image="Wallet" id="rxh-yF-97x"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Px0-os-4l9">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0WB-Lg-Tul" kind="relationship" relationship="rootViewController" id="mtE-VW-ePT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oZ1-X2-a3q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3540" y="5121"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="DEp-oT-BDe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MuH-9v-MBg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="Setting" id="Jzc-3t-aFH"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fUz-Cl-cb6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qQO-1J-iXi" kind="relationship" relationship="rootViewController" id="l51-Iz-VGc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zeS-DB-4eS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4495" y="5901"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Arrow back" width="20" height="14"/>
@@ -6082,14 +6241,14 @@ minutes, please wait ...</string>
     <inferredMetricsTieBreakers>
         <segue reference="ECv-xb-uvS"/>
         <segue reference="wp9-05-5ZG"/>
-        <segue reference="94t-6M-Swp"/>
+        <segue reference="ijQ-jv-rc6"/>
         <segue reference="JaH-wa-aDn"/>
         <segue reference="YYB-KE-9nn"/>
         <segue reference="4v7-Bv-6wS"/>
-        <segue reference="57D-OX-sbx"/>
+        <segue reference="BAb-mb-KXV"/>
         <segue reference="Oa7-Ma-Ndk"/>
         <segue reference="bDG-Xv-WCD"/>
-        <segue reference="qly-rG-0HJ"/>
-        <segue reference="0M5-ZF-71X"/>
+        <segue reference="9Eb-Fz-7t3"/>
+        <segue reference="o2o-Af-M3V"/>
     </inferredMetricsTieBreakers>
 </document>
