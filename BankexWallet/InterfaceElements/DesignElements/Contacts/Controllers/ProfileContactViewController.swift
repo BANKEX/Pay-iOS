@@ -44,16 +44,8 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         return label
     }()
     lazy var activityViewController:UIActivityViewController = {
-        let activityViewController = UIActivityViewController(activityItems: [], applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [
-            UIActivityType.postToTencentWeibo,
-            UIActivityType.print,
-            UIActivityType.assignToContact,
-            UIActivityType.saveToCameraRoll,
-            UIActivityType.addToReadingList,
-            UIActivityType.postToFlickr,
-            UIActivityType.postToVimeo
-        ]
+        let address = addressTextField.text!
+        let activityViewController = UIActivityViewController(activityItems: [address], applicationActivities: nil)
         return activityViewController
     }()
     lazy var alertViewController:UIAlertController = {
