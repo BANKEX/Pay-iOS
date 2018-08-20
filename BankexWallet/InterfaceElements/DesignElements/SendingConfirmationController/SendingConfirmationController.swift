@@ -8,6 +8,7 @@
 
 import UIKit
 import web3swift
+import Amplitude_iOS
 
 class SendingConfirmationController: UIViewController, Retriable {
 
@@ -56,7 +57,7 @@ class SendingConfirmationController: UIViewController, Retriable {
                                                    amount: (amount ?? "") + " " + token.symbol,
                                                    date: Date(),
                                                    token: token,
-                                                   key: keysService.selectedKey()!)
+                                                   key: keysService.selectedKey()!, isPending: true)
 
         
         performSegue(withIdentifier: "showSending", sender: self)
@@ -65,6 +66,7 @@ class SendingConfirmationController: UIViewController, Retriable {
                             with: inputtedPassword ?? "", options: nil) { (result) in
                                 switch result {
                                 case .Success(_):
+                                    Amplitude.instance().logEvent("Transaction Sent")
                                     self.transactionCompletionDelegate?.transactionDidSucceed(withAmount: self.amount ?? "", address: self.destinationAddress ?? "")
                                 case .Error(_):
                                     //TODO:

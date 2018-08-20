@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Amplitude_iOS
 
 class RepeatPassphraseViewController: UIViewController {
     
@@ -86,7 +87,7 @@ class RepeatPassphraseViewController: UIViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             self.service.createNewHDWallet(with: "ETH Wallet Name", mnemonics: passphrase, mnemonicsPassword: "", walletPassword: "BANKEXFOUNDATION") { _, error in
                 sender.isEnabled = true
-                
+                Amplitude.instance().logEvent("Wallet Created")
                 if !UserDefaults.standard.bool(forKey: "passcodeExists") {
                     error == nil ? self.performSegue(withIdentifier: "goToPinFromCreate", sender: nil) :
                         self.showWalletCreationAllert()

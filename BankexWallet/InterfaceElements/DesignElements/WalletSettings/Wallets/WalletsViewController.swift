@@ -55,11 +55,23 @@ class WalletsViewController: UIViewController {
     
     
     @objc func goBack(_ sender:UIButton) {
-        performSegue(withIdentifier: "backSegue", sender: nil)
+        performSegue(withIdentifier: "showAddWalletVC", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAddWalletVC" {
+            guard let destVC = segue.destination as? WalletCreationTypeController else { return }
+            destVC.isFromInitial = false
+        }
     }
     
     func configure() {
         navigationItem.title = "Wallets"
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        } else {
+            // Fallback on earlier versions
+        }
         tableView.dataSource = self
         tableView.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))

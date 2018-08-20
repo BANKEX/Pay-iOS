@@ -1,6 +1,20 @@
 # BANKEX Wallet - Ethereum Wallet for iOS
+![](https://github.com/BANKEX/BankexWalletIOS/blob/develop/Badge/%20bankex.png)
 
+<p align="center">
+ <a href="https://itunes.apple.com/ru/app/bankex-pay/id1411403963?l=en&mt=8"><img src="/Badge/appStore.svg"/></a>
+ </p>
+ 
+ <br>
+ 
+[![Swift](https://img.shields.io/badge/Swift-4.0-blue.svg)](https://swift.org/)
+[![Platform](https://img.shields.io/badge/Platform-iOS%2B9.0-purple.svg)](https://developer.apple.com/swift)
+[![Build Status](https://travis-ci.org/BANKEX/BankexWalletIOS.svg?branch=develop)](https://travis-ci.org/BANKEX/BankexWalletIOS)
+
+<br>
 Welcome to BANKEX's open source iOS app!
+
+
 
 ## Getting Started
 
@@ -19,6 +33,11 @@ Please be sure to include your operating system, device, version number, and
 steps to reproduce reported bugs. Keep in mind that all participants will be
 expected to follow our code of conduct.
 
+## Information
+
+- **Compatibility**: Requires iOS 9.0 or later. Compatible with iPhone and iPod touch.
+- **Languages**: English
+
 ## Code of Conduct
 
 We aim to share our knowledge and findings as we work daily to improve our
@@ -29,6 +48,10 @@ behavior violating this base foundation of respect.
 
 ## Publishing your own pull request
 If you want to publish your own pull request, you might want to ask us before to avoid doing similar work.
+
+## Requirements
+- iOS 9.0+ SDK
+- Xcode 9 or later
 
 ## CocoaPods
 If you want to add you own pods or update existing, you need to install cocoapods.
@@ -58,3 +81,10 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+## Details
+More details (architecture, environments, tests, tools...) can be found on the [wiki](https://github.com/BANKEX/BankexWalletIOS/wiki).
+
+## Change-log
+
+A brief summary of each Lovely release can be found on the [releases](https://github.com/BANKEX/BankexWalletIOS/releases).
