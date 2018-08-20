@@ -1,2 +1,3 @@
 language: objective-c
-script: xcodebuild -workspace BankexWallet.xcworkspace -scheme BankexWallet
+osx_image: xcode8.3
+script: xcodebuild -workspace BankexWallet.xcworkspace -scheme BankexWallet -sdk iphonesimulator10.3 -destination 'platform=iOS Simulator,OS=9.1,name=iPhone 6' -configuration Debug build
