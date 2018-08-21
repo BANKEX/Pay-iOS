@@ -12,7 +12,7 @@ target 'BankexWallet' do
   pod 'Amplitude-iOS', '~> 4.0.4'
   pod 'Firebase/Core'
   pod 'Firebase/DynamicLinks'
-
+  pod 'Firebase/RemoteConfig'
 
   target 'BankexWalletTests' do
     inherit! :search_paths
