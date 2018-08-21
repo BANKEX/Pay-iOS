@@ -10,7 +10,10 @@ target 'BankexWallet' do
   pod 'QRCodeReader.swift', '~> 8.1.1'
   pod 'Popover'
   pod 'Amplitude-iOS', '~> 4.0.4'
-  
+  pod 'Firebase/Core'
+  pod 'Firebase/RemoteConfig'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Crash'
 
 
   target 'BankexWalletTests' do
