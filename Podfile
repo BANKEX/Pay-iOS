@@ -11,9 +11,7 @@ target 'BankexWallet' do
   pod 'Popover'
   pod 'Amplitude-iOS', '~> 4.0.4'
   pod 'Firebase/Core'
-  pod 'Firebase/RemoteConfig'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Crash'
+  pod 'Firebase/DynamicLinks'
 
 
   target 'BankexWalletTests' do
