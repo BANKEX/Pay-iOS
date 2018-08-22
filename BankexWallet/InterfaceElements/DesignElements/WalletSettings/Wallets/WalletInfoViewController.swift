@@ -23,7 +23,7 @@ class WalletInfoViewController: UITableViewController {
         if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
-                self.performSegue(withIdentifier: "toPassphrase", sender: nil)
+                self.performSegue(withIdentifier: "ShowPassphrase", sender: nil)
             case 1:
                 self.performSegue(withIdentifier: "ShowPrivateKey", sender: nil)
             default:
@@ -36,6 +36,8 @@ class WalletInfoViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? AttentionViewController {
             vc.publicAddress = publicAddress
+        } else if let vc = segue.destination as? BackupPassphraseViewController {
+            vc.navTitle = "Backup Phrase"
         }
     }
 }

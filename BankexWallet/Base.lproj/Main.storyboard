@@ -911,7 +911,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" rowHeight="62" id="qby-pv-EVX" customClass="WalletCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" rowHeight="62" id="qby-pv-EVX" customClass="WalletCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qby-pv-EVX" id="Ruh-BB-lf4">
@@ -1083,7 +1083,7 @@
                                                         <constraint firstAttribute="width" constant="29" id="aDT-ix-V3J"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Export Private Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3b-dF-ROE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Export Private Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3b-dF-ROE" userLabel="ExportPrivateKeyLabel">
                                                     <rect key="frame" x="60" y="12" width="140" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1119,7 +1119,7 @@
         <!--Backup Passphrase View Controller-->
         <scene sceneID="RrP-3h-MUn">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="VWS-2e-ZYr" customClass="BackupPassphraseViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VWS-2e-ZYr" customClass="BackupPassphraseViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0zM-N6-H70">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1128,13 +1128,13 @@
                                 <rect key="frame" x="138" y="114" width="99" height="84"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apj-qM-PdM">
-                                <rect key="frame" x="20" y="353.5" width="335" height="17"/>
+                                <rect key="frame" x="20" y="276" width="335" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bdy-3b-J6h">
-                                <rect key="frame" x="44" y="445.5" width="287" height="47.5"/>
+                                <rect key="frame" x="44" y="368" width="287" height="47.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase copied to clipboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6y-JT-8Vy">
                                         <rect key="frame" x="49" y="32" width="190.5" height="16"/>
@@ -1172,7 +1172,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KuX-gF-Ux1">
-                                <rect key="frame" x="115.5" y="521" width="144" height="50"/>
+                                <rect key="frame" x="115.5" y="443.5" width="144" height="50"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="144" id="DK0-gm-wRb"/>
@@ -1188,7 +1188,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="copyButtonTapped:" destination="Ptd-7b-8Z1" eventType="touchUpInside" id="x1e-ou-433"/>
+                                    <action selector="copyButtonTapped:" destination="VWS-2e-ZYr" eventType="touchUpInside" id="fGx-GW-RE7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1208,8 +1208,9 @@
                             <constraint firstItem="djN-7B-FWX" firstAttribute="top" secondItem="G1e-jv-cC4" secondAttribute="bottom" constant="14" id="T8D-Bt-rC6"/>
                             <constraint firstItem="KuX-gF-Ux1" firstAttribute="centerX" secondItem="0zM-N6-H70" secondAttribute="centerX" id="YpM-QC-scC"/>
                             <constraint firstItem="PG4-5W-AF3" firstAttribute="top" secondItem="djN-7B-FWX" secondAttribute="bottom" id="cmy-LA-qSm"/>
-                            <constraint firstItem="h1B-s7-JuD" firstAttribute="bottom" secondItem="KuX-gF-Ux1" secondAttribute="bottom" constant="96" id="ekt-4f-IUJ"/>
+                            <constraint firstItem="h1B-s7-JuD" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KuX-gF-Ux1" secondAttribute="bottom" constant="10" id="ekt-4f-IUJ"/>
                             <constraint firstItem="h1B-s7-JuD" firstAttribute="trailing" secondItem="Bdy-3b-J6h" secondAttribute="trailing" constant="44" id="qXS-hM-QSo"/>
+                            <constraint firstItem="apj-qM-PdM" firstAttribute="top" secondItem="PG4-5W-AF3" secondAttribute="bottom" constant="30" id="rYL-VM-mWB"/>
                             <constraint firstItem="h1B-s7-JuD" firstAttribute="trailing" secondItem="PG4-5W-AF3" secondAttribute="trailing" constant="16" id="tre-nL-vxz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h1B-s7-JuD"/>
@@ -1226,37 +1227,37 @@
         <!--Attention View Controller-->
         <scene sceneID="e8a-qT-GOj">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="a4u-Jz-fwR" customClass="AttentionViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="a4u-Jz-fwR" customClass="AttentionViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sXf-Mb-i8D">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AttentionIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Yee-aV-chA">
-                                <rect key="frame" x="110" y="165" width="155" height="128"/>
+                                <rect key="frame" x="110" y="222" width="155" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="KZY-xp-302"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attention!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfo-5q-5jo">
-                                <rect key="frame" x="136.5" y="128" width="102" height="29"/>
+                                <rect key="frame" x="136.5" y="185" width="102" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.93725490196078431" green="0.62745098039215685" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anyone who knows your private key has access to your wallet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHh-zX-wRV">
-                                <rect key="frame" x="23" y="325" width="329" height="43"/>
+                                <rect key="frame" x="23" y="382" width="329" height="43"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proceed on your own risk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQT-RO-JPL">
-                                <rect key="frame" x="105.5" y="376" width="164" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proceed on your own risk" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQT-RO-JPL">
+                                <rect key="frame" x="16" y="433" width="343" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wc-wL-dW3">
-                                <rect key="frame" x="115.5" y="519" width="144" height="50"/>
+                                <rect key="frame" x="115.5" y="470" width="144" height="50"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="144" id="GwV-WN-cvY"/>
@@ -1279,14 +1280,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="qQT-RO-JPL" firstAttribute="leading" secondItem="f3j-N7-SCX" secondAttribute="leading" constant="16" id="1HL-tp-pnU"/>
                             <constraint firstItem="Yee-aV-chA" firstAttribute="top" secondItem="Jfo-5q-5jo" secondAttribute="bottom" constant="8" id="2Fq-XQ-PL2"/>
                             <constraint firstItem="qQT-RO-JPL" firstAttribute="top" secondItem="lHh-zX-wRV" secondAttribute="bottom" constant="8" id="95D-vl-ocA"/>
                             <constraint firstItem="3wc-wL-dW3" firstAttribute="centerX" secondItem="sXf-Mb-i8D" secondAttribute="centerX" id="FHp-lU-BsZ"/>
                             <constraint firstItem="f3j-N7-SCX" firstAttribute="trailing" secondItem="lHh-zX-wRV" secondAttribute="trailing" constant="23" id="MR1-ST-doL"/>
                             <constraint firstItem="f3j-N7-SCX" firstAttribute="bottom" secondItem="3wc-wL-dW3" secondAttribute="bottom" constant="98" id="Sbz-0B-l7F"/>
                             <constraint firstItem="lHh-zX-wRV" firstAttribute="leading" secondItem="f3j-N7-SCX" secondAttribute="leading" constant="23" id="Zbt-gG-T9a"/>
-                            <constraint firstItem="Jfo-5q-5jo" firstAttribute="top" secondItem="f3j-N7-SCX" secondAttribute="top" constant="64" id="dIJ-7G-sBs"/>
+                            <constraint firstItem="f3j-N7-SCX" firstAttribute="trailing" secondItem="qQT-RO-JPL" secondAttribute="trailing" constant="16" id="dGZ-Mx-OYg"/>
+                            <constraint firstItem="Jfo-5q-5jo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="f3j-N7-SCX" secondAttribute="top" id="dIJ-7G-sBs"/>
                             <constraint firstItem="qQT-RO-JPL" firstAttribute="centerX" secondItem="sXf-Mb-i8D" secondAttribute="centerX" id="eaD-rX-Jwl"/>
+                            <constraint firstItem="3wc-wL-dW3" firstAttribute="top" secondItem="qQT-RO-JPL" secondAttribute="bottom" constant="20" id="haN-ij-IXi"/>
                             <constraint firstItem="lHh-zX-wRV" firstAttribute="top" secondItem="Yee-aV-chA" secondAttribute="bottom" constant="32" id="ixC-If-bRY"/>
                             <constraint firstItem="Jfo-5q-5jo" firstAttribute="centerX" secondItem="sXf-Mb-i8D" secondAttribute="centerX" id="p5f-u3-u7h"/>
                             <constraint firstItem="f3j-N7-SCX" firstAttribute="trailing" secondItem="Yee-aV-chA" secondAttribute="trailing" constant="110" id="tzU-79-nMQ"/>
@@ -1698,7 +1702,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="cNL-Hx-6D9" style="IBUITableViewCellStyleDefault" id="ofK-ZN-bqi">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="cNL-Hx-6D9" style="IBUITableViewCellStyleDefault" id="ofK-ZN-bqi">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ofK-ZN-bqi" id="gZo-NS-75d">
@@ -1918,7 +1922,7 @@
                                 <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FavoritesListCell" rowHeight="72" id="w7W-qs-2ZL" customClass="FavoritesListCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FavoritesListCell" rowHeight="72" id="w7W-qs-2ZL" customClass="FavoritesListCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w7W-qs-2ZL" id="cOf-rv-2id">
@@ -2207,7 +2211,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" id="xS3-oO-FUb" customClass="ContactCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" id="xS3-oO-FUb" customClass="ContactCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xS3-oO-FUb" id="qql-Kh-wgM">
@@ -2841,7 +2845,7 @@ minutes, please wait ...</string>
                                 <rect key="frame" x="0.0" y="468.5" width="375" height="149.5"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Vef-ww-JI0">
-                                        <rect key="frame" x="169.5" y="56" width="37" height="37"/>
+                                        <rect key="frame" x="169.5" y="55.5" width="37" height="37"/>
                                         <color key="color" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -3325,7 +3329,7 @@ minutes, please wait ...</string>
                                 <rect key="frame" x="16" y="134" width="335" height="484"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionHistoryCell" rowHeight="58" id="e7I-1u-CMt" customClass="TransactionHistoryCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionHistoryCell" rowHeight="58" id="e7I-1u-CMt" customClass="TransactionHistoryCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="335" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e7I-1u-CMt" id="3E1-NN-8id">
@@ -4467,7 +4471,7 @@ successfully</string>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="ZCA-ZX-2rX">
-                                                            <rect key="frame" x="276" y="25.5" width="16" height="12"/>
+                                                            <rect key="frame" x="331" y="25.5" width="16" height="12"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HlN-SD-TK3">
                                                             <rect key="frame" x="62" y="25" width="31" height="14.5"/>
@@ -4476,13 +4480,13 @@ successfully</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-ih-tlZ">
-                                                            <rect key="frame" x="218.5" y="22" width="39.5" height="19.5"/>
+                                                            <rect key="frame" x="273.5" y="22" width="39.5" height="19.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1l-bc-6z7">
-                                                            <rect key="frame" x="28" y="63" width="264" height="1"/>
+                                                            <rect key="frame" x="28" y="63" width="319" height="1"/>
                                                             <color key="backgroundColor" red="0.88235294119999996" green="0.90588235289999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="ACg-6V-9Xv"/>
@@ -5158,7 +5162,7 @@ successfully</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bq9-58-P4B">
-                                                    <rect key="frame" x="32" y="50" width="256" height="50"/>
+                                                    <rect key="frame" x="32" y="50" width="311" height="50"/>
                                                     <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="jOk-qg-f5o"/>
@@ -5344,7 +5348,7 @@ minutes, please wait ...</string>
                                 <rect key="frame" x="0.0" y="151" width="375" height="467"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletTabTokenCell" rowHeight="148" id="6Mz-Fv-RaF" customClass="WalletTabTokenCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletTabTokenCell" rowHeight="148" id="6Mz-Fv-RaF" customClass="WalletTabTokenCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6Mz-Fv-RaF" id="5ix-bQ-4cv">
@@ -5536,7 +5540,7 @@ minutes, please wait ...</string>
                                             <outlet property="walletNameLabel" destination="PaB-XJ-qnw" id="avD-qW-rim"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TransactionHistoryCell" rowHeight="55" id="321-cJ-3vb" userLabel="TransactionCell" customClass="TransactionHistoryCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TransactionHistoryCell" rowHeight="55" id="321-cJ-3vb" userLabel="TransactionCell" customClass="TransactionHistoryCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="176" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="321-cJ-3vb" id="8BF-L6-9az">
@@ -5609,7 +5613,7 @@ minutes, please wait ...</string>
                                             <outlet property="transactionTypeLabel" destination="x2n-3A-Ef9" id="syr-3d-lhy"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmptySectionCell" rowHeight="112" id="NVk-jB-j8u" customClass="EmptySectionCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmptySectionCell" rowHeight="112" id="NVk-jB-j8u" customClass="EmptySectionCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="231" width="375" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NVk-jB-j8u" id="udQ-5J-rqG">
@@ -5707,7 +5711,7 @@ minutes, please wait ...</string>
                                 <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoListCell" rowHeight="83" id="GcG-oQ-joU" customClass="TokenInfoListCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoListCell" rowHeight="83" id="GcG-oQ-joU" customClass="TokenInfoListCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GcG-oQ-joU" id="e9u-gR-Rf3">
@@ -6187,7 +6191,7 @@ minutes, please wait ...</string>
                                 <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CreateTokenCell" rowHeight="53" id="Y3X-e5-Bbn" customClass="CreateTokenCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CreateTokenCell" rowHeight="53" id="Y3X-e5-Bbn" customClass="CreateTokenCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y3X-e5-Bbn" id="AR7-Wq-Iru">
@@ -6334,7 +6338,7 @@ minutes, please wait ...</string>
                                 <rect key="frame" x="0.0" y="120" width="375" height="393"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoListCell" rowHeight="83" id="mfk-he-6L2" customClass="TokenInfoListCell" customModule="BankexWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoListCell" rowHeight="83" id="mfk-he-6L2" customClass="TokenInfoListCell" customModule="BankexWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mfk-he-6L2" id="yF6-hC-avs">

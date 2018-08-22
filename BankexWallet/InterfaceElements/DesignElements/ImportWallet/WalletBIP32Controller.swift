@@ -102,7 +102,8 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     }
     
     @IBAction func createWalletTapped(_ sender:Any) {
-        let generatedPassphrase = passphraseTextView.text!
+        
+        let generatedPassphrase = passphraseTextView.text!.replacingOccurrences(of: "\n", with: "")
         let nameWallet = nameTextField.text ?? ""
         service.createNewHDWallet(with: nameWallet, mnemonics: generatedPassphrase, mnemonicsPassword: "", walletPassword: "BANKEXFOUNDATION") { (_, error) in
             guard error == nil else {
