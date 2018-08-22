@@ -84,6 +84,9 @@
 		E21836AB2105F6DC00795FDC /* TokenInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21836AA2105F6DC00795FDC /* TokenInfoController.swift */; };
 		E21836AD2105F74A00795FDC /* TokenInfoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21836AC2105F74A00795FDC /* TokenInfoListCell.swift */; };
 		E21836AF2105F84400795FDC /* TokenInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21836AE2105F84300795FDC /* TokenInfoService.swift */; };
+		E21926D2212C401E00EC9A83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E21926D1212C401E00EC9A83 /* GoogleService-Info.plist */; };
+		E21926D3212C401E00EC9A83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E21926D1212C401E00EC9A83 /* GoogleService-Info.plist */; };
+		E21926D4212C401E00EC9A83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E21926D1212C401E00EC9A83 /* GoogleService-Info.plist */; };
 		E231DDC5210FDBF80033E2FC /* CreateTokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E231DDC4210FDBF80033E2FC /* CreateTokenCell.swift */; };
 		E231DDC7210FDC120033E2FC /* CreateTokenSearchBarAndTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E231DDC6210FDC120033E2FC /* CreateTokenSearchBarAndTextFieldDelegate.swift */; };
 		E231DDC9210FDC310033E2FC /* CreateTokenQRCodeReaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E231DDC8210FDC310033E2FC /* CreateTokenQRCodeReaderDelegate.swift */; };
@@ -240,6 +243,8 @@
 		E21836AA2105F6DC00795FDC /* TokenInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInfoController.swift; sourceTree = "<group>"; };
 		E21836AC2105F74A00795FDC /* TokenInfoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInfoListCell.swift; sourceTree = "<group>"; };
 		E21836AE2105F84300795FDC /* TokenInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInfoService.swift; sourceTree = "<group>"; };
+		E21926D1212C401E00EC9A83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E21926D5212C645900EC9A83 /* BankexWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BankexWallet.entitlements; sourceTree = "<group>"; };
 		E231DDC4210FDBF80033E2FC /* CreateTokenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenCell.swift; sourceTree = "<group>"; };
 		E231DDC6210FDC120033E2FC /* CreateTokenSearchBarAndTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenSearchBarAndTextFieldDelegate.swift; sourceTree = "<group>"; };
 		E231DDC8210FDC310033E2FC /* CreateTokenQRCodeReaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenQRCodeReaderDelegate.swift; sourceTree = "<group>"; };
@@ -402,6 +407,7 @@
 		81942F05201B36A300F0AE29 /* BankexWallet */ = {
 			isa = PBXGroup;
 			children = (
+				E21926D5212C645900EC9A83 /* BankexWallet.entitlements */,
 				F0FF1C632054E75C0051D894 /* ServiceLayer */,
 				81C43344201B81E4008D3343 /* InterfaceElements */,
 				81C4333F201B730C008D3343 /* GlobalState */,
@@ -411,6 +417,7 @@
 				81942F10201B36A300F0AE29 /* Assets.xcassets */,
 				81942F12201B36A300F0AE29 /* LaunchScreen.storyboard */,
 				81942F15201B36A300F0AE29 /* Info.plist */,
+				E21926D1212C401E00EC9A83 /* GoogleService-Info.plist */,
 				81942F0D201B36A300F0AE29 /* BankexWallet.xcdatamodeld */,
 				F09FAEB020A4517A008D6AD7 /* Crashlytics.framework */,
 				F09FAEB120A4517A008D6AD7 /* Fabric.framework */,
@@ -879,6 +886,11 @@
 					81942F02201B36A300F0AE29 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					81942F19201B36A300F0AE29 = {
 						CreatedOnToolsVersion = 9.2;
@@ -918,6 +930,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81942F14201B36A300F0AE29 /* LaunchScreen.storyboard in Resources */,
+				E21926D2212C401E00EC9A83 /* GoogleService-Info.plist in Resources */,
 				81942F11201B36A300F0AE29 /* Assets.xcassets in Resources */,
 				81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */,
 			);
@@ -927,6 +940,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E21926D3212C401E00EC9A83 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,6 +948,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E21926D4212C401E00EC9A83 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,13 +1032,16 @@
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Popover/Popover.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SugarRecord/SugarRecord.framework",
 				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
 			);
@@ -1032,13 +1050,16 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Amplitude_iOS.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Popover.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SugarRecord.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
 			);
@@ -1338,6 +1359,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				BUNDLE_ID_SUFFIX = .dev;
+				CODE_SIGN_ENTITLEMENTS = BankexWallet/BankexWallet.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1365,6 +1387,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				BUNDLE_ID_SUFFIX = "";
+				CODE_SIGN_ENTITLEMENTS = BankexWallet/BankexWallet.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

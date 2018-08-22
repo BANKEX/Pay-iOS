@@ -11,6 +11,7 @@ import CoreData
 import Fabric
 import Crashlytics
 import Amplitude_iOS
+import Firebase
 
 
 @UIApplicationMain
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         Amplitude.instance().initializeApiKey("27da55fc989fc196d40aa68b9a163e36")
         Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
         Fabric.with([Crashlytics.self])
@@ -62,30 +64,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         if SecurityViewController.isEnabledMulti && UserDefaults.standard.bool(forKey: "isNotFirst")  {
             showPasscode()
         }
     }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        if let incomingURL = userActivity.webpageURL {
+            let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) {
+                [weak self] (dynamicLink, error) in
+                if let dynamicLink = dynamicLink, let _ = dynamicLink.url {
+                    self?.handleIncomingDynamicLink(dynamicLink)
+                }
+            }
+            return linkHandled
+        } else {
+            return false
+        }
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        // Saves changes in the application's managed object context before the application terminates.
-//        self.saveContext()
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+            print("I am handling a link through the openURL method (custom scheme instead of universal)")
+            self.handleIncomingDynamicLink(dynamicLink)
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
+        if dynamicLink.matchType == .weak {
+            print("I think your incoming link parameter is \(dynamicLink.url!) but I'm not shure")
+        } else {
+            guard let pathComponents = dynamicLink.url?.pathComponents else {return}
+            for nextPiece in pathComponents {
+                // parsing
+            }
+            print("Incoming link parameter is \(dynamicLink.url!)")
+        }
+        
     }
 
     // MARK: - Core Data stack
