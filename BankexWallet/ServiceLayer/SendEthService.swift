@@ -147,7 +147,6 @@ class SendEthServiceImplementation: SendEthService {
     }
     
     
-    // TODO: They're not optional! 
     func getAllTransactions() -> [ETHTransactionModel] {
         guard let address = self.keysService.selectedAddress() else { return [] }
         let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)

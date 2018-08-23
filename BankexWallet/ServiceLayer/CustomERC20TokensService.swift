@@ -152,9 +152,10 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                 switch result {
                 case .Success(let localName):
                     name = localName
-                case .Error(_):
-                    //TODO:
-                    print("error")
+                case .Error(let error):
+                    DispatchQueue.main.async {
+                        completion(SendEthResult.Error(error))
+                    }
                 }
                 dispatchGroup.leave()
             })
@@ -178,9 +179,10 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                 switch result {
                 case .Success(let localsymbol):
                     symbol = localsymbol
-                case .Error( _):
-                    //TODO:
-                    print("error")
+                case .Error(let error):
+                    DispatchQueue.main.async {
+                        completion(SendEthResult.Error(error))
+                    }
                 }
                 dispatchGroup.leave()
             })
@@ -277,9 +279,10 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                 switch result {
                 case .Success(let localName):
                     name = localName
-                case .Error(_):
-                    //TODO:
-                    print("error")
+                case .Error(let error):
+                    DispatchQueue.main.async {
+                        completion(SendEthResult.Error(error))
+                    }
                 }
                 dispatchGroup.leave()
             })
@@ -304,8 +307,9 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                 case .Success(let localsymbol):
                     symbol = localsymbol
                 case .Error( _):
-                    //TODO:
-                    print("error")
+                    DispatchQueue.main.async {
+                        completion(SendEthResult.Error(error))
+                    }
                 }
                 dispatchGroup.leave()
             })
