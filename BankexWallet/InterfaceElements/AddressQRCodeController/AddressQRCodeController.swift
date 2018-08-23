@@ -21,6 +21,7 @@ class AddressQRCodeController: UIViewController {
     @IBOutlet weak var copyAddressButton: UIButton!
 
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
+    var navTitle: String?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -61,7 +62,8 @@ class AddressQRCodeController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         let sendButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAddress(_:)))
         self.navigationItem.rightBarButtonItem = sendButton
-        self.title = "Receive"
+        self.title = navTitle ?? "Receive"
+        navigationItem.backBarButtonItem?.title = "Back"
     }
 
     @objc func shareAddress(_ sender : UIBarButtonItem) {
@@ -115,9 +117,11 @@ class AddressQRCodeController: UIViewController {
         guard let string = string else {
             return nil
         }
-
-        guard let code = Web3.EIP67Code(address: string)?.toString() else {
-            return nil
+        var code: String
+        if let c = Web3.EIP67Code(address: string)?.toString() {
+            code = c
+        } else {
+            code = string
         }
 
         let data = code.data(using: String.Encoding.ascii)
