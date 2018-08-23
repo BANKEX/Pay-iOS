@@ -16,14 +16,27 @@ import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    static var isAlreadyLaunchedOnce = false // Used to avoid 2 FIRApp configure
 
     var window: UIWindow?
     var navigationVC:UINavigationController?
     var currentViewController:UIViewController?
+    
+    enum tabBarPage: Int {
+        case main = 0
+        case wallet = 1
+        case settings = 2
+    }
+    
+    static var initiatingTabBar: tabBarPage = .main
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
+        if !AppDelegate.isAlreadyLaunchedOnce {
+            FirebaseApp.configure()
+            AppDelegate.isAlreadyLaunchedOnce = true
+        }
         Amplitude.instance().initializeApiKey("27da55fc989fc196d40aa68b9a163e36")
         Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
         Fabric.with([Crashlytics.self])
@@ -35,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return true
         }
+        
         initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
         window?.backgroundColor = .white
         return true
@@ -101,6 +115,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             guard let pathComponents = dynamicLink.url?.pathComponents else {return}
             for nextPiece in pathComponents {
+                if nextPiece == "helloworld" {
+                    AppDelegate.initiatingTabBar = .settings
+                }
+                
                 // parsing
             }
             print("Incoming link parameter is \(dynamicLink.url!)")
