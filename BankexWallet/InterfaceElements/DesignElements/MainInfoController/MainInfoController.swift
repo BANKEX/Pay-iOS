@@ -117,6 +117,10 @@ FavoriteSelectionDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        // testing dynamic links
+        self.tabBarController?.selectedIndex = AppDelegate.initiatingTabBar.rawValue
+        AppDelegate.initiatingTabBar = .main
+        //
     }
     
         
