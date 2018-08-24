@@ -1,9 +1,9 @@
 //
-//  NetworksServiceTests.swift
+//  NetworkServiceTests.swift
 //  BankexWalletTests
 //
-//  Created by Korovkina, Ekaterina on 3/11/2561 BE.
-//  Copyright © 2561 Alexander Vlasov. All rights reserved.
+//  Created by Vladislav on 24.08.2018.
+//  Copyright © 2018 Alexander Vlasov. All rights reserved.
 //
 
 import XCTest
@@ -22,22 +22,23 @@ class NetworksServiceTests: XCTestCase {
         super.tearDown()
     }
     
+    
+    
+    
+    
     func testAddingNewNetwork() {
         //given
-        let pathToTheFolder = "/TestPath"
-        let networkService = NetworksServiceImplementation(with: pathToTheFolder)
+        let networkService = NetworksServiceImplementation()
         try! networkService.addCustomNetwork(name: "Some Name",
-                                        networkId: BigUInt(67883),
-                                        networkUrlString: "https://anotherNetwork.io/",
-                                        accessToken: "someAccessToken")
+                                             networkId: BigUInt(67883),
+                                             networkUrlString: "https://anotherNetwork.io/",
+                                             accessToken: "someAccessToken")
         try! networkService.addCustomNetwork(name: "Some Another Name ",
                                              networkId: BigUInt(343),
                                              networkUrlString: "https://anotherNetwork.io/",
                                              accessToken: nil)
-
-        //when
-        let anotherNetworkService = NetworksServiceImplementation(with: pathToTheFolder)
-        let networksList = anotherNetworkService.currentNetworksList()
+        
+        let networksList = networkService.currentNetworksList()
         
         //then
         XCTAssertEqual(networksList.count, 2)
@@ -47,8 +48,7 @@ class NetworksServiceTests: XCTestCase {
     
     func testDeletingNewNetwork() {
         //given
-        let pathToTheFolder = "/TestPath"
-        let networkService = NetworksServiceImplementation(with: pathToTheFolder)
+        let networkService = NetworksServiceImplementation()
         try! networkService.addCustomNetwork(name: "Some Name",
                                              networkId: BigUInt(67883),
                                              networkUrlString: "https://anotherNetwork.io/",
@@ -61,8 +61,7 @@ class NetworksServiceTests: XCTestCase {
         try! networkService.deleteNetwork(with: BigUInt(67883))
         
         //when
-        let anotherNetworkService = NetworksServiceImplementation(with: pathToTheFolder)
-        let networksList = anotherNetworkService.currentNetworksList()
+        let networksList = networkService.currentNetworksList()
         
         //then
         XCTAssertEqual(networksList.count, 1)

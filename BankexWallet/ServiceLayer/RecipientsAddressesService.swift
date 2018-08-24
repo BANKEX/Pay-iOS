@@ -9,7 +9,7 @@
 import UIKit
 import SugarRecord
 protocol RecipientsAddressesService {
-    func store(address: String, with firstName: String,lastName:String, isEditing: Bool, completionHandler: @escaping (Error?) -> Void)
+    func store(address: String, with firstName: String, lastName:String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void)
     func getAllStoredAddresses() -> [FavoriteModel]?
     func clearAllSavedAddresses()
     func delete(with address: String, completionHandler: (() -> Void)?)
@@ -32,7 +32,7 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         return false
     }
     
-    func store(address: String, with firstName: String, lastName:String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void) {
+    func store(address: String, with firstName: String, lastName: String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void) {
         do {
             try db.operation({ (context, save) in
                 
