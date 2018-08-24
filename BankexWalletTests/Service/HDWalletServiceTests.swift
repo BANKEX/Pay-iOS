@@ -2,8 +2,8 @@
 //  HDWalletServiceTests.swift
 //  BankexWalletTests
 //
-//  Created by Korovkina, Ekaterina  on 4/1/2561 BE.
-//  Copyright © 2561 Alexander Vlasov. All rights reserved.
+//  Created by Vladislav on 24.08.2018.
+//  Copyright © 2018 Alexander Vlasov. All rights reserved.
 //
 
 import XCTest
@@ -18,7 +18,7 @@ class HDWalletServiceTests: XCTestCase {
     }
     
     override func tearDown() {
-
+        
         //after all
         try! DBStorage.db.operation({ (context, save) in
             let localwallets = try! context.fetch(FetchRequest<KeyWallet>().filtered(with: "name", equalTo: "Wallet name"))
@@ -29,13 +29,13 @@ class HDWalletServiceTests: XCTestCase {
         super.tearDown()
     }
     
-
+    
     func testCreateNewWallet() {
         //given
         let service: HDWalletService = HDWalletServiceImplementation()
         let mnemonics = service.generateMnemonics()
         let expectationForCreate = expectation(description: "Example")
-
+        
         //when
         
         service.createNewHDWallet(with: "Wallet name", mnemonics: mnemonics, mnemonicsPassword: "MnemonicsPassword", walletPassword: "WalletPAssword") { (address, error) in
@@ -61,14 +61,14 @@ class HDWalletServiceTests: XCTestCase {
         let service: HDWalletService = HDWalletServiceImplementation()
         let mnemonics = service.generateMnemonics()
         let expectationForCreate = expectation(description: "Example")
-
+        
         //when
         service.createNewHDWallet(with: "Wallet name", mnemonics: mnemonics, mnemonicsPassword: "MnemonicsPassword", walletPassword: "WalletPAssword") { (address, error) in
             let allKeys = service.fullHDKeysList()
             service.generateChildNode(with:"First Name", key: allKeys!.first!, password: "WalletPAssword", completion: { (_, _) in
-//                service.generateChildNode(with: "Second Name", key: allKeys!.first!, password: "WalletPAssword", completion: { (_, _) in
-                    expectationForCreate.fulfill()
-//                })
+                //                service.generateChildNode(with: "Second Name", key: allKeys!.first!, password: "WalletPAssword", completion: { (_, _) in
+                expectationForCreate.fulfill()
+                //                })
             })
         }
         
