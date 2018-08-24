@@ -75,6 +75,19 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         state = .noAvailable
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        clearInfo()
+        state = .noAvailable
+        self.removeFromParentViewController()
+    }
+    
+    func clearInfo() {
+        firstNameTextField.text = ""
+        lastNameTextField.text = ""
+        addressTextField.text = ""
+    }
+    
     func setupNavBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.title = "New Contact"
