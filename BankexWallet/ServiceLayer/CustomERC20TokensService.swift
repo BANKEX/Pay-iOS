@@ -306,7 +306,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                 switch result {
                 case .Success(let localsymbol):
                     symbol = localsymbol
-                case .Error( _):
+                case .Error( let error):
                     DispatchQueue.main.async {
                         completion(SendEthResult.Error(error))
                     }

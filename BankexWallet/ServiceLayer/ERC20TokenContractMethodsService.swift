@@ -37,7 +37,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
                     newTask.to = transactionModel.to
                     newTask.from = transactionModel.from
                     newTask.date = transactionModel.date
-                    newTask.amount = transactionModel.amount
+                    newTask.amount = transactionModel.amount.stripZeros()
                     newTask.networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
                     // TODO: Now we suppose that we can have only one with given address
                     let selectedTokenModel = CustomERC20TokensServiceImplementation().selectedERC20Token()

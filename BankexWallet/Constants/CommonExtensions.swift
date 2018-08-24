@@ -216,3 +216,21 @@ extension NSMutableAttributedString {
         return self
     }
 }
+
+extension String {
+    func stripZeros() -> String {
+        if !self.contains(".") {return self}
+        var end = self.index(self.endIndex, offsetBy: -1)
+        while self[end] == "0" {
+            end = self.index(before: end)
+        }
+        if self[end] == "." {
+            if self[self.index(before: end)] == "0" {
+                return "0.0"
+            } else {
+                return self[...end] + "0"
+            }
+        }
+        return String(self[...end])
+    }
+}
