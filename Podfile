@@ -13,6 +13,8 @@ target 'BankexWallet' do
   pod 'Firebase/Core'
   pod 'Firebase/DynamicLinks'
   pod 'Firebase/RemoteConfig'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Crash'
 
   target 'BankexWalletTests' do
     inherit! :search_paths
