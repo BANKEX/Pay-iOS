@@ -23,9 +23,6 @@ class SecurityViewController: UITableViewController {
     @IBOutlet weak var openSwitch:UISwitch!
     @IBOutlet weak var sendSwitch:UISwitch!
     @IBOutlet weak var multitaskSwitch:UISwitch!
-    static var isEnabled = true
-    static var isEnabledMulti = true
-    static var isEnabledSend = true    //  Let it be for now
     enum SecuritySections:Int {
         case First = 0,Second
     }
@@ -55,7 +52,7 @@ class SecurityViewController: UITableViewController {
     
     
     func updateUI() {
-        openSwitch.isOn = UserDefaults.standard.value(forKey:Keys.openSwitch.rawValue) as? Bool ?? true
+        openSwitch.isOn = UserDefaults.standard.bool(forKey:Keys.openSwitch.rawValue)
         sendSwitch.isOn = UserDefaults.standard.value(forKey:Keys.sendSwitch.rawValue) as? Bool ?? true
         multitaskSwitch.isOn = UserDefaults.standard.value(forKey:Keys.multiSwitch.rawValue) as? Bool ?? true
     }
@@ -64,43 +61,41 @@ class SecurityViewController: UITableViewController {
     @IBAction func switchTouchID(_ sender:UISwitch) {
         if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                print("Success")
+                UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
             }) { (error) in
                 sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey: Keys.openSwitch.rawValue)
-                SecurityViewController.isEnabled = false
             }
+            return
         }
-        UserDefaults.standard.set(sender.isOn, forKey: Keys.openSwitch.rawValue)
-        SecurityViewController.isEnabled = sender.isOn
+        UserDefaults.standard.set(false, forKey: Keys.openSwitch.rawValue)
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
         if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                print("Success")
+                UserDefaults.standard.set(true, forKey: Keys.sendSwitch.rawValue)
             }) { (error) in
                 sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey: Keys.sendSwitch.rawValue)
-                SecurityViewController.isEnabledSend = false
             }
+            return
         }
-        UserDefaults.standard.set(sender.isOn, forKey: Keys.sendSwitch.rawValue)
-        SecurityViewController.isEnabledSend = sender.isOn
+        UserDefaults.standard.set(false, forKey: Keys.sendSwitch.rawValue)
     }
+    
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
         if sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                print("Success")
+                UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
             }) { (error) in
                 sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey:Keys.multiSwitch.rawValue)
-                SecurityViewController.isEnabledMulti = false
             }
+            return
         }
-        UserDefaults.standard.set(sender.isOn, forKey: Keys.multiSwitch.rawValue)
-        SecurityViewController.isEnabledMulti = sender.isOn
+        UserDefaults.standard.set(false, forKey: Keys.multiSwitch.rawValue)
     }
     
     
