@@ -2,8 +2,8 @@
 //  CustomNetworksTests.swift
 //  BankexWalletTests
 //
-//  Created by Korovkina, Ekaterina on 3/11/2561 BE.
-//  Copyright © 2561 Alexander Vlasov. All rights reserved.
+//  Created by Vladislav on 24.08.2018.
+//  Copyright © 2018 Alexander Vlasov. All rights reserved.
 //
 
 import XCTest
@@ -54,3 +54,4 @@ class CustomNetworksTests: XCTestCase {
         XCTAssertEqual(decodedNetwork.networkName, customNetwork.networkName)
     }
 }
+
