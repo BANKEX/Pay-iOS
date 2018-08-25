@@ -12,6 +12,7 @@ import Fabric
 import Crashlytics
 import Amplitude_iOS
 import Firebase
+import PushKit
 
 
 @UIApplicationMain
