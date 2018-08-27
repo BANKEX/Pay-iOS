@@ -119,7 +119,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func updateTableView() {
-        let dataQueue = DispatchQueue.global(qos: .utility)
+        let dataQueue = DispatchQueue.main
         dataQueue.async {
             self.walletData.update(callback: { (etherToken, transactions, availableTokens) in
                 DispatchQueue.main.async {

@@ -9,6 +9,8 @@
 import UIKit
 import StoreKit
 import MessageUI
+import Reachability
+import CoreTelephony
 
 
 
@@ -39,6 +41,23 @@ class ManagerReferences {
         mc.mailComposeDelegate = delegate
         mc.setToRecipients([references.bankex.getRef()])
         mc.setSubject("TO BANKEX")
+        var messageBody = "When I do the following:\n1. \n2. \n3. \n\nThe app does:\n\nBut it should do:\n\n"
+        let padding = "--------------------"
+        messageBody += "\(padding)\nWith details listed below we will find solutions faster. Please do not remove this text.\n\(padding)\n"
+        let device = UIDevice.current
+        messageBody += "Operating system: \(device.systemName) \(device.systemVersion)\n"
+        messageBody += "Device: Apple \(UIDevice.modelName)\n"
+        if let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String, let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            messageBody += "Application: \(appName) \(version)\n"
+        }
+        messageBody += "Connection Type: \(getNetworkType())\n"
+        if let language = Locale.current.languageCode {
+            messageBody += "Language Code: \(language)\n"
+        }
+        if let country = Locale.current.regionCode {
+            messageBody += "Country Code: \(country)"
+        }
+        mc.setMessageBody(messageBody, isHTML: false)
         DispatchQueue.main.async {
             success(mc)
         }
@@ -99,6 +118,33 @@ class ManagerReferences {
         }else {
             UIApplication.shared.openURL(url)
         }
+    }
+    
+    func getNetworkType() -> String {
+        let reachability: Reachability = Reachability()!
+        do {
+            try reachability.startNotifier()
+            let status = reachability.connection
+            if(status == .none) {
+                return "No connection"
+            } else if (status == .wifi){
+                return "Wifi"
+            } else if (status == .cellular) {
+                let networkInfo = CTTelephonyNetworkInfo()
+                let carrierType = networkInfo.currentRadioAccessTechnology
+                switch carrierType {
+                case CTRadioAccessTechnologyGPRS?,CTRadioAccessTechnologyEdge?,CTRadioAccessTechnologyCDMA1x?: return "2G"
+                case CTRadioAccessTechnologyWCDMA?,CTRadioAccessTechnologyHSDPA?,CTRadioAccessTechnologyHSUPA?,CTRadioAccessTechnologyCDMAEVDORev0?,CTRadioAccessTechnologyCDMAEVDORevA?,CTRadioAccessTechnologyCDMAEVDORevB?,CTRadioAccessTechnologyeHRPD?: return "3G"
+                case CTRadioAccessTechnologyLTE?: return "4G"
+                default: return ""
+                }
+            } else {
+                return ""
+            }
+        } catch {
+            return ""
+        }
+        
     }
     
 }

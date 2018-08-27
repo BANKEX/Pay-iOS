@@ -93,6 +93,9 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         configureTableView()
         configureNavBar()
         configureTextView()
+        let activity = selectedContact.userActivity
+        activity.isEligibleForSearch = true
+        self.userActivity = activity
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -262,6 +265,10 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
             noteTextView.moveCursorToStart()
             return false
         }
+    }
+    
+    override func updateUserActivityState(_ activity: NSUserActivity) {
+        activity.addUserInfoEntries(from: selectedContact.userActivityUserInfo)
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {

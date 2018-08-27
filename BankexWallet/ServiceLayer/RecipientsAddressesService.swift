@@ -105,6 +105,24 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         return nil
     }
     
+    func getAddressByAddress(_ address:String) -> FavoriteModel? {
+        
+        let request = FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "address == %@", address))
+        
+        do {
+            let addresses = try db.fetch(request)
+            guard let firstAddress = addresses.first else { return nil }
+                let fName = firstAddress.firstName  ?? ""
+                let lName = firstAddress.lastName ?? ""
+                let address = firstAddress.address ?? ""
+                let noteString = firstAddress.note
+                return FavoriteModel(firstName: fName, lastname: lName, address: address, lastUsageDate: nil, note: noteString)
+        } catch {
+            print(error)
+        }
+        return nil
+    }
+    
     func delete(with address: String, completionHandler: (() -> Void)?) {
         do {
             
@@ -199,6 +217,10 @@ struct FavoriteModel {
     var address: String
     var lastUsageDate: Date?
     var note:String?
+    
+    var fullName:String {
+        return "\(firstName) \(lastname)"
+    }
 }
 
 struct NameError: LocalizedError {

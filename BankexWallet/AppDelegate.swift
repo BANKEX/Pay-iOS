@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var navigationVC:UINavigationController?
     var currentViewController:UIViewController?
+    var service = RecipientsAddressesServiceImplementation()
     
     enum tabBarPage: Int {
         case main = 0
@@ -90,7 +91,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        if userActivity.activityType == FavoriteModel.domainIdentifier {
+            if let objectID = userActivity.userInfo?["id"] as? String {
+                if let tabViewController = window?.rootViewController as? UITabBarController {
+                    tabViewController.selectedIndex = 0
+                        if let vcs = tabViewController.viewControllers, let mainNav = vcs.first as? UINavigationController {
+                            if let mainInfo = mainNav.viewControllers.first as? MainInfoController {
+                                guard let contact = service.getAddressByAddress(objectID) else { return false }
+                                mainNav.popToRootViewController(animated: false)
+                                guard let profileVC = mainInfo.storyboard?.instantiateViewController(withIdentifier: "ProfileContactViewController") as? ProfileContactViewController else { return false }
+                                profileVC.selectedContact = contact
+                                mainNav.pushViewController(profileVC, animated: false)
+                                return true
+                            }
+                        }
+                }
+            }
+        }
+        
+        
         if let incomingURL = userActivity.webpageURL {
+            
             let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) {
                 [weak self] (dynamicLink, error) in
                 if let dynamicLink = dynamicLink, let _ = dynamicLink.url {
