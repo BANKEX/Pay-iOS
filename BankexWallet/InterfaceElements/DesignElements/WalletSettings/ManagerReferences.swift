@@ -39,6 +39,8 @@ class ManagerReferences {
         mc.mailComposeDelegate = delegate
         mc.setToRecipients([references.bankex.getRef()])
         mc.setSubject("TO BANKEX")
+        let messageBody = "Hello! My device is \(UIDevice.modelName) and I have a problem.\n"
+        mc.setMessageBody(messageBody, isHTML: false)
         DispatchQueue.main.async {
             success(mc)
         }
