@@ -81,7 +81,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        if SecurityViewController.isEnabledMulti && UserDefaults.standard.bool(forKey: "isNotFirst")  {
+        if UserDefaults.standard.value(forKey: Keys.multiSwitch.rawValue) == nil {
+            UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
+        }
+        if UserDefaults.standard.bool(forKey: Keys.multiSwitch.rawValue) && UserDefaults.standard.bool(forKey: "isNotFirst")  {
             showPasscode()
         }
     }
