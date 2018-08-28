@@ -71,10 +71,13 @@ enum PredefinedTokens {
     }
 }
 
-class MainInfoController: UITableViewController,
+class MainInfoController: UIViewController,
     UITabBarControllerDelegate,
-FavoriteSelectionDelegate {
+FavoriteSelectionDelegate,
+UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var blockNumberLabel: UILabel!
     
     var itemsArray = [
         "CurrentWalletInfoCell",
@@ -83,8 +86,7 @@ FavoriteSelectionDelegate {
     //                      "FavouritesListWithCollectionCell"]
     
     let keyService = SingleKeyServiceImplementation()
-    var ethLabel: UILabel!
-    
+
     var favorites: [FavoriteModel]?
     var favService:RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     var favoritesToShow = [FavoriteModel]()
@@ -104,14 +106,21 @@ FavoriteSelectionDelegate {
         favorites = favService.getAllStoredAddresses()
         tokensService.updateConversions()
         configureNotifications()
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavBar()
-        navigationController?.navigationBar.topItem?.prompt = "   "
+        navigationController?.navigationBar.isHidden = true
         putTransactionsInfoIntoItemsArray()
         tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -214,21 +223,10 @@ FavoriteSelectionDelegate {
     }
     
     private func configureNavBar() {
-        title = nil
-        navigationController?.navigationBar.topItem?.title = nil
-        navigationController?.isNavigationBarHidden = false
-        let nameLabel = UILabel()
-        nameLabel.text = "Home"
         
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 34.0)
-        navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: nameLabel)
-        ethLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 130, height: 90))
         getBlockNumber { (number) in
             self.configureLabel(withNumber: number)
         }
-        
-        navigationController?.navigationBar.topItem?.setRightBarButtonItems(
-            [UIBarButtonItem(customView: ethLabel)], animated: true)
     }
     
     private func createStringWithBlockNumber(blockNumber: String) -> NSAttributedString? {
@@ -264,11 +262,10 @@ FavoriteSelectionDelegate {
     }
     
     private func configureLabel(withNumber number: String) {
-        
-        self.ethLabel.attributedText = self.createStringWithBlockNumber(blockNumber: formatNumber(number: number))
-        self.ethLabel.numberOfLines = 2
-        self.ethLabel.textAlignment = .right
-        self.ethLabel.font = UIFont.systemFont(ofSize: 12)
+        self.blockNumberLabel.attributedText = self.createStringWithBlockNumber(blockNumber: formatNumber(number: number))
+        self.blockNumberLabel.numberOfLines = 2
+        self.blockNumberLabel.textAlignment = .right
+        self.blockNumberLabel.font = UIFont.systemFont(ofSize: 12)
     }
     
     private func formatNumber(number: String) -> String {
@@ -341,13 +338,13 @@ FavoriteSelectionDelegate {
     
     // MARK: - Table view data source
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return itemsArray.count
     }
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: itemsArray[indexPath.row], for: indexPath)
         
         if let cell = cell as? TransactionHistoryCell {
