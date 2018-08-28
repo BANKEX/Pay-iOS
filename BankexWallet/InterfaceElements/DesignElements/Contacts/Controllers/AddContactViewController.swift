@@ -79,7 +79,8 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         super.viewDidDisappear(animated)
         clearInfo()
         state = .noAvailable
-        self.removeFromParentViewController()
+        //self.dismiss(animated: false, completion: nil)
+        //self.removeFromParentViewController()
     }
     
     func clearInfo() {
@@ -122,6 +123,15 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     }
     
     @objc func done() {
+        if firstNameTextField.text == nil && lastNameTextField.text != nil && lastNameTextField.text != "" {
+            firstNameTextField.text = ""
+        }
+        if lastNameTextField.text == nil && firstNameTextField.text != nil && firstNameTextField.text != "" {
+            lastNameTextField.text = ""
+        }
+        
+        print(firstNameTextField.text!)
+        print(lastNameTextField.text!)
         guard let firstName = firstNameTextField?.text,let lastName = lastNameTextField?.text,let address = addressTextField?.text else { return }
         guard let ethAddress = EthereumAddress(addressTextField?.text ?? "") else {
             showAlert(with: "Incorrect address", message: "Please enter valid address")
@@ -211,20 +221,39 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         let futureString = currentString.replacingCharacters(in: range, with: string) as String
         switch textField {
         case firstNameTextField:
-            if !futureString.isEmpty && !(lastNameTextField?.text?.isEmpty ?? true) && !(addressTextField?.text?.isEmpty ?? true) {
+            
+            if (!futureString.isEmpty || !(lastNameTextField?.text?.isEmpty ?? true)) && !(addressTextField?.text?.isEmpty ?? true) {
                 state = .available
             }else {
                 state = .noAvailable
             }
+            
+            if !futureString.isEmpty && (lastNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = futureString.prefix(1).uppercased()
+            } else if futureString.isEmpty && (lastNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = ""
+            } else if futureString.isEmpty && !(lastNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = lastNameTextField?.text?.prefix(1).uppercased()
+            }
+            
         case lastNameTextField:
-            if !futureString.isEmpty && !(firstNameTextField?.text?.isEmpty ?? true) && !(addressTextField?.text?.isEmpty ?? true) {
+            
+            if (!futureString.isEmpty || !(firstNameTextField?.text?.isEmpty ?? true)) && !(addressTextField?.text?.isEmpty ?? true) {
                 state = .available
             }else {
                 state = .noAvailable
             }
-            wordLabel.text = futureString.prefix(1).uppercased()
+            
+            if !futureString.isEmpty {
+                wordLabel.text = futureString.prefix(1).uppercased()
+            } else if futureString.isEmpty && (firstNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = ""
+            } else if futureString.isEmpty && !(firstNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = firstNameTextField?.text?.prefix(1).uppercased()
+            }
+            
         case addressTextField:
-            if !futureString.isEmpty && !(firstNameTextField?.text?.isEmpty ?? true) && !(lastNameTextField?.text?.isEmpty ?? true) {
+            if !futureString.isEmpty && (!(firstNameTextField?.text?.isEmpty ?? true) || !(lastNameTextField?.text?.isEmpty ?? true)) {
                 state = .available
             }else {
                 state = .noAvailable
