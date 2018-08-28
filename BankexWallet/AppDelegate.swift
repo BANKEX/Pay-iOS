@@ -59,6 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
     func configurePushes() {
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
