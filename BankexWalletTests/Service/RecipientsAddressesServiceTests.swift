@@ -75,4 +75,31 @@ class RecipientsAddressesServiceTests: XCTestCase {
         service.clearAllSavedAddresses()
     }
     
+    func testUpdateNote() {
+        service.store(address: "Some String", with: "First Name", lastName: "First last name", isEditing: false) { _ in }
+        service.store(address: "Another String", with: "Second Name", lastName: "Second last name", isEditing: false) { _ in }
+        service.updateNote(note: "Note", byAddress: "Another String")
+        let currentNote = service.getAllStoredAddresses()?.last?.note
+        XCTAssertNotNil(currentNote)
+        XCTAssertEqual(currentNote!, "Note")
+    }
+    
+    func testUpdateFirstName() {
+        service.store(address: "Some String", with: "First Name", lastName: "First last name", isEditing: false) { _ in }
+        service.store(address: "Another String", with: "Second Name", lastName: "Second last name", isEditing: false) { _ in }
+        service.updateFirstName(newName: "New first name", byAddress:"Some String")
+        let currentName = service.getAllStoredAddresses()?.first?.firstName
+        XCTAssertNotNil(currentName)
+        XCTAssertEqual(currentName!, "New first name")
+    }
+    
+    func testUpdateLastName() {
+        service.store(address: "Some String", with: "First Name", lastName: "First last name", isEditing: false) { _ in }
+        service.store(address: "Another String", with: "Second Name", lastName: "Second last name", isEditing: false) { _ in }
+        service.updateLastName(newName: "New last name", byAddress:"Another String")
+        let currentName = service.getAllStoredAddresses()?.last?.lastname
+        XCTAssertNotNil(currentName)
+        XCTAssertEqual(currentName!, "New last name")
+    }
+    
 }
