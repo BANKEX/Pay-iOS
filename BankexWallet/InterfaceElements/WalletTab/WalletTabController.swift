@@ -76,6 +76,10 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         chosenToken = tokenForInfo
     }
     
+    @objc func addNewTokenButtonTapped() {
+        self.performSegue(withIdentifier: "showAddNewToken", sender: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Wallet"
@@ -243,15 +247,21 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let headerView = UIView()
         headerView.backgroundColor = UIColor.white
-        
         let headerLabel = UILabel(frame: CGRect(x: 15, y: 32, width:
-            tableView.bounds.size.width, height: 22))
+            tableView.bounds.size.width - 140, height: 22))
         headerLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         headerLabel.textColor = UIColor.black
         headerLabel.text = self.tableView(self.tableView, titleForHeaderInSection: section)
-        
         headerView.addSubview(headerLabel)
-        
+        if self.tableView(self.tableView, titleForHeaderInSection: section) == "Tokens" {
+            let headerButton = UIButton(frame: CGRect(x: tableView.bounds.size.width - 135, y: 32, width: 120, height: 22))
+            headerButton.setTitle("Add new token", for: .normal)
+            headerButton.addTarget(self, action: #selector(addNewTokenButtonTapped), for: .touchUpInside)
+            headerButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
+            headerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            headerButton.titleLabel?.textAlignment = .right
+            headerView.addSubview(headerButton)
+        }
         return headerView
         
     }
