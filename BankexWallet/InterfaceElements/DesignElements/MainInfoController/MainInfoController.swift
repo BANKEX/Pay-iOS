@@ -160,7 +160,7 @@ UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func seeOrAddContactsButtonTapped(_ sender: UIButton) {
-        if sender.title(for: .normal) == "See All" {
+        if sender.title(for: .normal) == NSLocalizedString("See All", comment: ""){
             self.performSegue(withIdentifier: "seeAllFavorites", sender: nil)
         } else {
             self.performSegue(withIdentifier: "addNewFavorite", sender: nil)

@@ -420,7 +420,8 @@
                                     <constraint firstAttribute="height" constant="28" id="8rN-GF-i9h"/>
                                     <constraint firstAttribute="width" constant="140" id="soe-9s-ota"/>
                                 </constraints>
-                                <state key="normal" image="Paste button"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="Paste"/>
                                 <connections>
                                     <action selector="stringFromBuffer:" destination="zgF-bs-7XP" eventType="touchUpInside" id="m0u-CT-dIj"/>
                                 </connections>
@@ -455,6 +456,7 @@
                         <outlet property="importButton" destination="9B9-kC-WYr" id="492-sy-Cf1"/>
                         <outlet property="nameTextField" destination="ca2-qI-28c" id="IQF-3r-Fvs"/>
                         <outlet property="passphraseTextView" destination="UsK-Jd-mN2" id="tE1-CC-sFW"/>
+                        <outlet property="pasteButton" destination="2f2-WJ-80e" id="OSN-cP-PQV"/>
                         <outlet property="separator1" destination="I7g-mL-nV1" id="ATb-MB-5vv"/>
                         <outlet property="separator2" destination="1nK-oM-Q9C" id="agM-qd-ndI"/>
                         <segue destination="ieh-eS-frZ" kind="show" identifier="goToPinFromImportPassphrase" id="pT1-5S-qPI"/>
@@ -525,7 +527,10 @@
                                             <constraint firstAttribute="width" constant="140" id="DfC-Yv-xWd"/>
                                             <constraint firstAttribute="height" constant="28" id="cqX-40-XQB"/>
                                         </constraints>
-                                        <state key="normal" image="Paste button"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <state key="normal" title="Paste">
+                                            <color key="titleColor" red="0.1803921568627451" green="0.49019607843137253" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="textFromBuffer:" destination="Gda-yG-5fI" eventType="touchUpInside" id="qft-Z6-ADy"/>
                                         </connections>
@@ -602,6 +607,7 @@
                     <connections>
                         <outlet property="clearButton" destination="TLz-RI-Hz8" id="nhM-PN-UF5"/>
                         <outlet property="importButton" destination="w6i-Sg-uPe" id="RQu-Be-5O1"/>
+                        <outlet property="pasteButton" destination="aWb-Io-1BB" id="2rj-Sa-d5e"/>
                         <outlet property="privateKeyTextView" destination="JGw-Ba-1Is" id="QhQ-LW-brI"/>
                         <outlet property="separator1" destination="3vd-OQ-DBo" id="ZB4-S6-dE7"/>
                         <outlet property="separator2" destination="YeP-ir-Kad" id="A56-UI-KCN"/>
@@ -2062,7 +2068,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Suw-At-tgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JlM-aC-ubS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-3399" y="3035"/>
+            <point key="canvasLocation" x="-3406" y="2866"/>
         </scene>
         <!--Profile Contact View Controller-->
         <scene sceneID="qpR-yu-5JI">
@@ -2211,7 +2217,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kwF-1P-Imi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3369" y="3557"/>
+            <point key="canvasLocation" x="-3559" y="3624"/>
         </scene>
         <!--List Contacts View Controller-->
         <scene sceneID="sOS-Pp-9aG">
@@ -2280,7 +2286,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cRc-8G-XKE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2415.9420289855075" y="3542.934782608696"/>
+            <point key="canvasLocation" x="-2354" y="3151"/>
         </scene>
         <!--Main Info Controller-->
         <scene sceneID="roq-MN-Sd4">
@@ -4361,7 +4367,7 @@ successfully</string>
                                                         <constraint firstAttribute="height" constant="28" id="wfx-RL-SII"/>
                                                         <constraint firstAttribute="width" constant="140" id="xQ3-LK-KHG"/>
                                                     </constraints>
-                                                    <state key="normal" image="Paste button"/>
+                                                    <state key="normal" title="Paste"/>
                                                     <connections>
                                                         <action selector="importFromBuffer:" destination="xIk-xj-TA6" eventType="touchUpInside" id="TEt-Gj-7LR"/>
                                                     </connections>
@@ -5288,11 +5294,11 @@ successfully</string>
             <objects>
                 <viewController storyboardIdentifier="ProcessController" hidesBottomBarWhenPushed="YES" id="iLc-LU-ReD" customClass="SendingInProcessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="08T-rQ-TzM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vu5-xB-3LK">
-                                <rect key="frame" x="67.5" y="202.5" width="240" height="262"/>
+                                <rect key="frame" x="67.5" y="87" width="240" height="262"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DW4-9U-UJB">
                                         <rect key="frame" x="5" y="223.5" width="230.5" height="38.5"/>
@@ -6230,7 +6236,8 @@ minutes, please wait ...</string>
                                     <constraint firstAttribute="width" constant="140" id="KiC-3f-WEb"/>
                                     <constraint firstAttribute="height" constant="28" id="n5B-vu-Dkf"/>
                                 </constraints>
-                                <state key="normal" image="Paste button"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="Paste"/>
                                 <connections>
                                     <action selector="textFromBuffer:" destination="xjs-f2-eUN" eventType="touchUpInside" id="IAD-Ze-4s8"/>
                                 </connections>
@@ -6348,6 +6355,7 @@ minutes, please wait ...</string>
                     </view>
                     <connections>
                         <outlet property="messageLabel" destination="RD7-yR-13E" id="Jej-fO-xu5"/>
+                        <outlet property="pasteButton" destination="eES-Ve-k39" id="NWg-2W-wRz"/>
                         <outlet property="searchBar" destination="54I-a7-qHO" id="XDj-uy-4Cn"/>
                         <outlet property="tableView" destination="jdL-P1-RdF" id="ERu-PB-3nl"/>
                         <outlet property="tokenAddedIcon" destination="k4r-3U-gp3" id="HrX-Vj-tRX"/>
@@ -6605,7 +6613,6 @@ minutes, please wait ...</string>
         <image name="Favorites" width="240" height="160"/>
         <image name="Home" width="21" height="22"/>
         <image name="KeyIcon" width="29" height="29"/>
-        <image name="Paste button" width="420" height="84"/>
         <image name="PenIcon" width="29" height="29"/>
         <image name="QR" width="162" height="84"/>
         <image name="Reminder_backup" width="200" height="168"/>
@@ -6637,17 +6644,17 @@ minutes, please wait ...</string>
         <image name="white_touch_id" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4bl-zo-1Ji"/>
-        <segue reference="wp9-05-5ZG"/>
-        <segue reference="94t-6M-Swp"/>
+        <segue reference="ECv-xb-uvS"/>
+        <segue reference="aQE-iQ-YyK"/>
+        <segue reference="ijQ-jv-rc6"/>
         <segue reference="JaH-wa-aDn"/>
-        <segue reference="kdz-th-unh"/>
-        <segue reference="vxE-fU-tKs"/>
+        <segue reference="mAo-mA-TSk"/>
+        <segue reference="FRN-yh-beo"/>
         <segue reference="4v7-Bv-6wS"/>
         <segue reference="BAb-mb-KXV"/>
-        <segue reference="j9H-pr-gog"/>
+        <segue reference="b8o-nN-K4H"/>
         <segue reference="bDG-Xv-WCD"/>
-        <segue reference="qly-rG-0HJ"/>
+        <segue reference="pT1-5S-qPI"/>
         <segue reference="o2o-Af-M3V"/>
     </inferredMetricsTieBreakers>
 </document>

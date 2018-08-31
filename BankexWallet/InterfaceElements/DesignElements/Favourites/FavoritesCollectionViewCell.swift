@@ -14,12 +14,12 @@ class FavouritesTitleCell: UITableViewCell {
     let minFavoritesToShow = 1
     override func awakeFromNib() {
         super.awakeFromNib()
-        showMoreButton.setTitle((favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow ? "Add Contact" : "See All", for: .normal)
+        showMoreButton.setTitle((favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow ? NSLocalizedString("Add Contact", comment: "") : NSLocalizedString("See All", comment: ""), for: .normal)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        showMoreButton.setTitle((favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow ? "Add Contact" : "See All", for: .normal)
+        showMoreButton.setTitle((favService.getAllStoredAddresses()?.count ?? 0) < minFavoritesToShow ? NSLocalizedString("Add Contact", comment: "") : NSLocalizedString("See All", comment: ""), for: .normal)
     }
 }
 

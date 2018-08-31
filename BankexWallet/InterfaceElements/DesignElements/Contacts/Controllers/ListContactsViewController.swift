@@ -45,7 +45,7 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     func addBackButton() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle("  Home", for: .normal)
+        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
         //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
@@ -133,14 +133,14 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     
     func setupNavbar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationItem.title = "Contacts"
+        navigationItem.title = NSLocalizedString("Contacts", comment: "")
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .always
         } else {
             // Fallback on earlier versions
         }
         navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(transitionToAddContact)), animated: false)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title:NSLocalizedString("Home", comment: ""), style: .plain, target: self, action: nil)
     }
     
     

@@ -23,6 +23,7 @@
 		003D4BC820FF44D30096FEBA /* CollectionViewAfterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D4BC720FF44D30096FEBA /* CollectionViewAfterManager.swift */; };
 		003D4BCA20FF44E20096FEBA /* CollectionViewBeforeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D4BC920FF44E20096FEBA /* CollectionViewBeforeManager.swift */; };
 		0089E69A2126C9E30037AF60 /* WalletInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089E6992126C9E30037AF60 /* WalletInfoViewController.swift */; };
+		00F0B9A921394C3800AC3013 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00F0B9A721394C3800AC3013 /* Localizable.strings */; };
 		62AC3C13B9AE98E37A41F993 /* Pods_BankexWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */; };
 		66366B4820BD71CF00863C70 /* AddNewWalletWithPrivateKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66366B4720BD71CF00863C70 /* AddNewWalletWithPrivateKeyTests.swift */; };
 		66366B4B20BE8C3700863C70 /* AddAndSearchNewTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66366B4A20BE8C3700863C70 /* AddAndSearchNewTokenTests.swift */; };
@@ -169,6 +170,10 @@
 		003D4BC720FF44D30096FEBA /* CollectionViewAfterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewAfterManager.swift; sourceTree = "<group>"; };
 		003D4BC920FF44E20096FEBA /* CollectionViewBeforeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewBeforeManager.swift; sourceTree = "<group>"; };
 		0089E6992126C9E30037AF60 /* WalletInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInfoViewController.swift; sourceTree = "<group>"; };
+		00F0B99D21392C9800AC3013 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		00F0B9A32139380D00AC3013 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		00F0B9A821394C3800AC3013 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		00F0B9AB21394CF400AC3013 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWalletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66366B4720BD71CF00863C70 /* AddNewWalletWithPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWalletWithPrivateKeyTests.swift; sourceTree = "<group>"; };
 		66366B4A20BE8C3700863C70 /* AddAndSearchNewTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndSearchNewTokenTests.swift; sourceTree = "<group>"; };
@@ -419,6 +424,7 @@
 				81942F0D201B36A300F0AE29 /* BankexWallet.xcdatamodeld */,
 				F09FAEB020A4517A008D6AD7 /* Crashlytics.framework */,
 				F09FAEB120A4517A008D6AD7 /* Fabric.framework */,
+				00F0B9A721394C3800AC3013 /* Localizable.strings */,
 			);
 			path = BankexWallet;
 			sourceTree = "<group>";
@@ -911,6 +917,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
+				"zh-Hant",
 			);
 			mainGroup = 81942EFA201B36A300F0AE29;
 			productRefGroup = 81942F04201B36A300F0AE29 /* Products */;
@@ -929,6 +937,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00F0B9A921394C3800AC3013 /* Localizable.strings in Resources */,
 				81942F14201B36A300F0AE29 /* LaunchScreen.storyboard in Resources */,
 				E21926D2212C401E00EC9A83 /* GoogleService-Info.plist in Resources */,
 				81942F11201B36A300F0AE29 /* Assets.xcassets in Resources */,
@@ -1227,10 +1236,21 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		00F0B9A721394C3800AC3013 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00F0B9A821394C3800AC3013 /* en */,
+				00F0B9AB21394CF400AC3013 /* zh-Hant */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		81942F0A201B36A300F0AE29 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				81942F0B201B36A300F0AE29 /* Base */,
+				00F0B99D21392C9800AC3013 /* zh-Hant */,
+				00F0B9A32139380D00AC3013 /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1250,6 +1270,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1308,6 +1329,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

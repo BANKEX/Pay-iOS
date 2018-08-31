@@ -17,6 +17,7 @@ class CreateTokenController: UIViewController {
     
     @IBOutlet weak var tokenAddedIcon: UIImageView!
     @IBOutlet weak var tokenAddedLabel: UILabel!
+    @IBOutlet weak var pasteButton:UIButton!
     
     var needAddTokenAnimation = false
     
@@ -38,7 +39,7 @@ class CreateTokenController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupPasteButton()
         tableView.tableFooterView = UIView()
         
         self.hideKeyboardWhenTappedAround()
@@ -95,7 +96,7 @@ class CreateTokenController: UIViewController {
     
     func setNavigationBar() {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.title = "Add New Token"
+        self.title = NSLocalizedString("Add new token", comment: "")
     }
     
     @IBAction func scanTapped(_ sender:UIButton) {
@@ -119,6 +120,13 @@ class CreateTokenController: UIViewController {
         }
     }
     
+    fileprivate func setupPasteButton() {
+        pasteButton.layer.borderColor = WalletColors.blueText.color().cgColor
+        pasteButton.layer.borderWidth = 2.0
+        pasteButton.layer.cornerRadius = 15.0
+        pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
+        pasteButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
+    }
 }
 
 extension CreateTokenController: UIViewControllerTransitioningDelegate {

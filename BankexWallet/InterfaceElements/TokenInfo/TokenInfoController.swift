@@ -93,16 +93,16 @@ class TokenInfoController: UIViewController, UITableViewDelegate, UITableViewDat
         guard token != nil else {return cell}
         switch indexPath.row {
         case TokenInfoRaws.address.rawValue :
-            cell.configure(with: "Address", value: token?.address, measurment: nil)
+            cell.configure(with: NSLocalizedString("Address", comment: ""), value: token?.address, measurment: nil)
         case TokenInfoRaws.currency.rawValue :
             if token != nil {
                 let rate = "\(conversionService.currentConversionRate(for: (self.token?.symbol.uppercased())!))$"
-                cell.configure(with: "Currency", value: rate, measurment: (token?.name ?? ""))
+                cell.configure(with: NSLocalizedString("Currency", comment: ""), value: rate, measurment: (token?.name ?? ""))
             } else {
-                cell.configure(with: "Currency", value: "Error in token", measurment: (token?.name ?? ""))
+                cell.configure(with: NSLocalizedString("Currency", comment: ""), value: "Error in token", measurment: (token?.name ?? ""))
             }
         case TokenInfoRaws.decimals.rawValue :
-            cell.configure(with: "Decimals", value: token?.decimals, measurment: nil)
+            cell.configure(with: NSLocalizedString("Decimals", comment: ""), value: token?.decimals, measurment: nil)
         default:
             break
         }

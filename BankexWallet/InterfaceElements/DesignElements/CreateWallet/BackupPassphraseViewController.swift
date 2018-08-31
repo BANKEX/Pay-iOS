@@ -54,7 +54,7 @@ class BackupPassphraseViewController: UIViewController {
     }
     
     func navigationBarSetup() {
-        navigationItem.title = navTitle ?? "Creating Wallet"
+        navigationItem.title = navTitle ?? NSLocalizedString("Creating Wallet", comment: "")
         navigationController?.navigationBar.isHidden = false
     }
     

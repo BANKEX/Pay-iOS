@@ -25,9 +25,9 @@ class EditWalletNameController: UIViewController {
     }
     
     func navigationBarSetup() {
-        navigationItem.title = "Wallet Name"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
-        let button = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.title = NSLocalizedString("Wallet Name", comment: "")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Save", comment: ""), style: .plain, target: self, action: #selector(saveButtonTapped))
+        let button = UIBarButtonItem(title: NSLocalizedString("Back", comment: ""), style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.topItem?.backBarButtonItem = button
     }
     

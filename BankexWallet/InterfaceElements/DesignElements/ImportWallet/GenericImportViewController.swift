@@ -32,7 +32,7 @@ class GenericImportViewController: UIViewController {
     }
     
     func setupNavBar() {
-        title = "Importing Wallet"
+        title = NSLocalizedString("Importing Wallet", comment: "")
         navigationController?.navigationBar.isHidden = false
     }
     

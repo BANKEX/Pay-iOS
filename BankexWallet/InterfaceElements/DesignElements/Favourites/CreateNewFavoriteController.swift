@@ -70,7 +70,7 @@ class CreateNewFavoriteController: UIViewController,
     @IBAction func saveContact(_ sender: Any) {
         
         guard let name = nameTextfield.text, !name.isEmpty else {
-            nameTextfield.attributedPlaceholder = NSAttributedString(string: "Please, enter the name of the contact", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
+            nameTextfield.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Please, enter the name of the contact", comment: ""), attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
             UIView.animate(withDuration: 0.5, animations: {
                 self.nameTextfield.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             }) { (_) in
@@ -81,7 +81,7 @@ class CreateNewFavoriteController: UIViewController,
             return
         }
         guard let address = addressTextfield.text, !address.isEmpty else {
-            addressTextfield.attributedPlaceholder = NSAttributedString(string: "Please, enter the address of the contact", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
+            addressTextfield.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Please, enter the address of the contact", comment: ""), attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
             UIView.animate(withDuration: 0.5, animations: {
                 self.addressTextfield.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             }) { (_) in
@@ -106,7 +106,7 @@ class CreateNewFavoriteController: UIViewController,
         favoritesService.store(address: address, with: name,lastName: "Last", isEditing: editingContact) { (error) in
             if error?.localizedDescription == "Address already exists in the database" {
                 self.addressTextfield.text = ""
-                self.addressTextfield.attributedPlaceholder = NSAttributedString(string: "Address already exists in the database", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
+                self.addressTextfield.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Address already exists in the database", comment: ""), attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
                 UIView.animate(withDuration: 0.5, animations: {
                     self.addressTextfield.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
                 }) { (_) in
@@ -117,7 +117,7 @@ class CreateNewFavoriteController: UIViewController,
                 return
             } else if error?.localizedDescription == "Name already exists in the database" {
                 self.nameTextfield.text = ""
-                self.nameTextfield.attributedPlaceholder = NSAttributedString(string: "Name already exists in the database", attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
+                self.nameTextfield.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Name already exists in the database", comment: ""), attributes: [NSAttributedStringKey.foregroundColor: WalletColors.defaultGreyText.color(), NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 12)])
                 UIView.animate(withDuration: 0.5, animations: {
                     self.nameTextfield.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
                 }) { (_) in
@@ -146,9 +146,9 @@ class CreateNewFavoriteController: UIViewController,
         guard favoritesService.contains(address: addressTextfield.text ?? "") else {
             return
         }
-        let alert = UIAlertController(title: "Are you sure?", message: "You're going to remove this favorite contact.", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (Target) in
+        let alert = UIAlertController(title: NSLocalizedString("Are you sure?", comment: ""), message: NSLocalizedString("You're going to remove this favorite contact.", comment: ""), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive) { (Target) in
             self.favoritesService.delete(with: self.addressTextfield.text ?? "") {
                 
             }

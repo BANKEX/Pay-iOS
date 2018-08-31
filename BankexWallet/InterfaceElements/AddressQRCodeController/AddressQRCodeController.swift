@@ -46,7 +46,7 @@ class AddressQRCodeController: UIViewController {
     func addBackButton() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle("  Home", for: .normal)
+        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
         //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
@@ -62,7 +62,7 @@ class AddressQRCodeController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         let sendButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAddress(_:)))
         self.navigationItem.rightBarButtonItem = sendButton
-        self.title = navTitle ?? "Receive"
+        self.title = navTitle ?? NSLocalizedString("Receive", comment: "")
         navigationItem.backBarButtonItem?.title = "Back"
     }
 

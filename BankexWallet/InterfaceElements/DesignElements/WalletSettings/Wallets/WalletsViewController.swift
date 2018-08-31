@@ -63,7 +63,7 @@ class WalletsViewController: UIViewController, WalletSelectedDelegate {
     }
     
     func configure() {
-        navigationItem.title = "Wallets"
+        navigationItem.title = NSLocalizedString("Wallets", comment: "")
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         } else {
