@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MobileCoreServices
+import CoreSpotlight
 
 class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UITextViewDelegate {
     
@@ -54,7 +56,10 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         let delButton = UIAlertAction(title:"Delete", style: .destructive) { _ in
             guard let address = self.addressTextField?.text, self.service.contains(address: address) else { return }
             self.service.delete(with: address) {
-                self.navigationController?.popViewController(animated: true)
+                self.searchManager.deindex()
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
         alertVC.addAction(delButton)
@@ -64,6 +69,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     let service = RecipientsAddressesServiceImplementation()
     var selectedNote:String!
     var selectedContact:FavoriteModel!
+    var searchManager:SearchManager!
     let heightNameLabel:CGFloat = 36.0
     let heightHeader:CGFloat = 160.0
     let heightCircle:CGFloat = 86.0
@@ -93,9 +99,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         configureTableView()
         configureNavBar()
         configureTextView()
-        let activity = selectedContact.userActivity
-        activity.isEligibleForSearch = true
-        self.userActivity = activity
+        prepareUserActivity()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,6 +146,14 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView(frame: .zero)
         createHeaderView()
+    }
+    
+    func prepareUserActivity() {
+        searchManager = SearchManager(contact: selectedContact)
+        let activity = selectedContact.userActivity
+        activity.isEligibleForSearch = true
+        self.userActivity = activity
+        searchManager.index()
     }
     
     func createHeaderView() {

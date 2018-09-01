@@ -13,6 +13,7 @@ import Crashlytics
 import Amplitude_iOS
 import Firebase
 import PushKit
+import CoreSpotlight
 
 
 @UIApplicationMain
@@ -91,8 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        if userActivity.activityType == FavoriteModel.domainIdentifier {
-            if let objectID = userActivity.userInfo?["id"] as? String {
+        if userActivity.activityType == FavoriteModel.domainIdentifier || userActivity.activityType == CSSearchableItemActionType {
+            if let objectID = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String {
                 if let tabViewController = window?.rootViewController as? UITabBarController {
                     tabViewController.selectedIndex = 0
                         if let vcs = tabViewController.viewControllers, let mainNav = vcs.first as? UINavigationController {
