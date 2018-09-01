@@ -20,7 +20,6 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         case Editable,notEditable
     }
     
-    
     lazy var nameContactLabel:UILabel = {
         let label = UILabel()
         label.numberOfLines = 1

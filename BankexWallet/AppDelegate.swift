@@ -33,9 +33,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     static var initiatingTabBar: tabBarPage = .main
-
+    
+    
+    var activityVariable:String?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        if let userInfo = launchOptions{
+            if let userActivityDict = userInfo[UIApplicationLaunchOptionsKey.userActivityDictionary] as? [UIApplicationLaunchOptionsKey: Any] {
+                if let userActivityType = userActivityDict[.userActivityType] as? String  {
+                    if userActivityType == CSSearchableItemActionType {
+                        
+                    }
+                }
+            }
+        }
         if !AppDelegate.isAlreadyLaunchedOnce {
             FirebaseApp.configure()
             AppDelegate.isAlreadyLaunchedOnce = true
@@ -100,9 +111,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             if let mainInfo = mainNav.viewControllers.first as? MainInfoController {
                                 guard let contact = service.getAddressByAddress(objectID) else { return false }
                                 mainNav.popToRootViewController(animated: false)
-                                guard let profileVC = mainInfo.storyboard?.instantiateViewController(withIdentifier: "ProfileContactViewController") as? ProfileContactViewController else { return false }
-                                profileVC.selectedContact = contact
-                                mainNav.pushViewController(profileVC, animated: false)
+                                guard let listVC = mainInfo.storyboard?.instantiateViewController(withIdentifier: "ListContactsViewController") as? ListContactsViewController else { return false }
+                                mainNav.pushViewController(listVC, animated: false)
+                                listVC.chooseContact(contact: contact)
                                 return true
                             }
                         }
