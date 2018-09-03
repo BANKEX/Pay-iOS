@@ -64,7 +64,6 @@ class ManagerReferences {
     }
     
     
-    
     func accessToTwitter() {
         guard UIApplication.shared.canOpenURL(URL(string:references.twitter.getRef())!) else {
             //Show error
@@ -105,7 +104,7 @@ class ManagerReferences {
         DispatchQueue.main.async {
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
-            }else {
+            } else {
                 self.estimateApp()
             }
         }

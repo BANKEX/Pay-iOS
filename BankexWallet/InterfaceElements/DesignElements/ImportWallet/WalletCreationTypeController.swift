@@ -31,7 +31,7 @@ class WalletCreationTypeController: UIViewController {
     
     func setupRemoteConfigDefaults() {
         let defaultValues = [
-            "importButtonText" : "Import wallet" as NSObject
+            "importButtonText" : "Import Wallet" as NSObject
         ]
         RemoteConfig.remoteConfig().setDefaults(defaultValues)
         RemoteConfig.remoteConfig().activateFetched()
