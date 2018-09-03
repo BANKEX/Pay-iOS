@@ -45,6 +45,12 @@ class TransactionHistoryCell: UITableViewCell {
             transactionTypeLabel.text = isSend ? "Sent" : "Received"
         }
         addressLabel.text = isSend ? "To: \(getFormattedAddress(trans.to))" : "From: \(getFormattedAddress(trans.from))"
+        if trans.amount.first == "." {
+            var amount = trans.amount
+            amount.insert("0", at:trans.amount.startIndex)
+            amountLabel.text = (isSend ? "- " : "+ ") + amount + " " + trans.token.symbol.uppercased()
+            return
+        }
         amountLabel.text = (isSend ? "- " : "+ ") + trans.amount + " " + trans.token.symbol.uppercased()
         transactionTime.text = forMain ? dateFormatter.string(from: trans.date) : timeFormatter.string(from: trans.date)
     }
