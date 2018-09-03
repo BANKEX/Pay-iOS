@@ -15,6 +15,12 @@ extension SingleKeyWalletController: UITextViewDelegate {
         return true
     }
     
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if textView.text == "Enter your private key" {
+            textView.moveCursorToStart()
+        }
+    }
+    
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         guard textView == privateKeyTextView else { return  }

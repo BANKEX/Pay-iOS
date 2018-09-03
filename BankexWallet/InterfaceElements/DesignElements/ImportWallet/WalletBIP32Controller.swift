@@ -177,6 +177,12 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         }
     }
     
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if textView.text == "Enter your passphrase" {
+            textView.moveCursorToStart()
+        }
+    }
+    
     
     func textViewDidEndEditing(_ textView: UITextView) {
         separator1.backgroundColor = WalletColors.greySeparator.color()
