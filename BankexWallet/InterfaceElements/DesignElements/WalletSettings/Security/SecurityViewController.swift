@@ -33,7 +33,7 @@ class SecurityViewController: UITableViewController {
     }
     
     func setupNavbar() {
-        navigationItem.title = "Security"
+        navigationItem.title = NSLocalizedString("Security", comment: "Security")
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         } else {
@@ -113,7 +113,7 @@ class SecurityViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == SecuritySections.First.rawValue ? "USE TOUCH ID WHEN" : "LOCK APP"
+        return section == SecuritySections.First.rawValue ? NSLocalizedString("UseTouchID", comment: "") : NSLocalizedString("Lock App", comment: "")
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -23,7 +23,7 @@ class OnboardingViewController: UIViewController {
     weak var delegate: OnboardingDelegate?
     
     var images = ["Favorites", "ERC20", "Custom network"]
-    let texts = ["ERC20": ("ERC20 standard", "Support for any tokens within the Ether network."), "Custom network": ("Custom network", "Add your network and work with tokens right inside wallet."), "Favorites": ("Favorites", "Add your contacts in the Favorite list for quick access to them.")]
+    let texts = ["ERC20": (NSLocalizedString("ERC20 Standard", comment: ""), NSLocalizedString("Support for any token within the Ether network.", comment: "")), "Custom network": (NSLocalizedString("Custom Network", comment: ""), NSLocalizedString("Add your network and work with tokens right inside your wallet.", comment: "")), "Favorites": (NSLocalizedString("Favorites", comment: ""), NSLocalizedString("Add your contacts to Favorites to access them quickly.", comment: ""))]
     
     var image: UIImage?
     var name: String?
@@ -67,7 +67,7 @@ class OnboardingViewController: UIViewController {
         name = texts[image]?.0
         descr = texts[image]?.1
         self.circleSelected = circleSelected
-        buttonText = circleSelected == 2 ? "GET STARTED" : "NEXT"
+        buttonText = circleSelected == 2 ? NSLocalizedString("GET STARTED", comment: "") : NSLocalizedString("NEXT", comment: "")
     }
     
 }

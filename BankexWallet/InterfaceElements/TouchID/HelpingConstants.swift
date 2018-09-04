@@ -9,12 +9,12 @@
 import Foundation
 
 
-let touchIDAuthenticationStringReason = "Confirm your fingerprint to authenticate."
+let touchIDAuthenticationStringReason = NSLocalizedString("Confirm your fingerprint to authenticate.", comment: "")
 
-let touchIdPasscodeAuthenticationStringReason = "Your touchID locked. You did too many attempts,enter passcode for order to unlock touchID"
-
-
-let defaultTouchIDAuthenticationStringReason = "TouchID do not recognize your fingerprint,please try again"
+let touchIdPasscodeAuthenticationStringReason = NSLocalizedString("Your touchID locked. You did too many attempts,enter passcode for order to unlock touchID", comment: "")
 
 
-let biometricsNotAvailableReason = "Authentication not available on your devaice "
+let defaultTouchIDAuthenticationStringReason = NSLocalizedString("TouchID do not recognize your fingerprint,please try again", comment: "")
+
+
+let biometricsNotAvailableReason = NSLocalizedString("Authentication not available on your devaice ", comment: "")

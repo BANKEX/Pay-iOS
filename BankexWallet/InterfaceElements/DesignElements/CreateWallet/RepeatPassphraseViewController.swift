@@ -121,7 +121,7 @@ class RepeatPassphraseViewController: UIViewController {
     
     func showWalletCreationAllert() {
         let alert = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }

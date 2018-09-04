@@ -16,7 +16,7 @@ class AttentionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Private Key"
+        navigationItem.title = NSLocalizedString("Private Key", comment: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,7 +31,7 @@ class AttentionViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? AddressQRCodeController {
-            vc.navTitle = "Private Key"
+            vc.navTitle = NSLocalizedString("Private Key", comment: "")
             let item = UIBarButtonItem()
             item.title = "Back"
             navigationItem.backBarButtonItem = item

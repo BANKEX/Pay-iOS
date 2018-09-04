@@ -30,26 +30,25 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func editButtonTouched(_ sender: UIButton) {
         editEnabled = !editEnabled
-        editButton.setTitle(editEnabled ? "Cancel" : "Edit", for: .normal)
+        editButton.setTitle(editEnabled ? NSLocalizedString("Cancel", comment: "") : NSLocalizedString("Edit", comment: ""), for: .normal)
         tableView.reloadData()
     }
     
     @IBAction func deleteTokenTouched(_ sender: TokensListCellButton) {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Delete",
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""),
                                       style: .destructive,
                                       handler: { (action) in
                                         guard let address = sender.chosenToken?.address else { return }
                                         // TODO: it's not working
-                                        print("delete tapped")
                                         self.service.deleteToken(with: address)
                                         if let viewWithTag = self.view.viewWithTag(777) {
                                             viewWithTag.removeFromSuperview()
                                         }
                                         self.updateTableView()
         }))
-        alert.addAction(UIAlertAction(title: "Cancel",
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""),
                                       style: .cancel,
                                       handler: {action in
                                         if let viewWithTag = self.view.viewWithTag(777) {
@@ -82,7 +81,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Wallet"
+        title = NSLocalizedString("Wallet", comment: "")
         NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -113,7 +112,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         service.updateConversions()
         editEnabled = false
-        editButton.setTitle(editEnabled ? "Cancel" : "Edit", for: .normal)
+        editButton.setTitle(editEnabled ? NSLocalizedString("Cancel", comment: "") : NSLocalizedString("Edit", comment: ""), for: .normal)
         updateTableView()
     }
     
@@ -184,7 +183,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         } else if indexPath.section == WalletSections.recentTransations.rawValue {
             if transactionsToShow.count == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySectionCell", for: indexPath) as! EmptySectionCell
-                cell.configure(with: "Send or receive funds to see all your transaction history")
+                cell.configure(with: NSLocalizedString("Send or receive funds to see all your transaction history", comment: ""))
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionHistoryCell", for: indexPath) as! TransactionHistoryCell
@@ -196,7 +195,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             if tokens.count == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySectionCell", for: indexPath) as! EmptySectionCell
-                cell.configure(with: "Add tokens to see them here")
+                cell.configure(with: NSLocalizedString("Add tokens to see them here", comment: ""))
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "WalletTabTokenCell", for: indexPath) as! WalletTabTokenCell
@@ -233,9 +232,9 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         if section == WalletSections.ethereum.rawValue {
             return "Ethereum"
         } else if section == WalletSections.recentTransations.rawValue {
-            return "Recent Transactions"
+            return NSLocalizedString("Recent Transactions", comment: "")
         } else {
-            return "Tokens"
+            return NSLocalizedString("Tokens", comment: "")
         }
     }
     
@@ -253,9 +252,9 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
         headerLabel.textColor = UIColor.black
         headerLabel.text = self.tableView(self.tableView, titleForHeaderInSection: section)
         headerView.addSubview(headerLabel)
-        if self.tableView(self.tableView, titleForHeaderInSection: section) == "Tokens" {
+        if self.tableView(self.tableView, titleForHeaderInSection: section) == NSLocalizedString("Tokens", comment: "") {
             let headerButton = UIButton(frame: CGRect(x: tableView.bounds.size.width - 135, y: 32, width: 120, height: 22))
-            headerButton.setTitle("Add new token", for: .normal)
+            headerButton.setTitle(NSLocalizedString("Add new token", comment: ""), for: .normal)
             headerButton.addTarget(self, action: #selector(addNewTokenButtonTapped), for: .touchUpInside)
             headerButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
             headerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)

@@ -56,7 +56,7 @@ class PasscodeEnterController: UIViewController {
     
     func changePasscodeStatus(_ newStatus: passcodeStatus) {
         status = newStatus
-        messageLabel.text = status.rawValue
+        messageLabel.text = NSLocalizedString(status.rawValue, comment: "")
         if status == .wrong {
             passcode = ""
             changeNumsIcons(0)
@@ -225,8 +225,7 @@ class PasscodeEnterController: UIViewController {
                     type = "Error"
                 }
             }
-            
-            let reason = "Authenticate with " + type
+            let reason = NSLocalizedString("Authenticate with", comment: "") + type
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
                                    localizedReason: reason,
                                    reply:

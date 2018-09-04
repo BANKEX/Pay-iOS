@@ -46,7 +46,7 @@ class ChooseFeeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
-        navigationItem.title = "Send"
+        navigationItem.title = NSLocalizedString("Send", comment: "")
         addObservers()
         configureFee()
         addBackButton()
@@ -125,7 +125,7 @@ class ChooseFeeViewController: UIViewController {
                 let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
                 self.amountLabel.text = formattedAmount
                 self.conversionService.updateConversionRate(for: self.tokensService.selectedERC20Token().symbol.uppercased(), completion: { (conversionRate) in
-                    let convertedAmount = conversionRate == 0.0 ? "No data from CryptoCompare" : "$\(conversionRate * Double(formattedAmount!)!) at the rate of CryptoCompare"
+                    let convertedAmount = conversionRate == 0.0 ? NSLocalizedString("No data from CryptoCompare", comment: "") : String(format: NSLocalizedString("$%f at the rate of CryptoCompare", comment: ""), conversionRate * Double(formattedAmount!)!)
                     self.amountInDollarsLabel.text = convertedAmount
                 })
             case .Error(let error):
@@ -171,7 +171,7 @@ class ChooseFeeViewController: UIViewController {
     func addBackButton() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle("  Home", for: .normal)
+        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)

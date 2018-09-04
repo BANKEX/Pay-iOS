@@ -24,7 +24,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     @IBOutlet var textFields:[UITextField]!
     
     
-    var joinButton = UIBarButtonItem(title: "Join", style: .done, target: self, action: #selector(joinToConnection))
+    var joinButton = UIBarButtonItem(title: NSLocalizedString("Join", comment: ""), style: .done, target: self, action: #selector(joinToConnection))
     var state:State = .unavailable {
         didSet {
             if state == .available {
@@ -41,27 +41,41 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
         }
     }
     
+    lazy var pasteButton:UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(textFromBuffer), for:.touchUpInside)
+        button.layer.borderColor = WalletColors.blueText.color().cgColor
+        button.layer.borderWidth = 2.0
+        button.layer.cornerRadius = 15.0
+        button.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
+        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        return button
+    }()
+    
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
         state = .unavailable
+        commonSetup()
+    }
+    
+    fileprivate func commonSetup() {
         [networkNameTextField,networkURLTextField,networkIDTextField].forEach { (tf) in
             tf?.delegate = self
             tf?.autocorrectionType = .no
         }
-        navigationItem.title = "New Network"
+        prepareNavbar()
         tableView.separatorStyle = .none
         networkURLTextField.becomeFirstResponder()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(back))
-        navigationItem.rightBarButtonItem = joinButton
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(resignTextFields)))
     }
     
-    
-    
-    
-    
-    
+
+    fileprivate func prepareNavbar() {
+        navigationItem.title = NSLocalizedString("NewNetwork", comment: "")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: ""), style: .plain, target: self, action: #selector(back))
+        navigationItem.rightBarButtonItem = joinButton
+    }
     
     //MARK: - Methods
     @objc func textFromBuffer() {
@@ -96,15 +110,14 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
         if section == 1 {
             let view = UIView()
             view.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight)
-            let button = UIButton(frame: CGRect(x: 16.0, y: 0, width: 140.0, height: 28.0))
-            button.addTarget(self, action: #selector(textFromBuffer), for:.touchUpInside)
-            button.setImage(#imageLiteral(resourceName: "Paste button"), for: .normal)
-            view.addSubview(button)
+            pasteButton.frame = CGRect(x: 16.0, y: 0, width: 140.0, height: 28.0)
+            view.addSubview(pasteButton)
             return view
         }else {
             return nil
         }
     }
+    
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
