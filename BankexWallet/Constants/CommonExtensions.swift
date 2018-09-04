@@ -125,6 +125,12 @@ extension CGFloat {
     }
 }
 
+extension String {
+    func updateToNSSting() -> NSString {
+        return NSString(string:self)
+    }
+}
+
 extension UIColor {
     static func randomDark() -> UIColor {
         let max: CGFloat = 170

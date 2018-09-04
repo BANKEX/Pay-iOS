@@ -15,6 +15,9 @@ import Firebase
 import UserNotifications
 import FirebaseMessaging
 import FirebaseInstanceID
+import PushKit
+import CoreSpotlight
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var navigationVC:UINavigationController?
     var currentViewController:UIViewController?
+    var service = RecipientsAddressesServiceImplementation()
     
     let gcmMessageIDKey = "gcm.message_id"
     
@@ -34,9 +38,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     static var initiatingTabBar: tabBarPage = .main
-
+    
+    
+    var activityVariable:String?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        if let userInfo = launchOptions{
+            if let userActivityDict = userInfo[UIApplicationLaunchOptionsKey.userActivityDictionary] as? [UIApplicationLaunchOptionsKey: Any] {
+                if let userActivityType = userActivityDict[.userActivityType] as? String  {
+                    if userActivityType == CSSearchableItemActionType {
+                        
+                    }
+                }
+            }
+        }
         if !AppDelegate.isAlreadyLaunchedOnce {
             FirebaseApp.configure()
             AppDelegate.isAlreadyLaunchedOnce = true
@@ -124,7 +139,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        if userActivity.activityType == FavoriteModel.domainIdentifier || userActivity.activityType == CSSearchableItemActionType {
+            if let objectID = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String {
+                if let tabViewController = window?.rootViewController as? UITabBarController {
+                    tabViewController.selectedIndex = 0
+                        if let vcs = tabViewController.viewControllers, let mainNav = vcs.first as? UINavigationController {
+                            if let mainInfo = mainNav.viewControllers.first as? MainInfoController {
+                                guard let contact = service.getAddressByAddress(objectID) else { return false }
+                                mainNav.popToRootViewController(animated: false)
+                                guard let listVC = mainInfo.storyboard?.instantiateViewController(withIdentifier: "ListContactsViewController") as? ListContactsViewController else { return false }
+                                mainNav.pushViewController(listVC, animated: false)
+                                listVC.chooseContact(contact: contact)
+                                return true
+                            }
+                        }
+                }
+            }
+        }
+        
+        
         if let incomingURL = userActivity.webpageURL {
+            
             let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) {
                 [weak self] (dynamicLink, error) in
                 if let dynamicLink = dynamicLink, let _ = dynamicLink.url {

@@ -87,6 +87,8 @@ UITableViewDataSource, UITableViewDelegate {
     
     let keyService = SingleKeyServiceImplementation()
 
+    var ethLabel: UILabel!
+    var service = RecipientsAddressesServiceImplementation()
     var favorites: [FavoriteModel]?
     var favService:RecipientsAddressesService = RecipientsAddressesServiceImplementation()
     var favoritesToShow = [FavoriteModel]()
@@ -108,6 +110,13 @@ UITableViewDataSource, UITableViewDelegate {
         configureNotifications()
         tableView.delegate = self
         tableView.dataSource = self
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let addr = appDelegate.activityVariable {
+            guard let listVC = storyboard?.instantiateViewController(withIdentifier: "ListContactsViewController") as? ListContactsViewController else { return }
+            guard let contact = service.getAddressByAddress(addr) else { return }
+            navigationController?.pushViewController(listVC, animated: false)
+            listVC.chooseContact(contact: contact)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

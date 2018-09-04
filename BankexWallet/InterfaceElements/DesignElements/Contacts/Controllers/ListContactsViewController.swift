@@ -58,13 +58,38 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     }
     
     
+    func chooseContact(contact:FavoriteModel) {
+        var selectedRow = 0
+        var selectedSection = 0
+        loadViewIfNeeded()
+        viewDidLoad()
+        viewWillAppear(false)
+        let firstLetter = String(contact.lastname.prefix(1).uppercased())
+        for (section,letter) in sectionsTitles.enumerated() {
+            if letter == firstLetter {
+                selectedSection = section
+                break
+            }
+        }
+        guard let currentContacts = dictContacts[firstLetter] else { return }
+        for (row,con) in currentContacts.enumerated() {
+            if contact.address == con.address {
+                selectedRow = row
+                break
+            }
+        }
+        tableView.selectRow(at: IndexPath(row: selectedRow, section: selectedSection), animated: false, scrollPosition: .none)
+        tableView(tableView, didSelectRowAt: IndexPath(row: selectedRow, section: selectedSection))
+    }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        listContacts = service.getAllStoredAddresses()
+        self.listContacts = self.service.getAllStoredAddresses()
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         }
     }
     
