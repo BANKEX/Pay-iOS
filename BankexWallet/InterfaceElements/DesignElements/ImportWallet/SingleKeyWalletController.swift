@@ -83,9 +83,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     func clearTextFields() {
         singleKeyView.nameWalletTextField.text = ""
-        privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
         view.endEditing(true)
-        state = .notAvailable
     }
     
     func configure() {
