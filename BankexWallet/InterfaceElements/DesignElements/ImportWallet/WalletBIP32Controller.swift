@@ -24,7 +24,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     @IBOutlet weak var separator1:UIView!
     @IBOutlet weak var passphraseTextView:UITextView!
     @IBOutlet weak var clearButton:UIButton!
-    
+    @IBOutlet weak var pasteButton:UIButton!
     
     //MARK: - Properties
     let service = HDWalletServiceImplementation()
@@ -56,7 +56,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let text = passphraseTextView.text {
             if text == "\n" {
-                passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
+                passphraseTextView.applyPlaceHolderText(with: NSLocalizedString("Enter your seed phrase", comment: ""))
             }
         }
         view.endEditing(true)
@@ -67,7 +67,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     //MARK: - Methods
     func clearTextFields() {
         nameTextField.text = ""
-        passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
+        passphraseTextView.applyPlaceHolderText(with: NSLocalizedString("Enter your seed phrase", comment: ""))
         view.endEditing(true)
         if passphraseTextView.text.utf16.count > 0  {
             state = .notAvailable
@@ -78,17 +78,18 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
         nameTextField.delegate = self
         passphraseTextView.delegate = self
         passphraseTextView.contentInset.bottom = 10.0
-        passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
+        passphraseTextView.applyPlaceHolderText(with: NSLocalizedString("Enter your seed phrase", comment: ""))
         passphraseTextView.autocorrectionType = .no
         passphraseTextView.autocapitalizationType = .none
         nameTextField.autocorrectionType = .no
+        setupPasteButton()
     }
     
 
     
     //MARK: - IBActions
     @IBAction func clearTextView(_ sender:Any) {
-        passphraseTextView.applyPlaceHolderText(with: "Enter your passphrase")
+        passphraseTextView.applyPlaceHolderText(with: NSLocalizedString("Enter your seed phrase", comment: ""))
         state = .notAvailable
         passphraseTextView.moveCursorToStart()
     }
@@ -117,6 +118,14 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
                 self.performSegue(withIdentifier: "showProcessFromImportPassphrase", sender: self)
             }
         }
+    }
+    
+    fileprivate func setupPasteButton() {
+        pasteButton.layer.borderColor = WalletColors.blueText.color().cgColor
+        pasteButton.layer.borderWidth = 2.0
+        pasteButton.layer.cornerRadius = 15.0
+        pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
+        pasteButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
     }
     
     
@@ -182,6 +191,8 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
             textView.moveCursorToStart()
         }
     }
+    
+    
     
     
     func textViewDidEndEditing(_ textView: UITextView) {

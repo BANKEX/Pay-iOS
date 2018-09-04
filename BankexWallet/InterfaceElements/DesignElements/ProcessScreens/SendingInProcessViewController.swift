@@ -55,8 +55,8 @@ SendingResultInformation {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleLabel?.text = textToShow == nil ? "Sending funds" : textToShow!
-        processTitleLabel?.text = "Retrieving data"
+        titleLabel?.text = textToShow == nil ? NSLocalizedString("Sending funds", comment: "") : textToShow!
+        processTitleLabel?.text = NSLocalizedString("Retrieving data", comment: "")
     }
     
     override func viewWillDisappear(_ animated: Bool) {

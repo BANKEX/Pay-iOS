@@ -46,7 +46,7 @@ class PasscodeLockController: UIViewController {
     
     func changePasscodeStatus(_ newStatus: passcodeStatus) {
         status = newStatus
-        messageLabel.text = status.rawValue
+        messageLabel.text = NSLocalizedString(status.rawValue, comment: "")
         if status == .wrong {
             repeatedPasscode = ""
             changeNumsIcons(0)

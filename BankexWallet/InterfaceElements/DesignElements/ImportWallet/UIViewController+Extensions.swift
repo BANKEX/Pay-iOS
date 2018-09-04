@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
     func showCreationAlert() {
         let alertViewController = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
-        alertViewController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertViewController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
         self.present(alertViewController, animated: true)
     }
 }
