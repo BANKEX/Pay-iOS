@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var navigationVC:UINavigationController?
     var currentViewController:UIViewController?
     var service = RecipientsAddressesServiceImplementation()
-    
+    var selectedContact:FavoriteModel?
     let gcmMessageIDKey = "gcm.message_id"
     
     enum tabBarPage: Int {
@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var initiatingTabBar: tabBarPage = .main
     
     
-    var activityVariable:String?
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         if let userInfo = launchOptions{
@@ -153,6 +153,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 return true
                             }
                         }
+                }else if let initialNavBar = window?.rootViewController as? UINavigationController {
+                    if let addr = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String,let contact = service.getAddressByAddress(addr) {
+                        selectedContact = contact
+                    }
                 }
             }
         }
