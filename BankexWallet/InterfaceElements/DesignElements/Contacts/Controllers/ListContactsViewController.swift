@@ -151,6 +151,7 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
             searchViewController.obscuresBackgroundDuringPresentation = false
             searchViewController.searchResultsUpdater = self
             definesPresentationContext = true
+            searchViewController.searchBar.accessibilityLabel = "SearchVC"
         }else {
             //TODO
         }
@@ -164,7 +165,9 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
         } else {
             // Fallback on earlier versions
         }
-        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(transitionToAddContact)), animated: false)
+        let addBtn:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(transitionToAddContact))
+        addBtn.accessibilityLabel = "btnAddContact"
+        navigationItem.setRightBarButton(addBtn, animated: false)
         navigationItem.backBarButtonItem = UIBarButtonItem(title:NSLocalizedString("Home", comment: ""), style: .plain, target: self, action: nil)
     }
     

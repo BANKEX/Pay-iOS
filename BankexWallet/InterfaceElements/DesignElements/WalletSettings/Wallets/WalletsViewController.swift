@@ -71,7 +71,9 @@ class WalletsViewController: UIViewController, WalletSelectedDelegate {
         }
         tableView.dataSource = self
         tableView.delegate = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))
+        var btn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))
+        btn.accessibilityLabel = "AddBtn"
+        navigationItem.rightBarButtonItem = btn
     }
     
     //MARK: - WalletSelectedDelegate

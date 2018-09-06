@@ -82,16 +82,16 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         //self.removeFromParentViewController()
     }
     
+    
     func clearInfo() {
-        firstNameTextField.text = ""
-        lastNameTextField.text = ""
-        addressTextField.text = ""
+        [firstNameTextField,lastNameTextField,addressTextField].forEach { tf in tf?.text = "" }
     }
     
     func setupNavBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.title = NSLocalizedString("NewContact", comment: "")
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: ""), style: .plain, target: self, action: #selector(back))
+        doneButton.accessibilityLabel = "Done"
         navigationItem.rightBarButtonItem = doneButton
     }
     
@@ -114,6 +114,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     func setupPasteButton() {
         pasteButton.layer.borderColor = WalletColors.blueText.color().cgColor
         pasteButton.layer.borderWidth = 2.0
+        pasteButton.accessibilityLabel = "pasteBtn"
         pasteButton.layer.cornerRadius = 15.0
         pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
         pasteButton.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
