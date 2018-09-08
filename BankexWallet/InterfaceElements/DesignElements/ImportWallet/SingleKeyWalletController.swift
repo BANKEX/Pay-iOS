@@ -26,6 +26,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     @IBOutlet weak var separator1:UIView!
     @IBOutlet weak var separator2:UIView!
     @IBOutlet weak var importButton:UIButton!
+    @IBOutlet weak var pasteButton:UIButton!
     
     
     //MARK: - Properties
@@ -83,25 +84,24 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     func clearTextFields() {
         singleKeyView.nameWalletTextField.text = ""
-        privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
         view.endEditing(true)
-        state = .notAvailable
     }
     
     func configure() {
         privateKeyTextView.delegate = self
         singleKeyView.delegate = self
         privateKeyTextView.contentInset.bottom = 10.0
-        privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
+        privateKeyTextView.applyPlaceHolderText(with: NSLocalizedString("Enter your private key", comment: ""))
         privateKeyTextView.autocorrectionType = .no
         privateKeyTextView.autocapitalizationType = .none
+        setupPasteButton()
     }
     
    
     
     //MARK: - IBActions
     @IBAction func clearTextView(_ sender:Any) {
-        privateKeyTextView.applyPlaceHolderText(with: "Enter your private key")
+        privateKeyTextView.applyPlaceHolderText(with: NSLocalizedString("Enter your private key", comment: ""))
         privateKeyTextView.moveCursorToStart()
         state = .notAvailable
     }
@@ -128,6 +128,14 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         if let vc = segue.destination as? SendingInProcessViewController {
             vc.fromEnterScreen = true
         }
+    }
+    
+    fileprivate func setupPasteButton() {
+        pasteButton.layer.borderColor = WalletColors.blueText.color().cgColor
+        pasteButton.layer.borderWidth = 2.0
+        pasteButton.layer.cornerRadius = 15.0
+        pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
+        pasteButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
     }
     
     

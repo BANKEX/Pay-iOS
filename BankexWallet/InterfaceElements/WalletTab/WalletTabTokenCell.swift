@@ -66,7 +66,8 @@ class WalletTabTokenCell: UITableViewCell {
                                                                         decimals: 4)
                 self.amountLabel.text = formattedAmount!
                 // convert to $
-                let convertedAmount = withConversionRate == 0.0 ? "No data from CryptoCompare" : "$\(withConversionRate * Double(formattedAmount!)!) at the rate of CryptoCompare"
+                
+                let convertedAmount = withConversionRate == 0.0 ? NSLocalizedString("No data from CryptoCompare", comment: "") : String(format: NSLocalizedString("$%f at the rate of CryptoCompare", comment: ""), withConversionRate * Double(formattedAmount!)!)
                 self.amountInDollarLabel.text = convertedAmount
             case .Error( _):
                 self.amountLabel.text = "..."

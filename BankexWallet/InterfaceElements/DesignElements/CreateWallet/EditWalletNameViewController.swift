@@ -25,9 +25,11 @@ class EditWalletNameController: UIViewController {
     }
     
     func navigationBarSetup() {
-        navigationItem.title = "Wallet Name"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
-        let button = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.title = NSLocalizedString("Wallet Name", comment: "")
+        let saveBtn = UIBarButtonItem(title: NSLocalizedString("Save", comment: ""), style: .plain, target: self, action: #selector(saveButtonTapped))
+        saveBtn.accessibilityLabel = "SaveBt"
+        navigationItem.rightBarButtonItem = saveBtn
+        let button = UIBarButtonItem(title: NSLocalizedString("Back", comment: ""), style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.topItem?.backBarButtonItem = button
     }
     

@@ -41,7 +41,7 @@ class PasscodeEnterController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if SecurityViewController.isEnabled {
+        if UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue) {
             enterWithBiometrics()
         }
     }
@@ -56,7 +56,7 @@ class PasscodeEnterController: UIViewController {
     
     func changePasscodeStatus(_ newStatus: passcodeStatus) {
         status = newStatus
-        messageLabel.text = status.rawValue
+        messageLabel.text = NSLocalizedString(status.rawValue, comment: "")
         if status == .wrong {
             passcode = ""
             changeNumsIcons(0)
@@ -123,7 +123,10 @@ class PasscodeEnterController: UIViewController {
         super.viewWillAppear(animated)
         let context = LAContext()
         var error: NSError?
-        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) || !SecurityViewController.isEnabled {
+        if UserDefaults.standard.value(forKey: Keys.openSwitch.rawValue) == nil {
+            UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
+        }
+        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) || !UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue) {
             biometricsButton.alpha = 0.0
             biometricsButton.isUserInteractionEnabled = false
         }
@@ -222,8 +225,7 @@ class PasscodeEnterController: UIViewController {
                     type = "Error"
                 }
             }
-            
-            let reason = "Authenticate with " + type
+            let reason = NSLocalizedString("Authenticate with", comment: "") + type
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
                                    localizedReason: reason,
                                    reply:

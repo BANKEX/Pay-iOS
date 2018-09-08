@@ -21,6 +21,7 @@ class AddressQRCodeController: UIViewController {
     @IBOutlet weak var copyAddressButton: UIButton!
 
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
+    var navTitle: String?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -45,11 +46,12 @@ class AddressQRCodeController: UIViewController {
     func addBackButton() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle("  Home", for: .normal)
+        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
         //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        button.accessibilityLabel = "Back"
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
@@ -61,7 +63,8 @@ class AddressQRCodeController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         let sendButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAddress(_:)))
         self.navigationItem.rightBarButtonItem = sendButton
-        self.title = "Receive"
+        self.title = navTitle ?? NSLocalizedString("Receive", comment: "")
+        navigationItem.backBarButtonItem?.title = "Back"
     }
 
     @objc func shareAddress(_ sender : UIBarButtonItem) {
@@ -115,9 +118,11 @@ class AddressQRCodeController: UIViewController {
         guard let string = string else {
             return nil
         }
-
-        guard let code = Web3.EIP67Code(address: string)?.toString() else {
-            return nil
+        var code: String
+        if let c = Web3.EIP67Code(address: string)?.toString() {
+            code = c
+        } else {
+            code = string
         }
 
         let data = code.data(using: String.Encoding.ascii)

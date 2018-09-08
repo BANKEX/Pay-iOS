@@ -76,7 +76,7 @@ Retriable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Send"
+        navigationItem.title = NSLocalizedString("Send", comment: "")
         nextButton.isEnabled = false
         nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
         addTokensButton()
@@ -123,6 +123,7 @@ Retriable {
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
         button.setTitle("ETH", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.accessibilityLabel = "tokenArrowDown"
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
@@ -132,7 +133,7 @@ Retriable {
     func addBackButton() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle("  Home", for: .normal)
+        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
         //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
@@ -229,7 +230,7 @@ Retriable {
                 return
         }
         sendingProcess =  confirmation
-        vc.textToShow = "Preparing transaction"
+        vc.textToShow = NSLocalizedString("Preparing transaction", comment: "")
         
         
     }
@@ -275,9 +276,11 @@ Retriable {
         switch networkName {
         case "rinkeby", "ropsten":
             let urlString = networkName == "rinkeby" ? "https://faucet.rinkeby.io" : "http://faucet.ropsten.be:3001/"
-            let alertController = UIAlertController(title: "Free Eth", message: "You will be reditected to the \(urlString), where you will receive a further instructions", preferredStyle: UIAlertControllerStyle.alert)
-            let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-            let ok = UIAlertAction(title: "Continue", style: .default) { _ in
+            let messageFormat = NSLocalizedString("You will be reditected to the %@, where you will receive a further instructions", comment: "")
+            let message = String(format: messageFormat, urlString)
+            let alertController = UIAlertController(title: "Free Eth", message: message, preferredStyle: UIAlertControllerStyle.alert)
+            let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler: nil)
+            let ok = UIAlertAction(title: NSLocalizedString("Continue", comment: ""), style: .default) { _ in
                 guard let url = URL(string: urlString) else { return }
                 UIApplication.shared.openURL(url)
             }
@@ -285,8 +288,8 @@ Retriable {
             alertController.addAction(ok)
             self.present(alertController, animated: true, completion: nil)
         default:
-            let alertController = UIAlertController(title: "You can not do it", message: "You are on the wrong network now. Please change the network to rinkeby or ropsten to get test Ether.", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            let alertController = UIAlertController(title: NSLocalizedString("YouCannotDoit", comment: ""), message: NSLocalizedString("You are on the wrong network. Please change your network to Rinkeby or Ropsten to get test Ether.", comment: ""), preferredStyle: .alert)
+            let ok = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
             alertController.addAction(ok)
             present(alertController, animated: true, completion: nil)
             
@@ -370,7 +373,7 @@ Retriable {
                 let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
                 self.amountLabel.text = formattedAmount
                 let conversionRate = self.conversionService.currentConversionRate(for: self.tokensService.selectedERC20Token().symbol.uppercased())
-                let convertedAmount = conversionRate == 0.0 ? "No data from CryptoCompare" : "$\(conversionRate * Double(formattedAmount!)!) at the rate of CryptoCompare"
+                let convertedAmount = conversionRate == 0.0 ? NSLocalizedString("No data from CryptoCompare", comment: "") : String(format: NSLocalizedString("$%f at the rate of CryptoCompare", comment: ""), conversionRate * Double(formattedAmount!)!)
                 self.amountInDollarsLabel.text = convertedAmount
             case .Error(let error):
                 print("\(error)")

@@ -59,7 +59,7 @@ class NetworksViewController: UIViewController {
     func configure() {
         tableView.dataSource = self
         tableView.delegate = self
-        navigationItem.title = "Connection"
+        navigationItem.title = NSLocalizedString("Connection", comment: "Connection")
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNetworkTapped(_:)))
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
@@ -74,4 +74,6 @@ class NetworksViewController: UIViewController {
     }
     
 }
+
+
 

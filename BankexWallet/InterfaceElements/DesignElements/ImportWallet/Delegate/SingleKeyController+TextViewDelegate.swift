@@ -15,10 +15,16 @@ extension SingleKeyWalletController: UITextViewDelegate {
         return true
     }
     
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if textView.text == "Enter your private key" {
+            textView.moveCursorToStart()
+        }
+    }
+    
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         guard textView == privateKeyTextView else { return  }
-        guard textView.text == "Enter your private key" else { return  }
+        guard textView.text == NSLocalizedString("Enter your private key", comment: "") else { return  }
         privateKeyTextView.moveCursorToStart()
     }
     
@@ -26,7 +32,7 @@ extension SingleKeyWalletController: UITextViewDelegate {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 {
             state = .available
-            if textView == privateKeyTextView && textView.text == "Enter your private key" {
+            if textView == privateKeyTextView && textView.text == NSLocalizedString("Enter your private key", comment: "") {
                 if text.utf16.count == 0 {
                     return false
                 }
@@ -35,7 +41,7 @@ extension SingleKeyWalletController: UITextViewDelegate {
             return true
         }else {
             state = .notAvailable
-            textView.applyPlaceHolderText(with: "Enter your private key")
+            textView.applyPlaceHolderText(with: NSLocalizedString("Enter your private key", comment: ""))
             privateKeyTextView.moveCursorToStart()
             return false
         }

@@ -86,6 +86,7 @@ class TransactionsService {
                             newTask.to = newTask.to?.lowercased()
                             newTask.from = newTask.from?.lowercased()
                             newTask.networkId = self.networkId
+                            newTask.amount = newTask.amount!.stripZeros()
                             save()
                         } else {
                             let newTask: SendEthTransaction = try context.new()
@@ -95,7 +96,7 @@ class TransactionsService {
                             newTask.from = from
                             newTask.trHash = hash
                             newTask.date = date
-                            newTask.amount = Web3.Utils.formatToEthereumUnits(value)!
+                            newTask.amount = Web3.Utils.formatToEthereumUnits(value)!.stripZeros()
                             newTask.keywallet = selectedKey
                             newTask.token = selectedToken
                             newTask.networkId = self.networkId
@@ -115,6 +116,24 @@ class TransactionsService {
             }
         }
         dataTask.resume()
+    }
+    
+    func stripZeros(_ string: String) -> String {
+        if !string.contains(".") {return string}
+        var end = string.index(string.endIndex, offsetBy: -1)
+        
+        print(string[end])
+        while string[end] == "0" {
+            end = string.index(before: end)
+        }
+        if string[end] == "." {
+            if string[string.index(before: end)] == "0" {
+                return "0.0"
+            } else {
+                return string[...end] + "0"
+            }
+        }
+        return String(string[...end])
     }
 
 }

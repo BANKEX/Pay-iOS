@@ -9,7 +9,7 @@
 import UIKit
 import SugarRecord
 protocol RecipientsAddressesService {
-    func store(address: String, with firstName: String,lastName:String, isEditing: Bool, completionHandler: @escaping (Error?) -> Void)
+    func store(address: String, with firstName: String, lastName:String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void)
     func getAllStoredAddresses() -> [FavoriteModel]?
     func clearAllSavedAddresses()
     func delete(with address: String, completionHandler: (() -> Void)?)
@@ -32,7 +32,7 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         return false
     }
     
-    func store(address: String, with firstName: String, lastName:String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void) {
+    func store(address: String, with firstName: String, lastName: String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void) {
         do {
             try db.operation({ (context, save) in
                 
@@ -99,6 +99,24 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
             })
             
             return sortedAddresses
+        } catch {
+            print(error)
+        }
+        return nil
+    }
+    
+    func getAddressByAddress(_ address:String) -> FavoriteModel? {
+        
+        let request = FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "address == %@", address))
+        
+        do {
+            let addresses = try db.fetch(request)
+            guard let firstAddress = addresses.first else { return nil }
+                let fName = firstAddress.firstName  ?? ""
+                let lName = firstAddress.lastName ?? ""
+                let address = firstAddress.address ?? ""
+                let noteString = firstAddress.note
+                return FavoriteModel(firstName: fName, lastname: lName, address: address, lastUsageDate: nil, note: noteString)
         } catch {
             print(error)
         }
@@ -199,6 +217,10 @@ struct FavoriteModel {
     var address: String
     var lastUsageDate: Date?
     var note:String?
+    
+    var fullName:String {
+        return "\(firstName) \(lastname)"
+    }
 }
 
 struct NameError: LocalizedError {

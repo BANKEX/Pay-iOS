@@ -9,7 +9,7 @@
 import XCTest
 
 class AddAndSearchNewTokenTests: XCTestCase {
-        
+    
     override func setUp() {
         super.setUp()
         continueAfterFailure = false

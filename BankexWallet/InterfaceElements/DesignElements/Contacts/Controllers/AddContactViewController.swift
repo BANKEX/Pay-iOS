@@ -36,7 +36,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     }
     var headerView:UIView!
     let heightOfRow:CGFloat = 47.0
-    var doneButton:UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(done))
+    var doneButton:UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self, action: #selector(done))
     var service = RecipientsAddressesServiceImplementation()
     var radius:CGFloat = 43.0
     var circleView:UIView = {
@@ -64,8 +64,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         setupTextFields()
         setupNavBar()
         setupHeader()        
-        
-        
+        setupPasteButton()
     }
     
     
@@ -75,10 +74,24 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         state = .noAvailable
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        clearInfo()
+        state = .noAvailable
+        //self.dismiss(animated: false, completion: nil)
+        //self.removeFromParentViewController()
+    }
+    
+    
+    func clearInfo() {
+        [firstNameTextField,lastNameTextField,addressTextField].forEach { tf in tf?.text = "" }
+    }
+    
     func setupNavBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationItem.title = "New Contact"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(back))
+        navigationItem.title = NSLocalizedString("NewContact", comment: "")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: ""), style: .plain, target: self, action: #selector(back))
+        doneButton.accessibilityLabel = "Done"
         navigationItem.rightBarButtonItem = doneButton
     }
     
@@ -98,6 +111,16 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         tableView.tableHeaderView = headerView
     }
     
+    func setupPasteButton() {
+        pasteButton.layer.borderColor = WalletColors.blueText.color().cgColor
+        pasteButton.layer.borderWidth = 2.0
+        pasteButton.accessibilityLabel = "pasteBtn"
+        pasteButton.layer.cornerRadius = 15.0
+        pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
+        pasteButton.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
+        pasteButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
+    }
+    
     func addWordLabel() {
         wordLabel.frame.origin = CGPoint(x: 19.0, y: 15.0)
         wordLabel.frame.size = CGSize(width: 48.0, height: 57.0)
@@ -109,6 +132,13 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     }
     
     @objc func done() {
+        if firstNameTextField.text == nil && lastNameTextField.text != nil && lastNameTextField.text != "" {
+            firstNameTextField.text = ""
+        }
+        if lastNameTextField.text == nil && firstNameTextField.text != nil && firstNameTextField.text != "" {
+            lastNameTextField.text = ""
+        }
+    
         guard let firstName = firstNameTextField?.text,let lastName = lastNameTextField?.text,let address = addressTextField?.text else { return }
         guard let ethAddress = EthereumAddress(addressTextField?.text ?? "") else {
             showAlert(with: "Incorrect address", message: "Please enter valid address")
@@ -198,20 +228,39 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         let futureString = currentString.replacingCharacters(in: range, with: string) as String
         switch textField {
         case firstNameTextField:
-            if !futureString.isEmpty && !(lastNameTextField?.text?.isEmpty ?? true) && !(addressTextField?.text?.isEmpty ?? true) {
+            
+            if (!futureString.isEmpty || !(lastNameTextField?.text?.isEmpty ?? true)) && !(addressTextField?.text?.isEmpty ?? true) {
                 state = .available
             }else {
                 state = .noAvailable
             }
+            
+            if !futureString.isEmpty && (lastNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = futureString.prefix(1).uppercased()
+            } else if futureString.isEmpty && (lastNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = ""
+            } else if futureString.isEmpty && !(lastNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = lastNameTextField?.text?.prefix(1).uppercased()
+            }
+            
         case lastNameTextField:
-            if !futureString.isEmpty && !(firstNameTextField?.text?.isEmpty ?? true) && !(addressTextField?.text?.isEmpty ?? true) {
+            
+            if (!futureString.isEmpty || !(firstNameTextField?.text?.isEmpty ?? true)) && !(addressTextField?.text?.isEmpty ?? true) {
                 state = .available
             }else {
                 state = .noAvailable
             }
-            wordLabel.text = futureString.prefix(1).uppercased()
+            
+            if !futureString.isEmpty {
+                wordLabel.text = futureString.prefix(1).uppercased()
+            } else if futureString.isEmpty && (firstNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = ""
+            } else if futureString.isEmpty && !(firstNameTextField?.text?.isEmpty ?? true) {
+                wordLabel.text = firstNameTextField?.text?.prefix(1).uppercased()
+            }
+            
         case addressTextField:
-            if !futureString.isEmpty && !(firstNameTextField?.text?.isEmpty ?? true) && !(lastNameTextField?.text?.isEmpty ?? true) {
+            if !futureString.isEmpty && (!(firstNameTextField?.text?.isEmpty ?? true) || !(lastNameTextField?.text?.isEmpty ?? true)) {
                 state = .available
             }else {
                 state = .noAvailable

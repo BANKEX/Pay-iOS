@@ -32,6 +32,8 @@ protocol GlobalWalletsService {
     func delete(address: String)
     func selectedWallet() -> KeyWalletModel?
     func selectedWalletFromDB() -> KeyWalletModel?
+    func keystoreManager(forAddress address: String) -> KeystoreManager
+    func walletFromDB(forAddress address: String) -> KeyWalletModel?
 }
 
 extension GlobalWalletsService {
@@ -45,6 +47,22 @@ extension GlobalWalletsService {
         } else {
             return KeystoreManager([EthereumKeystoreV3(data)!])
         }
+    }
+    
+    func keystoreManager(forAddress address: String) -> KeystoreManager {
+        guard let wallet = walletFromDB(forAddress: address), let data = wallet.data else {
+            return KeystoreManager.defaultManager!
+        }
+        if wallet.isHD {
+            return KeystoreManager([BIP32Keystore(data)!])
+        } else {
+            return KeystoreManager([EthereumKeystoreV3(data)!])
+        }
+    }
+    
+    func walletFromDB(forAddress address: String) -> KeyWalletModel? {
+        let key = try! DBStorage.db.fetch(FetchRequest<KeyWallet>().filtered(with: NSPredicate(format: "address == %@", address))).first
+        return KeyWalletModel.from(wallet: key)
     }
 
     func selectedWalletFromDB() -> KeyWalletModel? {

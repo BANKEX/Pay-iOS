@@ -110,7 +110,7 @@ class SendEthServiceImplementation: SendEthService {
                     newTask.to = transactionModel.to.lowercased()
                     newTask.from = transactionModel.from.lowercased()
                     newTask.date = transactionModel.date as Date
-                    newTask.amount = transactionModel.amount
+                    newTask.amount = transactionModel.amount.stripZeros()
                     newTask.keywallet = selectedKey
                     newTask.token = selectedToken
                     newTask.networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
@@ -147,7 +147,6 @@ class SendEthServiceImplementation: SendEthService {
     }
     
     
-    // TODO: They're not optional! 
     func getAllTransactions() -> [ETHTransactionModel] {
         guard let address = self.keysService.selectedAddress() else { return [] }
         let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)

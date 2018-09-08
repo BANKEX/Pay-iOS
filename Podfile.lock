@@ -3,18 +3,110 @@ PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - CryptoSwift (0.10.0)
+  - Firebase/Core (5.6.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.1.1)
+  - Firebase/CoreOnly (5.6.0):
+    - FirebaseCore (= 5.1.1)
+  - Firebase/Crash (5.6.0):
+    - Firebase/Core
+    - FirebaseCrash (= 3.1.1)
+  - Firebase/DynamicLinks (5.6.0):
+    - Firebase/Core
+    - FirebaseDynamicLinks (= 3.0.2)
+  - Firebase/Messaging (5.6.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.1.0)
+  - Firebase/RemoteConfig (5.6.0):
+    - Firebase/Core
+    - FirebaseRemoteConfig (= 3.0.1)
+  - FirebaseABTesting (2.0.0):
+    - FirebaseCore (~> 5.0)
+    - Protobuf (~> 3.5)
+  - FirebaseAnalytics (5.1.1):
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.2)
+    - GoogleAppMeasurement (~> 5.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2.0)
+    - GoogleUtilities/MethodSwizzler (~> 5.2.0)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (5.1.1):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseCrash (3.1.1):
+    - FirebaseAnalytics (~> 5.1)
+    - FirebaseInstanceID (~> 3.2)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - Protobuf (~> 3.5)
+  - FirebaseDynamicLinks (3.0.2):
+    - FirebaseAnalytics (~> 5.1)
+  - FirebaseInstanceID (3.2.1):
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.2)
+  - FirebaseMessaging (3.1.0):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
+    - GoogleUtilities/Reachability (~> 5.2)
+    - Protobuf (~> 3.1)
+  - FirebaseRemoteConfig (3.0.1):
+    - FirebaseABTesting (~> 2.0)
+    - FirebaseAnalytics (~> 5.1)
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - Protobuf (~> 3.5)
+  - GoogleAppMeasurement (5.1.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2.0)
+    - GoogleUtilities/MethodSwizzler (~> 5.2.0)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - GoogleToolboxForMac/Logger (2.1.4):
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+  - GoogleUtilities/AppDelegateSwizzler (5.2.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.2.2)
+  - GoogleUtilities/Logger (5.2.2):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.2.2):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.2.2):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.2.2)"
+  - GoogleUtilities/Reachability (5.2.2):
+    - GoogleUtilities/Logger
+  - KIF (3.7.4):
+    - KIF/Core (= 3.7.4)
+  - KIF/Core (3.7.4)
   - libsodium (1.0.12)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
   - Popover (1.2.0)
-  - PromiseKit (6.3.4):
-    - PromiseKit/CorePromise (= 6.3.4)
-    - PromiseKit/Foundation (= 6.3.4)
-    - PromiseKit/UIKit (= 6.3.4)
-  - PromiseKit/CorePromise (6.3.4)
-  - PromiseKit/Foundation (6.3.4):
+  - PromiseKit (6.3.5):
+    - PromiseKit/CorePromise (= 6.3.5)
+    - PromiseKit/Foundation (= 6.3.5)
+    - PromiseKit/UIKit (= 6.3.5)
+  - PromiseKit/CorePromise (6.3.5)
+  - PromiseKit/Foundation (6.3.5):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.3.4):
+  - PromiseKit/UIKit (6.3.5):
     - PromiseKit/CorePromise
+  - Protobuf (3.6.1)
   - QRCodeReader.swift (8.1.1)
+  - ReachabilitySwift (4.1.0)
   - Result (3.0.0)
   - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
@@ -30,8 +122,15 @@ PODS:
 
 DEPENDENCIES:
   - Amplitude-iOS (~> 4.0.4)
+  - Firebase/Core
+  - Firebase/Crash
+  - Firebase/DynamicLinks
+  - Firebase/Messaging
+  - Firebase/RemoteConfig
+  - KIF
   - Popover
   - QRCodeReader.swift (~> 8.1.1)
+  - ReachabilitySwift
   - SugarRecord/CoreData (<= 3.1)
   - web3swift (<= 1.1.1)
 
@@ -40,10 +139,26 @@ SPEC REPOS:
     - Amplitude-iOS
     - BigInt
     - CryptoSwift
+    - Firebase
+    - FirebaseABTesting
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseCrash
+    - FirebaseDynamicLinks
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - FirebaseRemoteConfig
+    - GoogleAppMeasurement
+    - GoogleToolboxForMac
+    - GoogleUtilities
+    - KIF
     - libsodium
+    - nanopb
     - Popover
     - PromiseKit
+    - Protobuf
     - QRCodeReader.swift
+    - ReachabilitySwift
     - Result
     - secp256k1_ios
     - SipHash
@@ -54,16 +169,32 @@ SPEC CHECKSUMS:
   Amplitude-iOS: 2ad4d7270c99186236c1272a3a9425463b1ae1a7
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
+  Firebase: 75ea9e232eefa158c1049028030b8f661a2ccb62
+  FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
+  FirebaseAnalytics: 993577e91157feb40945abedd6ab346d8a4b6ac8
+  FirebaseCore: cb9ee75e0894def766167c95a4d5a14b1c138269
+  FirebaseCrash: fd373fbf5f9d1e235a984f2c7e446a5f26b968e8
+  FirebaseDynamicLinks: eb41fb20677b0a6e944b47f45cbe59f388e9e5cc
+  FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
+  FirebaseMessaging: f67b3719f520ee200da0e20ce577fe2bce0c01d0
+  FirebaseRemoteConfig: 7b6d675dfb11f0e0e638caee00908b06af150d56
+  GoogleAppMeasurement: f7507b39b70ad0bd80b3d81518b2f43868974307
+  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
+  GoogleUtilities: 06b66f9567769a7958db20a92f0128b2843e49d5
+  KIF: f3d01c109ee9d1cfe6b0f2bb2aa278e807e971e2
   libsodium: 9a8faa5ef2fa0d2d57bd7f7d79bf8fb7c1a9f0ea
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Popover: 28c1ac8e937ab2b3965bd2da7dd18324357abc41
-  PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
+  PromiseKit: 32c36425387e9cfc7f1206f27bfd906d0b53c0d6
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   QRCodeReader.swift: b164a681887de276d405ff02bce854d82cd6360b
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SugarRecord: 8bec9d426faf25769483d6814b0c7325c4f156ea
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 089855e604615a3fbdf0e04ab4830fdc7bed82fc
+PODFILE CHECKSUM: 6172f10cfeb03f3133484ea0de6c5d17120fbb4d
 
 COCOAPODS: 1.5.3

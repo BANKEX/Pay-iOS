@@ -32,8 +32,10 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     }
     
     func navigationBarSetup() {
-        navigationItem.title = "Creating Wallet"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
+        navigationItem.title = NSLocalizedString("Creating Wallet", comment: "")
+        let editBtn = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
+        editBtn.accessibilityLabel = "EditBtn"
+        navigationItem.rightBarButtonItem = editBtn
         navigationItem.setHidesBackButton(true, animated: false)
     }
     
@@ -55,8 +57,8 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     }
     
     func showAlert() {
-        let alert = UIAlertController(title: "Error", message: "Could not rename the wallet", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Could not rename the wallet", comment: ""), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }

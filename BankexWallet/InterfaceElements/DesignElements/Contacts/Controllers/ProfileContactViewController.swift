@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MobileCoreServices
+import CoreSpotlight
 
 class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UITextViewDelegate {
     
@@ -17,7 +19,6 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     enum State {
         case Editable,notEditable
     }
-    
     
     lazy var nameContactLabel:UILabel = {
         let label = UILabel()
@@ -51,33 +52,37 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
     }()
     lazy var alertViewController:UIAlertController = {
         let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let delButton = UIAlertAction(title:"Delete", style: .destructive) { _ in
+        let delButton = UIAlertAction(title:NSLocalizedString("Delete", comment: ""), style: .destructive) { _ in
             guard let address = self.addressTextField?.text, self.service.contains(address: address) else { return }
             self.service.delete(with: address) {
-                self.navigationController?.popViewController(animated: true)
+                self.searchManager.deindex()
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
         alertVC.addAction(delButton)
-        alertVC.addAction(UIAlertAction(title: "Cancel", style: .default))
+        alertVC.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default))
         return alertVC
     }()
     let service = RecipientsAddressesServiceImplementation()
     var selectedNote:String!
     var selectedContact:FavoriteModel!
+    var searchManager:SearchManager!
     let heightNameLabel:CGFloat = 36.0
     let heightHeader:CGFloat = 160.0
     let heightCircle:CGFloat = 86.0
-    let placeholderString = "Notes"
+    let placeholderString = NSLocalizedString("Notes", comment: "")
     var state:State = .notEditable {
         didSet{
             if state == .notEditable {
                 unselectKeyboard()
-                navigationItem.rightBarButtonItem?.title = "Edit"
+                navigationItem.rightBarButtonItem?.title = NSLocalizedString("Edit", comment: "")
                 navigationItem.hidesBackButton = false
                 navigationItem.setHidesBackButton(false, animated: true)
             }else {
                 addressTextField?.becomeFirstResponder()
-                navigationItem.rightBarButtonItem?.title = "Save"
+                navigationItem.rightBarButtonItem?.title = NSLocalizedString("Save", comment: "")
                 navigationItem.setHidesBackButton(true, animated: true)
             }
         }
@@ -93,6 +98,7 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         configureTableView()
         configureNavBar()
         configureTextView()
+        prepareUserActivity()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,10 +134,26 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         noteTextView.autocorrectionType = .no
     }
     
+    func addBackButton() {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "BackArrow"), for: .normal)
+        button.setTitle(NSLocalizedString("ContactsBack", comment: ""), for: .normal)
+        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     func configureNavBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(switchEditState))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Edit", comment: ""), style: .plain, target: self, action: #selector(switchEditState))
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.barTintColor = WalletColors.headerView.color()
+        addBackButton()
     }
     
     func configureTableView() {
@@ -139,6 +161,14 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView(frame: .zero)
         createHeaderView()
+    }
+    
+    func prepareUserActivity() {
+        searchManager = SearchManager(contact: selectedContact)
+        let activity = selectedContact.userActivity
+        activity.isEligibleForSearch = true
+        self.userActivity = activity
+        searchManager.index()
     }
     
     func createHeaderView() {
@@ -262,6 +292,10 @@ class ProfileContactViewController: UITableViewController,UITextFieldDelegate,UI
             noteTextView.moveCursorToStart()
             return false
         }
+    }
+    
+    override func updateUserActivityState(_ activity: NSUserActivity) {
+        activity.addUserInfoEntries(from: selectedContact.userActivityUserInfo)
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {

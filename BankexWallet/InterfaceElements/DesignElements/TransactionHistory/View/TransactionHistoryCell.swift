@@ -39,12 +39,20 @@ class TransactionHistoryCell: UITableViewCell {
         let isSend = SingleKeyServiceImplementation().selectedAddress()?.lowercased() == trans.from
         if trans.isPending {
             statusImageView.image = #imageLiteral(resourceName: "Confirming")
-            transactionTypeLabel.text = "Confirming"
+            transactionTypeLabel.text = NSLocalizedString("Confirming", comment: "")
         } else {
             statusImageView.image = isSend ? #imageLiteral(resourceName: "Sent") : #imageLiteral(resourceName: "Received")
-            transactionTypeLabel.text = isSend ? "Sent" : "Received"
+            transactionTypeLabel.text = isSend ? NSLocalizedString("Sent", comment: "") : NSLocalizedString("Received", comment: "")
         }
-        addressLabel.text = isSend ? "To: \(getFormattedAddress(trans.to))" : "From: \(getFormattedAddress(trans.from))"
+        let toLbl = String(format: NSLocalizedString("To: %@", comment: ""), getFormattedAddress(trans.to))
+        let fromLbl = String(format: NSLocalizedString("From: %@", comment: ""), getFormattedAddress(trans.from))
+        addressLabel.text = isSend ? toLbl : fromLbl
+        if trans.amount.first == "." {
+            var amount = trans.amount
+            amount.insert("0", at:trans.amount.startIndex)
+            amountLabel.text = (isSend ? "- " : "+ ") + amount + " " + trans.token.symbol.uppercased()
+            return
+        }
         amountLabel.text = (isSend ? "- " : "+ ") + trans.amount + " " + trans.token.symbol.uppercased()
         transactionTime.text = forMain ? dateFormatter.string(from: trans.date) : timeFormatter.string(from: trans.date)
     }

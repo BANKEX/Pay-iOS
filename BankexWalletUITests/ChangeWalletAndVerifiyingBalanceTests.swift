@@ -9,7 +9,7 @@
 import XCTest
 
 class ChangeWalletAndVerifiyingBalanceTests: XCTestCase {
-        
+    
     override func setUp() {
         super.setUp()
         

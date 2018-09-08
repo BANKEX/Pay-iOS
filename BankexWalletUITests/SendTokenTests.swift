@@ -2,14 +2,14 @@
 //  SendTokenTests.swift
 //  BankexWalletUITests
 //
-//  Created by Георгий Фесенко on 30.05.2018.
+//  Created by Vladislav on 27.08.2018.
 //  Copyright © 2018 Alexander Vlasov. All rights reserved.
 //
 
 import XCTest
 
 class SendTokenTests: XCTestCase {
-        
+    
     override func setUp() {
         super.setUp()
         
@@ -64,7 +64,7 @@ class SendTokenTests: XCTestCase {
         //Importing second wallet
         app.tabBars.buttons["Settings"].tap()
         
-
+        
         app.tables.cells["WalletsListCell"].children(matching: .other).element(boundBy: 0).tap()
         
         
@@ -101,7 +101,7 @@ class SendTokenTests: XCTestCase {
         let passTxtField = elementsQuery.secureTextFields["PasswordTextField"]
         passTxtField.tap()
         passTxtField.typeText("123456")
-
+        
         nextButton.tap()
         let button = app.buttons["NextButtonConfirm"]
         let buttonExists = NSPredicate(format: "exists == 1")

@@ -19,6 +19,7 @@ extension WalletsViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: WalletCell.identifier, for: indexPath) as! WalletCell
+        cell.delegate = self
         switch indexPath.section {
         case WalletsSections.CurrentWallet.rawValue:
             cell.configure(wallet: selectedWallet!)
@@ -31,7 +32,7 @@ extension WalletsViewController:UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == WalletsSections.RestWallets.rawValue ? "CHOOSE A WALLET..." : "CURRENT WALLET"
+        return section == WalletsSections.RestWallets.rawValue ? NSLocalizedString("ChooseWallet", comment: "") : NSLocalizedString("CurrentWallet", comment: "")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

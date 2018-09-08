@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import web3swift
 
 class BackupPassphraseViewController: UIViewController {
     
@@ -16,6 +17,8 @@ class BackupPassphraseViewController: UIViewController {
     
     let service: HDWalletService = HDWalletServiceImplementation()
     var passphrase: String?
+    var navTitle: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         passphrase = service.generateMnemonics()
@@ -29,8 +32,8 @@ class BackupPassphraseViewController: UIViewController {
         navigationBarSetup()
         passphraseCopiedView.alpha = 0.0
         if passphrase != UIPasteboard.general.string {
-            nextButton.isEnabled = false
-            nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
+            nextButton?.isEnabled = false
+            nextButton?.backgroundColor = WalletColors.disabledGreyButton.color()
         }
         
     }
@@ -40,18 +43,18 @@ class BackupPassphraseViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5, animations: {
             self.passphraseCopiedView.alpha = 1.0
-            self.nextButton.backgroundColor = WalletColors.blueText.color()
+            self.nextButton?.backgroundColor = WalletColors.blueText.color()
         }) { (_) in
             UIView.animate(withDuration: 0.5, animations: {
                 self.passphraseCopiedView.alpha = 0.0
             }, completion: nil)
         }
         
-        nextButton.isEnabled = true
+        nextButton?.isEnabled = true
     }
     
     func navigationBarSetup() {
-        navigationItem.title = "Creating Wallet"
+        navigationItem.title = navTitle ?? NSLocalizedString("Creating Wallet", comment: "")
         navigationController?.navigationBar.isHidden = false
     }
     
