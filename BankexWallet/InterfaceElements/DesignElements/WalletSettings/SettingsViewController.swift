@@ -36,6 +36,7 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
             return max
         }()
     }
+    
     let managerReferences = ManagerReferences()
     let walletService = SingleKeyServiceImplementation()
     let networkService = NetworksServiceImplementation()

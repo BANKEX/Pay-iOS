@@ -81,6 +81,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        editButton.accessibilityLabel = "edit"
         title = NSLocalizedString("Wallet", comment: "")
         NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
             DispatchQueue.main.async {
@@ -259,6 +260,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
             headerButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
             headerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             headerButton.titleLabel?.textAlignment = .right
+            headerButton.accessibilityLabel = "AddNewTokenBtn"
             headerView.addSubview(headerButton)
         }
         return headerView

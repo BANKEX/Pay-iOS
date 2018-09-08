@@ -123,6 +123,7 @@ Retriable {
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
         button.setTitle("ETH", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.accessibilityLabel = "tokenArrowDown"
         button.setTitleColor(WalletColors.blueText.color(), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
