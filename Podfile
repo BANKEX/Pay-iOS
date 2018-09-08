@@ -19,7 +19,7 @@ target 'BankexWallet' do
 
   target 'BankexWalletTests' do
     inherit! :search_paths
-    # Pods for testing
+    pod 'KIF', :configurations => ['Debug']
   end
 
   target 'BankexWalletUITests' do

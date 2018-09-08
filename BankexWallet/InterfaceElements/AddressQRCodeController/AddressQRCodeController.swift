@@ -51,6 +51,7 @@ class AddressQRCodeController: UIViewController {
         //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        button.accessibilityLabel = "Back"
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
