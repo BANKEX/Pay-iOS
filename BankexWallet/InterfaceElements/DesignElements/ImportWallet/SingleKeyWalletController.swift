@@ -9,8 +9,9 @@
 import UIKit
 import QRCodeReader
 import Amplitude_iOS
+import web3swift
 
-class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol {
+class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol,QRReaderVCDelegate {
     
     
     
@@ -35,14 +36,6 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     let service = SingleKeyServiceImplementation()
     let router = WalletCreationTypeRouterImplementation()
-    
-    lazy var readerVC:QRCodeReaderViewController = {
-        let builder = QRCodeReaderViewControllerBuilder {
-            $0.reader = QRCodeReader(metadataObjectTypes:[.qr],captureDevicePosition: .back)
-        }
-        return QRCodeReaderViewController(builder: builder)
-        builder.showSwitchCameraButton = false
-    }()
     
     var state:State = .notAvailable {
         didSet {
@@ -167,9 +160,9 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     
     
     @IBAction func scanDidTapped(_ scan: UIButton) {
-        readerVC.delegate = self
-        self.readerVC.modalPresentationStyle = .formSheet
-        self.present(readerVC, animated: true)
+        let qrReaderVC = QRReaderVC()
+        qrReaderVC.delegate = self
+        self.present(qrReaderVC, animated: true)
     }
     
     @IBAction func bufferDidTapped() {
@@ -180,6 +173,17 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
         }
     }
     
+    func didScan(_ result: String) {
+        privateKeyTextView.applyNotHolder()
+        
+        if let parsed = Web3.EIP67CodeParser.parse(result) {
+            privateKeyTextView.text = parsed.address.address
+        }else {
+            privateKeyTextView.text = result
+        }
+        privateKeyTextView.becomeFirstResponder()
+        state = .available
+    }
     
 }
 

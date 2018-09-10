@@ -3586,123 +3586,120 @@ minutes, please wait ...</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AttentionIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ct0-Rf-GPH">
-                                <rect key="frame" x="112.5" y="114" width="150" height="80"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeM-bQ-MYE">
-                                <rect key="frame" x="30" y="413.5" width="315" height="17"/>
+                                <rect key="frame" x="30" y="426" width="315" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-ez-tzX">
-                                <rect key="frame" x="40" y="505.5" width="295" height="47.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vs1-5s-t3n">
+                                <rect key="frame" x="0.0" y="64" width="375" height="247"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase copied to clipboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79Q-LU-lZQ">
-                                        <rect key="frame" x="53" y="32" width="190.5" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <nil key="textColor"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="gw9-wv-ed0">
+                                        <rect key="frame" x="172.5" y="22" width="30" height="120"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="3WF-Xg-Id1">
+                                        <rect key="frame" x="15" y="186" width="345" height="36"/>
+                                        <string key="text">Please copy your passphrase to a safe place
+These words are the only way to restore your wallet</string>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CopiedIcon" translatesAutoresizingMaskIntoConstraints="NO" id="3YO-89-Bcf">
-                                        <rect key="frame" x="135.5" y="0.0" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="AED-Ne-hiC"/>
-                                            <constraint firstAttribute="height" constant="24" id="RXb-qP-S1c"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="3YO-89-Bcf" firstAttribute="centerX" secondItem="bcL-ez-tzX" secondAttribute="centerX" id="8ya-8n-QMH"/>
-                                    <constraint firstItem="79Q-LU-lZQ" firstAttribute="centerX" secondItem="bcL-ez-tzX" secondAttribute="centerX" id="LIt-9u-GcG"/>
-                                    <constraint firstItem="79Q-LU-lZQ" firstAttribute="top" secondItem="3YO-89-Bcf" secondAttribute="bottom" constant="8" id="QNt-Ep-osa"/>
-                                    <constraint firstItem="3YO-89-Bcf" firstAttribute="top" secondItem="bcL-ez-tzX" secondAttribute="top" id="aJ5-ma-qZe"/>
-                                    <constraint firstAttribute="bottom" secondItem="79Q-LU-lZQ" secondAttribute="bottom" id="h89-n8-oIB"/>
+                                    <constraint firstItem="3WF-Xg-Id1" firstAttribute="leading" secondItem="Vs1-5s-t3n" secondAttribute="leading" constant="15" id="JZR-i7-Veb"/>
+                                    <constraint firstItem="gw9-wv-ed0" firstAttribute="centerX" secondItem="Vs1-5s-t3n" secondAttribute="centerX" id="WaW-TZ-Lm1"/>
+                                    <constraint firstAttribute="bottom" secondItem="3WF-Xg-Id1" secondAttribute="bottom" constant="25" id="Wuj-HI-MG9"/>
+                                    <constraint firstAttribute="trailing" secondItem="3WF-Xg-Id1" secondAttribute="trailing" constant="15" id="aum-p9-99e"/>
+                                    <constraint firstItem="gw9-wv-ed0" firstAttribute="top" secondItem="Vs1-5s-t3n" secondAttribute="top" constant="22" id="zH5-O2-FSa"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="oIl-NG-7h4">
-                                <rect key="frame" x="20" y="577" width="335" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qm4-Eu-4In">
+                                <rect key="frame" x="24" y="569" width="327" height="50"/>
+                                <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="nextCreate"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="pnU-Fl-U4y" kind="show" identifier="showRepeatPassphrase" id="OUn-5B-9wN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbA-t0-Y4q">
+                                <rect key="frame" x="24" y="503" width="327" height="50"/>
+                                <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="copy"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="INq-yt-5dZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Copy">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="copyButtonTapped:" destination="Ptd-7b-8Z1" eventType="touchUpInside" id="Jba-tF-GoL"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mCT-H5-GtC">
+                                <rect key="frame" x="0.0" y="609" width="375" height="58"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbA-t0-Y4q">
-                                        <rect key="frame" x="0.0" y="0.0" width="155" height="50"/>
-                                        <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <accessibility key="accessibilityConfiguration" label="copy"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="INq-yt-5dZ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Copy">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="copyButtonTapped:" destination="Ptd-7b-8Z1" eventType="touchUpInside" id="Jba-tF-GoL"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qm4-Eu-4In">
-                                        <rect key="frame" x="180" y="0.0" width="155" height="50"/>
-                                        <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <accessibility key="accessibilityConfiguration" label="nextCreate"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Next">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="pnU-Fl-U4y" kind="show" identifier="showRepeatPassphrase" id="OUn-5B-9wN"/>
-                                        </connections>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase copied to clipboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSf-E9-YYW">
+                                        <rect key="frame" x="0.0" y="20" width="375" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please copy your passphrase to a safe place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Bhi-Ek-GeA">
-                                <rect key="frame" x="40" y="208" width="295" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These words are the only way to restore your wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="eal-iD-a4q">
-                                <rect key="frame" x="20" y="225" width="335" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="PSf-E9-YYW" firstAttribute="leading" secondItem="mCT-H5-GtC" secondAttribute="leading" id="NQS-bn-DNo"/>
+                                    <constraint firstAttribute="trailing" secondItem="PSf-E9-YYW" secondAttribute="trailing" id="W56-hl-gNO"/>
+                                    <constraint firstItem="PSf-E9-YYW" firstAttribute="centerY" secondItem="mCT-H5-GtC" secondAttribute="centerY" id="cle-JY-s3c"/>
+                                    <constraint firstAttribute="height" constant="58" id="i9w-1T-mgk"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ct0-Rf-GPH" firstAttribute="top" secondItem="1Wu-Qq-hAz" secondAttribute="top" constant="50" id="5YK-zD-0Eh"/>
-                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="eal-iD-a4q" secondAttribute="trailing" constant="20" id="DN3-J3-w3F"/>
+                            <constraint firstItem="Vs1-5s-t3n" firstAttribute="top" secondItem="1Wu-Qq-hAz" secondAttribute="top" id="7qA-fD-D1h"/>
+                            <constraint firstItem="Qm4-Eu-4In" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="24" id="9Hf-mh-6sI"/>
+                            <constraint firstItem="Vs1-5s-t3n" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" id="BBV-UV-wRy"/>
                             <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="AeM-bQ-MYE" secondAttribute="trailing" constant="30" id="EQu-zq-QBJ"/>
-                            <constraint firstItem="Bhi-Ek-GeA" firstAttribute="top" secondItem="ct0-Rf-GPH" secondAttribute="bottom" constant="14" id="Fdh-t5-P1a"/>
-                            <constraint firstItem="bcL-ez-tzX" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="40" id="Hym-Oj-C33"/>
-                            <constraint firstItem="bcL-ez-tzX" firstAttribute="top" secondItem="AeM-bQ-MYE" secondAttribute="bottom" constant="75" id="Nme-vq-DLr"/>
-                            <constraint firstItem="eal-iD-a4q" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="20" id="Omv-bF-yXp"/>
-                            <constraint firstItem="ct0-Rf-GPH" firstAttribute="centerX" secondItem="gX9-cb-DsA" secondAttribute="centerX" id="XMB-EC-ypA"/>
-                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="Bhi-Ek-GeA" secondAttribute="trailing" constant="40" id="bc8-zc-UYr"/>
-                            <constraint firstItem="Bhi-Ek-GeA" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="40" id="d4J-IO-RyA"/>
-                            <constraint firstItem="eal-iD-a4q" firstAttribute="top" secondItem="Bhi-Ek-GeA" secondAttribute="bottom" id="dKc-zs-9Bf"/>
+                            <constraint firstItem="mCT-H5-GtC" firstAttribute="bottom" secondItem="1Wu-Qq-hAz" secondAttribute="bottom" id="Meu-wJ-UkB"/>
+                            <constraint firstItem="UbA-t0-Y4q" firstAttribute="top" secondItem="AeM-bQ-MYE" secondAttribute="bottom" constant="60" id="SH2-DI-eiW"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="bottom" secondItem="Qm4-Eu-4In" secondAttribute="bottom" constant="48" id="TD1-wd-0T8"/>
+                            <constraint firstItem="mCT-H5-GtC" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" id="XIZ-Eh-vr7"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="Qm4-Eu-4In" secondAttribute="trailing" constant="24" id="ZY0-fL-on8"/>
                             <constraint firstItem="AeM-bQ-MYE" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="30" id="dtf-MJ-Qrz"/>
-                            <constraint firstItem="ct0-Rf-GPH" firstAttribute="width" secondItem="gX9-cb-DsA" secondAttribute="width" multiplier="0.4" id="fVK-gL-kuc"/>
-                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="bottom" secondItem="oIl-NG-7h4" secondAttribute="bottom" constant="40" id="h9s-pd-wl4"/>
-                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="oIl-NG-7h4" secondAttribute="trailing" constant="20" id="kdq-OD-CYd"/>
-                            <constraint firstItem="oIl-NG-7h4" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="20" id="lN7-nF-dSN"/>
-                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="bcL-ez-tzX" secondAttribute="trailing" constant="40" id="suU-mb-lPn"/>
-                            <constraint firstItem="oIl-NG-7h4" firstAttribute="top" secondItem="bcL-ez-tzX" secondAttribute="bottom" constant="24" id="yVD-sC-TPI"/>
-                            <constraint firstItem="ct0-Rf-GPH" firstAttribute="height" secondItem="gX9-cb-DsA" secondAttribute="height" multiplier="0.12" id="yt9-FQ-e2e"/>
+                            <constraint firstItem="Qm4-Eu-4In" firstAttribute="top" secondItem="UbA-t0-Y4q" secondAttribute="bottom" constant="16" id="egN-Tq-drC"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="mCT-H5-GtC" secondAttribute="trailing" id="h9S-tH-B0a"/>
+                            <constraint firstItem="Vs1-5s-t3n" firstAttribute="height" secondItem="gX9-cb-DsA" secondAttribute="height" multiplier="1:2.7" id="m9m-Kq-QE6"/>
+                            <constraint firstItem="Qm4-Eu-4In" firstAttribute="height" secondItem="UbA-t0-Y4q" secondAttribute="height" id="pMR-0q-sl0"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="UbA-t0-Y4q" secondAttribute="trailing" constant="24" id="ptF-3P-da8"/>
+                            <constraint firstItem="UbA-t0-Y4q" firstAttribute="leading" secondItem="1Wu-Qq-hAz" secondAttribute="leading" constant="24" id="swb-i8-EdM"/>
+                            <constraint firstItem="1Wu-Qq-hAz" firstAttribute="trailing" secondItem="Vs1-5s-t3n" secondAttribute="trailing" id="wTh-Tp-b17"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Wu-Qq-hAz"/>
                     </view>
                     <connections>
+                        <outlet property="bottomContraint" destination="Meu-wJ-UkB" id="LkN-gt-Jb4"/>
+                        <outlet property="clipboardView" destination="mCT-H5-GtC" id="009-aP-kKj"/>
+                        <outlet property="copyButton" destination="UbA-t0-Y4q" id="5P0-Vc-BiT"/>
+                        <outlet property="lookOutView" destination="Vs1-5s-t3n" id="rSk-nr-v7S"/>
                         <outlet property="nextButton" destination="Qm4-Eu-4In" id="lQ4-bl-KOr"/>
-                        <outlet property="passphraseCopiedView" destination="bcL-ez-tzX" id="jkH-7C-Vhv"/>
                         <outlet property="passphraseLabel" destination="AeM-bQ-MYE" id="Zw1-z3-45B"/>
                     </connections>
                 </viewController>
@@ -6767,6 +6764,7 @@ minutes, please wait ...</string>
         <image name="Setting" width="24" height="24"/>
         <image name="Success" width="240" height="160"/>
         <image name="Twitter_Icon" width="87" height="87"/>
+        <image name="Vector" width="30" height="120"/>
         <image name="Wallet" width="22" height="22"/>
         <image name="Wallet Created" width="240" height="160"/>
         <image name="Wallet_icon" width="87" height="88"/>

@@ -22,6 +22,7 @@ extension SingleKeyWalletController: UITextViewDelegate {
     }
     
     
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         guard textView == privateKeyTextView else { return  }
         guard textView.text == NSLocalizedString("Enter your private key", comment: "") else { return  }

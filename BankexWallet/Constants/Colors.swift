@@ -15,6 +15,9 @@ enum WalletColors {
     static let importColor = UIColor(hex: "718093")
     static let separatorColor = UIColor(hex: "718093")
     static let disableColor = UIColor(hex: "E3E6E9")
+    static let errorColor = UIColor(hex: "F1361D")
+    static let clipboardColor = UIColor(hex:"B8BFC9")
+    static let clipboardTextColor = UIColor(hex:"F9FAFC")
     
     case blueText
     case errorRed
