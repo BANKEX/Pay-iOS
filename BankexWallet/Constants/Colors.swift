@@ -9,7 +9,13 @@
 import UIKit
 
 enum WalletColors {
+    
 
+    static let mainColor = UIColor(hex: "0DA9FF")
+    static let importColor = UIColor(hex: "718093")
+    static let separatorColor = UIColor(hex: "718093")
+    static let disableColor = UIColor(hex: "E3E6E9")
+    
     case blueText
     case errorRed
     case greySeparator

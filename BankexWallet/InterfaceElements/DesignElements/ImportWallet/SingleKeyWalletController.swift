@@ -22,16 +22,16 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     //MARK: - IBOutlets
     @IBOutlet weak var clearButton:UIButton!
     @IBOutlet weak var privateKeyTextView:UITextView!
-    @IBOutlet weak var singleKeyView:SingleKeyView!
+    @IBOutlet weak var nameWalletTextField:UITextField!
     @IBOutlet weak var separator1:UIView!
     @IBOutlet weak var separator2:UIView!
     @IBOutlet weak var importButton:UIButton!
     @IBOutlet weak var pasteButton:UIButton!
+    @IBOutlet weak var qrButton:UIButton!
     
     
     //MARK: - Properties
     
-    let privateKeyView = SingleKeyView()
     
     let service = SingleKeyServiceImplementation()
     let router = WalletCreationTypeRouterImplementation()
@@ -49,12 +49,12 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
             if state == .notAvailable {
                 clearButton.isHidden = true
                 importButton.isEnabled = false
-                importButton.backgroundColor = WalletColors.defaultGreyText.color()
+                importButton.backgroundColor = WalletColors.disableColor
                 privateKeyTextView.returnKeyType = .next
             }else {
                 clearButton.isHidden = false
                 importButton.isEnabled = true
-                importButton.backgroundColor = WalletColors.blueText.color()
+                importButton.backgroundColor = WalletColors.mainColor
                 privateKeyTextView.returnKeyType = .done
             }
         }
@@ -83,18 +83,20 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     //MARK: - Methods
     
     func clearTextFields() {
-        singleKeyView.nameWalletTextField.text = ""
+        nameWalletTextField.text = ""
         view.endEditing(true)
     }
     
     func configure() {
         privateKeyTextView.delegate = self
-        singleKeyView.delegate = self
+        nameWalletTextField.delegate = self
+        nameWalletTextField.autocorrectionType = .no
         privateKeyTextView.contentInset.bottom = 10.0
         privateKeyTextView.applyPlaceHolderText(with: NSLocalizedString("Enter your private key", comment: ""))
         privateKeyTextView.autocorrectionType = .no
         privateKeyTextView.autocapitalizationType = .none
         setupPasteButton()
+        setupQRBtn()
     }
     
    
@@ -107,7 +109,7 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     }
     
     @IBAction func createPrivateKeyWallet(_ sender:Any) {
-        service.createNewSingleAddressWallet(with: singleKeyView.nameWalletTextField.text, fromText: privateKeyTextView.text, password: nil) { (error) in
+        service.createNewSingleAddressWallet(with: nameWalletTextField.text, fromText: privateKeyTextView.text, password: nil) { (error) in
             if let _ = error {
                 self.showCreationAlert()
             }
@@ -131,11 +133,51 @@ class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWith
     }
     
     fileprivate func setupPasteButton() {
-        pasteButton.layer.borderColor = WalletColors.blueText.color().cgColor
+        pasteButton.layer.borderColor = WalletColors.mainColor.cgColor
         pasteButton.layer.borderWidth = 2.0
-        pasteButton.layer.cornerRadius = 15.0
+        pasteButton.layer.cornerRadius = 8.0
         pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
-        pasteButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        pasteButton.setTitleColor(WalletColors.mainColor, for: .normal)
+    }
+    
+    func setupQRBtn() {
+        qrButton.layer.borderColor = WalletColors.mainColor.cgColor
+        qrButton.layer.borderWidth = 2.0
+        qrButton.layer.cornerRadius = 8.0
+    }
+
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.returnKeyType == .done && importButton.isEnabled {
+            createPrivateKeyWallet(self)
+        }else if textField.returnKeyType == .next {
+            privateKeyTextView.applyNotHolder()
+            privateKeyTextView.becomeFirstResponder()
+        }
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        separator2.backgroundColor = WalletColors.mainColor
+        textField.returnKeyType = importButton.isEnabled ? .done : .next
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        separator2.backgroundColor = WalletColors.separatorColor
+    }
+    
+    
+    @IBAction func scanDidTapped(_ scan: UIButton) {
+        readerVC.delegate = self
+        self.readerVC.modalPresentationStyle = .formSheet
+        self.present(readerVC, animated: true)
+    }
+    
+    @IBAction func bufferDidTapped() {
+        if let string = UIPasteboard.general.string  {
+            privateKeyTextView.text = string
+            privateKeyTextView.textColor = .black
+            state = .available
+        }
     }
     
     

@@ -23,6 +23,7 @@ class GenericImportViewController: UIViewController {
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        segmentedControl.tintColor = WalletColors.mainColor
     }
     
     override func viewWillAppear(_ animated: Bool) {

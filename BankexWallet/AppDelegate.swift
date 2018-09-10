@@ -43,6 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        UINavigationBar.appearance().tintColor = WalletColors.mainColor
+        UITextField.appearance().tintColor = WalletColors.mainColor
+        UITextView.appearance().tintColor = WalletColors.mainColor
         if let userInfo = launchOptions{
             if let userActivityDict = userInfo[UIApplicationLaunchOptionsKey.userActivityDictionary] as? [UIApplicationLaunchOptionsKey: Any] {
                 if let userActivityType = userActivityDict[.userActivityType] as? String  {

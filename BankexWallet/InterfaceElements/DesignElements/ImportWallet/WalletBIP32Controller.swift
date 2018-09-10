@@ -34,12 +34,12 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
             if state == .notAvailable {
                 clearButton.isHidden = true
                 importButton.isEnabled = false
-                importButton.backgroundColor = WalletColors.defaultGreyText.color()
+                importButton.backgroundColor = WalletColors.disableColor
                 passphraseTextView.returnKeyType = .next
             }else {
                 clearButton.isHidden = false
                 importButton.isEnabled = true
-                importButton.backgroundColor = WalletColors.blueText.color()
+                importButton.backgroundColor = WalletColors.mainColor
                 passphraseTextView.returnKeyType = .done
             }
         }
@@ -121,11 +121,11 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     }
     
     fileprivate func setupPasteButton() {
-        pasteButton.layer.borderColor = WalletColors.blueText.color().cgColor
+        pasteButton.layer.borderColor = WalletColors.mainColor.cgColor
         pasteButton.layer.borderWidth = 2.0
-        pasteButton.layer.cornerRadius = 15.0
+        pasteButton.layer.cornerRadius = 8.0
         pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
-        pasteButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        pasteButton.setTitleColor(WalletColors.mainColor, for: .normal)
     }
     
     
@@ -133,12 +133,12 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     //MARK: - Delegate_TextField
     func textFieldDidBeginEditing(_ textField: UITextField)  {
         textField.returnKeyType = importButton.isEnabled ? .done : .next
-        separator2.backgroundColor = WalletColors.blueText.color()
+        separator2.backgroundColor = WalletColors.mainColor
     }
     
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        separator2.backgroundColor = WalletColors.greySeparator.color()
+        separator2.backgroundColor = WalletColors.separatorColor
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -156,7 +156,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     //MARK: - TextViewDelegate
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        separator1.backgroundColor = WalletColors.blueText.color()
+        separator1.backgroundColor = WalletColors.mainColor
         return true
     }
     
@@ -196,7 +196,7 @@ class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithCont
     
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        separator1.backgroundColor = WalletColors.greySeparator.color()
+        separator1.backgroundColor = WalletColors.separatorColor
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

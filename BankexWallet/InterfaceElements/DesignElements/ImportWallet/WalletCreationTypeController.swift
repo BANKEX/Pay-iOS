@@ -12,10 +12,14 @@ import Firebase
 class WalletCreationTypeController: UIViewController {
     
     @IBOutlet weak var importBtn:UIButton!
+    @IBOutlet weak var creaetBtn:UIButton!
+    
+    
     var isFromInitial = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupButtons()
     }
     
     func updateViewWithRCValues() {
@@ -24,6 +28,11 @@ class WalletCreationTypeController: UIViewController {
             let bt = rc.configValue(forKey: "importButtonText").stringValue ?? ""
             self.importBtn.setTitle(bt, for: .normal)
         }
+    }
+    
+    func setupButtons() {
+        importBtn.backgroundColor = WalletColors.importColor
+        creaetBtn.backgroundColor = WalletColors.mainColor
     }
     
     func setupRemoteConfigDefaults() {
@@ -64,30 +73,6 @@ class WalletCreationTypeController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = isFromInitial
-    }
-    
-    @IBAction func buttonTouchedDown(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.05,
-                       animations: {
-                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
-                       completion: nil)
-    }
-    
-    @IBAction func touchDragInside(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.05,
-                       animations: {
-                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
-                       completion: nil)
-    }
-    @IBAction func buttonTouchedUpInside(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.05) {
-            sender.transform = CGAffineTransform.identity
-        }
-    }
-    @IBAction func touchAborted(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.05) {
-            sender.transform = CGAffineTransform.identity
-        }
     }
     
     

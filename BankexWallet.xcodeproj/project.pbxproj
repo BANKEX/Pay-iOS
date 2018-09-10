@@ -77,8 +77,6 @@
 		86C8D76E210536490025BAFB /* WalletsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C8D76D210536490025BAFB /* WalletsDataSource.swift */; };
 		86C8D770210536550025BAFB /* WalletsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C8D76F210536550025BAFB /* WalletsDelegate.swift */; };
 		86CECE0D20FFD7CE00595B05 /* SingleKeyWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CECE0C20FFD7CE00595B05 /* SingleKeyWalletController.swift */; };
-		86CECE1020FFF70900595B05 /* SingleKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CECE0F20FFF70900595B05 /* SingleKeyView.swift */; };
-		86CECE1220FFFBA200595B05 /* SingleKeyController+SingleKeyViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CECE1120FFFBA200595B05 /* SingleKeyController+SingleKeyViewDelegate.swift */; };
 		86CECE14210003B400595B05 /* SingleKeyController+QRCodeReaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CECE13210003B400595B05 /* SingleKeyController+QRCodeReaderDelegate.swift */; };
 		86CECE162100048800595B05 /* SingleKeyController+TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CECE152100048800595B05 /* SingleKeyController+TextViewDelegate.swift */; };
 		86D133AA210A57EF00B4899F /* ListContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D133A9210A57EF00B4899F /* ListContactsViewController.swift */; };
@@ -248,8 +246,6 @@
 		86C8D76D210536490025BAFB /* WalletsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsDataSource.swift; sourceTree = "<group>"; };
 		86C8D76F210536550025BAFB /* WalletsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsDelegate.swift; sourceTree = "<group>"; };
 		86CECE0C20FFD7CE00595B05 /* SingleKeyWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKeyWalletController.swift; sourceTree = "<group>"; };
-		86CECE0F20FFF70900595B05 /* SingleKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKeyView.swift; sourceTree = "<group>"; };
-		86CECE1120FFFBA200595B05 /* SingleKeyController+SingleKeyViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleKeyController+SingleKeyViewDelegate.swift"; sourceTree = "<group>"; };
 		86CECE13210003B400595B05 /* SingleKeyController+QRCodeReaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleKeyController+QRCodeReaderDelegate.swift"; sourceTree = "<group>"; };
 		86CECE152100048800595B05 /* SingleKeyController+TextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleKeyController+TextViewDelegate.swift"; sourceTree = "<group>"; };
 		86D133A9210A57EF00B4899F /* ListContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContactsViewController.swift; sourceTree = "<group>"; };
@@ -560,7 +556,6 @@
 			isa = PBXGroup;
 			children = (
 				8686784F20FEA02E00A4CC9F /* ScreenWithContentProtocol.swift */,
-				86CECE1120FFFBA200595B05 /* SingleKeyController+SingleKeyViewDelegate.swift */,
 				86CECE13210003B400595B05 /* SingleKeyController+QRCodeReaderDelegate.swift */,
 				86CECE152100048800595B05 /* SingleKeyController+TextViewDelegate.swift */,
 			);
@@ -623,7 +618,6 @@
 				86A6CAF520FE34A6002C19AA /* WalletBIP32Controller.swift */,
 				86CECE0C20FFD7CE00595B05 /* SingleKeyWalletController.swift */,
 				862872822100D24D0004CCCF /* UIViewController+Extensions.swift */,
-				86CECE0E20FFF6F900595B05 /* View */,
 				862872842100EE040004CCCF /* Delegate */,
 			);
 			path = ImportWallet;
@@ -641,14 +635,6 @@
 			isa = PBXGroup;
 			children = (
 				86D54B3221050DBD0001A9AA /* WalletCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		86CECE0E20FFF6F900595B05 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				86CECE0F20FFF70900595B05 /* SingleKeyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1173,7 +1159,6 @@
 				86DB8A6F2105D12300B900F2 /* CreateNetworkViewController.swift in Sources */,
 				86D133AC210A6C2800B4899F /* ContactCell.swift in Sources */,
 				F00E4628207A354900387B96 /* SendingConfirmationController.swift in Sources */,
-				86CECE1020FFF70900595B05 /* SingleKeyView.swift in Sources */,
 				E21836A82105F44500795FDC /* WalletTabTokenCell.swift in Sources */,
 				F0B1B4CD205AABF2009D76D5 /* TokensListController.swift in Sources */,
 				003D4BBE20FCE7E20096FEBA /* OnboardingViewController.swift in Sources */,
@@ -1230,7 +1215,6 @@
 				0006753820C7C89A007FE20A /* WalletIsReadyCell.swift in Sources */,
 				002ED585210F17B200845A72 /* TransactionHistoryViewController.swift in Sources */,
 				81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */,
-				86CECE1220FFFBA200595B05 /* SingleKeyController+SingleKeyViewDelegate.swift in Sources */,
 				003D4BC020FDCA200096FEBA /* OnboardingPageViewController.swift in Sources */,
 				86C8D770210536550025BAFB /* WalletsDelegate.swift in Sources */,
 				81C4333C201B3B5C008D3343 /* Constants.swift in Sources */,
