@@ -32,7 +32,7 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     }
     
     func navigationBarSetup() {
-        navigationItem.title = NSLocalizedString("Creating Wallet", comment: "")
+        title = NSLocalizedString("Creating Wallet", comment: "")
         let editBtn = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
         editBtn.accessibilityLabel = "EditBtn"
         navigationItem.rightBarButtonItem = editBtn

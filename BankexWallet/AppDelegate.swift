@@ -46,15 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = WalletColors.mainColor
         UITextField.appearance().tintColor = WalletColors.mainColor
         UITextView.appearance().tintColor = WalletColors.mainColor
-        if let userInfo = launchOptions{
-            if let userActivityDict = userInfo[UIApplicationLaunchOptionsKey.userActivityDictionary] as? [UIApplicationLaunchOptionsKey: Any] {
-                if let userActivityType = userActivityDict[.userActivityType] as? String  {
-                    if userActivityType == CSSearchableItemActionType {
-                        
-                    }
-                }
-            }
-        }
+        UINavigationBar.appearance().backgroundColor = UIColor.white
+
         if !AppDelegate.isAlreadyLaunchedOnce {
             FirebaseApp.configure()
             AppDelegate.isAlreadyLaunchedOnce = true
@@ -303,6 +296,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
+extension UIApplication {
+    var statusBarView: UIView? {
+        if responds(to: Selector(("statusBar"))) {
+            return value(forKey: "statusBar") as? UIView
+        }
+        return nil
+    }
+}
 
 // [START ios_10_message_handling]
 @available(iOS 10, *)
@@ -346,6 +347,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 // [END ios_10_message_handling]
 
 extension AppDelegate : MessagingDelegate {
+    
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
@@ -415,6 +417,9 @@ extension UIViewController {
             debugPrint("We're about to hide the keyboard and the keyboard size is nil. Now is the rapture.")
         }
     }
+    
 }
+
+
 
 

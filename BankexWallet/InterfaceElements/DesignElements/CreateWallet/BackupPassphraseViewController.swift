@@ -29,7 +29,7 @@ class BackupPassphraseViewController: UIViewController {
         passphraseLabel.text = passphrase
         copyButton.backgroundColor = WalletColors.mainColor
         clipboardView.backgroundColor = WalletColors.clipboardColor
-        clipboardView.alpha = 0
+        bottomContraint.constant = 100.0
     }
     
     
@@ -43,37 +43,51 @@ class BackupPassphraseViewController: UIViewController {
         
     }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        UIApplication.shared.statusBarView?.backgroundColor = nil
+        UIApplication.shared.statusBarStyle = .default
+        navigationController?.navigationBar.barTintColor = .white
+    }
+    
     @IBAction func copyButtonTapped(_ sender: Any) {
         UIPasteboard.general.string = passphrase
+        self.nextButton?.backgroundColor = WalletColors.mainColor
         
-        UIView.animate(withDuration: 0.7, animations: {
-            self.nextButton?.backgroundColor = WalletColors.mainColor
-            self.clipboardView.alpha = 1
+        
+        UIView.animate(withDuration: 0.7,animations: {
+            if #available(iOS 11.0, *) {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let bottomInset = appDelegate.window?.safeAreaInsets.bottom
+                self.bottomContraint.constant = bottomInset!
+            }else {
+               self.bottomContraint.constant = 0
+            }
+            
+            self.view.layoutIfNeeded()
         }) { (_) in
-            UIView.animate(withDuration: 0.7, animations: {
-                self.clipboardView.alpha = 0
+            UIView.animate(withDuration: 0.7,delay:0.5,animations: {
+                self.bottomContraint.constant = 100
+                self.view.layoutIfNeeded()
             })
         }
+        
         
         nextButton?.isEnabled = true
     }
     
     func navigationBarSetup() {
-        let label = UILabel()
-        label.text = NSLocalizedString("Creating Wallet", comment: "")
-        label.textColor = UIColor.white
-        navigationItem.title = navTitle ?? NSLocalizedString("Creating Wallet", comment: "")
-        navigationItem.titleView = label
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.barTintColor = WalletColors.errorColor
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.tintColor = UIColor.white
-        navigationItem.rightBarButtonItem  = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.errorColor
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
-    @objc func share() {
-        
+    @IBAction func share() {
+        guard let passphrase = passphraseLabel.text else { return }
+        let activityVC = UIActivityViewController(activityItems: [passphrase], applicationActivities: nil)
+        present(activityVC, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,5 +95,9 @@ class BackupPassphraseViewController: UIViewController {
             repeatPasshraseVC.passphrase = passphrase
             repeatPasshraseVC.service = service
         }
+    }
+    
+    @IBAction func back() {
+        navigationController?.popViewController(animated: true)
     }
 }

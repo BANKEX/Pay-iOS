@@ -39,11 +39,11 @@ class RepeatPassphraseViewController: UIViewController {
             
             if wordsAfter == wordsInCorrectOrder {
                 UIView.animate(withDuration: 0.5) {
-                    self.nextButton.backgroundColor = WalletColors.blueText.color()
+                    self.nextButton.backgroundColor = WalletColors.mainColor
                     self.nextButton.isEnabled = true
                 }
             } else {
-                self.nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
+                self.nextButton.backgroundColor = WalletColors.disableColor
                 self.nextButton.isEnabled = false
             }
         }
@@ -76,7 +76,7 @@ class RepeatPassphraseViewController: UIViewController {
         super.viewDidLoad()
         navigationBarSetup()
         nextButton.isEnabled = false
-        nextButton.backgroundColor = WalletColors.disabledGreyButton.color()
+        nextButton.backgroundColor = WalletColors.disableColor
         setupManagers()
         
     }
@@ -100,6 +100,10 @@ class RepeatPassphraseViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = .white
+    }
     
     
     // Helpers
@@ -113,7 +117,7 @@ class RepeatPassphraseViewController: UIViewController {
     }
     
     func navigationBarSetup() {
-        navigationItem.title = "Creating Wallet"
+        navigationItem.title = NSLocalizedString("Creating Wallet", comment: "")
         let button = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.topItem?.backBarButtonItem = button
     }

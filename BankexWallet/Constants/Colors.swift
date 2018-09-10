@@ -18,6 +18,14 @@ enum WalletColors {
     static let errorColor = UIColor(hex: "F1361D")
     static let clipboardColor = UIColor(hex:"B8BFC9")
     static let clipboardTextColor = UIColor(hex:"F9FAFC")
+    static let bgMainColor = UIColor(hex:"F9FAFC")
+    
+    
+    struct QRReader {
+        static let successColor = UIColor(hex: "03B221")
+        static let errorColor = UIColor(hex:"FF3B30")
+        static let defaultColor = UIColor(hex:"E0E0E0")
+    }
     
     case blueText
     case errorRed
