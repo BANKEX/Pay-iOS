@@ -55,7 +55,7 @@ class QRReaderVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         return lbl
     }()
     
-    var lineView:UIView!
+    var lineView:UIView = UIView()
     
     var qrCodeView:UIView = {
         let view = UIView()
@@ -77,17 +77,20 @@ class QRReaderVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         auth()
-        state = .standard
     }
     
     fileprivate func auth() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            setupSession()
+            DispatchQueue.main.async {
+                self.setupSession()
+            }
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { (granted) in
                 if granted {
-                    self.setupSession()
+                    DispatchQueue.main.async {
+                        self.setupSession()
+                    }
                 }
             }
         case .restricted: return
@@ -123,6 +126,7 @@ class QRReaderVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         captureSession = AVCaptureSession()
         configurationSesion()
         layoutViews()
+        state = .standard
         captureSession.startRunning()
     }
     
@@ -155,7 +159,7 @@ class QRReaderVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         
         greenLayer.path = UIBezierPath(rect: qrCodeView.bounds).cgPath
         let w = qrCodeView.bounds.width/2
-        lineView = UIView(frame: CGRect(x:qrCodeView.bounds.midX - w/2, y: qrCodeView.bounds.midY - 0.5, width: w, height: 1.0))
+        lineView.frame = CGRect(x:qrCodeView.bounds.midX - w/2, y: qrCodeView.bounds.midY - 0.5, width: w, height: 1.0)
         qrCodeView.addSubview(lineView)
         qrCodeView.bringSubview(toFront: lineView)
         qrCodeView.layer.addSublayer(greenLayer)
