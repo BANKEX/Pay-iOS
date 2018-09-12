@@ -96,6 +96,7 @@ class CreateTokenController: UIViewController {
     
     func setNavigationBar() {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+
         self.title = NSLocalizedString("Add new token", comment: "")
     }
     

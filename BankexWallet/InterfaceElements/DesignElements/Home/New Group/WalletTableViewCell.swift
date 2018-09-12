@@ -1,38 +1,58 @@
 //
-//  EthereumTableVIewCell.swift
+//  WalletTableViewCell.swift
 //  BankexWallet
 //
-//  Created by Vladislav on 11.09.2018.
+//  Created by Vladislav on 12.09.2018.
 //  Copyright © 2018 Alexander Vlasov. All rights reserved.
 //
 
 import UIKit
 import web3swift
 
-
-class EthereumTableVIewCell: UITableViewCell {
+class WalletTableViewCell: UITableViewCell {
     
+    //IBOutlets
+    @IBOutlet weak var walletImageView:UIImageView!
     @IBOutlet weak var nameWalletLbl:UILabel!
     @IBOutlet weak var balanceLbl:UILabel!
     @IBOutlet weak var symbolLbl:UILabel!
     
-    let keyService = SingleKeyServiceImplementation()
     
-    var utilsService: UtilTransactionsService!
-    let tokensService = CustomERC20TokensServiceImplementation()
+    var utilsService:UtilTransactionsService?
     
-    
-    
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        selectionStyle = .none
-        updateLayout()
-        backgroundColor = .white
-        layer.cornerRadius = 8.0
-        [balanceLbl,symbolLbl].forEach { $0?.textColor = WalletColors.mainColor }
+    var wallet:KeyWalletModel! {
+        didSet {
+            configureWallet()
+        }
     }
     
+    
+    var token:ERC20TokenModel! {
+        didSet {
+            configureToken()
+        }
+    }
+    
+    
+    static let identifier:String = String(describing: WalletTableViewCell.self)
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupDefaultShadow()
+        selectionStyle = .none
+        layer.cornerRadius = 8.0
+        backgroundColor = .white
+    }
+    
+    func configureWallet() {
+        nameWalletLbl.text = wallet.name
+    }
+    
+    func configureToken() {
+        walletImageView.image = PredefinedTokens(with: token.symbol).image()
+        symbolLbl.text = token.symbol.uppercased()
+        updateLayout()
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -40,22 +60,13 @@ class EthereumTableVIewCell: UITableViewCell {
     }
     
     func updateLayout() {
-        self.balanceLbl.text = "..."
-        utilsService = tokensService.selectedERC20Token().address.isEmpty ? UtilTransactionsServiceImplementation() :
+        utilsService = token.address.isEmpty ? UtilTransactionsServiceImplementation() :
             CustomTokenUtilsServiceImplementation()
         updateBalance()
-        
-        // Initialization code
-//        tokenIconImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
-        nameWalletLbl.text = keyService.selectedWallet()?.name
-        symbolLbl.text = tokensService.selectedERC20Token().symbol.uppercased()
-        
     }
     func updateBalance() {
-        guard let selectedAddress = keyService.selectedAddress() else {
-            return
-        }
-        utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in
+        let selectedAddress = wallet.address
+        utilsService?.getBalance(for: token.address, address: selectedAddress) { (result) in
             switch result {
             case .Success(let response):
                 // TODO: it shouldn't be here anyway and also, lets move to background thread
@@ -71,8 +82,6 @@ class EthereumTableVIewCell: UITableViewCell {
             }
         }
     }
-    
+
     
 }
-
-

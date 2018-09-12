@@ -9,6 +9,17 @@
 import Foundation
 import UIKit
 
+extension UITableViewCell {
+
+    
+     func setupDefaultShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowRadius = 5
+        layer.shadowOffset = CGSize(width: 0, height: 4.0)
+        layer.shadowOpacity = 0.1
+    }
+}
+
 extension UIView {
     
     /* The color of the shadow. Defaults to opaque black. Colors created

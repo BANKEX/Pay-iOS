@@ -46,7 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = WalletColors.mainColor
         UITextField.appearance().tintColor = WalletColors.mainColor
         UITextView.appearance().tintColor = WalletColors.mainColor
-        UINavigationBar.appearance().backgroundColor = UIColor.white
+        UINavigationBar.appearance().barTintColor = UIColor.white
+        
 
         if !AppDelegate.isAlreadyLaunchedOnce {
             FirebaseApp.configure()

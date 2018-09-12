@@ -55,7 +55,6 @@ enum PredefinedTokens {
             return #imageLiteral(resourceName: "VeChain")
         default:
             return #imageLiteral(resourceName: "Other coins")
-            
         }
     }
     
