@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
     
     
     enum HomeSections:Int {
@@ -75,6 +75,7 @@ class HomeViewController: UIViewController {
         performSegue(withIdentifier: "createToken", sender: nil)
     }
     
+    
     //Methods
     fileprivate func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = .white
@@ -93,6 +94,7 @@ class HomeViewController: UIViewController {
             })
         }
     }
+    
     
     fileprivate func setupTableView() {
         tableView.backgroundColor = .clear
@@ -147,7 +149,7 @@ extension HomeViewController: UITableViewDataSource,UITableViewDelegate {
                 walletCell.token = tokenSerive.selectedERC20Token()
                 return walletCell
             }
-        }else if indexPath.section == 1 {
+        }else if HomeSections.Tokens.rawValue == 1 {
             if tokens.isEmpty {
                 let emptyCell = tableView.dequeueReusableCell(withIdentifier: EmptyTableCell.identifier, for: indexPath) as! EmptyTableCell
                 return emptyCell
@@ -160,6 +162,7 @@ extension HomeViewController: UITableViewDataSource,UITableViewDelegate {
                 if let tokenCell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as? TokenTableViewCell {
                     let num = floor(Double(indexPath.row/2))
                     tokenCell.token = tokens[Int(num)]
+                    tokenCell.isSearchable = false
                     return tokenCell
                 }
             }

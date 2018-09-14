@@ -9,7 +9,7 @@
 import UIKit
 import Amplitude_iOS
 
-class WalletBIP32Controller: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol,UITextViewDelegate {
+class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithContentProtocol,UITextViewDelegate {
     
     
     enum State {

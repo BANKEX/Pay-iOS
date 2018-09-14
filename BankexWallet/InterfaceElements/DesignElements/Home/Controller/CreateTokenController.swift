@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import QRCodeReader
+import web3swift
 
-class CreateTokenController: UIViewController {
+class CreateTokenController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -18,6 +18,7 @@ class CreateTokenController: UIViewController {
     @IBOutlet weak var tokenAddedIcon: UIImageView!
     @IBOutlet weak var tokenAddedLabel: UILabel!
     @IBOutlet weak var pasteButton:UIButton!
+    @IBOutlet weak var qrButton:UIButton!
     
     var needAddTokenAnimation = false
     
@@ -28,33 +29,40 @@ class CreateTokenController: UIViewController {
     var tokensAvailability: [Bool]?
     var walletData = WalletData()
     
-    let interactor = Interactor()
     
-    lazy var readerVC:QRCodeReaderViewController = {
-        let builder = QRCodeReaderViewControllerBuilder {
-            $0.reader = QRCodeReader(metadataObjectTypes:[.qr],captureDevicePosition: .back)
-        }
-        return QRCodeReaderViewController(builder: builder)
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = WalletColors.bgMainColor
+        setupNavBar()
+        setupTableView()
+        setupQRBtn()
         setupPasteButton()
-        tableView.tableFooterView = UIView()
-        
         self.hideKeyboardWhenTappedAround()
         self.setupViewResizerOnKeyboardShown()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         searchBar.delegate = self
-        
-        tableView.alpha = 0
-        tableView.isUserInteractionEnabled = false
-        
         tokenAddedIcon.alpha = 0
         tokenAddedLabel.alpha = 0
+    }
+    
+    fileprivate func setupTableView() {
+        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.tableFooterView = UIView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.alpha = 0
+        tableView.showsVerticalScrollIndicator = false
+        tableView.isUserInteractionEnabled = false
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: TokenTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: TokenTableViewCell.identifier)
+        tableView.register(UINib(nibName: PlaceholderCell.identifier, bundle: nil), forCellReuseIdentifier: PlaceholderCell.identifier)
+    }
+    
+    
+    fileprivate func setupNavBar() {
+        navigationController?.navigationBar.topItem?.title = NSLocalizedString("Wallet", comment: "")
+        self.title = NSLocalizedString("Add new token", comment: "")
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,29 +90,24 @@ class CreateTokenController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNavigationBar()
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? TokenInfoController {
+            destinationViewController.token = chosenToken ?? nil
+            destinationViewController.forAdding = true
+        }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
     
-    func setNavigationBar() {
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-
-        self.title = NSLocalizedString("Add new token", comment: "")
-    }
-    
-    @IBAction func scanTapped(_ sender:UIButton) {
-        readerVC.delegate = self
-        self.readerVC.modalPresentationStyle = .formSheet
-        self.present(readerVC, animated: true)
-    }
     
     @IBAction func textFromBuffer(_ sender:Any) {
         if let string = UIPasteboard.general.string  {
@@ -121,22 +124,80 @@ class CreateTokenController: UIViewController {
         }
     }
     
+    @IBAction func scanTapped() {
+        let qrReader = QRReaderVC()
+        qrReader.delegate = self
+        present(qrReader, animated: true)
+    }
+    
+    
     fileprivate func setupPasteButton() {
-        pasteButton.layer.borderColor = WalletColors.blueText.color().cgColor
+        pasteButton.layer.borderColor = WalletColors.mainColor.cgColor
         pasteButton.layer.borderWidth = 2.0
-        pasteButton.layer.cornerRadius = 15.0
+        pasteButton.layer.cornerRadius = 8.0
         pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
-        pasteButton.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        pasteButton.setTitleColor(WalletColors.mainColor, for: .normal)
+    }
+    
+    fileprivate func setupQRBtn() {
+        qrButton.layer.borderColor = WalletColors.mainColor.cgColor
+        qrButton.layer.borderWidth = 2.0
+        qrButton.layer.cornerRadius = 8.0
+    }
+    
+    
+}
+
+
+extension CreateTokenController: QRReaderVCDelegate {
+    func didScan(_ result: String) {
+        var str:String
+        if let parsed = Web3.EIP67CodeParser.parse(result) {
+            str = parsed.address.address
+        }else {
+            str = result
+        }
+        searchBar.text = str
+        searchBar.becomeFirstResponder()
     }
 }
 
-extension CreateTokenController: UIViewControllerTransitioningDelegate {
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissAnimator()
+extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if tokensList != nil {
+            return ((tokensList?.count)! * 2) + 1
+        } else {
+            return 0
+        }
+        
     }
     
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.row % 2 == 0 ? 20.0 : 70.0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row % 2 == 0 {
+            let placeholderCell = tableView.dequeueReusableCell(withIdentifier: PlaceholderCell.identifier, for: indexPath) as! PlaceholderCell
+            return placeholderCell
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as! TokenTableViewCell
+        let num = floor(Double(indexPath.row/2))
+        let token = tokensList![Int(num)]
+        //        let available = tokensAvailability![indexPath.row]
+        //        cell.configure(with: token, isAvailable: available)
+        cell.token = token
+        cell.isSearchable = true
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let num = floor(Double(indexPath.row/2))
+        let tokenToAdd = self.tokensList![Int(num)]
+        chosenToken = tokenToAdd
+        performSegue(withIdentifier: "addChosenToken", sender: self)
     }
 }
 

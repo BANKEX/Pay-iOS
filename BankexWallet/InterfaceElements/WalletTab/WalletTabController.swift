@@ -140,9 +140,7 @@ class WalletTabController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? TokenInfoController {
-            destinationViewController.transitioningDelegate = self
             destinationViewController.token = chosenToken ?? nil
-            destinationViewController.interactor = interactor
         }
     }
     

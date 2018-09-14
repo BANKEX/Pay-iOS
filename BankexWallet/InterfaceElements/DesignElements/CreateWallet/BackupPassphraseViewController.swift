@@ -47,7 +47,7 @@ class BackupPassphraseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = nil
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
         navigationController?.navigationBar.barTintColor = .white
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GenericImportViewController: UIViewController {
+class GenericImportViewController: BaseViewController {
 
     
     //MARK: - IBOutlets

@@ -11,7 +11,7 @@ import UIKit
 class PasscodeLockController: UIViewController {
     
     enum passcodeStatus: String {
-        case new = "Enter a passcode"
+        case new = "Set up passcode"
         case verify = "Verify your new passcode"
         case ready = "Ready"
         case wrong = "Wrong passcode"
@@ -40,6 +40,8 @@ class PasscodeLockController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationItem.hidesBackButton = true
+        navigationController?.navigationItem.setHidesBackButton(true, animated: true)
         changePasscodeStatus(.new)
         numsIcons = [firstNum, secondNum, thirdNum, fourthNum]
     }
@@ -97,6 +99,7 @@ class PasscodeLockController: UIViewController {
             }
         }
     }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

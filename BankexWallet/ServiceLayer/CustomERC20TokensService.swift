@@ -17,6 +17,7 @@ struct ERC20TokenModel {
     let decimals: String
     let symbol: String
     let isSelected: Bool
+    var isAdded: Bool
     
     init(token: ERC20Token) {
         self.name = token.name ?? ""
@@ -24,18 +25,20 @@ struct ERC20TokenModel {
         self.decimals = token.decimals ?? ""
         self.symbol = token.symbol ?? ""
         self.isSelected = token.isSelected
+        self.isAdded = token.isAdded
     }
     
     init(name: String,
          address: String,
          decimals: String,
          symbol: String,
-         isSelected: Bool) {
+         isSelected: Bool,isAdded:Bool = false) {
         self.name = name
         self.address = address
         self.decimals = decimals
         self.symbol = symbol
         self.isSelected = isSelected
+        self.isAdded = isAdded
     }
 }
 
@@ -242,7 +245,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                                              address: token.address ?? "",
                                                              decimals: token.decimals ?? "",
                                                              symbol: token.symbol ?? "",
-                                                             isSelected: false)
+                                                             isSelected: false,isAdded: token.isAdded)
                             tokensList.append(tokenModel)
                         }
                         completion(SendEthResult.Success(tokensList))
@@ -426,7 +429,8 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                    address: token.address ?? "",
                                    decimals: token.decimals ?? "",
                                    symbol: token.symbol ?? "",
-                                   isSelected: token.isSelected)
+                                   isSelected: token.isSelected,isAdded: token.isAdded)
+            
         }
         return listOfNetworks
     }

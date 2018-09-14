@@ -11,7 +11,7 @@ import QRCodeReader
 import Amplitude_iOS
 import web3swift
 
-class SingleKeyWalletController: UIViewController,UITextFieldDelegate,ScreenWithContentProtocol,QRReaderVCDelegate {
+class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWithContentProtocol,QRReaderVCDelegate {
     
     
     

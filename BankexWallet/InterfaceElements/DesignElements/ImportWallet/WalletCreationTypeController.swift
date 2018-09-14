@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class WalletCreationTypeController: UIViewController {
+class WalletCreationTypeController: BaseViewController {
     
     @IBOutlet weak var importBtn:UIButton!
     @IBOutlet weak var creaetBtn:UIButton!
@@ -19,6 +19,7 @@ class WalletCreationTypeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.shadowImage = UIImage()
         setupButtons()
     }
     

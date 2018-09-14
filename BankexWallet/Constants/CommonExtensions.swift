@@ -142,6 +142,14 @@ extension String {
     }
 }
 
+extension String {
+    func formattedAddrToken() -> String {
+        let prefix = self.prefix(6)
+        let suffix = self.suffix(6)
+        return prefix + "..." + suffix
+    }
+}
+
 extension UIColor {
     static func randomDark() -> UIColor {
         let max: CGFloat = 170

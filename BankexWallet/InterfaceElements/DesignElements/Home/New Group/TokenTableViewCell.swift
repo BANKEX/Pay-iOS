@@ -15,9 +15,12 @@ class TokenTableViewCell: UITableViewCell {
     @IBOutlet weak var balanceToken:UILabel!
     @IBOutlet weak var symbolToken:UILabel!
     @IBOutlet weak var nameToken:UILabel!
+    @IBOutlet weak var addressToken:UILabel!
+    @IBOutlet weak var tokenAddedImage:UIImageView!
     
     static let identifier:String = String(describing: TokenTableViewCell.self)
     let keysService = SingleKeyServiceImplementation()
+    var isSearchable = false
     
     var token:ERC20TokenModel! {
         didSet {
@@ -33,9 +36,24 @@ class TokenTableViewCell: UITableViewCell {
         layer.cornerRadius = 8.0
         selectionStyle = .none
         backgroundColor = .white
+        tokenAddedImage.isHidden = true
     }
 
     func configure() {
+        if isSearchable {
+            tokenAddedImage.isHidden = token.isAdded ? false : true
+            accessoryType = .none
+            symbolToken.isHidden = true
+            balanceToken.isHidden = true
+            addressToken.isHidden = false
+        }else {
+            accessoryType = .disclosureIndicator
+            symbolToken.isHidden = false
+            balanceToken.isHidden = false
+            addressToken.isHidden = true
+        }
+        
+        addressToken.text = token.address.formattedAddrToken()
         tokenImageView.image = PredefinedTokens(with: token.symbol).image()
         nameToken.text = token.name
         symbolToken.text = token.symbol.uppercased()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingViewController: UIViewController {
+class OnboardingViewController: BaseViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
