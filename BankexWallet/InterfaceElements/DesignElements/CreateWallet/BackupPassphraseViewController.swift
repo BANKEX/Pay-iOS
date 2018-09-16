@@ -56,7 +56,6 @@ class BackupPassphraseViewController: UIViewController {
         UIPasteboard.general.string = passphrase
         self.nextButton?.backgroundColor = WalletColors.mainColor
         
-        
         UIView.animate(withDuration: 0.7,animations: {
             if #available(iOS 11.0, *) {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate

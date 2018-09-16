@@ -6411,22 +6411,24 @@ minutes, please wait ...</string>
                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="tokenLbl"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token was added" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prg-N2-Bda">
-                                <rect key="frame" x="135" y="620" width="105" height="31"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8Y-ye-WZt">
+                                <rect key="frame" x="0.0" y="609" width="375" height="58"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token was added to your wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSj-UB-YvD">
+                                        <rect key="frame" x="0.0" y="20.5" width="375" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.050980392156862744" green="0.72941176470588232" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="7UG-uD-btY"/>
+                                    <constraint firstItem="pSj-UB-YvD" firstAttribute="leading" secondItem="R8Y-ye-WZt" secondAttribute="leading" id="1k7-pw-TCz"/>
+                                    <constraint firstAttribute="trailing" secondItem="pSj-UB-YvD" secondAttribute="trailing" id="4pY-Tx-cLc"/>
+                                    <constraint firstItem="pSj-UB-YvD" firstAttribute="centerY" secondItem="R8Y-ye-WZt" secondAttribute="centerY" id="7ve-54-8bd"/>
+                                    <constraint firstAttribute="height" constant="58" id="PH6-3C-vva"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CopiedIcon" translatesAutoresizingMaskIntoConstraints="NO" id="k4r-3U-gp3">
-                                <rect key="frame" x="176" y="596" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="YQc-Xq-H1L"/>
-                                    <constraint firstAttribute="width" secondItem="k4r-3U-gp3" secondAttribute="height" multiplier="1:1" id="cFk-Tr-WQS"/>
-                                </constraints>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -6435,30 +6437,28 @@ minutes, please wait ...</string>
                             <constraint firstItem="eES-Ve-k39" firstAttribute="leading" secondItem="l26-fd-vqJ" secondAttribute="trailing" constant="16" id="6VM-0r-PDk"/>
                             <constraint firstItem="jdL-P1-RdF" firstAttribute="trailing" secondItem="Z7H-F4-9jP" secondAttribute="trailing" constant="-15" id="8Wa-On-YB2"/>
                             <constraint firstItem="54I-a7-qHO" firstAttribute="top" secondItem="Z7H-F4-9jP" secondAttribute="top" id="Ea4-M9-64j"/>
+                            <constraint firstItem="Z7H-F4-9jP" firstAttribute="trailing" secondItem="R8Y-ye-WZt" secondAttribute="trailing" id="HQx-5a-0Ot"/>
                             <constraint firstItem="RD7-yR-13E" firstAttribute="centerX" secondItem="Z7H-F4-9jP" secondAttribute="centerX" id="MYI-rV-C5e"/>
                             <constraint firstItem="eES-Ve-k39" firstAttribute="width" secondItem="l26-fd-vqJ" secondAttribute="width" id="N25-IB-Vw8"/>
                             <constraint firstItem="54I-a7-qHO" firstAttribute="trailing" secondItem="Z7H-F4-9jP" secondAttribute="trailing" id="ORI-z8-V4p"/>
-                            <constraint firstItem="Z7H-F4-9jP" firstAttribute="bottom" secondItem="prg-N2-Bda" secondAttribute="bottom" constant="16" id="P0v-Kr-Ixv"/>
-                            <constraint firstItem="k4r-3U-gp3" firstAttribute="centerX" secondItem="prg-N2-Bda" secondAttribute="centerX" id="Uhd-YQ-uSH"/>
+                            <constraint firstItem="Z7H-F4-9jP" firstAttribute="bottom" secondItem="R8Y-ye-WZt" secondAttribute="bottom" id="ayS-oq-eoM"/>
                             <constraint firstItem="jdL-P1-RdF" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" constant="15" id="aze-FT-bo1"/>
                             <constraint firstItem="54I-a7-qHO" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" id="ehT-aO-QEW"/>
                             <constraint firstItem="jdL-P1-RdF" firstAttribute="bottom" secondItem="Z7H-F4-9jP" secondAttribute="bottom" id="fIZ-ft-vNk"/>
-                            <constraint firstItem="prg-N2-Bda" firstAttribute="top" secondItem="k4r-3U-gp3" secondAttribute="bottom" id="gxH-t5-Uq0"/>
                             <constraint firstItem="RD7-yR-13E" firstAttribute="centerY" secondItem="Z7H-F4-9jP" secondAttribute="centerY" id="nPI-rc-NZU"/>
                             <constraint firstItem="eES-Ve-k39" firstAttribute="top" secondItem="l26-fd-vqJ" secondAttribute="top" id="p5g-9U-OC7"/>
-                            <constraint firstItem="prg-N2-Bda" firstAttribute="centerX" secondItem="Z7H-F4-9jP" secondAttribute="centerX" id="pKG-qG-oUL"/>
                             <constraint firstItem="l26-fd-vqJ" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" constant="9" id="y8f-o8-ecF"/>
+                            <constraint firstItem="R8Y-ye-WZt" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" id="yTf-ce-8hY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Z7H-F4-9jP"/>
                     </view>
                     <connections>
+                        <outlet property="bottomContraint" destination="ayS-oq-eoM" id="yt5-uD-4Vj"/>
                         <outlet property="messageLabel" destination="RD7-yR-13E" id="Jej-fO-xu5"/>
                         <outlet property="pasteButton" destination="eES-Ve-k39" id="NWg-2W-wRz"/>
                         <outlet property="qrButton" destination="l26-fd-vqJ" id="4cp-kv-11i"/>
                         <outlet property="searchBar" destination="54I-a7-qHO" id="XDj-uy-4Cn"/>
                         <outlet property="tableView" destination="jdL-P1-RdF" id="ERu-PB-3nl"/>
-                        <outlet property="tokenAddedIcon" destination="k4r-3U-gp3" id="HrX-Vj-tRX"/>
-                        <outlet property="tokenAddedLabel" destination="prg-N2-Bda" id="I4k-yB-uyN"/>
                         <segue destination="lkK-o0-Lf8" kind="show" identifier="addChosenToken" id="4bl-zo-1Ji"/>
                     </connections>
                 </viewController>

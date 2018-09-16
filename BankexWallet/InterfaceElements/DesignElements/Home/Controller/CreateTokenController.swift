@@ -14,9 +14,7 @@ class CreateTokenController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var messageLabel: UILabel!
-    
-    @IBOutlet weak var tokenAddedIcon: UIImageView!
-    @IBOutlet weak var tokenAddedLabel: UILabel!
+    @IBOutlet weak var bottomContraint:NSLayoutConstraint!
     @IBOutlet weak var pasteButton:UIButton!
     @IBOutlet weak var qrButton:UIButton!
     
@@ -39,10 +37,9 @@ class CreateTokenController: BaseViewController {
         setupQRBtn()
         setupPasteButton()
         self.hideKeyboardWhenTappedAround()
-        self.setupViewResizerOnKeyboardShown()
+        //self.setupViewResizerOnKeyboardShown()
         searchBar.delegate = self
-        tokenAddedIcon.alpha = 0
-        tokenAddedLabel.alpha = 0
+        bottomContraint.constant = -58.0
     }
     
     fileprivate func setupTableView() {
@@ -73,16 +70,21 @@ class CreateTokenController: BaseViewController {
         DispatchQueue.main.async {
             if self.needAddTokenAnimation {
                 self.needAddTokenAnimation = false
-                self.tokenAddedIcon.alpha = 0.0
-                self.tokenAddedLabel.alpha = 0.0
-                UIView.animate(withDuration: 2.0, animations: {
-                    self.tokenAddedIcon.alpha = 1.0
-                    self.tokenAddedLabel.alpha = 1.0
-                })
-                UIView.animate(withDuration: 2.0, animations: {
-                    self.tokenAddedIcon.alpha = 0.0
-                    self.tokenAddedLabel.alpha = 0.0
-                })
+                UIView.animate(withDuration: 0.6,animations: {
+                    if #available(iOS 11.0, *) {
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        let bottomInset = appDelegate.window?.safeAreaInsets.bottom
+                        self.bottomContraint.constant = bottomInset!
+                    }else {
+                        self.bottomContraint.constant = 0
+                    }
+                    self.view.layoutIfNeeded()
+                }) { (_) in
+                    UIView.animate(withDuration: 0.7,delay:0.5,animations: {
+                        self.bottomContraint.constant = -58.0
+                        self.view.layoutIfNeeded()
+                    })
+                }
             }
             
             self.searchBar(self.searchBar, textDidChange: searchText)
