@@ -40,8 +40,7 @@ class PasscodeLockController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationItem.hidesBackButton = true
-        navigationController?.navigationItem.setHidesBackButton(true, animated: true)
+        navigationItem.hidesBackButton = true
         changePasscodeStatus(.new)
         numsIcons = [firstNum, secondNum, thirdNum, fourthNum]
     }

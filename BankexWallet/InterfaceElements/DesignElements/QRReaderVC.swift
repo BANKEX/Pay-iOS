@@ -79,6 +79,16 @@ class QRReaderVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         auth()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarView?.backgroundColor = .clear
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarView?.backgroundColor = .white
+    }
+    
     fileprivate func auth() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
