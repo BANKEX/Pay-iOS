@@ -2155,6 +2155,7 @@
                     <connections>
                         <outlet property="tableView" destination="lFM-Hx-M6q" id="mgK-4n-f2k"/>
                         <segue destination="xjs-f2-eUN" kind="show" identifier="createToken" id="TXr-nN-iSr"/>
+                        <segue destination="lkK-o0-Lf8" kind="show" identifier="showInfo" id="KYy-pe-ObI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLg-F4-kEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5746,7 +5747,6 @@ minutes, please wait ...</string>
                                                                     <state key="normal" title="Info"/>
                                                                     <connections>
                                                                         <action selector="infoTokenTouched:" destination="0WB-Lg-Tul" eventType="touchUpInside" id="7cW-dR-iBk"/>
-                                                                        <segue destination="lkK-o0-Lf8" kind="presentation" identifier="showTokenInfo" id="ECv-xb-uvS"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YG3-vG-gpI" customClass="TokensListCellButton" customModule="BankexWallet" customModuleProvider="target">
@@ -6470,7 +6470,7 @@ minutes, please wait ...</string>
         <!--Token Info Controller-->
         <scene sceneID="ExW-rJ-byV">
             <objects>
-                <viewController id="lkK-o0-Lf8" customClass="TokenInfoController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TokenInfoController" id="lkK-o0-Lf8" customClass="TokenInfoController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o85-n3-xDl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6676,7 +6676,7 @@ minutes, please wait ...</string>
         <image name="white_touch_id" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4bl-zo-1Ji"/>
+        <segue reference="KYy-pe-ObI"/>
         <segue reference="TXr-nN-iSr"/>
         <segue reference="wp9-05-5ZG"/>
         <segue reference="OdR-NC-3s9"/>

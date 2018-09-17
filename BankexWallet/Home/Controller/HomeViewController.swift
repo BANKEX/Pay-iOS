@@ -26,6 +26,7 @@ class HomeViewController: BaseViewController {
     var etherToken: ERC20TokenModel?
     var tokens = [ERC20TokenModel]()
     let walletData = WalletData()
+    var selectedToken:ERC20TokenModel!
     lazy var ethHeader:UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -67,6 +68,13 @@ class HomeViewController: BaseViewController {
         setupStatusBarColor()
         updateTableView()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let tokenInfoVC = segue.destination as? TokenInfoController {
+            tokenInfoVC.token = selectedToken
+        }
+    }
+
     
     
     //IBAction
@@ -190,6 +198,12 @@ extension HomeViewController: UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return HomeSections.Ethereum.rawValue == section ? 52.0 : 90.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let num = floor(Double(indexPath.row/2))
+        selectedToken = tokens[Int(num)]
+        performSegue(withIdentifier: "showInfo", sender: nil)
     }
    
     
