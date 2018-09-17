@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Hero
 
 class BaseTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hero.isEnabled = true
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
         tabBar.tintColor = WalletColors.mainColor
