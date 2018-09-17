@@ -24,7 +24,7 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
     @IBOutlet weak var separator1:UIView!
     @IBOutlet weak var passphraseTextView:UITextView!
     @IBOutlet weak var clearButton:UIButton!
-    @IBOutlet weak var pasteButton:UIButton!
+    @IBOutlet weak var pasteButton:PasteButton!
     
     //MARK: - Properties
     let service = HDWalletServiceImplementation()
@@ -82,7 +82,6 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
         passphraseTextView.autocorrectionType = .no
         passphraseTextView.autocapitalizationType = .none
         nameTextField.autocorrectionType = .no
-        setupPasteButton()
     }
     
 
@@ -118,14 +117,6 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
                 self.performSegue(withIdentifier: "showProcessFromImportPassphrase", sender: self)
             }
         }
-    }
-    
-    fileprivate func setupPasteButton() {
-        pasteButton.layer.borderColor = WalletColors.mainColor.cgColor
-        pasteButton.layer.borderWidth = 2.0
-        pasteButton.layer.cornerRadius = 8.0
-        pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
-        pasteButton.setTitleColor(WalletColors.mainColor, for: .normal)
     }
     
     

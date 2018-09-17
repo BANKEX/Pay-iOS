@@ -15,8 +15,8 @@ class CreateTokenController: BaseViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var bottomContraint:NSLayoutConstraint!
-    @IBOutlet weak var pasteButton:UIButton!
-    @IBOutlet weak var qrButton:UIButton!
+    @IBOutlet weak var pasteButton:PasteButton!
+    @IBOutlet weak var qrButton:QRButton!
     @IBOutlet weak var addTokenLbl:UILabel!
     
     var needAddTokenAnimation = false
@@ -35,8 +35,6 @@ class CreateTokenController: BaseViewController {
         view.backgroundColor = WalletColors.bgMainColor
         setupNavBar()
         setupTableView()
-        setupQRBtn()
-        setupPasteButton()
         self.hideKeyboardWhenTappedAround()
         //self.setupViewResizerOnKeyboardShown()
         searchBar.delegate = self
@@ -132,21 +130,6 @@ class CreateTokenController: BaseViewController {
         let qrReader = QRReaderVC()
         qrReader.delegate = self
         present(qrReader, animated: true)
-    }
-    
-    
-    fileprivate func setupPasteButton() {
-        pasteButton.layer.borderColor = WalletColors.mainColor.cgColor
-        pasteButton.layer.borderWidth = 2.0
-        pasteButton.layer.cornerRadius = 8.0
-        pasteButton.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
-        pasteButton.setTitleColor(WalletColors.mainColor, for: .normal)
-    }
-    
-    fileprivate func setupQRBtn() {
-        qrButton.layer.borderColor = WalletColors.mainColor.cgColor
-        qrButton.layer.borderWidth = 2.0
-        qrButton.layer.cornerRadius = 8.0
     }
     
     

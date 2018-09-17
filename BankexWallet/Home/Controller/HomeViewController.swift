@@ -44,8 +44,8 @@ class HomeViewController: BaseViewController {
         label.textColor = .black
         return label
     }()
-    lazy var addTokenBtn:UIButton = {
-        let button = UIButton()
+    lazy var addTokenBtn:BaseButton = {
+        let button = BaseButton()
         let widthBtn:CGFloat = 80.0
         button.frame = CGRect(x: tableView.bounds.width - widthBtn, y: 90.0 - 22.0, width: widthBtn, height: 22.0)
         button.setTitle("Add Tokens", for: .normal)
