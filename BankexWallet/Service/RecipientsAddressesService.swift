@@ -211,17 +211,7 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
 
 }
 
-struct FavoriteModel {
-    var firstName: String
-    var lastname: String
-    var address: String
-    var lastUsageDate: Date?
-    var note:String?
-    
-    var fullName:String {
-        return "\(firstName) \(lastname)"
-    }
-}
+
 
 struct NameError: LocalizedError {
     public let errorDescription: String?

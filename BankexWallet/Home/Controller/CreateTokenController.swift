@@ -150,6 +150,11 @@ class CreateTokenController: BaseViewController {
     }
     
     
+    
+    
+    
+    
+    
 }
 
 
@@ -203,18 +208,10 @@ extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
         if tokenToAdd.isAdded {
             addTokenLbl.text = "Token is already added to your wallet"
             UIView.animate(withDuration: 0.6,animations: {
-                if #available(iOS 11.0, *) {
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    let bottomInset = appDelegate.window?.safeAreaInsets.bottom
-                    self.bottomContraint.constant = bottomInset!
-                }else {
-                    self.bottomContraint.constant = 0
-                }
-                self.view.layoutIfNeeded()
+                self.showAnimation(with: self.bottomContraint)
             }) { (_) in
                 UIView.animate(withDuration: 0.7,delay:0.5,animations: {
-                    self.bottomContraint.constant = -58.0
-                    self.view.layoutIfNeeded()
+                    self.hideAnimation(with: self.bottomContraint)
                 })
             }
             return

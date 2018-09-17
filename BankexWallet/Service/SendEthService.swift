@@ -27,15 +27,7 @@ enum SendEthResult<T> {
     case Error(Error)
 }
 
-struct ETHTransactionModel {
-    let from: String
-    let to: String
-    let amount: String
-    let date: Date
-    let token: ERC20TokenModel
-    let key: HDKey
-    var isPending = false
-}
+
 
 protocol SendEthService {
     
