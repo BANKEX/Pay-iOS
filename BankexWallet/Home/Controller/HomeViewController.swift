@@ -70,9 +70,7 @@ class HomeViewController: BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let tokenInfoVC = segue.destination as? TokenInfoController {
-            tokenInfoVC.token = selectedToken
-        }
+        //TODO
     }
 
     
@@ -201,9 +199,7 @@ extension HomeViewController: UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let num = floor(Double(indexPath.row/2))
-        selectedToken = tokens[Int(num)]
-        performSegue(withIdentifier: "showInfo", sender: nil)
+        //TODO
     }
    
     
