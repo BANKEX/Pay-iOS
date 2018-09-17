@@ -64,6 +64,12 @@ enum PredefinedTokens {
             self = .Ethereum
         case "bkx":
             self = .Bankex
+        case "bnb":
+            self = .BNB
+        case "bytom":
+            self = .Bytom
+        case "dgd":
+            self = .DGD
         default:
             self = .NotDefined
         }

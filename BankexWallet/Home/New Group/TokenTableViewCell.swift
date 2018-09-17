@@ -17,6 +17,7 @@ class TokenTableViewCell: UITableViewCell {
     @IBOutlet weak var nameToken:UILabel!
     @IBOutlet weak var addressToken:UILabel!
     @IBOutlet weak var tokenAddedImage:UIImageView!
+    @IBOutlet weak var tokenView:TokenView!
     
     static let identifier:String = String(describing: TokenTableViewCell.self)
     let keysService = SingleKeyServiceImplementation()
@@ -54,7 +55,16 @@ class TokenTableViewCell: UITableViewCell {
         }
         
         addressToken.text = token.address.formattedAddrToken()
-        tokenImageView.image = PredefinedTokens(with: token.symbol).image()
+        let tokenCase = PredefinedTokens(with: token.symbol)
+        if tokenCase == .NotDefined {
+            tokenImageView.isHidden = true
+            tokenView.isHidden = false
+            tokenView.letter = token.name.prefix(1).uppercased()
+        }else {
+            tokenView.isHidden = true
+            tokenImageView.isHidden = false
+            tokenImageView.image = tokenCase.image()
+        }
         nameToken.text = token.name
         symbolToken.text = token.symbol.uppercased()
         
