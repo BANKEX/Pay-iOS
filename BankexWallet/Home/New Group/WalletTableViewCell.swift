@@ -74,7 +74,9 @@ class WalletTableViewCell: UITableViewCell {
                                                                        toUnits: .eth,
                                                                        decimals: 8,
                                                                        fallbackToScientific: true)
-                self.balanceLbl.text = formattedAmount!
+                DispatchQueue.main.async {
+                   self.balanceLbl.text = formattedAmount!
+                }
             case .Error(let error):
                 self.balanceLbl.text = "..."
                 

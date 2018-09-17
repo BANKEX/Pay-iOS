@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class HomeViewController: BaseViewController {
     
@@ -89,12 +90,15 @@ class HomeViewController: BaseViewController {
     
     
      fileprivate func updateTableView() {
-        let dataQueue = DispatchQueue.main
+        view.showSkeleton()
+        let dataQueue = DispatchQueue.global(qos: .userInitiated)
         dataQueue.async {
             self.walletData.update(callback: { (etherToken, transactions, availableTokens) in
                 DispatchQueue.main.async {
                     self.tokens = availableTokens
                     self.tableView.reloadData()
+                    self.view.stopSkeletonAnimation()
+                    self.view.hideSkeleton()
                 }
                 
             })
@@ -113,11 +117,24 @@ class HomeViewController: BaseViewController {
         tableView.register(UINib(nibName: TokenTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: TokenTableViewCell.identifier)
         tableView.register(UINib(nibName: PlaceholderCell.identifier, bundle: nil), forCellReuseIdentifier: PlaceholderCell.identifier)
         tableView.register(UINib(nibName: EmptyTableCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyTableCell.identifier)
+        tableView.isSkeletonable = true
     }
 
 }
 
-extension HomeViewController: UITableViewDataSource,UITableViewDelegate {
+extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,UITableViewDelegate {
+    
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        return 1
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return TokenTableViewCell.identifier
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

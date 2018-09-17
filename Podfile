@@ -17,6 +17,7 @@ target 'BankexWallet' do
   pod 'Firebase/Crash'
   pod 'ReachabilitySwift'
   pod 'Hero'
+  pod 'SkeletonView'
 
   target 'BankexWalletTests' do
     inherit! :search_paths
