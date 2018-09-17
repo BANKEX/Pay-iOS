@@ -77,7 +77,7 @@ class CreateWalletTests: BaseTests {
     
     private func cellIsRed(_ collectionView:UICollectionView, _ index:IndexPath) -> Bool {
         let cell = collectionView.cellForItem(at: index) as! CollectionViewCell
-        return cell.wordLabel.textColor == UIColor(red: 255/255, green: 255/59, blue: 255/48, alpha: 1)
+        return cell.wordLabel.textColor == UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 1)
     }
     
     func generateMnemonics() {

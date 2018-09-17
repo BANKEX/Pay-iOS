@@ -24,7 +24,7 @@ class CollectionViewCell: UICollectionViewCell {
 
     func configureCell(withText text: String, isCellRed: Bool = false) {
         wordLabel.text = text
-        wordLabel.textColor = isCellRed ? UIColor(red: 255/255, green: 255/59, blue: 255/48, alpha: 1) : #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
+        wordLabel.textColor = isCellRed ? UIColor(red: 255/255, green: 59/255, blue: 48/255, alpha: 1) : #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
         backgroundColor = isCellRed ? #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 0.7) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         layer.borderColor = isCellRed ? #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 1) : #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
         
