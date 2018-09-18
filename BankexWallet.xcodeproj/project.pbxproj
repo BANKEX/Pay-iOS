@@ -90,6 +90,7 @@
 		864732F021500FC200519AE1 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864732EF21500FC200519AE1 /* TokenView.swift */; };
 		864D0742214DAA9700BCC8BB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864D0741214DAA9700BCC8BB /* BaseViewController.swift */; };
 		864D0FF621393B8100176803 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864D0FF521393B8100176803 /* SearchManager.swift */; };
+		86813F5F21511E9C00E9D826 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86813F5E21511E9C00E9D826 /* InfoView.swift */; };
 		8686785020FEA02E00A4CC9F /* ScreenWithContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8686784F20FEA02E00A4CC9F /* ScreenWithContentProtocol.swift */; };
 		86A4917C2109CDD1006E3679 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A4917B2109CDD1006E3679 /* AddContactViewController.swift */; };
 		86A6CAEA20FE3367002C19AA /* BackupPassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A6CAE920FE3367002C19AA /* BackupPassphraseViewController.swift */; };
@@ -284,6 +285,7 @@
 		864732EF21500FC200519AE1 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
 		864D0741214DAA9700BCC8BB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		864D0FF521393B8100176803 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
+		86813F5E21511E9C00E9D826 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		8686784F20FEA02E00A4CC9F /* ScreenWithContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenWithContentProtocol.swift; sourceTree = "<group>"; };
 		86A4917B2109CDD1006E3679 /* AddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		86A6CAE920FE3367002C19AA /* BackupPassphraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPassphraseViewController.swift; sourceTree = "<group>"; };
@@ -485,7 +487,7 @@
 				864732C5214FC22900519AE1 /* Extensions */,
 				F0FF1C632054E75C0051D894 /* Service */,
 				861D2CD6214AF68100A108C4 /* Main */,
-				86A6F8C52147FE6600609413 /* Home */,
+				86A6F8C52147FE6600609413 /* Wallet */,
 				864732C4214FC17A00519AE1 /* SupportingFiles */,
 				81C43344201B81E4008D3343 /* InterfaceElements */,
 				81C4333F201B730C008D3343 /* GlobalState */,
@@ -607,6 +609,7 @@
 				F0B1B4D1205AAC95009D76D5 /* CreateTokenController.swift */,
 				86A6F8C32147FB8000609413 /* HomeViewController.swift */,
 				E21836AA2105F6DC00795FDC /* TokenInfoController.swift */,
+				F00E46192075212900387B96 /* MainInfoController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -758,13 +761,13 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
-		86A6F8C52147FE6600609413 /* Home */ = {
+		86A6F8C52147FE6600609413 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
 				861D2CCD214AA00200A108C4 /* Controller */,
 				86D7FB7721493269008245DE /* View */,
 			);
-			path = Home;
+			path = Wallet;
 			sourceTree = "<group>";
 		};
 		86C8D771210536AD0025BAFB /* View */ = {
@@ -801,6 +804,7 @@
 				861D2CCF214AA0AF00A108C4 /* EmptyTableCell.xib */,
 				861D2CDC214C072400A108C4 /* TokenInfoCell.swift */,
 				861D2CDD214C072400A108C4 /* TokenInfoCell.xib */,
+				86813F5E21511E9C00E9D826 /* InfoView.swift */,
 			);
 			name = View;
 			path = "New Group";
@@ -902,7 +906,6 @@
 		F00E4616207520B400387B96 /* MainInfoController */ = {
 			isa = PBXGroup;
 			children = (
-				F00E46192075212900387B96 /* MainInfoController.swift */,
 				F00E461B2075245100387B96 /* CurrentWalletInfoCell.swift */,
 				F00E461D207617BC00387B96 /* InitialLogicRouter.swift */,
 				F00E461F2076195C00387B96 /* FavouritesListWithCollectionCell.swift */,
@@ -1423,6 +1426,7 @@
 				F0FF1C6F20554B240051D894 /* HDWalletService.swift in Sources */,
 				F0FF1C6D20551A110051D894 /* KeysService.swift in Sources */,
 				86A6F8C021467DCB00609413 /* QRReaderVC.swift in Sources */,
+				86813F5F21511E9C00E9D826 /* InfoView.swift in Sources */,
 				F0EFED71205B6C5200FFDD4E /* ERC20TokenContractMethodsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

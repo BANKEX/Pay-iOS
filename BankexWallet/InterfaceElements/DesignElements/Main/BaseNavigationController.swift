@@ -14,5 +14,6 @@ class BaseNavigationController: UINavigationController {
         super.viewDidLoad()
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.setNeedsStatusBarAppearanceUpdate()
     }
 }

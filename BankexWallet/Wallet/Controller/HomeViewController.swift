@@ -71,7 +71,9 @@ class HomeViewController: BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //TODO
+        if let walletInfoVC = segue.destination as? MainInfoController {
+            walletInfoVC.selectedToken = selectedToken
+        }
     }
 
     
@@ -216,7 +218,13 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO
+        if HomeSections.Ethereum.rawValue == indexPath.section {
+            selectedToken = tokenSerive.selectedERC20Token()
+        }else {
+            let num = floor(Double(indexPath.row/2))
+            selectedToken = tokens[Int(num)]
+        }
+        performSegue(withIdentifier: "walletInfo", sender: nil)
     }
    
     

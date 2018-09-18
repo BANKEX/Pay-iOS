@@ -8,6 +8,7 @@
 
 import UIKit
 import BigInt
+import web3swift
 
 enum PredefinedTokens {
     case Bankex
@@ -76,13 +77,15 @@ enum PredefinedTokens {
     }
 }
 
-class MainInfoController: UIViewController,
+class MainInfoController: BaseViewController,
     UITabBarControllerDelegate,
 FavoriteSelectionDelegate,
-UITableViewDataSource, UITableViewDelegate {
+UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var blockNumberLabel: UILabel!
+    @IBOutlet weak var infoView:InfoView!
+    @IBOutlet weak var navigationBar:UINavigationBar!
     
     var itemsArray = [
         "CurrentWalletInfoCell",
@@ -103,31 +106,90 @@ UITableViewDataSource, UITableViewDelegate {
     
     var transactionsToShow = [ETHTransactionModel]()
     var transactionInitialDiff = 0
-    
+    var selectedToken:ERC20TokenModel?
+    var utilsService:UtilTransactionsService!
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateDataOnTheScreen()
-        configureRefreshControl()
-        favorites = favService.getAllStoredAddresses()
-        tokensService.updateConversions()
-        configureNotifications()
-        tableView.delegate = self
-        tableView.dataSource = self
-        catchUserActivity()
+        updateBalance()
+        updateSymbol()
+        updateWalletName()
+        if let token = selectedToken {
+            infoView.titleLabel.text = token.name == "Ether" ? "Wallet Information" : "Token Information"
+        }
+        infoView.delegate = self
+//        updateDataOnTheScreen()
+//        configureRefreshControl()
+//        favorites = favService.getAllStoredAddresses()
+//        tokensService.updateConversions()
+//        configureNotifications()
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        catchUserActivity()
     }
+    
+    func updateWalletName() {
+        guard let selToken = selectedToken else { return }
+        if selToken.name == "Ether" {
+            infoView.nameWallet.isHidden = false
+            guard let wallet = keyService.selectedWallet() else { return }
+            infoView.nameWallet.text = wallet.name
+        }else {
+            infoView.nameWallet.isHidden = true
+        }
+    }
+    
+    func updateSymbol() {
+        guard let selToken = selectedToken else { return }
+        let symbol = selToken.symbol.uppercased()
+        infoView.nameTokenLabel.text = symbol
+    }
+    
+    func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func updateBalance() {
+        utilsService = selectedToken!.address.isEmpty ? UtilTransactionsServiceImplementation() :
+            CustomTokenUtilsServiceImplementation()
+        guard let selectedAddress = keyService.selectedAddress() else {
+            return
+        }
+        utilsService.getBalance(for: selectedToken!.address, address: selectedAddress) { (result) in
+            switch result {
+            case .Success(let response):
+                // TODO: it shouldn't be here anyway and also, lets move to background thread
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let formattedAmount = Web3.Utils.formatToEthereumUnits(response,
+                                                                           toUnits: .eth,
+                                                                           decimals: 8,
+                                                                           fallbackToScientific: true)
+                    DispatchQueue.main.async {
+                        self.infoView.balanceLabel.text = formattedAmount!
+                    }
+                }
+            case .Error(let error):
+                self.infoView.balanceLabel.text = "..."
+                print("\(error)")
+            }
+        }
+    }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavBar()
         navigationController?.navigationBar.isHidden = true
-        putTransactionsInfoIntoItemsArray()
-        tableView.reloadData()
+//        putTransactionsInfoIntoItemsArray()
+//        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         navigationController?.navigationBar.isHidden = false
     }
     
@@ -135,7 +197,7 @@ UITableViewDataSource, UITableViewDelegate {
         super.viewDidAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         // testing dynamic links
-        self.tabBarController?.selectedIndex = AppDelegate.initiatingTabBar.rawValue
+        //self.tabBarController?.selectedIndex = AppDelegate.initiatingTabBar.rawValue
         AppDelegate.initiatingTabBar = .main
         //
     }
@@ -143,29 +205,6 @@ UITableViewDataSource, UITableViewDelegate {
         
     @IBAction func unwind(segue:UIStoryboardSegue) { }
     
-    
-    @IBAction func touchDown(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.05,
-                       animations: {
-                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
-                       completion: nil)
-    }
-    @IBAction func touchDragInside(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.05,
-                       animations: {
-                        sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)},
-                       completion: nil)
-    }
-    @IBAction func touchDragOutside(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.05) {
-            sender.transform = CGAffineTransform.identity
-        }
-    }
-    @IBAction func touchUpInside(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.05) {
-            sender.transform = CGAffineTransform.identity
-        }
-    }
     
     @IBAction func seeOrAddContactsButtonTapped(_ sender: UIButton) {
         if sender.title(for: .normal) == NSLocalizedString("See All", comment: ""){
@@ -240,10 +279,11 @@ UITableViewDataSource, UITableViewDelegate {
     }
     
     private func configureNavBar() {
-        
-        getBlockNumber { (number) in
-            self.configureLabel(withNumber: number)
-        }
+        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        UIApplication.shared.statusBarStyle = .lightContent
+//        getBlockNumber { (number) in
+//            self.configureLabel(withNumber: number)
+//        }
     }
     
     private func createStringWithBlockNumber(blockNumber: String) -> NSAttributedString? {
@@ -342,12 +382,12 @@ UITableViewDataSource, UITableViewDelegate {
     }
     
     //MARK: - Refresh Control
-    func configureRefreshControl() {
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = UIRefreshControl()
-            tableView.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
-        }
-    }
+//    func configureRefreshControl() {
+//        if #available(iOS 10.0, *) {
+//            tableView.refreshControl = UIRefreshControl()
+//            tableView.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
+//        }
+//    }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         updateDataOnTheScreen()
