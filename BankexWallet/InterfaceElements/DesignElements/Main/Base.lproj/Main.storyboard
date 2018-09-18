@@ -2458,6 +2458,19 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7v-Gg-7XL">
+                                        <rect key="frame" x="307" y="4.5" width="51" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <state key="normal" title="Delete">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BANKEX Token" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3B-pI-jzZ">
+                                        <rect key="frame" x="19" y="247" width="107.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -2468,27 +2481,33 @@
                                     <constraint firstItem="nQz-Pw-XJz" firstAttribute="top" secondItem="9xR-W3-xLv" secondAttribute="bottom" constant="7" id="Hv7-ne-fvE"/>
                                     <constraint firstItem="zlL-8T-50z" firstAttribute="centerX" secondItem="KmU-aR-GqC" secondAttribute="centerX" id="Jeh-Uo-fpX"/>
                                     <constraint firstItem="BrL-FQ-Hxy" firstAttribute="top" secondItem="KmU-aR-GqC" secondAttribute="top" constant="10" id="MKd-Dj-Omh"/>
+                                    <constraint firstItem="o7v-Gg-7XL" firstAttribute="centerY" secondItem="5QN-sC-B7Q" secondAttribute="centerY" id="MuH-PV-Ehf"/>
                                     <constraint firstAttribute="bottom" secondItem="nQz-Pw-XJz" secondAttribute="bottom" constant="12" id="NLz-Al-f3r"/>
                                     <constraint firstItem="HbQ-Jl-mH6" firstAttribute="leading" secondItem="KmU-aR-GqC" secondAttribute="leading" constant="5" id="RbX-pt-m7g"/>
                                     <constraint firstAttribute="trailing" secondItem="9xR-W3-xLv" secondAttribute="trailing" constant="5" id="TFm-Nw-fiv"/>
+                                    <constraint firstItem="K3B-pI-jzZ" firstAttribute="leading" secondItem="KmU-aR-GqC" secondAttribute="leading" constant="19" id="USa-YF-g4l"/>
                                     <constraint firstItem="BrL-FQ-Hxy" firstAttribute="leading" secondItem="KmU-aR-GqC" secondAttribute="leading" constant="10" id="Ucy-QJ-GTo"/>
                                     <constraint firstItem="5QN-sC-B7Q" firstAttribute="centerY" secondItem="BrL-FQ-Hxy" secondAttribute="centerY" id="VXh-5i-qhc"/>
                                     <constraint firstItem="HO5-Al-rAH" firstAttribute="leading" secondItem="KmU-aR-GqC" secondAttribute="leading" constant="5" id="WvX-jg-2JM"/>
                                     <constraint firstItem="nQz-Pw-XJz" firstAttribute="leading" secondItem="KmU-aR-GqC" secondAttribute="leading" constant="18" id="eay-ZP-caL"/>
                                     <constraint firstItem="cNg-9o-h2X" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nQz-Pw-XJz" secondAttribute="trailing" constant="40" id="gg3-Ys-EB2"/>
                                     <constraint firstItem="HO5-Al-rAH" firstAttribute="centerY" secondItem="KmU-aR-GqC" secondAttribute="centerY" id="mHh-gs-g11"/>
+                                    <constraint firstAttribute="bottom" secondItem="K3B-pI-jzZ" secondAttribute="bottom" constant="13" id="qE6-IG-0NG"/>
                                     <constraint firstItem="HbQ-Jl-mH6" firstAttribute="top" secondItem="HO5-Al-rAH" secondAttribute="bottom" constant="1" id="rOl-Mv-gcd"/>
                                     <constraint firstAttribute="trailing" secondItem="cNg-9o-h2X" secondAttribute="trailing" constant="20" id="se3-FH-51J"/>
+                                    <constraint firstAttribute="trailing" secondItem="o7v-Gg-7XL" secondAttribute="trailing" constant="17" id="x26-Vj-AMq"/>
                                     <constraint firstItem="zlL-8T-50z" firstAttribute="centerY" secondItem="5QN-sC-B7Q" secondAttribute="centerY" id="x6a-hk-Uaa"/>
                                     <constraint firstAttribute="trailing" secondItem="HbQ-Jl-mH6" secondAttribute="trailing" constant="5" id="zKL-ty-hyA"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="addrWallet" destination="nQz-Pw-XJz" id="Cf2-c1-bNb"/>
                                     <outlet property="balanceLabel" destination="HO5-Al-rAH" id="iiP-Bc-elX"/>
+                                    <outlet property="deleteButton" destination="o7v-Gg-7XL" id="o6s-Kh-BmT"/>
                                     <outlet property="nameTokenLabel" destination="cNg-9o-h2X" id="kbp-Rp-H6i"/>
                                     <outlet property="nameWallet" destination="9xR-W3-xLv" id="xd2-iK-Qzh"/>
                                     <outlet property="rateLabel" destination="HbQ-Jl-mH6" id="com-Kw-2f7"/>
                                     <outlet property="titleLabel" destination="zlL-8T-50z" id="Yte-Dx-knz"/>
+                                    <outlet property="tokenNameLabel" destination="K3B-pI-jzZ" id="VRL-d7-N84"/>
                                 </connections>
                             </view>
                         </subviews>

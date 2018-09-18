@@ -94,7 +94,15 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     //                      "FavouritesListWithCollectionCell"]
     
     let keyService = SingleKeyServiceImplementation()
-
+    var numberFormatter:NumberFormatter {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        numberFormatter.locale = Locale(identifier: "en_GB")
+        numberFormatter.currencySymbol = "$"
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 5
+        return numberFormatter
+    }
     var ethLabel: UILabel!
     var service = RecipientsAddressesServiceImplementation()
     var favorites: [FavoriteModel]?
@@ -108,16 +116,12 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     var transactionInitialDiff = 0
     var selectedToken:ERC20TokenModel?
     var utilsService:UtilTransactionsService!
+    var rateSevice = FiatServiceImplementation()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateBalance()
-        updateSymbol()
-        updateWalletName()
-        if let token = selectedToken {
-            infoView.titleLabel.text = token.name == "Ether" ? "Wallet Information" : "Token Information"
-        }
+        updateUI()
         infoView.delegate = self
 //        updateDataOnTheScreen()
 //        configureRefreshControl()
@@ -129,14 +133,46 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
 //        catchUserActivity()
     }
     
+    func updateUI() {
+        guard let selToken = selectedToken else { return }
+        if selToken.name == "Ether" {
+            infoView.state = .Eth
+        }else {
+            infoView.state = .Token
+        }
+        updateRate()
+        updateBalance()
+        updateSymbol()
+        updateWalletName()
+        updateWalletAddr()
+        updateTokenName()
+    }
+    func updateTokenName() {
+        guard let selectedToken = selectedToken else { return }
+        infoView.tokenNameLabel.text = selectedToken.name
+    }
+    
+    func updateRate() {
+        guard let selectedToken = selectedToken else { return }
+        let tokenName = selectedToken.symbol.uppercased()
+        self.rateSevice.updateConversionRate(for: tokenName, completion: { (result) in
+            let stringRate = self.numberFormatter.string(from: NSNumber(value:result)) ?? "0"
+            self.infoView.rateLabel.text = "\(stringRate) at the rate of CryptoCompare"
+        })
+    }
+    
     func updateWalletName() {
         guard let selToken = selectedToken else { return }
         if selToken.name == "Ether" {
-            infoView.nameWallet.isHidden = false
             guard let wallet = keyService.selectedWallet() else { return }
             infoView.nameWallet.text = wallet.name
-        }else {
-            infoView.nameWallet.isHidden = true
+        }
+    }
+    func updateWalletAddr() {
+        guard let selToken = selectedToken else { return }
+        if selToken.name == "Ether" {
+            guard let wallet = keyService.selectedWallet() else { return }
+            infoView.addrWallet.text = wallet.address.formattedAddrToken()
         }
     }
     
