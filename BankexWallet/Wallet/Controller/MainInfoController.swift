@@ -82,10 +82,9 @@ class MainInfoController: BaseViewController,
 FavoriteSelectionDelegate,
 UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var blockNumberLabel: UILabel!
     @IBOutlet weak var infoView:InfoView!
-    @IBOutlet weak var navigationBar:UINavigationBar!
+    @IBOutlet weak var sendButton:ActionButton!
+    @IBOutlet weak var receiveButton:ActionButton!
     
     var itemsArray = [
         "CurrentWalletInfoCell",
@@ -123,6 +122,7 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
         super.viewDidLoad()
         updateUI()
         infoView.delegate = self
+        prepareButtons()
 //        updateDataOnTheScreen()
 //        configureRefreshControl()
 //        favorites = favService.getAllStoredAddresses()
@@ -133,13 +133,16 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
 //        catchUserActivity()
     }
     
-    func updateUI() {
+    private func prepareButtons() {
+        sendButton.title = "Send"
+        sendButton.image = "send_icon"
+        receiveButton.title = "Receive"
+        receiveButton.image = "receive_icon"
+    }
+    
+    private func updateUI() {
         guard let selToken = selectedToken else { return }
-        if selToken.name == "Ether" {
-            infoView.state = .Eth
-        }else {
-            infoView.state = .Token
-        }
+        infoView.state = selToken.name == "Ether" ? .Eth : .Token
         updateRate()
         updateBalance()
         updateSymbol()
@@ -147,12 +150,12 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
         updateWalletAddr()
         updateTokenName()
     }
-    func updateTokenName() {
+    private func updateTokenName() {
         guard let selectedToken = selectedToken else { return }
         infoView.tokenNameLabel.text = selectedToken.name
     }
     
-    func updateRate() {
+    private func updateRate() {
         guard let selectedToken = selectedToken else { return }
         let tokenName = selectedToken.symbol.uppercased()
         self.rateSevice.updateConversionRate(for: tokenName, completion: { (result) in
@@ -161,14 +164,14 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
         })
     }
     
-    func updateWalletName() {
+    private func updateWalletName() {
         guard let selToken = selectedToken else { return }
         if selToken.name == "Ether" {
             guard let wallet = keyService.selectedWallet() else { return }
             infoView.nameWallet.text = wallet.name
         }
     }
-    func updateWalletAddr() {
+    private func updateWalletAddr() {
         guard let selToken = selectedToken else { return }
         if selToken.name == "Ether" {
             guard let wallet = keyService.selectedWallet() else { return }
@@ -176,7 +179,7 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
         }
     }
     
-    func updateSymbol() {
+    private func updateSymbol() {
         guard let selToken = selectedToken else { return }
         let symbol = selToken.symbol.uppercased()
         infoView.nameTokenLabel.text = symbol
@@ -354,12 +357,6 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
         }
     }
     
-    private func configureLabel(withNumber number: String) {
-        self.blockNumberLabel.attributedText = self.createStringWithBlockNumber(blockNumber: formatNumber(number: number))
-        self.blockNumberLabel.numberOfLines = 2
-        self.blockNumberLabel.textAlignment = .right
-        self.blockNumberLabel.font = UIFont.systemFont(ofSize: 12)
-    }
     
     private func formatNumber(number: String) -> String {
         var formattedNumber = ""
@@ -374,48 +371,48 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
         return String(formattedNumber.reversed())
     }
     
-    private func configureNotifications() {
-        NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-        }
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+//    private func configureNotifications() {
+//        NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//
+//        }
+//        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+//        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+//        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
     
-    private func updateDataOnTheScreen() {
-        getBlockNumber { (number) in
-            self.configureLabel(withNumber: number)
-            if let address = self.keyService.selectedAddress() {
-                TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
-                    self.putTransactionsInfoIntoItemsArray()
-                    self.tableView.reloadData()
-                    if #available(iOS 10.0, *) {
-                        self.tableView.refreshControl?.endRefreshing()
-                    }
-                }
-            } else {
-                if #available(iOS 10.0, *) {
-                    self.tableView.refreshControl?.endRefreshing()
-                }
-            }
-        }
-    }
+//    private func updateDataOnTheScreen() {
+//        getBlockNumber { (number) in
+//            self.configureLabel(withNumber: number)
+//            if let address = self.keyService.selectedAddress() {
+//                TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
+//                    self.putTransactionsInfoIntoItemsArray()
+//                    self.tableView.reloadData()
+//                    if #available(iOS 10.0, *) {
+//                        self.tableView.refreshControl?.endRefreshing()
+//                    }
+//                }
+//            } else {
+//                if #available(iOS 10.0, *) {
+//                    self.tableView.refreshControl?.endRefreshing()
+//                }
+//            }
+//        }
+//    }
     
     //MARK: - Refresh Control
 //    func configureRefreshControl() {
@@ -426,7 +423,7 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
 //    }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        updateDataOnTheScreen()
+        //updateDataOnTheScreen()
     }
     
     // MARK: - Table view data source
@@ -474,7 +471,7 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
             return
         }
         // This is just to force balance update sometimes, but think about better way maybe
-        tableView.reloadData()
+        //tableView.reloadData()
     }
     
     // MARK: FavoriteSelectionDelegate
@@ -500,7 +497,7 @@ extension MainInfoController: CloseNewWalletNotifDelegate {
             "FavouritesListWithCollectionCell"]
         
         putTransactionsInfoIntoItemsArray()
-        tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
+        //tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
         
         UserDefaults.standard.set(false, forKey: "isWalletNew")
     }

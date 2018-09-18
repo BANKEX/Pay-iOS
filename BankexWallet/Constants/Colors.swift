@@ -21,7 +21,8 @@ enum WalletColors {
     static let bgMainColor = UIColor(hex:"F9FAFC")
     static let createWalletCellColor = UIColor(hex:"9DA6B3")
     static let blackColor = UIColor(hex:"202326")
-    
+    static let sendColor = UIColor(hex:"FFB900")
+    static let receiveColor = UIColor(hex:"03B221")
     
     struct QRReader {
         static let successColor = UIColor(hex: "03B221")

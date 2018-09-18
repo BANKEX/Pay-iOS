@@ -2423,19 +2423,19 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlL-8T-50z">
-                                        <rect key="frame" x="169.5" y="10.5" width="36" height="21"/>
+                                        <rect key="frame" x="170" y="11" width="35.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0081347591 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HO5-Al-rAH">
-                                        <rect key="frame" x="5" y="118.5" width="365" height="41"/>
+                                        <rect key="frame" x="5" y="106" width="365" height="41"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$689 913 at the rate of Binance " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbQ-Jl-mH6">
-                                        <rect key="frame" x="5" y="160.5" width="365" height="18"/>
+                                        <rect key="frame" x="5" y="148" width="365" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2491,7 +2491,7 @@
                                     <constraint firstItem="HO5-Al-rAH" firstAttribute="leading" secondItem="KmU-aR-GqC" secondAttribute="leading" constant="5" id="WvX-jg-2JM"/>
                                     <constraint firstItem="nQz-Pw-XJz" firstAttribute="leading" secondItem="KmU-aR-GqC" secondAttribute="leading" constant="18" id="eay-ZP-caL"/>
                                     <constraint firstItem="cNg-9o-h2X" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nQz-Pw-XJz" secondAttribute="trailing" constant="40" id="gg3-Ys-EB2"/>
-                                    <constraint firstItem="HO5-Al-rAH" firstAttribute="centerY" secondItem="KmU-aR-GqC" secondAttribute="centerY" id="mHh-gs-g11"/>
+                                    <constraint firstItem="HO5-Al-rAH" firstAttribute="centerY" secondItem="KmU-aR-GqC" secondAttribute="centerY" multiplier="1:1.1" id="mHh-gs-g11"/>
                                     <constraint firstAttribute="bottom" secondItem="K3B-pI-jzZ" secondAttribute="bottom" constant="13" id="qE6-IG-0NG"/>
                                     <constraint firstItem="HbQ-Jl-mH6" firstAttribute="top" secondItem="HO5-Al-rAH" secondAttribute="bottom" constant="1" id="rOl-Mv-gcd"/>
                                     <constraint firstAttribute="trailing" secondItem="cNg-9o-h2X" secondAttribute="trailing" constant="20" id="se3-FH-51J"/>
@@ -2510,19 +2510,40 @@
                                     <outlet property="tokenNameLabel" destination="K3B-pI-jzZ" id="VRL-d7-N84"/>
                                 </connections>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="WHr-Yg-9kv">
+                                <rect key="frame" x="20" y="322" width="335" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJO-Rh-b4d" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="156" height="40"/>
+                                        <state key="normal" title="Send"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H37-Xc-wRU" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
+                                        <rect key="frame" x="179" y="0.0" width="156" height="40"/>
+                                        <state key="normal" title="Receive"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6Bg-Rl-D8o"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="5dX-UC-sbg" firstAttribute="trailing" secondItem="WHr-Yg-9kv" secondAttribute="trailing" constant="20" id="FA3-cz-a7b"/>
+                            <constraint firstItem="WHr-Yg-9kv" firstAttribute="top" secondItem="KmU-aR-GqC" secondAttribute="bottom" constant="24" id="FIQ-D5-KWv"/>
                             <constraint firstItem="KmU-aR-GqC" firstAttribute="leading" secondItem="5dX-UC-sbg" secondAttribute="leading" id="HGY-rp-ipH"/>
                             <constraint firstItem="5dX-UC-sbg" firstAttribute="trailing" secondItem="KmU-aR-GqC" secondAttribute="trailing" id="SvH-dI-1r0"/>
                             <constraint firstItem="KmU-aR-GqC" firstAttribute="top" secondItem="5dX-UC-sbg" secondAttribute="top" id="gFm-7f-jH9"/>
                             <constraint firstItem="KmU-aR-GqC" firstAttribute="height" secondItem="hGi-ZX-K3b" secondAttribute="height" multiplier="1:2.4" id="ltl-Vx-TmF"/>
+                            <constraint firstItem="WHr-Yg-9kv" firstAttribute="leading" secondItem="5dX-UC-sbg" secondAttribute="leading" constant="20" id="oll-YT-Md8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5dX-UC-sbg"/>
                     </view>
                     <navigationItem key="navigationItem" id="mY3-lN-RSd"/>
                     <connections>
                         <outlet property="infoView" destination="KmU-aR-GqC" id="Fa2-sK-j4c"/>
+                        <outlet property="receiveButton" destination="H37-Xc-wRU" id="0Jo-g2-bPq"/>
+                        <outlet property="sendButton" destination="MJO-Rh-b4d" id="Ype-SM-uX4"/>
                         <segue destination="Eco-Ir-4Ol" kind="show" identifier="seeAllFavorites" id="vz3-df-6ks"/>
                         <segue destination="xIk-xj-TA6" kind="show" identifier="addNewFavorite" id="vxE-fU-tKs"/>
                     </connections>
