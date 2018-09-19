@@ -2526,24 +2526,72 @@
                                     <constraint firstAttribute="height" constant="40" id="6Bg-Rl-D8o"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SnT-hZ-wNj">
+                                <rect key="frame" x="15" y="390" width="165.5" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfB-IB-JOP" customClass="BaseButton" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="311" y="386" width="47" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="See All">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2iP-Hw-0mm">
+                                <rect key="frame" x="15" y="426.5" width="360" height="191.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DRG-I3-lQy">
+                                <rect key="frame" x="0.0" y="411.5" width="375" height="206.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any transaction history yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gq6-zZ-ZGO">
+                                        <rect key="frame" x="70" y="83" width="235" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.63137254901960782" green="0.63137254901960782" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="gq6-zZ-ZGO" firstAttribute="centerY" secondItem="DRG-I3-lQy" secondAttribute="centerY" id="d81-QU-Fyx"/>
+                                    <constraint firstItem="gq6-zZ-ZGO" firstAttribute="leading" secondItem="DRG-I3-lQy" secondAttribute="leading" constant="70" id="mKB-ku-mQJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="gq6-zZ-ZGO" secondAttribute="trailing" constant="70" id="yCv-J8-EQV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="5dX-UC-sbg" firstAttribute="trailing" secondItem="DRG-I3-lQy" secondAttribute="trailing" id="1iB-OV-1zk"/>
+                            <constraint firstItem="5dX-UC-sbg" firstAttribute="trailing" secondItem="VfB-IB-JOP" secondAttribute="trailing" constant="17" id="3X6-WZ-JTv"/>
+                            <constraint firstItem="2iP-Hw-0mm" firstAttribute="top" secondItem="SnT-hZ-wNj" secondAttribute="bottom" constant="15" id="6ME-pj-ET3"/>
                             <constraint firstItem="5dX-UC-sbg" firstAttribute="trailing" secondItem="WHr-Yg-9kv" secondAttribute="trailing" constant="20" id="FA3-cz-a7b"/>
                             <constraint firstItem="WHr-Yg-9kv" firstAttribute="top" secondItem="KmU-aR-GqC" secondAttribute="bottom" constant="24" id="FIQ-D5-KWv"/>
                             <constraint firstItem="KmU-aR-GqC" firstAttribute="leading" secondItem="5dX-UC-sbg" secondAttribute="leading" id="HGY-rp-ipH"/>
+                            <constraint firstItem="VfB-IB-JOP" firstAttribute="centerY" secondItem="SnT-hZ-wNj" secondAttribute="centerY" id="S9K-LV-nGJ"/>
                             <constraint firstItem="5dX-UC-sbg" firstAttribute="trailing" secondItem="KmU-aR-GqC" secondAttribute="trailing" id="SvH-dI-1r0"/>
+                            <constraint firstItem="SnT-hZ-wNj" firstAttribute="leading" secondItem="5dX-UC-sbg" secondAttribute="leading" constant="15" id="aZn-2i-tXQ"/>
+                            <constraint firstItem="2iP-Hw-0mm" firstAttribute="leading" secondItem="SnT-hZ-wNj" secondAttribute="leading" id="bC7-mG-xdA"/>
+                            <constraint firstItem="SnT-hZ-wNj" firstAttribute="top" secondItem="WHr-Yg-9kv" secondAttribute="bottom" constant="28" id="cN0-Kq-CCB"/>
+                            <constraint firstItem="5dX-UC-sbg" firstAttribute="bottom" secondItem="DRG-I3-lQy" secondAttribute="bottom" id="dqR-eH-9Dd"/>
+                            <constraint firstItem="5dX-UC-sbg" firstAttribute="bottom" secondItem="2iP-Hw-0mm" secondAttribute="bottom" id="fOh-bk-Cvf"/>
                             <constraint firstItem="KmU-aR-GqC" firstAttribute="top" secondItem="5dX-UC-sbg" secondAttribute="top" id="gFm-7f-jH9"/>
+                            <constraint firstItem="DRG-I3-lQy" firstAttribute="top" secondItem="SnT-hZ-wNj" secondAttribute="bottom" id="itU-J3-oPE"/>
                             <constraint firstItem="KmU-aR-GqC" firstAttribute="height" secondItem="hGi-ZX-K3b" secondAttribute="height" multiplier="1:2.4" id="ltl-Vx-TmF"/>
                             <constraint firstItem="WHr-Yg-9kv" firstAttribute="leading" secondItem="5dX-UC-sbg" secondAttribute="leading" constant="20" id="oll-YT-Md8"/>
+                            <constraint firstItem="DRG-I3-lQy" firstAttribute="leading" secondItem="5dX-UC-sbg" secondAttribute="leading" id="wg2-O1-L4x"/>
+                            <constraint firstItem="5dX-UC-sbg" firstAttribute="trailing" secondItem="2iP-Hw-0mm" secondAttribute="trailing" id="xDf-pn-R4j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5dX-UC-sbg"/>
                     </view>
                     <navigationItem key="navigationItem" id="mY3-lN-RSd"/>
                     <connections>
+                        <outlet property="emptyView" destination="DRG-I3-lQy" id="HYF-dc-WdQ"/>
                         <outlet property="infoView" destination="KmU-aR-GqC" id="Fa2-sK-j4c"/>
+                        <outlet property="listTransButton" destination="VfB-IB-JOP" id="tdO-qA-YnX"/>
                         <outlet property="receiveButton" destination="H37-Xc-wRU" id="0Jo-g2-bPq"/>
                         <outlet property="sendButton" destination="MJO-Rh-b4d" id="Ype-SM-uX4"/>
+                        <outlet property="tableView" destination="2iP-Hw-0mm" id="tRN-bI-kcC"/>
                         <segue destination="Eco-Ir-4Ol" kind="show" identifier="seeAllFavorites" id="vz3-df-6ks"/>
                         <segue destination="xIk-xj-TA6" kind="show" identifier="addNewFavorite" id="vxE-fU-tKs"/>
                     </connections>

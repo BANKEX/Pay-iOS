@@ -78,19 +78,14 @@ enum PredefinedTokens {
 }
 
 class MainInfoController: BaseViewController,
-    UITabBarControllerDelegate,
-FavoriteSelectionDelegate,
-UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
+    UITabBarControllerDelegate,UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     
     @IBOutlet weak var infoView:InfoView!
     @IBOutlet weak var sendButton:ActionButton!
     @IBOutlet weak var receiveButton:ActionButton!
-    
-    var itemsArray = [
-        "CurrentWalletInfoCell",
-        "TransactionHistoryCell"]
-    //                      "FavouritesTitleCell",
-    //                      "FavouritesListWithCollectionCell"]
+    @IBOutlet weak var emptyView:UIView!
+    @IBOutlet weak var tableView:UITableView!
+    @IBOutlet weak var listTransButton:BaseButton!
     
     let keyService = SingleKeyServiceImplementation()
     var numberFormatter:NumberFormatter {
@@ -104,9 +99,6 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     }
     var ethLabel: UILabel!
     var service = RecipientsAddressesServiceImplementation()
-    var favorites: [FavoriteModel]?
-    var favService:RecipientsAddressesService = RecipientsAddressesServiceImplementation()
-    var favoritesToShow = [FavoriteModel]()
     
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()
@@ -116,21 +108,92 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     var selectedToken:ERC20TokenModel?
     var utilsService:UtilTransactionsService!
     var rateSevice = FiatServiceImplementation()
+    var transactions = [ETHTransactionModel]()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+        setupTableView()
         infoView.delegate = self
         prepareButtons()
-//        updateDataOnTheScreen()
+        sendEthService = selectedToken!.address.isEmpty ?
+            SendEthServiceImplementation() :
+            ERC20TokenContractMethodsServiceImplementation()
+        self.transactions = Array(self.sendEthService.getAllTransactions().prefix(3))
+        //updateDataOnTheScreen()
+        if self.transactions.isEmpty {
+            self.emptyView.isHidden = false
+            self.tableView.isHidden = true
+            self.listTransButton.isHidden = true
+        }else {
+            self.emptyView.isHidden = true
+            self.tableView.isHidden = false
+            self.listTransButton.isHidden = false
+        }
+
 //        configureRefreshControl()
-//        favorites = favService.getAllStoredAddresses()
 //        tokensService.updateConversions()
-//        configureNotifications()
-//        tableView.delegate = self
-//        tableView.dataSource = self
+        configureNotifications()
+        
 //        catchUserActivity()
+        //sendFackTrans()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
+        configureNavBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarView?.backgroundColor = .white
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        // testing dynamic links
+        //self.tabBarController?.selectedIndex = AppDelegate.initiatingTabBar.rawValue
+        AppDelegate.initiatingTabBar = .main
+        //
+    }
+    
+//    func sendFackTrans() {
+//        let sendEth = SendEthServiceImplementation()
+//        sendEth.prepareTransactionForSending(destinationAddressString: keyService.selectedWallet()!.address, amountString: "0.001") { (result) in
+//            switch result {
+//            case .Success(let response):
+//                var transaction = response
+//                let token = self.tokensService.selectedERC20Token()
+//                let model = ETHTransactionModel(from:self.keyService.selectedWallet()!.address, to: "0xfa8Ccb56c93F6f6682F89098d5D4f372e3c22504", amount: "0.001", date: Date(), token: token, key: self.keyService.selectedKey()!, isPending: true)
+//                var options = Web3Options.defaultOptions()
+//                options.gasLimit = BigUInt("21000")
+//                let gp = BigUInt(Double("20")! * pow(10, 9))
+//                options.gasPrice = gp
+//                options.from = transaction.options?.from
+//                options.to = transaction.options?.to
+//                options.value = transaction.options?.value
+//                sendEth.send(transactionModel: model, transaction: transaction, options: options, completion: { (result) in
+//                    print("OK")
+//                })
+//            default:break
+//            }
+//        }
+//
+//    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        tableView.separatorColor = WalletColors.disableColor
+        tableView.separatorInset.left = 42.0
+        tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
+        tableView.tableFooterView = UIView()
+        tableView.isScrollEnabled = false
     }
     
     private func prepareButtons() {
@@ -150,6 +213,7 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
         updateWalletAddr()
         updateTokenName()
     }
+    
     private func updateTokenName() {
         guard let selectedToken = selectedToken else { return }
         infoView.tokenNameLabel.text = selectedToken.name
@@ -217,29 +281,7 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        configureNavBar()
-        navigationController?.navigationBar.isHidden = true
-//        putTransactionsInfoIntoItemsArray()
-//        tableView.reloadData()
-    }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .default
-        UIApplication.shared.statusBarView?.backgroundColor = .white
-        navigationController?.navigationBar.isHidden = false
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        // testing dynamic links
-        //self.tabBarController?.selectedIndex = AppDelegate.initiatingTabBar.rawValue
-        AppDelegate.initiatingTabBar = .main
-        //
-    }
     
         
     @IBAction func unwind(segue:UIStoryboardSegue) { }
@@ -276,13 +318,10 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     
     //MARK: - Helpers
     func putTransactionsInfoIntoItemsArray() {
-        sendEthService = tokensService.selectedERC20Token().address.isEmpty ?
+        guard let selectedToken = selectedToken else { return }
+        sendEthService = selectedToken.address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
-        self.itemsArray = [
-            "CurrentWalletInfoCell",
-            "TransactionHistoryCell",//]
-            "FavouritesTitleCell"]
         transactionsToShow = Array(sendEthService.getAllTransactions().prefix(3))
         var arrayOfTransactions = [String]()
         switch transactionsToShow.count {
@@ -295,29 +334,15 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
         default:
             arrayOfTransactions = ["TopRoundedCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "LastTransactionHistoryCell", "BottomRoundedCell"]
         }
-        var arrayOfFavorites = [String]()
-        if let firstThree = favService.getAllStoredAddresses()?.prefix(3) {
-            favoritesToShow = Array(firstThree)
-        }
-        switch favoritesToShow.count {
-        case 0:
-            arrayOfFavorites = ["EmptyLastContactsCell"]
-        case 1:
-            arrayOfFavorites = ["FavoriteContactCell"]
-        case 2:
-            arrayOfFavorites = ["FavoriteContactCell", "FavoriteContactCell"]
-        default:
-            arrayOfFavorites = ["FavoriteContactCell", "FavoriteContactCell", "FavoriteContactCell"]
-            
-        }
         
-        let index = itemsArray.index{$0 == "TransactionHistoryCell"} ?? 0
-        transactionInitialDiff = index + 2
-        itemsArray.insert(contentsOf: arrayOfTransactions, at: index + 1)
-        itemsArray.append(contentsOf: arrayOfFavorites)
+//        let index = itemsArray.index{$0 == "TransactionHistoryCell"} ?? 0
+//        transactionInitialDiff = index + 2
+//        itemsArray.insert(contentsOf: arrayOfTransactions, at: index + 1)
+//        itemsArray.append(contentsOf: arrayOfFavorites)
     }
     
     private func configureNavBar() {
+        navigationController?.navigationBar.isHidden = true
         UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
         UIApplication.shared.statusBarStyle = .lightContent
 //        getBlockNumber { (number) in
@@ -371,48 +396,48 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
         return String(formattedNumber.reversed())
     }
     
-//    private func configureNotifications() {
-//        NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//
-//        }
-//        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
+    private func configureNotifications() {
+        NotificationCenter.default.addObserver(forName: ReceiveRatesNotification.receivedAllRates.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+
+        }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.updateUI()
+                self.tableView.reloadData()
+            }
+        }
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeToken.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
-//    private func updateDataOnTheScreen() {
-//        getBlockNumber { (number) in
-//            self.configureLabel(withNumber: number)
-//            if let address = self.keyService.selectedAddress() {
-//                TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
+    private func updateDataOnTheScreen() {
+            if let address = self.keyService.selectedAddress() {
+                TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
 //                    self.putTransactionsInfoIntoItemsArray()
-//                    self.tableView.reloadData()
+                    //self.getTransactions()
+                    self.transactions = Array(self.sendEthService.getAllTransactions().prefix(3))
+                    self.tableView.reloadData()
 //                    if #available(iOS 10.0, *) {
 //                        self.tableView.refreshControl?.endRefreshing()
 //                    }
-//                }
-//            } else {
+                }
+            } else {
 //                if #available(iOS 10.0, *) {
 //                    self.tableView.refreshControl?.endRefreshing()
 //                }
-//            }
-//        }
-//    }
+            }
+    }
     
     //MARK: - Refresh Control
 //    func configureRefreshControl() {
@@ -429,37 +454,23 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     // MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return itemsArray.count
+        return transactions.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: itemsArray[indexPath.row], for: indexPath)
-        
-        if let cell = cell as? TransactionHistoryCell {
-            let indexOfTransaction = indexPath.row - transactionInitialDiff
-            cell.configure(withTransaction: transactionsToShow[indexOfTransaction], isLastCell: indexOfTransaction == transactionsToShow.count - 1)
-        }
-        if let cell = cell as? TransactionHistorySectionCell {
-            cell.showMoreButton.isHidden = transactionsToShow.count == 0
-        }
-        if let cell = cell as? FavouritesListWithCollectionCell {
-            cell.selectionDelegate = self
-        }
-        
-        if let cell = cell as? WalletIsReadyCell {
-            cell.delegate = self
-            return cell
-        }
-        
-        if let cell = cell as? FavoriteContactCell {
-            let favToShowCount = favoritesToShow.count
-            let name = favoritesToShow[favToShowCount - (itemsArray.count - indexPath.row)].firstName
-            let surname = favoritesToShow[favToShowCount - (itemsArray.count - indexPath.row)].lastname
-            cell.configureCell(withName: name, andSurname: surname, isLast: indexPath.row + 1 == itemsArray.count)
-        }
-        return cell
+        let transInfoCell = tableView.dequeueReusableCell(withIdentifier: TransactionInfoCell.identifer, for: indexPath) as! TransactionInfoCell
+        let selectedTrans = transactions[indexPath.row]
+        transInfoCell.transaction = selectedTrans
+        return transInfoCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 53.0
     }
     
     
@@ -488,18 +499,4 @@ UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     }
 }
 
-extension MainInfoController: CloseNewWalletNotifDelegate {
-    func didClose() {
-        itemsArray = [
-            "CurrentWalletInfoCell",
-            "TransactionHistoryCell",//]
-            "FavouritesTitleCell",
-            "FavouritesListWithCollectionCell"]
-        
-        putTransactionsInfoIntoItemsArray()
-        //tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
-        
-        UserDefaults.standard.set(false, forKey: "isWalletNew")
-    }
-}
 
