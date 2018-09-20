@@ -421,6 +421,18 @@ class MainInfoController: BaseViewController,
         }
     }
     
+    func deleteButtonTapped() {
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertVC.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+        let deleteAction = UIAlertAction(title:"Delete", style: .destructive) { _ in
+            guard let addr = self.selectedToken?.address else { return }
+            self.tokensService.deleteToken(with: addr)
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertVC.addAction(deleteAction)
+        present(alertVC, animated: true)
+    }
+    
     private func updateDataOnTheScreen() {
             if let address = self.keyService.selectedAddress() {
                 TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
@@ -450,6 +462,7 @@ class MainInfoController: BaseViewController,
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //updateDataOnTheScreen()
     }
+    
     
     // MARK: - Table view data source
     

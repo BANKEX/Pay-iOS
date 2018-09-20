@@ -10,6 +10,7 @@ import UIKit
 
 protocol InfoViewDelegate:class {
     func backButtonTapped()
+    func deleteButtonTapped()
 }
 
 class InfoView: UIView {
@@ -54,5 +55,9 @@ class InfoView: UIView {
     
     @IBAction func stepBack() {
         delegate?.backButtonTapped()
+    }
+    
+    @IBAction func deleteToken() {
+        delegate?.deleteButtonTapped()
     }
 }
