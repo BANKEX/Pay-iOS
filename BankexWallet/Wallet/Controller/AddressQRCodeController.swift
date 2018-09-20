@@ -9,63 +9,82 @@
 import UIKit
 import web3swift
 
-class AddressQRCodeController: UIViewController {
+class AddressQRCodeController: BaseViewController {
 
     var addressToGenerateQR: String?
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var copiedIcon: UIImageView!
-    @IBOutlet weak var copiedLabel: UILabel!
     @IBOutlet weak var copyAddressButton: UIButton!
 
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     var navTitle: String?
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-    }
+    lazy var clipView:UIView = {
+        let clipView = UIView()
+        clipView.backgroundColor = UIColor(hex: "B8BFC9")
+        return clipView
+    }()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationBar()
+        setupClipboardView()
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        updateUI()
+    }
+    
+    private func updateUI() {
+        self.title = navTitle ?? NSLocalizedString("Receive", comment: "")
         imageView.image = generateQRCode(from: addressToGenerateQR)
         addressLabel.text = addressToGenerateQR?.lowercased()
         walletNameLabel.text = keysService.selectedWallet()?.name
-        copiedIcon.alpha = 0
-        copiedLabel.alpha = 0
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    private func setupNavBar() {
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        let sendButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAddress(_:)))
+        self.navigationItem.rightBarButtonItem = sendButton
         addBackButton()
     }
     
-    func addBackButton() {
+    private func addBackButton() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
-        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        button.setTitle(" Wallet", for: .normal)
+        button.setTitleColor(WalletColors.mainColor, for: .normal)
         //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-        button.accessibilityLabel = "Back"
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     @objc func backButtonTapped() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
+    
+    private func setupClipboardView() {
+        clipView.frame = CGRect(x: 0, y: view.bounds.maxY, width: view.bounds.width, height: 58.0)
+        let heightLabel = clipView.bounds.height/2
+        let label = UILabel(frame: CGRect(x: 0, y: clipView.bounds.midY - heightLabel/2, width: clipView.bounds.width, height: heightLabel))
+        label.textAlignment = .center
+        label.text = "Passphrase copied to clipboard"
+        label.textColor = UIColor(hex: "F9FAFC")
+        label.font = UIFont.systemFont(ofSize: 15.0)
+        clipView.addSubview(label)
+        self.view.addSubview(clipView)
+    }
+    
 
-    func setNavigationBar() {
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        let sendButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAddress(_:)))
-        self.navigationItem.rightBarButtonItem = sendButton
-        self.title = navTitle ?? NSLocalizedString("Receive", comment: "")
-        navigationItem.backBarButtonItem?.title = "Back"
-    }
 
     @objc func shareAddress(_ sender : UIBarButtonItem) {
 
@@ -84,34 +103,17 @@ class AddressQRCodeController: UIViewController {
 
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = addressToGenerateQR
-
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.1,
-                           animations: {
-                            self.copyAddressButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.1) {
-                    self.copyAddressButton.transform = CGAffineTransform.identity
-
-                }
-            })
-        }
-
-        DispatchQueue.main.async {
-            self.copiedIcon.alpha = 0.0
-            self.copiedLabel.alpha = 0.0
-            UIView.animate(withDuration: 1.0,
-                           animations: {
-                self.copiedIcon.alpha = 1.0
-                self.copiedLabel.alpha = 1.0
-            }, completion: { _ in
-                UIView.animate(withDuration: 2.0, animations: {
-                    self.copiedIcon.alpha = 0.0
-                    self.copiedLabel.alpha = 0.0
+            UIView.animate(withDuration: 0.7, animations: {
+                self.clipView.frame.origin.y = self.view.bounds.maxY - 58.0
+                self.view.layoutIfNeeded()
+            }) { _ in
+                UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
+                    self.clipView.frame.origin.y = self.view.bounds.maxY
+                    self.view.layoutIfNeeded()
                 })
-            })
+            }
         }
-
     }
 
     func generateQRCode(from string: String?) -> UIImage? {

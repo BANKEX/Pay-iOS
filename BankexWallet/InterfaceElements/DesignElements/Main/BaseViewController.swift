@@ -15,6 +15,7 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         UIApplication.shared.statusBarView?.backgroundColor = .white
         view.backgroundColor = WalletColors.bgMainColor
+        navigationController?.navigationBar.isTranslucent = false
     }
 
     
