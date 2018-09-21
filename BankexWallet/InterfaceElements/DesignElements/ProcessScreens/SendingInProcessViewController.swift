@@ -55,6 +55,7 @@ SendingResultInformation {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         titleLabel?.text = textToShow == nil ? NSLocalizedString("Sending funds", comment: "") : textToShow!
         processTitleLabel?.text = NSLocalizedString("Retrieving data", comment: "")
     }
@@ -67,7 +68,6 @@ SendingResultInformation {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         if fromEnterScreen {
             DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate

@@ -27,6 +27,18 @@ class CreateTokenController: BaseViewController {
     var tokensList: [ERC20TokenModel]?
     var tokensAvailability: [Bool]?
     var walletData = WalletData()
+    lazy var supportView:UIView = {
+        let view = UIView()
+        view.backgroundColor = WalletColors.QRReader.successColor
+        return view
+    }()
+    lazy var supportLbl:UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 15.0)
+        label.textAlignment = .center
+        return label
+    }()
     
     
     
@@ -35,10 +47,17 @@ class CreateTokenController: BaseViewController {
         view.backgroundColor = WalletColors.bgMainColor
         setupNavBar()
         setupTableView()
+        setupSupportView()
         self.hideKeyboardWhenTappedAround()
         //self.setupViewResizerOnKeyboardShown()
         searchBar.delegate = self
-        bottomContraint.constant = -58.0
+    }
+    
+    private func setupSupportView() {
+        supportView.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58.0)
+        supportLbl.frame = CGRect(x: 0, y: supportView.bounds.midY - 15.0, width: supportView.bounds.width, height: 30.0)
+        supportView.addSubview(supportLbl)
+        self.view.addSubview(supportView)
     }
     
     fileprivate func setupTableView() {
@@ -68,23 +87,15 @@ class CreateTokenController: BaseViewController {
         }
         DispatchQueue.main.async {
             if self.needAddTokenAnimation {
-                self.addTokenLbl.text = "Token was added to your wallet"
-                self.needAddTokenAnimation = false
-                UIView.animate(withDuration: 0.6,animations: {
-                    if #available(iOS 11.0, *) {
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        let bottomInset = appDelegate.window?.safeAreaInsets.bottom
-                        self.bottomContraint.constant = bottomInset!
-                    }else {
-                        self.bottomContraint.constant = 0
-                    }
-                    self.view.layoutIfNeeded()
-                }) { (_) in
-                    UIView.animate(withDuration: 0.7,delay:0.5,animations: {
-                        self.bottomContraint.constant = -58.0
-                        self.view.layoutIfNeeded()
+                self.supportLbl.text = "Token was added to your wallet"
+                UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
+                    self.supportView.frame.origin.y = self.view.bounds.height - 58.0
+                }, completion: { _ in
+                    UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut
+                        , animations: {
+                            self.supportView.frame.origin.y = self.view.bounds.height
                     })
-                }
+                })
             }
             
             self.searchBar(self.searchBar, textDidChange: searchText)
@@ -189,12 +200,12 @@ extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
         let num = floor(Double(indexPath.row/2))
         let tokenToAdd = self.tokensList![Int(num)]
         if tokenToAdd.isAdded {
-            addTokenLbl.text = "Token is already added to your wallet"
-            UIView.animate(withDuration: 0.6,animations: {
-                self.showAnimation(with: self.bottomContraint)
-            }) { (_) in
-                UIView.animate(withDuration: 0.7,delay:0.5,animations: {
-                    self.hideAnimation(with: self.bottomContraint)
+            supportLbl.text = "Token is already added to your wallet"
+            UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
+                self.supportView.frame.origin.y = self.view.bounds.height - 58.0
+            }) { _ in
+                UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
+                    self.supportView.frame.origin.y = self.view.bounds.height
                 })
             }
             return

@@ -7,16 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     func updateToNSSting() -> NSString {
         return NSString(string:self)
     }
     
-    func formattedAddrToken() -> String {
-        let prefix = self.prefix(6)
-        let suffix = self.suffix(6)
+    func formattedAddrToken(number:Int = 6) -> String {
+        let prefix = self.prefix(number)
+        let suffix = self.suffix(number)
         return prefix + "..." + suffix
+    }
+    
+    func size(_ font:UIFont) -> CGSize {
+        let str = self as NSString
+        return str.size(withAttributes: [NSAttributedStringKey.font:font])
     }
     
     func stripZeros() -> String {

@@ -21,15 +21,22 @@ class SendingSuccessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addBackButton()
+        //addBackButton()
+        
     }
     
     // MARK:
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
         if let amount = transactionAmount {
             transactionSucceedLabel.text = "Your \(amount) \(tokenService.selectedERC20Token().symbol) has been sent successfully"
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = true
     }
     
     func addBackButton() {

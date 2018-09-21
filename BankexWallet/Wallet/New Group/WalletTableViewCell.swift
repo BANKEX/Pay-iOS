@@ -18,20 +18,8 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet weak var symbolLbl:UILabel!
     
     
-    var utilsService:UtilTransactionsService?
-    
-    var wallet:KeyWalletModel! {
-        didSet {
-            configureWallet()
-        }
-    }
-    
-    
-    var token:ERC20TokenModel! {
-        didSet {
-            configureToken()
-        }
-    }
+    var utilsService = UtilTransactionsServiceImplementation()
+    let keyService = SingleKeyServiceImplementation()
     
     
     static let identifier:String = String(describing: WalletTableViewCell.self)
@@ -42,31 +30,31 @@ class WalletTableViewCell: UITableViewCell {
         selectionStyle = .none
         layer.cornerRadius = 8.0
         backgroundColor = .white
+        setData()
     }
     
-    func configureWallet() {
-        nameWalletLbl.text = wallet.name
-    }
-    
-    func configureToken() {
-        walletImageView.image = PredefinedTokens(with: token.symbol).image()
-        symbolLbl.text = token.symbol.uppercased()
+    func setData() {
         updateLayout()
+        if let wallet = keyService.selectedWallet() {
+            nameWalletLbl.text = wallet.name
+            walletImageView.image = PredefinedTokens.Ethereum.image()
+            symbolLbl.text = "ETH"
+        }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        setData()
         updateLayout()
     }
     
     func updateLayout() {
-        utilsService = token.address.isEmpty ? UtilTransactionsServiceImplementation() :
-            CustomTokenUtilsServiceImplementation()
         updateBalance()
     }
     func updateBalance() {
+        guard let wallet = keyService.selectedWallet() else { return }
         let selectedAddress = wallet.address
-        utilsService?.getBalance(for: token.address, address: selectedAddress) { (result) in
+        utilsService.getBalance(for: "", address: selectedAddress) { (result) in
             switch result {
             case .Success(let response):
                 // TODO: it shouldn't be here anyway and also, lets move to background thread

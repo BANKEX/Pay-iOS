@@ -216,7 +216,7 @@ class MainInfoController: BaseViewController,
     
     private func updateTokenName() {
         guard let selectedToken = selectedToken else { return }
-        infoView.tokenNameLabel.text = selectedToken.name
+        infoView.tokenNameLabel?.text = selectedToken.name
     }
     
     private func updateRate() {
@@ -304,6 +304,8 @@ class MainInfoController: BaseViewController,
             controller.selectedFavoriteName = selectedFavName
             selectedFavAddress = nil
             selectedFavName = nil
+            controller.selectedToken = self.selectedToken
+            controller.currentBalance = infoView.balanceLabel.text
         }
     }
     

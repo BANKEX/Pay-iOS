@@ -62,12 +62,22 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupStatusBarColor()
         updateTableView()
+        navigationController?.isNavigationBarHidden = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -97,6 +107,7 @@ class HomeViewController: BaseViewController {
         dataQueue.async {
             self.walletData.update(callback: { (etherToken, transactions, availableTokens) in
                 DispatchQueue.main.async {
+                    self.etherToken = etherToken
                     self.tokens = availableTokens
                     self.tableView.reloadData()
                     self.view.stopSkeletonAnimation()
@@ -106,7 +117,6 @@ class HomeViewController: BaseViewController {
             })
         }
     }
-    
     
     fileprivate func setupTableView() {
         tableView.backgroundColor = .clear
@@ -169,9 +179,6 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if HomeSections.Ethereum.rawValue == indexPath.section {
             if let walletCell = tableView.dequeueReusableCell(withIdentifier: WalletTableViewCell.identifier, for: indexPath) as? WalletTableViewCell {
-                let selectedWallet = keyService.selectedWallet()
-                walletCell.wallet = selectedWallet
-                walletCell.token = tokenSerive.selectedERC20Token()
                 return walletCell
             }
         }else if HomeSections.Tokens.rawValue == 1 {
@@ -220,9 +227,11 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if HomeSections.Ethereum.rawValue == indexPath.section {
             selectedToken = tokenSerive.selectedERC20Token()
+            tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
         }else {
             let num = floor(Double(indexPath.row/2))
             selectedToken = tokens[Int(num)]
+            tokenSerive.updateSelectedToken(to: selectedToken.address, completion: nil)
         }
         performSegue(withIdentifier: "walletInfo", sender: nil)
     }

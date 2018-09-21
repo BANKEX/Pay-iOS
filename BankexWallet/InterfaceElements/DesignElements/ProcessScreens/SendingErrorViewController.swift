@@ -12,7 +12,7 @@ protocol Retriable {
     func retryExisitngTransaction()
 }
 
-class SendingErrorViewController: UIViewController {
+class SendingErrorViewController: BaseViewController {
     
     var error: String?
     
@@ -22,6 +22,15 @@ class SendingErrorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addBackButton()
+        layoutTitle()
+    }
+    
+    func layoutTitle() {
+        let lbl = UILabel()
+        lbl.text = "Send"
+        lbl.font = UIFont.systemFont(ofSize: 17.0, weight:.semibold)
+        lbl.textColor = .white
+        navigationItem.titleView = lbl
     }
     
     @IBAction func retryTransaction(_ sender: Any) {
@@ -46,11 +55,28 @@ class SendingErrorViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.navigationBar.barTintColor = WalletColors.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        navigationController?.navigationBar.tintColor = .white
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.barTintColor = .white
+        UIApplication.shared.statusBarView?.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = WalletColors.mainColor
+    }
+    
     func addBackButton() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle("  \(NSLocalizedString("Home", comment: ""))", for: .normal)
-        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
+        button.setTitle(" \(NSLocalizedString("Wallet", comment: ""))", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(done(_:)), for: .touchUpInside)
     }

@@ -11,7 +11,7 @@ import UIKit
 class QRButton:UIButton {
     override func awakeFromNib() {
         self.layer.borderColor = WalletColors.mainColor.cgColor
-        self.layer.borderWidth = 2.0
+        self.layer.borderWidth = 1.5
         self.layer.cornerRadius = 8.0
     }
 }
