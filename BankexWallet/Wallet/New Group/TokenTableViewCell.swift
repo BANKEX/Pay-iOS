@@ -56,15 +56,15 @@ class TokenTableViewCell: UITableViewCell {
         
         addressToken.text = token.address.formattedAddrToken()
         let tokenCase = PredefinedTokens(with: token.symbol)
-        if tokenCase == .NotDefined {
-            tokenImageView.isHidden = true
-            tokenView.isHidden = false
-            tokenView.letter = token.name.prefix(1).uppercased()
-        }else {
-            tokenView.isHidden = true
-            tokenImageView.isHidden = false
-            tokenImageView.image = tokenCase.image()
-        }
+//        if tokenCase == .NotDefined {
+//            tokenImageView.isHidden = true
+//            tokenView.isHidden = false
+//        }else {
+//            tokenView.isHidden = true
+//            tokenImageView.isHidden = false
+//        }
+        tokenView.letter = token.name.prefix(1).uppercased()
+
         nameToken.text = token.name
         symbolToken.text = token.symbol.uppercased()
         

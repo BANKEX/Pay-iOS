@@ -48,7 +48,7 @@ class HomeViewController: BaseViewController {
     lazy var addTokenBtn:BaseButton = {
         let button = BaseButton()
         let widthBtn:CGFloat = 80.0
-        button.frame = CGRect(x: tableView.bounds.width - widthBtn, y: 90.0 - 22.0, width: widthBtn, height: 22.0)
+        button.frame = CGRect(x: tableView.bounds.width - widthBtn, y: 65.0 - 22.0, width: widthBtn, height: 22.0)
         button.setTitle("Add Tokens", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
         button.addTarget(self, action: #selector(self.createToken), for: .touchUpInside)
@@ -198,14 +198,14 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == HomeSections.Ethereum.rawValue {
             let ethView = UIView()
-            ethView.backgroundColor = WalletColors.bgMainColor
+            ethView.backgroundColor = .clear
             ethHeader.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 22.0)
             ethView.addSubview(ethHeader)
             return ethView
         }else if section == HomeSections.Tokens.rawValue {
             let tokensView = UIView()
-            tokensView.backgroundColor = WalletColors.bgMainColor
-            tokensHeader.frame = CGRect(x: 0, y: 90.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
+            tokensView.backgroundColor = .clear
+            tokensHeader.frame = CGRect(x: 0, y: 65.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
             tokensView.addSubview(tokensHeader)
             tokensView.addSubview(addTokenBtn)
             return tokensView
@@ -214,7 +214,7 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return HomeSections.Ethereum.rawValue == section ? 52.0 : 90.0
+        return HomeSections.Ethereum.rawValue == section ? 52.0 : 65.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -29,6 +29,7 @@ class TokenView:UIView {
         label.frame.origin = CGPoint(x: self.bounds.midX - self.bounds.width/3, y: 0)
         label.frame.size = CGSize(width: self.bounds.width, height: self.bounds.height)
         label.textColor = WalletColors.mainColor
+        label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.boldSystemFont(ofSize: 52.0)
         label.backgroundColor = .clear
         self.addSubview(label)

@@ -79,12 +79,13 @@ extension CreateTokenController: UISearchBarDelegate, UITextFieldDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text)
-        if searchBar.text != nil && searchBar.text! != "" && (self.tokensList != nil) {
-            let tokenToAdd = self.tokensList?.first
-            chosenToken = tokenToAdd
-            performSegue(withIdentifier: "addChosenToken", sender: self)
-        }
+//        print(searchBar.text)
+//        if searchBar.text != nil && searchBar.text! != "" && (self.tokensList != nil) {
+//            let tokenToAdd = self.tokensList?.first
+//            chosenToken = tokenToAdd
+//            performSegue(withIdentifier: "addChosenToken", sender: self)
+//        }
+        searchBar.resignFirstResponder()
     }
     
 }

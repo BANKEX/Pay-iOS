@@ -103,16 +103,12 @@ class AddressQRCodeController: BaseViewController {
 
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = addressToGenerateQR
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.7, animations: {
-                self.clipView.frame.origin.y = self.view.bounds.maxY - 58.0
-                self.view.layoutIfNeeded()
-            }) { _ in
-                UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
-                    self.clipView.frame.origin.y = self.view.bounds.maxY
-                    self.view.layoutIfNeeded()
-                })
-            }
+        UIView.animate(withDuration: 0.7, animations: {
+            self.clipView.frame.origin.y = self.view.bounds.maxY - 58.0
+        }) { _ in
+            UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
+                self.clipView.frame.origin.y = self.view.bounds.maxY
+            })
         }
     }
 

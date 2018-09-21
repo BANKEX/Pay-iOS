@@ -44,8 +44,11 @@ class ActionButton:UIButton {
         title = ""
         titleLabel?.isHidden = true
         backgroundColor = .white
-        layer.cornerRadius = 8.0
-        setupDefaultShadow()
+        layer.cornerRadius = 5.0
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowRadius = 10
+        layer.shadowOffset = CGSize(width: 0, height: 4.0)
+        layer.shadowOpacity = 0.2
         layoutTitle()
         layoutImage()
     }
