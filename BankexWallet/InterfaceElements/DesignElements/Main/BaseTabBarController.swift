@@ -18,8 +18,10 @@ class BaseTabBarController: UITabBarController {
         UITabBar.appearance().clipsToBounds = true
         tabBar.tintColor = WalletColors.mainColor
         tabBar.barTintColor = .white
-        tabBar.items?.last?.image = UIImage(named:"Wallet")
-        tabBar.items?.last?.selectedImage = UIImage(named:"Wallet_Selected")
+        tabBar.items?.first?.image = UIImage(named:"Wallet")
+        tabBar.items?.first?.selectedImage = UIImage(named:"Wallet_Selected")
+        tabBar.items?[1].image = UIImage(named:"contacts_icon")
+        tabBar.items?[1].selectedImage = UIImage(named:"contacts_sel_icon")
     }
 
 }

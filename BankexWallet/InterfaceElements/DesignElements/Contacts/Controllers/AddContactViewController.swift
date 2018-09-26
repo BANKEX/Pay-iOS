@@ -62,8 +62,7 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
         firstNameTextField?.becomeFirstResponder()
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeBecomeResponser)))
         setupTextFields()
-        setupNavBar()
-        setupHeader()        
+        setupHeader()
         setupPasteButton()
     }
     
@@ -85,14 +84,6 @@ class AddContactViewController: UITableViewController,UITextFieldDelegate {
     
     func clearInfo() {
         [firstNameTextField,lastNameTextField,addressTextField].forEach { tf in tf?.text = "" }
-    }
-    
-    func setupNavBar() {
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationItem.title = NSLocalizedString("NewContact", comment: "")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: ""), style: .plain, target: self, action: #selector(back))
-        doneButton.accessibilityLabel = "Done"
-        navigationItem.rightBarButtonItem = doneButton
     }
     
     func setupTextFields() {

@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ListContactsViewController: UIViewController,UISearchResultsUpdating {
+class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
+    
+    enum State {
+        case empty,fill,loading
+    }
     
     
     //MARK: - Properties
@@ -23,7 +27,15 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     var dictContacts:[String:[FavoriteModel]] = [:]
     var sectionsTitles:[String] = []
     var searchViewController:UISearchController = UISearchController(searchResultsController: nil)
+    var state:State = .loading {
+        didSet {
+            setFooterView()
+            tableView.reloadData()
+        }
+    }
     @IBOutlet weak var searchFooter:SearchFooter!
+    @IBOutlet weak var searchBar:UISearchBar!
+    @IBOutlet weak var emptyView:UIView!
     
     
     //MARK: - IBOutlets
@@ -34,7 +46,6 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
-        addBackButton()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = searchFooter
@@ -42,19 +53,15 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
         setupSearchVC()
     }
     
-    func addBackButton() {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
-        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
-        //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func backButtonTapped() {
-        navigationController?.popToRootViewController(animated: true)
+    func setFooterView() {
+        switch state {
+        case .loading:
+            break
+        case .empty:
+            emptyView.isHidden = false
+        case .fill:
+            emptyView.isHidden = true
+        }
     }
     
     
@@ -87,24 +94,20 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.listContacts = self.service.getAllStoredAddresses()
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-        }
+        state = isNoContacts() ? .empty : .fill
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = false
-        }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     
     //MARK: - Methods
     
-    
+    func isNoContacts() -> Bool {
+        guard let contacts = self.listContacts else { return true }
+        return contacts.isEmpty
+    }
     
     func updateArray() {
         sectionsTitles.removeAll()
@@ -146,29 +149,20 @@ class ListContactsViewController: UIViewController,UISearchResultsUpdating {
 
     
     func setupSearchVC() {
-        if #available(iOS 11.0, *) {
-            navigationItem.searchController = searchViewController
-            searchViewController.obscuresBackgroundDuringPresentation = false
-            searchViewController.searchResultsUpdater = self
-            definesPresentationContext = true
-            searchViewController.searchBar.accessibilityLabel = "SearchVC"
-        }else {
-            //TODO
-        }
+       searchBar.tintColor = WalletColors.mainColor
+        searchBar.barTintColor = WalletColors.bgMainColor
+        searchBar.backgroundImage = UIImage()
+        searchBar.changeSearchBarColor(color: WalletColors.disableColor)
+        searchBar.changeSearchBarTextColor(color: WalletColors.separatorColor)
+        searchBar.placeholder = "Search Contact"
     }
     
     func setupNavbar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.title = NSLocalizedString("Contacts", comment: "")
-        if #available(iOS 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
         let addBtn:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(transitionToAddContact))
         addBtn.accessibilityLabel = "btnAddContact"
         navigationItem.setRightBarButton(addBtn, animated: false)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title:NSLocalizedString("Home", comment: ""), style: .plain, target: self, action: nil)
     }
     
     
@@ -206,6 +200,57 @@ extension ListContactsViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "ProfileContact", sender: nil)
     }
+}
+
+extension ListContactsViewController:UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if isFiltering() {
+            return 1
+        }else {
+            return sectionsTitles.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+            searchFooter.establishFiltering(filteringCount: filteredContacts.count, total: listContacts?.count ?? 0)
+            return filteredContacts.count
+        }
+        searchFooter.establishNotFiltering()
+        let nameofSection = sectionsTitles[section]
+        return (dictContacts[nameofSection]?.count)!
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier:ContactCell.identifier, for: indexPath) as? ContactCell {
+            if isFiltering() {
+                cell.contact = filteredContacts[indexPath.row]
+            }else {
+                guard let currentContacts = dictContacts[sectionsTitles[indexPath.section]] else { return UITableViewCell() }
+                cell.contact = currentContacts[indexPath.row]
+            }
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if isFiltering() {
+            return ""
+        }else {
+            return sectionsTitles[section]
+        }
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        if isFiltering() {
+            return nil
+        }else {
+            return sectionsTitles
+        }
+    }
+    
+    
 }
 
 
