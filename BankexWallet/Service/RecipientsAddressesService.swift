@@ -9,7 +9,7 @@
 import UIKit
 import SugarRecord
 protocol RecipientsAddressesService {
-    func store(address: String, with firstName: String, lastName:String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void)
+    func store(address: String, with name:String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void)
     func getAllStoredAddresses() -> [FavoriteModel]?
     func clearAllSavedAddresses()
     func delete(with address: String, completionHandler: (() -> Void)?)
@@ -32,15 +32,14 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         return false
     }
     
-    func store(address: String, with firstName: String, lastName: String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void) {
+    func store(address: String, with name:String, isEditing editing: Bool, completionHandler: @escaping (Error?) -> Void) {
         do {
             try db.operation({ (context, save) in
                 
                 if let contact = try context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "address == %@", address))).first {
                     if editing {
                         contact.address = address
-                        contact.firstName = firstName
-                        contact.lastName = lastName
+                        contact.name = name
                         save()
                         DispatchQueue.main.async {
                             completionHandler(nil)
@@ -51,10 +50,10 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
                             completionHandler(error)
                         }
                     }
-                } else if let contact = try context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "(firstName == %@) AND (lastName == %@)", firstName,lastName))).first {
+                } else if let contact = try context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "name == %@", name))).first {
                     if editing {
                         contact.address = address
-                        contact.firstName = firstName
+                        contact.name = name
                         save()
                         DispatchQueue.main.async {
                             completionHandler(nil)
@@ -67,10 +66,8 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
                     }
                 } else {
                     let recepientAddress: FavoritesAddress = try context.new()
-                    recepientAddress.firstName = firstName
-                    recepientAddress.lastName = lastName
+                    recepientAddress.name = name
                     recepientAddress.address = address
-                    
                     try context.insert(recepientAddress)
                     save()
                     DispatchQueue.main.async {
@@ -86,18 +83,16 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
     
     func getAllStoredAddresses() -> [FavoriteModel]? {
         
-        let request = FetchRequest<FavoritesAddress>().sorted(with: "lastName", ascending: true)
+        let request = FetchRequest<FavoritesAddress>().sorted(with: "name", ascending: true)
         
         do {
             let addresses = try db.fetch(request)
             let sortedAddresses = addresses.map({ (recepientAddress) -> FavoriteModel in
-                let fName = recepientAddress.firstName  ?? ""
-                let lName = recepientAddress.lastName ?? ""
+                let name = recepientAddress.name ?? ""
                 let address = recepientAddress.address ?? ""
                 let noteString = recepientAddress.note
-                return FavoriteModel(firstName: fName, lastname: lName, address: address, lastUsageDate: nil, note: noteString)
+                return FavoriteModel(name: name, address: address, lastUsageDate: nil, note: noteString)
             })
-            
             return sortedAddresses
         } catch {
             print(error)
@@ -112,11 +107,10 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         do {
             let addresses = try db.fetch(request)
             guard let firstAddress = addresses.first else { return nil }
-                let fName = firstAddress.firstName  ?? ""
-                let lName = firstAddress.lastName ?? ""
+                let name = firstAddress.name ?? ""
                 let address = firstAddress.address ?? ""
                 let noteString = firstAddress.note
-                return FavoriteModel(firstName: fName, lastname: lName, address: address, lastUsageDate: nil, note: noteString)
+            return FavoriteModel(name:name, address: address, lastUsageDate: nil, note: noteString)
         } catch {
             print(error)
         }
@@ -157,10 +151,10 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         }
     }
     
-    func updateAddressBylastName(newAddress address: String, byName name: String) {
+    func updateAddressByName(newAddress address: String, byName name: String) {
         do {
             try db.operation { (context, save) in
-                if let data = try? context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "lastName == %@", name))).first {
+                if let data = try? context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "name == %@", name))).first {
                     data?.address = address
                     save()
                 }
@@ -183,24 +177,11 @@ class RecipientsAddressesServiceImplementation: RecipientsAddressesService {
         }
     }
     
-    func updateFirstName(newName name: String, byAddress address: String) {
+    func updateName(newName name: String, byAddress address: String) {
         do {
             try db.operation { (context, save) in
                 if let data = try? context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "address == %@", address))).first {
-                    data?.firstName = name
-                    save()
-                }
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
-    func updateLastName(newName name: String, byAddress address: String) {
-        do {
-            try db.operation { (context, save) in
-                if let data = try? context.fetch(FetchRequest<FavoritesAddress>().filtered(with: NSPredicate(format: "address == %@", address))).first {
-                    data?.lastName = name
+                    data?.name = name
                     save()
                 }
             }

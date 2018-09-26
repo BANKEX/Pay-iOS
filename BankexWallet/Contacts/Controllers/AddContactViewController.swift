@@ -102,32 +102,24 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     
     
     @IBAction func done() {
-//        if firstNameTextField.text == nil && lastNameTextField.text != nil && lastNameTextField.text != "" {
-//            firstNameTextField.text = ""
-//        }
-//        if lastNameTextField.text == nil && firstNameTextField.text != nil && firstNameTextField.text != "" {
-//            lastNameTextField.text = ""
-//        }
-//
-//        guard let firstName = firstNameTextField?.text,let lastName = lastNameTextField?.text,let address = addressTextField?.text else { return }
-//        guard let ethAddress = EthereumAddress(addressTextField?.text ?? "") else {
-//            showAlert(with: "Incorrect address", message: "Please enter valid address")
-//            return
-//        }
-//        service.store(address: address, with: firstName,lastName: lastName , isEditing: false) { (error) in
-//            if error?.localizedDescription == "Address already exists in the database" {
-//                self.showAlert(with: "Same Address", message: "Address already exists in your contacts")
-//                return
-//            } else if error?.localizedDescription == "Name already exists in the database" {
-//                self.showAlert(with: "Same Name", message: "Name already exists in your contacts")
-//                return
-//            } else if error != nil {
-//                return
-//            } else {
-//                self.navigationController?.popToRootViewController(animated: true)
-//            }
-//
-//        }
+        guard let nameContact = nameContactTextField?.text, let address = addressTextField?.text else { return }
+        guard let ethAddress = EthereumAddress(addressTextField?.text ?? "") else {
+            showAlert(with: "Incorrect address", message: "Please enter valid address")
+            return
+        }
+        service.store(address: address, with: nameContact , isEditing: false) { (error) in
+            if error?.localizedDescription == "Address already exists in the database" {
+                self.showAlert(with: "Same Address", message: "Address already exists in your contacts")
+                return
+            } else if error?.localizedDescription == "Name already exists in the database" {
+                self.showAlert(with: "Same Name", message: "Name already exists in your contacts")
+                return
+            } else if error != nil {
+                return
+            } else {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
         
         
     }

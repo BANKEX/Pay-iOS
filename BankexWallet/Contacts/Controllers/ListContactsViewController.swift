@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
+class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     
     enum State {
         case empty,fill,loading
@@ -26,7 +26,6 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
     var filteredContacts = [FavoriteModel]()
     var dictContacts:[String:[FavoriteModel]] = [:]
     var sectionsTitles:[String] = []
-    var searchViewController:UISearchController = UISearchController(searchResultsController: nil)
     var state:State = .loading {
         didSet {
             setFooterView()
@@ -49,9 +48,13 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = searchFooter
+        tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
         setupNavbar()
         setupSearchVC()
+        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.resign)))
     }
+    
+    
     
     func setFooterView() {
         switch state {
@@ -64,6 +67,10 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
         }
     }
     
+    @IBAction func resign() {
+        view.endEditing(true)
+    }
+    
     
     func chooseContact(contact:FavoriteModel) {
         var selectedRow = 0
@@ -71,7 +78,7 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
         loadViewIfNeeded()
         viewDidLoad()
         viewWillAppear(false)
-        let firstLetter = String(contact.lastname.prefix(1).uppercased())
+        let firstLetter = String(contact.name.prefix(1).uppercased())
         for (section,letter) in sectionsTitles.enumerated() {
             if letter == firstLetter {
                 selectedSection = section
@@ -89,8 +96,6 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
         tableView(tableView, didSelectRowAt: IndexPath(row: selectedRow, section: selectedSection))
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = .white
@@ -98,9 +103,6 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
         state = isNoContacts() ? .empty : .fill
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
     
     
     //MARK: - Methods
@@ -115,7 +117,7 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
         dictContacts.removeAll()
         guard let contacts = listContacts else { return }
         for contact in contacts {
-            let word = String(contact.lastname.prefix(1))
+            let word = String(contact.name.prefix(1))
             let singleWord = word.capitalized
             if dictContacts[singleWord] == nil {
                 dictContacts[singleWord] = [contact]
@@ -130,19 +132,19 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
 
     
     func searchBarIsEmpty() -> Bool {
-        return searchViewController.searchBar.text?.isEmpty ?? true
+        return searchBar.text?.isEmpty ?? true
     }
     
     
     func isFiltering() -> Bool {
-        return !searchBarIsEmpty() && searchViewController.isActive
+        return !searchBarIsEmpty() && searchBar.isFirstResponder
     }
     
     
     func filterContentForSearchText(_ searchText:String) {
         if let contacts = listContacts {
             filteredContacts = contacts.filter({ (contact:FavoriteModel) -> Bool in
-                return contact.firstName.lowercased().contains(searchText.lowercased()) || contact.lastname.lowercased().contains(searchText.lowercased())
+                return contact.name.lowercased().contains(searchText.lowercased()) || contact.name.lowercased().contains(searchText.lowercased())
             })
             tableView.reloadData()
         }
@@ -156,6 +158,7 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
         searchBar.changeSearchBarColor(color: WalletColors.disableColor)
         searchBar.changeSearchBarTextColor(color: WalletColors.separatorColor)
         searchBar.placeholder = "Search Contact"
+        searchBar.delegate = self
     }
     
     func setupNavbar() {
@@ -172,25 +175,27 @@ class ListContactsViewController: BaseViewController,UISearchResultsUpdating {
         performSegue(withIdentifier: "addContactSegue", sender: self)
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContentForSearchText(searchBar.text!)
     }
     
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ProfileContact" {
-            guard let destVC = segue.destination as? ProfileContactViewController else { return }
-            guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
-            if isFiltering() {
-                destVC.selectedContact = filteredContacts[selectedIndexPath.row]
-            }else {
-                let currentTitleSection = sectionsTitles[selectedIndexPath.section]
-                guard let currentContacts = dictContacts[currentTitleSection] else { return }
-                destVC.selectedContact = currentContacts[selectedIndexPath.row]
-            }
-            let button = UIBarButtonItem()
-            button.title = "Contacts"
-            navigationItem.backBarButtonItem = button
-        }
+//        if segue.identifier == "ProfileContact" {
+//            guard let destVC = segue.destination as? ProfileContactViewController else { return }
+//            guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
+//            if isFiltering() {
+//                destVC.selectedContact = filteredContacts[selectedIndexPath.row]
+//            }else {
+//                let currentTitleSection = sectionsTitles[selectedIndexPath.section]
+//                guard let currentContacts = dictContacts[currentTitleSection] else { return }
+//                destVC.selectedContact = currentContacts[selectedIndexPath.row]
+//            }
+//            let button = UIBarButtonItem()
+//            button.title = "Contacts"
+//            navigationItem.backBarButtonItem = button
+//        }
     }
     
 
@@ -222,7 +227,7 @@ extension ListContactsViewController:UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier:ContactCell.identifier, for: indexPath) as? ContactCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier:ContactTableCell.identifier, for: indexPath) as? ContactTableCell {
             if isFiltering() {
                 cell.contact = filteredContacts[indexPath.row]
             }else {

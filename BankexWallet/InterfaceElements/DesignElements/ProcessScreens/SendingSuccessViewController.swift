@@ -55,8 +55,8 @@ class SendingSuccessViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? CreateNewContact {
-            controller.addContact(with: addressToSend ?? "")
-        }
+//        if let controller = segue.destination as? CreateNewContact {
+//            controller.addContact(with: addressToSend ?? "")
+//        }
     }
 }

@@ -60,9 +60,9 @@ extension FavoriteModel {
     
     public var userActivity:NSUserActivity {
         let activity = NSUserActivity(activityType: FavoriteModel.domainIdentifier)
-        activity.title = fullName
+        activity.title = name
         activity.userInfo = userActivityUserInfo
-        activity.keywords = [firstName,lastname,address]
+        activity.keywords = [name,address]
         activity.contentAttributeSet = attributeSet
         return activity
     }
@@ -70,9 +70,9 @@ extension FavoriteModel {
     public var attributeSet: CSSearchableItemAttributeSet {
         let attributeSet = CSSearchableItemAttributeSet(
             itemContentType: kUTTypeContact as String)
-        attributeSet.title = fullName
+        attributeSet.title = name
         attributeSet.contentDescription = note ?? ""
-        attributeSet.keywords = [firstName,lastname,address]
+        attributeSet.keywords = [name,address]
         attributeSet.relatedUniqueIdentifier = self.uniqueIdentifier
         return attributeSet
     }

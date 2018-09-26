@@ -9,13 +9,9 @@
 import Foundation
 
 struct FavoriteModel {
-    var firstName: String
-    var lastname: String
+    var name: String
     var address: String
     var lastUsageDate: Date?
     var note:String?
     
-    var fullName:String {
-        return "\(firstName) \(lastname)"
-    }
 }
