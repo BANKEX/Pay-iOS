@@ -51,7 +51,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
         setupNavbar()
         setupSearchVC()
-        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.resign)))
+        //tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.resign)))
     }
     
     
@@ -182,20 +182,20 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "ProfileContact" {
-//            guard let destVC = segue.destination as? ProfileContactViewController else { return }
-//            guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
-//            if isFiltering() {
-//                destVC.selectedContact = filteredContacts[selectedIndexPath.row]
-//            }else {
-//                let currentTitleSection = sectionsTitles[selectedIndexPath.section]
-//                guard let currentContacts = dictContacts[currentTitleSection] else { return }
-//                destVC.selectedContact = currentContacts[selectedIndexPath.row]
-//            }
-//            let button = UIBarButtonItem()
-//            button.title = "Contacts"
-//            navigationItem.backBarButtonItem = button
-//        }
+        if segue.identifier == "ProfileContact" {
+            guard let destVC = segue.destination as? ProfileContactViewController else { return }
+            guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
+            if isFiltering() {
+                destVC.selectedContact = filteredContacts[selectedIndexPath.row]
+            }else {
+                let currentTitleSection = sectionsTitles[selectedIndexPath.section]
+                guard let currentContacts = dictContacts[currentTitleSection] else { return }
+                destVC.selectedContact = currentContacts[selectedIndexPath.row]
+            }
+            let button = UIBarButtonItem()
+            button.title = "Contacts"
+            navigationItem.backBarButtonItem = button
+        }
     }
     
 

@@ -97,7 +97,7 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
             tf?.delegate = self
             tf?.autocorrectionType = .no
         }
-        nameContactTextField.autocapitalizationType = .none
+        nameContactTextField.autocapitalizationType = .words
     }
     
     

@@ -142,11 +142,11 @@ Retriable,UITextFieldDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         updateUI()
 //        handleErrorMessage()
-//        enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
     }
     
     
     func updateUI() {
+        enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
         guard let selectedToken = selectedToken else { return }
         if isEthToken {
             infoView.state = .Eth
