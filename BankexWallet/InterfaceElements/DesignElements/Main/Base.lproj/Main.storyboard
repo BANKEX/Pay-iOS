@@ -2207,6 +2207,13 @@
                                     <action selector="sendFunds" destination="u6S-A1-UXr" eventType="touchUpInside" id="WCb-tg-rvI"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hek-AU-e0I">
+                                <rect key="frame" x="15" y="343" width="360" height="226"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -2216,10 +2223,14 @@
                             <constraint firstItem="iGC-Dd-THt" firstAttribute="top" secondItem="Q7m-dH-egr" secondAttribute="top" id="HpD-5v-hc4"/>
                             <constraint firstItem="UnI-pO-Nc0" firstAttribute="top" secondItem="iGC-Dd-THt" secondAttribute="bottom" constant="36" id="I57-IB-x8f"/>
                             <constraint firstItem="UnI-pO-Nc0" firstAttribute="leading" secondItem="Q7m-dH-egr" secondAttribute="leading" constant="15" id="I67-Oi-YxE"/>
+                            <constraint firstItem="m0I-5h-w6D" firstAttribute="top" secondItem="hek-AU-e0I" secondAttribute="bottom" id="J9a-U6-Kyz"/>
                             <constraint firstItem="m0I-5h-w6D" firstAttribute="leading" secondItem="Q7m-dH-egr" secondAttribute="leading" constant="24" id="RmO-3E-gmA"/>
                             <constraint firstItem="ol2-5E-HmO" firstAttribute="centerY" secondItem="UnI-pO-Nc0" secondAttribute="centerY" id="TgK-Yx-tzq"/>
                             <constraint firstItem="iGC-Dd-THt" firstAttribute="leading" secondItem="Q7m-dH-egr" secondAttribute="leading" id="WGw-xK-PXA"/>
+                            <constraint firstItem="hek-AU-e0I" firstAttribute="leading" secondItem="UnI-pO-Nc0" secondAttribute="leading" id="bLu-Iq-a9y"/>
+                            <constraint firstItem="hek-AU-e0I" firstAttribute="top" secondItem="UnI-pO-Nc0" secondAttribute="bottom" constant="20" id="l2b-XO-Q2o"/>
                             <constraint firstItem="Q7m-dH-egr" firstAttribute="trailing" secondItem="m0I-5h-w6D" secondAttribute="trailing" constant="24" id="nC1-Zy-lCb"/>
+                            <constraint firstItem="Q7m-dH-egr" firstAttribute="trailing" secondItem="hek-AU-e0I" secondAttribute="trailing" id="vCx-fu-h0F"/>
                             <constraint firstItem="iGC-Dd-THt" firstAttribute="height" secondItem="RGz-hP-AeQ" secondAttribute="height" multiplier="1:3.3" id="xOT-se-JTq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Q7m-dH-egr"/>
@@ -2228,6 +2239,7 @@
                         <outlet property="addrContactLabel" destination="vo5-mG-FN1" id="dbE-ds-fDF"/>
                         <outlet property="infoView" destination="iGC-Dd-THt" id="ycD-iY-8v8"/>
                         <outlet property="nameContactLabel" destination="VqI-yt-q5l" id="uU5-gp-Ujr"/>
+                        <outlet property="tableVIew" destination="hek-AU-e0I" id="ZBo-YD-i2v"/>
                         <segue destination="dxz-2H-Uh6" kind="show" identifier="showSendSegue" id="IPm-vR-Dzt"/>
                         <segue destination="Lhe-TM-fvj" kind="show" identifier="editSegue" id="6g9-zn-RLz"/>
                     </connections>

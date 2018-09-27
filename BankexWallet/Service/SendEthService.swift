@@ -158,6 +158,24 @@ class SendEthServiceImplementation: SendEthService {
         })
     }
     
+    func getTransactions(address:String) -> [ETHTransactionModel] {
+        let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
+        
+        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@) && token == nil", NSNumber(value: networkId), address.lowercased(), address.lowercased())).sorted(with: "date", ascending: false))
+        
+        return transactions.map({ (transaction) -> ETHTransactionModel in
+            let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :
+                ERC20TokenModel(token: transaction.token!)
+            return ETHTransactionModel(from: transaction.from ?? "",
+                                       to: transaction.to ?? "",
+                                       amount: transaction.amount ?? "",
+                                       date: transaction.date!,
+                                       token: token,
+                                       key: HDKey(name: transaction.keywallet?.name,
+                                                  address: (transaction.keywallet?.address ?? "")), isPending: transaction.isPending)
+        })
+    }
+    
     let db = DBStorage.db    
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     
