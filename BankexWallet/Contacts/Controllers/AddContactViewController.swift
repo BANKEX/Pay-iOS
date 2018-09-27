@@ -71,10 +71,13 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
         nameContactTextField.becomeFirstResponder()
     }
     
+    override func willMove(toParentViewController parent: UIViewController?) {
+        navigationController?.navigationBar.barTintColor = .white
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        //navigationController?.navigationBar.tintColor = WalletColors.mainColor
         UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
     }
