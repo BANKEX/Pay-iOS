@@ -17,9 +17,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     @IBOutlet weak var infoView:UIView!
 
     //MARK: - Properties
-    enum State {
-        case Editable,notEditable
-    }
+    
 
     lazy var activityViewController:UIActivityViewController = {
         let str = "Name:\n\(selectedContact!.name)\nAddress:\n\(selectedContact!.address)"
@@ -44,18 +42,6 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     let service = RecipientsAddressesServiceImplementation()
     var selectedContact:FavoriteModel!
     var searchManager:SearchManager!
-    var state:State = .notEditable {
-        didSet{
-            if state == .notEditable {
-                navigationItem.rightBarButtonItem?.title = NSLocalizedString("Edit", comment: "")
-                navigationItem.hidesBackButton = false
-                navigationItem.setHidesBackButton(false, animated: true)
-            }else {
-                navigationItem.rightBarButtonItem?.title = NSLocalizedString("Save", comment: "")
-                navigationItem.setHidesBackButton(true, animated: true)
-            }
-        }
-    }
 
 
 
@@ -63,10 +49,12 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Contacts"
         infoView.backgroundColor = WalletColors.mainColor
 //        configureTableView()
 //        prepareUserActivity()
     }
+  
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,7 +74,14 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
             guard let address = selectedContact?.address,service.contains(address: address) else { return }
             controller.selectedFavoriteAddress = address
             //Add token or eth
+        }else if let editVC = segue.destination as? EditViewController {
+            editVC.selectedContact = selectedContact
+            editVC.delegate = self
         }
+    }
+    
+    @IBAction func editContact() {
+        self.performSegue(withIdentifier: "editSegue", sender: nil)
     }
 
 
@@ -147,10 +142,6 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 //    }
 
 
-    @objc func switchEditState() {
-        state = (state == .Editable) ? .notEditable : .Editable
-    }
-
 
     //MARK: - IBAction
 
@@ -182,4 +173,10 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 //        present(alertViewController, animated: true)
     }
 
+}
+
+extension ProfileContactViewController:EditViewContollerDelegate {
+    func didUpdateContact(name: String, address: String) {
+        selectedContact = service.getAddressByAddress(address)
+    }
 }

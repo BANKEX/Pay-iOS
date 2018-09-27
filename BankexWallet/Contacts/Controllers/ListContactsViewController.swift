@@ -99,6 +99,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = WalletColors.mainColor
         self.listContacts = self.service.getAllStoredAddresses()
         state = isNoContacts() ? .empty : .fill
     }
@@ -165,7 +166,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         navigationItem.title = NSLocalizedString("Contacts", comment: "")
         let addBtn:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(transitionToAddContact))
         addBtn.accessibilityLabel = "btnAddContact"
-        navigationItem.setRightBarButton(addBtn, animated: false)
+        navigationItem.setRightBarButton(addBtn, animated: true)
     }
     
     
