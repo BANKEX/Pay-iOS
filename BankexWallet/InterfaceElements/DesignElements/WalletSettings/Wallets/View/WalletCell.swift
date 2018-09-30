@@ -9,7 +9,7 @@
 import UIKit
 
 protocol WalletSelectedDelegate: class {
-    func didSelectWallet(withAddress address: String)
+    func didSelectWallet(withAddress address: String,name:String)
 }
 
 class WalletCell: UITableViewCell {
@@ -34,7 +34,7 @@ class WalletCell: UITableViewCell {
     
     @IBAction func infoButtonTapped(_ sender: Any) {
         if let address = address {
-            delegate?.didSelectWallet(withAddress: address)
+            delegate?.didSelectWallet(withAddress: address,name: nameWalletLabel.text!)
         }
     }
     

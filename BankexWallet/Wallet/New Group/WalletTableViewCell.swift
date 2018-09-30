@@ -34,6 +34,7 @@ class WalletTableViewCell: UITableViewCell {
     }
     
     func setData() {
+        keyService.updateSelectedWallet()
         updateLayout()
         if let wallet = keyService.selectedWallet() {
             nameWalletLbl.text = wallet.name

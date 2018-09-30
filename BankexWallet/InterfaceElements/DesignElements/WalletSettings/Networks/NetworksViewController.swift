@@ -17,19 +17,13 @@ protocol NetworkDelegate:class {
     func didTapped(with network:CustomNetwork)
 }
 
-class NetworksViewController: UIViewController {
+class NetworksViewController: BaseViewController {
     
     @IBOutlet weak var tableView:UITableView!
     
     
-    enum NetworksSections:Int,CounableProtocol {
+    enum NetworksSections:Int,CaseIterable {
         case CurrentNetwork = 0,DefaultNetwork,CustomNetwork
-        
-        static let count: Int = {
-            var max: Int = 0
-            while let _ = NetworksSections(rawValue: max) { max += 1 }
-            return max
-        }()
     }
     
     weak var delegate:NetworkDelegate?
@@ -37,6 +31,7 @@ class NetworksViewController: UIViewController {
     var selectedNetwork:CustomNetwork {
         return networkService.preferredNetwork()
     }
+    var isFromDeveloper = false
     let networkService = NetworksServiceImplementation()
     var listNetworks:[CustomNetwork]!
     var listCustomNetworks:[CustomNetwork] {
@@ -49,8 +44,8 @@ class NetworksViewController: UIViewController {
         super.viewDidLoad()
         configure()
         self.listNetworks = self.networkService.currentNetworksList()
-        
-        
+        tableView.tableFooterView = HeaderView()
+        tableView.backgroundColor = WalletColors.bgMainColor
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
         }
@@ -59,13 +54,8 @@ class NetworksViewController: UIViewController {
     func configure() {
         tableView.dataSource = self
         tableView.delegate = self
-        navigationItem.title = NSLocalizedString("Connection", comment: "Connection")
+        navigationItem.title = isFromDeveloper ? "Custom Networks" : "Network"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNetworkTapped(_:)))
-        if #available(iOS 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        } else {
-            // Fallback on earlier versions
-        }
     }
     
     

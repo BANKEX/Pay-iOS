@@ -13,6 +13,7 @@ import MessageUI
 extension SettingsViewController:MFMailComposeViewControllerDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        selectedSection = indexPath.section
         switch indexPath.section {
         case SettingsSections.General.rawValue:
             if indexPath.row == 0 {
@@ -45,7 +46,8 @@ extension SettingsViewController:MFMailComposeViewControllerDelegate {
                 managerReferences.accessToTelegram()
             }
         case SettingsSections.Developer.rawValue:
-            self.performSegue(withIdentifier: "networkSegue", sender: nil)
+            self.performSegue(withIdentifier: "dev", sender: nil)
+            //self.performSegue(withIdentifier: "networkSegue", sender: nil)
         default: break
         }
     }

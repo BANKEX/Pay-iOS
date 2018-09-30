@@ -48,6 +48,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = searchFooter
+        tableView.backgroundColor = WalletColors.bgMainColor
         tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
         setupNavbar()
         setupSearchVC()

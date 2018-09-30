@@ -12,24 +12,17 @@ protocol WalletsDelegate:class  {
     func didTapped(with wallet:HDKey)
 }
 
-class WalletsViewController: UIViewController, WalletSelectedDelegate {
+class WalletsViewController: BaseViewController, WalletSelectedDelegate {
     
     @IBOutlet weak var tableView:UITableView!
     
-    enum WalletsSections:Int,CounableProtocol {
-        static var count: Int = {
-            var max:Int = 0
-            while let _ = WalletsSections(rawValue: max) { max += 1 }
-            return max
-        }()
-        
+    enum WalletsSections:Int,CaseIterable {
         case CurrentWallet = 0,RestWallets
     }
     
     
     
-    
-    let service: GlobalWalletsService = HDWalletServiceImplementation()
+    let service: HDWalletServiceImplementation = HDWalletServiceImplementation()
     var listWallets = [HDKey]()
     var selectedWallet:HDKey? {
         return service.selectedKey()
@@ -40,12 +33,16 @@ class WalletsViewController: UIViewController, WalletSelectedDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        listWallets = (service.fullHDKeysList() ?? [HDKey]()) + (service.fullListOfSingleEthereumAddresses() ?? [HDKey]())
-        
-        
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { _ in
             self.tableView.reloadData()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        service.updateSelectedWallet()
+        listWallets = (service.fullHDKeysList() ?? [HDKey]()) + (service.fullListOfSingleEthereumAddresses() ?? [HDKey]())
+        tableView.reloadData()
     }
     
     
@@ -58,29 +55,28 @@ class WalletsViewController: UIViewController, WalletSelectedDelegate {
             guard let destVC = segue.destination as? WalletCreationTypeController else { return }
             destVC.isFromInitial = false
         } else if let walletInfoViewController = segue.destination as? WalletInfoViewController {
-            walletInfoViewController.publicAddress = sender as? String
+            walletInfoViewController.dict = sender as? [String:String]
         }
     }
     
     func configure() {
-        navigationItem.title = NSLocalizedString("Wallets", comment: "")
-        if #available(iOS 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        } else {
-            // Fallback on earlier versions
-        }
+        navigationItem.title = "HD Wallets"
         tableView.dataSource = self
         tableView.delegate = self
         var btn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))
         btn.accessibilityLabel = "AddBtn"
         navigationItem.rightBarButtonItem = btn
+        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.tableFooterView = HeaderView()
     }
     
     //MARK: - WalletSelectedDelegate
-    func didSelectWallet(withAddress address: String) {
-        self.performSegue(withIdentifier: "ShowWalletInfo", sender: address)
+    func didSelectWallet(withAddress address: String, name: String) {
+        let dict = ["addr":address,"name":name]
+        self.performSegue(withIdentifier: "ShowWalletInfo", sender: dict)
     }
     
+
 }
 
 

@@ -9,9 +9,34 @@
 import UIKit
 import web3swift
 
-class AttentionViewController: UIViewController {
+
+
+class AttentionViewController: BaseViewController {
     
+    
+    enum State {
+        case PrivateKey,CustomNetwork
+    }
+    
+    
+    @IBOutlet weak var descriptionLabel:UILabel!
+    @IBOutlet weak var titleLabel:UILabel!
+    var isFromDeveloper:Bool = false
     var publicAddress: String?
+    var directionSegue:String = ""
+    var state:State = .PrivateKey {
+        didSet {
+            if state == .PrivateKey {
+                descriptionLabel.text = "Anyone who knows your private key has access to your wallet"
+                titleLabel.text = "Private Key"
+                directionSegue = "showPrivateKey"
+            }else {
+                descriptionLabel.text = "This option is intended for development use only"
+                titleLabel.text = "Custom Networks"
+                directionSegue = "showCustomNetworks"
+            }
+        }
+    }
     let keysService = SingleKeyServiceImplementation()
     
     override func viewDidLoad() {
@@ -21,12 +46,21 @@ class AttentionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.tabBarController?.tabBar.isHidden = true
+        state = isFromDeveloper ? .CustomNetwork : .PrivateKey
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.errorColor
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.tabBarController?.tabBar.isHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        UIApplication.shared.statusBarView?.backgroundColor = .white
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
+    @IBAction func proceed() {
+        self.performSegue(withIdentifier: directionSegue, sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,6 +74,16 @@ class AttentionViewController: UIViewController {
             let prk = try! keysService.keystoreManager(forAddress: selectedAddress).UNSAFE_getPrivateKeyData(password: "BANKEXFOUNDATION", account: ethAddress)
             print(prk.toHexString())
             print(String.init(data: prk, encoding: .ascii))
+        }else if let netwokrsVC = segue.destination as? NetworksViewController {
+            netwokrsVC.isFromDeveloper = true
         }
+    }
+    
+    @IBAction func shareAddress() {
+        //TODO
+    }
+    
+    @IBAction func back() {
+        navigationController?.popViewController(animated: true)
     }
 }

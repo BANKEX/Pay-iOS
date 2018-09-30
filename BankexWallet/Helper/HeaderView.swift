@@ -9,10 +9,16 @@
 import UIKit
 
 class HeaderView: UIView {
-    
+    //API
     public var title:String = "" {
         didSet{
            updateUI()
+        }
+    }
+    
+    public var textColor:UIColor = WalletColors.blackColor.withAlphaComponent(0.5) {
+        didSet {
+            updateUI()
         }
     }
     var label:UILabel!
@@ -46,7 +52,7 @@ class HeaderView: UIView {
     
     private func updateUI() {
         label.text = title
-        
+        label.textColor = self.textColor
     }
     
     

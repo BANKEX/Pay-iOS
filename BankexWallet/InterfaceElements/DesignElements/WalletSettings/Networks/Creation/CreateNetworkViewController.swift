@@ -41,16 +41,6 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
         }
     }
     
-    lazy var pasteButton:UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(textFromBuffer), for:.touchUpInside)
-        button.layer.borderColor = WalletColors.blueText.color().cgColor
-        button.layer.borderWidth = 2.0
-        button.layer.cornerRadius = 15.0
-        button.setTitle(NSLocalizedString("Paste", comment: ""), for: .normal)
-        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
-        return button
-    }()
     
     //MARK: - LifeCircle
     override func viewDidLoad() {
@@ -68,6 +58,8 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
         tableView.separatorStyle = .none
         networkURLTextField.becomeFirstResponder()
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(resignTextFields)))
+        tableView.tableFooterView = UIView()
+        tableView.backgroundColor = WalletColors.bgMainColor
     }
     
 
@@ -109,8 +101,11 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
             let view = UIView()
+            view.backgroundColor = WalletColors.bgMainColor
             view.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight)
-            pasteButton.frame = CGRect(x: 16.0, y: 0, width: 140.0, height: 28.0)
+            let pasteButton = PasteButton()
+            pasteButton.titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+            pasteButton.frame = CGRect(x: 16.0, y: 5, width: 66.0, height: 35.0)
             view.addSubview(pasteButton)
             return view
         }else {

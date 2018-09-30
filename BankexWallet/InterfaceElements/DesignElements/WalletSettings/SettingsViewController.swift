@@ -34,15 +34,20 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
     let managerReferences = ManagerReferences()
     let walletService = SingleKeyServiceImplementation()
     let networkService = NetworksServiceImplementation()
-
+    var selectedSection:Int!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Settings"
         prepareNavbar()
         tableView.backgroundColor = WalletColors.bgMainColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        walletService.updateSelectedWallet()
         updateUI()
         setupFooter()
     }
@@ -68,9 +73,12 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
         if segue.identifier == "networkSegue" {
             let dest = segue.destination as! NetworksViewController
             dest.delegate = self
+            dest.isFromDeveloper = selectedSection == SettingsSections.Developer.rawValue ? true : false
         }else if segue.identifier == "walletSegue" {
             let dest = segue.destination as! WalletsViewController
             dest.delegate = self
+        }else if let attentionVC = segue.destination as? AttentionViewController {
+            attentionVC.isFromDeveloper = true
         }
     }
     

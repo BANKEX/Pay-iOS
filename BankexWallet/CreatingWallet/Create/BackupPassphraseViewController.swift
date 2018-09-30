@@ -17,11 +17,18 @@ class BackupPassphraseViewController: UIViewController {
     @IBOutlet weak var copyButton:UIButton!
     @IBOutlet weak var bottomContraint:NSLayoutConstraint!
     @IBOutlet weak var clipboardView:UIView!
+    @IBOutlet weak var bottomButtonContraint:NSLayoutConstraint!
+    @IBOutlet weak var titleLbl:UILabel!
     
     let service: HDWalletService = HDWalletServiceImplementation()
     var passphrase: String?
     var navTitle: String?
-    
+    var fromSettings:Bool {
+        if let _ = navTitle {
+            return true
+        }
+        return false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         lookOutView.backgroundColor = WalletColors.errorColor
@@ -36,6 +43,14 @@ class BackupPassphraseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarSetup()
+        nextButton.isHidden = fromSettings ? true : false
+        if fromSettings {
+            nextButton.isHidden = true
+            bottomButtonContraint.constant = -50.0
+        }else {
+            nextButton.isHidden = false
+            bottomButtonContraint.constant = 16.0
+        }
         if passphrase != UIPasteboard.general.string {
             nextButton?.isEnabled = false
             nextButton?.backgroundColor = WalletColors.disableColor
@@ -78,6 +93,7 @@ class BackupPassphraseViewController: UIViewController {
     }
     
     func navigationBarSetup() {
+        titleLbl.text = navTitle ?? "Create Wallet"
         navigationController?.setNavigationBarHidden(true, animated: true)
         UIApplication.shared.statusBarView?.backgroundColor = WalletColors.errorColor
         UIApplication.shared.statusBarStyle = .lightContent

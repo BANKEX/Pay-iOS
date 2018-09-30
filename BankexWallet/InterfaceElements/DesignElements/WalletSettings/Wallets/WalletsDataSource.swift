@@ -10,7 +10,7 @@ import UIKit
 
 extension WalletsViewController:UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return WalletsSections.count
+        return WalletsSections.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,8 +31,18 @@ extension WalletsViewController:UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == WalletsSections.RestWallets.rawValue ? NSLocalizedString("ChooseWallet", comment: "") : NSLocalizedString("CurrentWallet", comment: "")
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = HeaderView()
+        if WalletsSections.CurrentWallet.rawValue == section {
+            headerView.title = "CURRENT WALLET"
+        }else {
+            headerView.title = "CHOOSE A WALLET"
+        }
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 54.0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

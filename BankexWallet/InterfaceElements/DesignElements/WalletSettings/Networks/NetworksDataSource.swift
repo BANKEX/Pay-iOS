@@ -10,27 +10,18 @@ import UIKit
 
 extension NetworksViewController:UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return NetworksSections.count
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case NetworksSections.CurrentNetwork.rawValue: return 1
-        case NetworksSections.DefaultNetwork.rawValue: return listNetworks.count
-        case NetworksSections.CustomNetwork.rawValue: return listCustomNetworks.count
+        case 1:
+            return isFromDeveloper ? listCustomNetworks.count : listNetworks.count
         default: return 0
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == NetworksSections.DefaultNetwork.rawValue {
-            return NSLocalizedString("ChooseNetwork", comment: "")
-        }else if section == NetworksSections.CustomNetwork.rawValue && listCustomNetworks.count > 0 {
-            return "CUSTOM NETWORK"
-        }else {
-            return ""
-        }
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -44,6 +35,23 @@ extension NetworksViewController:UITableViewDataSource {
             }
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = HeaderView()
+        if section == 0 {
+            headerView.title = "CURRENT NETWORK"
+        }else {
+            if isFromDeveloper && listCustomNetworks.count == 0 {
+                headerView.textColor = .clear
+            }
+            headerView.title = isFromDeveloper ? "CUSTOM NETWORKS" : "DEFAULT NETWORKS"
+        }
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 54.0
     }
 }
 
