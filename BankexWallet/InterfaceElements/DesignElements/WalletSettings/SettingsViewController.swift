@@ -27,14 +27,8 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
     @IBOutlet weak var nameNetworkLabel:UILabel!
     
     
-    enum SettingsSections:Int,CounableProtocol {
-        case Main = 0,AppStore,SocialNetwork
-        
-        static var count: Int = {
-            var max = 0
-            while let _ = SettingsSections(rawValue: max) { max += 1 }
-            return max
-        }()
+    enum SettingsSections:Int,CaseIterable {
+        case General = 0,Support,Community,Developer
     }
     
     let managerReferences = ManagerReferences()
@@ -43,21 +37,23 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareNavbar()
+        tableView.backgroundColor = WalletColors.bgMainColor
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
+        setupFooter()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        updateUI()
-        configureNavBar()
-    }
-    
-    
-     
-    
-    func configureNavBar() {
+    func prepareNavbar() {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
-
+    
+    func setupFooter() {
+        tableView.tableFooterView = HeaderView()
+    }
 
     
     func updateUI() {
