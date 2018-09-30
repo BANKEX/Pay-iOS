@@ -30,6 +30,9 @@ class SecurityViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavbar()
+        [openSwitch,sendSwitch,multitaskSwitch].forEach { $0?.onTintColor = WalletColors.mainColor }
+        tableView.tableFooterView = HeaderView()
+        tableView.backgroundColor = WalletColors.bgMainColor
     }
     
     func setupNavbar() {
@@ -112,12 +115,18 @@ class SecurityViewController: UITableViewController {
         return section == SecuritySections.First.rawValue ? 2 : 1
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == SecuritySections.First.rawValue ? NSLocalizedString("UseTouchID", comment: "") : NSLocalizedString("Lock App", comment: "")
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = HeaderView()
+        if SecuritySections.First.rawValue == section {
+            headerView.title = NSLocalizedString("UseTouchID", comment: "")
+        }else {
+            headerView.title = NSLocalizedString("Lock App", comment: "")
+        }
+        return headerView
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == SecuritySections.First.rawValue ? 67.0 : 54.0
+        return 54.0
     }
     
     
