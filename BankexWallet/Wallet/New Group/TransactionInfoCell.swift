@@ -27,6 +27,7 @@ class TransactionInfoCell: UITableViewCell {
         formatter.dateFormat = "HH:mm:ss"
         return formatter
     }()
+    var fromMain:Bool = true
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US")
@@ -55,6 +56,7 @@ class TransactionInfoCell: UITableViewCell {
             amount.insert("0", at: transaction.amount.startIndex)
         }
         amountLabel.text = (isSend ? "- " : "+ ") + amount
+        dateLabel.isHidden = fromMain ? false : true
         timeLabel.text = timeFormatter.string(from: transaction.date)
         dateLabel.text = dateFormatter.string(from: transaction.date)
         let token = transaction.token

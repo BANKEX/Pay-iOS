@@ -55,11 +55,6 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
      
     
     func configureNavBar() {
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-        } else {
-            // Fallback on earlier versions
-        }
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
