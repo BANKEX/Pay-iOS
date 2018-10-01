@@ -81,8 +81,8 @@ class MainInfoController: BaseViewController,
     UITabBarControllerDelegate,UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
     
     @IBOutlet weak var infoView:InfoView!
-    @IBOutlet weak var sendButton:ActionButton!
-    @IBOutlet weak var receiveButton:ActionButton!
+    @IBOutlet weak var sendButton:UIButton!
+    @IBOutlet weak var receiveButton:UIButton!
     @IBOutlet weak var emptyView:UIView!
     @IBOutlet weak var tableView:UITableView!
     @IBOutlet weak var listTransButton:BaseButton!
@@ -114,35 +114,26 @@ class MainInfoController: BaseViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        [sendButton,receiveButton].forEach { $0?.callShadow() }
         infoView.delegate = self
-        prepareButtons()
         sendEthService = selectedToken!.address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
         self.transactions = Array(self.sendEthService.getAllTransactions().prefix(3))
-        //updateDataOnTheScreen()
-        if self.transactions.isEmpty {
-            self.emptyView.isHidden = false
-            self.tableView.isHidden = true
-            self.listTransButton.isHidden = true
-        }else {
-            self.emptyView.isHidden = true
-            self.tableView.isHidden = false
-            self.listTransButton.isHidden = false
-        }
-
 //        configureRefreshControl()
 //        tokensService.updateConversions()
         configureNotifications()
         
-//        catchUserActivity()
         //sendFackTrans()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateUI()
         configureNavBar()
+        updateRate()
+        updateBalance()
+        updateDataOnTheScreen()
+        updateUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -196,22 +187,24 @@ class MainInfoController: BaseViewController,
         tableView.isScrollEnabled = false
     }
     
-    private func prepareButtons() {
-        sendButton.title = "Send"
-        sendButton.image = "send_icon"
-        receiveButton.title = "Receive"
-        receiveButton.image = "receive_icon"
-    }
     
     private func updateUI() {
-        guard let selToken = selectedToken else { return }
+//        guard let selToken = selectedToken else { return }
+        let selToken = tokensService.selectedERC20Token()
         infoView.state = selToken.name == "Ether" ? .Eth : .Token
-        updateRate()
-        updateBalance()
         updateSymbol()
         updateWalletName()
         updateWalletAddr()
         updateTokenName()
+        if self.transactions.isEmpty {
+            self.emptyView.isHidden = false
+            self.tableView.isHidden = true
+            self.listTransButton.isHidden = true
+        }else {
+            self.emptyView.isHidden = true
+            self.tableView.isHidden = false
+            self.listTransButton.isHidden = false
+        }
     }
     
     private func updateTokenName() {
@@ -309,14 +302,7 @@ class MainInfoController: BaseViewController,
         }
     }
     
-    func catchUserActivity() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if let selectedContact = appDelegate.selectedContact {
-            guard let listVC = storyboard?.instantiateViewController(withIdentifier: "ListContactsViewController") as? ListContactsViewController else { return }
-            navigationController?.pushViewController(listVC, animated: false)
-            listVC.chooseContact(contact: selectedContact)
-        }
-    }
+    
     
     //MARK: - Helpers
     func putTransactionsInfoIntoItemsArray() {
@@ -384,7 +370,6 @@ class MainInfoController: BaseViewController,
         }
     }
     
-    
     private func formatNumber(number: String) -> String {
         var formattedNumber = ""
         var numberOfSpaces = 0
@@ -433,6 +418,12 @@ class MainInfoController: BaseViewController,
         }
         alertVC.addAction(deleteAction)
         present(alertVC, animated: true)
+    }
+    
+    @IBAction func toQRScreen() {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "qr", sender: nil)
+        }
     }
     
     private func updateDataOnTheScreen() {

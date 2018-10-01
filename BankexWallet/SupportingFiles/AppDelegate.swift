@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func showTabBar() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tabBar = storyboard.instantiateViewController(withIdentifier: "MainTabController") as? UITabBarController
+        let tabBar = storyboard.instantiateViewController(withIdentifier: "MainTabController") as? BaseTabBarController
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
     }
@@ -134,19 +134,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == FavoriteModel.domainIdentifier || userActivity.activityType == CSSearchableItemActionType {
             if let objectID = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String {
-                if let tabViewController = window?.rootViewController as? UITabBarController {
-                    tabViewController.selectedIndex = 0
-                        if let vcs = tabViewController.viewControllers, let mainNav = vcs.first as? UINavigationController {
-                            if let mainInfo = mainNav.viewControllers.first as? MainInfoController {
+                if let tabViewController = window?.rootViewController as? BaseTabBarController {
+                    tabViewController.selectedIndex = 2
+                        if let vcs = tabViewController.viewControllers, let mainNav = vcs[2] as? BaseNavigationController {
+                            if let contactsVC = mainNav.viewControllers.first as? ListContactsViewController {
                                 guard let contact = service.getAddressByAddress(objectID) else { return false }
                                 mainNav.popToRootViewController(animated: false)
-                                guard let listVC = mainInfo.storyboard?.instantiateViewController(withIdentifier: "ListContactsViewController") as? ListContactsViewController else { return false }
-                                mainNav.pushViewController(listVC, animated: false)
-                                listVC.chooseContact(contact: contact)
+                                contactsVC.chooseContact(contact: contact)
                                 return true
                             }
                         }
-                }else if let initialNavBar = window?.rootViewController as? UINavigationController {
+                }else if let initialNavBar = window?.rootViewController as? BaseNavigationController {
                     if let addr = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String,let contact = service.getAddressByAddress(addr) {
                         selectedContact = contact
                     }

@@ -138,12 +138,12 @@ class SingleKeyServiceImplementation: SingleKeyService {
     
     // MARK: Private Part
     let db = DBStorage.db
-    
     private func save(with name: String?,
                       keyData: Data,
                       for address: String,
                       completion: @escaping (Error?)-> Void) {
         do {
+            
             try db.operation({ (context, save) in
                 let newWallet: KeyWallet = try context.new()
                 newWallet.name = name

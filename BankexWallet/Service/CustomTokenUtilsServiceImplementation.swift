@@ -92,20 +92,16 @@ class CustomTokenUtilsServiceImplementation: UtilTransactionsService {
             let parameters = [ethAddress]
             let transaction = contract?.method("balanceOf", parameters: parameters as [AnyObject], options: self.defaultOptions())
             let bkxBalance = transaction?.call(options: self.defaultOptions())
-            DispatchQueue.main.async {
-                if let balance = bkxBalance?.value?["balance"] as? BigUInt {
-                    self.update(balance: balance, token: token, address: address)
+            if let balance = bkxBalance?.value?["balance"] as? BigUInt {
+                self.update(balance: balance, token: token, address: address)
+                DispatchQueue.main.async {
                     completion(SendEthResult.Success(balance))
                 }
-                else {
-                    DispatchQueue.main.async {
-                        completion(SendEthResult.Success(self.localGetBalance(for: token, address: address)))
-                    }
+            } else {
+                DispatchQueue.main.async {
+                    completion(SendEthResult.Success(self.localGetBalance(for: token, address: address)))
                 }
-
             }
-            
-            return
         }
     }
     

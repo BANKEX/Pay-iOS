@@ -66,8 +66,8 @@ class UtilTransactionsServiceImplementation: UtilTransactionsService {
                     }
                     return
             }
-            DispatchQueue.main.async {
                 self.update(balance: resultValue, token: token, address: address)
+            DispatchQueue.main.async {
                 completion(SendEthResult.Success(resultValue))
             }
         }

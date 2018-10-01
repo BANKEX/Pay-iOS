@@ -158,7 +158,7 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
         
         let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@)",NSNumber(value: networkId), address.lowercased(), address.lowercased())).sorted(with: "date", ascending: false))
         let filteredTransactions = transactions.filter { (tr) -> Bool in
-            guard let token = tr.token else { return true }
+            guard let token = tr.token else { return false }
             guard let address = token.address else { return false }
             return address == selectedToken.address
         }

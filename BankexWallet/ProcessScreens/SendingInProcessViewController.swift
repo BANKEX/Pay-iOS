@@ -24,6 +24,7 @@ class SendingInProcessViewController: UIViewController,
 SendingResultInformation {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var processTitleLabel: UILabel?
+    @IBOutlet weak var activityView:UIActivityIndicatorView!
 
     
     var amountToSend: String?
@@ -55,16 +56,22 @@ SendingResultInformation {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        activityView.startAnimating()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         titleLabel?.text = textToShow == nil ? NSLocalizedString("Sending funds", comment: "") : textToShow!
         processTitleLabel?.text = NSLocalizedString("Retrieving data", comment: "")
+        processTitleLabel?.textColor = WalletColors.sendColor
+        titleLabel?.textColor = UIColor(red: 0, green: 117, blue: 254)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        activityView.stopAnimating()
         textToShow = nil
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

@@ -304,7 +304,7 @@ Retriable,UITextFieldDelegate {
     
     
     @IBAction func addFromFavouritesTapped(_ sender: Any) {
-        // TODO: Open favs list
+        self.performSegue(withIdentifier: "contactFav", sender: nil)
     }
     
     @IBAction func insertFromClipboardTapped(_ sender: Any) {

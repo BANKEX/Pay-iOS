@@ -143,6 +143,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     }
     
     
+    
     func filterContentForSearchText(_ searchText:String) {
         if let contacts = listContacts {
             filteredContacts = contacts.filter({ (contact:FavoriteModel) -> Bool in

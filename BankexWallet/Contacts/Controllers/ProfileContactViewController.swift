@@ -55,7 +55,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         title = "Contacts"
         infoView.backgroundColor = WalletColors.mainColor
         configureTableView()
-//        prepareUserActivity()
+        prepareUserActivity()
     }
   
 
@@ -66,7 +66,12 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         view.showSkeleton()
         TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: selectedContact!.address) { isGood in
             if isGood {
-                self.transactions = Array(self.sendService.getTransactions(address: self.selectedContact!.address).prefix(3))
+                self.transactions = Array(self.sendService.getAllTransactions().prefix(3).filter({ tr -> Bool in
+                    if tr.to == self.selectedContact.address.lowercased() {
+                        return true
+                    }
+                    return false
+                }))
                 self.tableVIew.reloadData()
                 self.view.stopSkeletonAnimation()
                 self.view.hideSkeleton()
@@ -127,7 +132,8 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         tableVIew.backgroundColor = WalletColors.bgMainColor
         tableVIew.isScrollEnabled = false
     }
-
+    
+    
     func prepareUserActivity() {
         searchManager = SearchManager(contact: selectedContact)
         let activity = selectedContact.userActivity
@@ -158,6 +164,9 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 //    }
 
 
+    @IBAction func seeAll() {
+        tabBarController?.selectedIndex = 1
+    }
 
     //MARK: - IBAction
 
@@ -176,7 +185,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         }
         present(activityViewController, animated: true)
     }
-
+    
 
     @IBAction func removeContact() {
 //        if let popOver = alertViewController.popoverPresentationController {
@@ -197,6 +206,7 @@ extension ProfileContactViewController:EditViewContollerDelegate {
     }
 }
 
+
 extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate,SkeletonTableViewDataSource {
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
@@ -213,6 +223,7 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return transactions.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableVIew.dequeueReusableCell(withIdentifier: TransactionInfoCell.identifer, for: indexPath) as! TransactionInfoCell

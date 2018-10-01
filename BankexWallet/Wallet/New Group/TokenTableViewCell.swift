@@ -70,7 +70,7 @@ class TokenTableViewCell: UITableViewCell {
         
         let service: UtilTransactionsService = !token.address.isEmpty ? CustomTokenUtilsServiceImplementation() : UtilTransactionsServiceImplementation()
         service.getBalance(for: token.address, address: keysService.selectedAddress() ?? "") { (result) in
-            
+
             switch result {
             case .Success(let response):
                 // TODO: it shouldn't be here anyway and also, lets move to background thread

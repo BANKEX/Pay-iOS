@@ -13,10 +13,9 @@ class TokenInfoCell: UITableViewCell {
     @IBOutlet weak var headerLabel:UILabel!
     @IBOutlet weak var valueLabel:UILabel!
     
-    
+    let conversionService = FiatServiceImplementation()
     static let identifier:String = String(describing: TokenInfoCell.self)
     var selectedIndex = 0
-    var rate:Double?
     var selectedToken:ERC20TokenModel? {
         didSet {
             setData()
@@ -47,10 +46,8 @@ class TokenInfoCell: UITableViewCell {
         case .decimals:
             valueLabel.text = token.decimals
         case .currency:
-            if let r = rate {
-                valueLabel.text = numberFormatter.string(from: NSNumber(value:r))
-            }else {
-                valueLabel.text = "..."
+            conversionService.updateConversionRate(for: selectedToken!.symbol.uppercased()) { rate in
+                self.valueLabel.text = self.numberFormatter.string(from: NSNumber(value:rate))
             }
         }
     }

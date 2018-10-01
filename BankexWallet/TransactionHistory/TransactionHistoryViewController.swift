@@ -16,7 +16,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     var popover: Popover!
     
     var tokensTableViewManager = TokensTableViewManager()
-    
+    var selectedAddress:String?
     fileprivate var popoverOptions: [PopoverOption] = [
         .type(.down),
         .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6)),
@@ -184,6 +184,8 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.string(from: date)
     }
+    
+    
     
     private func updateTransactions(status: TransactionStatus = .all) {
         var transactions: [ETHTransactionModel]

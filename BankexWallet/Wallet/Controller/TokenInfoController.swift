@@ -15,16 +15,13 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
     
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
-    let conversionService = FiatServiceImplementation.service
     var token: ERC20TokenModel?
-    var rate: Double?
     
     
     var forAdding: Bool = false
     
     
     override func viewDidLoad() {
-        self.rate = self.conversionService.currentConversionRate(for: (self.token?.symbol.uppercased())!)
         setTableView()
 //        if token == nil && keysService.selectedWallet()?.name == nil {
 //            tokensService.getNewConversion(for: (token?.symbol.uppercased())!)
@@ -62,10 +59,6 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
         case TokenInfoRaws.address.rawValue :
             cell.selectedIndex = TokenInfoRaws.address.rawValue
         case TokenInfoRaws.currency.rawValue :
-            if token != nil {
-                guard let r = rate else { return UITableViewCell() }
-                cell.rate = r
-            }
             cell.selectedIndex = TokenInfoRaws.currency.rawValue
         case TokenInfoRaws.decimals.rawValue :
             cell.selectedIndex = TokenInfoRaws.decimals.rawValue

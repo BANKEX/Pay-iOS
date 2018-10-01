@@ -67,7 +67,10 @@ class HomeViewController: BaseViewController {
                 self.tableView.reloadData()
             }
         }
+        catchUserActivity()
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -98,6 +101,17 @@ class HomeViewController: BaseViewController {
     //Methods
     fileprivate func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = .white
+    }
+    
+    func catchUserActivity() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let selectedContact = appDelegate.selectedContact {
+            tabBarController?.selectedIndex = 2
+            let navVC = tabBarController?.viewControllers![2] as? BaseNavigationController
+            navVC?.popToRootViewController(animated: false)
+            let listVC = navVC?.viewControllers.first as? ListContactsViewController
+            listVC?.chooseContact(contact: selectedContact)
+        }
     }
     
     
@@ -226,7 +240,7 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if HomeSections.Ethereum.rawValue == indexPath.section {
-            selectedToken = tokenSerive.selectedERC20Token()
+            selectedToken = etherToken
             tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
         }else {
             let num = floor(Double(indexPath.row/2))
