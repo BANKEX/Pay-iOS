@@ -2093,13 +2093,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzO-6Q-kBl" customClass="SearchFooter" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="574" width="375" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Lwa-gU-cXQ"/>
-                                </constraints>
-                            </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYN-ah-Rke">
                                 <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <subviews>
@@ -2127,17 +2120,14 @@
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <constraints>
-                            <constraint firstItem="l6j-zk-cjw" firstAttribute="bottom" secondItem="lzO-6Q-kBl" secondAttribute="bottom" id="2TU-6c-a06"/>
                             <constraint firstItem="l6j-zk-cjw" firstAttribute="trailing" secondItem="fYN-ah-Rke" secondAttribute="trailing" id="Bv3-Ob-9dD"/>
                             <constraint firstItem="PmK-KC-SPH" firstAttribute="leading" secondItem="l6j-zk-cjw" secondAttribute="leading" id="FRy-b2-KnU"/>
                             <constraint firstItem="l6j-zk-cjw" firstAttribute="bottom" secondItem="nKx-PB-0gh" secondAttribute="bottom" id="OcG-mL-eV0"/>
                             <constraint firstItem="l6j-zk-cjw" firstAttribute="trailing" secondItem="nKx-PB-0gh" secondAttribute="trailing" id="Xev-vM-kSi"/>
                             <constraint firstItem="fYN-ah-Rke" firstAttribute="height" secondItem="nKx-PB-0gh" secondAttribute="height" id="c17-ce-pwt"/>
                             <constraint firstItem="PmK-KC-SPH" firstAttribute="trailing" secondItem="l6j-zk-cjw" secondAttribute="trailing" id="dVH-55-cAw"/>
-                            <constraint firstItem="lzO-6Q-kBl" firstAttribute="trailing" secondItem="l6j-zk-cjw" secondAttribute="trailing" id="dlN-au-6xn"/>
                             <constraint firstItem="fYN-ah-Rke" firstAttribute="leading" secondItem="l6j-zk-cjw" secondAttribute="leading" id="h6F-Iu-c9s"/>
                             <constraint firstItem="PmK-KC-SPH" firstAttribute="top" secondItem="l6j-zk-cjw" secondAttribute="top" id="h8p-eM-nBG"/>
-                            <constraint firstItem="lzO-6Q-kBl" firstAttribute="leading" secondItem="l6j-zk-cjw" secondAttribute="leading" id="pBv-jY-MKl"/>
                             <constraint firstItem="fYN-ah-Rke" firstAttribute="top" secondItem="PmK-KC-SPH" secondAttribute="bottom" id="sBx-t1-Mlw"/>
                             <constraint firstItem="nKx-PB-0gh" firstAttribute="top" secondItem="PmK-KC-SPH" secondAttribute="bottom" id="sqo-Pq-t8e"/>
                             <constraint firstItem="nKx-PB-0gh" firstAttribute="leading" secondItem="l6j-zk-cjw" secondAttribute="leading" id="xJ6-cp-98w"/>
@@ -2148,7 +2138,6 @@
                     <connections>
                         <outlet property="emptyView" destination="fYN-ah-Rke" id="fDk-Oa-wr0"/>
                         <outlet property="searchBar" destination="PmK-KC-SPH" id="ZdH-ZI-XSD"/>
-                        <outlet property="searchFooter" destination="lzO-6Q-kBl" id="SGR-6A-Oco"/>
                         <outlet property="tableView" destination="nKx-PB-0gh" id="otN-BJ-uit"/>
                         <segue destination="Qr8-NM-qjL" kind="show" identifier="addContactSegue" id="s7j-Gy-bX0"/>
                         <segue destination="u6S-A1-UXr" kind="show" identifier="ProfileContact" id="JQX-TM-oYs"/>

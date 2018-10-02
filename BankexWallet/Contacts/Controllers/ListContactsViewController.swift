@@ -32,7 +32,6 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
             tableView.reloadData()
         }
     }
-    @IBOutlet weak var searchFooter:SearchFooter!
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var emptyView:UIView!
     
@@ -55,9 +54,9 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     private func prepareTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.tableFooterView = searchFooter
         tableView.backgroundColor = WalletColors.bgMainColor
         tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
+        tableView.tableFooterView = HeaderView()
     }
     
     
@@ -121,6 +120,12 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         navigationController?.navigationBar.tintColor = WalletColors.mainColor
         self.listContacts = self.service.getAllStoredAddresses()
         state = isNoContacts() ? .empty : .fill
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchBar.text = ""
+        resign()
     }
     
     
@@ -239,10 +244,8 @@ extension ListContactsViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
-            searchFooter.establishFiltering(filteringCount: filteredContacts.count, total: listContacts?.count ?? 0)
             return filteredContacts.count
         }
-        searchFooter.establishNotFiltering()
         let nameofSection = sectionsTitles[section]
         return (dictContacts[nameofSection]?.count)!
     }
