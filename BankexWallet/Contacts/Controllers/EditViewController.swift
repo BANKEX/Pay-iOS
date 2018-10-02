@@ -105,13 +105,11 @@ class EditViewController: BaseViewController {
     }
     
     @IBAction func deleteContact() {
-        let alertViewController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alertViewController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+        let alertViewController = UIAlertController.destructive(button: "Delete") {
             self.service.delete(with: self.selectedContact!.address, completionHandler: {
                 self.navigationController?.popToRootViewController(animated: true)
             })
-        }))
-        alertViewController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        }
         present(alertViewController, animated: true)
     }
     

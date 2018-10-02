@@ -34,8 +34,14 @@ class HomeViewController: BaseViewController {
                 navigationController?.setNavigationBarHidden(false, animated: true)
                 mainSign.isHidden = true
                 navigationItem.title = "Send funds"
-                topConstraint.constant = -(inset-20)
-                isFromContact = false
+                topConstraint.constant = -(inset-40)
+                let btn = UIButton(type: .system)
+                btn.setImage(UIImage(named:"BackArrow"), for: .normal)
+                btn.setTitle("  Back", for: .normal)
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
+                btn.setTitleColor(WalletColors.mainColor, for: .normal)
+                btn.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+                navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btn)
             }
         }
     }
@@ -119,6 +125,11 @@ class HomeViewController: BaseViewController {
         performSegue(withIdentifier: "createToken", sender: nil)
     }
     
+    @IBAction func back() {
+        navigationController?.popViewController(animated: true)
+        isFromContact = false
+        Mediator.contactAddr = nil
+    }
     
     //Methods
     fileprivate func setupStatusBarColor() {

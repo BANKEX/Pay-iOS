@@ -146,7 +146,7 @@ Retriable,UITextFieldDelegate {
     
     
     func updateUI() {
-        enterAddressTextfield.text = selectedFavoriteAddress ?? enterAddressTextfield.text
+        enterAddressTextfield.text = Mediator.contactAddr ?? enterAddressTextfield.text
         guard let selectedToken = selectedToken else { return }
         if isEthToken {
             infoView.state = .Eth

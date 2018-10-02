@@ -11,6 +11,11 @@ import MobileCoreServices
 import CoreSpotlight
 import SkeletonView
 
+struct Mediator {
+     public static var contactAddr:String?
+}
+
+
 class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITextViewDelegate {
 
     @IBOutlet weak var nameContactLabel:UILabel!
@@ -19,13 +24,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     @IBOutlet weak var tableVIew:UITableView!
 
     //MARK: - Properties
-    
 
-    lazy var activityViewController:UIActivityViewController = {
-        let str = "Name:\n\(selectedContact!.name)\nAddress:\n\(selectedContact!.address)"
-        let activityViewController = UIActivityViewController(activityItems: [str], applicationActivities: nil)
-        return activityViewController
-    }()
     lazy var alertViewController:UIAlertController = {
         let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let delButton = UIAlertAction(title:NSLocalizedString("Delete", comment: ""), style: .destructive) { _ in
@@ -52,8 +51,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Contacts"
-        infoView.backgroundColor = WalletColors.mainColor
+        commonPrepare()
         configureTableView()
         prepareUserActivity()
     }
@@ -91,6 +89,8 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? HomeViewController {
             guard let address = selectedContact?.address,service.contains(address: address) else { return }
+            Mediator.contactAddr = address
+            controller.isFromContact = true
         }else if let editVC = segue.destination as? EditViewController {
             editVC.selectedContact = selectedContact
             editVC.delegate = self
@@ -105,6 +105,11 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 
     @IBAction func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func commonPrepare() {
+        title = "Contacts"
+        infoView.backgroundColor = WalletColors.mainColor
     }
     
     private func manageTop(isHide:Bool = true) {
@@ -123,7 +128,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         UIApplication.shared.statusBarStyle = .default
     }
 
-    func configureTableView() {
+    private func configureTableView() {
         tableVIew.delegate = self
         tableVIew.dataSource = self
         tableVIew.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
@@ -132,7 +137,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     }
     
     
-    func prepareUserActivity() {
+    private func prepareUserActivity() {
         searchManager = SearchManager(contact: selectedContact)
         let activity = selectedContact.userActivity
         activity.isEligibleForSearch = true
@@ -142,61 +147,37 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 
 
 
-    func updateUI() {
+     private func updateUI() {
         guard let selectedContact = selectedContact else { return }
         nameContactLabel.text = selectedContact.name
         addrContactLabel.text = selectedContact.address.formattedAddrToken(number: 5)
     }
 
-//    func prepareText() -> NSAttributedString {
-//        let firstString = selectedContact.firstName
-//        let lastString = selectedContact.lastname
-//        let firstAttr = [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 30.0)]
-//        let attrFirstString = NSAttributedString(string: firstString, attributes: firstAttr)
-//        let secondAttr = [NSAttributedStringKey.font:UIFont.boldSystemFont(ofSize: 30.0)]
-//        let attrSecondString = NSAttributedString(string: lastString, attributes: secondAttr)
-//        var attrString = NSMutableAttributedString(attributedString: attrFirstString)
-//        attrString.append(NSAttributedString(string: " "))
-//        attrString.append(attrSecondString)
-//        return attrString
-//    }
 
+    
 
+    //MARK: - IBAction
+    
     @IBAction func seeAll() {
         //
     }
 
-    //MARK: - IBAction
-
     @IBAction func sendFunds() {
-        let nav = tabBarController?.viewControllers?.first as! BaseNavigationController
-        let homeVC = nav.topViewController as! HomeViewController
-        homeVC.isFromContact = true
-        tabBarController?.selectedViewController = nav
+        self.performSegue(withIdentifier: "isFromContact", sender: nil)
     }
 
 
     @IBAction func shareContact() {
-        if let popOver = activityViewController.popoverPresentationController {
+        let text = "Name:\n\(selectedContact!.name)\nAddress:\n\(selectedContact!.address)"
+        let activity = UIActivityViewController.activity(content: text)
+        if let popOver = activity.popoverPresentationController {
             popOver.sourceView = view
             popOver.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY, width: 0, height: 0)
             popOver.permittedArrowDirections = []
-            present(activityViewController, animated: true)
+            present(activity, animated: true)
             return
         }
-        present(activityViewController, animated: true)
-    }
-    
-
-    @IBAction func removeContact() {
-//        if let popOver = alertViewController.popoverPresentationController {
-//            popOver.sourceView = tableView
-//            popOver.sourceRect = CGRect(x: tableView.bounds.midX, y: tableView.bounds.maxY, width: 0, height: 0)
-//            popOver.permittedArrowDirections = []
-//            present(alertViewController, animated: true)
-//            return
-//        }
-//        present(alertViewController, animated: true)
+        present(activity, animated: true)
     }
 
 }

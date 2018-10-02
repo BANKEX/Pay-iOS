@@ -38,10 +38,14 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         tableView.backgroundColor = WalletColors.bgMainColor
         tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
         prepareNavBar()
-        configureSendEthService()
-        updateTransactions()
         configureRefreshControl()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureSendEthService()
+        updateTransactions()
     }
     
     private func prepareNavBar() {
