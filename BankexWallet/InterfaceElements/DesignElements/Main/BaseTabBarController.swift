@@ -13,7 +13,6 @@ class BaseTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hero.isEnabled = true
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
         tabBar.tintColor = WalletColors.mainColor
@@ -27,5 +26,5 @@ class BaseTabBarController: UITabBarController {
         tabBar.items?.last?.image = #imageLiteral(resourceName: "Setting")
         tabBar.items?.last?.selectedImage = #imageLiteral(resourceName: "settings_selected")
     }
-
 }
+

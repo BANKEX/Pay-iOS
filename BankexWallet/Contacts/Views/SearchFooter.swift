@@ -26,7 +26,7 @@ class SearchFooter:UIView {
     
     
     fileprivate func setupView() {
-        backgroundColor = WalletColors.blueText.color()
+        backgroundColor = WalletColors.mainColor
         self.alpha = 0.0
         label.textAlignment = .center
         label.tintColor = .white

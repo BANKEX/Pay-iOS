@@ -9,6 +9,46 @@
 import Foundation
 import UIKit
 
+private var handle = 0
+
+public class ClosureSelector<Parameter> {
+    public let selector: Selector
+    private let closure: (Parameter)->()
+    
+    init(closure: @escaping (Parameter)->()){
+        self.selector = #selector(ClosureSelector.target)
+        self.closure = closure
+    }
+    
+    @objc func target( param: AnyObject) {
+        closure(param as! Parameter)
+    }
+}
+public class EmptyClosureSelector {
+    public let selector: Selector
+    private let closure: ()->()
+    
+    init(closure: @escaping ()->()) {
+        self.selector = #selector(EmptyClosureSelector.target)
+        self.closure = closure
+    }
+    
+    @objc func target() {
+        closure()
+    }
+}
+
+public extension UIButton {
+    func onTouch(_ action: @escaping ()->()) {
+        add(on: .touchUpInside, action: action)
+    }
+    func add(on controlEvents: UIControlEvents, action: @escaping ()->()) {
+        let closureSelector = EmptyClosureSelector(closure: action)
+        objc_setAssociatedObject(self, &handle, closureSelector, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        self.addTarget(closureSelector, action: closureSelector.selector, for: controlEvents)
+    }
+}
+
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -18,6 +58,24 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    public func addBackButton(title:String,image:UIImage, action:(()->())?) {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.textColor = WalletColors.mainColor
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
+        button.setImage(image, for: .normal)
+        if let action = action {
+            button.onTouch(action)
+        }
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+    }
+    
+
+    
+    @objc func touch() {
+       
     }
     
     func setupViewResizerOnKeyboardShown() {

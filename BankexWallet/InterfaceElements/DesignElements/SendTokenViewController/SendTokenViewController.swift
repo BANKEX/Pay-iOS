@@ -221,11 +221,11 @@ Retriable,UITextFieldDelegate {
             errorMessage = nil
             switch message {
             case "invalidAddress":
-                enterAddressTextfield.textColor = WalletColors.errorRed.color()
+                enterAddressTextfield.textColor = WalletColors.errorColor
                 
             case "insufficient funds for gas * price + value":
                 print("well")
-                amountTextfield.textColor = WalletColors.errorRed.color()
+                amountTextfield.textColor = WalletColors.errorColor
                 
             default:
                 break

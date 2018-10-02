@@ -11,15 +11,40 @@ import SkeletonView
 
 class HomeViewController: BaseViewController {
     
+    enum State {
+        case home,fromContact
+    }
     
     enum HomeSections:Int {
         case Ethereum = 0, Tokens
     }
     
-    @IBOutlet weak var tableView:UITableView!
-
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mainSign: UIImageView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageView: UIView!
+    //Delete tabbar
+    var state:State = .home {
+        didSet {
+            if state == .home {
+                navigationController?.setNavigationBarHidden(true, animated: true)
+                mainSign.isHidden = false
+                topConstraint.constant = 0
+            }else {
+                navigationController?.setNavigationBarHidden(false, animated: true)
+                mainSign.isHidden = true
+                navigationItem.title = "Send funds"
+                topConstraint.constant = -(inset-20)
+                isFromContact = false
+            }
+        }
+    }
     
-    
+    var inset:CGFloat {
+        return imageView.bounds.size.height - 20.0
+    }
+    var isFromContact:Bool = false
+    var addressFromContract:String?
     let keyService = SingleKeyServiceImplementation()
     let tokenSerive = CustomERC20TokensServiceImplementation()
     let service: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
@@ -70,17 +95,14 @@ class HomeViewController: BaseViewController {
         catchUserActivity()
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupStatusBarColor()
+        state = isFromContact ? .fromContact : .home
         updateTableView()
-        navigationController?.isNavigationBarHidden = true
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

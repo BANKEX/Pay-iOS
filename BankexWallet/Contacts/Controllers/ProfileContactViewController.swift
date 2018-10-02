@@ -89,10 +89,8 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? SendTokenViewController {
+        if let controller = segue.destination as? HomeViewController {
             guard let address = selectedContact?.address,service.contains(address: address) else { return }
-            controller.selectedFavoriteAddress = address
-            //Add token or eth
         }else if let editVC = segue.destination as? EditViewController {
             editVC.selectedContact = selectedContact
             editVC.delegate = self
@@ -165,13 +163,16 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 
 
     @IBAction func seeAll() {
-        tabBarController?.selectedIndex = 1
+        //
     }
 
     //MARK: - IBAction
 
     @IBAction func sendFunds() {
-        performSegue(withIdentifier: "showSendSegue", sender: self)
+        let nav = tabBarController?.viewControllers?.first as! BaseNavigationController
+        let homeVC = nav.topViewController as! HomeViewController
+        homeVC.isFromContact = true
+        tabBarController?.selectedViewController = nav
     }
 
 
@@ -239,3 +240,6 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
         return UIView()
     }
 }
+
+
+

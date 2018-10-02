@@ -25,7 +25,7 @@ class ManagerReferences {
             case .telegram: return "https://t.me/bankexpay"
             case .twitter: return "https://twitter.com/BANKEX"
             case .appStore: return "itms-apps://itunes.apple.com/app/id1411403963"
-            case .bankex: return "a.ingachev@bankex.com"
+            case .bankex: return "pay@bankex.com"
             }
         }
     }

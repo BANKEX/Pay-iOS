@@ -83,7 +83,7 @@ class TransactionsService {
                     try self.db.operation({ (context, save) in
                         if let newTask = try context.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "trHash == %@", hash))).first {
                             newTask.isPending = false
-                            newTask.to = newTask.to?.lowercased()
+                            newTask.to = to.lowercased()
                             newTask.from = newTask.from?.lowercased()
                             newTask.networkId = self.networkId
                             newTask.amount = newTask.amount!.stripZeros()
