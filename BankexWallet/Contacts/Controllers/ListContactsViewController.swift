@@ -45,17 +45,35 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareTableView()
+        setupNavbar()
+        setupSearchVC()
+        setupAccessoryView()
+    }
+    
+    
+    private func prepareTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = searchFooter
         tableView.backgroundColor = WalletColors.bgMainColor
         tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
-        setupNavbar()
-        setupSearchVC()
-        //tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.resign)))
     }
     
     
+    private func setupAccessoryView() {
+        let accessoryView = UIView()
+        accessoryView.backgroundColor = .white
+        accessoryView.frame.size = CGSize(width: tableView.bounds.width, height: 40)
+        let sizeArrow:CGSize = CGSize(width: 20, height: 20)
+        let arrowDown = UIButton()
+        arrowDown.frame.size = sizeArrow
+        arrowDown.frame.origin = CGPoint(x: sizeArrow.width/2, y: accessoryView.bounds.midY - sizeArrow.width/2)
+        arrowDown.addTarget(self, action: #selector(resign), for: .touchUpInside)
+        arrowDown.setImage(#imageLiteral(resourceName: "bottom"), for: .normal)
+        accessoryView.addSubview(arrowDown)
+        searchBar.inputAccessoryView = accessoryView
+    }
     
     func setFooterView() {
         switch state {
@@ -69,7 +87,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     }
     
     @IBAction func resign() {
-        view.endEditing(true)
+        searchBar.resignFirstResponder()
     }
     
     
