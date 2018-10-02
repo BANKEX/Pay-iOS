@@ -21,7 +21,7 @@ class BaseButton:UIButton {
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        let offSet:CGFloat = 10.0
+        let offSet:CGFloat = 15.0
         let newRect = CGRect(x: self.bounds.origin.x - offSet, y: self.bounds.origin.y - offSet, width: self.bounds.size.width + offSet*2, height: self.bounds.size.height + offSet*2)
         return newRect.contains(point)
     }
