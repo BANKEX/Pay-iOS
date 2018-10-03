@@ -241,7 +241,6 @@ Retriable,UITextFieldDelegate {
     
     var sendingProcess: SendingResultInformation?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let vc = segue.destination as? ChooseFeeViewController,let amount = amountTextfield.text {
             vc.selectedToken = self.selectedToken
             vc.currentBalance = self.currentBalance
@@ -253,6 +252,10 @@ Retriable,UITextFieldDelegate {
         } else if let errorVC = segue.destination as? SendingErrorViewController {
             guard let error = sender as? String else { return }
             errorVC.error = error
+        }else if let listVC = segue.destination as? ListContactsViewController {
+            listVC.fromSendScreen = true
+            listVC.delegate = self
+            UIApplication.shared.statusBarStyle = .default
         }
         
         guard segue.identifier == "showSending",
@@ -502,5 +505,11 @@ extension SendTokenViewController: QRReaderVCDelegate {
         }else {
             enterAddressTextfield.text = result
         }
+    }
+}
+
+extension SendTokenViewController: ListContactsViewControllerDelegate {
+    func choosenFavoriteContact(contact: FavoriteModel) {
+        enterAddressTextfield.text = contact.address
     }
 }

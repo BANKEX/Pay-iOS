@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol ListContactsViewControllerDelegate:class {
+    func choosenFavoriteContact(contact:FavoriteModel)
+}
 
 class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     
@@ -23,6 +26,8 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
             self.tableView.reloadData()
         }
     }
+    weak var delegate:ListContactsViewControllerDelegate?
+    var fromSendScreen:Bool = false
     var filteredContacts = [FavoriteModel]()
     var dictContacts:[String:[FavoriteModel]] = [:]
     var sectionsTitles:[String] = []
@@ -50,6 +55,30 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         setupAccessoryView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        if fromSendScreen {
+            addLeftBtn()
+            hideAddRightButton()
+        }else {
+            addRightButton()
+        }
+        self.listContacts = self.service.getAllStoredAddresses()
+        state = isNoContacts() ? .empty : .fill
+    }
+    
+    private func addLeftBtn() {
+        let btn = UIButton(type: .system)
+        btn.setImage(UIImage(named:"BackArrow"), for: .normal)
+        btn.setTitle("  Back", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
+        btn.setTitleColor(WalletColors.mainColor, for: .normal)
+        btn.addTarget(self, action: #selector(back), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btn)
+    }
+    
     
     private func prepareTableView() {
         tableView.dataSource = self
@@ -59,15 +88,20 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         tableView.tableFooterView = HeaderView()
     }
     
+    @objc func back() {
+        fromSendScreen = false
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     private func setupAccessoryView() {
         let accessoryView = UIView()
         accessoryView.backgroundColor = .white
         accessoryView.frame.size = CGSize(width: tableView.bounds.width, height: 40)
         let sizeArrow:CGSize = CGSize(width: 20, height: 20)
-        let arrowDown = UIButton()
+        let arrowDown = BaseButton()
         arrowDown.frame.size = sizeArrow
-        arrowDown.frame.origin = CGPoint(x: sizeArrow.width/2, y: accessoryView.bounds.midY - sizeArrow.width/2)
+        arrowDown.frame.origin = CGPoint(x: sizeArrow.width, y: accessoryView.bounds.midY - sizeArrow.width/2)
         arrowDown.addTarget(self, action: #selector(resign), for: .touchUpInside)
         arrowDown.setImage(#imageLiteral(resourceName: "bottom"), for: .normal)
         accessoryView.addSubview(arrowDown)
@@ -114,13 +148,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         tableView(tableView, didSelectRowAt: IndexPath(row: selectedRow, section: selectedSection))
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = WalletColors.mainColor
-        self.listContacts = self.service.getAllStoredAddresses()
-        state = isNoContacts() ? .empty : .fill
-    }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -187,12 +215,17 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         searchBar.delegate = self
     }
     
+    
     func setupNavbar() {
         navigationItem.title = NSLocalizedString("Contacts", comment: "")
+    }
+    
+    fileprivate func addRightAddButton() {
         let addBtn:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(transitionToAddContact))
         addBtn.accessibilityLabel = "btnAddContact"
         navigationItem.setRightBarButton(addBtn, animated: true)
     }
+    
     
     
     
@@ -229,6 +262,18 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
 
 extension ListContactsViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if fromSendScreen {
+            let selectedContact:FavoriteModel
+            if isFiltering() {
+                selectedContact = filteredContacts[indexPath.row]
+            }else {
+                guard let currentContacts = dictContacts[sectionsTitles[indexPath.section]] else { return }
+                selectedContact = currentContacts[indexPath.row]
+            }
+            delegate?.choosenFavoriteContact(contact: selectedContact)
+            navigationController?.popViewController(animated: true)
+            return
+        }
         performSegue(withIdentifier: "ProfileContact", sender: nil)
     }
 }

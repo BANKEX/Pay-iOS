@@ -9,9 +9,13 @@
 import UIKit
 
 extension UIViewController {
-    func showCreationAlert() {
+    public func showCreationAlert() {
         let alertViewController = UIAlertController(title: "Error", message: "Couldn't add key", preferredStyle: .alert)
         alertViewController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
         self.present(alertViewController, animated: true)
+    }
+    
+    public func hideAddRightButton() {
+        navigationItem.setRightBarButton(nil, animated: false)
     }
 }
