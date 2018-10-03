@@ -17,6 +17,7 @@ class AddressQRCodeController: BaseViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var copyAddressButton: UIButton!
+    @IBOutlet weak var activityVC:UIActivityIndicatorView!
 
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     var navTitle: String?
@@ -35,7 +36,14 @@ class AddressQRCodeController: BaseViewController {
     
     private func updateUI() {
         self.title = navTitle ?? NSLocalizedString("Receive", comment: "")
-        imageView.image = generateQRCode(from: addressToGenerateQR)
+        activityVC.startAnimating()
+        DispatchQueue.global().async {
+            let image = self.generateQRCode(from: self.addressToGenerateQR)
+            DispatchQueue.main.async {
+                self.imageView.image = image
+                self.activityVC.stopAnimating()
+            }
+        }
         addressLabel.text = addressToGenerateQR?.lowercased()
         walletNameLabel.text = keysService.selectedWallet()?.name
     }
@@ -113,14 +121,11 @@ class AddressQRCodeController: BaseViewController {
     }
 
     func generateQRCode(from string: String?) -> UIImage? {
-        guard let string = string else {
-            return nil
-        }
         var code: String
-        if let c = Web3.EIP67Code(address: string)?.toString() {
+        if let c = Web3.EIP67Code(address: string ?? "")?.toString() {
             code = c
         } else {
-            code = string
+            code = string ?? ""
         }
 
         let data = code.data(using: String.Encoding.ascii)

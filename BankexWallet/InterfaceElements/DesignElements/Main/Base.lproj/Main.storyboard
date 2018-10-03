@@ -4171,10 +4171,15 @@ successfully</string>
                                             <constraint firstAttribute="width" constant="240" id="KWo-c9-0jT"/>
                                         </constraints>
                                     </imageView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TpF-os-8Q1">
+                                        <rect key="frame" x="177.5" y="157" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="crX-5b-v1D" firstAttribute="centerY" secondItem="3Q3-a6-G0T" secondAttribute="centerY" id="6aT-Hq-1Pw"/>
+                                    <constraint firstItem="TpF-os-8Q1" firstAttribute="centerY" secondItem="3Q3-a6-G0T" secondAttribute="centerY" id="PVy-Ah-PDV"/>
+                                    <constraint firstItem="TpF-os-8Q1" firstAttribute="centerX" secondItem="3Q3-a6-G0T" secondAttribute="centerX" id="Y2Y-kX-7Vv"/>
                                     <constraint firstItem="crX-5b-v1D" firstAttribute="centerX" secondItem="3Q3-a6-G0T" secondAttribute="centerX" id="gMi-wq-INx"/>
                                 </constraints>
                             </view>
@@ -4224,6 +4229,7 @@ successfully</string>
                         <viewLayoutGuide key="safeArea" id="nkr-dP-dm2"/>
                     </view>
                     <connections>
+                        <outlet property="activityVC" destination="TpF-os-8Q1" id="bIR-Cy-str"/>
                         <outlet property="addressLabel" destination="lTY-n2-9CJ" id="Z8P-yH-7O5"/>
                         <outlet property="copyAddressButton" destination="rSk-9a-V7H" id="u4L-cp-k7o"/>
                         <outlet property="imageView" destination="crX-5b-v1D" id="G9Q-fP-IXs"/>
