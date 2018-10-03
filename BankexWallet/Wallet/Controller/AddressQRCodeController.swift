@@ -85,7 +85,7 @@ class AddressQRCodeController: BaseViewController {
         let heightLabel = clipView.bounds.height/2
         let label = UILabel(frame: CGRect(x: 0, y: clipView.bounds.midY - heightLabel/2, width: clipView.bounds.width, height: heightLabel))
         label.textAlignment = .center
-        label.text = "Passphrase copied to clipboard"
+        label.text = navTitle == nil ? "Passphrase copied to clipboard" : "Private key copied to clipboard"
         label.textColor = UIColor(hex: "F9FAFC")
         label.font = UIFont.systemFont(ofSize: 15.0)
         clipView.addSubview(label)

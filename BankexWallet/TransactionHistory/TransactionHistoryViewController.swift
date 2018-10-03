@@ -35,11 +35,9 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = WalletColors.bgMainColor
-        tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
+        setupTableView()
         prepareNavBar()
         configureRefreshControl()
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,8 +46,14 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         updateTransactions()
     }
     
+    func setupTableView() {
+        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
+    }
+    
     private func prepareNavBar() {
         addTokensButton()
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     //MARK: - Refresh Control

@@ -22,6 +22,8 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Add New Token"
         setTableView()
 //        if token == nil && keysService.selectedWallet()?.name == nil {
 //            tokensService.getNewConversion(for: (token?.symbol.uppercased())!)
@@ -82,6 +84,9 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 1 || indexPath.row == 2 {
+            return 80.0
+        }
         return 90.0
     }
     

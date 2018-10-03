@@ -12,6 +12,7 @@ class TokenInfoCell: UITableViewCell {
     
     @IBOutlet weak var headerLabel:UILabel!
     @IBOutlet weak var valueLabel:UILabel!
+    @IBOutlet weak var separator:UIView!
     
     let conversionService = FiatServiceImplementation()
     static let identifier:String = String(describing: TokenInfoCell.self)
@@ -49,6 +50,7 @@ class TokenInfoCell: UITableViewCell {
             conversionService.updateConversionRate(for: selectedToken!.symbol.uppercased()) { rate in
                 self.valueLabel.text = self.numberFormatter.string(from: NSNumber(value:rate))
             }
+            separator.isHidden = false
         }
     }
 }

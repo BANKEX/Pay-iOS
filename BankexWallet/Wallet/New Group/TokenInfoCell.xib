@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,17 +31,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aG-OX-tMf">
+                        <rect key="frame" x="1" y="69" width="319" height="1"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.90196078431372551" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Szl-a0-fYT"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="sYq-eH-KB3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="7Y4-sr-Pnm"/>
                     <constraint firstItem="PbC-hF-lR7" firstAttribute="top" secondItem="sYq-eH-KB3" secondAttribute="bottom" constant="10" id="F1y-ao-9HL"/>
                     <constraint firstItem="sYq-eH-KB3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IdW-An-Pe7"/>
+                    <constraint firstItem="9aG-OX-tMf" firstAttribute="top" secondItem="PbC-hF-lR7" secondAttribute="bottom" constant="15" id="Jc4-U7-nv5"/>
                     <constraint firstItem="PbC-hF-lR7" firstAttribute="leading" secondItem="sYq-eH-KB3" secondAttribute="leading" id="QOh-Sa-MEg"/>
+                    <constraint firstAttribute="trailing" secondItem="9aG-OX-tMf" secondAttribute="trailing" id="l1Y-HO-aRc"/>
+                    <constraint firstItem="9aG-OX-tMf" firstAttribute="leading" secondItem="PbC-hF-lR7" secondAttribute="leading" constant="1" id="nt4-bx-Cyu"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="headerLabel" destination="sYq-eH-KB3" id="KzY-fL-E0U"/>
+                <outlet property="separator" destination="9aG-OX-tMf" id="F6B-mX-a1x"/>
                 <outlet property="valueLabel" destination="PbC-hF-lR7" id="8dK-o6-x6F"/>
             </connections>
         </tableViewCell>

@@ -49,13 +49,22 @@ class NetworksViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
         }
+        
+    }
+    
+    func hideAddBtn() {
+        navigationItem.rightBarButtonItem = nil
     }
     
     func configure() {
         tableView.dataSource = self
         tableView.delegate = self
         navigationItem.title = isFromDeveloper ? "Custom Networks" : "Network"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNetworkTapped(_:)))
+        if !isFromDeveloper {
+            hideAddBtn()
+        }else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNetworkTapped(_:)))
+        }
     }
     
     

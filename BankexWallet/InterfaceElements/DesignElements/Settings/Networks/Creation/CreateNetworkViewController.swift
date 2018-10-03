@@ -106,10 +106,13 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
             let pasteButton = PasteButton()
             pasteButton.titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
             pasteButton.frame = CGRect(x: 16.0, y: 5, width: 66.0, height: 35.0)
+            pasteButton.backgroundColor = WalletColors.bgMainColor
             view.addSubview(pasteButton)
             return view
         }else {
-            return nil
+            let v = UIView()
+            v.backgroundColor = WalletColors.bgMainColor
+            return v
         }
     }
     

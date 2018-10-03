@@ -76,7 +76,6 @@ class CreateTokenController: BaseViewController {
     
     fileprivate func setupNavBar() {
         navigationController?.navigationBar.topItem?.title = NSLocalizedString("Wallet", comment: "")
-        self.title = NSLocalizedString("Add new token", comment: "")
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
@@ -112,13 +111,14 @@ class CreateTokenController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.title = NSLocalizedString("Add new token", comment: "")
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        self.title = NSLocalizedString("Wallet", comment: "")
     }
     
     
