@@ -130,8 +130,8 @@ class MainInfoController: BaseViewController,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavBar()
-        updateRate()
         updateBalance()
+        updateRate()
         updateDataOnTheScreen()
         updateUI()
     }
@@ -216,8 +216,9 @@ class MainInfoController: BaseViewController,
         guard let selectedToken = selectedToken else { return }
         let tokenName = selectedToken.symbol.uppercased()
         self.rateSevice.updateConversionRate(for: tokenName, completion: { (result) in
-            let stringRate = self.numberFormatter.string(from: NSNumber(value:result)) ?? "0"
-            self.infoView.rateLabel.text = "\(stringRate) at the rate of CryptoCompare"
+            guard let balanceString = self.infoView.balanceLabel.text else { return }
+            guard let rateCurrency = balanceString.formatToDollar(rate: result) else { return }
+            self.infoView.rateLabel.text = "\(self.numberFormatter.string(from: NSNumber(value:rateCurrency)) ?? "") at the rate of CryptoCompare"
         })
     }
     
@@ -263,6 +264,9 @@ class MainInfoController: BaseViewController,
                                                                            fallbackToScientific: true)
                     DispatchQueue.main.async {
                         self.infoView.balanceLabel.text = formattedAmount!
+                        if self.infoView.isEmptyBalance {
+                            self.infoView.rateLabel.isHidden = true
+                        }
                     }
                 }
             case .Error(let error):

@@ -31,12 +31,10 @@ class WalletInfoViewController: UITableViewController {
         if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
-                self.performSegue(withIdentifier: "ShowPassphrase", sender: nil)
-            case 1:
                 self.performSegue(withIdentifier: "ShowPrivateKey", sender: nil)
-            case 2:
+            case 1:
                 self.performSegue(withIdentifier: "renameSegue", sender: nil)
-            case 3:
+            case 2:
                 //Delete
                 if isSimilarWallet() {
                     let alertVC = UIAlertController.common(title: "Error", message: "You can't to delete selected wallet")
@@ -68,8 +66,6 @@ class WalletInfoViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? AttentionViewController {
             vc.publicAddress = publicAddress
-        } else if let vc = segue.destination as? BackupPassphraseViewController {
-            vc.navTitle = "Backup Phrase"
         }else if let renameVC = segue.destination as? RenameViewController {
             if let nameWallet = nameWalletLabel.text {
                 renameVC.selectedWalletName = nameWallet

@@ -203,7 +203,7 @@ class QRReaderVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         if metaDataObject.type == AVMetadataObject.ObjectType.qr {
             state = .success
             if let str = metaDataObject.stringValue {
-                if str.count == 64 || str.prefix(2) == "0x" {
+                if str.count == 64 || str.prefix(2) == "0x" || str.hasPrefix("ethereum:") {
                     state = .success
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.delegate?.didScan(str)

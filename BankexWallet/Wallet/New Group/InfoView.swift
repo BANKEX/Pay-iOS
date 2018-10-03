@@ -47,6 +47,10 @@ class InfoView: UIView {
         }
     }
     
+    var isEmptyBalance:Bool {
+        return balanceLabel.text == "0"
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

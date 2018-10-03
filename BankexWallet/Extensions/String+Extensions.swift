@@ -14,6 +14,12 @@ extension String {
         return NSString(string:self)
     }
     
+    func formatToDollar(rate:Double) -> Double? {
+        guard let number = Double(self) else { return nil }
+        let total = rate * number
+        return total
+    }
+    
     func formattedAddrToken(number:Int = 6) -> String {
         let prefix = self.prefix(number)
         let suffix = self.suffix(number)

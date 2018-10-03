@@ -63,7 +63,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
             addLeftBtn()
             hideAddRightButton()
         }else {
-            addRightButton()
+            addRightAddButton()
         }
         self.listContacts = self.service.getAllStoredAddresses()
         state = isNoContacts() ? .empty : .fill
