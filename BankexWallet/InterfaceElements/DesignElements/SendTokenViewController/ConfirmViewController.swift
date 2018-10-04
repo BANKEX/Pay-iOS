@@ -17,12 +17,11 @@ class ConfirmViewController: UITableViewController {
     
     @IBOutlet weak var fromLabel:UILabel!
     @IBOutlet weak var toLabel:UILabel!
-    @IBOutlet weak var gasPriceLabel:UILabel!
     @IBOutlet weak var amountLabel:UILabel!
     @IBOutlet weak var feeLabel:UILabel!
-    @IBOutlet weak var gasLimitLabel:UILabel!
     @IBOutlet weak var walletNameLabel: UILabel!
-
+    @IBOutlet weak var totalLabel:UILabel!
+    
     //Properties
     
     
@@ -40,29 +39,33 @@ class ConfirmViewController: UITableViewController {
     var isPinAccepted = false
     let tokenService = CustomERC20TokensServiceImplementation()
     let keyService = SingleKeyServiceImplementation()
+    var selectedToken:ERC20TokenModel?
+    var isEthToken:Bool {
+        guard let token = selectedToken else { return false }
+        return token.address.isEmpty
+    }
     
     @IBAction func unwindBackToConfirm(segue:UIStoryboardSegue) { }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        let label = UILabel()
+        label.text = "Send"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
+        navigationItem.titleView = label
         configureTableView()
     }
     
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
-    }
-    
     func configureTableView() {
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 1))
-        tableView.separatorInset.right = 15.0
+        tableView.backgroundColor = UIColor(hex:"F9F9F9")
     }
     
     func configure(_ dict:[String:Any]) {
@@ -74,20 +77,34 @@ class ConfirmViewController: UITableViewController {
     }
     
     func updateUI() {
-        gasLimitLabel.text = gasLimit
-        gasPriceLabel.text = gasPrice
-        toLabel.text = transaction.transaction.to.address
-        amountLabel.text = amount
-        fromLabel.text = fromAddr
-        feeLabel.text = fee
+        let symbol = isEthToken ? "ETH" : selectedToken!.symbol.uppercased()
+        toLabel.text = transaction.transaction.to.address.formattedAddrToken(number:5)
+        amountLabel.text = "\(amount!) \(symbol)"
+        fromLabel.text = fromAddr.formattedAddrToken(number:5)
+        feeLabel.text = "\(fee!) \(symbol)"
         walletNameLabel.text = name
         isAuth = UserDefaults.standard.value(forKey:Keys.sendSwitch.rawValue) as? Bool ?? true
+        guard let feeString = fee, let feeNumber = Float(feeString),let amountString = amount, let amountNumber = Float(amountString) else { return }
+        let total = feeNumber + amountNumber
+        totalLabel.text = "\(total) \(symbol)"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = WalletColors.mainColor
+        navigationController?.navigationBar.tintColor = .white
+        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        UIApplication.shared.statusBarStyle = .lightContent
         if isPinAccepted { self.sendFunds() }
         updateUI()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = .white
+        UIApplication.shared.statusBarStyle = .default
     }
     
     
@@ -103,7 +120,7 @@ class ConfirmViewController: UITableViewController {
     func formattedFee() -> String? {
         let gasPrice = BigUInt(Double(self.gasPrice)! * pow(10, 9))
         guard let gasLimit = BigUInt(self.gasLimit) else { return "" }
-        return Web3.Utils.formatToEthereumUnits((gasPrice * gasLimit), toUnits: .eth, decimals: 10)
+        return Web3.Utils.formatToEthereumUnits((gasPrice * gasLimit), toUnits: .eth, decimals: 7)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -169,7 +186,18 @@ class ConfirmViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 3 {
+            return UIScreen.main.bounds.height - (233 + 186)
+        }else if indexPath.row == 0 {
+            return 233
+        }else {
+            return 62
+        }
+    }
+    
     
     
     
 }
+

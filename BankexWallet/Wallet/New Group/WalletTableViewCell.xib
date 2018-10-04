@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WalletTableViewCell" customModule="BankexWallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTC-aX-fpQ">
+                        <rect key="frame" x="15" y="0.0" width="290" height="69.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gpa-ha-3cY">
+                                <rect key="frame" x="9" y="14" width="42" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="AWZ-FY-6KO"/>
+                                    <constraint firstAttribute="width" constant="42" id="gw3-SF-rNh"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zok-pW-3dx">
+                                <rect key="frame" x="71" y="14" width="97" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRb-l7-fM9">
+                                <rect key="frame" x="92.5" y="36.5" width="30" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" red="0.050980392159999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow Right Grey" translatesAutoresizingMaskIntoConstraints="NO" id="sEn-86-L95">
+                                <rect key="frame" x="268" y="28.5" width="8" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="8" id="UFs-1t-GWB"/>
+                                    <constraint firstAttribute="height" constant="13" id="eR5-0s-EbX"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFp-mx-z5Q">
+                                <rect key="frame" x="71" y="36.5" width="14.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" red="0.050980392159999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gpa-ha-3cY" firstAttribute="leading" secondItem="mTC-aX-fpQ" secondAttribute="leading" constant="9" id="5Mv-if-iIB"/>
+                            <constraint firstItem="GRb-l7-fM9" firstAttribute="centerY" secondItem="mFp-mx-z5Q" secondAttribute="centerY" id="KcI-GJ-q9P"/>
+                            <constraint firstItem="GRb-l7-fM9" firstAttribute="leading" secondItem="mFp-mx-z5Q" secondAttribute="trailing" constant="7" id="LOn-sL-83g"/>
+                            <constraint firstItem="sEn-86-L95" firstAttribute="centerY" secondItem="mTC-aX-fpQ" secondAttribute="centerY" id="UFL-DA-mgh"/>
+                            <constraint firstItem="mFp-mx-z5Q" firstAttribute="leading" secondItem="zok-pW-3dx" secondAttribute="leading" id="VeE-n2-Oie"/>
+                            <constraint firstAttribute="bottom" secondItem="mFp-mx-z5Q" secondAttribute="bottom" constant="15" id="X3N-zq-w8F"/>
+                            <constraint firstAttribute="trailing" secondItem="sEn-86-L95" secondAttribute="trailing" constant="14" id="boL-sV-bus"/>
+                            <constraint firstItem="zok-pW-3dx" firstAttribute="top" secondItem="gpa-ha-3cY" secondAttribute="top" id="nR7-6A-QSv"/>
+                            <constraint firstItem="zok-pW-3dx" firstAttribute="leading" secondItem="gpa-ha-3cY" secondAttribute="trailing" constant="20" id="wUw-hD-c3e"/>
+                            <constraint firstItem="gpa-ha-3cY" firstAttribute="centerY" secondItem="mTC-aX-fpQ" secondAttribute="centerY" id="yz1-1u-58X"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="mTC-aX-fpQ" secondAttribute="bottom" id="4zG-2k-7cA"/>
+                    <constraint firstItem="mTC-aX-fpQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="SPF-Cj-1Mh"/>
+                    <constraint firstItem="mTC-aX-fpQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="b8G-jC-FCK"/>
+                    <constraint firstAttribute="trailing" secondItem="mTC-aX-fpQ" secondAttribute="trailing" constant="15" id="bGd-vR-GQW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="balanceLbl" destination="mFp-mx-z5Q" id="hs2-1X-y2J"/>
+                <outlet property="fillView" destination="mTC-aX-fpQ" id="WvE-Zb-Y0O"/>
+                <outlet property="nameWalletLbl" destination="zok-pW-3dx" id="Asc-Hh-wlb"/>
+                <outlet property="symbolLbl" destination="GRb-l7-fM9" id="77M-32-e6l"/>
+                <outlet property="walletImageView" destination="gpa-ha-3cY" id="fhl-EI-lic"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Arrow Right Grey" width="8" height="13"/>
+    </resources>
+</document>

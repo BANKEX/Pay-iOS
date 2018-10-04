@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="TokenTableViewCell" customModule="BankexWallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8DI-0u-p1j">
+                        <rect key="frame" x="15" y="0.0" width="290" height="69.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MEQ-cb-Jlr">
+                                <rect key="frame" x="9" y="17" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="PaW-xM-L7c"/>
+                                    <constraint firstAttribute="width" constant="36" id="SPl-JM-Kc6"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BANKEX token" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2FL-Z5-GAc">
+                                <rect key="frame" x="71" y="17" width="113" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t03-ge-74R">
+                                <rect key="frame" x="71" y="36.5" width="50" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" red="0.050980392159999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4W-V6-tSS">
+                                <rect key="frame" x="71" y="36.5" width="39" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" red="0.050980392159999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addToken_icon" translatesAutoresizingMaskIntoConstraints="NO" id="aUk-yH-Wwr">
+                                <rect key="frame" x="262" y="26.5" width="17" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="SwN-qM-bmn"/>
+                                    <constraint firstAttribute="width" constant="17" id="gQv-kj-cgY"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jfi-v9-xAP" customClass="TokenView" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="9" y="14" width="42" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="gaM-su-75a"/>
+                                    <constraint firstAttribute="height" constant="42" id="jmO-iF-EER"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow Right Grey" translatesAutoresizingMaskIntoConstraints="NO" id="qQF-Gy-vRM">
+                                <rect key="frame" x="268" y="28.5" width="8" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="13" id="ZcX-IG-8jv"/>
+                                    <constraint firstAttribute="width" constant="8" id="lu4-ud-d2r"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BKX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9t-5f-kKl">
+                                <rect key="frame" x="128" y="36.5" width="31" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" red="0.050980392159999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MEQ-cb-Jlr" firstAttribute="centerY" secondItem="8DI-0u-p1j" secondAttribute="centerY" id="0bw-me-H0G"/>
+                            <constraint firstItem="MEQ-cb-Jlr" firstAttribute="leading" secondItem="8DI-0u-p1j" secondAttribute="leading" constant="9" id="22Q-j8-a2w"/>
+                            <constraint firstItem="2FL-Z5-GAc" firstAttribute="leading" secondItem="Jfi-v9-xAP" secondAttribute="trailing" constant="20" id="2TN-qO-Nxz"/>
+                            <constraint firstItem="t9t-5f-kKl" firstAttribute="centerY" secondItem="t03-ge-74R" secondAttribute="centerY" id="8DY-db-9of"/>
+                            <constraint firstItem="t03-ge-74R" firstAttribute="leading" secondItem="2FL-Z5-GAc" secondAttribute="leading" id="AUn-IJ-Qia"/>
+                            <constraint firstAttribute="trailing" secondItem="qQF-Gy-vRM" secondAttribute="trailing" constant="14" id="G57-oQ-u6d"/>
+                            <constraint firstItem="2FL-Z5-GAc" firstAttribute="top" secondItem="MEQ-cb-Jlr" secondAttribute="top" id="Gbr-BZ-upO"/>
+                            <constraint firstItem="r4W-V6-tSS" firstAttribute="leading" secondItem="2FL-Z5-GAc" secondAttribute="leading" id="NNI-xY-EbC"/>
+                            <constraint firstItem="Jfi-v9-xAP" firstAttribute="centerY" secondItem="8DI-0u-p1j" secondAttribute="centerY" id="RlU-DO-i4Y"/>
+                            <constraint firstAttribute="bottom" secondItem="t03-ge-74R" secondAttribute="bottom" constant="15" id="SWc-Lo-mn2"/>
+                            <constraint firstAttribute="bottom" secondItem="r4W-V6-tSS" secondAttribute="bottom" constant="15" id="Wa5-IV-bHk"/>
+                            <constraint firstItem="qQF-Gy-vRM" firstAttribute="centerY" secondItem="8DI-0u-p1j" secondAttribute="centerY" id="bCu-k8-oPm"/>
+                            <constraint firstItem="aUk-yH-Wwr" firstAttribute="centerY" secondItem="8DI-0u-p1j" secondAttribute="centerY" id="gNk-Q9-hfZ"/>
+                            <constraint firstItem="t9t-5f-kKl" firstAttribute="leading" secondItem="t03-ge-74R" secondAttribute="trailing" constant="7" id="jJG-gB-5kP"/>
+                            <constraint firstItem="Jfi-v9-xAP" firstAttribute="leading" secondItem="8DI-0u-p1j" secondAttribute="leading" constant="9" id="x2d-Tc-ADe"/>
+                            <constraint firstAttribute="trailing" secondItem="aUk-yH-Wwr" secondAttribute="trailing" constant="11" id="zO5-Va-ZgS"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="8DI-0u-p1j" secondAttribute="trailing" constant="15" id="csR-tc-dld"/>
+                    <constraint firstItem="8DI-0u-p1j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="nff-e1-t6H"/>
+                    <constraint firstItem="8DI-0u-p1j" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="whI-07-EBq"/>
+                    <constraint firstAttribute="bottom" secondItem="8DI-0u-p1j" secondAttribute="bottom" id="zQ9-bS-oPW"/>
+                </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                        <integer key="value" value="5"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                    <integer key="value" value="5"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="addressToken" destination="r4W-V6-tSS" id="z0I-Sa-o58"/>
+                <outlet property="arrowRight" destination="qQF-Gy-vRM" id="g8k-w8-LHB"/>
+                <outlet property="balanceToken" destination="t03-ge-74R" id="8on-i9-mvZ"/>
+                <outlet property="fillView" destination="8DI-0u-p1j" id="hum-By-9Gl"/>
+                <outlet property="nameToken" destination="2FL-Z5-GAc" id="IPo-jw-9ZA"/>
+                <outlet property="symbolToken" destination="t9t-5f-kKl" id="RFG-7k-ZLR"/>
+                <outlet property="tokenAddedImage" destination="aUk-yH-Wwr" id="DcA-5S-1wy"/>
+                <outlet property="tokenImageView" destination="MEQ-cb-Jlr" id="dId-HN-QRq"/>
+                <outlet property="tokenView" destination="Jfi-v9-xAP" id="SSG-Xa-4mc"/>
+            </connections>
+            <point key="canvasLocation" x="-100" y="-57"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Arrow Right Grey" width="8" height="13"/>
+        <image name="addToken_icon" width="14" height="14"/>
+    </resources>
+</document>
