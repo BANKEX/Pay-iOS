@@ -65,7 +65,7 @@ class RecipientsAddressesServiceTests: XCTestCase {
         service.store(address: "Another String", with: "Second Name", lastName: "Second last name", isEditing: false) { _ in }
 
         //when
-        service.updateAddressBylastName(newAddress: "Another address", byName: "First last name")
+        service.updateAddressByName(newAddress: "Another address", byName: "First last name")
         let allAddresses = service.getAllStoredAddresses()
 
         //then
@@ -87,7 +87,7 @@ class RecipientsAddressesServiceTests: XCTestCase {
     func testUpdateFirstName() {
         service.store(address: "Some String", with: "First Name", lastName: "First last name", isEditing: false) { _ in }
         service.store(address: "Another String", with: "Second Name", lastName: "Second last name", isEditing: false) { _ in }
-        service.updateFirstName(newName: "New first name", byAddress:"Some String")
+        service.updateName(newName: "New first name", byAddress:"Some String")
         let currentName = service.getAllStoredAddresses()?.first?.firstName
         XCTAssertNotNil(currentName)
         XCTAssertEqual(currentName!, "New first name")

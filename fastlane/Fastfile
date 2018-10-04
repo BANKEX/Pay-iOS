@@ -21,11 +21,12 @@ end
 #Prod build
 lane :build_appStore do
   travis
-  match(type: "appstore",app_identifier:"com.bankex.pay",force_for_new_devices:true)
+  match(type: "appstore",app_identifier:"com.bankex.pay")
   #scan
   gym(clean:true,scheme:"BankexWallet",export_method:"app-store")
   crashliticsLogIn
 end
+
 
 
 #Dev build

@@ -10,49 +10,95 @@ import UIKit
 import web3swift
 import BigInt
 
-class ChooseFeeViewController: UIViewController {
-    //MARK: - Outlets
-    @IBOutlet weak var currencySymbolLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var gasPriceTextField: UITextField!
-    @IBOutlet weak var gasPriceSlider: UISlider!
-    @IBOutlet weak var gasLimitTextField: UITextField!
-    @IBOutlet weak var gasLimitSlider: UISlider!
-    @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var amountInDollarsLabel: UILabel!
+class ChooseFeeViewController: BaseViewController {
     
-    @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var walletAddressLabel: UILabel!
+    enum StateButtons {
+        case enable,disable
+    }
+    
+    
+    //MARK: - Outlets
+    @IBOutlet weak var gasPriceTextField: UITextField!
+    @IBOutlet weak var gasLimitTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var textFields: [UITextField]!
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var infoView:InfoView!
     
-    @IBOutlet weak var interDataAndButtonConstraint: NSLayoutConstraint!
+    
+    
     //MARK: - Variables
+    var state:StateButtons! {
+        didSet {
+            if state == .enable {
+                sendButton.isEnabled = true
+                sendButton.backgroundColor = WalletColors.mainColor
+            }else {
+                sendButton.isEnabled = false
+                sendButton.backgroundColor = WalletColors.disableColor
+            }
+        }
+    }
+    lazy var unitLabel:UILabel = {
+       let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17.0)
+        label.text = "Gwei"
+        label.textColor = WalletColors.blackColor
+        return label
+    }()
     var amount: String!
-    var destinationAddress: String!
-    var transaction: TransactionIntermediate!
-    
-    @IBOutlet weak var tokenImageView: UIImageView!
+    var destinationAddress: String?
+    var transaction: TransactionIntermediate?
     //MARK: - Services
     var sendEthService: SendEthService!
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     let tokensService = CustomERC20TokensServiceImplementation()
-    let conversionService = FiatServiceImplementation()
-    lazy var utilsService: UtilTransactionsService = tokensService.selectedERC20Token().address.isEmpty ? UtilTransactionsServiceImplementation() :
-    CustomTokenUtilsServiceImplementation()
-
+    var currentBalance:String?
+    var selectedToken:ERC20TokenModel?
+    var isEthToken:Bool {
+        guard let token = selectedToken else { return false }
+        return token.address.isEmpty
+    }
+    var isCorrectValuePrice:Bool {
+        guard let str = gasPriceTextField.text else { return false }
+        guard let value = Float(str) else { return false }
+        return value >= 1.0 && value <= 99.0
+    }
+    var isCorrectValueLimit:Bool {
+        guard let _ = gasLimitTextField.text else { return false }
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.title = NSLocalizedString("Send", comment: "")
+        title = NSLocalizedString("Wallet", comment: "")
         addObservers()
-        configureFee()
-        addBackButton()
-        updateBalance()
+        setupTextFields()
         
-        _ = textFields.map { $0.delegate = self }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        updateUI()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+        UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarView?.backgroundColor = .white
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     var sendingProcess: SendingResultInformation?
@@ -62,35 +108,43 @@ class ChooseFeeViewController: UIViewController {
         guard let confirmVC = segue.destination as? ConfirmViewController else { return }
         guard let gasPrice = gasPriceTextField.text else { return }
         guard let gasLimit = gasLimitTextField.text else { return }
-        guard let name = walletNameLabel.text else { return }
+        guard let name = infoView.nameWallet.text else { return }
+        guard let selectedToken = selectedToken else { return }
 //        transaction.options?.gasLimit = BigUInt(gasLimit)
 //        let gp = BigUInt(Double(gasPrice)! * pow(10, 9))
 //        transaction.options?.gasPrice = BigUInt(gp)
         let dict:[String:Any] = ["gasPrice":gasPrice,"gasLimit":gasLimit,"transaction":transaction,"amount":amount, "name": name]
         confirmVC.configure(dict)
+        confirmVC.selectedToken = selectedToken
         guard segue.identifier == "showSending",
             let confirmation = segue.destination as? SendingResultInformation else {
                 return
         }
         sendingProcess =  confirmation
-        
     }
     
-    
-    //MARK: - Actions
-    @IBAction func gasPriceSliderValueChanged(_ sender: UISlider) {
-        let y = yFunc(x: sender.value)
-        gasPriceTextField.text = String(describing: y.roundToDecimals())
+    private func setupTextFields() {
+        gasPriceTextField.placeholder = "1-99"
+        gasLimitTextField.placeholder = "21000-10000000"
+        _ = textFields.map { $0.delegate = self }
+        [gasPriceTextField,gasLimitTextField].forEach { $0?.returnKeyType = .next }
     }
     
-    func yFunc(x: Float) -> Float {
-        return x * x
-    }
-    
-    
-    @IBAction func gasLimitSliderValueChanged(_ sender: UISlider) {
-        let y = yFunc(x: sender.value)
-        gasLimitTextField.text = String(describing: Int(y))
+    private func updateUI() {
+        infoView.state = isEthToken ? .Eth : .Token
+        guard let selectedToken = selectedToken else { return }
+        infoView.balanceLabel.text = currentBalance ?? "..."
+        infoView.nameTokenLabel.text = selectedToken.symbol.uppercased()
+        if let selectedWallet = keysService.selectedWallet() {
+            infoView.nameWallet.text = selectedWallet.name
+            infoView.addrWallet.text = selectedWallet.address.formattedAddrToken(number: 10)
+        }
+        infoView.tokenNameLabel?.text = selectedToken.name
+        configureFee()
+        state = isCorrectValuePrice && isCorrectValueLimit ? .enable : .disable
+        let xOffSet = gasPriceTextField.frame.origin.x + gasPriceTextField.text!.size(gasPriceTextField.font!).width
+        unitLabel.frame = CGRect(x: xOffSet, y: -1, width: 65.0, height: gasPriceTextField.bounds.height)
+        gasPriceTextField.addSubview(unitLabel)
     }
     
     
@@ -98,41 +152,7 @@ class ChooseFeeViewController: UIViewController {
         self.performSegue(withIdentifier: "ConfirmSegue", sender: nil)
     }
     
-    @IBAction func emptySpaceTapped(_ sender: Any) {
-        view.endEditing(true)
-    }
-    //MARK: - Helpers
-    func configure(_ sender: [String: Any]) {
-        amount = sender["amount"] as? String
-        destinationAddress = sender["destinationAddress"] as? String
-        transaction = sender["transaction"] as? TransactionIntermediate
-    }
-    
-    func updateBalance() {
-        currencySymbolLabel.text = tokensService.selectedERC20Token().symbol.uppercased()
-        
-        guard let selectedAddress = keysService.selectedAddress() else {
-            return
-        }
-        walletNameLabel.text = keysService.selectedWallet()?.name
-        walletAddressLabel.text = selectedAddress
-        tokenImageView.image = PredefinedTokens(with: tokensService.selectedERC20Token().symbol).image()
-        utilsService.getBalance(for: tokensService.selectedERC20Token().address, address: selectedAddress) { (result) in
-            switch result {
-            case .Success(let response):
-                print("\(response)")
-                // TODO: it shouldn't be here anyway and also, lets move to background thread
-                let formattedAmount = Web3.Utils.formatToEthereumUnits(response, toUnits: .eth, decimals: 4)
-                self.amountLabel.text = formattedAmount
-                self.conversionService.updateConversionRate(for: self.tokensService.selectedERC20Token().symbol.uppercased(), completion: { (conversionRate) in
-                    let convertedAmount = conversionRate == 0.0 ? NSLocalizedString("No data from CryptoCompare", comment: "") : String(format: NSLocalizedString("$%f at the rate of CryptoCompare", comment: ""), conversionRate * Double(formattedAmount!)!)
-                    self.amountInDollarsLabel.text = convertedAmount
-                })
-            case .Error(let error):
-                print("\(error)")
-            }
-        }
-    }
+
     
     
     func addObservers() {
@@ -146,38 +166,20 @@ class ChooseFeeViewController: UIViewController {
                                                object: nil)
     }
     
+    
+    
     func configureFee() {
         
-        guard let gasLimitInt = transaction.options?.gasLimit else { return }
-        guard let gasPriceInt = transaction.options?.gasPrice else { return }
+        guard let gasLimitInt = transaction?.options?.gasLimit else { return }
+        guard let gasPriceInt = transaction?.options?.gasPrice else { return }
         
         let initialGasPrice: Float = Float(gasPriceInt / BigUInt(pow(10.0, 9.0)))
         let initialGasLimit: Float = Float(gasLimitInt)
-        
-        gasPriceSlider.minimumValue = sqrt(0.5)
-        gasPriceSlider.maximumValue = sqrt(200)
-        gasPriceSlider.value = sqrt(initialGasPrice)
         gasPriceTextField.text = String(describing: initialGasPrice)
-        
-        
-        gasLimitSlider.minimumValue = 0
-        gasLimitSlider.maximumValue = sqrt(10000000)
-        gasLimitSlider.value = sqrt(initialGasLimit)
         gasLimitTextField.text = String(describing: Int(initialGasLimit))
-        gasPriceTextField.placeholder = String(describing: gasPriceSlider.minimumValue) + "-" + String(describing: gasPriceSlider.maximumValue)
-        gasLimitTextField.placeholder = String(describing: gasLimitSlider.minimumValue) + "-" + String(describing: gasLimitSlider.maximumValue)
     }
     
-    func addBackButton() {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
-        button.setTitleColor(WalletColors.blueText.color(), for: .normal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func backButtonTapped() {
+    @IBAction func backButtonTapped() {
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -195,8 +197,7 @@ class ChooseFeeViewController: UIViewController {
                        delay: TimeInterval(0),
                        options: animationCurve,
                        animations: {
-                        self.scrollView.contentInset = UIEdgeInsets.zero
-                        self.scrollView.contentOffset = CGPoint.zero
+                        self.view.frame.origin.y = 0
                         
         },
                        completion: nil)
@@ -212,27 +213,23 @@ class ChooseFeeViewController: UIViewController {
             let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
             let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
             let textField = textFields.first {$0.isFirstResponder}
-            let textFieldFrameY = (textField?.frame.maxY ?? 0) + 50
-            var  newOffset: CGFloat = 0
-            if textFieldFrameY > view.frame.maxY - endFrameHeight && textField != nil {
-                newOffset = textFieldFrameY - (view.frame.maxY - endFrameHeight)
+            if endFrameY <= gasLimitTextField.bottomY && !gasPriceTextField.isFirstResponder {
+                UIView.animate(withDuration: duration,
+                               delay: TimeInterval(0),
+                               options: animationCurve,
+                               animations: {
+                                UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: {
+                                    let offSet = self.gasLimitTextField.bottomY - endFrameY
+                                    self.view.frame.origin.y = -(offSet + 5.0)
+                                }, completion: nil)
+                                
+                },
+                               completion: nil)
             }
             
-            UIView.animate(withDuration: duration,
-                           delay: TimeInterval(0),
-                           options: animationCurve,
-                           animations: {
-                            if endFrameY >= UIScreen.main.bounds.size.height {
-                                self.scrollView.contentInset = UIEdgeInsets.zero
-                            } else {
-                                self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, endFrame?.size.height ?? 0.0, 0)
-                            }
-                            self.scrollView.contentOffset = CGPoint(x: 0, y: newOffset)
-                            
-            },
-                           completion: nil)
         }
     }
+
     
     
     
@@ -241,7 +238,7 @@ class ChooseFeeViewController: UIViewController {
 
 extension ChooseFeeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.returnKeyType == .done && sendButton.isEnabled {
+        if textField.returnKeyType == .go && sendButton.isEnabled {
             sendButtonTapped(self)
         } else if textField.returnKeyType == .next {
             let index = textFields.index(of: textField) ?? 0
@@ -256,43 +253,52 @@ extension ChooseFeeViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text ?? "")  as NSString
         let futureString = currentText.replacingCharacters(in: range, with: string) as String
-        sendButton.isEnabled = false
+        state = .disable
         
         switch textField {
         case gasPriceTextField:
-            if !futureString.isEmpty && !(gasLimitTextField.text?.isEmpty ?? true) {
-                sendButton.isEnabled = true
+            if futureString.isEmpty {
+                unitLabel.frame.origin.x = textField.frame.origin.x + textField.placeholder!.size(textField.font!).width
+            }else {
+                unitLabel.frame.origin.x = textField.frame.origin.x + futureString.size(textField.font!).width
             }
-            
-            if let floatRepresentation = Float(futureString) {
-                gasPriceSlider.value = floatRepresentation
+            if !futureString.isEmpty && isCorrectValueLimit && isCorrectValuePrice {
+                state = .enable
             }
         case gasLimitTextField:
-            if !futureString.isEmpty && !(gasPriceTextField.text?.isEmpty ?? true) {
-                sendButton.isEnabled = true
+            if !futureString.isEmpty && isCorrectValuePrice && isCorrectValueLimit {
+                state = .enable
             }
-            
-            if let floatRepresentation = Float(futureString) {
-                gasLimitSlider.value = floatRepresentation
-            }
-            
         default:
-            sendButton.isEnabled = false
+            state = .disable
         }
-        
-        sendButton.backgroundColor = sendButton.isEnabled ? WalletColors.defaultDarkBlueButton.color() : WalletColors.disableButtonBackground.color()
-        textField.returnKeyType = sendButton.isEnabled ? UIReturnKeyType.done : .next
-        
+        textField.returnKeyType = state == .enable ? UIReturnKeyType.go : .next
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.textColor = WalletColors.blackColor
+        unitLabel.textColor = WalletColors.blackColor
+        textField.returnKeyType = isCorrectValuePrice && isCorrectValueLimit ? .go : .next
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if !isCorrectValuePrice {
+            gasPriceTextField.textColor = WalletColors.errorColor
+            if gasPriceTextField.text == "" {
+                unitLabel.textColor = WalletColors.blackColor
+            }
+            unitLabel.textColor = WalletColors.errorColor
+            state = .disable
+        }else if !isCorrectValueLimit {
+            gasLimitTextField.textColor = WalletColors.errorColor
+            state = .disable
+        }
         return true
     }
 }
 
-public extension Float {
-    func roundToDecimals(decimals: Int = 2) -> Float {
-        let multiplier = Float(10^decimals)
-        return (multiplier * self).rounded() / multiplier
-    }
-}
 
 
 
