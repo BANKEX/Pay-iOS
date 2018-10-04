@@ -89,6 +89,14 @@
 		864732EC214FF75D00519AE1 /* PasteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864732EB214FF75D00519AE1 /* PasteButton.swift */; };
 		864732EE214FF93400519AE1 /* QRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864732ED214FF93400519AE1 /* QRButton.swift */; };
 		864732F021500FC200519AE1 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864732EF21500FC200519AE1 /* TokenView.swift */; };
+		8649F18A2166A30500EAFDF9 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8649F1892166A30500EAFDF9 /* NotificationCenter.framework */; };
+		8649F18D2166A30500EAFDF9 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8649F18C2166A30500EAFDF9 /* TodayViewController.swift */; };
+		8649F1902166A30500EAFDF9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8649F18E2166A30500EAFDF9 /* MainInterface.storyboard */; };
+		8649F1942166A30500EAFDF9 /* Wallet Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8649F1882166A30500EAFDF9 /* Wallet Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8649F19D2166AD1500EAFDF9 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8649F19C2166AD1500EAFDF9 /* UserDefaults+Extensions.swift */; };
+		8649F19E2167758700EAFDF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81942F10201B36A300F0AE29 /* Assets.xcassets */; };
+		8649F1A021679BB700EAFDF9 /* Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8649F19F21679BB700EAFDF9 /* Guide.swift */; };
+		8649F1A22167AC9F00EAFDF9 /* AppDelegate+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8649F1A12167AC9F00EAFDF9 /* AppDelegate+Extenstions.swift */; };
 		864D0742214DAA9700BCC8BB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864D0741214DAA9700BCC8BB /* BaseViewController.swift */; };
 		864D0FF621393B8100176803 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864D0FF521393B8100176803 /* SearchManager.swift */; };
 		8667D75321569C2500C6B5E3 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8667D75221569C2500C6B5E3 /* UITextField+Extensions.swift */; };
@@ -188,7 +196,28 @@
 			remoteGlobalIDString = 81942F02201B36A300F0AE29;
 			remoteInfo = BankexWallet;
 		};
+		8649F1922166A30500EAFDF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81942EFB201B36A300F0AE29 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8649F1872166A30500EAFDF9;
+			remoteInfo = "Wallet Widget";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8649F1982166A30500EAFDF9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8649F1942166A30500EAFDF9 /* Wallet Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		001A23E9212AD49C001B268B /* AttentionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionViewController.swift; sourceTree = "<group>"; };
@@ -288,6 +317,15 @@
 		864732EB214FF75D00519AE1 /* PasteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteButton.swift; sourceTree = "<group>"; };
 		864732ED214FF93400519AE1 /* QRButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRButton.swift; sourceTree = "<group>"; };
 		864732EF21500FC200519AE1 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		8649F1882166A30500EAFDF9 /* Wallet Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Wallet Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8649F1892166A30500EAFDF9 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		8649F18C2166A30500EAFDF9 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		8649F18F2166A30500EAFDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		8649F1912166A30500EAFDF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8649F1992166A8D100EAFDF9 /* Wallet Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Wallet Widget.entitlements"; sourceTree = "<group>"; };
+		8649F19C2166AD1500EAFDF9 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		8649F19F21679BB700EAFDF9 /* Guide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guide.swift; sourceTree = "<group>"; };
+		8649F1A12167AC9F00EAFDF9 /* AppDelegate+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Extenstions.swift"; sourceTree = "<group>"; };
 		864D0741214DAA9700BCC8BB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		864D0FF521393B8100176803 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		8667D75221569C2500C6B5E3 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
@@ -401,6 +439,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8649F1852166A30500EAFDF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8649F18A2166A30500EAFDF9 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -469,6 +515,7 @@
 				E21926D5212C645900EC9A83 /* BankexWallet.entitlements */,
 				81942F1D201B36A300F0AE29 /* BankexWalletTests */,
 				860144F62133661F002010AE /* BankexWalletUITests */,
+				8649F18B2166A30500EAFDF9 /* Wallet Widget */,
 				81942F04201B36A300F0AE29 /* Products */,
 				34C573DBC09792B63DAD18FA /* Pods */,
 				D9242BFE1AD22F65352D9039 /* Frameworks */,
@@ -481,6 +528,7 @@
 				81942F03201B36A300F0AE29 /* BankexWallet.app */,
 				81942F1A201B36A300F0AE29 /* BankexWalletTests.xctest */,
 				860144F52133661F002010AE /* BankexWalletUITests.xctest */,
+				8649F1882166A30500EAFDF9 /* Wallet Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -712,6 +760,8 @@
 				86E99E2121629B0300948091 /* UIbutton+Extensions.swift */,
 				86E99E242162D28700948091 /* UIAlertController+Extensions.swift */,
 				86E99E282164AEE800948091 /* UIActivityViewController+Extensions.swift */,
+				8649F19C2166AD1500EAFDF9 /* UserDefaults+Extensions.swift */,
+				8649F1A12167AC9F00EAFDF9 /* AppDelegate+Extenstions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -743,8 +793,20 @@
 				864732ED214FF93400519AE1 /* QRButton.swift */,
 				864732EF21500FC200519AE1 /* TokenView.swift */,
 				86BE227B2161018800C1B18D /* HeaderView.swift */,
+				8649F19F21679BB700EAFDF9 /* Guide.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		8649F18B2166A30500EAFDF9 /* Wallet Widget */ = {
+			isa = PBXGroup;
+			children = (
+				8649F1992166A8D100EAFDF9 /* Wallet Widget.entitlements */,
+				8649F18C2166A30500EAFDF9 /* TodayViewController.swift */,
+				8649F18E2166A30500EAFDF9 /* MainInterface.storyboard */,
+				8649F1912166A30500EAFDF9 /* Info.plist */,
+			);
+			path = "Wallet Widget";
 			sourceTree = "<group>";
 		};
 		86A4917A2109CD70006E3679 /* Contacts */ = {
@@ -885,6 +947,7 @@
 				D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */,
 				73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */,
 				64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */,
+				8649F1892166A30500EAFDF9 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1012,10 +1075,12 @@
 				81942F01201B36A300F0AE29 /* Resources */,
 				F99A2D9B6BE0ECA6BB8C7B27 /* [CP] Embed Pods Frameworks */,
 				F09FAEAF20A4514D008D6AD7 /* ShellScript */,
+				8649F1982166A30500EAFDF9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8649F1932166A30500EAFDF9 /* PBXTargetDependency */,
 			);
 			name = BankexWallet;
 			productName = BankexWallet;
@@ -1061,13 +1126,30 @@
 			productReference = 860144F52133661F002010AE /* BankexWalletUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		8649F1872166A30500EAFDF9 /* Wallet Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8649F1972166A30500EAFDF9 /* Build configuration list for PBXNativeTarget "Wallet Widget" */;
+			buildPhases = (
+				8649F1842166A30500EAFDF9 /* Sources */,
+				8649F1852166A30500EAFDF9 /* Frameworks */,
+				8649F1862166A30500EAFDF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Wallet Widget";
+			productName = "Wallet Widget";
+			productReference = 8649F1882166A30500EAFDF9 /* Wallet Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		81942EFB201B36A300F0AE29 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Alexander Vlasov";
 				TargetAttributes = {
@@ -1075,6 +1157,9 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1093,6 +1178,15 @@
 						CreatedOnToolsVersion = 9.4.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 81942F02201B36A300F0AE29;
+					};
+					8649F1872166A30500EAFDF9 = {
+						CreatedOnToolsVersion = 10.0;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1114,6 +1208,7 @@
 				81942F02201B36A300F0AE29 /* BankexWallet */,
 				81942F19201B36A300F0AE29 /* BankexWalletTests */,
 				860144F42133661F002010AE /* BankexWalletUITests */,
+				8649F1872166A30500EAFDF9 /* Wallet Widget */,
 			);
 		};
 /* End PBXProject section */
@@ -1150,6 +1245,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8649F1862166A30500EAFDF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8649F19E2167758700EAFDF9 /* Assets.xcassets in Resources */,
+				8649F1902166A30500EAFDF9 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1309,6 +1413,7 @@
 				86DB8A6F2105D12300B900F2 /* CreateNetworkViewController.swift in Sources */,
 				861D2CD0214AA0AF00A108C4 /* EmptyTableCell.swift in Sources */,
 				86E15F10215BA02800F85AD2 /* UISearchBar+Extensions.swift in Sources */,
+				8649F1A22167AC9F00EAFDF9 /* AppDelegate+Extenstions.swift in Sources */,
 				861D2CDB214AF6B500A108C4 /* BaseNavigationController.swift in Sources */,
 				861D2CD8214AF69E00A108C4 /* BaseTabBarController.swift in Sources */,
 				F00E4628207A354900387B96 /* SendingConfirmationController.swift in Sources */,
@@ -1344,6 +1449,7 @@
 				86A6CAF220FE345B002C19AA /* GenericImportViewController.swift in Sources */,
 				8617A51D210CE84C007F6A9A /* ProfileContactViewController.swift in Sources */,
 				0089E69A2126C9E30037AF60 /* WalletInfoViewController.swift in Sources */,
+				8649F19D2166AD1500EAFDF9 /* UserDefaults+Extensions.swift in Sources */,
 				86E99E252162D28700948091 /* UIAlertController+Extensions.swift in Sources */,
 				86A6CAEA20FE3367002C19AA /* BackupPassphraseViewController.swift in Sources */,
 				003D4BCA20FF44E20096FEBA /* CollectionViewBeforeManager.swift in Sources */,
@@ -1409,6 +1515,7 @@
 				86BE227E2161895C00C1B18D /* RenameViewController.swift in Sources */,
 				86A6CAEE20FE33A1002C19AA /* WalletCreatedViewController.swift in Sources */,
 				8617F6802107D5900039751D /* TouchManager.swift in Sources */,
+				8649F1A021679BB700EAFDF9 /* Guide.swift in Sources */,
 				86D54B3321050DBD0001A9AA /* WalletCell.swift in Sources */,
 				002ED58D21132AEC00845A72 /* TokensTableViewManager.swift in Sources */,
 				E2724AA92107ED550070960A /* PasscodeEnterController.swift in Sources */,
@@ -1465,6 +1572,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8649F1842166A30500EAFDF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8649F18D2166A30500EAFDF9 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1477,6 +1592,11 @@
 			isa = PBXTargetDependency;
 			target = 81942F02201B36A300F0AE29 /* BankexWallet */;
 			targetProxy = 860144FA2133661F002010AE /* PBXContainerItemProxy */;
+		};
+		8649F1932166A30500EAFDF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8649F1872166A30500EAFDF9 /* Wallet Widget */;
+			targetProxy = 8649F1922166A30500EAFDF9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1506,6 +1626,14 @@
 				81942F13201B36A300F0AE29 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8649F18E2166A30500EAFDF9 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8649F18F2166A30500EAFDF9 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1627,6 +1755,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 805299A5A8B2FE29BB36247D /* Pods-BankexWallet.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.dev;
 				BUNDLE_ID_SUFFIX = .dev;
 				CODE_SIGN_ENTITLEMENTS = BankexWallet/BankexWallet.entitlements;
@@ -1656,6 +1785,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D7AB6244521EE66BF695E73F /* Pods-BankexWallet.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_ENTITLEMENTS = BankexWallet/BankexWallet.entitlements;
@@ -1764,6 +1894,55 @@
 			};
 			name = Release;
 		};
+		8649F1952166A30500EAFDF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = "Wallet Widget/Wallet Widget.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 32Q6R987N8;
+				INFOPLIST_FILE = "Wallet Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bankex.pay.dev.Wallet-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8649F1962166A30500EAFDF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = "Wallet Widget/Wallet Widget.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 32Q6R987N8;
+				INFOPLIST_FILE = "Wallet Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bankex.pay.dev.Wallet-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1799,6 +1978,15 @@
 			buildConfigurations = (
 				860144FD2133661F002010AE /* Debug */,
 				860144FE2133661F002010AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8649F1972166A30500EAFDF9 /* Build configuration list for PBXNativeTarget "Wallet Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8649F1952166A30500EAFDF9 /* Debug */,
+				8649F1962166A30500EAFDF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

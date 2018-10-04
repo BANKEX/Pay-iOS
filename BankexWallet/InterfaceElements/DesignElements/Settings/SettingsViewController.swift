@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import web3swift
 
 
 class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDelegate {
     func didTapped(with wallet: HDKey) {
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
+            UserDefaults.saveData(string: wallet.name!)
         }
+        updateBalance()
     }
     
     func didTapped(with network: CustomNetwork) {
@@ -43,6 +46,35 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
         navigationItem.title = "Settings"
         prepareNavbar()
         tableView.backgroundColor = WalletColors.bgMainColor
+    }
+    
+    func updateBalance() {
+        var utilsService:UtilTransactionsService
+        let tokenService = CustomERC20TokensServiceImplementation()
+        let selectedToken = tokenService.selectedERC20Token()
+        let keyService = SingleKeyServiceImplementation()
+        utilsService = selectedToken.address.isEmpty ? UtilTransactionsServiceImplementation() :
+            CustomTokenUtilsServiceImplementation()
+        guard let selectedAddress = keyService.selectedAddress() else {
+            return
+        }
+        utilsService.getBalance(for: selectedToken.address, address: selectedAddress) { (result) in
+            switch result {
+            case .Success(let response):
+                // TODO: it shouldn't be here anyway and also, lets move to background thread
+                DispatchQueue.global(qos: .utility).async {
+                    let formattedAmount = Web3.Utils.formatToEthereumUnits(response,
+                                                                           toUnits: .eth,
+                                                                           decimals: 8,
+                                                                           fallbackToScientific: true)
+                    DispatchQueue.main.async {
+                        UserDefaults.saveData(string: formattedAmount!)
+                    }
+                }
+            case .Error(let error):
+                print("\(error)")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

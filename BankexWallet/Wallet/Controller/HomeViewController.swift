@@ -92,6 +92,11 @@ class HomeViewController: BaseViewController {
     //LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Guide.value != nil {
+            let addrVC = storyboard?.instantiateViewController(withIdentifier: "AddressQRCodeController") as! AddressQRCodeController
+            addrVC.addressToGenerateQR = SingleKeyServiceImplementation().selectedAddress()!
+            navigationController?.pushViewController(addrVC, animated: false)
+        }
         setupTableView()
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeWallet.notificationName(), object: nil, queue: nil) { (_) in
             DispatchQueue.main.async {
@@ -109,6 +114,7 @@ class HomeViewController: BaseViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        Guide.value = nil
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

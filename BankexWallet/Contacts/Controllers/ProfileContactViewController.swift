@@ -15,6 +15,10 @@ struct Mediator {
      public static var contactAddr:String?
 }
 
+struct HistoryMediator {
+    public static var addr:String?
+}
+
 
 class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITextViewDelegate {
 
@@ -64,7 +68,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         view.showSkeleton()
         TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: selectedContact!.address) { isGood in
             if isGood {
-                self.transactions = Array(self.sendService.getAllTransactions().prefix(3).filter({ tr -> Bool in
+                self.transactions = Array(self.sendService.getAllTransactions(addr:nil).prefix(3).filter({ tr -> Bool in
                     if tr.to == self.selectedContact.address.lowercased() {
                         return true
                     }
@@ -127,6 +131,11 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
     }
+    
+    @IBAction func seeAll() {
+        tabBarController?.selectedIndex = 1
+        HistoryMediator.addr = selectedContact.address
+    }
 
     private func configureTableView() {
         tableVIew.delegate = self
@@ -157,10 +166,6 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     
 
     //MARK: - IBAction
-    
-    @IBAction func seeAll() {
-        //
-    }
 
     @IBAction func sendFunds() {
         self.performSegue(withIdentifier: "isFromContact", sender: nil)

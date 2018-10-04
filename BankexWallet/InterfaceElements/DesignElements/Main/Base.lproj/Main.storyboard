@@ -1296,17 +1296,6 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apk-CW-1rL">
-                                        <rect key="frame" x="337" y="7.5" width="27" height="27"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="27" id="93E-Py-1jk"/>
-                                            <constraint firstAttribute="height" constant="27" id="kCt-jP-vnj"/>
-                                        </constraints>
-                                        <state key="normal" image="share"/>
-                                        <connections>
-                                            <action selector="shareAddress" destination="a4u-Jz-fwR" eventType="touchUpInside" id="Jdc-HM-XMy"/>
-                                        </connections>
-                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="nUZ-rw-EGQ">
                                         <rect key="frame" x="165" y="78.5" width="45" height="167.5"/>
                                         <constraints>
@@ -1360,8 +1349,6 @@
                                     <constraint firstItem="yVM-5A-CwR" firstAttribute="centerX" secondItem="sDz-x4-WVM" secondAttribute="centerX" id="HOb-TS-DFI"/>
                                     <constraint firstItem="g0G-zf-Fya" firstAttribute="top" secondItem="pdz-eA-oEr" secondAttribute="bottom" constant="18" id="NZ4-L7-h23"/>
                                     <constraint firstItem="yVM-5A-CwR" firstAttribute="top" secondItem="nUZ-rw-EGQ" secondAttribute="bottom" constant="20" id="NgS-ne-ZRP"/>
-                                    <constraint firstItem="Apk-CW-1rL" firstAttribute="top" secondItem="2pk-zy-aqR" secondAttribute="bottom" constant="-24.5" id="P2q-7L-75w"/>
-                                    <constraint firstAttribute="trailing" secondItem="Apk-CW-1rL" secondAttribute="trailing" constant="11" id="RAo-GU-V6S"/>
                                     <constraint firstItem="nUZ-rw-EGQ" firstAttribute="centerX" secondItem="sDz-x4-WVM" secondAttribute="centerX" id="RfL-kb-xGn"/>
                                     <constraint firstAttribute="bottom" secondItem="g0G-zf-Fya" secondAttribute="bottom" constant="48" id="UVG-Gj-LtY"/>
                                     <constraint firstAttribute="trailing" secondItem="uc3-id-XLK" secondAttribute="trailing" constant="45" id="c8H-ZT-8Ea"/>
@@ -2531,7 +2518,7 @@
         <!--Main Info Controller-->
         <scene sceneID="roq-MN-Sd4">
             <objects>
-                <viewController id="Nqf-Fy-uI6" customClass="MainInfoController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainInfoController" id="Nqf-Fy-uI6" customClass="MainInfoController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hGi-ZX-K3b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3273,6 +3260,7 @@ any transaction history yet</string>
                     <navigationItem key="navigationItem" title="Transaction History" id="2j5-wE-yUj"/>
                     <connections>
                         <outlet property="emptyView" destination="jqw-4f-7Z9" id="xoX-Cm-3yn"/>
+                        <outlet property="segmentControl" destination="Jtp-9m-itp" id="5Cs-3i-aSF"/>
                         <outlet property="tableView" destination="Tll-nS-pNB" id="GZn-90-L1Y"/>
                     </connections>
                 </viewController>
@@ -4147,7 +4135,7 @@ successfully</string>
         <!--AddressQR Code Controller-->
         <scene sceneID="WOg-BZ-rAj">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="vp6-20-0hl" customClass="AddressQRCodeController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressQRCodeController" hidesBottomBarWhenPushed="YES" id="vp6-20-0hl" customClass="AddressQRCodeController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4QL-Ar-lb3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5369,19 +5357,19 @@ minutes, please wait ...</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAL-ki-LFZ">
-                                                    <rect key="frame" x="74" y="4" width="229" height="17"/>
+                                                    <rect key="frame" x="74" y="4" width="259" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNy-7f-0xq">
-                                                    <rect key="frame" x="74" y="28" width="255" height="14"/>
+                                                    <rect key="frame" x="74" y="28" width="285" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CopiedIcon" translatesAutoresizingMaskIntoConstraints="NO" id="LZC-I8-x45">
-                                                    <rect key="frame" x="315" y="5.5" width="14" height="14"/>
+                                                    <rect key="frame" x="345" y="5.5" width="14" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="14" id="1XX-gs-af2"/>
                                                         <constraint firstAttribute="height" constant="14" id="mjn-9Y-uPb"/>
@@ -5637,7 +5625,7 @@ minutes, please wait ...</string>
         <image name="empty_pin_code" width="119" height="15"/>
         <image name="network_icon" width="29" height="29"/>
         <image name="pin_background" width="375" height="667"/>
-        <image name="qr" width="20" height="20"/>
+        <image name="qr" width="16.333333969116211" height="16"/>
         <image name="receive_icon" width="16" height="16"/>
         <image name="send_icon" width="16" height="16"/>
         <image name="share" width="27" height="27"/>
@@ -5648,7 +5636,7 @@ minutes, please wait ...</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qlT-rW-zU3"/>
-        <segue reference="USj-xB-uaI"/>
+        <segue reference="6Lw-Hb-mw0"/>
         <segue reference="aQE-iQ-YyK"/>
         <segue reference="94t-6M-Swp"/>
         <segue reference="JaH-wa-aDn"/>
@@ -5658,7 +5646,7 @@ minutes, please wait ...</string>
         <segue reference="bDG-Xv-WCD"/>
         <segue reference="Ifx-vO-B66"/>
         <segue reference="fKt-CA-37X"/>
-        <segue reference="AnP-VM-Uv4"/>
+        <segue reference="Jbu-eR-5tu"/>
         <segue reference="pT1-5S-qPI"/>
         <segue reference="bSW-e7-K9g"/>
         <segue reference="o2o-Af-M3V"/>

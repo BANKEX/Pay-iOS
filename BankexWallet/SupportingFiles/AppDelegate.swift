@@ -18,6 +18,18 @@ import FirebaseInstanceID
 import PushKit
 import CoreSpotlight
 
+enum ShortcutIdentifier:String {
+    case send
+    case receive
+    
+    init?(identifer:String) {
+        guard let identity = identifer.components(separatedBy: ".").last else {
+            return nil
+        }
+        self.init(rawValue: identity)
+    }
+}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,8 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var navigationVC:UINavigationController?
     var currentViewController:UIViewController?
     var service = RecipientsAddressesServiceImplementation()
+    var keyService = SingleKeyServiceImplementation()
     var selectedContact:FavoriteModel?
     let gcmMessageIDKey = "gcm.message_id"
+    var selectedAddress:String {
+        return keyService.selectedAddress() ?? ""
+    }
     
     enum tabBarPage: Int {
         case main = 0
@@ -40,6 +56,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var initiatingTabBar: tabBarPage = .main
     
     
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        completionHandler(handleShortcut(shortcutItem: shortcutItem))
+    }
+    
+    func handleShortcut(shortcutItem:UIApplicationShortcutItem) -> Bool {
+        let shortcutType = shortcutItem.type
+        guard let shortcutIdentifier = ShortcutIdentifier(identifer:shortcutType) else { return false }
+        selectPath(shortcutIdentifier)
+        return true
+    }
+    
+    func selectPath(_ identifier:ShortcutIdentifier) {
+        if identifier == .send {
+            showFirstTabController()
+        }else if identifier == .receive {
+            //From background
+            if isLaunched {
+            let tabvc = window?.rootViewController as! BaseTabBarController
+            tabvc.selectedIndex = 0
+            if let nav = tabvc.viewControllers?[0] as? BaseNavigationController {
+                if let addressQRVC = storyboard().instantiateViewController(withIdentifier: "AddressQRCodeController") as? AddressQRCodeController {
+                    addressQRVC.addressToGenerateQR = SingleKeyServiceImplementation().selectedAddress()
+                    nav.pushViewController(addressQRVC, animated: false)
+                }
+            }
+                //From unlaunch
+            }else if !isLaunched {
+                Guide.value = identifier.rawValue
+            }
+        }
+    }
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

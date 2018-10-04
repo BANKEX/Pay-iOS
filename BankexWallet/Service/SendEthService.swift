@@ -51,7 +51,7 @@ protocol SendEthService {
               transaction: TransactionIntermediate, options: Web3Options?, completion:
         @escaping (SendEthResult<TransactionSendingResult>) -> Void)
     
-    func getAllTransactions() -> [ETHTransactionModel]
+    func getAllTransactions(addr:String?) -> [ETHTransactionModel]
     
     func delete(transaction: ETHTransactionModel)
 }
@@ -139,8 +139,8 @@ class SendEthServiceImplementation: SendEthService {
     }
     
     
-    func getAllTransactions() -> [ETHTransactionModel] {
-        guard let address = self.keysService.selectedAddress() else { return [] }
+    func getAllTransactions(addr:String?) -> [ETHTransactionModel] {
+        guard let address = addr ?? self.keysService.selectedAddress() else { return [] }
         let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
         let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@) && token == nil", NSNumber(value: networkId), address.lowercased(), address.lowercased())).sorted(with: "date", ascending: false))
         
@@ -250,22 +250,3 @@ class SendEthServiceImplementation: SendEthService {
     // MARK:
 }
 
-extension SendEthServiceImplementation {
-    func getAllTransactions(_ addr:String? = nil) -> [ETHTransactionModel] {
-        let currentAddress = keysService.selectedAddress() ?? ""
-        let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
-        let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@) && token == nil", NSNumber(value: networkId), addr?.lowercased() ?? currentAddress.lowercased(), addr?.lowercased() ?? currentAddress.lowercased())).sorted(with: "date", ascending: false))
-        
-        return transactions.map({ (transaction) -> ETHTransactionModel in
-            let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :
-                ERC20TokenModel(token: transaction.token!)
-            return ETHTransactionModel(from: transaction.from ?? "",
-                                       to: transaction.to ?? "",
-                                       amount: transaction.amount ?? "",
-                                       date: transaction.date!,
-                                       token: token,
-                                       key: HDKey(name: transaction.keywallet?.name,
-                                                  address: (transaction.keywallet?.address ?? "")), isPending: transaction.isPending)
-        })
-    }
-}
