@@ -14,7 +14,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     enum State {
         case empty,fill
     }
-    
+    @IBOutlet weak var segmentControl:UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView:UIView!
     var tokensButton: UIButton!
@@ -44,7 +44,9 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     let transactionsService = TransactionsService()
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
-    
+    var fromContact:Bool {
+        return HistoryMediator.addr != nil
+    }
     var transactionsToShow = [[ETHTransactionModel]]()
     var currentState: TransactionStatus = .all
     
@@ -58,13 +60,25 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+    }
+    
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         configureSendEthService()
-        updateTransactions()
+        if fromContact {
+            updateTransactions(address: HistoryMediator.addr!, status: .all)
+        } else {
+            updateTransactions()
+        }
         updateUI()
     }
     
     func updateUI() {
         state = transactionsToShow.isEmpty ? .empty : .fill
+        tableView.reloadData()
     }
     
     
@@ -101,11 +115,10 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //TODO: - Update the data here
-        guard let selectedAddress = keysService.selectedAddress() else { return }
+        guard let selectedAddress = HistoryMediator.addr ?? keysService.selectedAddress() else { return }
         transactionsService.refreshTransactionsInSelectedNetwork(forAddress: selectedAddress) { (success) in
             if success {
-                self.updateTransactions(status: self.currentState)
-                self.tableView.reloadData()
+                self.updateTransactions(address: selectedAddress, status: self.currentState)
                 self.updateUI()
             }
             refreshControl.endRefreshing()
@@ -138,31 +151,30 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     }
     
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
-        
+        var selAddr = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
         switch sender.selectedSegmentIndex {
         case 0:
-            updateTransactions(status: .all)
+            updateTransactions(address: selAddr, status: .all)
         case 1:
-            updateTransactions(status: .received)
+            updateTransactions(address: selAddr, status: .received)
         case 2:
-            updateTransactions(status: .sent)
+            updateTransactions(address: selAddr, status: .sent)
         case 3:
-            updateTransactions(status: .confirming)
+            updateTransactions(address: selAddr, status: .confirming)
         default:
             print("This is not possible")
         }
-        tableView.reloadData()
         updateUI()
     }
     
     //MARK: - Choose Token Delegate
     func didSelectToken(name: String) {
         popover.dismiss()
+        let selAddr = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
         guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
         tokensService.updateSelectedToken(to: token.address, completion: {
             self.tokensButton.setTitle(name.uppercased(), for: .normal)
-            self.updateTransactions(status: self.currentState)
-            self.tableView.reloadData()
+            self.updateTransactions(address: selAddr, status: self.currentState)
             self.updateUI()
         })
         
@@ -175,6 +187,12 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return transactionsToShow.count
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        HistoryMediator.addr = nil
+        segmentControl.selectedSegmentIndex = 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -237,23 +255,26 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     }
     
     
-    
     private func updateTransactions(status: TransactionStatus = .all) {
+        let selectedAddress = SingleKeyServiceImplementation().selectedAddress()!
+        updateTransactions(address: selectedAddress, status: status)
+    }
+    
+    private func updateTransactions(address:String, status: TransactionStatus = .all) {
         var transactions: [ETHTransactionModel]
         transactionsToShow.removeAll()
         currentState = status
         configureSendEthService()
-        guard let selectedAddress = SingleKeyServiceImplementation().selectedAddress() else { return }
-        switch status {
-        case .all:
-            transactions = sendEthService.getAllTransactions()
-        case .sent:
-            transactions = sendEthService.getAllTransactions().filter{ $0.from == selectedAddress.lowercased() && !$0.isPending }
-        case .received:
-            transactions = sendEthService.getAllTransactions().filter{ $0.from != selectedAddress.lowercased() && !$0.isPending}
-        case .confirming:
-            transactions = sendEthService.getAllTransactions().filter{ $0.isPending }
-        }
+            switch status {
+            case .all:
+                transactions = sendEthService.getAllTransactions(addr: address)
+            case .sent:
+                transactions = sendEthService.getAllTransactions(addr: address).filter{ $0.from == address.lowercased() && !$0.isPending }
+            case .received:
+                transactions = sendEthService.getAllTransactions(addr: address).filter{ $0.from != address.lowercased() && !$0.isPending}
+            case .confirming:
+                transactions = sendEthService.getAllTransactions(addr: address).filter{ $0.isPending }
+            }
         for transaction in transactions {
             let trDate = getFormattedDate(date: transaction.date)
             if transactionsToShow.isEmpty {
@@ -277,7 +298,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
 }
 
 
-enum TransactionStatus {
+enum TransactionStatus:Int {
     case all
     case sent
     case received

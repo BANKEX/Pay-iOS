@@ -119,7 +119,7 @@ class MainInfoController: BaseViewController,
         sendEthService = selectedToken!.address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
-        self.transactions = Array(self.sendEthService.getAllTransactions().prefix(3))
+        self.transactions = Array(self.sendEthService.getAllTransactions(addr:nil).prefix(3))
 //        configureRefreshControl()
 //        tokensService.updateConversions()
         configureNotifications()
@@ -314,7 +314,7 @@ class MainInfoController: BaseViewController,
         sendEthService = selectedToken.address.isEmpty ?
             SendEthServiceImplementation() :
             ERC20TokenContractMethodsServiceImplementation()
-        transactionsToShow = Array(sendEthService.getAllTransactions().prefix(3))
+        transactionsToShow = Array(sendEthService.getAllTransactions(addr:nil).prefix(3))
         var arrayOfTransactions = [String]()
         switch transactionsToShow.count {
         case 0:
@@ -439,7 +439,7 @@ class MainInfoController: BaseViewController,
                 TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
 //                    self.putTransactionsInfoIntoItemsArray()
                     //self.getTransactions()
-                    self.transactions = Array(self.sendEthService.getAllTransactions().prefix(3))
+                    self.transactions = Array(self.sendEthService.getAllTransactions(addr:nil).prefix(3))
                     self.tableView.reloadData()
 //                    if #available(iOS 10.0, *) {
 //                        self.tableView.refreshControl?.endRefreshing()

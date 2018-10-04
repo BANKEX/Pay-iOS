@@ -79,9 +79,7 @@ class AttentionViewController: BaseViewController {
         }
     }
     
-    @IBAction func shareAddress() {
-        //TODO
-    }
+
     
     @IBAction func back() {
         navigationController?.popViewController(animated: true)

@@ -149,9 +149,9 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
     }
     
     //Now that function returns transactions for selected token only.
-    func getAllTransactions() -> [ETHTransactionModel] {
+    func getAllTransactions(addr:String?) -> [ETHTransactionModel] {
         
-        guard let address = self.keysService.selectedAddress() else { return [] }
+        guard let address = addr ?? self.keysService.selectedAddress() else { return [] }
         let selectedToken = CustomERC20TokensServiceImplementation().selectedERC20Token()
         let networkId = Int64(NetworksServiceImplementation().preferredNetwork().networkId)
         
