@@ -3,36 +3,37 @@ PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - CryptoSwift (0.10.0)
-  - Firebase/Core (5.6.0):
+  - Firebase/Core (5.9.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 5.1.1)
-  - Firebase/CoreOnly (5.6.0):
-    - FirebaseCore (= 5.1.1)
-  - Firebase/Crash (5.6.0):
+    - FirebaseAnalytics (= 5.2.0)
+  - Firebase/CoreOnly (5.9.0):
+    - FirebaseCore (= 5.1.4)
+  - Firebase/Crash (5.9.0):
     - Firebase/Core
     - FirebaseCrash (= 3.1.1)
-  - Firebase/DynamicLinks (5.6.0):
-    - Firebase/Core
-    - FirebaseDynamicLinks (= 3.0.2)
-  - Firebase/Messaging (5.6.0):
+  - Firebase/DynamicLinks (5.9.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (= 3.1.0)
-  - Firebase/RemoteConfig (5.6.0):
+    - FirebaseDynamicLinks (= 3.1.0)
+  - Firebase/Messaging (5.9.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.1.2)
+  - Firebase/RemoteConfig (5.9.0):
     - Firebase/Core
     - FirebaseRemoteConfig (= 3.0.1)
   - FirebaseABTesting (2.0.0):
     - FirebaseCore (~> 5.0)
     - Protobuf (~> 3.5)
-  - FirebaseAnalytics (5.1.1):
+  - FirebaseAnalytics (5.2.0):
     - FirebaseCore (~> 5.1)
     - FirebaseInstanceID (~> 3.2)
-    - GoogleAppMeasurement (~> 5.1)
-    - GoogleUtilities/AppDelegateSwizzler (~> 5.2.0)
-    - GoogleUtilities/MethodSwizzler (~> 5.2.0)
+    - GoogleAppMeasurement (~> 5.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - FirebaseCore (5.1.1):
+  - FirebaseAnalyticsInterop (1.0.0)
+  - FirebaseCore (5.1.4):
     - GoogleUtilities/Logger (~> 5.2)
   - FirebaseCrash (3.1.1):
     - FirebaseAnalytics (~> 5.1)
@@ -40,12 +41,15 @@ PODS:
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - Protobuf (~> 3.5)
-  - FirebaseDynamicLinks (3.0.2):
+  - FirebaseDynamicLinks (3.1.0):
     - FirebaseAnalytics (~> 5.1)
-  - FirebaseInstanceID (3.2.1):
+    - FirebaseAnalyticsInterop (~> 1.0)
     - FirebaseCore (~> 5.1)
-    - GoogleUtilities/Environment (~> 5.2)
-  - FirebaseMessaging (3.1.0):
+  - FirebaseInstanceID (3.2.2):
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.3)
+    - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseMessaging (3.1.2):
     - FirebaseCore (~> 5.0)
     - FirebaseInstanceID (~> 3.0)
     - GoogleUtilities/Reachability (~> 5.2)
@@ -58,9 +62,9 @@ PODS:
     - GoogleUtilities/Environment (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - Protobuf (~> 3.5)
-  - GoogleAppMeasurement (5.1.1):
-    - GoogleUtilities/AppDelegateSwizzler (~> 5.2.0)
-    - GoogleUtilities/MethodSwizzler (~> 5.2.0)
+  - GoogleAppMeasurement (5.2.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
@@ -69,22 +73,25 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
-  - GoogleUtilities/AppDelegateSwizzler (5.2.2):
+  - GoogleUtilities/AppDelegateSwizzler (5.3.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (5.2.2)
-  - GoogleUtilities/Logger (5.2.2):
+  - GoogleUtilities/Environment (5.3.0)
+  - GoogleUtilities/Logger (5.3.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (5.2.2):
+  - GoogleUtilities/MethodSwizzler (5.3.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (5.2.2):
+  - GoogleUtilities/Network (5.3.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (5.2.2)"
-  - GoogleUtilities/Reachability (5.2.2):
+  - "GoogleUtilities/NSData+zlib (5.3.0)"
+  - GoogleUtilities/Reachability (5.3.0):
     - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.3.0):
+    - GoogleUtilities/Logger
+  - Hero (1.3.1)
   - KIF (3.7.4):
     - KIF/Core (= 3.7.4)
   - KIF/Core (3.7.4)
@@ -106,10 +113,11 @@ PODS:
     - PromiseKit/CorePromise
   - Protobuf (3.6.1)
   - QRCodeReader.swift (8.1.1)
-  - ReachabilitySwift (4.1.0)
+  - ReachabilitySwift (4.2.1)
   - Result (3.0.0)
   - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
+  - SkeletonView (1.4)
   - SugarRecord/CoreData (3.0.3):
     - Result (~> 3.0)
   - web3swift (1.1.1):
@@ -127,10 +135,12 @@ DEPENDENCIES:
   - Firebase/DynamicLinks
   - Firebase/Messaging
   - Firebase/RemoteConfig
+  - Hero
   - KIF
   - Popover
   - QRCodeReader.swift (~> 8.1.1)
   - ReachabilitySwift
+  - SkeletonView
   - SugarRecord/CoreData (<= 3.1)
   - web3swift (<= 1.1.1)
 
@@ -142,6 +152,7 @@ SPEC REPOS:
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseCrash
     - FirebaseDynamicLinks
@@ -151,6 +162,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleToolboxForMac
     - GoogleUtilities
+    - Hero
     - KIF
     - libsodium
     - nanopb
@@ -162,6 +174,7 @@ SPEC REPOS:
     - Result
     - secp256k1_ios
     - SipHash
+    - SkeletonView
     - SugarRecord
     - web3swift
 
@@ -169,18 +182,20 @@ SPEC CHECKSUMS:
   Amplitude-iOS: 2ad4d7270c99186236c1272a3a9425463b1ae1a7
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
-  Firebase: 75ea9e232eefa158c1049028030b8f661a2ccb62
+  Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
   FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
-  FirebaseAnalytics: 993577e91157feb40945abedd6ab346d8a4b6ac8
-  FirebaseCore: cb9ee75e0894def766167c95a4d5a14b1c138269
+  FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
+  FirebaseAnalyticsInterop: 31b00d2a916918327308b2dff47251eb96f9e4ad
+  FirebaseCore: 2a84b6b325792a4319ef71ee18819dcba08d2fd7
   FirebaseCrash: fd373fbf5f9d1e235a984f2c7e446a5f26b968e8
-  FirebaseDynamicLinks: eb41fb20677b0a6e944b47f45cbe59f388e9e5cc
-  FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
-  FirebaseMessaging: f67b3719f520ee200da0e20ce577fe2bce0c01d0
+  FirebaseDynamicLinks: 33f349103fa71d463688b7671e6a60e00ac6a5af
+  FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
+  FirebaseMessaging: d6feeb06218d2675b4149b0ada925a6b707a74cf
   FirebaseRemoteConfig: 7b6d675dfb11f0e0e638caee00908b06af150d56
-  GoogleAppMeasurement: f7507b39b70ad0bd80b3d81518b2f43868974307
+  GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
-  GoogleUtilities: 06b66f9567769a7958db20a92f0128b2843e49d5
+  GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
+  Hero: 1c3c625ba05856f305d29f5c270f8766c5ff2df7
   KIF: f3d01c109ee9d1cfe6b0f2bb2aa278e807e971e2
   libsodium: 9a8faa5ef2fa0d2d57bd7f7d79bf8fb7c1a9f0ea
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -188,13 +203,14 @@ SPEC CHECKSUMS:
   PromiseKit: 32c36425387e9cfc7f1206f27bfd906d0b53c0d6
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   QRCodeReader.swift: b164a681887de276d405ff02bce854d82cd6360b
-  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
+  SkeletonView: 50f7a9b04e3a62bd0ae964859c19317fabaea367
   SugarRecord: 8bec9d426faf25769483d6814b0c7325c4f156ea
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 6172f10cfeb03f3133484ea0de6c5d17120fbb4d
+PODFILE CHECKSUM: 17f36e15d26f853d6a1707692ba95e79e3d8c3fe
 
 COCOAPODS: 1.5.3
