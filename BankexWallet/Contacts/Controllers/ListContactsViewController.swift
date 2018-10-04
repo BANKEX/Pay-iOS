@@ -85,6 +85,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         tableView.delegate = self
         tableView.backgroundColor = WalletColors.bgMainColor
         tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
+        tableView.keyboardDismissMode = .interactive
         tableView.tableFooterView = HeaderView()
     }
     

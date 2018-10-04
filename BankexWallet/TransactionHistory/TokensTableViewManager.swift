@@ -13,24 +13,30 @@ class TokensTableViewManager: NSObject, UITableViewDataSource, UITableViewDelega
 
     weak var delegate: ChooseTokenDelegate?
     
-    lazy var tokens = tokensService.availableTokensList()
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let count = tokens?.count else { return 0 }
+        guard let count = tokensService.availableTokensList()?.count else { return 0 }
         return count
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        guard let tokens = tokens else { return UITableViewCell() }
+        guard let tokens = tokensService.availableTokensList() else { return UITableViewCell() }
         cell.textLabel?.text = tokens[indexPath.row].symbol.uppercased()
+        cell.textLabel?.textAlignment = .center
         cell.textLabel?.clipsToBounds = true
         cell.clipsToBounds = true
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 32
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let tokens = tokens else { return }
+        guard let tokens = tokensService.availableTokensList() else { return }
         delegate?.didSelectToken(name: tokens[indexPath.row].symbol.uppercased())
     }
     

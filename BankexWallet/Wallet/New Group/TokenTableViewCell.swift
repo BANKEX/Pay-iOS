@@ -18,6 +18,8 @@ class TokenTableViewCell: UITableViewCell {
     @IBOutlet weak var addressToken:UILabel!
     @IBOutlet weak var tokenAddedImage:UIImageView!
     @IBOutlet weak var tokenView:TokenView!
+    @IBOutlet weak var fillView:UIView!
+    @IBOutlet weak var arrowRight:UIImageView!
     
     static let identifier:String = String(describing: TokenTableViewCell.self)
     let keysService = SingleKeyServiceImplementation()
@@ -33,22 +35,22 @@ class TokenTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupDefaultShadow()
-        layer.cornerRadius = 8.0
+        fillView.setupDefaultShadow()
+        fillView.layer.cornerRadius = 8.0
         selectionStyle = .none
-        backgroundColor = .white
+        backgroundColor = WalletColors.bgMainColor
         tokenAddedImage.isHidden = true
     }
 
     func configure() {
         if isSearchable {
             tokenAddedImage.isHidden = token.isAdded ? false : true
-            accessoryType = .none
+            arrowRight.isHidden = true
             symbolToken.isHidden = true
             balanceToken.isHidden = true
             addressToken.isHidden = false
         }else {
-            accessoryType = .disclosureIndicator
+            arrowRight.isHidden = false
             symbolToken.isHidden = false
             balanceToken.isHidden = false
             addressToken.isHidden = true

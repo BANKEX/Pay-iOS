@@ -16,6 +16,7 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet weak var nameWalletLbl:UILabel!
     @IBOutlet weak var balanceLbl:UILabel!
     @IBOutlet weak var symbolLbl:UILabel!
+    @IBOutlet weak var fillView:UIView!
     
     
     var utilsService = UtilTransactionsServiceImplementation()
@@ -26,10 +27,10 @@ class WalletTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupDefaultShadow()
+        fillView.setupDefaultShadow()
         selectionStyle = .none
-        layer.cornerRadius = 8.0
-        backgroundColor = .white
+        fillView.layer.cornerRadius = 8.0
+        backgroundColor = WalletColors.bgMainColor
         setData()
     }
     

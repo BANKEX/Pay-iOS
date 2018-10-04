@@ -430,6 +430,10 @@ class MainInfoController: BaseViewController,
         }
     }
     
+    @IBAction func seeAll() {
+        tabBarController?.selectedIndex = 1
+    }
+    
     private func updateDataOnTheScreen() {
             if let address = self.keyService.selectedAddress() {
                 TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in

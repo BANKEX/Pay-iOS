@@ -11,10 +11,16 @@ import Popover
 
 class TransactionHistoryViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, ChooseTokenDelegate, UIPopoverPresentationControllerDelegate {
     
+    enum State {
+        case empty,fill
+    }
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyView:UIView!
     var tokensButton: UIButton!
     var popover: Popover!
-    
+    //Save height of popover when appear 5 tokens
+    var fiveTokensHeight:CGFloat = 0
     var tokensTableViewManager = TokensTableViewManager()
     var selectedAddress:String?
     fileprivate var popoverOptions: [PopoverOption] = [
@@ -23,7 +29,17 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         .arrowSize(CGSize(width: 29, height: 16)),
         .cornerRadius(8.0)
     ]
-    
+    var state:State = .empty {
+        didSet {
+            if state == .empty {
+                tableView.isHidden = true
+                emptyView.isHidden = false
+            }else {
+                tableView.isHidden = false
+                emptyView.isHidden = true
+            }
+        }
+    }
     var sendEthService: SendEthService!
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     let transactionsService = TransactionsService()
@@ -44,7 +60,13 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         super.viewWillAppear(animated)
         configureSendEthService()
         updateTransactions()
+        updateUI()
     }
+    
+    func updateUI() {
+        state = transactionsToShow.isEmpty ? .empty : .fill
+    }
+    
     
     func setupTableView() {
         tableView.backgroundColor = WalletColors.bgMainColor
@@ -64,6 +86,19 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         }
     }
     
+    
+    func calculateHeight() -> CGFloat {
+        let heightOfToken:CGFloat = 23
+        guard let tokens = tokensService.availableTokensList() else { return 0 }
+        if tokens.count > 5 {
+            return fiveTokensHeight
+        }else {
+            let height = tokens.count * Int(heightOfToken)
+            fiveTokensHeight = CGFloat(height).next(number: tokens.count)
+            return CGFloat(height).next(number: tokens.count)
+        }
+    }
+    
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //TODO: - Update the data here
         guard let selectedAddress = keysService.selectedAddress() else { return }
@@ -71,6 +106,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
             if success {
                 self.updateTransactions(status: self.currentState)
                 self.tableView.reloadData()
+                self.updateUI()
             }
             refreshControl.endRefreshing()
         }
@@ -79,16 +115,21 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     //MARK: - Popover magic
     @objc func showTokensButtonTapped(_ sender: Any) {
         popover = Popover(options: self.popoverOptions)
-        let tableView = UITableView(frame: CGRect(x: 0, y: 10, width: 100, height: 150), style: .plain)
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: 86, height: calculateHeight()))
+        aView.clipsToBounds = true
+        aView.backgroundColor = UIColor.clear
+//        let tableView = UITableView(frame: CGRect(x: 0, y: 5, width: 100, height: calculateHeight()), style: .plain)
+        let tableView = UITableView()
+        tableView.frame = CGRect(x: 0, y: 10, width: aView.bounds.width, height: aView.bounds.height)
         tableView.separatorStyle = .none
         tableView.clipsToBounds = true
+        let v = UIView()
+        v.frame.size.height = 5
+        tableView.tableHeaderView = v
+        tableView.showsVerticalScrollIndicator = false
         tableView.layer.cornerRadius = 8.0
-        let aView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 160))
-        aView.clipsToBounds = true
         aView.addSubview(tableView)
-        aView.backgroundColor = UIColor.clear
-        
-        let point = CGPoint(x: UIScreen.main.bounds.width - 30, y: 50)
+        let point = CGPoint(x: UIScreen.main.bounds.width - 29, y: 50)
         tokensTableViewManager.delegate = self
         tableView.delegate = tokensTableViewManager
         tableView.dataSource = tokensTableViewManager
@@ -111,6 +152,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
             print("This is not possible")
         }
         tableView.reloadData()
+        updateUI()
     }
     
     //MARK: - Choose Token Delegate
@@ -121,6 +163,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
             self.tokensButton.setTitle(name.uppercased(), for: .normal)
             self.updateTransactions(status: self.currentState)
             self.tableView.reloadData()
+            self.updateUI()
         })
         
     }

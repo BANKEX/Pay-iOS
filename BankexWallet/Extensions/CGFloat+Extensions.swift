@@ -13,4 +13,15 @@ extension CGFloat {
     static var random: CGFloat {
         return CGFloat(arc4random()) / CGFloat(UInt32.max)
     }
+    
+    func next(number:Int) -> CGFloat {
+        let inset:CGFloat = 8
+        var totalInset:CGFloat
+        if number == 1 {
+            totalInset = inset*2
+        }else {
+            totalInset = CGFloat(number+1)*inset
+        }
+        return self + totalInset
+    }
 }
