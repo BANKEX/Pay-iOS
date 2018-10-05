@@ -123,7 +123,6 @@ class MainInfoController: BaseViewController,
 //        configureRefreshControl()
 //        tokensService.updateConversions()
         configureNotifications()
-        
         //sendFackTrans()
     }
     
@@ -267,6 +266,7 @@ class MainInfoController: BaseViewController,
                         if self.infoView.isEmptyBalance {
                             self.infoView.rateLabel.isHidden = true
                         }
+                        UserDefaults.saveData(string: self.infoView.balanceLabel.text!)
                     }
                 }
             case .Error(let error):
