@@ -41,6 +41,7 @@ class WalletTableViewCell: UITableViewCell {
             nameWalletLbl.text = wallet.name
             walletImageView.image = PredefinedTokens.Ethereum.image()
             symbolLbl.text = "ETH"
+            UserDefaults.saveData(string: wallet.name)
         }
     }
     
@@ -66,6 +67,7 @@ class WalletTableViewCell: UITableViewCell {
                                                                        fallbackToScientific: true)
                 DispatchQueue.main.async {
                    self.balanceLbl.text = formattedAmount!
+                    UserDefaults.saveData(string: formattedAmount!)
                 }
             case .Error(let error):
                 self.balanceLbl.text = "..."
