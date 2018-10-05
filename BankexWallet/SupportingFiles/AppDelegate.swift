@@ -192,7 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 return true
                             }
                         }
-                }else if let initialNavBar = window?.rootViewController as? BaseNavigationController {
+                }else if let _ = window?.rootViewController as? BaseNavigationController {
                     if let addr = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String,let contact = service.getAddressByAddress(addr) {
                         selectedContact = contact
                     }

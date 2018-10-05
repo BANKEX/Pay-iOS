@@ -1,8 +1,8 @@
 //
-//  TokenInfoService.swift
+//  TokenInfoRaws.swift
 //  BankexWallet
 //
-//  Created by Антон Григорьев on 23.07.2018.
+//  Created by Vladislav on 06/10/2018.
 //  Copyright © 2018 Alexander Vlasov. All rights reserved.
 //
 
