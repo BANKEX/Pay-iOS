@@ -32,7 +32,7 @@ end
 #Dev build
 lane :build_Dev do
   travis
-  match(type: "development",app_identifier:"com.bankex.pay.dev")
+  match(type: "development",app_identifier:["com.bankex.pay.dev","com.bankex.pay.dev.Wallet-Widget"])
   #scan
   gym(clean:true,scheme:"BankexWallet",configuration:"Debug",export_method:"development")
   crashliticsLogIn
