@@ -37,17 +37,24 @@ class PasscodeEnterController: UIViewController {
         configureBackground()
         changePasscodeStatus(.enter)
         numsIcons = [firstNum, secondNum, thirdNum, fourthNum]
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         if UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue) {
             enterWithBiometrics()
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        super.viewWillAppear(animated)
+        let context = LAContext()
+        var error: NSError?
+        if UserDefaults.standard.value(forKey: Keys.openSwitch.rawValue) == nil {
+            UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
+        }
+        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) || !UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue) {
+            biometricsButton.alpha = 0.0
+            biometricsButton.isUserInteractionEnabled = false
+        }
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -66,6 +73,7 @@ class PasscodeEnterController: UIViewController {
     }
     
     private func configureBackground() {
+        UIApplication.shared.statusBarView?.backgroundColor = nil
         if instanciatedFromSend {
             backgroundImageView.image = UIImage(named: "pin-greybackground")
         }
@@ -87,9 +95,8 @@ class PasscodeEnterController: UIViewController {
             if self.instanciatedFromSend {
                 self.performSegue(withIdentifier: "backToSend", sender: nil)
             } else {
-                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
                 if let vc = currentPasscodeViewController, vc.navigationController == nil {
-                    vc.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                     currentPasscodeViewController = nil
                 } else {
                     self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
@@ -118,20 +125,9 @@ class PasscodeEnterController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        super.viewWillAppear(animated)
-        let context = LAContext()
-        var error: NSError?
-        if UserDefaults.standard.value(forKey: Keys.openSwitch.rawValue) == nil {
-            UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
-        }
-        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) || !UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue) {
-            biometricsButton.alpha = 0.0
-            biometricsButton.isUserInteractionEnabled = false
-        }
-        
-    }
+    
+    
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -258,8 +254,6 @@ class PasscodeEnterController: UIViewController {
 class enterPinCodeNumberButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
-        //self.layer.masksToBounds = false
         self.layer.cornerRadius = self.bounds.size.width/2
-        //elf.clipsToBounds = true
     }
 }
