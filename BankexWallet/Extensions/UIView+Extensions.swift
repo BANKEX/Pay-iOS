@@ -95,4 +95,12 @@ extension UIView {
         layer.shadowOffset = CGSize(width: 0, height: 5.0)
         layer.shadowOpacity = 0.1
     }
+    
+    func initialAnimation() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                self.transform = CGAffineTransform.identity
+            }
+        }
+    }
 }

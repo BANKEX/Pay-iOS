@@ -29,15 +29,26 @@ class PasscodeEnterController: UIViewController {
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var biometricsButton: UIButton!
     
+    var turnOnTouchID:Bool {
+        return UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue)
+    }
+    var fromBackground:Bool {
+        guard let vc = currentPasscodeViewController, vc.navigationController == nil else { return false }
+        return true
+    }
     var numsIcons: [UIImageView]?
     var instanciatedFromSend = false
-    
+    var isAvailableTouchID:Bool {
+        let context = LAContext()
+        var error: NSError?
+        return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackground()
         changePasscodeStatus(.enter)
         numsIcons = [firstNum, secondNum, thirdNum, fourthNum]
-        if UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue) {
+        if turnOnTouchID {
             enterWithBiometrics()
         }
     }
@@ -45,16 +56,18 @@ class PasscodeEnterController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(animated)
-        let context = LAContext()
-        var error: NSError?
         if UserDefaults.standard.value(forKey: Keys.openSwitch.rawValue) == nil {
             UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
         }
-        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) || !UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue) {
-            biometricsButton.alpha = 0.0
-            biometricsButton.isUserInteractionEnabled = false
+        if !isAvailableTouchID || !turnOnTouchID {
+            hideBiometricButton()
         }
         
+    }
+    
+    func hideBiometricButton() {
+        biometricsButton.alpha = 0.0
+        biometricsButton.isUserInteractionEnabled = false
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -66,7 +79,7 @@ class PasscodeEnterController: UIViewController {
         messageLabel.text = NSLocalizedString(status.rawValue, comment: "")
         if status == .wrong {
             passcode = ""
-            changeNumsIcons(0)
+            updateUI(0)
         } else if status == .ready {
             enterWallet()
         }
@@ -95,7 +108,7 @@ class PasscodeEnterController: UIViewController {
             if self.instanciatedFromSend {
                 self.performSegue(withIdentifier: "backToSend", sender: nil)
             } else {
-                if let vc = currentPasscodeViewController, vc.navigationController == nil {
+                if self.fromBackground {
                     self.dismiss(animated: true, completion: nil)
                     currentPasscodeViewController = nil
                 } else {
@@ -105,7 +118,7 @@ class PasscodeEnterController: UIViewController {
         }
     }
     
-    func changeNumsIcons(_ nums: Int) {
+    func updateUI(_ nums: Int) {
         switch nums {
         case 0:
             for i in 0...(numsIcons?.count)!-1 {
@@ -132,8 +145,6 @@ class PasscodeEnterController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        //tabBarController?.tabBar.isHidden = false
-
     }
     
     @IBAction func numberTouchedDown(_ sender: UIButton) {
@@ -147,16 +158,10 @@ class PasscodeEnterController: UIViewController {
     
     @IBAction func numberPressed(_ sender: enterPinCodeNumberButton) {
         let number = sender.currentTitle!
-        
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05) {
-                sender.transform = CGAffineTransform.identity
-            }
-        }
-        
+        sender.initialAnimation()
         if status == .enter {
             passcode += number
-            changeNumsIcons(passcode.count)
+            updateUI(passcode.count)
             if passcode.count == 4 {
                 let newStatus: passcodeStatus = checkPin(passcode) ? .ready : .wrong
                 changePasscodeStatus(newStatus)
@@ -164,15 +169,13 @@ class PasscodeEnterController: UIViewController {
         } else if status == .wrong {
             changePasscodeStatus(.enter)
             passcode += number
-            changeNumsIcons(passcode.count)
+            updateUI(passcode.count)
         }
         
     }
     
     @IBAction func touchAborted(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.05) {
-            sender.transform = CGAffineTransform.identity
-        }
+        sender.initialAnimation()
     }
     
     @IBAction func touchDragInside(_ sender: UIButton) {
@@ -184,28 +187,19 @@ class PasscodeEnterController: UIViewController {
     
     
     @IBAction func deletePressed(_ sender: UIButton) {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05) {
-                sender.transform = CGAffineTransform.identity
-            }
-        }
+        sender.initialAnimation()
         if passcode != "" {
             passcode.removeLast()
-            changeNumsIcons(passcode.count)
+            updateUI(passcode.count)
         }
     }
     
     @IBAction func biometricsPressed(_ sender: UIButton) {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05) {
-                sender.transform = CGAffineTransform.identity
-            }
-        }
+        sender.initialAnimation()
         enterWithBiometrics()
     }
     
     func enterWithBiometrics() {
-        let touchManager = TouchManager()  //WTF!!!
         
         let context = LAContext()
         var error: NSError?
@@ -233,12 +227,6 @@ class PasscodeEnterController: UIViewController {
                     
             })
         }
-    }
-    
-    func showAlertController(_ message: String) {
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
