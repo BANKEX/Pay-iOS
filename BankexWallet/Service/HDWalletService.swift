@@ -230,7 +230,6 @@ class HDWalletServiceImplementation: HDWalletService {
                            completion: @escaping (String?, Error?) -> Void) {
         // TODO: smth strange is here with throwing
         do {
-            
             guard let keystore = try? BIP32Keystore(mnemonics: mnemonics,
                                                     password: walletPassword,
                                                     mnemonicsPassword: mnemonicsPassword,
@@ -239,7 +238,6 @@ class HDWalletServiceImplementation: HDWalletService {
                     throw HDWalletCreationError.creationError
             }
             saveWalletInfo(name: name, wallet: wallet, completion: completion)
-            
         }
         catch (let error) {
             completion(nil, error)
