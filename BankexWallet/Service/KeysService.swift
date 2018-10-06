@@ -132,7 +132,9 @@ class SingleKeyServiceImplementation: SingleKeyService {
             completion(WalletCreationError.creationError)
             return
         }
-        save(with: name, keyData: keydata, for: address, completion: completion)
+        DispatchQueue.global().async {
+            self.save(with: name, keyData: keydata, for: address, completion: completion)
+        }
     }
     
     
@@ -143,7 +145,6 @@ class SingleKeyServiceImplementation: SingleKeyService {
                       for address: String,
                       completion: @escaping (Error?)-> Void) {
         do {
-            
             try db.operation({ (context, save) in
                 let newWallet: KeyWallet = try context.new()
                 newWallet.name = name

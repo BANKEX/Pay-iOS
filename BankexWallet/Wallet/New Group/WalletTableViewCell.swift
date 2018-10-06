@@ -54,6 +54,8 @@ class WalletTableViewCell: UITableViewCell {
     func updateLayout() {
         updateBalance()
     }
+    
+    
     func updateBalance() {
         guard let wallet = keyService.selectedWallet() else { return }
         let selectedAddress = wallet.address

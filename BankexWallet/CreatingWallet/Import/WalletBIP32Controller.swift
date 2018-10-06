@@ -25,6 +25,8 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
     @IBOutlet weak var passphraseTextView:UITextView!
     @IBOutlet weak var clearButton:UIButton!
     @IBOutlet weak var pasteButton:PasteButton!
+    @IBOutlet weak var activityView:UIActivityIndicatorView!
+    @IBOutlet weak var containerView:UIView!
     
     //MARK: - Properties
     let service = HDWalletServiceImplementation()
@@ -102,7 +104,7 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
     }
     
     @IBAction func createWalletTapped(_ sender:Any) {
-        
+        showLoading()
         let generatedPassphrase = passphraseTextView.text!.replacingOccurrences(of: "\n", with: "")
         let nameWallet = nameTextField.text ?? ""
         service.createNewHDWallet(with: nameWallet, mnemonics: generatedPassphrase, mnemonicsPassword: "", walletPassword: "BANKEXFOUNDATION") { (_, error) in
@@ -111,12 +113,27 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
                 return
             }
             Amplitude.instance().logEvent("Wallet Imported")
+            self.hideLoading()
             if !UserDefaults.standard.bool(forKey: "passcodeExists") {
                 self.performSegue(withIdentifier: "goToPinFromImportPassphrase", sender: self)
             } else {
                 self.performSegue(withIdentifier: "showProcessFromImportPassphrase", sender: self)
             }
         }
+    }
+    
+    func showLoading() {
+        UIView.animate(withDuration: 0.1) {
+            self.containerView.alpha = 1.0
+        }
+        self.activityView.startAnimating()
+    }
+    
+    func hideLoading() {
+        UIView.animate(withDuration: 0.1) {
+            self.containerView.alpha = 0
+        }
+        self.activityView.stopAnimating()
     }
     
     
@@ -222,4 +239,6 @@ extension UITextView {
         }
     }
 }
+
+
 

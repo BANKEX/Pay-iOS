@@ -99,6 +99,7 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
         state = .notAvailable
     }
     
+    
     @IBAction func createPrivateKeyWallet(_ sender:Any) {
         service.createNewSingleAddressWallet(with: nameWalletTextField.text, fromText: privateKeyTextView.text, password: nil) { (error) in
             if let _ = error {
@@ -111,7 +112,6 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
                 self.performSegue(withIdentifier: "showProcessFromImportSecretKey", sender: self)
             }
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

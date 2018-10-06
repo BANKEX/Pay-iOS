@@ -46,7 +46,7 @@ extension UIAlertController {
     }
     
     public func addCancel() {
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
         addAction(cancel)
     }
     public func addDestructive(title:String?,action:(()->())? = nil) {

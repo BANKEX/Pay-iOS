@@ -60,23 +60,6 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-    public func addBackButton(title:String,image:UIImage, action:(()->())?) {
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.textColor = WalletColors.mainColor
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-        button.setImage(image, for: .normal)
-        if let action = action {
-            button.onTouch(action)
-        }
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-    }
-    
-
-    
-    @objc func touch() {
-       
-    }
     
     func setupViewResizerOnKeyboardShown() {
         NotificationCenter.default.addObserver(self,

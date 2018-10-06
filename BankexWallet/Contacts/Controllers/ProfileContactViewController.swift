@@ -49,15 +49,23 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     var selectedContact:FavoriteModel!
     var searchManager:SearchManager!
     var sendService = SendEthServiceImplementation()
-
+    var clipboardView:ClipboardView!
 
 
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupClipboardView()
         commonPrepare()
         configureTableView()
         prepareUserActivity()
+    }
+    
+    func setupClipboardView() {
+        clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58))
+        clipboardView.title = "Address copied to clipboard"
+        clipboardView.color = WalletColors.clipboardColor
+        view.addSubview(clipboardView)
     }
   
 
@@ -66,7 +74,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         manageTop()
         updateUI()
         view.showSkeleton()
-        TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: selectedContact!.address) { isGood in
+        TransactionsService().refreshTransactionsInSelectedNetwork(type: .ETH, forAddress: selectedContact!.address, node: nil) { isGood in
             if isGood {
                 self.transactions = Array(self.sendService.getAllTransactions(addr:nil).prefix(3).filter({ tr -> Bool in
                     if tr.to == self.selectedContact.address.lowercased() {
@@ -173,8 +181,13 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 
 
     @IBAction func shareContact() {
-        let text = "Name:\n\(selectedContact!.name)\nAddress:\n\(selectedContact!.address)"
+        let text = "\(selectedContact!.address)"
         let activity = UIActivityViewController.activity(content: text)
+        activity.completionWithItemsHandler = { (type, isSuccess, items, error) in
+            if isSuccess && error == nil {
+                self.clipboardView.showClipboard()
+            }
+        }
         if let popOver = activity.popoverPresentationController {
             popOver.sourceView = view
             popOver.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY, width: 0, height: 0)

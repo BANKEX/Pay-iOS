@@ -14,10 +14,11 @@ class WalletInfoViewController: UITableViewController {
     var dict:[String:String]!
     var publicAddress:String?
     let walletsService: GlobalWalletsService = HDWalletServiceImplementation()
-    
+    var clipboardView:ClipboardView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupClipboard()
         addressLabel.text = dict["addr"]
         nameWalletLabel.text = dict["name"]
         publicAddress = dict["addr"]
@@ -26,9 +27,23 @@ class WalletInfoViewController: UITableViewController {
         tableView.tableFooterView = HeaderView()
     }
     
+    func setupClipboard() {
+        clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58))
+        clipboardView.backgroundColor = WalletColors.clipboardColor
+        clipboardView.title = "Address copied to clipboard"
+        view.addSubview(clipboardView)
+    }
+    
+    func saveDataInBuffer(_ string:String?) {
+        UIPasteboard.general.string = string ?? ""
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
+            clipboardView.showClipboard()
+            saveDataInBuffer(addressLabel.text)
+        }else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 self.performSegue(withIdentifier: "ShowPrivateKey", sender: nil)
@@ -52,7 +67,12 @@ class WalletInfoViewController: UITableViewController {
                 print("Unreal")
             }
         }
+        
     }
+    
+    
+    
+    
     
     
     func isSimilarWallet() -> Bool {

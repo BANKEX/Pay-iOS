@@ -121,12 +121,12 @@ class PasscodeEnterController: UIViewController {
     func updateUI(_ nums: Int) {
         switch nums {
         case 0:
-            for i in 0...(numsIcons?.count)!-1 {
-                self.numsIcons![i].image = UIImage(named: "white_line")
+            numsIcons?.forEach { icon in
+                icon.image = UIImage(named: "white_line")
             }
         case 4:
-            for i in 0...nums-1 {
-                self.numsIcons![i].image = UIImage(named: "White_dot")
+            numsIcons?.forEach { icon in
+                icon.image = UIImage(named: "White_dot")
             }
         default:
             for i in 0...nums-1 {
@@ -137,7 +137,6 @@ class PasscodeEnterController: UIViewController {
             }
         }
     }
-    
     
     
     
@@ -200,7 +199,6 @@ class PasscodeEnterController: UIViewController {
     }
     
     func enterWithBiometrics() {
-        
         let context = LAContext()
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
@@ -219,9 +217,9 @@ class PasscodeEnterController: UIViewController {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
                                    localizedReason: reason,
                                    reply:
-                {(succes, error) in
+                {(success, error) in
                     
-                    if succes {
+                    if success {
                         self.enterWallet()
                     }
                     

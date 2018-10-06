@@ -35,16 +35,15 @@ class HomeViewController: BaseViewController {
                 mainSign.isHidden = true
                 navigationItem.title = "Send funds"
                 topConstraint.constant = -(inset-40)
-                let btn = UIButton(type: .system)
-                btn.setImage(UIImage(named:"BackArrow"), for: .normal)
-                btn.setTitle("  Back", for: .normal)
-                btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-                btn.setTitleColor(WalletColors.mainColor, for: .normal)
-                btn.addTarget(self, action: #selector(self.back), for: .touchUpInside)
-                navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btn)
+               let backButton = self.customBackButton()
+                backButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+                navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
             }
         }
     }
+    
+    
+    
     
     var inset:CGFloat {
         return imageView.bounds.size.height - 20.0

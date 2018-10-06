@@ -71,7 +71,7 @@ class AttentionViewController: BaseViewController {
             navigationItem.backBarButtonItem = item
             guard let selectedAddress = publicAddress, let ethAddress = EthereumAddress(selectedAddress) else { return }
             vc.addressToGenerateQR = try? keysService.keystoreManager(forAddress: selectedAddress).UNSAFE_getPrivateKeyData(password: "BANKEXFOUNDATION", account: ethAddress).toHexString()
-            let _ = try! keysService.keystoreManager(forAddress: selectedAddress).UNSAFE_getPrivateKeyData(password: "BANKEXFOUNDATION", account: ethAddress)
+//            let _ = try! keysService.keystoreManager(forAddress: selectedAddress).UNSAFE_getPrivateKeyData(password: "BANKEXFOUNDATION", account: ethAddress)
         }else if let netwokrsVC = segue.destination as? NetworksViewController {
             netwokrsVC.isFromDeveloper = true
         }

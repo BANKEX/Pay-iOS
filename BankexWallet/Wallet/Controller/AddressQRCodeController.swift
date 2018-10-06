@@ -66,15 +66,11 @@ class AddressQRCodeController: BaseViewController {
     }
     
     private func addBackButton() {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle(" Wallet", for: .normal)
-        button.setTitleColor(WalletColors.mainColor, for: .normal)
-        //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        let button = customBackButton(title: " Wallet")
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
+    
     
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
@@ -85,7 +81,7 @@ class AddressQRCodeController: BaseViewController {
         let heightLabel = clipView.bounds.height/2
         let label = UILabel(frame: CGRect(x: 0, y: clipView.bounds.midY - heightLabel/2, width: clipView.bounds.width, height: heightLabel))
         label.textAlignment = .center
-        label.text = navTitle == nil ? "Passphrase copied to clipboard" : "Private key copied to clipboard"
+        label.text = navTitle == nil ? "Address copied to clipboard" : "Private key copied to clipboard"
         label.textColor = UIColor(hex: "F9FAFC")
         label.font = UIFont.systemFont(ofSize: 15.0)
         clipView.addSubview(label)
@@ -132,13 +128,11 @@ class AddressQRCodeController: BaseViewController {
 
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
             filter.setValue(data, forKey: "inputMessage")
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
-
+            let transform = CGAffineTransform(scaleX: 7, y: 7)
             if let output = filter.outputImage?.transformed(by: transform) {
                 return UIImage(ciImage: output)
             }
         }
-
         return nil
     }
 }

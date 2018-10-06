@@ -53,17 +53,16 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        TransactionsService().refreshTransactionsInSelectedNetwork(type: nil, forAddress: keysService.selectedAddress()!, node: nil, completion: { _ in })
         setupTableView()
-        prepareNavBar()
         configureRefreshControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        prepareNavBar()
     }
     
-
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -116,7 +115,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //TODO: - Update the data here
         guard let selectedAddress = HistoryMediator.addr ?? keysService.selectedAddress() else { return }
-        transactionsService.refreshTransactionsInSelectedNetwork(forAddress: selectedAddress) { (success) in
+        transactionsService.refreshTransactionsInSelectedNetwork(type: nil, forAddress: selectedAddress, node: nil) { (success) in
             if success {
                 self.updateTransactions(address: selectedAddress, status: self.currentState)
                 self.updateUI()

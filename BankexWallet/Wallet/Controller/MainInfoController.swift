@@ -109,6 +109,9 @@ class MainInfoController: BaseViewController,
     var utilsService:UtilTransactionsService!
     var rateSevice = FiatServiceImplementation()
     var transactions = [ETHTransactionModel]()
+    var isEtherToken:Bool {
+        return tokensService.selectedERC20Token().address.isEmpty
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -436,32 +439,11 @@ class MainInfoController: BaseViewController,
     
     private func updateDataOnTheScreen() {
             if let address = self.keyService.selectedAddress() {
-                TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: address) { (tr) in
-//                    self.putTransactionsInfoIntoItemsArray()
-                    //self.getTransactions()
+                TransactionsService().refreshTransactionsInSelectedNetwork(type: nil, forAddress: address, node: nil) { (tr) in
                     self.transactions = Array(self.sendEthService.getAllTransactions(addr:nil).prefix(3))
                     self.tableView.reloadData()
-//                    if #available(iOS 10.0, *) {
-//                        self.tableView.refreshControl?.endRefreshing()
-//                    }
                 }
-            } else {
-//                if #available(iOS 10.0, *) {
-//                    self.tableView.refreshControl?.endRefreshing()
-//                }
             }
-    }
-    
-    //MARK: - Refresh Control
-//    func configureRefreshControl() {
-//        if #available(iOS 10.0, *) {
-//            tableView.refreshControl = UIRefreshControl()
-//            tableView.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
-//        }
-//    }
-    
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        //updateDataOnTheScreen()
     }
     
     
