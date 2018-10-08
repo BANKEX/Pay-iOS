@@ -7,20 +7,12 @@
 //
 
 import UIKit
-import QRCodeReader
 import AVFoundation
 import web3swift
 import Popover
 
-protocol FavoriteInputController: class {
-    var selectedFavoriteName: String? {get set}
-    var selectedFavoriteAddress: String? {get set}
-    
-}
 
-
-class SendTokenViewController: BaseViewController,
-    FavoriteInputController,InfoViewDelegate,
+class SendTokenViewController: BaseViewController,InfoViewDelegate,
 Retriable,UITextFieldDelegate {
     func deleteButtonTapped() {
         //
@@ -73,8 +65,6 @@ Retriable,UITextFieldDelegate {
     var transaction:TransactionIntermediate?
 
     // MARK: Inputs
-    var selectedFavoriteName: String?
-    var selectedFavoriteAddress: String?
     var selectedToken:ERC20TokenModel {
         return tokensService.selectedERC20Token()
     }

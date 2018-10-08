@@ -97,6 +97,8 @@ class ChooseFeeViewController: BaseViewController {
         UIApplication.shared.statusBarView?.backgroundColor = .white
     }
     
+    
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -109,13 +111,8 @@ class ChooseFeeViewController: BaseViewController {
         guard let gasPrice = gasPriceTextField.text else { return }
         guard let gasLimit = gasLimitTextField.text else { return }
         guard let name = infoView.nameWallet.text else { return }
-        guard let selectedToken = selectedToken else { return }
-//        transaction.options?.gasLimit = BigUInt(gasLimit)
-//        let gp = BigUInt(Double(gasPrice)! * pow(10, 9))
-//        transaction.options?.gasPrice = BigUInt(gp)
         let dict:[String:Any] = ["gasPrice":gasPrice,"gasLimit":gasLimit,"transaction":transaction,"amount":amount, "name": name]
         confirmVC.configure(dict)
-        confirmVC.selectedToken = selectedToken
         guard segue.identifier == "showSending",
             let confirmation = segue.destination as? SendingResultInformation else {
                 return

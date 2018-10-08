@@ -28,4 +28,16 @@ extension UIViewController {
     public func hideAddRightButton() {
         navigationItem.setRightBarButton(nil, animated: false)
     }
+    
+    public func navBarColor(_ color:UIColor) {
+        navigationController?.navigationBar.barTintColor = color
+    }
+    
+    public func statusBarColor(_ color:UIColor) {
+        UIApplication.shared.statusBarView?.backgroundColor = color
+    }
+    
+    public func navBarTintColor(_ color:UIColor) {
+        navigationController?.navigationBar.tintColor = color
+    }
 }

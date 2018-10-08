@@ -115,12 +115,6 @@ class HomeViewController: BaseViewController {
         super.viewWillDisappear(animated)
         Guide.value = nil
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let walletInfoVC = segue.destination as? MainInfoController {
-            walletInfoVC.selectedToken = selectedToken
-        }
-    }
 
     
     

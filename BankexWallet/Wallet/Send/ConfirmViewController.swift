@@ -26,7 +26,7 @@ class ConfirmViewController: UITableViewController {
     
     
     var fromAddr:String {
-        guard let addr = getFromAddress() else { return " " }
+        let addr = keyService.selectedAddress() ?? ""
         return addr
     }
     var gasPrice:String!
@@ -39,30 +39,28 @@ class ConfirmViewController: UITableViewController {
     var isPinAccepted = false
     let tokenService = CustomERC20TokensServiceImplementation()
     let keyService = SingleKeyServiceImplementation()
-    var selectedToken:ERC20TokenModel?
+    var selectedToken:ERC20TokenModel {
+        return tokenService.selectedERC20Token()
+    }
     var isEthToken:Bool {
-        guard let token = selectedToken else { return false }
-        return token.address.isEmpty
+        return selectedToken.address.isEmpty
     }
     
     @IBAction func unwindBackToConfirm(segue:UIStoryboardSegue) { }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        let label = UILabel()
-        label.text = "Send"
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
-        navigationItem.titleView = label
+        prepareNavBar()
         configureTableView()
     }
-    
-    
-    // MARK: - Table view data source
+
+    func prepareNavBar() {
+        navigationItem.titleView = UIView.titleLabel()
+    }
     
     func configureTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 1))
         tableView.backgroundColor = UIColor(hex:"F9F9F9")
@@ -77,7 +75,7 @@ class ConfirmViewController: UITableViewController {
     }
     
     func updateUI() {
-        let symbol = isEthToken ? "ETH" : selectedToken!.symbol.uppercased()
+        let symbol = selectedToken.symbol.uppercased()
         toLabel.text = transaction.transaction.to.address.formattedAddrToken(number:5)
         amountLabel.text = "\(amount!) \(symbol)"
         fromLabel.text = fromAddr.formattedAddrToken(number:5)
@@ -91,34 +89,21 @@ class ConfirmViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = WalletColors.mainColor
-        navigationController?.navigationBar.tintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
-        UIApplication.shared.statusBarStyle = .lightContent
+        appearanceNavBar(false)
         if isPinAccepted { self.sendFunds() }
         updateUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = WalletColors.mainColor
-        UIApplication.shared.statusBarView?.backgroundColor = .white
-        UIApplication.shared.statusBarStyle = .default
+        appearanceNavBar(true)
     }
-    
-    
     
     //Helper
     
-    func getFromAddress() -> String? {
-        let service = SingleKeyServiceImplementation()
-        let addr = service.selectedWallet()?.address
-        return addr
-    }
-    
     func formattedFee() -> String? {
-        let gasPrice = BigUInt(Double(self.gasPrice)! * pow(10, 9))
+        guard let gasNumber = Double(self.gasPrice) else { return nil }
+        let gasPrice = BigUInt(gasNumber * pow(10, 9))
         guard let gasLimit = BigUInt(self.gasLimit) else { return "" }
         return Web3.Utils.formatToEthereumUnits((gasPrice * gasLimit), toUnits: .eth, decimals: 7)
     }
@@ -137,7 +122,7 @@ class ConfirmViewController: UITableViewController {
     }
     
     func sendFunds() {
-        let sendEthService: SendEthService = self.tokenService.selectedERC20Token().address.isEmpty ? SendEthServiceImplementation() : ERC20TokenContractMethodsServiceImplementation()
+        let sendEthService: SendEthService = isEthToken ? SendEthServiceImplementation() : ERC20TokenContractMethodsServiceImplementation()
         let token  = self.tokenService.selectedERC20Token()
         let model = ETHTransactionModel(from: self.fromAddr, to: self.toLabel.text ?? "", amount: self.amount, date: Date(), token: token, key:self.keyService.selectedKey()!, isPending: true)
         self.performSegue(withIdentifier: "waitSegue", sender: nil)
@@ -176,11 +161,6 @@ class ConfirmViewController: UITableViewController {
             } else {
                 self.performSegue(withIdentifier: "showPIN", sender: nil)
             }
-//            TouchManager.authenticateBioMetrics(reason: "", success: {
-//                self.sendFunds()
-//            }) { (error) in
-//                print(error.getErrorMessage())
-//            }
         } else {
             self.sendFunds()
         }
@@ -188,7 +168,7 @@ class ConfirmViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 3 {
-            return UIScreen.main.bounds.height - (233 + 186)
+            return 250
         }else if indexPath.row == 0 {
             return 233
         }else {
@@ -196,8 +176,18 @@ class ConfirmViewController: UITableViewController {
         }
     }
     
-    
-    
-    
+    func appearanceNavBar(_ exit:Bool) {
+        if exit {
+            navBarColor(.white)
+            navBarTintColor(WalletColors.mainColor)
+            statusBarColor(.white)
+            UIApplication.shared.statusBarStyle = .default
+            return
+        }
+        navBarColor(WalletColors.mainColor)
+        navBarTintColor(.white)
+        statusBarColor(WalletColors.mainColor)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
 }
 

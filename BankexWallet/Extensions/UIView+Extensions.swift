@@ -103,4 +103,12 @@ extension UIView {
             }
         }
     }
+    
+    class func titleLabel() -> UILabel {
+        let label = UILabel()
+        label.text = "Send"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
+        return label
+    }
 }
