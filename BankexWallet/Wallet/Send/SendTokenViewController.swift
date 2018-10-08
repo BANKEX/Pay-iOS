@@ -158,12 +158,13 @@ Retriable,UITextFieldDelegate {
             infoView.nameWallet.text = currentWallet.name
             infoView.addrWallet.text = currentWallet.address.formattedAddrToken(number: 10)
         }
-        var balance:String
-        if currentBalance != nil {
-            infoView.balanceLabel.text = currentBalance!
+        if let currentBalance = currentBalance {
+            infoView.balanceLabel.text = currentBalance
         }else {
             //GetBalance
+            
         }
+        
         infoView.tokenNameLabel?.text = selectedToken.name
     }
     

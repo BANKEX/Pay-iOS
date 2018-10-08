@@ -2276,12 +2276,39 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="roB-I5-937">
+                                <rect key="frame" x="0.0" y="293.5" width="375" height="275.5"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CVS-UA-GIl">
+                                        <rect key="frame" x="177.5" y="128" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaY-5p-Ez3">
+                                        <rect key="frame" x="75" y="117.5" width="225" height="41"/>
+                                        <string key="text">You don't have
+any transaction history yet</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="CVS-UA-GIl" firstAttribute="centerX" secondItem="roB-I5-937" secondAttribute="centerX" id="6UT-wX-3gJ"/>
+                                    <constraint firstItem="JaY-5p-Ez3" firstAttribute="leading" secondItem="roB-I5-937" secondAttribute="leading" constant="75" id="ICT-g9-iKx"/>
+                                    <constraint firstItem="JaY-5p-Ez3" firstAttribute="centerY" secondItem="roB-I5-937" secondAttribute="centerY" id="Za9-Wn-8oM"/>
+                                    <constraint firstItem="CVS-UA-GIl" firstAttribute="centerY" secondItem="roB-I5-937" secondAttribute="centerY" id="fen-JF-IGE"/>
+                                    <constraint firstAttribute="trailing" secondItem="JaY-5p-Ez3" secondAttribute="trailing" constant="75" id="tJ4-Jh-J0u"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ol2-5E-HmO" firstAttribute="trailing" secondItem="cGi-Xs-WGd" secondAttribute="trailing" id="2bc-dd-ye0"/>
                             <constraint firstItem="Q7m-dH-egr" firstAttribute="trailing" secondItem="iGC-Dd-THt" secondAttribute="trailing" id="4Cl-DU-Tmi"/>
+                            <constraint firstItem="roB-I5-937" firstAttribute="leading" secondItem="Q7m-dH-egr" secondAttribute="leading" id="Ce4-Ci-nYV"/>
+                            <constraint firstItem="roB-I5-937" firstAttribute="top" secondItem="ol2-5E-HmO" secondAttribute="top" constant="40" id="CmX-Sf-Ocv"/>
+                            <constraint firstItem="m0I-5h-w6D" firstAttribute="top" secondItem="roB-I5-937" secondAttribute="bottom" id="Ezl-py-aMD"/>
                             <constraint firstItem="Q7m-dH-egr" firstAttribute="bottom" secondItem="m0I-5h-w6D" secondAttribute="bottom" constant="48" id="Haa-5C-wCc"/>
+                            <constraint firstItem="Q7m-dH-egr" firstAttribute="trailing" secondItem="roB-I5-937" secondAttribute="trailing" id="HhH-hG-2fW"/>
                             <constraint firstItem="iGC-Dd-THt" firstAttribute="top" secondItem="Q7m-dH-egr" secondAttribute="top" id="HpD-5v-hc4"/>
                             <constraint firstItem="UnI-pO-Nc0" firstAttribute="top" secondItem="iGC-Dd-THt" secondAttribute="bottom" constant="36" id="I57-IB-x8f"/>
                             <constraint firstItem="UnI-pO-Nc0" firstAttribute="leading" secondItem="Q7m-dH-egr" secondAttribute="leading" constant="15" id="I67-Oi-YxE"/>
@@ -2299,9 +2326,13 @@
                         <viewLayoutGuide key="safeArea" id="Q7m-dH-egr"/>
                     </view>
                     <connections>
+                        <outlet property="activity" destination="CVS-UA-GIl" id="aJS-T0-23B"/>
                         <outlet property="addrContactLabel" destination="vo5-mG-FN1" id="dbE-ds-fDF"/>
+                        <outlet property="containerView" destination="roB-I5-937" id="DnZ-ci-NdI"/>
+                        <outlet property="emptyTitle" destination="JaY-5p-Ez3" id="ejs-fl-SBj"/>
                         <outlet property="infoView" destination="iGC-Dd-THt" id="ycD-iY-8v8"/>
                         <outlet property="nameContactLabel" destination="VqI-yt-q5l" id="uU5-gp-Ujr"/>
+                        <outlet property="seeAllBtn" destination="ol2-5E-HmO" id="hTF-x2-tp2"/>
                         <outlet property="tableVIew" destination="hek-AU-e0I" id="ZBo-YD-i2v"/>
                         <segue destination="Lhe-TM-fvj" kind="show" identifier="editSegue" id="6g9-zn-RLz"/>
                         <segue destination="NSD-iW-Ldc" kind="show" identifier="showSendSegue" id="USj-xB-uaI"/>

@@ -154,30 +154,6 @@ class MainInfoController: BaseViewController,
         //
     }
     
-//    func sendFackTrans() {
-//        let sendEth = SendEthServiceImplementation()
-//        sendEth.prepareTransactionForSending(destinationAddressString: keyService.selectedWallet()!.address, amountString: "0.001") { (result) in
-//            switch result {
-//            case .Success(let response):
-//                var transaction = response
-//                let token = self.tokensService.selectedERC20Token()
-//                let model = ETHTransactionModel(from:self.keyService.selectedWallet()!.address, to: "0xfa8Ccb56c93F6f6682F89098d5D4f372e3c22504", amount: "0.001", date: Date(), token: token, key: self.keyService.selectedKey()!, isPending: true)
-//                var options = Web3Options.defaultOptions()
-//                options.gasLimit = BigUInt("21000")
-//                let gp = BigUInt(Double("20")! * pow(10, 9))
-//                options.gasPrice = gp
-//                options.from = transaction.options?.from
-//                options.to = transaction.options?.to
-//                options.value = transaction.options?.value
-//                sendEth.send(transactionModel: model, transaction: transaction, options: options, completion: { (result) in
-//                    print("OK")
-//                })
-//            default:break
-//            }
-//        }
-//
-//    }
-    
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self

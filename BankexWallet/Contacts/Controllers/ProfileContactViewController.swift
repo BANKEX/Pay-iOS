@@ -21,11 +21,20 @@ struct HistoryMediator {
 
 
 class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITextViewDelegate {
+    
+    enum State {
+        case loading,empty,fill
+    }
+    
 
     @IBOutlet weak var nameContactLabel:UILabel!
     @IBOutlet weak var addrContactLabel:UILabel!
     @IBOutlet weak var infoView:UIView!
     @IBOutlet weak var tableVIew:UITableView!
+    @IBOutlet weak var containerView:UIView!
+    @IBOutlet weak var activity:UIActivityIndicatorView!
+    @IBOutlet weak var emptyTitle:UILabel!
+    @IBOutlet weak var seeAllBtn:UIButton!
 
     //MARK: - Properties
 
@@ -44,6 +53,26 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         alertVC.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default))
         return alertVC
     }()
+    var state:State = .loading {
+        didSet {
+            switch state {
+            case .loading:
+                containerView.isHidden = false
+                activity.startAnimating()
+                emptyTitle.isHidden = true
+                seeAllBtn.isHidden = true
+            case .empty:
+                containerView.isHidden = false
+                activity.stopAnimating()
+                emptyTitle.isHidden = false
+                seeAllBtn.isHidden = true
+            case .fill:
+                containerView.isHidden = true
+                activity.stopAnimating()
+                seeAllBtn.isHidden = false
+            }
+        }
+    }
     var transactions:[ETHTransactionModel] = []
     let service = RecipientsAddressesServiceImplementation()
     var selectedContact:FavoriteModel!
@@ -73,7 +102,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         super.viewWillAppear(animated)
         manageTop()
         updateUI()
-        view.showSkeleton()
+        state = .loading
         TransactionsService().refreshTransactionsInSelectedNetwork(type: .ETH, forAddress: selectedContact!.address, node: nil) { isGood in
             if isGood {
                 self.transactions = Array(self.sendService.getAllTransactions(addr:nil).prefix(3).filter({ tr -> Bool in
@@ -82,9 +111,8 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
                     }
                     return false
                 }))
+                self.state = self.transactions.isEmpty ? .empty : .fill
                 self.tableVIew.reloadData()
-                self.view.stopSkeletonAnimation()
-                self.view.hideSkeleton()
             }else {
                 print("Appear error")
             }
