@@ -26,11 +26,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }
         }
     }
+    var standartHeight:CGFloat = 110
     
     override func viewDidLoad() {
         super.viewDidLoad()
         balanceLabel.text = "..."
         nameWallet.text = "..."
+        extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,6 +60,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 return
             }
             completionHandler(NCUpdateResult.newData)
+        }
+    }
+    
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        if activeDisplayMode == .expanded {
+            preferredContentSize = CGSize(width: maxSize.width, height:standartHeight * 2)
+        }else {
+            preferredContentSize = maxSize
         }
     }
     
