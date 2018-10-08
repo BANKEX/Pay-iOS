@@ -75,10 +75,11 @@ Retriable,UITextFieldDelegate {
     // MARK: Inputs
     var selectedFavoriteName: String?
     var selectedFavoriteAddress: String?
-    var selectedToken:ERC20TokenModel?
+    var selectedToken:ERC20TokenModel {
+        return tokensService.selectedERC20Token()
+    }
     var isEthToken:Bool {
-        guard let token = selectedToken else { return false }
-        return token.address.isEmpty
+        return selectedToken.address.isEmpty
     }
     var isCorrectAddress:Bool {
         guard let addr = enterAddressTextfield.text else { return false }
@@ -147,7 +148,6 @@ Retriable,UITextFieldDelegate {
     
     func updateUI() {
         enterAddressTextfield.text = Mediator.contactAddr ?? enterAddressTextfield.text
-        guard let selectedToken = selectedToken else { return }
         if isEthToken {
             infoView.state = .Eth
         }else {
@@ -162,11 +162,12 @@ Retriable,UITextFieldDelegate {
             infoView.balanceLabel.text = currentBalance
         }else {
             //GetBalance
-            
+            updateBalance()
         }
         
         infoView.tokenNameLabel?.text = selectedToken.name
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -180,6 +181,33 @@ Retriable,UITextFieldDelegate {
     
     //MARK: - Helpers
     
+    
+    func updateBalance() {
+        utilsService = selectedToken.address.isEmpty ? UtilTransactionsServiceImplementation() :
+            CustomTokenUtilsServiceImplementation()
+        guard let selectedAddress = keysService.selectedAddress() else {
+            return
+        }
+        utilsService.getBalance(for: selectedToken.address, address: selectedAddress) { (result) in
+            switch result {
+            case .Success(let response):
+                // TODO: it shouldn't be here anyway and also, lets move to background thread
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let formattedAmount = Web3.Utils.formatToEthereumUnits(response,
+                                                                           toUnits: .eth,
+                                                                           decimals: 8,
+                                                                           fallbackToScientific: true)
+                    DispatchQueue.main.async {
+                        self.infoView.balanceLabel.text = formattedAmount!
+                        self.currentBalance = formattedAmount!
+                    }
+                }
+            case .Error(let error):
+                self.infoView.balanceLabel.text = "..."
+                print("\(error)")
+            }
+        }
+    }
     
     func updateTopLayout() {
         // Do any additional setup after loading the view.
@@ -477,7 +505,7 @@ extension SendTokenViewController {
             guard let amountString = amountTextfield.text,let amount = Float(amountString) else { return true }
             guard let currentBalance = Float(infoView.balanceLabel.text!) else { return true }
             if !isCorrectAmount {
-                notEnoughSumLbl.text = "Not enough \(selectedToken!.symbol.uppercased()) in your wallet"
+                notEnoughSumLbl.text = "Not enough \(selectedToken.symbol.uppercased()) in your wallet"
                 amountTextfield.textColor = WalletColors.errorColor
                 symbolTFLabel.textColor = WalletColors.errorColor
                 UIView.animate(withDuration: 0.1) {

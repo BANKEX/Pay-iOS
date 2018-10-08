@@ -280,7 +280,6 @@ class MainInfoController: BaseViewController,
             controller.selectedFavoriteName = selectedFavName
             selectedFavAddress = nil
             selectedFavName = nil
-            controller.selectedToken = self.selectedToken
             controller.currentBalance = infoView.balanceLabel.text
         }
     }

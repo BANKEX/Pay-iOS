@@ -139,6 +139,7 @@ class HomeViewController: BaseViewController {
     //Methods
     fileprivate func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = .white
+        UIApplication.shared.statusBarStyle = .default
     }
     
     func catchUserActivity() {
@@ -277,6 +278,11 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isFromContact {
+            let sendToken = storyboard?.instantiateViewController(withIdentifier: "SendTokenViewController") as! SendTokenViewController
+            navigationController?.pushViewController(sendToken, animated: true)
+            return
+        }
         if HomeSections.Ethereum.rawValue == indexPath.section {
             selectedToken = etherToken
             tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
@@ -287,8 +293,6 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
         }
         performSegue(withIdentifier: "walletInfo", sender: nil)
     }
-   
     
 }
-
 

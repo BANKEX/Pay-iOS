@@ -57,6 +57,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.tintColor = WalletColors.mainColor
         if fromSendScreen {
