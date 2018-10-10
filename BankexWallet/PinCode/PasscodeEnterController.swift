@@ -45,7 +45,6 @@ class PasscodeEnterController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackground()
         changePasscodeStatus(.enter)
         numsIcons = [firstNum, secondNum, thirdNum, fourthNum]
         if turnOnTouchID {
@@ -54,8 +53,9 @@ class PasscodeEnterController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        configureBackground()
         if UserDefaults.standard.value(forKey: Keys.openSwitch.rawValue) == nil {
             UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
         }
