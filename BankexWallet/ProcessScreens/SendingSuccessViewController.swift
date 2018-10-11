@@ -13,7 +13,7 @@ class SendingSuccessViewController: UIViewController {
     // MARK: All the data we need
     var transactionAmount: String?
     var addressToSend: String?
-    let favoritesService: RecipientsAddressesService = RecipientsAddressesServiceImplementation()
+    let favoritesService: ContactServiceProtocol = ContactService()
     let tokenService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     
     // MARK:  Outlets

@@ -44,7 +44,7 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
             }
         }
     }
-    var service = RecipientsAddressesServiceImplementation()
+    var service = ContactService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +110,7 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
             showAlert(with: "Incorrect address", message: "Please enter valid address")
             return
         }
-        service.store(address: address, with: nameContact , isEditing: false) { (error) in
+        service.saveContact(address: address, with: nameContact) { (error) in
             if error?.localizedDescription == "Address already exists in the database" {
                 self.showAlert(with: "Same Address", message: "Address already exists in your contacts")
                 return

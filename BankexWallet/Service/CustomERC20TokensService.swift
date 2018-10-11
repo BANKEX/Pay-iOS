@@ -212,7 +212,6 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                             completion(SendEthResult.Success(tokensList))
                             return
                         }
-                        
                     } else {
                         DispatchQueue.main.async {
                             self.getOnlineTokensList(with: searchString, completion: completion)

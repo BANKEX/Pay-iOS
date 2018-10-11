@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var navigationVC:UINavigationController?
     var currentViewController:UIViewController?
-    var service = RecipientsAddressesServiceImplementation()
+    var service = ContactService()
     var keyService = SingleKeyServiceImplementation()
     var selectedContact:FavoriteModel?
     let gcmMessageIDKey = "gcm.message_id"
@@ -164,15 +164,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     tabViewController.selectedIndex = 2
                         if let vcs = tabViewController.viewControllers, let mainNav = vcs[2] as? BaseNavigationController {
                             if let contactsVC = mainNav.viewControllers.first as? ListContactsViewController {
-                                guard let contact = service.getAddressByAddress(objectID) else { return false }
-                                mainNav.popToRootViewController(animated: false)
-                                contactsVC.chooseContact(contact: contact)
+                                service.contactByAddress(objectID) { contact in
+                                    if let contact = contact {
+                                        mainNav.popToRootViewController(animated: false)
+                                        contactsVC.chooseContact(contact: contact)
+                                    }
+                                }
                                 return true
                             }
                         }
                 }else if let _ = window?.rootViewController as? BaseNavigationController {
-                    if let addr = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String,let contact = service.getAddressByAddress(addr) {
-                        selectedContact = contact
+                    if let addr = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String {
+                        service.contactByAddress(addr) { contact in
+                            self.selectedContact = contact
+                        }
                     }
                 }
             }

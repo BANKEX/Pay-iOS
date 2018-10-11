@@ -98,7 +98,7 @@ class MainInfoController: BaseViewController,
         return numberFormatter
     }
     var ethLabel: UILabel!
-    var service = RecipientsAddressesServiceImplementation()
+    var service = ContactService()
     
     var sendEthService: SendEthService!
     let tokensService = CustomERC20TokensServiceImplementation()

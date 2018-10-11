@@ -19,7 +19,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     
     
     //MARK: - Properties
-    let service = RecipientsAddressesServiceImplementation()
+    let service = ContactService()
     var listContacts:[FavoriteModel]? {
         didSet {
             updateArray()
@@ -66,8 +66,10 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         }else {
             addRightAddButton()
         }
-        self.listContacts = self.service.getAllStoredAddresses()
-        state = isNoContacts() ? .empty : .fill
+        self.service.listContacts(onCompition: { (contacts) in
+            self.listContacts = contacts
+            self.state = self.isNoContacts() ? .empty : .fill
+        })
     }
     
     private func addLeftBtn() {

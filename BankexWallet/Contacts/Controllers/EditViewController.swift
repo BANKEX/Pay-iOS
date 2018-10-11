@@ -35,7 +35,7 @@ class EditViewController: BaseViewController {
             }
         }
     }
-    let service = RecipientsAddressesServiceImplementation()
+    let service = ContactService()
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTFs()
@@ -75,13 +75,7 @@ class EditViewController: BaseViewController {
         }
         nameTextField.autocapitalizationType = .sentences
     }
-    
-    private func updateNameContact() {
-        service.updateName(newName: nameTextField.text!, byAddress: selectedContact!.address)
-    }
-    private func updateAddressContact() {
-        service.updateAddressByName(newAddress: addrTextField.text!, byName: selectedContact!.name)
-    }
+   
     
     private func updateUI() {
         if let selectedContact = selectedContact {
@@ -98,15 +92,17 @@ class EditViewController: BaseViewController {
     }
     
     @IBAction func saveContact() {
-        updateNameContact()
-        updateAddressContact()
-        delegate?.didUpdateContact(name: nameTextField.text!, address: addrTextField.text!)
-        navigationController?.popViewController(animated: true)
+        service.updateName(newName: nameTextField.text!, selectedContact!.address) { _ in
+            self.service.updateAddress(newAddress: self.addrTextField.text!, self.selectedContact!.name) { isSuccess in
+                self.delegate?.didUpdateContact(name: self.nameTextField.text!, address: self.addrTextField.text!)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     @IBAction func deleteContact() {
         let alertViewController = UIAlertController.destructive(button: "Delete") {
-            self.service.delete(with: self.selectedContact!.address, completionHandler: {
+            self.service.delete(with: self.selectedContact!.address, completionHandler: { _ in
                 self.navigationController?.popToRootViewController(animated: true)
             })
         }

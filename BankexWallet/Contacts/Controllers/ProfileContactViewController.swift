@@ -42,11 +42,9 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let delButton = UIAlertAction(title:NSLocalizedString("Delete", comment: ""), style: .destructive) { _ in
             guard let address = self.addrContactLabel?.text, self.service.contains(address: address) else { return }
-            self.service.delete(with: address) {
+            self.service.delete(with: address) { _ in
                 self.searchManager.deindex()
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
+                self.navigationController?.popViewController(animated: true)
             }
         }
         alertVC.addAction(delButton)
@@ -74,7 +72,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         }
     }
     var transactions:[ETHTransactionModel] = []
-    let service = RecipientsAddressesServiceImplementation()
+    let service = ContactService()
     var selectedContact:FavoriteModel!
     var searchManager:SearchManager!
     var sendService = SendEthServiceImplementation()
@@ -103,6 +101,10 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         manageTop()
         updateUI()
         state = .loading
+        updateTransactions()
+    }
+    
+    func updateTransactions() {
         TransactionsService().refreshTransactionsInSelectedNetwork(type: .ETH, forAddress: selectedContact!.address, node: nil) { isGood in
             if isGood {
                 self.transactions = Array(self.sendService.getAllTransactions(addr:nil).prefix(3).filter({ tr -> Bool in
@@ -230,7 +232,10 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 
 extension ProfileContactViewController:EditViewContollerDelegate {
     func didUpdateContact(name: String, address: String) {
-        selectedContact = service.getAddressByAddress(address)
+        service.contactByAddress(address) { contact in
+            self.selectedContact = contact
+            self.updateUI()
+        }
     }
 }
 

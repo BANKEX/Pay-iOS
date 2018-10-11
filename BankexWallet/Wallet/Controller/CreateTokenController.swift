@@ -96,7 +96,6 @@ class CreateTokenController: BaseViewController {
                     })
                 })
             }
-            
             self.searchBar(self.searchBar, textDidChange: searchText)
         }
         
