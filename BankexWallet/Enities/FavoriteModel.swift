@@ -11,6 +11,10 @@ import Foundation
 struct FavoriteModel {
     var name: String
     var address: String
+    var firstName:String?
+    var lastName:String?
+    var lastUsageDate:Date?
+    var note:String?
     
     init(_ contact:FavoritesAddress) {
         name = contact.name ?? "..."

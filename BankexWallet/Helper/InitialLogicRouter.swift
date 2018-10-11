@@ -19,12 +19,6 @@ class InitialLogicRouter {
         self.rootController = rootControler
         if !UserDefaults.standard.bool(forKey: "passcodeExists") || keysService.selectedWallet() == nil {
             return
-//            keysService.delete() { (error) in
-//                if let _ = error {
-//                    print(error?.localizedDescription)
-//                }
-//                return
-//            }
         } else {
             rootControler.performSegue(withIdentifier: "showEnterPin", sender: self)
         }

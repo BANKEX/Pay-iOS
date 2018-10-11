@@ -272,20 +272,21 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isFromContact {
-            let sendToken = storyboard?.instantiateViewController(withIdentifier: "SendTokenViewController") as! SendTokenViewController
-            navigationController?.pushViewController(sendToken, animated: true)
-            return
-        }
-        if HomeSections.Ethereum.rawValue == indexPath.section {
-            selectedToken = etherToken
-            tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
-        }else {
-            let num = floor(Double(indexPath.row/2))
-            selectedToken = tokens[Int(num)]
-            tokenSerive.updateSelectedToken(to: selectedToken.address, completion: nil)
-        }
-        performSegue(withIdentifier: "walletInfo", sender: nil)
+            if isFromContact && !tokens.isEmpty {
+                let sendToken = storyboard?.instantiateViewController(withIdentifier: "SendTokenViewController") as! SendTokenViewController
+                navigationController?.pushViewController(sendToken, animated: true)
+                performSegue(withIdentifier: "walletInfo", sender: nil)
+                return
+            }
+            if HomeSections.Ethereum.rawValue == indexPath.section {
+                tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
+                performSegue(withIdentifier: "walletInfo", sender: nil)
+            }else if HomeSections.Tokens.rawValue == indexPath.section && !tokens.isEmpty {
+                let num = floor(Double(indexPath.row/2))
+                selectedToken = tokens[Int(num)]
+                tokenSerive.updateSelectedToken(to: selectedToken.address, completion: nil)
+                performSegue(withIdentifier: "walletInfo", sender: nil)
+            }
     }
     
 }

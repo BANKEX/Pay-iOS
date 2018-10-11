@@ -72,7 +72,9 @@ class ContactService: ContactServiceProtocol {
         let request = FetchRequest<FavoritesAddress>().sorted(with: "name", ascending: true)
         do {
             let initialContacts = try db.fetch(request)
-            initialContacts.forEach { contacts.append(FavoriteModel($0)) }
+            initialContacts.forEach { contact in
+                contacts.append(FavoriteModel(contact))
+            }
             DispatchQueue.main.async {
                onCompition(contacts)
             }
