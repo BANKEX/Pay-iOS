@@ -9,6 +9,10 @@
 import UIKit
 import SkeletonView
 
+struct TokenShortService {
+    static var arrayTokensShort:[TokenShort] = []
+}
+
 class HomeViewController: BaseViewController {
     
     enum State {
@@ -105,8 +109,17 @@ class HomeViewController: BaseViewController {
         catchUserActivity()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let sortedArray = TokenShortService.arrayTokensShort.sorted { lhs, rhs -> Bool in
+            return lhs.balance > rhs.balance
+        }
+        Storage.store(sortedArray, as: "tokens.json")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        TokenShortService.arrayTokensShort.removeAll()
         setupStatusBarColor()
         state = isFromContact ? .fromContact : .home
         updateTableView()

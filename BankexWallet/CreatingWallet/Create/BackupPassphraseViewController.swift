@@ -29,6 +29,7 @@ class BackupPassphraseViewController: UIViewController {
         }
         return false
     }
+    var isAnimating = false
     override func viewDidLoad() {
         super.viewDidLoad()
         lookOutView.backgroundColor = WalletColors.errorColor
@@ -70,23 +71,28 @@ class BackupPassphraseViewController: UIViewController {
     @IBAction func copyButtonTapped(_ sender: Any) {
         UIPasteboard.general.string = passphrase
         self.nextButton?.backgroundColor = WalletColors.mainColor
-        
-        UIView.animate(withDuration: 0.7,animations: {
-            if #available(iOS 11.0, *) {
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                let bottomInset = appDelegate.window?.safeAreaInsets.bottom
-                self.bottomContraint.constant = bottomInset!
-            }else {
-               self.bottomContraint.constant = 0
-            }
-            
-            self.view.layoutIfNeeded()
-        }) { (_) in
-            UIView.animate(withDuration: 0.7,delay:0.5,animations: {
-                self.bottomContraint.constant = 100
+        if !isAnimating {
+            isAnimating = true
+            UIView.animate(withDuration: 0.6,animations: {
+                if #available(iOS 11.0, *) {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let bottomInset = appDelegate.window?.safeAreaInsets.bottom
+                    self.bottomContraint.constant = bottomInset!
+                }else {
+                    self.bottomContraint.constant = 0
+                }
+                
                 self.view.layoutIfNeeded()
-            })
+            }) { (_) in
+                UIView.animate(withDuration: 0.6,delay:0.5,animations: {
+                    self.bottomContraint.constant = 100
+                    self.view.layoutIfNeeded()
+                }) { _ in
+                    self.isAnimating = false
+                }
+            }
         }
+        
         
         
         nextButton?.isEnabled = true

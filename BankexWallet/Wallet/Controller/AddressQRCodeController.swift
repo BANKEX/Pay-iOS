@@ -18,7 +18,9 @@ class AddressQRCodeController: BaseViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var copyAddressButton: UIButton!
     @IBOutlet weak var activityVC:UIActivityIndicatorView!
-
+    
+    
+    var isAnimating = false
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     var navTitle: String?
     lazy var clipView:UIView = {
@@ -107,12 +109,17 @@ class AddressQRCodeController: BaseViewController {
 
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = addressToGenerateQR
-        UIView.animate(withDuration: 0.7, animations: {
-            self.clipView.frame.origin.y = self.view.bounds.maxY - 58.0
-        }) { _ in
-            UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
-                self.clipView.frame.origin.y = self.view.bounds.maxY
-            })
+        if !isAnimating {
+            isAnimating = true
+            UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
+                self.clipView.frame.origin.y = self.view.bounds.maxY - 58.0
+            }) { _ in
+                UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
+                    self.clipView.frame.origin.y = self.view.bounds.maxY
+                }) { _ in
+                    self.isAnimating = false
+                }
+            }
         }
     }
 

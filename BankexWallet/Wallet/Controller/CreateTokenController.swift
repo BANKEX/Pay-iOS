@@ -22,7 +22,7 @@ class CreateTokenController: BaseViewController {
     var needAddTokenAnimation = false
     
     var chosenToken: ERC20TokenModel?
-    
+    var isAnimating = false
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     var tokensList: [ERC20TokenModel]?
     var tokensAvailability: [Bool]?
@@ -200,12 +200,17 @@ extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
         let tokenToAdd = self.tokensList![Int(num)]
         if tokenToAdd.isAdded {
             supportLbl.text = "Token is already added to your wallet"
-            UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
-                self.supportView.frame.origin.y = self.view.bounds.height - 58.0
-            }) { _ in
-                UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
-                    self.supportView.frame.origin.y = self.view.bounds.height
-                })
+            if !isAnimating {
+                isAnimating = true
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
+                    self.supportView.frame.origin.y = self.view.bounds.height - 58.0
+                }) { _ in
+                    UIView.animate(withDuration: 0.6, delay: 0.5, options: .curveEaseInOut, animations: {
+                        self.supportView.frame.origin.y = self.view.bounds.height
+                    }) { _ in
+                        self.isAnimating = false
+                    }
+                }
             }
             return
         }

@@ -34,12 +34,11 @@ enum ShortcutIdentifier:String {
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    static var isAlreadyLaunchedOnce = false // Used to avoid 2 FIRApp configure
-
     var window: UIWindow?
     var navigationVC:UINavigationController?
     var currentViewController:UIViewController?
     var service = ContactService()
+    var tokenService = CustomERC20TokensServiceImplementation()
     var keyService = SingleKeyServiceImplementation()
     var selectedContact:FavoriteModel?
     let gcmMessageIDKey = "gcm.message_id"
@@ -89,17 +88,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
+//    guard let launchOptions = launchOptions else { return true }
+//    guard let url = launchOptions[.url] as? NSURL else { return true }
+//    handleURL(url as URL)
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         prepareAppearance()
-
-        if !AppDelegate.isAlreadyLaunchedOnce {
-            FirebaseApp.configure()
-            AppDelegate.isAlreadyLaunchedOnce = true
-            configurePushes()
-        }
+        FirebaseApp.configure()
+        configurePushes()
         Amplitude.instance().initializeApiKey("27da55fc989fc196d40aa68b9a163e36")
         Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
         Fabric.with([Crashlytics.self])
@@ -111,7 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return true
         }
-        
         initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
         window?.backgroundColor = .white
         return true
@@ -198,13 +194,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
             print("I am handling a link through the openURL method (custom scheme instead of universal)")
             self.handleIncomingDynamicLink(dynamicLink)
             return true
         } else {
-            return false
+            return handleURL(url)
+        }
+    }
+    @discardableResult
+    func handleURL(_ url:URL) -> Bool {
+        guard let filteredURL = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return true }
+        guard let host = filteredURL.host else { return true }
+        let tabBar = storyboard().instantiateViewController(withIdentifier: "MainTabController") as! BaseTabBarController
+        if host == "ether" {
+            if isLaunched {
+                let tab = window?.rootViewController as! BaseTabBarController
+                tab.selectedIndex = 0
+                guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return false }
+                nav.popToRootViewController(animated: false)
+                let mainInfo = storyboard().instantiateViewController(withIdentifier: "MainInfoController") as! MainInfoController
+                tokenService.updateSelectedToken(to: "")
+                nav.pushViewController(mainInfo, animated: false)
+            }else {
+                window?.rootViewController = tabBar
+                guard !PasscodeEnterController.isLocked else { return true }
+                let passcodeVC = storyboard().instantiateViewController(withIdentifier: "passcodeEnterController") as! PasscodeEnterController
+                currentPasscodeViewController = passcodeVC
+                window?.rootViewController?.present(passcodeVC, animated: true, completion: nil)
+                let tab = rootVC() as! BaseTabBarController
+                tab.selectedIndex = 0
+                guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return false }
+                let mainInfo = storyboard().instantiateViewController(withIdentifier: "MainInfoController") as! MainInfoController
+                tokenService.updateSelectedToken(to: "")
+                nav.pushViewController(mainInfo, animated: false)
+            }
+            return true
+        }else {
+            return true
         }
     }
     

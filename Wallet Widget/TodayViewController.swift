@@ -12,8 +12,7 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
-    @IBOutlet weak var balanceLabel:UILabel!
-    @IBOutlet weak var nameWallet:UILabel!
+    @IBOutlet weak var tableView:UITableView!
     
     enum Keys {
         case balance
@@ -26,49 +25,74 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }
         }
     }
+    let userDefaults = UserDefaults(suiteName: "group.PayWidget")
+    var numberTokens = 0
+    let cellIdentifier = "CurrencyCell"
     var standartHeight:CGFloat = 110
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        balanceLabel.text = "..."
-        nameWallet.text = "..."
-        extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        tableView.rowHeight = standartHeight
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateUI()
-    }
-    
-   
-    
-    func updateUI(completion:((Bool) -> ())? = nil) {
-        let userDefault = UserDefaults(suiteName: "group.PayWidget")
-        guard let balance = userDefault?.string(forKey: Keys.balance.key()),let name = userDefault?.string(forKey: Keys.nameWallet.key()) else {
-            completion?(false)
-            return
+        if Storage.isExist(fileName: "tokens.json") {
+            let tokens = Storage.retrieve("tokens.json", as: [TokenShort].self)
+            print("************************************\(tokens.count)")
         }
-        balanceLabel.text = balance
-        nameWallet.text = name
-        completion?(true)
     }
+
+   
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        updateUI { isSuccess in
-            if !isSuccess {
-                completionHandler(NCUpdateResult.noData)
-                return
-            }
-            completionHandler(NCUpdateResult.newData)
-        }
+        completionHandler(.newData)
     }
     
-    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-        if activeDisplayMode == .expanded {
-            preferredContentSize = CGSize(width: maxSize.width, height:standartHeight * 2)
-        }else {
-            preferredContentSize = maxSize
-        }
-    }
+//    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+//        if activeDisplayMode == .expanded {
+//            preferredContentSize = CGSize(width: maxSize.width, height:standartHeight * numberTokens.cgFloat() + standartHeight)
+//        }else {
+//            preferredContentSize = maxSize
+//        }
+//    }
     
 }
+
+extension TodayViewController:UITableViewDataSource,UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return numberTokens + 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let currencyToken = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CurrencyCell
+        if indexPath.row == 0 {
+            let balance = userDefaults?.string(forKey: Keys.balance.key())
+            let name = userDefaults?.string(forKey: Keys.nameWallet.key())
+            currencyToken.setData(balance: balance, name: name)
+        }
+        return currencyToken
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            guard let url = URL(string:"pay://ether") else { return }
+            extensionContext?.open(url, completionHandler: nil)
+        }
+    }
+}
+
+extension Int {
+    func cgFloat() -> CGFloat {
+        return CGFloat(self)
+    }
+}
+

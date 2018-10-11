@@ -80,7 +80,8 @@ class TokenTableViewCell: UITableViewCell {
                                                                         toUnits: .eth,
                                                                         decimals: 8)
                 self.balanceToken.text = formattedAmount!
-
+                let tokenShort = TokenShort(name: self.token.name, balance: formattedAmount!)
+                TokenShortService.arrayTokensShort.append(tokenShort)
             case .Error( _):
                 self.balanceToken.text = "..."
             }

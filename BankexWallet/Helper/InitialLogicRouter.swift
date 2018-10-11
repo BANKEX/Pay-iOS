@@ -22,8 +22,10 @@ class InitialLogicRouter {
         } else {
             rootControler.performSegue(withIdentifier: "showEnterPin", sender: self)
         }
-        
     }
+    
+    
+    
     
     func useFaceIdToAuth(rootControler: UINavigationController) {
         let context = LAContext()

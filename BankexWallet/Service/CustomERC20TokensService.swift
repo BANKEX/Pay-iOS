@@ -55,6 +55,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     
     let conversionService = FiatServiceImplementation.service
     
+    
     func resetSelectedToken() {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
