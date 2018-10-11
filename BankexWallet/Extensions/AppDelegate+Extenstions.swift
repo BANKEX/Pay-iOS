@@ -39,6 +39,7 @@ extension AppDelegate {
     }
     
     func showPasscode() {
+        guard !PasscodeEnterController.isLocked else { return }
         if let vc = storyboard().instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController {
             currentPasscodeViewController = vc
             window?.rootViewController?.present(vc, animated: true, completion: nil)

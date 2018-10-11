@@ -11,6 +11,9 @@ import LocalAuthentication
 
 class PasscodeEnterController: UIViewController {
     
+    static var isLocked = false
+    var isEntering = false
+    
     enum passcodeStatus: String {
         case enter = "Touch ID or Enter Passcode"
         case wrong = "Wrong passcode"
@@ -50,10 +53,18 @@ class PasscodeEnterController: UIViewController {
         if turnOnTouchID {
             enterWithBiometrics()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterForeground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+    }
+    
+    @objc func didEnterForeground() {
+        if turnOnTouchID {
+            enterWithBiometrics()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        PasscodeEnterController.isLocked = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         configureBackground()
         if UserDefaults.standard.value(forKey: Keys.openSwitch.rawValue) == nil {
@@ -104,16 +115,15 @@ class PasscodeEnterController: UIViewController {
     }
     
     func enterWallet() {
-        DispatchQueue.main.async {
-            if self.instanciatedFromSend {
-                self.performSegue(withIdentifier: "backToSend", sender: nil)
+        PasscodeEnterController.isLocked = false
+        if self.instanciatedFromSend {
+            self.performSegue(withIdentifier: "backToSend", sender: nil)
+        } else {
+            if self.fromBackground {
+                self.dismiss(animated: true, completion: nil)
+                currentPasscodeViewController = nil
             } else {
-                if self.fromBackground {
-                    self.dismiss(animated: true, completion: nil)
-                    currentPasscodeViewController = nil
-                } else {
-                    self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
-                }
+                self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
             }
         }
     }
@@ -199,6 +209,8 @@ class PasscodeEnterController: UIViewController {
     }
     
     func enterWithBiometrics() {
+        guard !isEntering else { return }
+        isEntering = true
         let context = LAContext()
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
@@ -218,9 +230,9 @@ class PasscodeEnterController: UIViewController {
                                    localizedReason: reason,
                                    reply:
                 {(success, error) in
-                    
+                    self.isEntering = false
                     if success {
-                        self.enterWallet()
+                        DispatchQueue.main.async(execute: self.enterWallet)
                     }
                     
             })
