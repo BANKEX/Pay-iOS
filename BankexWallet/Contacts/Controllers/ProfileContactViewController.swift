@@ -196,7 +196,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 
      private func updateUI() {
         guard let selectedContact = selectedContact else { return }
-        nameContactLabel.text = selectedContact.name ?? selectedContact.firstName
+        nameContactLabel.text = selectedContact.name
         addrContactLabel.text = selectedContact.address.formattedAddrToken(number: 5)
     }
 

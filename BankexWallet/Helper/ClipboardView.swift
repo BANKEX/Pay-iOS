@@ -24,7 +24,7 @@ class ClipboardView:UIView {
     }
     
     private var titleLabel:UILabel!
-    
+    private var isAnimating = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,17 +45,22 @@ class ClipboardView:UIView {
     }
     
     func showClipboard() {
-        UIView.animate(withDuration: 0.7, animations: {
-            self.frame.origin.y = self.superview!.bounds.height - self.bounds.height
-        }) { _ in
-            self.hideClipboard()
+        if !isAnimating {
+            isAnimating = true
+            UIView.animate(withDuration: 0.6, animations: {
+                self.frame.origin.y = self.superview!.bounds.height - self.bounds.height
+            }) { _ in
+                self.hideClipboard()
+            }
         }
     }
     
     func hideClipboard() {
-        UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.6, delay: 0.5, options: .curveEaseInOut, animations: {
             self.frame.origin.y = self.superview!.bounds.maxY
-        })
+        }) { _ in
+            self.isAnimating = false
+        }
     }
     
     
