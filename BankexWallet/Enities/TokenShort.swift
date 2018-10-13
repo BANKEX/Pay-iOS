@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct TokenShort:Codable {
+struct TokenShort:Codable,Hashable {
     var name:String
     var balance:String
     

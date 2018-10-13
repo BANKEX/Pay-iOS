@@ -111,10 +111,12 @@ class HomeViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let sortedArray = TokenShortService.arrayTokensShort.sorted { lhs, rhs -> Bool in
-            return lhs.balance > rhs.balance
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let sortedArray = TokenShortService.arrayTokensShort.sorted { lhs, rhs -> Bool in
+                return Double(lhs.balance)! > Double(rhs.balance)!
+            }
+            Storage.store(Array(sortedArray.prefix(2)), as: "tokens.json")
         }
-        Storage.store(sortedArray, as: "tokens.json")
     }
     
     override func viewWillAppear(_ animated: Bool) {

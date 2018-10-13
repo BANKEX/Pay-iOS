@@ -234,6 +234,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             return true
         }else {
+            guard let host = filteredURL.host else { return true }
+            guard let nameToken = host.components(separatedBy: ".").last else { return true }
+            guard let selectedToken = tokenService.availableTokensList()?.filter({ return $0.name == nameToken }).first else { return true }
+            if isLaunched {
+                let tab = window?.rootViewController as! BaseTabBarController
+                tab.selectedIndex = 0
+                guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return false }
+                nav.popToRootViewController(animated: false)
+                let mainInfo = storyboard().instantiateViewController(withIdentifier: "MainInfoController") as! MainInfoController
+                tokenService.updateSelectedToken(to: selectedToken.address)
+                nav.pushViewController(mainInfo, animated: false)
+            }else {
+                window?.rootViewController = tabBar
+                guard !PasscodeEnterController.isLocked else { return true }
+                let passcodeVC = storyboard().instantiateViewController(withIdentifier: "passcodeEnterController") as! PasscodeEnterController
+                currentPasscodeViewController = passcodeVC
+                window?.rootViewController?.present(passcodeVC, animated: true, completion: nil)
+                let tab = rootVC() as! BaseTabBarController
+                tab.selectedIndex = 0
+                guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return false }
+                let mainInfo = storyboard().instantiateViewController(withIdentifier: "MainInfoController") as! MainInfoController
+                tokenService.updateSelectedToken(to: selectedToken.address)
+                nav.pushViewController(mainInfo, animated: false)
+            }
             return true
         }
     }
