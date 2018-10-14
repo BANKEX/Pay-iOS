@@ -81,6 +81,12 @@ Then, run the following command:
 $ pod install
 ```
 
+## Communication
+
+- If you found a bug, open an issue.
+- If you have a feature request, open an issue.
+- If you want to contribute, submit a pull request.
+
 ## Details
 More details (architecture, environments, tests, tools...) can be found on the [wiki](https://github.com/BANKEX/BankexWalletIOS/wiki).
 
