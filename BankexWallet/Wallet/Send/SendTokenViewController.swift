@@ -107,14 +107,13 @@ Retriable,UITextFieldDelegate {
     
     
     
-    
-    
+   
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
     private func configurePlaceholder() {
-        let attrString = NSAttributedString(string: "Enter address", attributes: [NSAttributedStringKey.foregroundColor:WalletColors.clipboardColor])
+        let attrString = NSAttributedString(string: NSLocalizedString("EnterAddr", comment: ""), attributes: [NSAttributedStringKey.foregroundColor:WalletColors.clipboardColor])
         let attrStringAmount = NSAttributedString(string: "0", attributes: [NSAttributedStringKey.foregroundColor:WalletColors.clipboardColor])
         enterAddressTextfield.attributedPlaceholder = attrString
         amountTextfield.attributedPlaceholder = attrStringAmount
@@ -495,7 +494,7 @@ extension SendTokenViewController {
             guard let amountString = amountTextfield.text,let amount = Float(amountString) else { return true }
             guard let currentBalance = Float(infoView.balanceLabel.text!) else { return true }
             if !isCorrectAmount {
-                notEnoughSumLbl.text = "Not enough \(selectedToken.symbol.uppercased()) in your wallet"
+                notEnoughSumLbl.text = String(format: NSLocalizedString("Not enough %@ in your wallet", comment: ""), selectedToken.symbol.uppercased())
                 amountTextfield.textColor = WalletColors.errorColor
                 symbolTFLabel.textColor = WalletColors.errorColor
                 UIView.animate(withDuration: 0.1) {

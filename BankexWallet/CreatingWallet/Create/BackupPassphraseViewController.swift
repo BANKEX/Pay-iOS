@@ -99,7 +99,7 @@ class BackupPassphraseViewController: UIViewController {
     }
     
     func navigationBarSetup() {
-        titleLbl.text = navTitle ?? "Create Wallet"
+        titleLbl.text = navTitle ?? NSLocalizedString("Create Wallet", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
         UIApplication.shared.statusBarView?.backgroundColor = WalletColors.errorColor
         UIApplication.shared.statusBarStyle = .lightContent

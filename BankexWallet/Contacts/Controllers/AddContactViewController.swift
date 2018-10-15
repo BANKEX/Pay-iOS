@@ -107,15 +107,15 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     @IBAction func done() {
         guard let nameContact = nameContactTextField?.text, let address = addressTextField?.text else { return }
         guard let ethAddress = EthereumAddress(addressTextField?.text ?? "") else {
-            showAlert(with: "Incorrect address", message: "Please enter valid address")
+            showAlert(with: NSLocalizedString("Incorrect", comment: ""), message: NSLocalizedString("ValidAddr", comment: ""))
             return
         }
         service.saveContact(address: address, with: nameContact) { (error) in
             if error?.localizedDescription == "Address already exists in the database" {
-                self.showAlert(with: "Same Address", message: "Address already exists in your contacts")
+                self.showAlert(with: NSLocalizedString("SameAddr", comment: ""), message: NSLocalizedString("AddrExist", comment: ""))
                 return
             } else if error?.localizedDescription == "Name already exists in the database" {
-                self.showAlert(with: "Same Name", message: "Name already exists in your contacts")
+                self.showAlert(with: NSLocalizedString("SameName", comment: ""), message: NSLocalizedString("NameExist", comment: ""))
                 return
             } else if error != nil {
                 return

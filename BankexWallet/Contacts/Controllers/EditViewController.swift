@@ -39,7 +39,7 @@ class EditViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTFs()
-        navigationItem.setRightBarButton(UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(self.deleteContact)), animated: true)
+        navigationItem.setRightBarButton(UIBarButtonItem(title: NSLocalizedString("Delete", comment: ""), style: .plain, target: self, action: #selector(self.deleteContact)), animated: true)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -101,7 +101,7 @@ class EditViewController: BaseViewController {
     }
     
     @IBAction func deleteContact() {
-        let alertViewController = UIAlertController.destructive(button: "Delete") {
+        let alertViewController = UIAlertController.destructive(button: NSLocalizedString("Delete", comment: "")) {
             self.service.delete(with: self.selectedContact!.address, completionHandler: { _ in
                 self.navigationController?.popToRootViewController(animated: true)
             })

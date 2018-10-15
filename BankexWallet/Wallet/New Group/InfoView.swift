@@ -36,13 +36,13 @@ class InfoView: UIView {
                 tokenNameLabel?.isHidden = true
                 nameWallet.isHidden = false
                 addrWallet.isHidden = false
-                titleLabel?.text = "Wallet Information"
+                titleLabel?.text = NSLocalizedString("WalletInfo", comment: "")
             }else {
                 deleteButton?.isHidden = false
                 tokenNameLabel?.isHidden = false
                 nameWallet.isHidden = true
                 addrWallet.isHidden = true
-                titleLabel?.text = "Token Information"
+                titleLabel?.text =  NSLocalizedString("TokenInfo", comment: "")
             }
         }
     }

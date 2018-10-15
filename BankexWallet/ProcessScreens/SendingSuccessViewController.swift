@@ -30,7 +30,7 @@ class SendingSuccessViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
         if let amount = transactionAmount {
-            transactionSucceedLabel.text = "Your \(amount) \(tokenService.selectedERC20Token().symbol) has been sent successfully"
+            transactionSucceedLabel.text = String(format: NSLocalizedString("Your %@ %@ has been sent successfully", comment: ""), arguments: [amount,tokenService.selectedERC20Token().symbol])
         }
     }
     
@@ -42,7 +42,7 @@ class SendingSuccessViewController: UIViewController {
     func addBackButton() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle("  Home", for: .normal)
+        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
         button.setTitleColor(WalletColors.mainColor, for: .normal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(done(_:)), for: .touchUpInside)

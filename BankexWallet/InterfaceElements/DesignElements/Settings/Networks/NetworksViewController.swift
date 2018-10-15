@@ -59,7 +59,7 @@ class NetworksViewController: BaseViewController {
     func configure() {
         tableView.dataSource = self
         tableView.delegate = self
-        navigationItem.title = isFromDeveloper ? "Custom Networks" : "Network"
+        navigationItem.title = isFromDeveloper ? NSLocalizedString("CustomNetworks", comment: "") : NSLocalizedString("Network", comment: "")
         if !isFromDeveloper {
             hideAddBtn()
         }else {

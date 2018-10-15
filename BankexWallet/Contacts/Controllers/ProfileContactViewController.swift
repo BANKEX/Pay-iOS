@@ -150,7 +150,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     }
     
     private func commonPrepare() {
-        title = "Contacts"
+        title = NSLocalizedString("Contacts", comment: "")
         infoView.backgroundColor = WalletColors.mainColor
     }
     

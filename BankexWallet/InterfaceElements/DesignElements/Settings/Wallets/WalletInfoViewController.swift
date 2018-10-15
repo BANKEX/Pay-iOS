@@ -22,7 +22,7 @@ class WalletInfoViewController: UITableViewController {
         addressLabel.text = dict["addr"]
         nameWalletLabel.text = dict["name"]
         publicAddress = dict["addr"]
-        title = "Wallet Info"
+        title = NSLocalizedString("WalletInfo", comment: "")
         tableView.backgroundColor = WalletColors.bgMainColor
         tableView.tableFooterView = HeaderView()
     }
@@ -30,10 +30,9 @@ class WalletInfoViewController: UITableViewController {
     func setupClipboard() {
         clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58))
         clipboardView.backgroundColor = WalletColors.clipboardColor
-        clipboardView.title = "Address copied to clipboard"
+        clipboardView.title = NSLocalizedString("AddrCopied", comment: "")
         view.addSubview(clipboardView)
     }
-    
     func saveDataInBuffer(_ string:String?) {
         UIPasteboard.general.string = string ?? ""
     }
@@ -52,11 +51,11 @@ class WalletInfoViewController: UITableViewController {
             case 2:
                 //Delete
                 if isSimilarWallet() {
-                    let alertVC = UIAlertController.common(title: "Error", message: "You can't to delete selected wallet")
+                    let alertVC = UIAlertController.common(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("CantDel", comment: ""))
                     present(alertVC, animated: true)
                     return
                 }
-                let alertViewController = UIAlertController.destructive(button: "Delete") {
+                let alertViewController = UIAlertController.destructive(button: NSLocalizedString("Delete", comment: "")) {
                     if let addr = self.addressLabel.text {
                         self.walletsService.delete(address: addr)
                         self.navigationController?.popViewController(animated: true)
@@ -97,9 +96,9 @@ class WalletInfoViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView()
         if section == 0 {
-            headerView.title = "WALLET INFORMATION"
+            headerView.title = NSLocalizedString("ChooseWallet", comment: "")
         }else {
-            headerView.title = "WALLET SECURITY"
+            headerView.title = NSLocalizedString("WalletSecurity", comment: "")
         }
         return headerView
     }

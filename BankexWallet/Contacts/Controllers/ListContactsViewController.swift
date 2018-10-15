@@ -215,7 +215,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         searchBar.backgroundImage = UIImage()
         searchBar.changeSearchBarColor(color: WalletColors.disableColor)
         searchBar.changeSearchBarTextColor(color: WalletColors.separatorColor)
-        searchBar.placeholder = "Search Contact"
+        searchBar.placeholder = NSLocalizedString("SearchContact", comment: "")
         searchBar.delegate = self
     }
     
@@ -256,7 +256,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
                 destVC.selectedContact = currentContacts[selectedIndexPath.row]
             }
             let button = UIBarButtonItem()
-            button.title = "Contacts"
+            button.title = NSLocalizedString("Contacts", comment: "")
             navigationItem.backBarButtonItem = button
         }
     }

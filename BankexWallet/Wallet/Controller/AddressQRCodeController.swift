@@ -68,7 +68,7 @@ class AddressQRCodeController: BaseViewController {
     }
     
     private func addBackButton() {
-        let button = customBackButton(title: " Wallet")
+        let button = customBackButton(title: NSLocalizedString(" Wallet", comment: ""))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
@@ -83,7 +83,7 @@ class AddressQRCodeController: BaseViewController {
         let heightLabel = clipView.bounds.height/2
         let label = UILabel(frame: CGRect(x: 0, y: clipView.bounds.midY - heightLabel/2, width: clipView.bounds.width, height: heightLabel))
         label.textAlignment = .center
-        label.text = navTitle == nil ? "Address copied to clipboard" : "Private key copied to clipboard"
+        label.text = navTitle == nil ? NSLocalizedString("AddrCopied", comment: "") : NSLocalizedString("PrivateCopied", comment: "")
         label.textColor = UIColor(hex: "F9FAFC")
         label.font = UIFont.systemFont(ofSize: 15.0)
         clipView.addSubview(label)

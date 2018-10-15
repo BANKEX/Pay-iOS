@@ -37,10 +37,10 @@ extension SettingsViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView()
         switch section {
-        case 0: headerView.title = "GENERAL"
-        case 1: headerView.title = "SUPPORT"
-        case 2: headerView.title = "COMMUNITY"
-        case 3: headerView.title = "DEVELOPER SETTINGS"
+        case 0: headerView.title = NSLocalizedString("General", comment: "")
+        case 1: headerView.title = NSLocalizedString("Support", comment: "")
+        case 2: headerView.title = NSLocalizedString("Community", comment: "")
+        case 3: headerView.title = NSLocalizedString("DevSettings", comment: "")
         default: break
         }
         return headerView

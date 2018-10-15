@@ -90,7 +90,7 @@ class SettingsViewController: UITableViewController {
     }
 
     private func prepareNavbar() {
-        navigationItem.title = "Settings"
+        navigationItem.title = NSLocalizedString("Settings", comment: "")
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 

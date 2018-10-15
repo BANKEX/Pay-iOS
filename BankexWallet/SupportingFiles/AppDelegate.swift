@@ -117,9 +117,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         UIApplication.attachBlur()
     }
+    
+    
+    
+    
     
     
     func configurePushes() {

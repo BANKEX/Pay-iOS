@@ -37,7 +37,7 @@ class HomeViewController: BaseViewController {
             } else {
                 navigationController?.setNavigationBarHidden(false, animated: true)
                 mainSign.isHidden = true
-                navigationItem.title = "Send funds"
+                navigationItem.title = NSLocalizedString("SendFunds", comment: "")
                 topConstraint.constant = -(inset-40)
                let backButton = self.customBackButton()
                 backButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
@@ -83,7 +83,7 @@ class HomeViewController: BaseViewController {
         let button = BaseButton()
         let widthBtn:CGFloat = 80.0
         button.frame = CGRect(x: tableView.bounds.width - widthBtn - 15.0, y: 65.0 - 22.0, width: widthBtn, height: 22.0)
-        button.setTitle("Add Tokens", for: .normal)
+        button.setTitle(NSLocalizedString("AddTokens", comment:""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
         button.addTarget(self, action: #selector(self.createToken), for: .touchUpInside)
         button.setTitleColor(WalletColors.mainColor, for: .normal)

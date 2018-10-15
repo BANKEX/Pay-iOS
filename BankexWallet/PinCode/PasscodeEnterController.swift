@@ -18,12 +18,20 @@ class PasscodeEnterController: UIViewController {
         case enter = "Touch ID or Enter Passcode"
         case wrong = "Wrong passcode"
         case ready = "Ready"
+        
+        func status() -> String {
+            switch self {
+            case .enter: return NSLocalizedString("EnderID", comment: "")
+            case .wrong: return NSLocalizedString("Wrong", comment: "")
+            case .ready: return NSLocalizedString("Ready", comment: "")
+            }
+        }
     }
     
     @IBOutlet weak var messageLabel: UILabel!
     var passcode: String = ""
     var status: passcodeStatus = .enter
-    
+
     @IBOutlet weak var firstNum: UIImageView!
     @IBOutlet weak var secondNum: UIImageView!
     @IBOutlet weak var thirdNum: UIImageView!
@@ -73,7 +81,6 @@ class PasscodeEnterController: UIViewController {
         if !isAvailableTouchID || !turnOnTouchID {
             hideBiometricButton()
         }
-        
     }
     
     func hideBiometricButton() {
@@ -87,7 +94,7 @@ class PasscodeEnterController: UIViewController {
     
     func changePasscodeStatus(_ newStatus: passcodeStatus) {
         status = newStatus
-        messageLabel.text = NSLocalizedString(status.rawValue, comment: "")
+        messageLabel.text = NSLocalizedString(status.status(), comment: "")
         if status == .wrong {
             passcode = ""
             updateUI(0)
@@ -214,16 +221,19 @@ class PasscodeEnterController: UIViewController {
         let context = LAContext()
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            var type = "Touch ID"
+            var type = NSLocalizedString("TouchID", comment: "")
             if #available(iOS 11, *) {
                 switch(context.biometryType) {
                 case .touchID:
-                    type = "Touch ID"
+                    type = NSLocalizedString("TouchID", comment: "")
                 case .faceID:
-                    type = "Face ID"
+                    type = NSLocalizedString("Face ID", comment: "")
                 case .none:
-                    type = "Error"
+                    type = NSLocalizedString("Error", comment: "")
                 }
+            }
+            if #available(iOS 10.0, *) {
+                context.localizedCancelTitle = NSLocalizedString("Cancel", comment: "")
             }
             let reason = NSLocalizedString("Authenticate with", comment: "") + type
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,

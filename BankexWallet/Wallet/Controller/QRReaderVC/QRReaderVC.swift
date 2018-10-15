@@ -20,9 +20,9 @@ class QRReaderVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
     }
 
 
-    let defautText = "Scan QR Code"
-    let errorText = "QR Code is not recognized. Please try again."
-    let successText = "Scanning..."
+    let defautText = NSLocalizedString("ScanQR", comment: "")
+    let errorText = NSLocalizedString("QRNotRec", comment: "")
+    let successText = NSLocalizedString("Scanning", comment: "")
     var videoPreviewLayer:AVCaptureVideoPreviewLayer!
     var captureSession:AVCaptureSession!
     var state:State = .standard {

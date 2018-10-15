@@ -194,7 +194,7 @@ class MainInfoController: BaseViewController,
         self.rateSevice.updateConversionRate(for: tokenName, completion: { (result) in
             guard let balanceString = self.infoView.balanceLabel.text else { return }
             guard let rateCurrency = balanceString.formatToDollar(rate: result) else { return }
-            self.infoView.rateLabel.text = "\(self.numberFormatter.string(from: NSNumber(value:rateCurrency)) ?? "") at the rate of CryptoCompare"
+            self.infoView.rateLabel.text = String(format: NSLocalizedString("%@ at the rate of CryptoCompare", comment: ""), self.numberFormatter.string(from: NSNumber(value:rateCurrency)) ?? "")
         })
     }
     
@@ -304,7 +304,7 @@ class MainInfoController: BaseViewController,
     func deleteButtonTapped() {
         let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertVC.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
-        let deleteAction = UIAlertAction(title:"Delete", style: .destructive) { _ in
+        let deleteAction = UIAlertAction(title:NSLocalizedString("Delete", comment: ""), style: .destructive) { _ in
             self.tokensService.deleteToken(with: self.selectedToken.address)
             self.navigationController?.popViewController(animated: true)
         }

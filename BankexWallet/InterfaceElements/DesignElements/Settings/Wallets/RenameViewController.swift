@@ -31,10 +31,10 @@ class RenameViewController: BaseViewController {
         view.endEditing(true)
     }
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let rightBarButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveWalletName))
+        let rightBarButton = UIBarButtonItem(title: NSLocalizedString("Save", comment: ""), style: .plain, target: self, action: #selector(self.saveWalletName))
         navigationItem.setRightBarButton(rightBarButton, animated: false)
     }
     

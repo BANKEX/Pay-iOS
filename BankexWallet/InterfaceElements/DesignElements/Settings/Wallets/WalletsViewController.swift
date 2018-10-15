@@ -60,7 +60,7 @@ class WalletsViewController: BaseViewController, WalletSelectedDelegate {
     }
     
     func configure() {
-        navigationItem.title = "Wallets"
+        navigationItem.title = NSLocalizedString("Wallets", comment: "")
         tableView.dataSource = self
         tableView.delegate = self
         var btn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))

@@ -27,12 +27,12 @@ class AttentionViewController: BaseViewController {
     var state:State = .PrivateKey {
         didSet {
             if state == .PrivateKey {
-                descriptionLabel.text = "Anyone who knows your private key has access to your wallet"
-                titleLabel.text = "Private Key"
+                descriptionLabel.text = NSLocalizedString("Anyone", comment: "")
+                titleLabel.text = NSLocalizedString("Private Key", comment: "")
                 directionSegue = "showPrivateKey"
             }else {
-                descriptionLabel.text = "This option is intended for development use only"
-                titleLabel.text = "Custom Networks"
+                descriptionLabel.text = NSLocalizedString("Options", comment: "")
+                titleLabel.text = NSLocalizedString("CustomNetworks", comment: "")
                 directionSegue = "showCustomNetworks"
             }
         }

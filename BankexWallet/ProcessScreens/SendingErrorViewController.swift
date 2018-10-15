@@ -27,7 +27,7 @@ class SendingErrorViewController: BaseViewController {
     
     func layoutTitle() {
         let lbl = UILabel()
-        lbl.text = "Send"
+        lbl.text = NSLocalizedString("Send", comment: "")
         lbl.font = UIFont.systemFont(ofSize: 17.0, weight:.semibold)
         lbl.textColor = .white
         navigationItem.titleView = lbl
