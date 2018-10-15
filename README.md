@@ -1,5 +1,4 @@
 # BANKEX Wallet - Ethereum Wallet for iOS
-![](https://github.com/BANKEX/BankexWalletIOS/blob/develop/Badge/%20bankex.png)
 
 <p align="center">
  <a href="https://itunes.apple.com/ru/app/bankex-pay/id1411403963?l=en&mt=8"><img src="/Badge/appStore.svg"/></a>
@@ -81,6 +80,12 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+## Communication
+
+- If you **found a bug**, open an issue.
+- If you **have a feature request**, open an issue.
+- If you **want to contribute**, submit a pull request.
 
 ## Details
 More details (architecture, environments, tests, tools...) can be found on the [wiki](https://github.com/BANKEX/BankexWalletIOS/wiki).
