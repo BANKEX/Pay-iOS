@@ -34,12 +34,11 @@ enum ShortcutIdentifier:String {
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    static var isAlreadyLaunchedOnce = false // Used to avoid 2 FIRApp configure
-
     var window: UIWindow?
     var navigationVC:UINavigationController?
     var currentViewController:UIViewController?
     var service = ContactService()
+    var tokenService = CustomERC20TokensServiceImplementation()
     var keyService = SingleKeyServiceImplementation()
     var selectedContact:FavoriteModel?
     let gcmMessageIDKey = "gcm.message_id"
@@ -89,17 +88,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
+//    guard let launchOptions = launchOptions else { return true }
+//    guard let url = launchOptions[.url] as? NSURL else { return true }
+//    handleURL(url as URL)
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         prepareAppearance()
-
-        if !AppDelegate.isAlreadyLaunchedOnce {
-            FirebaseApp.configure()
-            AppDelegate.isAlreadyLaunchedOnce = true
-            configurePushes()
-        }
+        FirebaseApp.configure()
+        configurePushes()
         Amplitude.instance().initializeApiKey("27da55fc989fc196d40aa68b9a163e36")
         Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
         Fabric.with([Crashlytics.self])
@@ -111,7 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return true
         }
-        
         initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
         window?.backgroundColor = .white
         return true
@@ -120,6 +116,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        UIApplication.attachBlur()
+    }
+    
     
     func configurePushes() {
         // [START set_messaging_delegate]
@@ -149,6 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        UIApplication.unattachBlur()
         if UserDefaults.standard.value(forKey: Keys.multiSwitch.rawValue) == nil {
             UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
         }
@@ -198,13 +200,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
             print("I am handling a link through the openURL method (custom scheme instead of universal)")
             self.handleIncomingDynamicLink(dynamicLink)
             return true
         } else {
-            return false
+            return handleURL(url)
+        }
+    }
+    
+    
+    
+    @discardableResult
+    func handleURL(_ url:URL) -> Bool {
+        guard let filteredURL = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return true }
+        guard let host = filteredURL.host else { return true }
+        if host == "ether" {
+            if isLaunched {
+                goToMain("", true)
+            }else {
+                goToMain("", false)
+            }
+            return true
+        }else {
+            guard let nameToken = host.components(separatedBy: ".").last else { return true }
+            guard let selectedToken = tokenService.availableTokensList()?.filter({ return $0.name == nameToken }).first else { return true }
+            if isLaunched {
+                goToMain(selectedToken.address, true)
+            }else {
+                goToMain(selectedToken.address, false)
+            }
+            return true
         }
     }
     
@@ -318,6 +347,31 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 // [END ios_10_message_handling]
 
 extension AppDelegate : MessagingDelegate {
+    
+    func goToMain(_ tokenAddress:String, _ isLaunch:Bool) {
+        let mainInfo = CreateVC(byName: "MainInfoController") as! MainInfoController
+        if isLaunch {
+            let tab = window?.rootViewController as! BaseTabBarController
+            tab.selectedIndex = 0
+            guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return }
+            nav.popToRootViewController(animated: false)
+            tokenService.updateSelectedToken(to: tokenAddress)
+            nav.pushViewController(mainInfo, animated: false)
+        }else {
+            let tabBar = CreateVC(byName: "MainTabController") as! BaseTabBarController
+            window?.rootViewController = tabBar
+            guard !PasscodeEnterController.isLocked else { return }
+            let passcodeVC = CreateVC(byName: "passcodeEnterController") as! PasscodeEnterController
+            currentPasscodeViewController = passcodeVC
+            window?.rootViewController?.present(passcodeVC, animated: true, completion: nil)
+            let tab = rootVC() as! BaseTabBarController
+            tab.selectedIndex = 0
+            guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return }
+            tokenService.updateSelectedToken(to: tokenAddress)
+            nav.pushViewController(mainInfo, animated: false)
+        }
+        
+    }
     
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {

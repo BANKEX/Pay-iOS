@@ -186,12 +186,12 @@ extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
             return placeholderCell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as! TokenTableViewCell
+        cell.isSearchable = true
         let num = floor(Double(indexPath.row/2))
         let token = tokensList![Int(num)]
         //        let available = tokensAvailability![indexPath.row]
         //        cell.configure(with: token, isAvailable: available)
         cell.token = token
-        cell.isSearchable = true
         return cell
     }
     

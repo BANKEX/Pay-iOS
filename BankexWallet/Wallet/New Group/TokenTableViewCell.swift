@@ -24,15 +24,15 @@ class TokenTableViewCell: UITableViewCell {
     static let identifier:String = String(describing: TokenTableViewCell.self)
     let keysService = SingleKeyServiceImplementation()
     var isSearchable = false
+    let service = CustomTokenUtilsServiceImplementation()
+
     
     var token:ERC20TokenModel! {
         didSet {
             configure()
         }
     }
-        
-
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         fillView.setupDefaultShadow()
@@ -57,20 +57,11 @@ class TokenTableViewCell: UITableViewCell {
         }
         
         addressToken.text = token.address.formattedAddrToken()
-        let tokenCase = PredefinedTokens(with: token.symbol)
-//        if tokenCase == .NotDefined {
-//            tokenImageView.isHidden = true
-//            tokenView.isHidden = false
-//        }else {
-//            tokenView.isHidden = true
-//            tokenImageView.isHidden = false
-//        }
         tokenView.letter = token.name.prefix(1).uppercased()
 
         nameToken.text = token.name
         symbolToken.text = token.symbol.uppercased()
         
-        let service: UtilTransactionsService = !token.address.isEmpty ? CustomTokenUtilsServiceImplementation() : UtilTransactionsServiceImplementation()
         service.getBalance(for: token.address, address: keysService.selectedAddress() ?? "") { (result) in
 
             switch result {
@@ -80,12 +71,16 @@ class TokenTableViewCell: UITableViewCell {
                                                                         toUnits: .eth,
                                                                         decimals: 8)
                 self.balanceToken.text = formattedAmount!
-
             case .Error( _):
                 self.balanceToken.text = "..."
             }
         }
-        
+        if !self.isSearchable {
+            let tokenShort = TokenShort(name: self.token.name, balance: balanceToken.text!)
+            if !TokenShortService.arrayTokensShort.contains(tokenShort) {
+                TokenShortService.arrayTokensShort.append(tokenShort)
+            }
+        }
     }
     
 }

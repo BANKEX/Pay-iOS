@@ -42,7 +42,7 @@ extension AppDelegate {
         guard !PasscodeEnterController.isLocked else { return }
         if let vc = storyboard().instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController {
             currentPasscodeViewController = vc
-            window?.rootViewController?.present(vc, animated: true, completion: nil)
+            window?.rootViewController?.present(vc, animated: false, completion: nil)
         }
     }
     
@@ -56,6 +56,10 @@ extension AppDelegate {
         let tabBar = storyboard().instantiateViewController(withIdentifier: "MainTabController") as? BaseTabBarController
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
+    }
+    
+    func rootVC() -> UIViewController? {
+        return window?.rootViewController
     }
 
 }

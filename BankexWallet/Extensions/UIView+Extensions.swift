@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import VisualEffectView
 
 extension UIView {
     
@@ -87,6 +88,19 @@ extension UIView {
         get {
             return layer.shadowRadius
         }
+    }
+    
+    func addBlur() {
+        let visualEffectView = VisualEffectView(frame: self.bounds)
+        
+        // Configure the view with tint color, blur radius, etc
+        visualEffectView.blurRadius = 5
+        visualEffectView.scale = 1
+        visualEffectView.colorTintAlpha = 0.1
+        addSubview(visualEffectView)
+    }
+    func removeBlur() {
+        self.subviews.last!.removeFromSuperview()
     }
     
     func setupDefaultShadow() {
