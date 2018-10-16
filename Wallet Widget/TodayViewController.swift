@@ -95,6 +95,8 @@ extension TodayViewController:UITableViewDataSource,UITableViewDelegate {
             extensionContext?.open(url, completionHandler: nil)
         }
     }
+    
+    
 }
 
 extension Int {

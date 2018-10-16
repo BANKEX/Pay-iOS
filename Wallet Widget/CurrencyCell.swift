@@ -34,6 +34,21 @@ class CurrencyCell: UITableViewCell {
         }else {
             balanceCurrency.text = shortToken.balance
             nameCurrency.text = shortToken.name
+            addTokenImage()
         }
+    }
+    
+    func addTokenImage() {
+        let circleView = UIView(frame: CGRect(x: 22, y: 20, width: 64, height: 64))
+        circleView.layer.cornerRadius = circleView.bounds.width/2
+        circleView.backgroundColor = .white
+        let word = UILabel()
+        word.frame = CGRect(x: 0, y: 0, width: circleView.bounds.width, height: circleView.bounds.height)
+        word.textColor = UIColor(red: 13/255, green: 169/255, blue: 255/255, alpha: 1)
+        word.text = shortToken.name.prefix(1).uppercased()
+        word.textAlignment = .center
+        word.font = UIFont.boldSystemFont(ofSize: 52.0)
+        circleView.addSubview(word)
+        contentView.addSubview(circleView)
     }
 }
