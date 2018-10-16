@@ -39,8 +39,10 @@ extension SettingsViewController:MFMailComposeViewControllerDelegate {
             }
         case SettingsSections.Community.rawValue:
             if indexPath.row == 0 {
-                managerReferences.accessToTwitter()
+                performSegue(withIdentifier: "products", sender: nil)
             }else if indexPath.row == 1 {
+                managerReferences.accessToTwitter()
+            }else if indexPath.row == 2 {
                 managerReferences.accessToFacebook()
             }else {
                 managerReferences.accessToTelegram()

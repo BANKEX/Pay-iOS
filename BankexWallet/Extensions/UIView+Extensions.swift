@@ -125,4 +125,10 @@ extension UIView {
         label.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
         return label
     }
+    
+    func rotate() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 3, options: [], animations: {
+            self.transform = self.transform.rotated(by: .pi)
+        })
+    }
 }

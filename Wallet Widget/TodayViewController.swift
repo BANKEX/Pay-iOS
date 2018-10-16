@@ -15,19 +15,10 @@ import Crashlytics
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
-    @IBOutlet weak var tableView:UITableView!
     
-    enum Keys {
-        case balance
-        case nameWallet
-        
-        func key() -> String {
-            switch self {
-            case .balance: return "Balance"
-            case .nameWallet: return "Name"
-            }
-        }
-    }
+    @IBOutlet weak var tableView:UITableView!
+
+    
     let fileName = "tokens.json"
     var tokens:[TokenShort]!
     let userDefaults = UserDefaults(suiteName: "group.PayWidget")
@@ -48,6 +39,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             tableView.reloadData()
         }
         extensionContext?.widgetLargestAvailableDisplayMode = tokens.isEmpty ? .compact : .expanded
+        setupTableView()
+    }
+    
+    private func setupTableView() {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.rowHeight = standartHeight
         tableView.separatorStyle = .none
@@ -69,6 +64,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
 }
 
+
+
+
+
+
+
 extension TodayViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tokens.count + 1
@@ -88,10 +89,11 @@ extension TodayViewController:UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            guard let url = URL(string:"pay://ether") else { return }
+            guard let url = Currency.ether.path() else { return }
             extensionContext?.open(url, completionHandler: nil)
         }else {
-            guard let url = URL(string:"pay://token.\(tokens[indexPath.row - 1].name)") else { return }
+            let currentToken = tokens[indexPath.row - 1]
+            guard let url = Currency.token(currentToken).path() else { return }
             extensionContext?.open(url, completionHandler: nil)
         }
     }
@@ -102,6 +104,32 @@ extension TodayViewController:UITableViewDataSource,UITableViewDelegate {
 extension Int {
     func cgFloat() -> CGFloat {
         return CGFloat(self)
+    }
+}
+
+extension TodayViewController {
+    private enum Currency {
+        case ether
+        case token(TokenShort)
+        
+        func path() -> URL? {
+            switch self {
+            case .ether : return URL(string:"pay://ether")
+            case .token(let token): return URL(string:"pay://token.\(token.name)")
+            }
+        }
+    }
+    
+    private enum Keys {
+        case balance
+        case nameWallet
+        
+        func key() -> String {
+            switch self {
+            case .balance: return "Balance"
+            case .nameWallet: return "Name"
+            }
+        }
     }
 }
 

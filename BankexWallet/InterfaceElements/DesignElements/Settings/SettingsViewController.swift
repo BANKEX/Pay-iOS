@@ -13,7 +13,7 @@ import web3swift
 class SettingsViewController: UITableViewController {
     
     enum SettingsSections:Int,CaseIterable {
-        case General = 0,Support,Community,Developer
+        case  General = 0 ,Support,Community,Developer
     }
     
     
