@@ -16,9 +16,7 @@ class CurrencyCell: UITableViewCell {
     
     var shortToken:TokenShort! {
         didSet {
-            if shortToken != nil {
-                setData(balance: nil, name: nil, true)
-            }
+            setData(balance: nil, name: nil, true)
         }
     }
 
@@ -38,17 +36,31 @@ class CurrencyCell: UITableViewCell {
         }
     }
     
-    func addTokenImage() {
-        let circleView = UIView(frame: CGRect(x: 22, y: 20, width: 64, height: 64))
+    private func addTokenImage() {
+        let circleView = UIView(frame: CGRect(x: 22, y: 20, width: 64, height: 64)) //Magic)
         circleView.layer.cornerRadius = circleView.bounds.width/2
         circleView.backgroundColor = .white
         let word = UILabel()
-        word.frame = CGRect(x: 0, y: 0, width: circleView.bounds.width, height: circleView.bounds.height)
+        word.frame = circleView.bounds
         word.textColor = UIColor(red: 13/255, green: 169/255, blue: 255/255, alpha: 1)
-        word.text = shortToken.name.prefix(1).uppercased()
+        word.text = shortToken.name.firstLetter
         word.textAlignment = .center
         word.font = UIFont.boldSystemFont(ofSize: 52.0)
         circleView.addSubview(word)
         contentView.addSubview(circleView)
+    }
+    
+}
+
+
+
+
+
+
+
+
+extension String {
+    var firstLetter:String {
+        return self.prefix(1).uppercased()
     }
 }
