@@ -86,7 +86,7 @@ class CreateTokenController: BaseViewController {
         }
         DispatchQueue.main.async {
             if self.needAddTokenAnimation {
-                self.supportLbl.text = "Token was added to your wallet"
+                self.supportLbl.text = NSLocalizedString("TokenAdded", comment: "")
                 UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
                     self.supportView.frame.origin.y = self.view.bounds.height - 58.0
                 }, completion: { _ in
@@ -199,7 +199,7 @@ extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
         let num = floor(Double(indexPath.row/2))
         let tokenToAdd = self.tokensList![Int(num)]
         if tokenToAdd.isAdded {
-            supportLbl.text = "Token is already added to your wallet"
+            supportLbl.text = NSLocalizedString("tokenIsAdded", comment: "")
             if !isAnimating {
                 isAnimating = true
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {

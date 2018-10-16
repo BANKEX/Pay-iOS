@@ -27,7 +27,7 @@ extension SettingsViewController:MFMailComposeViewControllerDelegate {
             if indexPath.row == 0 {
                 managerReferences.accessToBankexMail(delegate: self, failed: { (errorMessage) in
                     DispatchQueue.main.async {
-                        let alertVC = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                        let alertVC = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: errorMessage, preferredStyle: .alert)
                         alertVC.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default))
                         self.present(alertVC, animated: true)
                     }

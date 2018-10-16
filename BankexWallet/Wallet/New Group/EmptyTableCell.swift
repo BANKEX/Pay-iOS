@@ -13,9 +13,12 @@ class EmptyTableCell: UITableViewCell {
     
     static let identifier = String(describing: EmptyTableCell.self)
     
+    @IBOutlet weak var emptyLabel:UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        emptyLabel.text = NSLocalizedString("YouDontHave", comment: "")
         selectionStyle = .none
         backgroundColor = .clear
     }

@@ -25,7 +25,7 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Add New Token"
+        title = NSLocalizedString("AddNewToken", comment: "")
         setTableView()
 //        if token == nil && keysService.selectedWallet()?.name == nil {
 //            tokensService.getNewConversion(for: (token?.symbol.uppercased())!)

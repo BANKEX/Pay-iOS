@@ -8,6 +8,9 @@
 
 import UIKit
 import NotificationCenter
+import Fabric
+import Crashlytics
+
 
 
 class TodayViewController: UIViewController, NCWidgetProviding {
@@ -30,6 +33,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     let userDefaults = UserDefaults(suiteName: "group.PayWidget")
     let cellIdentifier = "CurrencyCell"
     var standartHeight:CGFloat = 110
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
+        Fabric.with([Crashlytics.self])
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

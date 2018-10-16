@@ -118,7 +118,7 @@ class RepeatPassphraseViewController: UIViewController {
     
     func navigationBarSetup() {
         navigationItem.title = NSLocalizedString("Creating Wallet", comment: "")
-        let button = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        let button = UIBarButtonItem(title: NSLocalizedString("Back", comment: ""), style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.topItem?.backBarButtonItem = button
     }
     

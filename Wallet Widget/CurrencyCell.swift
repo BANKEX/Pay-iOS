@@ -36,6 +36,4 @@ class CurrencyCell: UITableViewCell {
             nameCurrency.text = shortToken.name
         }
     }
-
-    
 }

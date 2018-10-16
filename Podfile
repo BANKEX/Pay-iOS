@@ -31,3 +31,10 @@ target 'BankexWallet' do
   end
 
 end
+
+
+target 'Wallet Widget' do
+    use_frameworks!
+    pod 'Fabric'
+    pod 'Crashlytics'
+end

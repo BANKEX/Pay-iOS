@@ -15,9 +15,9 @@ enum TokenInfoRaws: Int {
     
     func string() -> String {
         switch self {
-        case .address: return "Address"
-        case .currency: return "Currency"
-        case .decimals: return "Decimals"
+        case .address: return NSLocalizedString("Address", comment: "")
+        case .currency: return NSLocalizedString("Currency", comment: "")
+        case .decimals: return NSLocalizedString("Decimals", comment: "")
         }
     }
 }

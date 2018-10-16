@@ -33,7 +33,7 @@ class ManagerReferences {
     func accessToBankexMail(delegate:MFMailComposeViewControllerDelegate?, failed:@escaping ((String)->()),success:@escaping ((MFMailComposeViewController)->())) {
         var errorMessage = ""
         guard MFMailComposeViewController.canSendMail() else {
-            errorMessage += "Device is not available to send email.Please check your settings"
+            errorMessage += NSLocalizedString("ErrorSend", comment: "")
             failed(errorMessage)
             return
         }
