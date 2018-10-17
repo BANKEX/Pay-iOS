@@ -7,7 +7,7 @@
  <br>
  
 [![Swift](https://img.shields.io/badge/Swift-4.2-blue.svg)](https://swift.org/)
-[![Platform](https://img.shields.io/badge/Platform-iOS%2B9.0-purple.svg)](https://developer.apple.com/swift)
+[![Platform](https://img.shields.io/badge/Platform-iOS%2B10.0-purple.svg)](https://developer.apple.com/swift)
 [![Build Status](https://travis-ci.org/BANKEX/BankexWalletIOS.svg?branch=develop)](https://travis-ci.org/BANKEX/BankexWalletIOS)
 
 <br>
