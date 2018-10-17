@@ -70,6 +70,8 @@ class ProductViewCell: UICollectionViewCell {
         } else {
             UIApplication.shared.openURL(product.url)
         }
+        isPicked = !isPicked
+        updateUI()
     }
     
     
