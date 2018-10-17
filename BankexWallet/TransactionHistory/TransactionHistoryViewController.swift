@@ -104,7 +104,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         let heightOfToken:CGFloat = 23
         guard let tokens = tokensService.availableTokensList() else { return 0 }
         if tokens.count > 5 {
-            return fiveTokensHeight
+            return CGFloat(5 * Int(heightOfToken)).next(number: tokens.count)
         }else {
             let height = tokens.count * Int(heightOfToken)
             fiveTokensHeight = CGFloat(height).next(number: tokens.count)
