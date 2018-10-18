@@ -131,4 +131,18 @@ extension UIView {
             self.transform = self.transform.rotated(by: .pi)
         })
     }
+    
+    func show() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }) { _ in
+            self.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
+    
+    func hide() {
+        UIView.animate(withDuration: 0.25) {
+            self.transform = CGAffineTransform(scaleX: 0, y: 0)
+        }
+    }
 }
