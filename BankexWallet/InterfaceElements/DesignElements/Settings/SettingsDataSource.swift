@@ -22,7 +22,7 @@ extension SettingsViewController {
         case SettingsSections.Support.rawValue:
             return 2
         case SettingsSections.Community.rawValue:
-            return 3
+            return 4
         case SettingsSections.Developer.rawValue:
             return 1
         default:

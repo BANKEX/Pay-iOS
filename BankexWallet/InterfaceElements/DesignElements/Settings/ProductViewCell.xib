@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ProductViewCell" customModule="BankexWallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k6v-Bh-5I4">
+                        <rect key="frame" x="20" y="15" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="kXD-2x-VPy"/>
+                            <constraint firstAttribute="height" constant="40" id="oog-MU-aD0"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNB-hm-IW6">
+                        <rect key="frame" x="70" y="24.5" width="34" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8x-F4-DrX" customClass="SwitchButton" customModule="BankexWallet" customModuleProvider="target">
+                        <rect key="frame" x="337" y="25" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="2wg-yA-cAG"/>
+                            <constraint firstAttribute="width" constant="20" id="Z3s-Yu-yRd"/>
+                        </constraints>
+                        <connections>
+                            <action selector="switchTap" destination="gTV-IL-0wX" eventType="touchUpInside" id="4FN-MO-rDK"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQK-TZ-QB5">
+                        <rect key="frame" x="0.0" y="70" width="375" height="114"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5i-oL-aSt">
+                                <rect key="frame" x="20" y="8" width="337" height="47"/>
+                                <string key="text">BANKEX Scan is a service that lets users search for Ethereum transactions. Use BANKEX Scan to get a maximum of information about every transaction. </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NkM-IV-vAR">
+                                <rect key="frame" x="321" y="82" width="46" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="1fD-gB-oea"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.050980392159999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="get" destination="gTV-IL-0wX" eventType="touchUpInside" id="avZ-Hg-3hN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P5i-oL-aSt" firstAttribute="top" secondItem="MQK-TZ-QB5" secondAttribute="top" constant="8" id="cd3-cL-pVS"/>
+                            <constraint firstAttribute="trailing" secondItem="NkM-IV-vAR" secondAttribute="trailing" constant="8" id="f7S-r1-azS"/>
+                            <constraint firstAttribute="bottom" secondItem="NkM-IV-vAR" secondAttribute="bottom" constant="8" id="yPw-RZ-wK0"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="DNB-hm-IW6" firstAttribute="leading" secondItem="k6v-Bh-5I4" secondAttribute="trailing" constant="10" id="2hf-nN-lVI"/>
+                <constraint firstItem="MQK-TZ-QB5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8CD-3Q-Qi9"/>
+                <constraint firstItem="k6v-Bh-5I4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="9Cb-So-hVG"/>
+                <constraint firstItem="P5i-oL-aSt" firstAttribute="trailing" secondItem="b8x-F4-DrX" secondAttribute="trailing" id="FRz-Yy-5xF"/>
+                <constraint firstItem="MQK-TZ-QB5" firstAttribute="top" secondItem="k6v-Bh-5I4" secondAttribute="bottom" constant="15" id="HW9-W6-WpW"/>
+                <constraint firstItem="P5i-oL-aSt" firstAttribute="leading" secondItem="k6v-Bh-5I4" secondAttribute="leading" id="KKe-dt-3ts"/>
+                <constraint firstAttribute="bottom" secondItem="MQK-TZ-QB5" secondAttribute="bottom" id="NmF-EY-w4O"/>
+                <constraint firstAttribute="trailing" secondItem="b8x-F4-DrX" secondAttribute="trailing" constant="18" id="Wj8-Ib-b5F"/>
+                <constraint firstItem="DNB-hm-IW6" firstAttribute="centerY" secondItem="k6v-Bh-5I4" secondAttribute="centerY" id="aOp-Im-rU1"/>
+                <constraint firstItem="k6v-Bh-5I4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="cmG-Xc-Jzn"/>
+                <constraint firstAttribute="trailing" secondItem="MQK-TZ-QB5" secondAttribute="trailing" id="j2X-OQ-MSr"/>
+                <constraint firstItem="b8x-F4-DrX" firstAttribute="centerY" secondItem="DNB-hm-IW6" secondAttribute="centerY" id="kWi-AH-PF7"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="containerView" destination="MQK-TZ-QB5" id="wr4-dF-n9X"/>
+                <outlet property="descriptionLabel" destination="P5i-oL-aSt" id="5tt-uk-8yk"/>
+                <outlet property="getButton" destination="NkM-IV-vAR" id="OEP-3e-rvl"/>
+                <outlet property="productImage" destination="k6v-Bh-5I4" id="gYg-iD-VMa"/>
+                <outlet property="productSwitch" destination="b8x-F4-DrX" id="Dnf-oA-TyO"/>
+                <outlet property="titleProduct" destination="DNB-hm-IW6" id="c9q-ef-CBr"/>
+            </connections>
+            <point key="canvasLocation" x="55.200000000000003" y="48.575712143928037"/>
+        </collectionViewCell>
+    </objects>
+</document>
