@@ -13,6 +13,10 @@ class TimerCell: UITableViewCell {
     @IBOutlet weak var timerLabel:UILabel!
     @IBOutlet weak var doneImage:UIImageView!
     
+    var isCurrentCell:Bool {
+        return (AutoLockService.shared.getState() ?? "") == timerLabel.text!
+    }
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,16 +26,18 @@ class TimerCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            doneImage.isHidden = false
+            doneImage.show()
         }
     }
     
     func setData(_ time:String) {
         timerLabel.text = time + " sec"
-        doneImage.isHidden = (AutoLockService.shared.getState() ?? "") == timerLabel.text! ? false : true
+        isCurrentCell ? doneImage.show() : doneImage.hide()
     }
     
 }
+
+
 
 
 
