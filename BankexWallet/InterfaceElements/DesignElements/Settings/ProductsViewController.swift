@@ -50,6 +50,7 @@ extension ProductsViewController:UICollectionViewDataSource,UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var size = CGSize(width: collectionView.bounds.width - 2 * inset, height: heightCell)
         if let cell = collectionView.cellForItem(at: indexPath) as? ProductViewCell {
+            cell.delegate = self
             if cell.isPicked {
                 size.height += cell.descriptionLabel!.bounds.height + 8 + cell.getButton!.bounds.height + 20
             }
@@ -73,5 +74,11 @@ extension ProductsViewController:UICollectionViewDataSource,UICollectionViewDele
 
     
     
+}
+
+extension ProductsViewController:ProductViewCellDelegate {
+    func didSwitch() {
+        collectionView.moveItem(at: IndexPath(item: 0, section: 0), to: IndexPath(item: 0, section: 0))
+    }
 }
 

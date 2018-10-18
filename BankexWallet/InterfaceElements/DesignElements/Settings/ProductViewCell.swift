@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol ProductViewCellDelegate:class {
+    func didSwitch()
+}
+
 class ProductViewCell: UICollectionViewCell {
+    
+    
     
     
     
@@ -23,6 +29,8 @@ class ProductViewCell: UICollectionViewCell {
     var product:Product!
     var gesture:UITapGestureRecognizer!
     var size = CGSize.zero
+    
+    weak var delegate:ProductViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,6 +80,10 @@ class ProductViewCell: UICollectionViewCell {
         }
         isPicked = !isPicked
         updateUI()
+    }
+    
+    @IBAction func switchTap() {
+        delegate?.didSwitch()
     }
     
     
@@ -133,9 +145,9 @@ extension ProductViewCell {
         
         var url:URL {
             switch self {
-            case .scan: return URL(string:"https://www.yandex.ru/")!
-            case .custody: return URL(string:"https://www.yandex.ru/")!
-            case .trust: return URL(string:"https://www.yandex.ru/")!
+            case .scan: return URL(string:"itms-apps://itunes.apple.com/us/app/ethereum-exporer-bankex-scan/id1434820920")!
+            case .custody: return URL(string:"https://custody.bankex.com")!
+            case .trust: return URL(string:"https://trust.bankex.com")!
             }
         }
         
