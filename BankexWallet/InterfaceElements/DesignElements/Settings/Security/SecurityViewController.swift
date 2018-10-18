@@ -23,6 +23,7 @@ class SecurityViewController: UITableViewController {
     @IBOutlet weak var openSwitch:UISwitch!
     @IBOutlet weak var sendSwitch:UISwitch!
     @IBOutlet weak var multitaskSwitch:UISwitch!
+    @IBOutlet weak var timerLbl:UILabel!
     enum SecuritySections:Int {
         case First = 0,Second,Third
     }
@@ -58,6 +59,7 @@ class SecurityViewController: UITableViewController {
         openSwitch.isOn = UserDefaults.standard.bool(forKey:Keys.openSwitch.rawValue)
         sendSwitch.isOn = UserDefaults.standard.value(forKey:Keys.sendSwitch.rawValue) as? Bool ?? true
         multitaskSwitch.isOn = UserDefaults.standard.value(forKey:Keys.multiSwitch.rawValue) as? Bool ?? true
+        timerLbl.text = AutoLockService.shared.getState() ?? ""
     }
     
     
@@ -100,9 +102,13 @@ class SecurityViewController: UITableViewController {
         }
         UserDefaults.standard.set(false, forKey: Keys.multiSwitch.rawValue)
     }
+
     
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let dest = segue.destination as? AutoLockViewController else { return }
+        dest.delegate = self
+    }
     
     
     
@@ -118,6 +124,12 @@ class SecurityViewController: UITableViewController {
             return 1
         }else {
             return 1
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            performSegue(withIdentifier: "autoLock", sender: nil)
         }
     }
     
@@ -139,4 +151,10 @@ class SecurityViewController: UITableViewController {
     }
     
     
+}
+
+extension SecurityViewController:AutoLockViewControllerDelegate {
+    func didSelect(_ time: String) {
+        timerLbl.text = time
+    }
 }

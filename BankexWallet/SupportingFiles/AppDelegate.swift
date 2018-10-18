@@ -115,11 +115,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         UIApplication.shared.applicationIconBadgeNumber = 0
+        AutoLockService.shared.stopTimer()
     }
     
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         UIApplication.attachBlur()
+        AutoLockService.shared.launchTimer()
     }
     
     
@@ -152,6 +154,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [END register_for_notifications]
     }
+    
+    
+    
+
 
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -159,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UserDefaults.standard.value(forKey: Keys.multiSwitch.rawValue) == nil {
             UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
         }
-        if UserDefaults.standard.bool(forKey: Keys.multiSwitch.rawValue) && UserDefaults.standard.bool(forKey: "isNotFirst")  {
+        if UserDefaults.standard.bool(forKey: Keys.multiSwitch.rawValue) && UserDefaults.standard.bool(forKey: "isNotFirst") && !AutoLockService.shared.isRunning  {
             showPasscode()
         }
     }
