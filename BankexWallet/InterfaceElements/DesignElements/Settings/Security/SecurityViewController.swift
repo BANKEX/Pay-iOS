@@ -24,7 +24,7 @@ class SecurityViewController: UITableViewController {
     @IBOutlet weak var sendSwitch:UISwitch!
     @IBOutlet weak var multitaskSwitch:UISwitch!
     enum SecuritySections:Int {
-        case First = 0,Second
+        case First = 0,Second,Third
     }
     
     override func viewDidLoad() {
@@ -108,19 +108,28 @@ class SecurityViewController: UITableViewController {
     
     //DataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == SecuritySections.First.rawValue ? 2 : 1
+        if section == SecuritySections.First.rawValue {
+            return 2
+        }else if section == SecuritySections.Second.rawValue {
+            return 1
+        }else {
+            return 1
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView()
         if SecuritySections.First.rawValue == section {
             headerView.title = NSLocalizedString("UseTouchID", comment: "")
-        }else {
+        }else if SecuritySections.Second.rawValue == section {
             headerView.title = NSLocalizedString("Lock App", comment: "")
+        }else {
+            headerView.titleFrame = CGRect(x: 16, y: 0, width: view.bounds.width - 55, height: 54)
+            headerView.title = "If enabled the app requires PIN when switching between apps"
         }
         return headerView
     }
