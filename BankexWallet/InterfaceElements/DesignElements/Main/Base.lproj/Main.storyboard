@@ -3929,30 +3929,20 @@ accessibilityIdentifier</string>
         <!--Wallet Created View Controller-->
         <scene sceneID="38z-em-Dxv">
             <objects>
-                <viewController id="a3J-Y6-DtH" customClass="WalletCreatedViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="a3J-Y6-DtH" customClass="WalletCreatedViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J2S-WQ-nkd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="Wallet Created" translatesAutoresizingMaskIntoConstraints="NO" id="VQx-mb-tba">
-                                <rect key="frame" x="64" y="74" width="247.5" height="138"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Created!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUS-an-WGX">
-                                <rect key="frame" x="100" y="239" width="175" height="29"/>
-                                <accessibility key="accessibilityConfiguration" label="Wallet Created!"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
-                                <color key="textColor" red="0.050980392156862744" green="0.72941176470588232" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAC-II-JHc">
-                                <rect key="frame" x="24" y="520" width="327" height="50"/>
+                                <rect key="frame" x="24" y="569" width="327" height="50"/>
                                 <color key="backgroundColor" red="0.050980392156862744" green="0.66274509803921566" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="next3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="VR6-rC-zMU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Finish">
+                                <state key="normal" title="Create PIN">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -3965,53 +3955,93 @@ accessibilityIdentifier</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbS-T0-1sL">
-                                <rect key="frame" x="16" y="328" width="100.5" height="20.5"/>
+                                <rect key="frame" x="16" y="397" width="100.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="ETH Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcm-SJ-pEb">
-                                <rect key="frame" x="16" y="356.5" width="119.5" height="18"/>
+                                <rect key="frame" x="16" y="425.5" width="119.5" height="18"/>
                                 <accessibility key="accessibilityConfiguration" label="walletNameLb"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Wallet Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLI-qR-wfT">
-                                <rect key="frame" x="16" y="403.5" width="120" height="20.5"/>
+                                <rect key="frame" x="16" y="472.5" width="120" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="f0X-Ac-2ve">
-                                <rect key="frame" x="16" y="432" width="343" height="18"/>
+                                <rect key="frame" x="16" y="501" width="343" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYg-yj-7TT">
+                                <rect key="frame" x="0.0" y="64" width="375" height="299"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cu-sb-LSi">
+                                        <rect key="frame" x="133.5" y="11" width="108" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFe-cj-9G9">
+                                        <rect key="frame" x="328" y="5" width="30" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Edit">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="editButtonTapped" destination="a3J-Y6-DtH" eventType="touchUpInside" id="z4l-8g-Ely"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="_Compound Path_" translatesAutoresizingMaskIntoConstraints="NO" id="xYI-ya-DCD">
+                                        <rect key="frame" x="145.5" y="110.5" width="104" height="78"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="104" id="3EU-lc-V4m"/>
+                                            <constraint firstAttribute="height" constant="78" id="h4r-AR-CCQ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXW-NM-BWp">
+                                        <rect key="frame" x="146" y="201.5" width="83.5" height="41"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.050980392156862744" green="0.72941176470588232" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="SFe-cj-9G9" firstAttribute="centerY" secondItem="6cu-sb-LSi" secondAttribute="centerY" id="CM4-Pt-XWG"/>
+                                    <constraint firstItem="KXW-NM-BWp" firstAttribute="centerX" secondItem="vYg-yj-7TT" secondAttribute="centerX" id="IGj-uO-hJo"/>
+                                    <constraint firstItem="6cu-sb-LSi" firstAttribute="top" secondItem="vYg-yj-7TT" secondAttribute="top" constant="11" id="O7V-Vg-GVn"/>
+                                    <constraint firstItem="6cu-sb-LSi" firstAttribute="centerX" secondItem="vYg-yj-7TT" secondAttribute="centerX" id="Oyc-en-CH6"/>
+                                    <constraint firstAttribute="trailing" secondItem="SFe-cj-9G9" secondAttribute="trailing" constant="17" id="gcZ-tN-Iec"/>
+                                    <constraint firstItem="xYI-ya-DCD" firstAttribute="centerY" secondItem="vYg-yj-7TT" secondAttribute="centerY" id="o0P-e6-Ox7"/>
+                                    <constraint firstItem="KXW-NM-BWp" firstAttribute="top" secondItem="xYI-ya-DCD" secondAttribute="bottom" constant="13" id="qnd-Az-Luh"/>
+                                    <constraint firstItem="xYI-ya-DCD" firstAttribute="centerX" secondItem="vYg-yj-7TT" secondAttribute="centerX" constant="10" id="vWI-KM-HYk"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="HBi-1G-beW" firstAttribute="trailing" secondItem="qAC-II-JHc" secondAttribute="trailing" constant="24" id="3A1-3s-Hfv"/>
-                            <constraint firstItem="VQx-mb-tba" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HBi-1G-beW" secondAttribute="top" constant="10" id="B2x-Kv-gxW"/>
-                            <constraint firstItem="qAC-II-JHc" firstAttribute="top" secondItem="f0X-Ac-2ve" secondAttribute="bottom" constant="70" id="BxK-qg-j9e"/>
-                            <constraint firstItem="pbS-T0-1sL" firstAttribute="top" secondItem="tUS-an-WGX" secondAttribute="bottom" constant="60" id="Du3-RI-Wib"/>
+                            <constraint firstItem="vYg-yj-7TT" firstAttribute="top" secondItem="HBi-1G-beW" secondAttribute="top" id="9MR-ht-gRP"/>
+                            <constraint firstItem="pbS-T0-1sL" firstAttribute="top" secondItem="vYg-yj-7TT" secondAttribute="bottom" constant="34" id="BUx-jZ-mPm"/>
                             <constraint firstItem="BLI-qR-wfT" firstAttribute="top" secondItem="Gcm-SJ-pEb" secondAttribute="bottom" constant="29" id="Ejg-QH-JdK"/>
-                            <constraint firstItem="tUS-an-WGX" firstAttribute="top" secondItem="VQx-mb-tba" secondAttribute="bottom" constant="27" id="KNs-F8-vEH"/>
                             <constraint firstItem="Gcm-SJ-pEb" firstAttribute="top" secondItem="pbS-T0-1sL" secondAttribute="bottom" constant="8" id="OdM-p3-aT5"/>
-                            <constraint firstItem="VQx-mb-tba" firstAttribute="width" secondItem="J2S-WQ-nkd" secondAttribute="width" multiplier="0.66" id="Q7z-IC-0lb"/>
-                            <constraint firstItem="HBi-1G-beW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Gcm-SJ-pEb" secondAttribute="trailing" symbolic="YES" id="Shs-rd-CAh"/>
+                            <constraint firstItem="Gcm-SJ-pEb" firstAttribute="leading" secondItem="pbS-T0-1sL" secondAttribute="leading" id="TLd-hP-FDQ"/>
                             <constraint firstItem="HBi-1G-beW" firstAttribute="bottom" secondItem="qAC-II-JHc" secondAttribute="bottom" constant="48" id="XQl-WJ-8cx"/>
-                            <constraint firstItem="BLI-qR-wfT" firstAttribute="leading" secondItem="f0X-Ac-2ve" secondAttribute="leading" id="dJy-0v-Gyd"/>
-                            <constraint firstItem="Gcm-SJ-pEb" firstAttribute="leading" secondItem="f0X-Ac-2ve" secondAttribute="leading" id="eB2-cn-1Oa"/>
                             <constraint firstItem="qAC-II-JHc" firstAttribute="leading" secondItem="HBi-1G-beW" secondAttribute="leading" constant="24" id="fJj-SA-Ui0"/>
-                            <constraint firstItem="pbS-T0-1sL" firstAttribute="leading" secondItem="f0X-Ac-2ve" secondAttribute="leading" id="htX-em-ESX"/>
-                            <constraint firstItem="VQx-mb-tba" firstAttribute="centerX" secondItem="J2S-WQ-nkd" secondAttribute="centerX" id="jaT-YR-Ii6"/>
-                            <constraint firstItem="HBi-1G-beW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pbS-T0-1sL" secondAttribute="trailing" symbolic="YES" id="oDY-zS-WwA"/>
-                            <constraint firstItem="f0X-Ac-2ve" firstAttribute="leading" secondItem="HBi-1G-beW" secondAttribute="leading" constant="16" id="qPG-Nu-2MK"/>
+                            <constraint firstItem="f0X-Ac-2ve" firstAttribute="leading" secondItem="pbS-T0-1sL" secondAttribute="leading" id="fbA-8t-PIx"/>
+                            <constraint firstItem="vYg-yj-7TT" firstAttribute="height" secondItem="J2S-WQ-nkd" secondAttribute="height" multiplier="1:2.23" id="gDO-20-qGj"/>
+                            <constraint firstItem="pbS-T0-1sL" firstAttribute="leading" secondItem="HBi-1G-beW" secondAttribute="leading" constant="16" id="lPj-TN-dC0"/>
+                            <constraint firstItem="BLI-qR-wfT" firstAttribute="leading" secondItem="pbS-T0-1sL" secondAttribute="leading" id="lSU-E1-Zfd"/>
+                            <constraint firstItem="HBi-1G-beW" firstAttribute="trailing" secondItem="vYg-yj-7TT" secondAttribute="trailing" id="lpQ-Sj-jSM"/>
                             <constraint firstItem="HBi-1G-beW" firstAttribute="trailing" secondItem="f0X-Ac-2ve" secondAttribute="trailing" constant="16" id="qcB-bu-M2q"/>
-                            <constraint firstItem="HBi-1G-beW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BLI-qR-wfT" secondAttribute="trailing" symbolic="YES" id="vQl-bq-in0"/>
-                            <constraint firstItem="tUS-an-WGX" firstAttribute="centerX" secondItem="J2S-WQ-nkd" secondAttribute="centerX" id="wsC-qR-JBv"/>
+                            <constraint firstItem="vYg-yj-7TT" firstAttribute="leading" secondItem="HBi-1G-beW" secondAttribute="leading" id="qyu-JC-atM"/>
                             <constraint firstItem="f0X-Ac-2ve" firstAttribute="top" secondItem="BLI-qR-wfT" secondAttribute="bottom" constant="8" id="ywI-Li-DIi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HBi-1G-beW"/>
@@ -5556,8 +5586,8 @@ minutes, please wait ...</string>
         <image name="Telegram" width="29" height="29"/>
         <image name="Twitter" width="29" height="29"/>
         <image name="Vector" width="46" height="182"/>
-        <image name="Wallet Created" width="240" height="160"/>
         <image name="Warning- Error" width="240" height="160"/>
+        <image name="_Compound Path_" width="99" height="72.5"/>
         <image name="arrow_right" width="24" height="24"/>
         <image name="clear" width="14" height="14"/>
         <image name="developer" width="29" height="29"/>

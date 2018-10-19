@@ -20,7 +20,7 @@ protocol SendingResultInformation: class {
                                password: String)
 }
 
-class SendingInProcessViewController: UIViewController,
+class SendingInProcessViewController: BaseViewController,
 SendingResultInformation {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var processTitleLabel: UILabel?
@@ -56,6 +56,7 @@ SendingResultInformation {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
         activityView.startAnimating()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         titleLabel?.text = textToShow == nil ? NSLocalizedString("Sending funds", comment: "") : textToShow!

@@ -57,6 +57,7 @@ class EditViewController: BaseViewController {
         navigationController?.navigationBar.tintColor = .white
         UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
         UIApplication.shared.statusBarStyle = .lightContent
+        
         updateUI()
     }
     
