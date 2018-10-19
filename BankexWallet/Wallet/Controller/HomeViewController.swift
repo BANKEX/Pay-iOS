@@ -86,7 +86,7 @@ class HomeViewController: BaseViewController {
         button.setTitle(NSLocalizedString("AddTokens", comment:""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
         button.addTarget(self, action: #selector(self.createToken), for: .touchUpInside)
-        button.setTitleColor(WalletColors.mainColor, for: .normal)
+        button.setTitleColor(UIColor.mainColor, for: .normal)
         button.backgroundColor = .clear
         return button
     }()

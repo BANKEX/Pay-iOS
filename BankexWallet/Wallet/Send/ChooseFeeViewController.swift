@@ -31,10 +31,10 @@ class ChooseFeeViewController: BaseViewController {
         didSet {
             if state == .enable {
                 sendButton.isEnabled = true
-                sendButton.backgroundColor = WalletColors.mainColor
+                sendButton.backgroundColor = UIColor.mainColor
             }else {
                 sendButton.isEnabled = false
-                sendButton.backgroundColor = WalletColors.disableColor
+                sendButton.backgroundColor = UIColor.disableColor
             }
         }
     }
@@ -42,7 +42,7 @@ class ChooseFeeViewController: BaseViewController {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17.0)
         label.text = "Gwei"
-        label.textColor = WalletColors.blackColor
+        label.textColor = UIColor.blackColor
         return label
     }()
     var amount: String!
@@ -86,7 +86,7 @@ class ChooseFeeViewController: BaseViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
         UIApplication.shared.statusBarStyle = .lightContent
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
         updateUI()
     }
     
@@ -274,22 +274,22 @@ extension ChooseFeeViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.textColor = WalletColors.blackColor
-        unitLabel.textColor = WalletColors.blackColor
+        textField.textColor = UIColor.blackColor
+        unitLabel.textColor = UIColor.blackColor
         textField.returnKeyType = isCorrectValuePrice && isCorrectValueLimit ? .go : .next
         return true
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if !isCorrectValuePrice {
-            gasPriceTextField.textColor = WalletColors.errorColor
+            gasPriceTextField.textColor = UIColor.errorColor
             if gasPriceTextField.text == "" {
-                unitLabel.textColor = WalletColors.blackColor
+                unitLabel.textColor = UIColor.blackColor
             }
-            unitLabel.textColor = WalletColors.errorColor
+            unitLabel.textColor = UIColor.errorColor
             state = .disable
         }else if !isCorrectValueLimit {
-            gasLimitTextField.textColor = WalletColors.errorColor
+            gasLimitTextField.textColor = UIColor.errorColor
             state = .disable
         }
         return true

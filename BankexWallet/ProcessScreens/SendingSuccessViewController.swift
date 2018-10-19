@@ -43,7 +43,7 @@ class SendingSuccessViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
         button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
-        button.setTitleColor(WalletColors.mainColor, for: .normal)
+        button.setTitleColor(UIColor.mainColor, for: .normal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(done(_:)), for: .touchUpInside)
     }

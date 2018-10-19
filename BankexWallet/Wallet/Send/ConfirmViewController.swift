@@ -179,14 +179,14 @@ class ConfirmViewController: UITableViewController {
     func appearanceNavBar(_ exit:Bool) {
         if exit {
             navBarColor(.white)
-            navBarTintColor(WalletColors.mainColor)
+            navBarTintColor(UIColor.mainColor)
             statusBarColor(.white)
             UIApplication.shared.statusBarStyle = .default
             return
         }
-        navBarColor(WalletColors.mainColor)
+        navBarColor(UIColor.mainColor)
         navBarTintColor(.white)
-        statusBarColor(WalletColors.mainColor)
+        statusBarColor(UIColor.mainColor)
         UIApplication.shared.statusBarStyle = .lightContent
     }
 }

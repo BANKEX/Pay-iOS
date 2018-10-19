@@ -31,9 +31,9 @@ class SecurityViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavbar()
-        [openSwitch,sendSwitch,multitaskSwitch].forEach { $0?.onTintColor = WalletColors.mainColor }
+        [openSwitch,sendSwitch,multitaskSwitch].forEach { $0?.onTintColor = UIColor.mainColor }
         tableView.tableFooterView = HeaderView()
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
     }
     
     func setupNavbar() {

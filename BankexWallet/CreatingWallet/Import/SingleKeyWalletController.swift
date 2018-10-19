@@ -42,12 +42,12 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
             if state == .notAvailable {
                 clearButton.isHidden = true
                 importButton.isEnabled = false
-                importButton.backgroundColor = WalletColors.disableColor
+                importButton.backgroundColor = UIColor.disableColor
                 privateKeyTextView.returnKeyType = .next
             }else {
                 clearButton.isHidden = false
                 importButton.isEnabled = true
-                importButton.backgroundColor = WalletColors.mainColor
+                importButton.backgroundColor = UIColor.mainColor
                 privateKeyTextView.returnKeyType = .done
             }
         }
@@ -135,11 +135,11 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        separator2.backgroundColor = WalletColors.mainColor
+        separator2.backgroundColor = UIColor.mainColor
         textField.returnKeyType = importButton.isEnabled ? .done : .next
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        separator2.backgroundColor = WalletColors.separatorColor
+        separator2.backgroundColor = UIColor.separatorColor
     }
     
     

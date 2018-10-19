@@ -30,7 +30,7 @@ class WalletTableViewCell: UITableViewCell {
         fillView.setupDefaultShadow()
         selectionStyle = .none
         fillView.layer.cornerRadius = 8.0
-        backgroundColor = WalletColors.bgMainColor
+        backgroundColor = UIColor.bgMainColor
         setData()
     }
     

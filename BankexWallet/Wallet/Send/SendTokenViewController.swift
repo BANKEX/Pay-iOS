@@ -42,7 +42,7 @@ Retriable,UITextFieldDelegate {
     
     lazy var symbolTFLabel:UILabel = {
         let label = UILabel()
-        label.textColor = WalletColors.blackColor
+        label.textColor = UIColor.blackColor
         label.font = UIFont.systemFont(ofSize: 17.0)
         return label
     }()
@@ -100,7 +100,7 @@ Retriable,UITextFieldDelegate {
         setupContactsButton()
         configurePlaceholder()
         nextButton.isEnabled = false
-        nextButton.backgroundColor = WalletColors.disableColor
+        nextButton.backgroundColor = UIColor.disableColor
         setupNotifications()
         updateTopLayout()
     }
@@ -113,8 +113,8 @@ Retriable,UITextFieldDelegate {
     }
     
     private func configurePlaceholder() {
-        let attrString = NSAttributedString(string: NSLocalizedString("EnterAddr", comment: ""), attributes: [NSAttributedStringKey.foregroundColor:WalletColors.clipboardColor])
-        let attrStringAmount = NSAttributedString(string: "0", attributes: [NSAttributedStringKey.foregroundColor:WalletColors.clipboardColor])
+        let attrString = NSAttributedString(string: NSLocalizedString("EnterAddr", comment: ""), attributes: [NSAttributedStringKey.foregroundColor:UIColor.clipboardColor])
+        let attrStringAmount = NSAttributedString(string: "0", attributes: [NSAttributedStringKey.foregroundColor:UIColor.clipboardColor])
         enterAddressTextfield.attributedPlaceholder = attrString
         amountTextfield.attributedPlaceholder = attrStringAmount
     }
@@ -122,13 +122,13 @@ Retriable,UITextFieldDelegate {
     private func setupContactsButton() {
         contactsButton.layer.cornerRadius = 8.0
         contactsButton.layer.borderWidth = 2.0
-        contactsButton.layer.borderColor = WalletColors.mainColor.cgColor
+        contactsButton.layer.borderColor = UIColor.mainColor.cgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
         UIApplication.shared.statusBarStyle = .lightContent
         updateUI()
 //        handleErrorMessage()
@@ -239,11 +239,11 @@ Retriable,UITextFieldDelegate {
             errorMessage = nil
             switch message {
             case "invalidAddress":
-                enterAddressTextfield.textColor = WalletColors.errorColor
+                enterAddressTextfield.textColor = UIColor.errorColor
                 
             case "insufficient funds for gas * price + value":
                 print("well")
-                amountTextfield.textColor = WalletColors.errorColor
+                amountTextfield.textColor = UIColor.errorColor
                 
             default:
                 break
@@ -403,8 +403,8 @@ extension SendTokenViewController {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.returnKeyType = nextButton.isEnabled ? UIReturnKeyType.done : .next
-        textField.textColor = WalletColors.blackColor
-        symbolTFLabel.textColor = WalletColors.blackColor
+        textField.textColor = UIColor.blackColor
+        symbolTFLabel.textColor = UIColor.blackColor
         topContrStack.constant = 16.0
         UIView.animate(withDuration: 0.1) {
             self.wrongAddrLbl.alpha = 0
@@ -440,7 +440,7 @@ extension SendTokenViewController {
             nextButton.isEnabled = false
         }
         
-        nextButton.backgroundColor = nextButton.isEnabled ? WalletColors.mainColor : WalletColors.disableColor
+        nextButton.backgroundColor = nextButton.isEnabled ? UIColor.mainColor : UIColor.disableColor
         textField.returnKeyType = nextButton.isEnabled ? UIReturnKeyType.done : .next
         
         return true
@@ -465,26 +465,26 @@ extension SendTokenViewController {
                 return true
             }
             guard let _ = EthereumAddress(addr) else {
-                enterAddressTextfield.textColor = WalletColors.errorColor
+                enterAddressTextfield.textColor = UIColor.errorColor
                 topContrStack.constant = 37.0
                 UIView.animate(withDuration: 0.1) {
                     self.wrongAddrLbl.alpha = 1.0
                     self.view.layoutIfNeeded()
                 }
                 nextButton.isEnabled = false
-                nextButton.backgroundColor = WalletColors.disableColor
+                nextButton.backgroundColor = UIColor.disableColor
                 return true
             }
             if isCorrectAmount {
                 nextButton.isEnabled = true
-                nextButton.backgroundColor = WalletColors.mainColor
+                nextButton.backgroundColor = UIColor.mainColor
             }
         }else if textField == amountTextfield {
             guard let _ = Float((amountTextfield.text ?? "")) else {
-                amountTextfield.textColor = WalletColors.errorColor
-                symbolTFLabel.textColor = WalletColors.errorColor
+                amountTextfield.textColor = UIColor.errorColor
+                symbolTFLabel.textColor = UIColor.errorColor
                 if amountTextfield.text == "" {
-                    symbolTFLabel.textColor = WalletColors.blackColor
+                    symbolTFLabel.textColor = UIColor.blackColor
                 }
                 UIView.animate(withDuration: 0.1) {
                     self.notEnoughSumLbl.alpha = 0
@@ -495,13 +495,13 @@ extension SendTokenViewController {
             guard let currentBalance = Float(infoView.balanceLabel.text!) else { return true }
             if !isCorrectAmount {
                 notEnoughSumLbl.text = String(format: NSLocalizedString("Not enough %@ in your wallet", comment: ""), selectedToken.symbol.uppercased())
-                amountTextfield.textColor = WalletColors.errorColor
-                symbolTFLabel.textColor = WalletColors.errorColor
+                amountTextfield.textColor = UIColor.errorColor
+                symbolTFLabel.textColor = UIColor.errorColor
                 UIView.animate(withDuration: 0.1) {
                     self.notEnoughSumLbl.alpha = 1.0
                 }
                 nextButton.isEnabled = false
-                nextButton.backgroundColor = WalletColors.disableColor
+                nextButton.backgroundColor = UIColor.disableColor
             }
         }
         return true

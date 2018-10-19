@@ -59,7 +59,7 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
         networkURLTextField.becomeFirstResponder()
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(resignTextFields)))
         tableView.tableFooterView = UIView()
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
     }
     
 
@@ -101,17 +101,17 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
             let view = UIView()
-            view.backgroundColor = WalletColors.bgMainColor
+            view.backgroundColor = UIColor.bgMainColor
             view.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight)
             let pasteButton = PasteButton()
             pasteButton.titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
             pasteButton.frame = CGRect(x: 16.0, y: 5, width: 66.0, height: 35.0)
-            pasteButton.backgroundColor = WalletColors.bgMainColor
+            pasteButton.backgroundColor = UIColor.bgMainColor
             view.addSubview(pasteButton)
             return view
         }else {
             let v = UIView()
-            v.backgroundColor = WalletColors.bgMainColor
+            v.backgroundColor = UIColor.bgMainColor
             return v
         }
     }

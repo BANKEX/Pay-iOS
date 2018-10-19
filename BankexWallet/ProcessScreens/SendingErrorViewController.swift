@@ -58,8 +58,8 @@ class SendingErrorViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.barTintColor = WalletColors.mainColor
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        navigationController?.navigationBar.barTintColor = UIColor.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
         navigationController?.navigationBar.tintColor = .white
     }
     
@@ -68,7 +68,7 @@ class SendingErrorViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.barTintColor = .white
         UIApplication.shared.statusBarView?.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        navigationController?.navigationBar.tintColor = UIColor.mainColor
     }
     
     func addBackButton() {

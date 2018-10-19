@@ -54,7 +54,7 @@ class ProductViewCell: UICollectionViewCell {
     }
     
     func updateUI() {
-        backgroundColor = isPicked ? WalletColors.mainColor : .white
+        backgroundColor = isPicked ? UIColor.mainColor : .white
         productImage?.image = isPicked ? product.selectedImage : product.image
         titleProduct?.textColor = isPicked ? .white : .black
         productSwitch?.layer.borderWidth = isPicked ? 0 : 1.5

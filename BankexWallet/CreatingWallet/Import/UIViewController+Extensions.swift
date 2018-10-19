@@ -21,7 +21,7 @@ extension UIViewController {
         btn.setImage(UIImage(named:"BackArrow"), for: .normal)
         btn.setTitle(title, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-        btn.setTitleColor(WalletColors.mainColor, for: .normal)
+        btn.setTitleColor(UIColor.mainColor, for: .normal)
         return btn
     }
     

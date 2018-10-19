@@ -24,7 +24,7 @@ class HeaderView: UIView {
         }
     }
     
-    public var textColor:UIColor = WalletColors.blackColor.withAlphaComponent(0.5) {
+    public var textColor:UIColor = UIColor.blackColor.withAlphaComponent(0.5) {
         didSet {
             updateUI()
         }
@@ -43,7 +43,7 @@ class HeaderView: UIView {
     }
     
     private func prepareView() {
-        self.backgroundColor = WalletColors.bgMainColor
+        self.backgroundColor = UIColor.bgMainColor
 
     }
     
@@ -51,7 +51,7 @@ class HeaderView: UIView {
         label = UILabel(frame: CGRect(x: 16.0, y: 32.0, width: self.frame.width, height: 20))
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 13.0)
-        label.textColor = WalletColors.blackColor.withAlphaComponent(0.5)
+        label.textColor = UIColor.blackColor.withAlphaComponent(0.5)
         self.addSubview(label)
     }
     

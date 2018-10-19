@@ -45,7 +45,7 @@ class NetworksViewController: BaseViewController {
         configure()
         self.listNetworks = self.networkService.currentNetworksList()
         tableView.tableFooterView = HeaderView()
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         NotificationCenter.default.addObserver(forName: DataChangeNotifications.didChangeNetwork.notificationName(), object: nil, queue: nil) { (_) in
             self.tableView.reloadData()
         }

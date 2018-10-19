@@ -82,7 +82,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     
     func setupTableView() {
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
     }
     
@@ -199,14 +199,14 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 22))
         label.text = getDateForPrint(date: transactionsToShow[section][0].date)
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        view.backgroundColor = WalletColors.bgMainColor
+        view.backgroundColor = UIColor.bgMainColor
         view.addSubview(label)
         return view
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30))
-        view.backgroundColor = WalletColors.bgMainColor
+        view.backgroundColor = UIColor.bgMainColor
         return view
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -231,7 +231,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         let title = tokensService.selectedERC20Token().symbol.uppercased()
         tokensButton.setTitle(title, for: .normal)
         tokensButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        tokensButton.setTitleColor(WalletColors.mainColor, for: .normal)
+        tokensButton.setTitleColor(UIColor.mainColor, for: .normal)
         tokensButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: tokensButton)
         tokensButton.addTarget(self, action: #selector(showTokensButtonTapped), for: .touchUpInside)

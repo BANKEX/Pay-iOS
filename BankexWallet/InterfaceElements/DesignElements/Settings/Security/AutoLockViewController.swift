@@ -30,8 +30,8 @@ class AutoLockViewController:BaseViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = HeaderView()
-        tableView.backgroundColor = WalletColors.bgMainColor
-        tableView.separatorColor = WalletColors.disableColor
+        tableView.backgroundColor = UIColor.bgMainColor
+        tableView.separatorColor = UIColor.disableColor
     }
 
 

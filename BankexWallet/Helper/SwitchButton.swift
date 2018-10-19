@@ -20,7 +20,7 @@ class SwitchButton:UIButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         layer.borderWidth = 1.5
-        layer.borderColor = WalletColors.mainColor.cgColor
+        layer.borderColor = UIColor.mainColor.cgColor
         layer.cornerRadius = bounds.width/2
         backgroundColor = .white
         let arrowImage = UIImageView()

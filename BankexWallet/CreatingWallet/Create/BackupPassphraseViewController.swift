@@ -32,11 +32,11 @@ class BackupPassphraseViewController: UIViewController {
     var isAnimating = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        lookOutView.backgroundColor = WalletColors.errorColor
+        lookOutView.backgroundColor = UIColor.errorColor
         passphrase = service.generateMnemonics()
         passphraseLabel.text = passphrase
-        copyButton.backgroundColor = WalletColors.mainColor
-        clipboardView.backgroundColor = WalletColors.clipboardColor
+        copyButton.backgroundColor = UIColor.mainColor
+        clipboardView.backgroundColor = UIColor.clipboardColor
         bottomContraint.constant = 100.0
     }
     
@@ -54,7 +54,7 @@ class BackupPassphraseViewController: UIViewController {
         }
         if passphrase != UIPasteboard.general.string {
             nextButton?.isEnabled = false
-            nextButton?.backgroundColor = WalletColors.disableColor
+            nextButton?.backgroundColor = UIColor.disableColor
         }
         
     }
@@ -70,7 +70,7 @@ class BackupPassphraseViewController: UIViewController {
     
     @IBAction func copyButtonTapped(_ sender: Any) {
         UIPasteboard.general.string = passphrase
-        self.nextButton?.backgroundColor = WalletColors.mainColor
+        self.nextButton?.backgroundColor = UIColor.mainColor
         if !isAnimating {
             isAnimating = true
             UIView.animate(withDuration: 0.6,animations: {
@@ -102,7 +102,7 @@ class BackupPassphraseViewController: UIViewController {
         title = NSLocalizedString("Back", comment: "")
         titleLbl.text = navTitle ?? NSLocalizedString("Create Wallet", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.errorColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.errorColor
         UIApplication.shared.statusBarStyle = .lightContent
     }
     

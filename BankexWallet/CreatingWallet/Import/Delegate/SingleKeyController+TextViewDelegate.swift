@@ -11,7 +11,7 @@ import UIKit
 extension SingleKeyWalletController: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         textView.returnKeyType = importButton.isEnabled ? .done : .next
-        separator1.backgroundColor = WalletColors.mainColor
+        separator1.backgroundColor = UIColor.mainColor
         return true
     }
     
@@ -49,6 +49,6 @@ extension SingleKeyWalletController: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        separator1.backgroundColor = WalletColors.separatorColor
+        separator1.backgroundColor = UIColor.separatorColor
     }
 }

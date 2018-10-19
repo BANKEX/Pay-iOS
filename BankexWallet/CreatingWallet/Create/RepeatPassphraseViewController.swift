@@ -39,11 +39,11 @@ class RepeatPassphraseViewController: UIViewController {
             
             if wordsAfter == wordsInCorrectOrder {
                 UIView.animate(withDuration: 0.5) {
-                    self.nextButton.backgroundColor = WalletColors.mainColor
+                    self.nextButton.backgroundColor = UIColor.mainColor
                     self.nextButton.isEnabled = true
                 }
             } else {
-                self.nextButton.backgroundColor = WalletColors.disableColor
+                self.nextButton.backgroundColor = UIColor.disableColor
                 self.nextButton.isEnabled = false
             }
         }
@@ -76,7 +76,7 @@ class RepeatPassphraseViewController: UIViewController {
         super.viewDidLoad()
         navigationBarSetup()
         nextButton.isEnabled = false
-        nextButton.backgroundColor = WalletColors.disableColor
+        nextButton.backgroundColor = UIColor.disableColor
         setupManagers()
         
     }

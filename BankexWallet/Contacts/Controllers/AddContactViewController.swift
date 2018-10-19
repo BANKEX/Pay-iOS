@@ -36,10 +36,10 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
         didSet {
             switch state {
             case .available:
-                doneButton.backgroundColor = WalletColors.mainColor
+                doneButton.backgroundColor = UIColor.mainColor
                 doneButton.isEnabled = true
             case .noAvailable:
-                doneButton.backgroundColor = WalletColors.disableColor
+                doneButton.backgroundColor = UIColor.disableColor
                 doneButton.isEnabled = false
             }
         }
@@ -60,9 +60,9 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         state = .noAvailable
-        navigationController?.navigationBar.barTintColor = WalletColors.mainColor
+        navigationController?.navigationBar.barTintColor = UIColor.mainColor
         navigationController?.navigationBar.tintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
@@ -77,7 +77,7 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        //navigationController?.navigationBar.tintColor = UIColor.mainColor
         UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
     }

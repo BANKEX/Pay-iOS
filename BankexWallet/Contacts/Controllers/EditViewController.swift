@@ -27,10 +27,10 @@ class EditViewController: BaseViewController {
     var stateButton:State = .disable {
         didSet {
             if stateButton == .enable {
-                saveButton.backgroundColor = WalletColors.mainColor
+                saveButton.backgroundColor = UIColor.mainColor
                 saveButton.isEnabled = true
             }else {
-                saveButton.backgroundColor = WalletColors.disableColor
+                saveButton.backgroundColor = UIColor.disableColor
                 saveButton.isEnabled = false
             }
         }
@@ -53,9 +53,9 @@ class EditViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = WalletColors.mainColor
+        navigationController?.navigationBar.barTintColor = UIColor.mainColor
         navigationController?.navigationBar.tintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
         UIApplication.shared.statusBarStyle = .lightContent
         updateUI()
     }
@@ -65,7 +65,7 @@ class EditViewController: BaseViewController {
         UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
         navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        navigationController?.navigationBar.tintColor = UIColor.mainColor
     }
     
     private func prepareTFs() {

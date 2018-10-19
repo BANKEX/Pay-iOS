@@ -29,7 +29,7 @@ class CreateTokenController: BaseViewController {
     var walletData = WalletData()
     lazy var supportView:UIView = {
         let view = UIView()
-        view.backgroundColor = WalletColors.QRReader.successColor
+        view.backgroundColor = UIColor.QRReader.successColor
         return view
     }()
     lazy var supportLbl:UILabel = {
@@ -44,7 +44,7 @@ class CreateTokenController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = WalletColors.bgMainColor
+        view.backgroundColor = UIColor.bgMainColor
         setupNavBar()
         setupTableView()
         setupSupportView()
@@ -61,7 +61,7 @@ class CreateTokenController: BaseViewController {
     }
     
     fileprivate func setupTableView() {
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self

@@ -26,9 +26,9 @@ extension AppDelegate {
     }
     
     func prepareAppearance() {
-        UINavigationBar.appearance().tintColor = WalletColors.mainColor
-        UITextField.appearance().tintColor = WalletColors.mainColor
-        UITextView.appearance().tintColor = WalletColors.mainColor
+        UINavigationBar.appearance().tintColor = UIColor.mainColor
+        UITextField.appearance().tintColor = UIColor.mainColor
+        UITextView.appearance().tintColor = UIColor.mainColor
         UINavigationBar.appearance().barTintColor = UIColor.white
     }
     

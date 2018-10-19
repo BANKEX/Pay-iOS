@@ -32,8 +32,8 @@ class WalletCreationTypeController: BaseViewController {
     }
     
     func setupButtons() {
-        importBtn.backgroundColor = WalletColors.importColor
-        creaetBtn.backgroundColor = WalletColors.mainColor
+        importBtn.backgroundColor = UIColor.importColor
+        creaetBtn.backgroundColor = UIColor.mainColor
     }
     
     func setupRemoteConfigDefaults() {

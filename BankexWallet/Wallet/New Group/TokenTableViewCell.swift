@@ -38,7 +38,7 @@ class TokenTableViewCell: UITableViewCell {
         fillView.setupDefaultShadow()
         fillView.layer.cornerRadius = 8.0
         selectionStyle = .none
-        backgroundColor = WalletColors.bgMainColor
+        backgroundColor = UIColor.bgMainColor
         tokenAddedImage.isHidden = true
     }
 

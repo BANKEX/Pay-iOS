@@ -23,13 +23,13 @@ class WalletInfoViewController: UITableViewController {
         nameWalletLabel.text = dict["name"]
         publicAddress = dict["addr"]
         title = NSLocalizedString("WalletInfo", comment: "")
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.tableFooterView = HeaderView()
     }
     
     func setupClipboard() {
         clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58))
-        clipboardView.backgroundColor = WalletColors.clipboardColor
+        clipboardView.backgroundColor = UIColor.clipboardColor
         clipboardView.title = NSLocalizedString("AddrCopied", comment: "")
         view.addSubview(clipboardView)
     }

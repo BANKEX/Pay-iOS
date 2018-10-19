@@ -66,7 +66,7 @@ class WalletsViewController: BaseViewController, WalletSelectedDelegate {
         var btn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))
         btn.accessibilityLabel = "AddBtn"
         navigationItem.rightBarButtonItem = btn
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.tableFooterView = HeaderView()
     }
     

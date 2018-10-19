@@ -17,7 +17,7 @@ class ClipboardView:UIView {
         }
     }
     
-    public var color:UIColor = WalletColors.clipboardColor {
+    public var color:UIColor = UIColor.clipboardColor {
         didSet {
             backgroundColor = color
         }
@@ -34,7 +34,7 @@ class ClipboardView:UIView {
     func setData() {
         titleLabel = UILabel(frame: CGRect(x: 0, y: 14, width: self.bounds.width, height: 30))
         titleLabel.textAlignment = .center
-        titleLabel.textColor = WalletColors.bgMainColor
+        titleLabel.textColor = UIColor.bgMainColor
         titleLabel.font = UIFont.systemFont(ofSize: 15.0)
         titleLabel.text = title
         addSubview(titleLabel)

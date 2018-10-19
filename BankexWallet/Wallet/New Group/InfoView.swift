@@ -54,7 +54,7 @@ class InfoView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = WalletColors.mainColor
+        backgroundColor = UIColor.mainColor
     }
     
     @IBAction func stepBack() {

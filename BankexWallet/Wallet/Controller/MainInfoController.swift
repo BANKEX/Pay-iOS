@@ -158,7 +158,7 @@ class MainInfoController: BaseViewController,
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .clear
-        tableView.separatorColor = WalletColors.disableColor
+        tableView.separatorColor = UIColor.disableColor
         tableView.separatorInset.left = 42.0
         tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
         tableView.tableFooterView = UIView()
@@ -272,7 +272,7 @@ class MainInfoController: BaseViewController,
     
     private func configureNavBar() {
         navigationController?.navigationBar.isHidden = true
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
         UIApplication.shared.statusBarStyle = .lightContent
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum WalletColors {
+extension UIColor {
     
     static let circleColor = UIColor(hex:"C7CCD4")
     static let mainColor = UIColor(hex: "0DA9FF")

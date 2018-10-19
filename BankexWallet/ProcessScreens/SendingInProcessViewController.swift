@@ -60,7 +60,7 @@ SendingResultInformation {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         titleLabel?.text = textToShow == nil ? NSLocalizedString("Sending funds", comment: "") : textToShow!
         processTitleLabel?.text = NSLocalizedString("Retrieving data", comment: "")
-        processTitleLabel?.textColor = WalletColors.sendColor
+        processTitleLabel?.textColor = UIColor.sendColor
         titleLabel?.textColor = UIColor(red: 0, green: 117, blue: 254)
     }
     

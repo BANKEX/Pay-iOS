@@ -30,16 +30,16 @@ class QRReaderVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
             switch state {
             case .error:
                 messageLabel.text = errorText
-                lineView.backgroundColor = WalletColors.QRReader.errorColor
-                greenLayer.strokeColor = WalletColors.QRReader.errorColor.cgColor
+                lineView.backgroundColor = UIColor.QRReader.errorColor
+                greenLayer.strokeColor = UIColor.QRReader.errorColor.cgColor
             case .success:
                 messageLabel.text = successText
-                lineView.backgroundColor = WalletColors.QRReader.successColor
-                greenLayer.strokeColor = WalletColors.QRReader.successColor.cgColor
+                lineView.backgroundColor = UIColor.QRReader.successColor
+                greenLayer.strokeColor = UIColor.QRReader.successColor.cgColor
             case .standard:
                 messageLabel.text = defautText
-                lineView.backgroundColor = WalletColors.QRReader.defaultColor
-                greenLayer.strokeColor = WalletColors.QRReader.defaultColor.cgColor
+                lineView.backgroundColor = UIColor.QRReader.defaultColor
+                greenLayer.strokeColor = UIColor.QRReader.defaultColor.cgColor
             }
         }
     }

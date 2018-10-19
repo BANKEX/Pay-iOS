@@ -55,7 +55,7 @@ class SettingsViewController: UITableViewController {
     }
     
     private func commonSetup() {
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.tableFooterView = HeaderView()
     }
     

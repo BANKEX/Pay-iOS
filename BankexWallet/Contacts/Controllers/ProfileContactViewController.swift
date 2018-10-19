@@ -91,7 +91,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     func setupClipboardView() {
         clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58))
         clipboardView.title = "Address copied to clipboard"
-        clipboardView.color = WalletColors.clipboardColor
+        clipboardView.color = UIColor.clipboardColor
         view.addSubview(clipboardView)
     }
   
@@ -151,21 +151,21 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     
     private func commonPrepare() {
         title = NSLocalizedString("Contacts", comment: "")
-        infoView.backgroundColor = WalletColors.mainColor
+        infoView.backgroundColor = UIColor.mainColor
     }
     
     private func manageTop(isHide:Bool = true) {
         if isHide {
             navigationController?.setNavigationBarHidden(isHide, animated: true)
-            navigationController?.navigationBar.barTintColor = WalletColors.mainColor
+            navigationController?.navigationBar.barTintColor = UIColor.mainColor
             navigationController?.navigationBar.tintColor = .white
-            UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
+            UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
             UIApplication.shared.statusBarStyle = .lightContent
             return
         }
         navigationController?.isNavigationBarHidden = isHide
         navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        navigationController?.navigationBar.tintColor = UIColor.mainColor
         UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
     }
@@ -179,7 +179,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         tableVIew.delegate = self
         tableVIew.dataSource = self
         tableVIew.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
-        tableVIew.backgroundColor = WalletColors.bgMainColor
+        tableVIew.backgroundColor = UIColor.bgMainColor
         tableVIew.isScrollEnabled = false
     }
     

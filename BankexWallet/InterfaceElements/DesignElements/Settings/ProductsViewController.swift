@@ -29,7 +29,7 @@ class ProductsViewController: BaseViewController {
         collectionView.register(UINib(nibName: cellIdentifer, bundle: nil), forCellWithReuseIdentifier: cellIdentifer)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = WalletColors.bgMainColor
+        collectionView.backgroundColor = UIColor.bgMainColor
         collectionView.allowsMultipleSelection = true
         collectionView.alwaysBounceVertical = true
     }

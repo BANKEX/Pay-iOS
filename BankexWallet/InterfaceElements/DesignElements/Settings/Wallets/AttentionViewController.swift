@@ -48,7 +48,7 @@ class AttentionViewController: BaseViewController {
         super.viewWillAppear(animated)
         state = isFromDeveloper ? .CustomNetwork : .PrivateKey
         navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.errorColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.errorColor
         UIApplication.shared.statusBarStyle = .lightContent
     }
     

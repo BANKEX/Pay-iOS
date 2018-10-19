@@ -59,7 +59,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        navigationController?.navigationBar.tintColor = UIColor.mainColor
         if fromSendScreen {
             addLeftBtn()
             hideAddRightButton()
@@ -77,7 +77,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         btn.setImage(UIImage(named:"BackArrow"), for: .normal)
         btn.setTitle("  Back", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-        btn.setTitleColor(WalletColors.mainColor, for: .normal)
+        btn.setTitleColor(UIColor.mainColor, for: .normal)
         btn.addTarget(self, action: #selector(back), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btn)
     }
@@ -86,7 +86,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     private func prepareTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
         tableView.keyboardDismissMode = .interactive
         tableView.tableFooterView = HeaderView()
@@ -210,11 +210,11 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
 
     
     func setupSearchVC() {
-       searchBar.tintColor = WalletColors.mainColor
-        searchBar.barTintColor = WalletColors.bgMainColor
+       searchBar.tintColor = UIColor.mainColor
+        searchBar.barTintColor = UIColor.bgMainColor
         searchBar.backgroundImage = UIImage()
-        searchBar.changeSearchBarColor(color: WalletColors.disableColor)
-        searchBar.changeSearchBarTextColor(color: WalletColors.separatorColor)
+        searchBar.changeSearchBarColor(color: UIColor.disableColor)
+        searchBar.changeSearchBarTextColor(color: UIColor.separatorColor)
         searchBar.placeholder = NSLocalizedString("SearchContact", comment: "")
         searchBar.delegate = self
     }

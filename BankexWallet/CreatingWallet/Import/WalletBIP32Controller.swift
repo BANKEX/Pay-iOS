@@ -36,12 +36,12 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
             if state == .notAvailable {
                 clearButton.isHidden = true
                 importButton.isEnabled = false
-                importButton.backgroundColor = WalletColors.disableColor
+                importButton.backgroundColor = UIColor.disableColor
                 passphraseTextView.returnKeyType = .next
             }else {
                 clearButton.isHidden = false
                 importButton.isEnabled = true
-                importButton.backgroundColor = WalletColors.mainColor
+                importButton.backgroundColor = UIColor.mainColor
                 passphraseTextView.returnKeyType = .done
             }
         }
@@ -141,12 +141,12 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
     //MARK: - Delegate_TextField
     func textFieldDidBeginEditing(_ textField: UITextField)  {
         textField.returnKeyType = importButton.isEnabled ? .done : .next
-        separator2.backgroundColor = WalletColors.mainColor
+        separator2.backgroundColor = UIColor.mainColor
     }
     
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        separator2.backgroundColor = WalletColors.separatorColor
+        separator2.backgroundColor = UIColor.separatorColor
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -164,7 +164,7 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
     //MARK: - TextViewDelegate
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        separator1.backgroundColor = WalletColors.mainColor
+        separator1.backgroundColor = UIColor.mainColor
         return true
     }
     
@@ -204,7 +204,7 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
     
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        separator1.backgroundColor = WalletColors.separatorColor
+        separator1.backgroundColor = UIColor.separatorColor
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -220,12 +220,12 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
 
 extension UITextView {
     var isPlaceholder:Bool {
-        return self.text == NSLocalizedString("Notes", comment: "") && self.textColor == WalletColors.setColorForTextViewPlaceholder()
+        return self.text == NSLocalizedString("Notes", comment: "") && self.textColor == UIColor.setColorForTextViewPlaceholder()
     }
     
     func applyPlaceHolderText(with placeholder:String) {
         self.text = placeholder
-        self.textColor = WalletColors.setColorForTextViewPlaceholder()
+        self.textColor = UIColor.setColorForTextViewPlaceholder()
     }
     
     func applyNotHolder() {
