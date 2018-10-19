@@ -23,20 +23,17 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         walletAddressLabel.text = address
-        navigationBarSetup()
-
     }
     
-    @objc func editButtonTapped() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.greenColor
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    @IBAction func editButtonTapped() {
         performSegue(withIdentifier: "showEdit", sender: nil)
-    }
-    
-    func navigationBarSetup() {
-        title = NSLocalizedString("Creating Wallet", comment: "")
-        let editBtn = UIBarButtonItem(title: NSLocalizedString("Edit", comment: ""), style: .plain, target: self, action: #selector(editButtonTapped))
-        editBtn.accessibilityLabel = "EditBtn"
-        navigationItem.rightBarButtonItem = editBtn
-        navigationItem.setHidesBackButton(true, animated: false)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

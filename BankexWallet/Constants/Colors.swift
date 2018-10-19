@@ -23,6 +23,7 @@ extension UIColor {
     static let blackColor = UIColor(hex:"202326")
     static let sendColor = UIColor(hex:"FFB900")
     static let receiveColor = UIColor(hex:"03B221")
+    static let greenColor = UIColor(hex:"0DBA26")
     
     struct QRReader {
         static let successColor = UIColor(hex: "03B221")

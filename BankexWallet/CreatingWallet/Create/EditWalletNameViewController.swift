@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditWalletNameController: UIViewController {
+class EditWalletNameController: BaseViewController {
     
     @IBOutlet weak var walletNameTextField: UITextField!
     weak var delegate: NameChangingDelegate?
@@ -16,6 +16,13 @@ class EditWalletNameController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBarSetup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
+        UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarView?.backgroundColor = .white
     }
     
     @objc func saveButtonTapped() {
