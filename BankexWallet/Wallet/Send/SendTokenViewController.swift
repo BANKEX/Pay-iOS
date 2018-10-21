@@ -131,7 +131,6 @@ Retriable,UITextFieldDelegate {
         UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
         UIApplication.shared.statusBarStyle = .lightContent
         updateUI()
-//        handleErrorMessage()
     }
     
     
@@ -232,23 +231,6 @@ Retriable,UITextFieldDelegate {
                                                selector: #selector(self.keyboardDidHide(notification:)),
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
-    }
-    
-    func handleErrorMessage() {
-        if let message = errorMessage {
-            errorMessage = nil
-            switch message {
-            case "invalidAddress":
-                enterAddressTextfield.textColor = UIColor.errorColor
-                
-            case "insufficient funds for gas * price + value":
-                print("well")
-                amountTextfield.textColor = UIColor.errorColor
-                
-            default:
-                break
-            }
-        }
     }
     
     
