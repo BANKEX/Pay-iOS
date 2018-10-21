@@ -33,7 +33,11 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     }
     
     @IBAction func editButtonTapped() {
-        performSegue(withIdentifier: "showEdit", sender: nil)
+        if UIDevice.isIpad {
+            presentPopUp()
+        }else {
+            performSegue(withIdentifier: "showEdit", sender: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,6 +62,15 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func presentPopUp() {
+        let editVC = CreateVC(byName: "EditWalletNameController") as! EditWalletNameController
+        let nv = UINavigationController(rootViewController: editVC)
+        nv.modalPresentationStyle = .formSheet
+        editVC.addCancelButtonIfNeed()
+        editVC.delegate = self
+        tabBarController?.present(nv, animated: true, completion: nil)
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
