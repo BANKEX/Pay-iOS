@@ -80,8 +80,8 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+<img src="/Badge/Communication.png">
 
-## Communication
 
 - If you **found a bug**, open an issue.
 - If you **have a feature request**, open an issue.
@@ -90,6 +90,6 @@ $ pod install
 ## Details
 More details (architecture, environments, tests, tools...) can be found on the [wiki](https://github.com/BANKEX/BankexWalletIOS/wiki).
 
-<img src="/Badge/Change-Log.png" height="400" width="900">
+<img src="/Badge/Change-Log.png">
 
 A brief summary of each Lovely release can be found on the [releases](https://github.com/BANKEX/BankexWalletIOS/releases).
