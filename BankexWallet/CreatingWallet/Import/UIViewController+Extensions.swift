@@ -15,11 +15,11 @@ extension UIViewController {
         self.present(alertViewController, animated: true)
     }
     
-    public func addPopover(in view:UIView, rect:CGRect) {
+    public func addPopover(in view:UIView, rect:CGRect, _ direction:UIPopoverArrowDirection? = nil) {
         guard let popover = self.popoverPresentationController else { return }
         popover.sourceView = view
         popover.sourceRect = rect
-        popover.permittedArrowDirections = []
+        if let direct = direction { popover.permittedArrowDirections = [direct] } else { popover.permittedArrowDirections = [] }
     }
     
     
