@@ -13,6 +13,9 @@ class ListSectionsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 56
+        tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     
