@@ -89,7 +89,10 @@ $ pod install
 - If you **have a feature request**, open an issue.
 - If you **want to contribute**, submit a pull request.
 
-## Details
+
+<img src="/Badge/Details.png">
+
+
 More details (architecture, environments, tests, tools...) can be found on the [wiki](https://github.com/BANKEX/BankexWalletIOS/wiki).
 
 <img src="/Badge/Change-Log.png">
