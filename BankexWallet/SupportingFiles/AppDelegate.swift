@@ -113,6 +113,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func showSplitVC() {
+        let splitVC = CreateVC(byName: "BaseSplitViewController") as! BaseSplitViewController
+        window?.rootViewController = splitVC
+        window?.makeKeyAndVisible()
+    }
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         UIApplication.shared.applicationIconBadgeNumber = 0
         AutoLockService.shared.stopTimer()

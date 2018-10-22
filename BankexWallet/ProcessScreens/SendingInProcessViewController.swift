@@ -79,7 +79,11 @@ SendingResultInformation {
         if fromEnterScreen {
             DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.showTabBar()
+                if UIDevice.isIpad {
+                    appDelegate.showSplitVC()
+                }else {
+                    appDelegate.showTabBar()
+                }
             }
         }
     }

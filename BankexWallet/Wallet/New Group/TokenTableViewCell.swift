@@ -20,6 +20,8 @@ class TokenTableViewCell: UITableViewCell {
     @IBOutlet weak var tokenView:TokenView!
     @IBOutlet weak var fillView:UIView!
     @IBOutlet weak var arrowRight:UIImageView!
+    @IBOutlet weak var leftContraint:NSLayoutConstraint!
+    @IBOutlet weak var rightContraint:NSLayoutConstraint!
     
     static let identifier:String = String(describing: TokenTableViewCell.self)
     let keysService = SingleKeyServiceImplementation()
@@ -35,6 +37,8 @@ class TokenTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        leftContraint.constant = UIDevice.isIpad ? 52 : 15
+        rightContraint.constant = UIDevice.isIpad ? 52 : 15
         fillView.setupDefaultShadow()
         fillView.layer.cornerRadius = 8.0
         selectionStyle = .none
