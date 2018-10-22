@@ -15,7 +15,7 @@ Welcome to BANKEX's open source iOS app!
 
 
 
-## Getting Started
+<img src="/Badge/Getting Started.png">
 
 1. [Download](https://developer.apple.com/xcode/download/) the Xcode 9 release.
 1. Clone this repository.
