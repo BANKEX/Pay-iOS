@@ -34,7 +34,8 @@ Please be sure to include your operating system, device, version number, and
 steps to reproduce reported bugs. Keep in mind that all participants will be
 expected to follow our code of conduct.
 
-## Information
+<img src="/Badge/Information.png">
+
 
 - **Compatibility**: Requires iOS 9.0 or later. Compatible with iPhone and iPod touch.
 - **Languages**: English
