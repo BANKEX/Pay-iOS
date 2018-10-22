@@ -15,6 +15,13 @@ extension UIViewController {
         self.present(alertViewController, animated: true)
     }
     
+    public func addPopover(in view:UIView, rect:CGRect) {
+        guard let popover = self.popoverPresentationController else { return }
+        popover.sourceView = view
+        popover.sourceRect = rect
+        popover.permittedArrowDirections = []
+    }
+    
     
     public func customBackButton(title:String? = "  Back") -> UIButton {
         let btn = UIButton(type: .system)

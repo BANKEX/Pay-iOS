@@ -218,16 +218,11 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
                 self.clipboardView.showClipboard()
             }
         }
-        if let popOver = activity.popoverPresentationController {
-            popOver.sourceView = view
-            popOver.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY, width: 0, height: 0)
-            popOver.permittedArrowDirections = []
-            present(activity, animated: true)
-            return
+        if UIDevice.isIpad {
+            activity.addPopover(in: view, rect: CGRect(x: view.bounds.midX, y: view.bounds.maxY, width: 0, height: 0))
         }
         present(activity, animated: true)
     }
-
 }
 
 extension ProfileContactViewController:EditViewContollerDelegate {
