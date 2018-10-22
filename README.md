@@ -90,6 +90,6 @@ $ pod install
 ## Details
 More details (architecture, environments, tests, tools...) can be found on the [wiki](https://github.com/BANKEX/BankexWalletIOS/wiki).
 
-## Change-log
+<img src="/Badge/Change-Log.png" height="400" width="900">
 
 A brief summary of each Lovely release can be found on the [releases](https://github.com/BANKEX/BankexWalletIOS/releases).
