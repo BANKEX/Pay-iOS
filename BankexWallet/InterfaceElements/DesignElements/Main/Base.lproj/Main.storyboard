@@ -5588,28 +5588,36 @@ minutes, please wait ...</string>
                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Search"/>
                                 </userDefinedRuntimeAttributes>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l26-fd-vqJ" customClass="QRButton" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="9" y="92" width="66" height="35"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FRc-Ed-946">
+                                <rect key="frame" x="9" y="92" width="148" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l26-fd-vqJ" customClass="QRButton" customModule="BankexWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="66" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="66" id="4Fc-m9-gdo"/>
+                                            <constraint firstAttribute="height" constant="35" id="M7S-58-tOq"/>
+                                        </constraints>
+                                        <state key="normal" image="qr"/>
+                                        <connections>
+                                            <action selector="scanTapped" destination="xjs-f2-eUN" eventType="touchUpInside" id="Edy-mh-zz6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eES-Ve-k39" customClass="PasteButton" customModule="BankexWallet" customModuleProvider="target">
+                                        <rect key="frame" x="82" y="0.0" width="66" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="n5B-vu-Dkf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <state key="normal" title="Paste"/>
+                                        <connections>
+                                            <action selector="textFromBuffer:" destination="xjs-f2-eUN" eventType="touchUpInside" id="IAD-Ze-4s8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="66" id="4Fc-m9-gdo"/>
-                                    <constraint firstAttribute="height" constant="35" id="M7S-58-tOq"/>
+                                    <constraint firstItem="eES-Ve-k39" firstAttribute="width" secondItem="l26-fd-vqJ" secondAttribute="width" id="nuK-4W-7FF"/>
                                 </constraints>
-                                <state key="normal" image="qr"/>
-                                <connections>
-                                    <action selector="scanTapped" destination="xjs-f2-eUN" eventType="touchUpInside" id="Edy-mh-zz6"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eES-Ve-k39" customClass="PasteButton" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="91" y="92" width="66" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="n5B-vu-Dkf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                <state key="normal" title="Paste"/>
-                                <connections>
-                                    <action selector="textFromBuffer:" destination="xjs-f2-eUN" eventType="touchUpInside" id="IAD-Ze-4s8"/>
-                                </connections>
-                            </button>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter token address to search" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RD7-yR-13E">
                                 <rect key="frame" x="112.5" y="323" width="150" height="41"/>
                                 <constraints>
@@ -5619,7 +5627,7 @@ minutes, please wait ...</string>
                                 <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jdL-P1-RdF">
+                            <tableView clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jdL-P1-RdF">
                                 <rect key="frame" x="0.0" y="177" width="375" height="490"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -5688,21 +5696,16 @@ minutes, please wait ...</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="jdL-P1-RdF" firstAttribute="top" secondItem="l26-fd-vqJ" secondAttribute="bottom" constant="50" id="26L-wR-ymI"/>
-                            <constraint firstItem="l26-fd-vqJ" firstAttribute="top" secondItem="54I-a7-qHO" secondAttribute="bottom" constant="16" id="393-Bn-sjn"/>
-                            <constraint firstItem="eES-Ve-k39" firstAttribute="leading" secondItem="l26-fd-vqJ" secondAttribute="trailing" constant="16" id="6VM-0r-PDk"/>
                             <constraint firstItem="jdL-P1-RdF" firstAttribute="trailing" secondItem="Z7H-F4-9jP" secondAttribute="trailing" id="8Wa-On-YB2"/>
                             <constraint firstItem="54I-a7-qHO" firstAttribute="top" secondItem="Z7H-F4-9jP" secondAttribute="top" id="Ea4-M9-64j"/>
+                            <constraint firstItem="FRc-Ed-946" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" constant="9" id="LKt-6Z-4lK"/>
                             <constraint firstItem="RD7-yR-13E" firstAttribute="centerX" secondItem="Z7H-F4-9jP" secondAttribute="centerX" id="MYI-rV-C5e"/>
-                            <constraint firstItem="eES-Ve-k39" firstAttribute="width" secondItem="l26-fd-vqJ" secondAttribute="width" id="N25-IB-Vw8"/>
                             <constraint firstItem="54I-a7-qHO" firstAttribute="trailing" secondItem="Z7H-F4-9jP" secondAttribute="trailing" id="ORI-z8-V4p"/>
                             <constraint firstItem="jdL-P1-RdF" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" id="aze-FT-bo1"/>
-                            <constraint firstItem="Z7H-F4-9jP" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eES-Ve-k39" secondAttribute="trailing" symbolic="YES" id="d1d-Fg-2Ay"/>
                             <constraint firstItem="54I-a7-qHO" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" id="ehT-aO-QEW"/>
                             <constraint firstItem="jdL-P1-RdF" firstAttribute="bottom" secondItem="Z7H-F4-9jP" secondAttribute="bottom" id="fIZ-ft-vNk"/>
                             <constraint firstItem="RD7-yR-13E" firstAttribute="centerY" secondItem="Z7H-F4-9jP" secondAttribute="centerY" id="nPI-rc-NZU"/>
-                            <constraint firstItem="eES-Ve-k39" firstAttribute="top" secondItem="l26-fd-vqJ" secondAttribute="top" id="p5g-9U-OC7"/>
-                            <constraint firstItem="l26-fd-vqJ" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" constant="9" id="y8f-o8-ecF"/>
+                            <constraint firstItem="FRc-Ed-946" firstAttribute="top" secondItem="54I-a7-qHO" secondAttribute="bottom" constant="16" id="tT6-jl-9ce"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Z7H-F4-9jP"/>
                     </view>
