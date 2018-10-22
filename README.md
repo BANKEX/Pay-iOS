@@ -20,7 +20,9 @@ Welcome to BANKEX's open source iOS app!
 1. [Download](https://developer.apple.com/xcode/download/) the Xcode 9 release.
 1. Clone this repository.
 
-## Contributing
+
+<img src="/Badge/Contributing.png">
+
 
 We intend for this project to be an educational resource: we are excited to
 share our wins, mistakes, and methodology of iOS development as we work
