@@ -23,6 +23,7 @@ class ChooseFeeViewController: BaseViewController {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var textFields: [UITextField]!
     @IBOutlet weak var infoView:InfoView!
+    @IBOutlet weak var heightConstraint:NSLayoutConstraint!
     
     
     
@@ -71,6 +72,7 @@ class ChooseFeeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Wallet", comment: "")
+        heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 1/4.76 : 1/3.3)
         addObservers()
         setupTextFields()
         

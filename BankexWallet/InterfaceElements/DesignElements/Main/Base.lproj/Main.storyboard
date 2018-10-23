@@ -4827,10 +4827,13 @@ successfully</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.093852094" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fee-2H-VHH">
-                                        <rect key="frame" x="5" y="83" width="310" height="27"/>
+                                        <rect key="frame" x="5" y="76" width="310" height="41"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0xd551234a…06d736074f" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czJ-v5-zJt">
                                         <rect key="frame" x="19" y="184" width="160" height="16"/>
@@ -4930,7 +4933,7 @@ successfully</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8c-uL-PaL">
-                                <rect key="frame" x="24" y="602" width="272" height="50"/>
+                                <rect key="frame" x="110" y="602" width="100" height="50"/>
                                 <color key="backgroundColor" red="0.8901960784313725" green="0.90196078431372551" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="jq6-B3-N9r"/>
@@ -4941,7 +4944,7 @@ successfully</string>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
+                                        <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -4964,13 +4967,17 @@ successfully</string>
                             <constraint firstItem="9Ah-p2-9lH" firstAttribute="top" secondItem="2Re-7M-LNV" secondAttribute="bottom" id="Bbw-T1-R8A"/>
                             <constraint firstItem="eiY-4s-5zi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1hu-xB-TSB" secondAttribute="trailing" symbolic="YES" id="Bej-VV-iKA"/>
                             <constraint firstItem="eiY-4s-5zi" firstAttribute="trailing" secondItem="9Ah-p2-9lH" secondAttribute="trailing" id="Kac-MJ-EeW"/>
-                            <constraint firstItem="S8c-uL-PaL" firstAttribute="leading" secondItem="eiY-4s-5zi" secondAttribute="leading" constant="24" id="OJk-eS-s1t"/>
+                            <constraint firstItem="S8c-uL-PaL" firstAttribute="leading" secondItem="eiY-4s-5zi" secondAttribute="leading" constant="24" id="OJk-eS-s1t">
+                                <variation key="heightClass=regular-widthClass=regular" constant="110"/>
+                            </constraint>
                             <constraint firstItem="2Re-7M-LNV" firstAttribute="leading" secondItem="rC8-Of-Fye" secondAttribute="leading" id="Q0g-Kj-P3m"/>
                             <constraint firstItem="XNH-dl-oHH" firstAttribute="top" secondItem="eiY-4s-5zi" secondAttribute="top" id="QuC-vK-nLy"/>
                             <constraint firstItem="Hne-lS-zKx" firstAttribute="top" secondItem="1hu-xB-TSB" secondAttribute="bottom" constant="15" id="VSD-jg-7uA"/>
                             <constraint firstItem="rC8-Of-Fye" firstAttribute="leading" secondItem="eiY-4s-5zi" secondAttribute="leading" constant="19" id="Vqz-08-jhP"/>
                             <constraint firstItem="2Re-7M-LNV" firstAttribute="top" secondItem="rC8-Of-Fye" secondAttribute="bottom" constant="15" id="XTH-3N-iHR"/>
-                            <constraint firstItem="eiY-4s-5zi" firstAttribute="trailing" secondItem="S8c-uL-PaL" secondAttribute="trailing" constant="24" id="Zqv-tb-iJq"/>
+                            <constraint firstItem="eiY-4s-5zi" firstAttribute="trailing" secondItem="S8c-uL-PaL" secondAttribute="trailing" constant="24" id="Zqv-tb-iJq">
+                                <variation key="heightClass=regular-widthClass=regular" constant="110"/>
+                            </constraint>
                             <constraint firstItem="XNH-dl-oHH" firstAttribute="height" secondItem="B5z-XE-p9e" secondAttribute="height" multiplier="1:3.3" id="aHf-3V-7sM"/>
                             <constraint firstItem="eiY-4s-5zi" firstAttribute="trailing" secondItem="6oo-4E-9gC" secondAttribute="trailing" id="cDC-Xj-AEM"/>
                             <constraint firstItem="6oo-4E-9gC" firstAttribute="top" secondItem="Hne-lS-zKx" secondAttribute="bottom" id="ffO-dG-Wii"/>
@@ -4989,6 +4996,7 @@ successfully</string>
                     <connections>
                         <outlet property="gasLimitTextField" destination="Hne-lS-zKx" id="t8k-KC-gKU"/>
                         <outlet property="gasPriceTextField" destination="2Re-7M-LNV" id="J6J-5U-YpD"/>
+                        <outlet property="heightConstraint" destination="aHf-3V-7sM" id="rP2-qn-yRa"/>
                         <outlet property="infoView" destination="XNH-dl-oHH" id="ROk-es-q5s"/>
                         <outlet property="sendButton" destination="S8c-uL-PaL" id="CX5-Kk-ccR"/>
                         <outletCollection property="textFields" destination="2Re-7M-LNV" collectionClass="NSMutableArray" id="6Be-4j-eYN"/>
