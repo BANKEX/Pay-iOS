@@ -14,6 +14,6 @@ class BaseSplitViewController: UISplitViewController {
         super.viewDidLoad()
         preferredDisplayMode = .allVisible
         view.backgroundColor = UIColor(red: 223/255, green: 226/255, blue: 230/255, alpha: 1)
+        presentsWithGesture = false
     }
-
 }
