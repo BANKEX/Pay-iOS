@@ -37,6 +37,7 @@ Retriable,UITextFieldDelegate {
     @IBOutlet weak var topContrStack:NSLayoutConstraint!
     @IBOutlet weak var notEnoughSumLbl:UILabel!
     @IBOutlet var textFields:[UITextField]!
+    @IBOutlet weak var heightConstraint:NSLayoutConstraint!
     
     
     
@@ -97,6 +98,7 @@ Retriable,UITextFieldDelegate {
         notEnoughSumLbl.alpha = 0
         initialHeight = infoView.bounds.height
         infoView.delegate = self
+        heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 1/4.76 : 1/3.3)
         setupContactsButton()
         configurePlaceholder()
         nextButton.isEnabled = false
