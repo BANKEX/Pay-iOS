@@ -23,7 +23,7 @@
             <objects>
                 <viewController storyboardIdentifier="Onboarding" id="tIR-RD-pJ7" customClass="OnboardingViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dLa-oo-1Nb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0o-XF-oaQ">
@@ -224,7 +224,7 @@
                                 <rect key="frame" x="192" y="174" width="384" height="76"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="J47-g9-ucF">
-                                <rect key="frame" x="272" y="861" width="224" height="115"/>
+                                <rect key="frame" x="272" y="811" width="224" height="115"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncR-Ov-TWm">
                                         <rect key="frame" x="0.0" y="0.0" width="224" height="50"/>
@@ -337,13 +337,13 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uth-qE-4i7">
-                                <rect key="frame" x="194.5" y="241" width="364" height="783"/>
+                                <rect key="frame" x="194.5" y="241" width="364" height="733"/>
                                 <connections>
                                     <segue destination="NQv-6V-bIF" kind="embed" id="3Es-ip-Avo"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m62-vk-V3q">
-                                <rect key="frame" x="194.5" y="241" width="364" height="783"/>
+                                <rect key="frame" x="194.5" y="241" width="364" height="733"/>
                                 <connections>
                                     <segue destination="zgF-bs-7XP" kind="embed" id="Axi-28-c3N"/>
                                 </connections>
@@ -427,7 +427,7 @@
             <objects>
                 <viewController id="zgF-bs-7XP" customClass="WalletBIP32Controller" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W3j-xf-8ev">
-                        <rect key="frame" x="0.0" y="0.0" width="364" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="364" height="733"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your passphrase" translatesAutoresizingMaskIntoConstraints="NO" id="UsK-Jd-mN2">
@@ -448,7 +448,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B9-kC-WYr">
-                                <rect key="frame" x="70" y="685" width="224" height="50"/>
+                                <rect key="frame" x="70" y="635" width="224" height="50"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="importPassphraseBtn"/>
                                 <constraints>
@@ -635,7 +635,7 @@
             <objects>
                 <viewController id="NQv-6V-bIF" customClass="SingleKeyWalletController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mOs-aW-oc9">
-                        <rect key="frame" x="0.0" y="0.0" width="364" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="364" height="733"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your private key" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JGw-Ba-1Is">
@@ -663,7 +663,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6i-Sg-uPe">
-                                <rect key="frame" x="70" y="685" width="224" height="50"/>
+                                <rect key="frame" x="70" y="635" width="224" height="50"/>
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="ImportBtn_ImportingScren"/>
                                 <constraints>
@@ -1193,14 +1193,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ihI-ft-ZZn">
-                                <rect key="frame" x="0.0" y="70" width="768" height="954"/>
+                                <rect key="frame" x="20" y="70" width="728" height="954"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" rowHeight="62" id="qby-pv-EVX" customClass="WalletCell" customModule="BankexWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="768" height="62"/>
+                                        <rect key="frame" x="0.0" y="28" width="728" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qby-pv-EVX" id="Ruh-BB-lf4">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="61.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="728" height="61.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="827-HY-a1m">
@@ -1210,14 +1210,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4nf-t0-upk">
-                                                    <rect key="frame" x="16" y="32" width="290" height="17"/>
+                                                    <rect key="frame" x="16" y="32" width="643" height="17"/>
                                                     <accessibility key="accessibilityConfiguration" label="addrLabel"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GF6-MV-QlO">
-                                                    <rect key="frame" x="310" y="30.5" width="50" height="20"/>
+                                                    <rect key="frame" x="663" y="30.5" width="50" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="RsA-8Q-HbL"/>
                                                         <constraint firstAttribute="height" constant="20" id="zSe-zY-tbP"/>
@@ -1258,10 +1258,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ihI-ft-ZZn" firstAttribute="leading" secondItem="QBJ-f3-MFh" secondAttribute="leading" id="6Y0-ss-cSe"/>
+                            <constraint firstItem="ihI-ft-ZZn" firstAttribute="leading" secondItem="QBJ-f3-MFh" secondAttribute="leading" id="6Y0-ss-cSe">
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
                             <constraint firstItem="QBJ-f3-MFh" firstAttribute="bottom" secondItem="ihI-ft-ZZn" secondAttribute="bottom" id="7mf-Fh-kfi"/>
                             <constraint firstItem="ihI-ft-ZZn" firstAttribute="top" secondItem="QBJ-f3-MFh" secondAttribute="top" id="R8C-eI-Mg7"/>
-                            <constraint firstItem="QBJ-f3-MFh" firstAttribute="trailing" secondItem="ihI-ft-ZZn" secondAttribute="trailing" id="jtp-Og-5gb"/>
+                            <constraint firstItem="QBJ-f3-MFh" firstAttribute="trailing" secondItem="ihI-ft-ZZn" secondAttribute="trailing" id="jtp-Og-5gb">
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QBJ-f3-MFh"/>
                     </view>
@@ -1603,7 +1607,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztH-lz-z4f">
-                                <rect key="frame" x="0.0" y="70" width="768" height="954"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="904"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify your passcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUM-zI-rhZ">
                                         <rect key="frame" x="312" y="48" width="144" height="18"/>
@@ -1641,7 +1645,7 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="npn-8f-uzG">
-                                        <rect key="frame" x="0.0" y="738" width="768" height="216"/>
+                                        <rect key="frame" x="0.0" y="688" width="768" height="216"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="2Oc-jG-GKY">
                                                 <rect key="frame" x="6" y="6" width="756" height="151.5"/>
@@ -3576,20 +3580,20 @@ any transaction history yet</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbS-xK-Yu0">
-                                                    <rect key="frame" x="326" y="7" width="33" height="16"/>
+                                                    <rect key="frame" x="682" y="7" width="33" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssi-aK-n7x" userLabel="SeparatorView">
-                                                    <rect key="frame" x="58" y="-0.5" width="301" height="1"/>
+                                                    <rect key="frame" x="58" y="-0.5" width="657" height="1"/>
                                                     <color key="backgroundColor" red="0.73725490199999999" green="0.73333333329999995" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="Lyb-xj-nfE"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="lt2-yi-vYr">
-                                                    <rect key="frame" x="332.5" y="40.5" width="26.5" height="12"/>
+                                                    <rect key="frame" x="688.5" y="40.5" width="26.5" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -3969,7 +3973,7 @@ These words are the only way to restore your wallet</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ou-vL-T35">
-                                <rect key="frame" x="272" y="926" width="224" height="50"/>
+                                <rect key="frame" x="272" y="876" width="224" height="50"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.50980392159999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="nextMnemonic"/>
                                 <constraints>
@@ -4006,10 +4010,10 @@ These words are the only way to restore your wallet</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dh-3i-Zqx">
-                                <rect key="frame" x="250" y="216" width="268" height="116"/>
+                                <rect key="frame" x="250" y="216" width="268" height="106"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wgq-hB-4vF">
-                                        <rect key="frame" x="0.0" y="0.0" width="268" height="116"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="268" height="106"/>
                                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="ji9-2e-7qv">
                                             <size key="itemSize" width="76" height="31"/>
@@ -4065,10 +4069,10 @@ accessibilityIdentifier</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGr-bk-yqC">
-                                <rect key="frame" x="250" y="422" width="268" height="464"/>
+                                <rect key="frame" x="250" y="412" width="268" height="424"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vFr-lL-G5w">
-                                        <rect key="frame" x="0.0" y="0.0" width="268" height="464"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="268" height="424"/>
                                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="rjd-Qh-eI5">
                                             <size key="itemSize" width="76" height="31"/>
@@ -4123,14 +4127,14 @@ accessibilityIdentifier</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFQ-9i-LeS">
-                                <rect key="frame" x="205" y="336" width="358" height="1"/>
+                                <rect key="frame" x="205" y="326" width="358" height="1"/>
                                 <color key="backgroundColor" red="0.73725490196078436" green="0.73333333333333328" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="d9v-Ap-pJD"/>
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong order Please try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igo-na-Rvf">
-                                <rect key="frame" x="333" y="345" width="102" height="40"/>
+                                <rect key="frame" x="333" y="335" width="102" height="40"/>
                                 <accessibility key="accessibilityConfiguration" label="error"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="hMc-a5-tpP"/>
@@ -4243,7 +4247,7 @@ accessibilityIdentifier</string>
                                     <constraint firstAttribute="height" constant="50" id="VR6-rC-zMU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Create PIN">
+                                <state key="normal" title="Create Wallet">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -5729,19 +5733,19 @@ minutes, please wait ...</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAL-ki-LFZ">
-                                                    <rect key="frame" x="74" y="4" width="259" height="17"/>
+                                                    <rect key="frame" x="74" y="4" width="652" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNy-7f-0xq">
-                                                    <rect key="frame" x="74" y="28" width="285" height="14"/>
+                                                    <rect key="frame" x="74" y="28" width="678" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CopiedIcon" translatesAutoresizingMaskIntoConstraints="NO" id="LZC-I8-x45">
-                                                    <rect key="frame" x="345" y="5.5" width="14" height="14"/>
+                                                    <rect key="frame" x="738" y="5.5" width="14" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="14" id="1XX-gs-af2"/>
                                                         <constraint firstAttribute="height" constant="14" id="mjn-9Y-uPb"/>
@@ -6110,7 +6114,7 @@ minutes, please wait ...</string>
         <segue reference="fKt-CA-37X"/>
         <segue reference="AnP-VM-Uv4"/>
         <segue reference="9Eb-Fz-7t3"/>
-        <segue reference="bSW-e7-K9g"/>
-        <segue reference="0M5-ZF-71X"/>
+        <segue reference="wBc-5M-XXH"/>
+        <segue reference="o2o-Af-M3V"/>
     </inferredMetricsTieBreakers>
 </document>

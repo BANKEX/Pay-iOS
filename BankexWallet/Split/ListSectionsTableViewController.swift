@@ -21,12 +21,14 @@ class ListSectionsViewController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = 56
         tableView.separatorStyle = .none
-        tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
-        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+        selectRow(0)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    
+    func selectRow(_ row:Int) {
+        tableView.selectRow(at: IndexPath(row: row, section: 0), animated: true, scrollPosition: .none)
+        tableView(tableView, didSelectRowAt: IndexPath(row: row, section: 0))
+    }
     
 
 

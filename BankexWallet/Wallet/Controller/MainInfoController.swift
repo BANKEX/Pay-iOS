@@ -329,7 +329,14 @@ class MainInfoController: BaseViewController,
     }
     
     @IBAction func seeAll() {
-        tabBarController?.selectedIndex = 1
+        if UIDevice.isIpad {
+            guard let nav = splitViewController?.viewControllers[0] as? UINavigationController else { return }
+            nav.popToRootViewController(animated: false)
+            guard let vc = nav.topViewController as? ListSectionsViewController else { return }
+            vc.selectRow(1)
+        }else {
+            tabBarController?.selectedIndex = 1
+        }
     }
     
     private func updateDataOnTheScreen() {
