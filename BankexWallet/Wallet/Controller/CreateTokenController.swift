@@ -55,7 +55,7 @@ class CreateTokenController: BaseViewController {
     
     private func setupSupportView() {
         supportView.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58.0)
-        supportLbl.frame = CGRect(x: 0, y: supportView.bounds.midY - 15.0, width: supportView.bounds.width, height: 30.0)
+        supportLbl.frame = CGRect(x: 0, y: supportView.bounds.midY - 15.0, width: UIDevice.isIpad ? supportView.bounds.width - splitViewController!.primaryColumnWidth : supportView.bounds.width, height: 30.0)
         supportView.addSubview(supportLbl)
         self.view.addSubview(supportView)
     }
