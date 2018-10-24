@@ -115,7 +115,7 @@ class HomeViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        imageView.shimmerAnimation()
+        //imageView.shimmerAnimation()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let sortedArray = TokenShortService.arrayTokensShort.sorted { lhs, rhs -> Bool in
                 return Double(lhs.balance)! > Double(rhs.balance)!
