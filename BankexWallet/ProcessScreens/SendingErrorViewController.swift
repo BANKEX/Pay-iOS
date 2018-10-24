@@ -57,6 +57,7 @@ class SendingErrorViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        splitViewController?.show()
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = UIColor.mainColor
         UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor

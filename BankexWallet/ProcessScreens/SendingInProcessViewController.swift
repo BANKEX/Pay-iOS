@@ -56,6 +56,7 @@ SendingResultInformation {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        splitViewController?.hide()
         UIApplication.shared.statusBarStyle = .default
         activityView.startAnimating()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -67,6 +68,7 @@ SendingResultInformation {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        splitViewController?.show()
         activityView.stopAnimating()
         textToShow = nil
         navigationController?.setNavigationBarHidden(false, animated: false)

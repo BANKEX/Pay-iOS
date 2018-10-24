@@ -73,6 +73,7 @@ class WalletCreationTypeController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        splitViewController?.hide()
         navigationController?.navigationBar.isHidden = isFromInitial
     }
     
