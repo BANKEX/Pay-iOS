@@ -295,7 +295,7 @@ extension ListContactsViewController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if UIDevice.isIpad {
             let view = UIView()
-            view.backgroundColor = UIColor.clear
+            view.backgroundColor = UIColor.bgMainColor
             let label = UILabel()
             label.frame.size = CGSize(width: tableView.bounds.width, height: 28)
             label.frame.origin = CGPoint(x: 16, y: 0)

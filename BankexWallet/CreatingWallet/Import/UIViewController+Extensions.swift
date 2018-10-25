@@ -23,6 +23,13 @@ extension UIViewController {
     }
     
     
+    func selectSection(_ section:Int) {
+        guard let nav = splitViewController?.viewControllers[0] as? UINavigationController else { return }
+        nav.popToRootViewController(animated: false)
+        guard let vc = nav.topViewController as? ListSectionsViewController else { return }
+        vc.selectRow(section)
+    }
+    
     public func customBackButton(title:String? = "  Back") -> UIButton {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(named:"BackArrow"), for: .normal)

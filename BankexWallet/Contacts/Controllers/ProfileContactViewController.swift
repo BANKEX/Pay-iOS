@@ -187,7 +187,11 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     }
     
     @IBAction func seeAll() {
-        tabBarController?.selectedIndex = 1
+        if UIDevice.isIpad {
+            selectSection(1)
+        }else {
+           tabBarController?.selectedIndex = 1
+        }
         HistoryMediator.addr = selectedContact.address
     }
 
@@ -216,13 +220,14 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         nameContactLabel.text = selectedContact.name
         addrContactLabel.text = selectedContact.address.formattedAddrToken(number: 5)
     }
-
-
     
 
     //MARK: - IBAction
-
+    
     @IBAction func sendFunds() {
+        if UIDevice.isIpad {
+            selectSection(0)
+        }
         self.performSegue(withIdentifier: "isFromContact", sender: nil)
     }
 
