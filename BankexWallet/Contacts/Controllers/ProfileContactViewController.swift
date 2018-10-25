@@ -35,6 +35,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     @IBOutlet weak var activity:UIActivityIndicatorView!
     @IBOutlet weak var emptyTitle:UILabel!
     @IBOutlet weak var seeAllBtn:UIButton!
+    @IBOutlet weak var heightConstraint:NSLayoutConstraint!
 
     //MARK: - Properties
 
@@ -140,7 +141,22 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     }
     
     @IBAction func editContact() {
-        self.performSegue(withIdentifier: "editSegue", sender: nil)
+        if UIDevice.isIpad {
+            let editContact = CreateVC(byName: "EditViewController") as! EditViewController
+            editContact.selectedContact = selectedContact
+            presentPopUp(editContact)
+        }else {
+            self.performSegue(withIdentifier: "editSegue", sender: nil)
+        }
+    }
+    
+    func presentPopUp(_ vc:EditViewController) {
+        let nv = UINavigationController(rootViewController: vc)
+        nv.preferredContentSize = CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height/2)
+        nv.modalPresentationStyle = .formSheet
+        vc.addCancelButtonIfNeed()
+        vc.delegate = self
+        splitViewController?.present(nv, animated: true, completion: nil)
     }
 
 
@@ -181,6 +197,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         tableVIew.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
         tableVIew.backgroundColor = UIColor.bgMainColor
         tableVIew.isScrollEnabled = false
+        heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 1/4.76 : 1/3.3)
     }
     
     
