@@ -195,6 +195,11 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         tableVIew.backgroundColor = UIColor.bgMainColor
         tableVIew.isScrollEnabled = true
         heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 1/4.76 : 1/3.3)
+        if #available(iOS 11.0, *) {
+            tableVIew.separatorInsetReference = .fromCellEdges
+        } else {
+        }
+        tableVIew.separatorInset.left = 48
     }
     
     
