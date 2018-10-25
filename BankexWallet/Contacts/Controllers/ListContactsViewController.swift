@@ -90,6 +90,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
         tableView.keyboardDismissMode = .interactive
         tableView.tableFooterView = HeaderView()
+        tableView.separatorStyle = UIDevice.isIpad ? .singleLine : .none
     }
     
     @objc func back() {
@@ -289,6 +290,22 @@ extension ListContactsViewController:UITableViewDataSource {
         }else {
             return sectionsTitles.count
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if UIDevice.isIpad {
+            let view = UIView()
+            view.backgroundColor = UIColor.clear
+            let label = UILabel()
+            label.frame.size = CGSize(width: tableView.bounds.width, height: 28)
+            label.frame.origin = CGPoint(x: 16, y: 0)
+            view.addSubview(label)
+            label.textColor = .black
+            label.textAlignment = .left
+            label.text = sectionsTitles[section]
+            return view
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
