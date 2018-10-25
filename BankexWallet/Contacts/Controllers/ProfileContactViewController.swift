@@ -31,9 +31,6 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     @IBOutlet weak var addrContactLabel:UILabel!
     @IBOutlet weak var infoView:UIView!
     @IBOutlet weak var tableVIew:UITableView!
-    @IBOutlet weak var containerView:UIView!
-    @IBOutlet weak var activity:UIActivityIndicatorView!
-    @IBOutlet weak var emptyTitle:UILabel!
     @IBOutlet weak var seeAllBtn:UIButton!
     @IBOutlet weak var heightConstraint:NSLayoutConstraint!
 
@@ -56,18 +53,13 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         didSet {
             switch state {
             case .loading:
-                containerView.isHidden = false
-                activity.startAnimating()
-                emptyTitle.isHidden = true
+                tableVIew.isHidden = true
                 seeAllBtn.isHidden = true
             case .empty:
-                containerView.isHidden = false
-                activity.stopAnimating()
-                emptyTitle.isHidden = false
+                tableVIew.isHidden = false
                 seeAllBtn.isHidden = true
             case .fill:
-                containerView.isHidden = true
-                activity.stopAnimating()
+                tableVIew.isHidden = false
                 seeAllBtn.isHidden = false
             }
         }
@@ -199,8 +191,9 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         tableVIew.delegate = self
         tableVIew.dataSource = self
         tableVIew.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
+        tableVIew.register(UINib(nibName: EmptyTableCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyTableCell.identifier)
         tableVIew.backgroundColor = UIColor.bgMainColor
-        tableVIew.isScrollEnabled = false
+        tableVIew.isScrollEnabled = true
         heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 1/4.76 : 1/3.3)
     }
     
@@ -271,18 +264,23 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactions.count
+        if transactions.isEmpty { return 1 } else { return transactions.count }
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if transactions.isEmpty {
+            let emptyCell = tableView.dequeueReusableCell(withIdentifier: EmptyTableCell.identifier, for: indexPath) as! EmptyTableCell
+            emptyCell.setData("You don't have any transaction history yet")
+            return emptyCell
+        }
         let cell = tableVIew.dequeueReusableCell(withIdentifier: TransactionInfoCell.identifer, for: indexPath) as! TransactionInfoCell
         cell.transaction = transactions[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 53.0
+        if transactions.isEmpty { return 240 } else { return 53 }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

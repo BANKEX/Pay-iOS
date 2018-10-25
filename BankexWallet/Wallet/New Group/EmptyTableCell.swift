@@ -29,4 +29,8 @@ class EmptyTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setData(_ title:String) {
+        emptyLabel.text = title
+    }
+    
 }
