@@ -221,6 +221,20 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         addrContactLabel.text = selectedContact.address.formattedAddrToken(number: 5)
     }
     
+    
+    func removeContact() {
+        let alertViewController = UIAlertController(title: "Delete contact?", message: nil, preferredStyle: .alert)
+        alertViewController.addCancel()
+        alertViewController.addDestructive(title: NSLocalizedString("Delete", comment: "")) {
+            self.service.delete(with: self.selectedContact.address, completionHandler: { isSuccess in
+                if isSuccess {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+        }
+        alertViewController.addPopover(in: view, rect: CGRect(x: 0, y: 0, width: 270, height: 105))
+        present(alertViewController, animated: true)
+    }
 
     //MARK: - IBAction
     
@@ -253,6 +267,12 @@ extension ProfileContactViewController:EditViewContollerDelegate {
             self.selectedContact = contact
             self.updateUI()
         }
+    }
+}
+
+extension ProfileContactViewController:DeleteCellDelegate {
+    func didTapRemoveButton() {
+        removeContact()
     }
 }
 
@@ -290,9 +310,11 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
             return emptyCell
         }else if transactions.isEmpty && UIDevice.isIpad && indexPath.row == 1 {
             let delCell = tableView.dequeueReusableCell(withIdentifier: DeleteCell.identifier, for: indexPath) as! DeleteCell
+            delCell.delegate = self
             return delCell
         }else if indexPath.row == transactions.count {
             let delCell = tableView.dequeueReusableCell(withIdentifier: DeleteCell.identifier, for: indexPath) as! DeleteCell
+            delCell.delegate = self
             return delCell
         }
         let cell = tableVIew.dequeueReusableCell(withIdentifier: TransactionInfoCell.identifer, for: indexPath) as! TransactionInfoCell
@@ -311,6 +333,14 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
             return 71
         }else {
             return 53
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if UIDevice.isIpad && indexPath.row == transactions.count {
+            removeContact()
+        }else if UIDevice.isIpad && transactions.isEmpty && indexPath.row == 1 {
+            removeContact()
         }
     }
 }
