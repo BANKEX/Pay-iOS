@@ -232,11 +232,24 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     }
     
     
-    
+    func presentPopUp(_ vc:AddContactViewController) {
+        let nv = UINavigationController(rootViewController: vc)
+        nv.preferredContentSize = CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height * 0.7)
+        nv.modalPresentationStyle = .formSheet
+        vc.addCancelButtonIfNeed()
+        vc.addSaveButtonIfNeed()
+        self.present(nv, animated: true, completion: nil)
+    }
     
     
     @objc func transitionToAddContact() {
-        performSegue(withIdentifier: "addContactSegue", sender: self)
+        if UIDevice.isIpad {
+            let createContactVC = CreateVC(byName: "AddContactViewController") as! AddContactViewController
+            createContactVC.delegate = self
+            presentPopUp(createContactVC)
+        }else {
+            performSegue(withIdentifier: "addContactSegue", sender: self)
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -346,6 +359,15 @@ extension ListContactsViewController:UITableViewDataSource {
     }
     
     
+}
+
+extension ListContactsViewController:AddContactViewControllerDelegate {
+    func didSave() {
+        self.service.listContacts(onCompition: { (contacts) in
+            self.listContacts = contacts
+            self.state = self.isNoContacts() ? .empty : .fill
+        })
+    }
 }
 
 
