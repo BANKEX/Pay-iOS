@@ -24,6 +24,10 @@ func CreateVC(byName controllerName: String, probablyStoryboard: UIStoryboard? =
     return result
 }
 
+var footerTableView:UIView {
+    return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
+}
+
 
 func TryLoadVC(withName controllerName: String, fromStoryboard storyboard: UIStoryboard) -> UIViewController? {
     var result: UIViewController?

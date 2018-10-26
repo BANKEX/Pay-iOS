@@ -200,6 +200,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         } else {
         }
         tableVIew.separatorInset.left = 48
+        tableVIew.tableFooterView = footerTableView
     }
     
     
@@ -285,11 +286,13 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if transactions.isEmpty { return 240 } else { return 53 }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        if transactions.isEmpty && UIDevice.isIpad {
+            return 240
+        }else if transactions.isEmpty && !UIDevice.isIpad {
+            return tableVIew.bounds.height
+        }else {
+            return 53
+        }
     }
 }
 
