@@ -192,6 +192,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         tableVIew.dataSource = self
         tableVIew.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
         tableVIew.register(UINib(nibName: EmptyTableCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyTableCell.identifier)
+        tableVIew.register(UINib(nibName: DeleteCell.identifier, bundle: nil), forCellReuseIdentifier: DeleteCell.identifier)
         tableVIew.backgroundColor = UIColor.bgMainColor
         tableVIew.isScrollEnabled = true
         heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 1/4.76 : 1/3.3)
@@ -200,7 +201,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         } else {
         }
         tableVIew.separatorInset.left = 48
-        tableVIew.tableFooterView = footerTableView
+        tableVIew.tableFooterView = UIDevice.isIpad ? UIView() : footerTableView
     }
     
     
@@ -270,15 +271,24 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if transactions.isEmpty { return 1 } else { return transactions.count }
+        if UIDevice.isIpad && transactions.isEmpty {
+            return 2
+        }else if !UIDevice.isIpad && transactions.isEmpty {
+            return 1
+        }else {
+            return transactions.count
+        }
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if transactions.isEmpty {
+        if transactions.isEmpty && indexPath.row == 0 {
             let emptyCell = tableView.dequeueReusableCell(withIdentifier: EmptyTableCell.identifier, for: indexPath) as! EmptyTableCell
             emptyCell.setData("You don't have any transaction history yet")
             return emptyCell
+        }else if transactions.isEmpty && UIDevice.isIpad && indexPath.row == 1 {
+            let delCell = tableView.dequeueReusableCell(withIdentifier: DeleteCell.identifier, for: indexPath) as! DeleteCell
+            return delCell
         }
         let cell = tableVIew.dequeueReusableCell(withIdentifier: TransactionInfoCell.identifer, for: indexPath) as! TransactionInfoCell
         cell.transaction = transactions[indexPath.row]
@@ -286,10 +296,12 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if transactions.isEmpty && UIDevice.isIpad {
+        if transactions.isEmpty && UIDevice.isIpad && indexPath.row == 0 {
             return 240
         }else if transactions.isEmpty && !UIDevice.isIpad {
             return tableVIew.bounds.height
+        }else if transactions.isEmpty && UIDevice.isIpad && indexPath.row == 1 {
+            return 44
         }else {
             return 53
         }
