@@ -275,6 +275,8 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
             return 2
         }else if !UIDevice.isIpad && transactions.isEmpty {
             return 1
+        }else if !transactions.isEmpty && UIDevice.isIpad {
+            return transactions.count + 1
         }else {
             return transactions.count
         }
@@ -289,6 +291,9 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
         }else if transactions.isEmpty && UIDevice.isIpad && indexPath.row == 1 {
             let delCell = tableView.dequeueReusableCell(withIdentifier: DeleteCell.identifier, for: indexPath) as! DeleteCell
             return delCell
+        }else if indexPath.row == transactions.count {
+            let delCell = tableView.dequeueReusableCell(withIdentifier: DeleteCell.identifier, for: indexPath) as! DeleteCell
+            return delCell
         }
         let cell = tableVIew.dequeueReusableCell(withIdentifier: TransactionInfoCell.identifer, for: indexPath) as! TransactionInfoCell
         cell.transaction = transactions[indexPath.row]
@@ -300,8 +305,10 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
             return 240
         }else if transactions.isEmpty && !UIDevice.isIpad {
             return tableVIew.bounds.height
-        }else if transactions.isEmpty && UIDevice.isIpad && indexPath.row == 1 {
+        }else if (transactions.isEmpty && UIDevice.isIpad && indexPath.row == 1) || transactions.count == indexPath.row {
             return 44
+        }else if !transactions.isEmpty && UIDevice.isIpad && indexPath.row == transactions.count - 1 {
+            return 71
         }else {
             return 53
         }
