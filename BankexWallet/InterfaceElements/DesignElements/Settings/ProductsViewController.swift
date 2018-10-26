@@ -59,7 +59,8 @@ extension ProductsViewController:UICollectionViewDataSource,UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 32, left: 15, bottom: 0, right: 15)
+        let topInset:CGFloat = UIDevice.isIpad ? 54 : 32
+        return UIEdgeInsets(top: topInset, left: 15, bottom: 0, right: 15)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

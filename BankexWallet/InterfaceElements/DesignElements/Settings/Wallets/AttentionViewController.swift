@@ -21,6 +21,7 @@ class AttentionViewController: BaseViewController {
     
     @IBOutlet weak var descriptionLabel:UILabel!
     @IBOutlet weak var titleLabel:UILabel!
+    @IBOutlet weak var heightConstraint:NSLayoutConstraint!
     var isFromDeveloper:Bool = false
     var publicAddress: String?
     var directionSegue:String = ""
@@ -42,6 +43,8 @@ class AttentionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = NSLocalizedString("Private Key", comment: "")
+        _ = heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 0.17 : 0.27)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
