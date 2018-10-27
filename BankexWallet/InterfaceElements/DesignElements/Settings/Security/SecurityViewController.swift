@@ -34,6 +34,8 @@ class SecurityViewController: UITableViewController {
         [openSwitch,sendSwitch,multitaskSwitch].forEach { $0?.onTintColor = UIColor.mainColor }
         tableView.tableFooterView = HeaderView()
         tableView.backgroundColor = UIColor.bgMainColor
+        tableView.separatorInset.right = UIDevice.isIpad ? 20 : 0
+        if UIDevice.isIpad { tableView.separatorInset.left = 36 } 
     }
     
     func setupNavbar() {
@@ -135,12 +137,15 @@ class SecurityViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView()
+        let xOffset:CGFloat = UIDevice.isIpad ? 36 : 16
         if SecuritySections.First.rawValue == section {
             headerView.title = NSLocalizedString("UseTouchID", comment: "")
+            headerView.titleFrame = CGRect(x: xOffset, y: 32, width: view.bounds.width - 55, height: 20)
         }else if SecuritySections.Second.rawValue == section {
             headerView.title = NSLocalizedString("Lock App", comment: "")
+            headerView.titleFrame = CGRect(x: xOffset, y: 32, width: view.bounds.width - 55, height: 20)
         }else {
-            headerView.titleFrame = CGRect(x: 16, y: 0, width: view.bounds.width - 55, height: 54)
+            headerView.titleFrame = CGRect(x: xOffset, y: 0, width: view.bounds.width - 55, height: 54)
             headerView.title = "If enabled the app requires PIN when switching between apps"
         }
         return headerView
