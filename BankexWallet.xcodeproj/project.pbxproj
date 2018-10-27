@@ -80,6 +80,10 @@
 		863156A22103B7AA00914F31 /* NetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863156A12103B7AA00914F31 /* NetworksViewController.swift */; };
 		863156A82103DC5300914F31 /* NetworksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863156A72103DC5300914F31 /* NetworksDataSource.swift */; };
 		863156AA2103DD2900914F31 /* NetworksDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863156A92103DD2900914F31 /* NetworksDelegate.swift */; };
+		863A6A5F2184EBAA00E4A8D3 /* GeneralInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863A6A5D2184EBAA00E4A8D3 /* GeneralInformationCell.swift */; };
+		863A6A602184EBAA00E4A8D3 /* GeneralInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 863A6A5E2184EBAA00E4A8D3 /* GeneralInformationCell.xib */; };
+		863A6A632184EDAF00E4A8D3 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863A6A612184EDAF00E4A8D3 /* InfoCell.swift */; };
+		863A6A642184EDAF00E4A8D3 /* InfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 863A6A622184EDAF00E4A8D3 /* InfoCell.xib */; };
 		8641716D2173626100F85F19 /* VIew+Routines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641716C2173626100F85F19 /* VIew+Routines.swift */; };
 		864171792177597300F85F19 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864171782177597300F85F19 /* ProductsViewController.swift */; };
 		8641717C2177599A00F85F19 /* ProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641717A2177599A00F85F19 /* ProductViewCell.swift */; };
@@ -329,6 +333,10 @@
 		863156A12103B7AA00914F31 /* NetworksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworksViewController.swift; sourceTree = "<group>"; };
 		863156A72103DC5300914F31 /* NetworksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworksDataSource.swift; sourceTree = "<group>"; };
 		863156A92103DD2900914F31 /* NetworksDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworksDelegate.swift; sourceTree = "<group>"; };
+		863A6A5D2184EBAA00E4A8D3 /* GeneralInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInformationCell.swift; sourceTree = "<group>"; };
+		863A6A5E2184EBAA00E4A8D3 /* GeneralInformationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneralInformationCell.xib; sourceTree = "<group>"; };
+		863A6A612184EDAF00E4A8D3 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		863A6A622184EDAF00E4A8D3 /* InfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoCell.xib; sourceTree = "<group>"; };
 		8641716C2173626100F85F19 /* VIew+Routines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VIew+Routines.swift"; sourceTree = "<group>"; };
 		864171782177597300F85F19 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		8641717A2177599A00F85F19 /* ProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewCell.swift; sourceTree = "<group>"; };
@@ -746,6 +754,7 @@
 		86315698210393E700914F31 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				863A6A5C2184EB8300E4A8D3 /* View */,
 				86FE6DEA21076933009AE44E /* Security */,
 				86D54B2F21050A8A0001A9AA /* Wallets */,
 				863156992103940300914F31 /* SettingsViewController.swift */,
@@ -770,6 +779,17 @@
 				86FE6DE921076288009AE44E /* Creation */,
 			);
 			path = Networks;
+			sourceTree = "<group>";
+		};
+		863A6A5C2184EB8300E4A8D3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				863A6A5D2184EBAA00E4A8D3 /* GeneralInformationCell.swift */,
+				863A6A5E2184EBAA00E4A8D3 /* GeneralInformationCell.xib */,
+				863A6A612184EDAF00E4A8D3 /* InfoCell.swift */,
+				863A6A622184EDAF00E4A8D3 /* InfoCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		864732C4214FC17A00519AE1 /* SupportingFiles */ = {
@@ -1245,6 +1265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86219C082180AB1300185EF6 /* SectionTableCell.xib in Resources */,
+				863A6A602184EBAA00E4A8D3 /* GeneralInformationCell.xib in Resources */,
 				86D7FB7F2149338B008245DE /* WalletTableViewCell.xib in Resources */,
 				867681C321831F4100C269ED /* DeleteCell.xib in Resources */,
 				00F0B9A921394C3800AC3013 /* Localizable.strings in Resources */,
@@ -1256,6 +1277,7 @@
 				8641717D2177599A00F85F19 /* ProductViewCell.xib in Resources */,
 				81942F11201B36A300F0AE29 /* Assets.xcassets in Resources */,
 				86D7FB8321494AE4008245DE /* TokenTableViewCell.xib in Resources */,
+				863A6A642184EDAF00E4A8D3 /* InfoCell.xib in Resources */,
 				862F877921527A10001D7DDE /* TransactionInfoCell.xib in Resources */,
 				861D2CDF214C072400A108C4 /* TokenInfoCell.xib in Resources */,
 				81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */,
@@ -1462,6 +1484,7 @@
 				F0FF1C7C205693480051D894 /* UtilTransactionsService.swift in Sources */,
 				864732E7214FCB8000519AE1 /* ViewController+Extensions.swift in Sources */,
 				86DB8A6F2105D12300B900F2 /* CreateNetworkViewController.swift in Sources */,
+				863A6A632184EDAF00E4A8D3 /* InfoCell.swift in Sources */,
 				861D2CD0214AA0AF00A108C4 /* EmptyTableCell.swift in Sources */,
 				86E15F10215BA02800F85AD2 /* UISearchBar+Extensions.swift in Sources */,
 				8649F1A22167AC9F00EAFDF9 /* AppDelegate+Extenstions.swift in Sources */,
@@ -1490,6 +1513,7 @@
 				E231DDC7210FDC120033E2FC /* CreateTokenSearchBarAndTextFieldDelegate.swift in Sources */,
 				862067F22178AFDB0099A15D /* TimerCell.swift in Sources */,
 				864732DA214FC45000519AE1 /* Collection+Extensions.swift in Sources */,
+				863A6A5F2184EBAA00E4A8D3 /* GeneralInformationCell.swift in Sources */,
 				003D4BC820FF44D30096FEBA /* CollectionViewAfterManager.swift in Sources */,
 				F00E461A2075212900387B96 /* MainInfoController.swift in Sources */,
 				863156A82103DC5300914F31 /* NetworksDataSource.swift in Sources */,
