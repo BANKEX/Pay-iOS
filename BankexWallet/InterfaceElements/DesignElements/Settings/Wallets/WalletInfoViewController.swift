@@ -131,6 +131,14 @@ extension WalletInfoViewController:UITableViewDelegate,UITableViewDataSource {
         return headerView
     }
     
+    func presentPopUp(_ vc:RenameViewController) {
+        let nv = UINavigationController(rootViewController: vc)
+        nv.preferredContentSize = CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height/2)
+        nv.modalPresentationStyle = .formSheet
+        vc.addCancelButtonIfNeed()
+        splitViewController?.present(nv, animated: true, completion: nil)
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
@@ -141,7 +149,16 @@ extension WalletInfoViewController:UITableViewDelegate,UITableViewDataSource {
             case 0:
                 self.performSegue(withIdentifier: "ShowPrivateKey", sender: nil)
             case 1:
-                self.performSegue(withIdentifier: "renameSegue", sender: nil)
+                if UIDevice.isIpad {
+                    let renameVC = CreateVC(byName: "RenameViewController") as! RenameViewController
+                    if let nameWallet = publicName {
+                        renameVC.selectedWalletName = nameWallet
+                        renameVC.delegate = self
+                    }
+                    presentPopUp(renameVC)
+                }else {
+                  self.performSegue(withIdentifier: "renameSegue", sender: nil)
+                }
             case 2:
                 //Delete
                 if isSimilarWallet() {
