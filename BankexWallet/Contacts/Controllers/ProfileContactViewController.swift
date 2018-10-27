@@ -135,20 +135,13 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     @IBAction func editContact() {
         if UIDevice.isIpad {
             let editContact = CreateVC(byName: "EditViewController") as! EditViewController
+            editContact.addCancelButtonIfNeed()
+            editContact.delegate = self
             editContact.selectedContact = selectedContact
-            presentPopUp(editContact)
+            presentPopUp(editContact, size: CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height/2))
         }else {
             self.performSegue(withIdentifier: "editSegue", sender: nil)
         }
-    }
-    
-    func presentPopUp(_ vc:EditViewController) {
-        let nv = UINavigationController(rootViewController: vc)
-        nv.preferredContentSize = CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height/2)
-        nv.modalPresentationStyle = .formSheet
-        vc.addCancelButtonIfNeed()
-        vc.delegate = self
-        splitViewController?.present(nv, animated: true, completion: nil)
     }
 
 

@@ -34,7 +34,10 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     
     @IBAction func editButtonTapped() {
         if UIDevice.isIpad {
-            presentPopUp()
+            let editVC = CreateVC(byName: "EditWalletNameController") as! EditWalletNameController
+            editVC.addCancelButtonIfNeed()
+            editVC.delegate = self
+            presentPopUp(editVC, shower: tabBarController)
         }else {
             performSegue(withIdentifier: "showEdit", sender: nil)
         }
@@ -64,14 +67,6 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func presentPopUp() {
-        let editVC = CreateVC(byName: "EditWalletNameController") as! EditWalletNameController
-        let nv = UINavigationController(rootViewController: editVC)
-        nv.modalPresentationStyle = .formSheet
-        editVC.addCancelButtonIfNeed()
-        editVC.delegate = self
-        tabBarController?.present(nv, animated: true, completion: nil)
-    }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         DispatchQueue.main.async {

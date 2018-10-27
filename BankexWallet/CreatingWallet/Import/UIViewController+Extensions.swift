@@ -22,6 +22,17 @@ extension UIViewController {
         if let direct = direction { popover.permittedArrowDirections = [direct] } else { popover.permittedArrowDirections = [] }
     }
     
+    func presentPopUp(_ vc:UIViewController, size:CGSize? = nil , shower:UIViewController? = nil) {
+        let nv = UINavigationController(rootViewController: vc)
+        if let size = size {
+           nv.preferredContentSize = size
+        }
+        nv.modalPresentationStyle = .formSheet
+        if let shower = shower {
+            shower.present(nv, animated: true, completion: nil)
+        }else { splitViewController?.present(nv, animated: true, completion: nil) }
+    }
+    
     
     func selectSection(_ section:Int) {
         guard let nav = splitViewController?.viewControllers[0] as? UINavigationController else { return }

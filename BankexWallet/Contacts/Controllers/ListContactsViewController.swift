@@ -232,21 +232,13 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     }
     
     
-    func presentPopUp(_ vc:AddContactViewController) {
-        let nv = UINavigationController(rootViewController: vc)
-        nv.preferredContentSize = CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height * 0.7)
-        nv.modalPresentationStyle = .formSheet
-        vc.addCancelButtonIfNeed()
-        vc.addSaveButtonIfNeed()
-        self.present(nv, animated: true, completion: nil)
-    }
-    
-    
     @objc func transitionToAddContact() {
         if UIDevice.isIpad {
             let createContactVC = CreateVC(byName: "AddContactViewController") as! AddContactViewController
             createContactVC.delegate = self
-            presentPopUp(createContactVC)
+            createContactVC.addCancelButtonIfNeed()
+            createContactVC.addSaveButtonIfNeed()
+            presentPopUp(createContactVC, size: CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height * 0.7), shower: self)
         }else {
             performSegue(withIdentifier: "addContactSegue", sender: self)
         }
