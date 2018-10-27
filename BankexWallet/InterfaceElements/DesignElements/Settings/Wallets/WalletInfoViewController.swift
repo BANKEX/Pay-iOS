@@ -157,13 +157,25 @@ extension WalletInfoViewController:UITableViewDelegate,UITableViewDataSource {
                 //Delete
                 if isSimilarWallet() {
                     let alertVC = UIAlertController.common(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("CantDel", comment: ""))
+                    //alertVC.addPopover(in: view, rect: CGRect(x: 0, y: 0, width: 270, height: 100))
                     present(alertVC, animated: true)
                     return
                 }
-                let alertViewController = UIAlertController.destructive(button: NSLocalizedString("Delete", comment: "")) {
-                    if let addr = self.publicAddress {
-                        self.walletsService.delete(address: addr)
-                        self.navigationController?.popViewController(animated: true)
+                let alertViewController:UIAlertController
+                if UIDevice.isIpad {
+                    alertViewController = UIAlertController.destructiveIpad(title: "Delete Wallet", description: "You are going to delete your wallet. This action can’t be undone.", button: NSLocalizedString("Delete", comment: ""), action: {
+                        if let addr = self.publicAddress {
+                            self.walletsService.delete(address: addr)
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    })
+                    alertViewController.addPopover(in: view, rect: CGRect(x: 0, y: 0, width: 270, height: 140))
+                }else {
+                    alertViewController = UIAlertController.destructive(button: NSLocalizedString("Delete", comment: "")) {
+                        if let addr = self.publicAddress {
+                            self.walletsService.delete(address: addr)
+                            self.navigationController?.popViewController(animated: true)
+                        }
                     }
                 }
                 present(alertViewController, animated: true)
@@ -174,4 +186,5 @@ extension WalletInfoViewController:UITableViewDelegate,UITableViewDataSource {
         
     }
 }
+
 
