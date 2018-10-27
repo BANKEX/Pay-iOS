@@ -86,7 +86,11 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     
     
     @objc func back() {
-        navigationController?.popViewController(animated: true)
+        if UIDevice.isIpad {
+            dismiss(animated: true, completion: nil)
+        }else {
+           navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func joinToConnection(_ sender:Any) {

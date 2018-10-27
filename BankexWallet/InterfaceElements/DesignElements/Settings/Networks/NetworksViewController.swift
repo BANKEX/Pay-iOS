@@ -67,12 +67,29 @@ class NetworksViewController: BaseViewController {
         }
     }
     
+    func presentPopOver(_ vc:CreateNetworkViewController) {
+        let nv = UINavigationController(rootViewController: vc)
+        nv.modalPresentationStyle = .popover
+        if let popOver = nv.popoverPresentationController {
+            popOver.permittedArrowDirections = .up
+            popOver.sourceView = view
+            popOver.sourceRect = CGRect(x: view.bounds.maxX - 45, y: view.bounds.minY - 600, width: 375, height: 600)
+        }
+        nv.preferredContentSize = CGSize(width: 375, height: splitViewController!.view.bounds.height * 0.55)
+        self.present(nv, animated: true, completion: nil)
+    }
+
+    
     
     @objc func createNetworkTapped(_ sender:UIButton) {
-        performSegue(withIdentifier: "createNetworkSegue", sender: self)
+        if UIDevice.isIpad {
+            let addNetworkVC = CreateVC(byName: "CreateNetworkViewController") as! CreateNetworkViewController
+            presentPopOver(addNetworkVC)
+        }else {
+            performSegue(withIdentifier: "createNetworkSegue", sender: self)
+        }
     }
     
 }
-
 
 
