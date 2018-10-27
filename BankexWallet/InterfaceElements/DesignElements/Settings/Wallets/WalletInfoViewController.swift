@@ -19,6 +19,7 @@ class WalletInfoViewController: BaseViewController {
     let generalCellIdentifier = "GeneralInformationCell"
     let infoCellIdentifier = "InfoCell"
     var publicName:String?
+    var secondWidth:CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,10 @@ class WalletInfoViewController: BaseViewController {
     }
     
     func setupClipboard() {
-        clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58))
+        if UIDevice.isIpad {
+            secondWidth = view.bounds.width - splitViewController!.primaryColumnWidth
+        }
+        clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: UIDevice.isIpad ? secondWidth! : view.bounds.width/2, height: 58))
         clipboardView.backgroundColor = UIColor.clipboardColor
         clipboardView.title = NSLocalizedString("AddrCopied", comment: "")
         view.addSubview(clipboardView)
