@@ -108,6 +108,7 @@ class BackupPassphraseViewController: UIViewController {
     @IBAction func share() {
         guard let passphrase = passphraseLabel.text else { return }
         let activityVC = UIActivityViewController(activityItems: [passphrase], applicationActivities: nil)
+        activityVC.addPopover(in: view, rect: CGRect(x: view.bounds.width - 34, y: 0, width: 0, height: 0), .up)
         present(activityVC, animated: true)
     }
     
