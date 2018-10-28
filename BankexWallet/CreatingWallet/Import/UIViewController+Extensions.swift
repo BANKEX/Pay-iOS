@@ -33,6 +33,13 @@ extension UIViewController {
         }else { splitViewController?.present(nv, animated: true, completion: nil) }
     }
     
+    func secondaryVC() -> UINavigationController? {
+        return splitViewController?.viewControllers.last as? UINavigationController
+    }
+    func primaryVC() -> UIViewController? {
+        return splitViewController?.viewControllers.first as? UINavigationController
+    }
+    
     
     func selectSection(_ section:Int) {
         guard let nav = splitViewController?.viewControllers[0] as? UINavigationController else { return }

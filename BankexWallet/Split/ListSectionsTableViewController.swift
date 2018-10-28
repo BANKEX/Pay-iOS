@@ -26,8 +26,12 @@ class ListSectionsViewController: UIViewController {
     }
     
     func selectRow(_ row:Int) {
-        tableView.selectRow(at: IndexPath(row: row, section: 0), animated: true, scrollPosition: .none)
+        chooseRowColorIfNeeded(row)
         tableView(tableView, didSelectRowAt: IndexPath(row: row, section: 0))
+    }
+    
+    func chooseRowColorIfNeeded(_ row:Int) {
+        tableView.selectRow(at: IndexPath(row: row, section: 0), animated: true, scrollPosition: .none)
     }
     
 

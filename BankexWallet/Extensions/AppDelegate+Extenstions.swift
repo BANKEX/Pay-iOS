@@ -18,6 +18,13 @@ extension AppDelegate {
     }
     
     var isLaunched:Bool {
+        if UIDevice.isIpad {
+            if window?.rootViewController is UISplitViewController {
+                return true
+            }else {
+                return false
+            }
+        }
         guard let _ = window?.rootViewController as? BaseTabBarController else { return false }
         return true
     }
