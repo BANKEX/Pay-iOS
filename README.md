@@ -9,8 +9,7 @@
  </p>
  
  <br>
- 
-[![Swift](https://img.shields.io/badge/contact-%40BANKEX-blue.svg)](https://twitter.com/BANKEX)
+[![Twitter](https://img.shields.io/badge/contact-%40BANKEX-blue.svg)](https://twitter.com/BANKEX)
 [![Platform](https://img.shields.io/badge/Platform-iOS%2B10.0-purple.svg)](https://developer.apple.com/swift)
 [![Build Status](https://travis-ci.org/BANKEX/BankexWalletIOS.svg?branch=develop)](https://travis-ci.org/BANKEX/BankexWalletIOS)
 
