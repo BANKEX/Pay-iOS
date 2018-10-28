@@ -41,7 +41,7 @@ class WalletInfoViewController: BaseViewController {
         if UIDevice.isIpad {
             secondWidth = view.bounds.width - splitViewController!.primaryColumnWidth
         }
-        clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: UIDevice.isIpad ? secondWidth! : view.bounds.width/2, height: 58))
+        clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: UIDevice.isIpad ? secondWidth! : view.bounds.width, height: 58))
         clipboardView.backgroundColor = UIColor.clipboardColor
         clipboardView.title = NSLocalizedString("AddrCopied", comment: "")
         view.addSubview(clipboardView)

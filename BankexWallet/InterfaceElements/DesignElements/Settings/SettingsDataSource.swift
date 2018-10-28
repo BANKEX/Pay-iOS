@@ -35,7 +35,9 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let xOffset:CGFloat = UIDevice.isIpad ? 36 : 16
         let headerView = HeaderView()
+        headerView.titleFrame = CGRect(x: xOffset, y: 32.0, width: headerView.frame.width, height: 20)
         switch section {
         case 0: headerView.title = NSLocalizedString("General", comment: "")
         case 1: headerView.title = NSLocalizedString("Support", comment: "")
