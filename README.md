@@ -8,7 +8,8 @@
  <a href="https://itunes.apple.com/ru/app/bankex-pay/id1411403963?l=en&mt=8"><img src="/Badge/appStore.svg"/></a>
  </p>
  
- <br>
+<br>
+ 
 [![Twitter](https://img.shields.io/badge/contact-%40BANKEX-blue.svg)](https://twitter.com/BANKEX)
 [![Platform](https://img.shields.io/badge/Platform-iOS%2B10.0-purple.svg)](https://developer.apple.com/swift)
 [![Build Status](https://travis-ci.org/BANKEX/BankexWalletIOS.svg?branch=develop)](https://travis-ci.org/BANKEX/BankexWalletIOS)
