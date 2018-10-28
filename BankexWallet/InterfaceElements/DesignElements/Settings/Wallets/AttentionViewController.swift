@@ -51,14 +51,13 @@ class AttentionViewController: BaseViewController {
         super.viewWillAppear(animated)
         state = isFromDeveloper ? .CustomNetwork : .PrivateKey
         navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.errorColor
+        UIApplication.shared.statusBarView?.backgroundColor = nil
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
     }
     

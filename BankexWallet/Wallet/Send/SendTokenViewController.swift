@@ -130,7 +130,7 @@ Retriable,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = nil
         UIApplication.shared.statusBarStyle = .lightContent
         updateUI()
     }

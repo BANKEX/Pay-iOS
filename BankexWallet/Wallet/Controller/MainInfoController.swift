@@ -147,7 +147,6 @@ class MainInfoController: BaseViewController,
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIApplication.shared.statusBarStyle = .default
-        UIApplication.shared.statusBarView?.backgroundColor = .white
         navigationController?.navigationBar.isHidden = false
     }
     
@@ -275,7 +274,7 @@ class MainInfoController: BaseViewController,
     
     private func configureNavBar() {
         navigationController?.navigationBar.isHidden = true
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = nil
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
