@@ -60,7 +60,7 @@ class EditViewController: BaseViewController {
         title = UIDevice.isIpad ? "Edit Contact" : ""
         navigationController?.navigationBar.barTintColor = UIDevice.isIpad ? UIColor.white : UIColor.mainColor
         navigationController?.navigationBar.tintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? nil : UIColor.mainColor
         UIApplication.shared.statusBarStyle = .lightContent
         updateUI()
     }

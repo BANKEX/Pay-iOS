@@ -79,6 +79,9 @@ class RenameViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if UIDevice.isIpad {
+            UIApplication.shared.statusBarView?.backgroundColor = nil
+        }
         updateUI()
     }
     

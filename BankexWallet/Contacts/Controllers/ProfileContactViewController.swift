@@ -157,7 +157,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     
     private func manageTop(isHide:Bool = true) {
         if isHide {
-            navigationController?.setNavigationBarHidden(isHide, animated: true)
+            navigationController?.setNavigationBarHidden(isHide, animated: false)
             navigationController?.navigationBar.barTintColor = UIColor.mainColor
             navigationController?.navigationBar.tintColor = .white
             UIApplication.shared.statusBarView?.backgroundColor = nil
