@@ -72,6 +72,7 @@ class PasscodeEnterController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
         splitViewController?.show()
         UIView.animate(withDuration: 0.1) {
             self.splitViewController?.preferredPrimaryColumnWidthFraction = 0

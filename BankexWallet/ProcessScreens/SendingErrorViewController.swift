@@ -60,7 +60,8 @@ class SendingErrorViewController: BaseViewController {
         splitViewController?.show()
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = UIColor.mainColor
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
+        statusBarColor(UIDevice.isIpad ? nil : UIColor.mainColor)
+        UIApplication.shared.statusBarStyle = .lightContent
         navigationController?.navigationBar.tintColor = .white
     }
     

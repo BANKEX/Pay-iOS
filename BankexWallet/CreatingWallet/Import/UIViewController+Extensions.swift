@@ -65,7 +65,7 @@ extension UIViewController {
         navigationController?.navigationBar.barTintColor = color
     }
     
-    public func statusBarColor(_ color:UIColor) {
+    public func statusBarColor(_ color:UIColor?) {
         UIApplication.shared.statusBarView?.backgroundColor = color
     }
     

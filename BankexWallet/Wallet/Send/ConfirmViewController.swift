@@ -186,7 +186,7 @@ class ConfirmViewController: UITableViewController {
         }
         navBarColor(UIColor.mainColor)
         navBarTintColor(.white)
-        statusBarColor(UIColor.mainColor)
+        statusBarColor(UIDevice.isIpad ? nil : UIColor.mainColor)
         UIApplication.shared.statusBarStyle = .lightContent
     }
 }
