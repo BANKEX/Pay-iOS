@@ -104,23 +104,49 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
     }
     
     @IBAction func createWalletTapped(_ sender:Any) {
-        showLoading()
-        let generatedPassphrase = passphraseTextView.text!.replacingOccurrences(of: "\n", with: "")
-        let nameWallet = nameTextField.text ?? ""
-        service.createNewHDWallet(with: nameWallet, mnemonics: generatedPassphrase, mnemonicsPassword: "", walletPassword: "BANKEXFOUNDATION") { (_, error) in
-            guard error == nil else {
-                self.showCreationAlert()
-                return
-            }
-            Amplitude.instance().logEvent("Wallet Imported")
-            self.hideLoading()
+        if UIDevice.isIpad {
             if !UserDefaults.standard.bool(forKey: "passcodeExists") {
-                self.performSegue(withIdentifier: "goToPinFromImportPassphrase", sender: self)
-            } else {
-                self.performSegue(withIdentifier: "showProcessFromImportPassphrase", sender: self)
+                //PresentPasscodeLock
+                let passcodeLock = CreateVC(byName: "PasscodeIpadVC") as! PasscodeIpadVC
+                passcodeLock.delegate = self
+                passcodeLock.modalPresentationStyle = .formSheet
+                passcodeLock.preferredContentSize = CGSize(width: 320, height: 600)
+                present(passcodeLock, animated: true, completion: nil)
+            }else {
+                showLoading()
+                let generatedPassphrase = passphraseTextView.text!.replacingOccurrences(of: "\n", with: "")
+                let nameWallet = nameTextField.text ?? ""
+                service.createNewHDWallet(with: nameWallet, mnemonics: generatedPassphrase, mnemonicsPassword: "", walletPassword: "BANKEXFOUNDATION") { (_, error) in
+                    guard error == nil else {
+                        self.showCreationAlert()
+                        return
+                    }
+                    Amplitude.instance().logEvent("Wallet Imported")
+                    self.hideLoading()
+                    self.performSegue(withIdentifier: "showProcessFromImportPassphrase", sender: self)
+                }
+            }
+        }else {
+            showLoading()
+            let generatedPassphrase = passphraseTextView.text!.replacingOccurrences(of: "\n", with: "")
+            let nameWallet = nameTextField.text ?? ""
+            service.createNewHDWallet(with: nameWallet, mnemonics: generatedPassphrase, mnemonicsPassword: "", walletPassword: "BANKEXFOUNDATION") { (_, error) in
+                guard error == nil else {
+                    self.showCreationAlert()
+                    return
+                }
+                Amplitude.instance().logEvent("Wallet Imported")
+                self.hideLoading()
+                if !UserDefaults.standard.bool(forKey: "passcodeExists") {
+                    self.performSegue(withIdentifier: "goToPinFromImportPassphrase", sender: self)
+                } else {
+                    self.performSegue(withIdentifier: "showProcessFromImportPassphrase", sender: self)
+                }
             }
         }
     }
+    
+    
     
     
     
@@ -241,6 +267,24 @@ extension UITextView {
         }
     }
 }
+
+extension WalletBIP32Controller:PasscodeIpadVCDelegate {
+    func didCreate() {
+        showLoading()
+        let generatedPassphrase = passphraseTextView.text!.replacingOccurrences(of: "\n", with: "")
+        let nameWallet = nameTextField.text ?? ""
+        service.createNewHDWallet(with: nameWallet, mnemonics: generatedPassphrase, mnemonicsPassword: "", walletPassword: "BANKEXFOUNDATION") { (_, error) in
+            guard error == nil else {
+                self.showCreationAlert()
+                return
+            }
+            Amplitude.instance().logEvent("Wallet Imported")
+            self.hideLoading()
+            self.router.exitFromTheScreeniPad()
+            }
+        }
+    }
+
 
 
 

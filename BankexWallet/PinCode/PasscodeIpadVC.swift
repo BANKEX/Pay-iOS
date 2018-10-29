@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol PasscodeIpadVCDelegate:class {
+    func didCreate()
+}
 
 class PasscodeIpadVC: BaseViewController {
     
@@ -17,6 +20,8 @@ class PasscodeIpadVC: BaseViewController {
         case ready = "Ready"
         case wrong = "Wrong passcode"
     }
+    
+    weak var delegate:PasscodeIpadVCDelegate?
         
     let service = SingleKeyServiceImplementation()
     let router = WalletCreationTypeRouterImplementation()
@@ -90,13 +95,13 @@ class PasscodeIpadVC: BaseViewController {
         } catch {
             fatalError("Error updating keychain - \(error)")
         }
+        delegate?.didCreate()
         UserDefaults.standard.set(true, forKey: "passcodeExists")
         UserDefaults.standard.synchronize()
         if newWallet {
             dismiss(animated: true, completion: nil)
         } else {
             dismiss(animated: true, completion: nil)
-            self.router.exitFromTheScreen()
         }
     }
     
