@@ -86,7 +86,6 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
         nameTextField.autocorrectionType = .no
     }
     
-
     
     //MARK: - IBActions
     @IBAction func clearTextView(_ sender:Any) {
@@ -106,7 +105,6 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
     @IBAction func createWalletTapped(_ sender:Any) {
         if UIDevice.isIpad {
             if !UserDefaults.standard.bool(forKey: "passcodeExists") {
-                //PresentPasscodeLock
                 let passcodeLock = CreateVC(byName: "PasscodeIpadVC") as! PasscodeIpadVC
                 passcodeLock.delegate = self
                 passcodeLock.modalPresentationStyle = .formSheet
