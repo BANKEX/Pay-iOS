@@ -86,6 +86,7 @@ class CreateTokenController: BaseViewController {
         }
         DispatchQueue.main.async {
             if self.needAddTokenAnimation {
+                self.needAddTokenAnimation = false
                 self.supportLbl.text = NSLocalizedString("TokenAdded", comment: "")
                 UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
                     self.supportView.frame.origin.y = self.view.bounds.height - 58.0
@@ -98,7 +99,6 @@ class CreateTokenController: BaseViewController {
             }
             self.searchBar(self.searchBar, textDidChange: searchText)
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -216,6 +216,12 @@ extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
         }
         chosenToken = tokenToAdd
         performSegue(withIdentifier: "addChosenToken", sender: self)
+    }
+}
+
+extension CreateTokenController:TokenInfoControllerDelegate {
+    func didAddToken() {
+        //
     }
 }
 
