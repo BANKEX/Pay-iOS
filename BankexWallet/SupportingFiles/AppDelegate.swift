@@ -176,6 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == FavoriteModel.domainIdentifier || userActivity.activityType == CSSearchableItemActionType {
             if let objectID = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String {
@@ -198,6 +199,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             self.selectedContact = contact
                         }
                     }
+                }else if let splitVC = window?.rootViewController as? UISplitViewController {
+                    let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
+                    let nav = BaseNavigationController(rootViewController: listContactsVC)
+                    let profileVC = CreateVC(byName: "ProfileContactViewController") as! ProfileContactViewController
+                    service.contactByAddress(objectID) { contact in
+                        if let contact = contact {
+                            profileVC.selectedContact = contact
+                            nav.pushViewController(profileVC, animated: false)
+                        }
+                    }
+                    splitVC.showDetailViewController(nav, sender: nil)
                 }
             }
         }

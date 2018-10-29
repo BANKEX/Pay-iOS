@@ -159,6 +159,16 @@ class HomeViewController: BaseViewController {
     func catchUserActivity() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if let selectedContact = appDelegate.selectedContact {
+            appDelegate.selectedContact = nil
+            if UIDevice.isIpad {
+                let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
+                let nav = BaseNavigationController(rootViewController: listContactsVC)
+                let profileVC = CreateVC(byName: "ProfileContactViewController") as! ProfileContactViewController
+                profileVC.selectedContact = selectedContact
+                nav.pushViewController(profileVC, animated: false)
+                splitViewController?.showDetailViewController(nav, sender: nil)
+                return
+            }
             tabBarController?.selectedIndex = 2
             let navVC = tabBarController?.viewControllers![2] as? BaseNavigationController
             navVC?.popToRootViewController(animated: false)
