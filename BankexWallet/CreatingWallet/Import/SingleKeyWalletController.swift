@@ -10,6 +10,7 @@ import UIKit
 import QRCodeReader
 import Amplitude_iOS
 import web3swift
+import GrowingTextView
 
 class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWithContentProtocol,QRReaderVCDelegate {
     
@@ -22,7 +23,7 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
     
     //MARK: - IBOutlets
     @IBOutlet weak var clearButton:UIButton!
-    @IBOutlet weak var privateKeyTextView:UITextView!
+    @IBOutlet weak var privateKeyTextView:GrowingTextView!
     @IBOutlet weak var nameWalletTextField:UITextField!
     @IBOutlet weak var separator1:UIView!
     @IBOutlet weak var separator2:UIView!
@@ -58,16 +59,12 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        automaticallyAdjustsScrollViewInsets = false
         configure()
         state = .notAvailable
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let text = privateKeyTextView.text {
-            if text == "\n" {
-                privateKeyTextView.applyPlaceHolderText(with: "Enter your passphrase")
-            }
-        }
         view.endEditing(true)
     }
     
@@ -84,8 +81,9 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
         privateKeyTextView.delegate = self
         nameWalletTextField.delegate = self
         nameWalletTextField.autocorrectionType = .no
-        privateKeyTextView.contentInset.bottom = 10.0
-        privateKeyTextView.applyPlaceHolderText(with: NSLocalizedString("Enter your private key", comment: ""))
+        privateKeyTextView.placeholder = NSLocalizedString("Enter your private key", comment: "")
+        privateKeyTextView.placeholderColor = UIColor.setColorForTextViewPlaceholder()
+        privateKeyTextView.trimWhiteSpaceWhenEndEditing = false
         privateKeyTextView.autocorrectionType = .no
         privateKeyTextView.autocapitalizationType = .none
     }
@@ -94,8 +92,7 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
     
     //MARK: - IBActions
     @IBAction func clearTextView(_ sender:Any) {
-        privateKeyTextView.applyPlaceHolderText(with: NSLocalizedString("Enter your private key", comment: ""))
-        privateKeyTextView.moveCursorToStart()
+        privateKeyTextView.text = ""
         state = .notAvailable
     }
     
@@ -146,7 +143,6 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
         if textField.returnKeyType == .done && importButton.isEnabled {
             createPrivateKeyWallet(self)
         }else if textField.returnKeyType == .next {
-            privateKeyTextView.applyNotHolder()
             privateKeyTextView.becomeFirstResponder()
         }
         return true
@@ -170,14 +166,11 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
     @IBAction func bufferDidTapped() {
         if let string = UIPasteboard.general.string  {
             privateKeyTextView.text = string
-            privateKeyTextView.textColor = .black
             state = .available
         }
     }
     
     func didScan(_ result: String) {
-        privateKeyTextView.applyNotHolder()
-        
         if let parsed = Web3.EIP67CodeParser.parse(result) {
             privateKeyTextView.text = parsed.address.address
         }else {
@@ -201,5 +194,40 @@ extension SingleKeyWalletController:PasscodeIpadVCDelegate {
     }
 }
 
+
+extension SingleKeyWalletController:GrowingTextViewDelegate  {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        textView.returnKeyType = importButton.isEnabled ? .done : .next
+        separator1.backgroundColor = UIColor.mainColor
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newLength = textView.text.utf16.count + text.utf16.count - range.length
+        if newLength > 0 {
+            state = .available
+            if textView == privateKeyTextView && textView.text.isEmpty {
+                if text.utf16.count == 0 {
+                    return false
+                }
+            }
+            return true
+        }else {
+            state = .notAvailable
+            textView.text = ""
+            return false
+        }
+    }
+    
+    func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        separator1.backgroundColor = UIColor.separatorColor
+    }
+}
 
 
