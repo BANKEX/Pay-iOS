@@ -17,6 +17,8 @@ class BaseSplitViewController: UISplitViewController {
         presentsWithGesture = false
         preferredPrimaryColumnWidthFraction = 0.4
     }
+    
+    
 }
 
 extension UISplitViewController {

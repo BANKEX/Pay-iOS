@@ -122,6 +122,8 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
         }
     }
     
+    
+    
     func showLoading() {
         UIView.animate(withDuration: 0.1) {
             self.containerView.alpha = 1.0

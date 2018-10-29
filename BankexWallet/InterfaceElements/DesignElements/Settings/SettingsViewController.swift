@@ -35,6 +35,11 @@ class SettingsViewController: UITableViewController {
         commonSetup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //TODO
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         walletService.updateSelectedWallet()

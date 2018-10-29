@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIColor {
-    
+
     static let circleColor = UIColor(hex:"C7CCD4")
     static let mainColor = UIColor(hex: "0DA9FF")
     static let importColor = UIColor(hex: "718093")
@@ -24,6 +24,7 @@ extension UIColor {
     static let sendColor = UIColor(hex:"FFB900")
     static let receiveColor = UIColor(hex:"03B221")
     static let greenColor = UIColor(hex:"0DBA26")
+    static let borderColor = UIColor(hex:"8A8A8F").withAlphaComponent(0.3)
     
     struct QRReader {
         static let successColor = UIColor(hex: "03B221")
