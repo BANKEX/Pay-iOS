@@ -131,7 +131,7 @@ Retriable,UITextFieldDelegate {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
         UIApplication.shared.statusBarView?.backgroundColor = nil
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
         updateUI()
     }
     

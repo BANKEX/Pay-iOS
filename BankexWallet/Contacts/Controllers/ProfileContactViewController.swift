@@ -161,7 +161,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
             navigationController?.navigationBar.barTintColor = UIColor.mainColor
             navigationController?.navigationBar.tintColor = .white
             UIApplication.shared.statusBarView?.backgroundColor = nil
-            UIApplication.shared.statusBarStyle = .lightContent
+            UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
             return
         }
         navigationController?.isNavigationBarHidden = isHide

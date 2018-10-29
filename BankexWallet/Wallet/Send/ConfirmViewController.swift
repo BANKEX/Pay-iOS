@@ -55,7 +55,7 @@ class ConfirmViewController: UITableViewController {
     }
 
     func prepareNavBar() {
-        navigationItem.titleView = UIView.titleLabel()
+        navigationItem.titleView = UIDevice.isIpad ? UIView.titleLabel(.black) : UIView.titleLabel()
     }
     
     func configureTableView() {
@@ -184,10 +184,10 @@ class ConfirmViewController: UITableViewController {
             UIApplication.shared.statusBarStyle = .default
             return
         }
-        navBarColor(UIColor.mainColor)
-        navBarTintColor(.white)
+        navBarColor(UIDevice.isIpad ? .white : UIColor.mainColor)
+        navBarTintColor(UIDevice.isIpad ? UIColor.mainColor : .white)
         statusBarColor(UIDevice.isIpad ? nil : UIColor.mainColor)
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
     }
 }
 
