@@ -52,6 +52,7 @@ class PasscodeIpadVC: BaseViewController {
         navigationBar.shadowImage = UIImage()
         numsIcons = [firstnum, secondNum, thirdNum, fourthNum]
         changePasscodeStatus(.new)
+        configureKeyboardButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,6 +98,19 @@ class PasscodeIpadVC: BaseViewController {
             dismiss(animated: true, completion: nil)
             self.router.exitFromTheScreen()
         }
+    }
+    
+    func addShadow() {
+        btns.forEach {
+            $0.layer.shadowColor = UIColor.shadowColor.cgColor
+            $0.layer.shadowOffset = CGSize(width: 0, height: 1)
+            $0.layer.shadowOpacity = 1
+            $0.layer.shadowRadius = 0
+        }
+    }
+    func configureKeyboardButtons() {
+        addShadow()
+        btns.forEach { $0.layer.cornerRadius = 4.26 }
     }
     
     func changeNumsIcons(_ nums: Int) {

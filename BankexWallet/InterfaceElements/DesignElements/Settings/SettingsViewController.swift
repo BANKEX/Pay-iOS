@@ -21,7 +21,6 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var nameNetworkLabel:UILabel!
     
     
-    
     let managerReferences = ManagerReferences()
     let walletService = SingleKeyServiceImplementation()
     let networkService = NetworksServiceImplementation()
@@ -35,10 +34,7 @@ class SettingsViewController: UITableViewController {
         commonSetup()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //TODO
-    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
