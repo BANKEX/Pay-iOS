@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QRCodeReader
 import Amplitude_iOS
 import web3swift
 import GrowingTextView
