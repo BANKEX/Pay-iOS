@@ -97,14 +97,12 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
     }
     
     
+    
+    
     @IBAction func createPrivateKeyWallet(_ sender:Any) {
         if UIDevice.isIpad {
             if !UserDefaults.standard.bool(forKey: "passcodeExists") {
-                let passcodeVC = CreateVC(byName: "PasscodeIpadVC") as! PasscodeIpadVC
-                passcodeVC.modalPresentationStyle = .formSheet
-                passcodeVC.delegate = self
-                passcodeVC.preferredContentSize = CGSize(width: 320, height: 600)
-                present(passcodeVC, animated: true, completion: nil)
+                presentPasscodeIpad()
             }else {
                 service.createNewSingleAddressWallet(with: nameWalletTextField.text, fromText: privateKeyTextView.text, password: nil) { (error) in
                     if let _ = error {
@@ -114,16 +112,17 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
                     self.performSegue(withIdentifier: "showProcessFromImportSecretKey", sender: self)
                 }
             }
-        }
-        service.createNewSingleAddressWallet(with: nameWalletTextField.text, fromText: privateKeyTextView.text, password: nil) { (error) in
-            if let _ = error {
-                self.showCreationAlert()
-            }
-            Amplitude.instance().logEvent("Wallet Imported")
-            if !UserDefaults.standard.bool(forKey: "passcodeExists") {
-                self.performSegue(withIdentifier: "goToPinFromImportSingleKey", sender: self)
-            } else {
-                self.performSegue(withIdentifier: "showProcessFromImportSecretKey", sender: self)
+        }else {
+            service.createNewSingleAddressWallet(with: nameWalletTextField.text, fromText: privateKeyTextView.text, password: nil) { (error) in
+                if let _ = error {
+                    self.showCreationAlert()
+                }
+                Amplitude.instance().logEvent("Wallet Imported")
+                if !UserDefaults.standard.bool(forKey: "passcodeExists") {
+                    self.performSegue(withIdentifier: "goToPinFromImportSingleKey", sender: self)
+                } else {
+                    self.performSegue(withIdentifier: "showProcessFromImportSecretKey", sender: self)
+                }
             }
         }
     }
@@ -168,6 +167,14 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
             privateKeyTextView.text = string
             state = .available
         }
+    }
+    
+    func presentPasscodeIpad() {
+        let passcodeVC = CreateVC(byName: "PasscodeIpadVC") as! PasscodeIpadVC
+        passcodeVC.modalPresentationStyle = .formSheet
+        passcodeVC.delegate = self
+        passcodeVC.preferredContentSize = CGSize(width: 320, height: 600)
+        present(passcodeVC, animated: true, completion: nil)
     }
     
     func didScan(_ result: String) {
