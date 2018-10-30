@@ -42,7 +42,6 @@ class AttentionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = NSLocalizedString("Private Key", comment: "")
         _ = heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 0.17 : 0.27)
 
     }
@@ -50,9 +49,10 @@ class AttentionViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         state = isFromDeveloper ? .CustomNetwork : .PrivateKey
+        navigationItem.title = state == .CustomNetwork ? NSLocalizedString("CustomNetworks", comment: "") : NSLocalizedString("Private Key", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
         UIApplication.shared.statusBarView?.backgroundColor = nil
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
