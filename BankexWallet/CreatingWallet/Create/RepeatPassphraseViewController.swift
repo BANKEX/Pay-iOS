@@ -89,12 +89,15 @@ class RepeatPassphraseViewController: UIViewController {
                 sender.isEnabled = true
                 Amplitude.instance().logEvent("Wallet Created")
                 if !UserDefaults.standard.bool(forKey: "passcodeExists") {
-                    error == nil ? self.performSegue(withIdentifier: "goToPinFromCreate", sender: nil) :
-                        self.showWalletCreationAllert()
+                    if UIDevice.isIpad {
+                        error == nil ? self.performSegue(withIdentifier: "toWalletCreated", sender: nil) : self.showWalletCreationAllert()
+                    }else {
+                        error == nil ? self.performSegue(withIdentifier: "goToPinFromCreate", sender: nil) :
+                            self.showWalletCreationAllert()
+                    }
                 } else {
                     error == nil ? self.performSegue(withIdentifier: "toWalletCreated", sender: nil) : self.showWalletCreationAllert()
                 }
-                
             }
         }
         

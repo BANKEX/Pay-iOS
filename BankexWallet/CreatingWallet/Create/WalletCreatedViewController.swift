@@ -67,11 +67,30 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func presentPasscode() {
+        let passcode = CreateVC(byName: "PasscodeIpadVC") as! PasscodeIpadVC
+        passcode.delegate = self
+        passcode.modalPresentationStyle = .formSheet
+        passcode.preferredContentSize = CGSize(width: 320, height: 600)
+        present(passcode, animated: true, completion: nil)
+    }
+    
     
     @IBAction func nextButtonTapped(_ sender: Any) {
+        if UIDevice.isIpad && !UserDefaults.standard.bool(forKey: "passcodeExists") {
+            presentPasscode()
+        }else {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "showProcessFromCreation", sender: self)
+            }
+        }
+    }
+}
+
+extension WalletCreatedViewController:PasscodeIpadVCDelegate {
+    func didCreate() {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showProcessFromCreation", sender: self)
         }
-        //WalletCreationTypeRouterImplementation().exitFromTheScreen()
     }
 }
