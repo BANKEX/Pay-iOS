@@ -11,7 +11,7 @@ import UIKit
 extension UIColor {
 
     static let circleColor = UIColor(hex:"C7CCD4")
-    static let mainColor = UIColor(hex: "0DA9FF")
+    static let mainColor = UIColor(hex: "3975E8")
     static let importColor = UIColor(hex: "718093")
     static let separatorColor = UIColor(hex: "718093")
     static let disableColor = UIColor(hex: "E3E6E9")
