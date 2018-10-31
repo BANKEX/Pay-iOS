@@ -28,7 +28,7 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        statusBarColor(nil)
+        statusBarColor(UIDevice.isIpad ? .white : UIColor.greenColor)
         UIApplication.shared.statusBarStyle = .lightContent
     }
     

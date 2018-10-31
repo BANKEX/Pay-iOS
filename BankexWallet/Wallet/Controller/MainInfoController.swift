@@ -274,7 +274,7 @@ class MainInfoController: BaseViewController,
     
     private func configureNavBar() {
         navigationController?.navigationBar.isHidden = true
-        UIApplication.shared.statusBarView?.backgroundColor = nil
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.mainColor
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
     }
     

@@ -66,6 +66,7 @@ class BackupPassphraseViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
     }
     
@@ -103,7 +104,7 @@ class BackupPassphraseViewController: UIViewController {
         title = NSLocalizedString("Back", comment: "")
         titleLbl.text = navTitle ?? NSLocalizedString("Create Wallet", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
-        statusBarColor(nil)
+        statusBarColor(UIColor.errorColor)
         UIApplication.shared.statusBarStyle = .lightContent
     }
     

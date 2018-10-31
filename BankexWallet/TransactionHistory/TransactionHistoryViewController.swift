@@ -89,6 +89,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     private func prepareNavBar() {
         addTokensButton()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        UIApplication.shared.statusBarView?.backgroundColor = .white
     }
     
     //MARK: - Refresh Control

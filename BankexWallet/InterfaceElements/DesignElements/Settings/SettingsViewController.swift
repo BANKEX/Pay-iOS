@@ -38,6 +38,7 @@ class SettingsViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         walletService.updateSelectedWallet()
         updateUI()
     }

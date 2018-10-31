@@ -60,6 +60,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.tintColor = UIColor.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         if fromSendScreen {
             addLeftBtn()
             hideAddRightButton()

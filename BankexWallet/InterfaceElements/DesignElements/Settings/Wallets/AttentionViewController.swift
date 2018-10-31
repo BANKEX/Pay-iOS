@@ -51,7 +51,7 @@ class AttentionViewController: BaseViewController {
         state = isFromDeveloper ? .CustomNetwork : .PrivateKey
         navigationItem.title = state == .CustomNetwork ? NSLocalizedString("CustomNetworks", comment: "") : NSLocalizedString("Private Key", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = nil
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.errorColor
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
     }
     

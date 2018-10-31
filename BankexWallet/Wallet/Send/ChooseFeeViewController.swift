@@ -88,7 +88,7 @@ class ChooseFeeViewController: BaseViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
-        UIApplication.shared.statusBarView?.backgroundColor = nil
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.mainColor
         updateUI()
     }
     
