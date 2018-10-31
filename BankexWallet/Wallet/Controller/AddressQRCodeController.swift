@@ -52,6 +52,8 @@ class AddressQRCodeController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        copyAddressButton.layer.borderWidth = 2
+        copyAddressButton.layer.borderColor = UIColor.mainColor.cgColor
     }
     
     override func viewWillDisappear(_ animated: Bool) {

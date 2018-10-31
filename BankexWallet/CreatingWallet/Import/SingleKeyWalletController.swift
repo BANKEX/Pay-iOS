@@ -42,7 +42,7 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
             if state == .notAvailable {
                 clearButton.isHidden = true
                 importButton.isEnabled = false
-                importButton.backgroundColor = UIColor.disableColor
+                importButton.backgroundColor = UIColor.lightBlue
                 privateKeyTextView.returnKeyType = .next
             }else {
                 clearButton.isHidden = false

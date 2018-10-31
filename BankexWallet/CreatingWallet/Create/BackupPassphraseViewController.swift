@@ -35,7 +35,9 @@ class BackupPassphraseViewController: UIViewController {
         lookOutView.backgroundColor = UIColor.errorColor
         passphrase = service.generateMnemonics()
         passphraseLabel.text = passphrase
-        copyButton.backgroundColor = UIColor.mainColor
+        copyButton.backgroundColor = .white
+        copyButton.layer.borderWidth = 2
+        copyButton.layer.borderColor = UIColor.mainColor.cgColor
         clipboardView.backgroundColor = UIColor.clipboardColor
         bottomContraint.constant = 100.0
     }
@@ -54,7 +56,7 @@ class BackupPassphraseViewController: UIViewController {
         }
         if passphrase != UIPasteboard.general.string {
             nextButton?.isEnabled = false
-            nextButton?.backgroundColor = UIColor.disableColor
+            nextButton?.backgroundColor = UIColor.lightBlue
         }
         
     }

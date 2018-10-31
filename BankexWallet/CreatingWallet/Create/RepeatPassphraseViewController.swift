@@ -43,7 +43,7 @@ class RepeatPassphraseViewController: UIViewController {
                     self.nextButton.isEnabled = true
                 }
             } else {
-                self.nextButton.backgroundColor = UIColor.disableColor
+                self.nextButton.backgroundColor = UIColor.lightBlue
                 self.nextButton.isEnabled = false
             }
         }
@@ -76,7 +76,7 @@ class RepeatPassphraseViewController: UIViewController {
         super.viewDidLoad()
         navigationBarSetup()
         nextButton.isEnabled = false
-        nextButton.backgroundColor = UIColor.disableColor
+        nextButton.backgroundColor = UIColor.lightBlue
         setupManagers()
         
     }

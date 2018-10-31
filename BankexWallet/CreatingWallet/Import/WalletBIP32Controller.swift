@@ -37,7 +37,7 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
             if state == .notAvailable {
                 clearButton.isHidden = true
                 importButton.isEnabled = false
-                importButton.backgroundColor = UIColor.disableColor
+                importButton.backgroundColor = UIColor.lightBlue
                 passphraseTextView.returnKeyType = .next
             }else {
                 clearButton.isHidden = false

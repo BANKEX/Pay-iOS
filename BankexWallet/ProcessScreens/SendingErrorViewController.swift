@@ -23,6 +23,8 @@ class SendingErrorViewController: BaseViewController {
         super.viewDidLoad()
         addBackButton()
         layoutTitle()
+        retryButton.layer.borderColor = UIColor.mainColor.cgColor
+        retryButton.layer.borderWidth = 2
     }
     
     func layoutTitle() {
