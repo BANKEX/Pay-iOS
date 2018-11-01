@@ -119,10 +119,10 @@ extension UIView {
         }
     }
     
-    class func titleLabel() -> UILabel {
+    class func titleLabel(_ color:UIColor? = .white) -> UILabel {
         let label = UILabel()
         label.text = NSLocalizedString("Send", comment: "")
-        label.textColor = .white
+        label.textColor = color
         label.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
         return label
     }

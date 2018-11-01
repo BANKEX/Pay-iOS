@@ -23,13 +23,15 @@ class SendingErrorViewController: BaseViewController {
         super.viewDidLoad()
         addBackButton()
         layoutTitle()
+        retryButton.layer.borderColor = UIColor.mainColor.cgColor
+        retryButton.layer.borderWidth = 2
     }
     
     func layoutTitle() {
         let lbl = UILabel()
         lbl.text = NSLocalizedString("Send", comment: "")
         lbl.font = UIFont.systemFont(ofSize: 17.0, weight:.semibold)
-        lbl.textColor = .white
+        lbl.textColor = UIDevice.isIpad ? .black : .white
         navigationItem.titleView = lbl
     }
     
@@ -57,10 +59,12 @@ class SendingErrorViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        splitViewController?.show()
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.barTintColor = UIColor.mainColor
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barTintColor = UIDevice.isIpad ? .white : UIColor.mainColor
+        statusBarColor(UIDevice.isIpad ? .white : UIColor.mainColor)
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
+        navigationController?.navigationBar.tintColor = UIDevice.isIpad ? UIColor.mainColor : .white
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,7 +80,7 @@ class SendingErrorViewController: BaseViewController {
         button.setImage(UIImage(named: "BackArrow"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         button.setTitle(" \(NSLocalizedString("Wallet", comment: ""))", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(UIDevice.isIpad ? UIColor.mainColor : UIColor.white, for: .normal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(done(_:)), for: .touchUpInside)
     }

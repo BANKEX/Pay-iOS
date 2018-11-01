@@ -86,6 +86,7 @@ class MainInfoController: BaseViewController,
     @IBOutlet weak var emptyView:UIView!
     @IBOutlet weak var tableView:UITableView!
     @IBOutlet weak var listTransButton:BaseButton!
+    @IBOutlet weak var heightConstraint:NSLayoutConstraint!
     
     let keyService = SingleKeyServiceImplementation()
     var numberFormatter:NumberFormatter {
@@ -130,6 +131,8 @@ class MainInfoController: BaseViewController,
     func commonSetup() {
         [sendButton,receiveButton].forEach { $0?.callShadow() }
         infoView.delegate = self
+        let multiplier:CGFloat = UIDevice.isIpad ? 1/4.76 : 1/2.28
+        heightConstraint.setMultiplier(multiplier: multiplier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,7 +147,6 @@ class MainInfoController: BaseViewController,
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIApplication.shared.statusBarStyle = .default
-        UIApplication.shared.statusBarView?.backgroundColor = .white
         navigationController?.navigationBar.isHidden = false
     }
     
@@ -272,8 +274,8 @@ class MainInfoController: BaseViewController,
     
     private func configureNavBar() {
         navigationController?.navigationBar.isHidden = true
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.mainColor
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
     }
     
     private func configureNotifications() {
@@ -302,15 +304,22 @@ class MainInfoController: BaseViewController,
     }
     
     func deleteButtonTapped() {
-        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alertStyle:UIAlertController.Style = UIDevice.isIpad ? .alert : .actionSheet
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: alertStyle)
         alertVC.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
         let deleteAction = UIAlertAction(title:NSLocalizedString("Delete", comment: ""), style: .destructive) { _ in
             self.tokensService.deleteToken(with: self.selectedToken.address)
             self.navigationController?.popViewController(animated: true)
         }
+        if UIDevice.isIpad {
+            alertVC.title = "Delete Token"
+            alertVC.message = "You are going to delete a token. This action can’t be undone."
+            alertVC.addPopover(in: view, rect: CGRect(x: splitViewController!.view.bounds.midX, y: splitViewController!.view.bounds.midY - 70, width: 270, height: 140))
+        }
         alertVC.addAction(deleteAction)
         present(alertVC, animated: true)
     }
+    
     
     @IBAction func toQRScreen() {
         DispatchQueue.main.async {
@@ -319,7 +328,11 @@ class MainInfoController: BaseViewController,
     }
     
     @IBAction func seeAll() {
-        tabBarController?.selectedIndex = 1
+        if UIDevice.isIpad {
+            selectSection(1)
+        }else {
+            tabBarController?.selectedIndex = 1
+        }
     }
     
     private func updateDataOnTheScreen() {

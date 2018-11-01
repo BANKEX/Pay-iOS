@@ -9,6 +9,10 @@
 import UIKit
 import web3swift
 
+protocol TokenInfoControllerDelegate:class {
+    func didAddToken()
+}
+
 class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
@@ -22,6 +26,7 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
     
     var forAdding: Bool = false
     
+    weak var delegate:TokenInfoControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +87,7 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
                                         name: foundModel.name,
                                         decimals: foundModel.decimals,
                                         symbol: foundModel.symbol)
+        delegate?.didAddToken()
         handleToken(foundModel)
     }
     

@@ -82,7 +82,11 @@ class HomeViewController: BaseViewController {
     lazy var addTokenBtn:BaseButton = {
         let button = BaseButton()
         let widthBtn:CGFloat = 80.0
-        button.frame = CGRect(x: tableView.bounds.width - widthBtn - 15.0, y: 65.0 - 22.0, width: widthBtn, height: 22.0)
+        if UIDevice.isIpad {
+            button.frame = CGRect(x: tableView.bounds.width - widthBtn - 50.0, y: 65.0 - 22.0, width: widthBtn, height: 22.0)
+        }else {
+            button.frame = CGRect(x: tableView.bounds.width - widthBtn - 15.0, y: 65.0 - 22.0, width: widthBtn, height: 22.0)
+        }
         button.setTitle(NSLocalizedString("AddTokens", comment:""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
         button.addTarget(self, action: #selector(self.createToken), for: .touchUpInside)
@@ -111,7 +115,7 @@ class HomeViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        imageView.shimmerAnimation()
+        //imageView.shimmerAnimation()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let sortedArray = TokenShortService.arrayTokensShort.sorted { lhs, rhs -> Bool in
                 return Double(lhs.balance)! > Double(rhs.balance)!
@@ -155,6 +159,16 @@ class HomeViewController: BaseViewController {
     func catchUserActivity() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if let selectedContact = appDelegate.selectedContact {
+            appDelegate.selectedContact = nil
+            if UIDevice.isIpad {
+                let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
+                let nav = BaseNavigationController(rootViewController: listContactsVC)
+                let profileVC = CreateVC(byName: "ProfileContactViewController") as! ProfileContactViewController
+                profileVC.selectedContact = selectedContact
+                nav.pushViewController(profileVC, animated: false)
+                splitViewController?.showDetailViewController(nav, sender: nil)
+                return
+            }
             tabBarController?.selectedIndex = 2
             let navVC = tabBarController?.viewControllers![2] as? BaseNavigationController
             navVC?.popToRootViewController(animated: false)
@@ -269,13 +283,21 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
         if section == HomeSections.Ethereum.rawValue {
             let ethView = UIView()
             ethView.backgroundColor = .clear
-            ethHeader.frame = CGRect(x: 15, y: 0, width: tableView.bounds.width, height: 22.0)
+            if UIDevice.isIpad {
+               ethHeader.frame = CGRect(x: 52, y: 0, width: tableView.bounds.width, height: 22.0)
+            }else {
+                ethHeader.frame = CGRect(x: 15, y: 0, width: tableView.bounds.width, height: 22.0)
+            }
             ethView.addSubview(ethHeader)
             return ethView
         }else if section == HomeSections.Tokens.rawValue {
             let tokensView = UIView()
             tokensView.backgroundColor = .clear
-            tokensHeader.frame = CGRect(x: 15, y: 65.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
+            if UIDevice.isIpad {
+                tokensHeader.frame = CGRect(x: 52, y: 65.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
+            }else {
+                tokensHeader.frame = CGRect(x: 15, y: 65.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
+            }
             tokensView.addSubview(tokensHeader)
             tokensView.addSubview(addTokenBtn)
             return tokensView

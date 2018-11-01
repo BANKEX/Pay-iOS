@@ -23,6 +23,7 @@ class ChooseFeeViewController: BaseViewController {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var textFields: [UITextField]!
     @IBOutlet weak var infoView:InfoView!
+    @IBOutlet weak var heightConstraint:NSLayoutConstraint!
     
     
     
@@ -71,6 +72,7 @@ class ChooseFeeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Wallet", comment: "")
+        heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 1/4.76 : 1/3.3)
         addObservers()
         setupTextFields()
         
@@ -85,8 +87,8 @@ class ChooseFeeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.statusBarStyle = .lightContent
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.mainColor
         updateUI()
     }
     
@@ -94,7 +96,6 @@ class ChooseFeeViewController: BaseViewController {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
         UIApplication.shared.statusBarStyle = .default
-        UIApplication.shared.statusBarView?.backgroundColor = .white
     }
     
     

@@ -39,7 +39,11 @@ class EditViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTFs()
-        navigationItem.setRightBarButton(UIBarButtonItem(title: NSLocalizedString("Delete", comment: ""), style: .plain, target: self, action: #selector(self.deleteContact)), animated: true)
+        if UIDevice.isIpad {
+            addSaveButtonIfNeed()
+        }else {
+            navigationItem.setRightBarButton(UIBarButtonItem(title: NSLocalizedString("Delete", comment: ""), style: .plain, target: self, action: #selector(self.deleteContact)), animated: true)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -53,18 +57,17 @@ class EditViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainColor
+        title = UIDevice.isIpad ? "Edit Contact" : ""
+        navigationController?.navigationBar.barTintColor = UIDevice.isIpad ? UIColor.white : UIColor.mainColor
         navigationController?.navigationBar.tintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? nil : UIColor.mainColor
         UIApplication.shared.statusBarStyle = .lightContent
-        
         updateUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarView?.backgroundColor = .white
-        UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .lightContent : .default
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.tintColor = UIColor.mainColor
     }
@@ -83,6 +86,7 @@ class EditViewController: BaseViewController {
             nameTextField.text = selectedContact.name
             addrTextField.text = selectedContact.address
         }
+        saveButton.isHidden = UIDevice.isIpad ? true : false
     }
     
     @IBAction func pasteText() {
@@ -96,7 +100,11 @@ class EditViewController: BaseViewController {
         service.updateName(newName: nameTextField.text!, selectedContact!.address) { _ in
             self.service.updateAddress(newAddress: self.addrTextField.text!, self.selectedContact!.name) { isSuccess in
                 self.delegate?.didUpdateContact(name: self.nameTextField.text!, address: self.addrTextField.text!)
-                self.navigationController?.popViewController(animated: true)
+                if UIDevice.isIpad {
+                    self.dismiss(animated: true, completion: nil)
+                }else {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
@@ -108,6 +116,28 @@ class EditViewController: BaseViewController {
             })
         }
         present(alertViewController, animated: true)
+    }
+    
+    func addCancelButtonIfNeed() {
+        let cancel = UIButton(type: .system)
+        cancel.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        cancel.setTitleColor(UIColor.mainColor, for: .normal)
+        cancel.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        cancel.addTarget(self, action: #selector(fadeOut), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancel)
+    }
+    
+    func addSaveButtonIfNeed() {
+        let cancel = UIButton(type: .system)
+        cancel.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
+        cancel.setTitleColor(UIColor.mainColor, for: .normal)
+        cancel.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        cancel.addTarget(self, action: #selector(saveContact), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancel)
+    }
+    
+    @objc func fadeOut() {
+        dismiss(animated: true, completion: nil)
     }
     
 

@@ -37,6 +37,7 @@ Retriable,UITextFieldDelegate {
     @IBOutlet weak var topContrStack:NSLayoutConstraint!
     @IBOutlet weak var notEnoughSumLbl:UILabel!
     @IBOutlet var textFields:[UITextField]!
+    @IBOutlet weak var heightConstraint:NSLayoutConstraint!
     
     
     
@@ -97,6 +98,7 @@ Retriable,UITextFieldDelegate {
         notEnoughSumLbl.alpha = 0
         initialHeight = infoView.bounds.height
         infoView.delegate = self
+        heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 1/4.76 : 1/3.3)
         setupContactsButton()
         configurePlaceholder()
         nextButton.isEnabled = false
@@ -128,10 +130,9 @@ Retriable,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.mainColor
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
         updateUI()
-//        handleErrorMessage()
     }
     
     
@@ -232,23 +233,6 @@ Retriable,UITextFieldDelegate {
                                                selector: #selector(self.keyboardDidHide(notification:)),
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
-    }
-    
-    func handleErrorMessage() {
-        if let message = errorMessage {
-            errorMessage = nil
-            switch message {
-            case "invalidAddress":
-                enterAddressTextfield.textColor = UIColor.errorColor
-                
-            case "insufficient funds for gas * price + value":
-                print("well")
-                amountTextfield.textColor = UIColor.errorColor
-                
-            default:
-                break
-            }
-        }
     }
     
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,8 +29,8 @@
                                     <constraint firstAttribute="width" constant="42" id="gw3-SF-rNh"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zok-pW-3dx">
-                                <rect key="frame" x="71" y="14" width="97" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zok-pW-3dx">
+                                <rect key="frame" x="71" y="14" width="187" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -38,7 +38,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRb-l7-fM9">
                                 <rect key="frame" x="92.5" y="36.5" width="30" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <color key="textColor" red="0.050980392159999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow Right Grey" translatesAutoresizingMaskIntoConstraints="NO" id="sEn-86-L95">
@@ -51,7 +51,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFp-mx-z5Q">
                                 <rect key="frame" x="71" y="36.5" width="14.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <color key="textColor" red="0.050980392159999999" green="0.66274509800000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -60,6 +60,7 @@
                             <constraint firstItem="gpa-ha-3cY" firstAttribute="leading" secondItem="mTC-aX-fpQ" secondAttribute="leading" constant="9" id="5Mv-if-iIB"/>
                             <constraint firstItem="GRb-l7-fM9" firstAttribute="centerY" secondItem="mFp-mx-z5Q" secondAttribute="centerY" id="KcI-GJ-q9P"/>
                             <constraint firstItem="GRb-l7-fM9" firstAttribute="leading" secondItem="mFp-mx-z5Q" secondAttribute="trailing" constant="7" id="LOn-sL-83g"/>
+                            <constraint firstItem="sEn-86-L95" firstAttribute="leading" secondItem="zok-pW-3dx" secondAttribute="trailing" constant="10" id="RjH-cu-hf0"/>
                             <constraint firstItem="sEn-86-L95" firstAttribute="centerY" secondItem="mTC-aX-fpQ" secondAttribute="centerY" id="UFL-DA-mgh"/>
                             <constraint firstItem="mFp-mx-z5Q" firstAttribute="leading" secondItem="zok-pW-3dx" secondAttribute="leading" id="VeE-n2-Oie"/>
                             <constraint firstAttribute="bottom" secondItem="mFp-mx-z5Q" secondAttribute="bottom" constant="15" id="X3N-zq-w8F"/>
@@ -81,7 +82,9 @@
             <connections>
                 <outlet property="balanceLbl" destination="mFp-mx-z5Q" id="hs2-1X-y2J"/>
                 <outlet property="fillView" destination="mTC-aX-fpQ" id="WvE-Zb-Y0O"/>
+                <outlet property="leftConstraint" destination="SPF-Cj-1Mh" id="K96-dj-drz"/>
                 <outlet property="nameWalletLbl" destination="zok-pW-3dx" id="Asc-Hh-wlb"/>
+                <outlet property="rightContraint" destination="bGd-vR-GQW" id="b8F-AN-ORc"/>
                 <outlet property="symbolLbl" destination="GRb-l7-fM9" id="77M-32-e6l"/>
                 <outlet property="walletImageView" destination="gpa-ha-3cY" id="fhl-EI-lic"/>
             </connections>

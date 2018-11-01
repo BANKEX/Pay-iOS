@@ -55,7 +55,7 @@ class CreateTokenController: BaseViewController {
     
     private func setupSupportView() {
         supportView.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58.0)
-        supportLbl.frame = CGRect(x: 0, y: supportView.bounds.midY - 15.0, width: supportView.bounds.width, height: 30.0)
+        supportLbl.frame = CGRect(x: 0, y: supportView.bounds.midY - 15.0, width: UIDevice.isIpad ? supportView.bounds.width - splitViewController!.primaryColumnWidth : supportView.bounds.width, height: 30.0)
         supportView.addSubview(supportLbl)
         self.view.addSubview(supportView)
     }
@@ -86,6 +86,7 @@ class CreateTokenController: BaseViewController {
         }
         DispatchQueue.main.async {
             if self.needAddTokenAnimation {
+                self.needAddTokenAnimation = false
                 self.supportLbl.text = NSLocalizedString("TokenAdded", comment: "")
                 UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
                     self.supportView.frame.origin.y = self.view.bounds.height - 58.0
@@ -98,7 +99,6 @@ class CreateTokenController: BaseViewController {
             }
             self.searchBar(self.searchBar, textDidChange: searchText)
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -216,6 +216,12 @@ extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
         }
         chosenToken = tokenToAdd
         performSegue(withIdentifier: "addChosenToken", sender: self)
+    }
+}
+
+extension CreateTokenController:TokenInfoControllerDelegate {
+    func didAddToken() {
+        //
     }
 }
 

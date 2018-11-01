@@ -24,6 +24,7 @@ class ContactTableCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = UIDevice.isIpad ? .clear : .white
     }
     
     func setData() {

@@ -21,7 +21,6 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var nameNetworkLabel:UILabel!
     
     
-    
     let managerReferences = ManagerReferences()
     let walletService = SingleKeyServiceImplementation()
     let networkService = NetworksServiceImplementation()
@@ -35,8 +34,11 @@ class SettingsViewController: UITableViewController {
         commonSetup()
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         walletService.updateSelectedWallet()
         updateUI()
     }
@@ -57,6 +59,8 @@ class SettingsViewController: UITableViewController {
     private func commonSetup() {
         tableView.backgroundColor = UIColor.bgMainColor
         tableView.tableFooterView = HeaderView()
+        if UIDevice.isIpad { tableView.separatorInset.right = 20 }
+        tableView.separatorInset.left = UIDevice.isIpad ? 80 : 60
     }
     
     

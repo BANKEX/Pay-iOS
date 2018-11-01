@@ -113,6 +113,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func showSplitVC() {
+        let splitVC = CreateVC(byName: "BaseSplitViewController") as! BaseSplitViewController
+        window?.rootViewController = splitVC
+        window?.makeKeyAndVisible()
+    }
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         UIApplication.shared.applicationIconBadgeNumber = 0
         AutoLockService.shared.stopTimer()
@@ -170,6 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == FavoriteModel.domainIdentifier || userActivity.activityType == CSSearchableItemActionType {
             if let objectID = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String {
@@ -192,6 +199,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             self.selectedContact = contact
                         }
                     }
+                }else if let splitVC = window?.rootViewController as? UISplitViewController {
+                    let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
+                    let nav = BaseNavigationController(rootViewController: listContactsVC)
+                    let profileVC = CreateVC(byName: "ProfileContactViewController") as! ProfileContactViewController
+                    service.contactByAddress(objectID) { contact in
+                        if let contact = contact {
+                            profileVC.selectedContact = contact
+                            nav.pushViewController(profileVC, animated: false)
+                        }
+                    }
+                    splitVC.showDetailViewController(nav, sender: nil)
                 }
             }
         }
@@ -231,18 +249,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let host = filteredURL.host else { return true }
         if host == "ether" {
             if isLaunched {
-                goToMain("", true)
+                if UIDevice.isIpad { goToMainIpad("", true) } else { goToMain("", true) }
             }else {
-                goToMain("", false)
+                if UIDevice.isIpad { goToMainIpad("", false) } else { goToMain("", false) }
             }
             return true
         }else {
             guard let nameToken = host.components(separatedBy: ".").last else { return true }
             guard let selectedToken = tokenService.availableTokensList()?.filter({ return $0.name == nameToken }).first else { return true }
             if isLaunched {
-                goToMain(selectedToken.address, true)
+                if UIDevice.isIpad { goToMainIpad(selectedToken.address, true) } else { goToMain(selectedToken.address, true) }
             }else {
-                goToMain(selectedToken.address, false)
+                if UIDevice.isIpad { goToMainIpad(selectedToken.address, false) } else { goToMain(selectedToken.address, false) }
             }
             return true
         }
@@ -358,6 +376,32 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 // [END ios_10_message_handling]
 
 extension AppDelegate : MessagingDelegate {
+    
+    func goToMainIpad(_ tokenAddress:String, _ isLaunch:Bool) {
+        let mainInfo = CreateVC(byName: "MainInfoController") as! MainInfoController
+        let homeVC = CreateVC(byName: "HomeViewController") as! HomeViewController
+        if isLaunch {
+            guard let splitVC = window?.rootViewController as? BaseSplitViewController else { return }
+            let nav = BaseNavigationController(rootViewController: homeVC)
+            nav.pushViewController(mainInfo, animated: false)
+            tokenService.updateSelectedToken(to: tokenAddress)
+            splitVC.showDetailViewController(nav, sender: nil)
+            guard let n = splitVC.viewControllers[0] as? UINavigationController else { return }
+            guard let vc = n.topViewController as? ListSectionsViewController else { return }
+            vc.chooseRowColorIfNeeded(0)
+        }else {
+            showSplitVC()
+            guard !PasscodeEnterController.isLocked else { return }
+            let passcodeVC = CreateVC(byName: "passcodeEnterController") as! PasscodeEnterController
+            currentPasscodeViewController = passcodeVC
+            guard let split = window?.rootViewController as? UISplitViewController else { return }
+            split.present(passcodeVC, animated: true, completion: nil)
+            guard let nav = split.viewControllers[1] as? UINavigationController else { return }
+            nav.pushViewController(mainInfo, animated: false)
+            tokenService.updateSelectedToken(to: tokenAddress)
+            split.showDetailViewController(nav, sender: nil)
+        }
+    }
     
     func goToMain(_ tokenAddress:String, _ isLaunch:Bool) {
         let mainInfo = CreateVC(byName: "MainInfoController") as! MainInfoController

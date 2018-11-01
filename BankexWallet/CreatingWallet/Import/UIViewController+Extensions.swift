@@ -15,6 +15,38 @@ extension UIViewController {
         self.present(alertViewController, animated: true)
     }
     
+    public func addPopover(in view:UIView, rect:CGRect, _ direction:UIPopoverArrowDirection? = nil) {
+        guard let popover = self.popoverPresentationController else { return }
+        popover.sourceView = view
+        popover.sourceRect = rect
+        if let direct = direction { popover.permittedArrowDirections = [direct] } else { popover.permittedArrowDirections = [] }
+    }
+    
+    func presentPopUp(_ vc:UIViewController, size:CGSize? = nil , shower:UIViewController? = nil) {
+        let nv = UINavigationController(rootViewController: vc)
+        if let size = size {
+           nv.preferredContentSize = size
+        }
+        nv.modalPresentationStyle = .formSheet
+        if let shower = shower {
+            shower.present(nv, animated: true, completion: nil)
+        }else { splitViewController?.present(nv, animated: true, completion: nil) }
+    }
+    
+    func secondaryVC() -> UINavigationController? {
+        return splitViewController?.viewControllers.last as? UINavigationController
+    }
+    func primaryVC() -> UIViewController? {
+        return splitViewController?.viewControllers.first as? UINavigationController
+    }
+    
+    
+    func selectSection(_ section:Int) {
+        guard let nav = splitViewController?.viewControllers[0] as? UINavigationController else { return }
+        nav.popToRootViewController(animated: false)
+        guard let vc = nav.topViewController as? ListSectionsViewController else { return }
+        vc.selectRow(section)
+    }
     
     public func customBackButton(title:String? = "  Back") -> UIButton {
         let btn = UIButton(type: .system)
@@ -33,7 +65,7 @@ extension UIViewController {
         navigationController?.navigationBar.barTintColor = color
     }
     
-    public func statusBarColor(_ color:UIColor) {
+    public func statusBarColor(_ color:UIColor?) {
         UIApplication.shared.statusBarView?.backgroundColor = color
     }
     

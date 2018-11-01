@@ -10,6 +10,10 @@ import UIKit
 import AVFoundation
 import web3swift
 
+protocol AddContactViewControllerDelegate:class {
+    func didSave()
+}
+
 class AddContactViewController: BaseViewController,UITextFieldDelegate {
     
     @IBOutlet weak var nameContactTextField:UITextField!
@@ -18,7 +22,7 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var pasteButton:UIButton!
     @IBOutlet weak var doneButton:UIButton!
     
-    
+    weak var delegate:AddContactViewControllerDelegate?
     
     enum State {
         case noAvailable,available
@@ -55,15 +59,36 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
         view.endEditing(true)
     }
     
+    func addCancelButtonIfNeed() {
+        let cancel = UIButton(type: .system)
+        cancel.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        cancel.setTitleColor(UIColor.mainColor, for: .normal)
+        cancel.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        cancel.addTarget(self, action: #selector(fadeOut), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancel)
+    }
+    func addSaveButtonIfNeed() {
+        let save = UIButton(type: .system)
+        save.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
+        save.setTitleColor(UIColor.mainColor, for: .normal)
+        save.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        save.addTarget(self, action: #selector(done), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: save)
+    }
     
+    @objc func fadeOut() {
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         state = .noAvailable
-        navigationController?.navigationBar.barTintColor = UIColor.mainColor
+        navigationController?.navigationBar.barTintColor = UIDevice.isIpad ? .white : UIColor.mainColor
         navigationController?.navigationBar.tintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .clear : UIColor.mainColor
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
+        doneButton.isHidden = UIDevice.isIpad ? true : false
+        title = UIDevice.isIpad ? "New Contact" : ""
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,7 +145,12 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
             } else if error != nil {
                 return
             } else {
-                self.navigationController?.popToRootViewController(animated: true)
+                if UIDevice.isIpad {
+                    self.delegate?.didSave()
+                    self.dismiss(animated: true, completion: nil )
+                }else {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
         }
         

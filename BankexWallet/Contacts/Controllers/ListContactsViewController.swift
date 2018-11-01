@@ -60,6 +60,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.tintColor = UIColor.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         if fromSendScreen {
             addLeftBtn()
             hideAddRightButton()
@@ -90,6 +91,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
         tableView.keyboardDismissMode = .interactive
         tableView.tableFooterView = HeaderView()
+        tableView.separatorStyle = UIDevice.isIpad ? .singleLine : .none
     }
     
     @objc func back() {
@@ -231,11 +233,16 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     }
     
     
-    
-    
-    
     @objc func transitionToAddContact() {
-        performSegue(withIdentifier: "addContactSegue", sender: self)
+        if UIDevice.isIpad {
+            let createContactVC = CreateVC(byName: "AddContactViewController") as! AddContactViewController
+            createContactVC.delegate = self
+            createContactVC.addCancelButtonIfNeed()
+            createContactVC.addSaveButtonIfNeed()
+            presentPopUp(createContactVC, size: CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height * 0.7), shower: self)
+        }else {
+            performSegue(withIdentifier: "addContactSegue", sender: self)
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -291,6 +298,22 @@ extension ListContactsViewController:UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if UIDevice.isIpad {
+            let view = UIView()
+            view.backgroundColor = UIColor.bgMainColor
+            let label = UILabel()
+            label.frame.size = CGSize(width: tableView.bounds.width, height: 28)
+            label.frame.origin = CGPoint(x: 16, y: 0)
+            view.addSubview(label)
+            label.textColor = .black
+            label.textAlignment = .left
+            label.text = sectionsTitles[section]
+            return view
+        }
+        return nil
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
             return filteredContacts.count
@@ -329,6 +352,15 @@ extension ListContactsViewController:UITableViewDataSource {
     }
     
     
+}
+
+extension ListContactsViewController:AddContactViewControllerDelegate {
+    func didSave() {
+        self.service.listContacts(onCompition: { (contacts) in
+            self.listContacts = contacts
+            self.state = self.isNoContacts() ? .empty : .fill
+        })
+    }
 }
 
 

@@ -24,7 +24,7 @@ class TokensTableViewManager: NSObject, UITableViewDataSource, UITableViewDelega
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         guard let tokens = tokensService.availableTokensList() else { return UITableViewCell() }
         cell.textLabel?.text = tokens[indexPath.row].symbol.uppercased()
-        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.textAlignment = UIDevice.isIpad ? .left : .center
         cell.textLabel?.clipsToBounds = true
         cell.clipsToBounds = true
         return cell

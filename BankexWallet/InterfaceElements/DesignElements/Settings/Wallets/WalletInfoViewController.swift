@@ -8,27 +8,40 @@
 
 import UIKit
 
-class WalletInfoViewController: UITableViewController {
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var nameWalletLabel:UILabel!
+class WalletInfoViewController: BaseViewController {
+    
+
+    @IBOutlet weak var tableView:UITableView!
     var dict:[String:String]!
     var publicAddress:String?
     let walletsService: GlobalWalletsService = HDWalletServiceImplementation()
     var clipboardView:ClipboardView!
+    let generalCellIdentifier = "GeneralInformationCell"
+    let infoCellIdentifier = "InfoCell"
+    var publicName:String?
+    var secondWidth:CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupClipboard()
-        addressLabel.text = dict["addr"]
-        nameWalletLabel.text = dict["name"]
         publicAddress = dict["addr"]
+        publicName = dict["name"]
         title = NSLocalizedString("WalletInfo", comment: "")
         tableView.backgroundColor = UIColor.bgMainColor
         tableView.tableFooterView = HeaderView()
+        tableView.register(UINib(nibName: generalCellIdentifier, bundle: nil), forCellReuseIdentifier: generalCellIdentifier)
+        tableView.register(UINib(nibName: infoCellIdentifier, bundle: nil), forCellReuseIdentifier: infoCellIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorInset.left = 59
+        tableView.separatorColor = UIColor.disableColor
     }
     
     func setupClipboard() {
-        clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58))
+        if UIDevice.isIpad {
+            secondWidth = view.bounds.width - splitViewController!.primaryColumnWidth
+        }
+        clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: UIDevice.isIpad ? secondWidth! : view.bounds.width, height: 58))
         clipboardView.backgroundColor = UIColor.clipboardColor
         clipboardView.title = NSLocalizedString("AddrCopied", comment: "")
         view.addSubview(clipboardView)
@@ -37,45 +50,9 @@ class WalletInfoViewController: UITableViewController {
         UIPasteboard.general.string = string ?? ""
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 {
-            clipboardView.showClipboard()
-            saveDataInBuffer(addressLabel.text)
-        }else if indexPath.section == 1 {
-            switch indexPath.row {
-            case 0:
-                self.performSegue(withIdentifier: "ShowPrivateKey", sender: nil)
-            case 1:
-                self.performSegue(withIdentifier: "renameSegue", sender: nil)
-            case 2:
-                //Delete
-                if isSimilarWallet() {
-                    let alertVC = UIAlertController.common(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("CantDel", comment: ""))
-                    present(alertVC, animated: true)
-                    return
-                }
-                let alertViewController = UIAlertController.destructive(button: NSLocalizedString("Delete", comment: "")) {
-                    if let addr = self.addressLabel.text {
-                        self.walletsService.delete(address: addr)
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                }
-                present(alertViewController, animated: true)
-            default:
-                print("Unreal")
-            }
-        }
-        
-    }
-    
-    
-    
-    
-    
     
     func isSimilarWallet() -> Bool {
-        if let addr = addressLabel.text,let wallet = walletsService.selectedWallet() {
+        if let addr = publicAddress,let wallet = walletsService.selectedWallet() {
             return addr == wallet.address
         }
         return true
@@ -86,14 +63,65 @@ class WalletInfoViewController: UITableViewController {
         if let vc = segue.destination as? AttentionViewController {
             vc.publicAddress = publicAddress
         }else if let renameVC = segue.destination as? RenameViewController {
-            if let nameWallet = nameWalletLabel.text {
+            if let nameWallet = publicName {
                 renameVC.selectedWalletName = nameWallet
                 renameVC.delegate = self
             }
         }
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+}
+
+extension WalletInfoViewController:RenameViewControllerDelegate {
+    func didUpdateWalletName(name: String) {
+        publicName = name
+        tableView.reloadData()
+    }
+    
+    func addressOfWallet() -> String {
+        return publicAddress ?? ""
+    }
+}
+
+extension WalletInfoViewController:UITableViewDelegate,UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }else {
+            return 3
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: generalCellIdentifier, for: indexPath) as! GeneralInformationCell
+            cell.setData(address: publicAddress ?? "", name: publicName ?? "")
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: infoCellIdentifier, for: indexPath) as! InfoCell
+            cell.infoState = InfoState(rawValue: indexPath.row)
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 62
+        }else {
+            return 44
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 54.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView()
         if section == 0 {
             headerView.title = NSLocalizedString("ChooseWallet", comment: "")
@@ -103,19 +131,60 @@ class WalletInfoViewController: UITableViewController {
         return headerView
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 54.0
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 {
+            clipboardView.showClipboard()
+            saveDataInBuffer(addressOfWallet())
+        }else if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0:
+                self.performSegue(withIdentifier: "ShowPrivateKey", sender: nil)
+            case 1:
+                if UIDevice.isIpad {
+                    let renameVC = CreateVC(byName: "RenameViewController") as! RenameViewController
+                    renameVC.addCancelButtonIfNeed()
+                    if let nameWallet = publicName {
+                        renameVC.selectedWalletName = nameWallet
+                        renameVC.delegate = self
+                    }
+                    presentPopUp(renameVC, size: CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height/2))
+                }else {
+                  self.performSegue(withIdentifier: "renameSegue", sender: nil)
+                }
+            case 2:
+                //Delete
+                if isSimilarWallet() {
+                    let alertVC = UIAlertController.common(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("CantDel", comment: ""))
+                    //alertVC.addPopover(in: view, rect: CGRect(x: 0, y: 0, width: 270, height: 100))
+                    present(alertVC, animated: true)
+                    return
+                }
+                let alertViewController:UIAlertController
+                if UIDevice.isIpad {
+                    alertViewController = UIAlertController.destructiveIpad(title: "Delete Wallet", description: "You are going to delete your wallet. This action can’t be undone.", button: NSLocalizedString("Delete", comment: ""), action: {
+                        if let addr = self.publicAddress {
+                            self.walletsService.delete(address: addr)
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    })
+                    alertViewController.addPopover(in: view, rect: CGRect(x: 0, y: 0, width: 270, height: 140))
+                }else {
+                    alertViewController = UIAlertController.destructive(button: NSLocalizedString("Delete", comment: "")) {
+                        if let addr = self.publicAddress {
+                            self.walletsService.delete(address: addr)
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                }
+                present(alertViewController, animated: true)
+            default:
+                print("Unreal")
+            }
+        }
+        
     }
 }
 
-extension WalletInfoViewController:RenameViewControllerDelegate {
-    func didUpdateWalletName(name: String) {
-        nameWalletLabel.text = name
-        tableView.reloadData()
-    }
-    
-    func addressOfWallet() -> String {
-        return addressLabel.text ?? ""
-    }
-}
 

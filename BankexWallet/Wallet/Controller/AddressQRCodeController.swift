@@ -19,7 +19,6 @@ class AddressQRCodeController: BaseViewController {
     @IBOutlet weak var copyAddressButton: UIButton!
     @IBOutlet weak var activityVC:UIActivityIndicatorView!
     
-    
     var isAnimating = false
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     var navTitle: String?
@@ -53,6 +52,8 @@ class AddressQRCodeController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        copyAddressButton.layer.borderWidth = 2
+        copyAddressButton.layer.borderColor = UIColor.mainColor.cgColor
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -98,11 +99,12 @@ class AddressQRCodeController: BaseViewController {
 
         let itemsToShare = [ addressToShare ]
         let activityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-
+        if UIDevice.isIpad {
+            activityViewController.addPopover(in: view, rect: CGRect(x: view.bounds.width - 37, y: 0, width: 0, height: 0), .up)
+        }
         // exclude some activity types from the list (optional)
         activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook, UIActivityType.mail, UIActivityType.message, UIActivityType.postToTwitter ]
-
+        
         self.present(activityViewController, animated: true, completion: nil)
     }
 

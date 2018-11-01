@@ -35,7 +35,9 @@ class BackupPassphraseViewController: UIViewController {
         lookOutView.backgroundColor = UIColor.errorColor
         passphrase = service.generateMnemonics()
         passphraseLabel.text = passphrase
-        copyButton.backgroundColor = UIColor.mainColor
+        copyButton.backgroundColor = .white
+        copyButton.layer.borderWidth = 2
+        copyButton.layer.borderColor = UIColor.mainColor.cgColor
         clipboardView.backgroundColor = UIColor.clipboardColor
         bottomContraint.constant = 100.0
     }
@@ -54,7 +56,7 @@ class BackupPassphraseViewController: UIViewController {
         }
         if passphrase != UIPasteboard.general.string {
             nextButton?.isEnabled = false
-            nextButton?.backgroundColor = UIColor.disableColor
+            nextButton?.backgroundColor = UIColor.lightBlue
         }
         
     }
@@ -63,8 +65,8 @@ class BackupPassphraseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
     }
     
@@ -102,13 +104,14 @@ class BackupPassphraseViewController: UIViewController {
         title = NSLocalizedString("Back", comment: "")
         titleLbl.text = navTitle ?? NSLocalizedString("Create Wallet", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.errorColor
+        statusBarColor(UIColor.errorColor)
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
     @IBAction func share() {
         guard let passphrase = passphraseLabel.text else { return }
         let activityVC = UIActivityViewController(activityItems: [passphrase], applicationActivities: nil)
+        activityVC.addPopover(in: view, rect: CGRect(x: view.bounds.width - 34, y: 0, width: 0, height: 0), .up)
         present(activityVC, animated: true)
     }
     

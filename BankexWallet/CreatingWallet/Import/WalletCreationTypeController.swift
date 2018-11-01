@@ -32,7 +32,9 @@ class WalletCreationTypeController: BaseViewController {
     }
     
     func setupButtons() {
-        importBtn.backgroundColor = UIColor.importColor
+        importBtn.backgroundColor = .white
+        importBtn.layer.borderColor = UIColor.mainColor.cgColor
+        importBtn.layer.borderWidth = 2
         creaetBtn.backgroundColor = UIColor.mainColor
     }
     
@@ -73,6 +75,7 @@ class WalletCreationTypeController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        splitViewController?.hide()
         navigationController?.navigationBar.isHidden = isFromInitial
     }
     

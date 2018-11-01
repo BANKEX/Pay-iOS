@@ -16,8 +16,15 @@ extension UIAlertController {
         return alertViewController
     }
     
-    public class func destructive(title:String? = nil,description:String? = nil,button:String?,action:@escaping ()->()) -> UIAlertController {
+    public class func destructive(title:String? = nil,description:String? = nil, button:String?,action:@escaping ()->()) -> UIAlertController {
         let alertViewController = UIAlertController(title: title, message: description, preferredStyle: .actionSheet)
+        alertViewController.addDestructive(title: button, action: action)
+        alertViewController.addCancel()
+        return alertViewController
+    }
+    
+    public class func destructiveIpad(title:String? = nil,description:String? = nil, button:String?,action:@escaping ()->()) -> UIAlertController {
+        let alertViewController = UIAlertController(title: title, message: description, preferredStyle: .alert)
         alertViewController.addDestructive(title: button, action: action)
         alertViewController.addCancel()
         return alertViewController

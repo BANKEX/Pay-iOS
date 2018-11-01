@@ -17,6 +17,8 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet weak var balanceLbl:UILabel!
     @IBOutlet weak var symbolLbl:UILabel!
     @IBOutlet weak var fillView:UIView!
+    @IBOutlet weak var leftConstraint:NSLayoutConstraint!
+    @IBOutlet weak var rightContraint:NSLayoutConstraint!
     
     
     var utilsService = UtilTransactionsServiceImplementation()
@@ -27,6 +29,8 @@ class WalletTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        leftConstraint.constant = UIDevice.isIpad ? 52 : 15
+        rightContraint.constant = UIDevice.isIpad ? 52 : 15
         fillView.setupDefaultShadow()
         selectionStyle = .none
         fillView.layer.cornerRadius = 8.0

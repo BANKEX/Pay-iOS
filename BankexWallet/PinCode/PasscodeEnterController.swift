@@ -72,6 +72,11 @@ class PasscodeEnterController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+        splitViewController?.show()
+        UIView.animate(withDuration: 0.1) {
+            self.splitViewController?.preferredPrimaryColumnWidthFraction = 0
+        }
         PasscodeEnterController.isLocked = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         configureBackground()
@@ -81,6 +86,11 @@ class PasscodeEnterController: UIViewController {
         if !isAvailableTouchID || !turnOnTouchID {
             hideBiometricButton()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        splitViewController?.hide()
     }
     
     func hideBiometricButton() {
@@ -154,8 +164,6 @@ class PasscodeEnterController: UIViewController {
             }
         }
     }
-    
-    
     
     
     override func viewDidDisappear(_ animated: Bool) {

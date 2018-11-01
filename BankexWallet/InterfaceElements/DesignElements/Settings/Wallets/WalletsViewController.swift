@@ -40,6 +40,7 @@ class WalletsViewController: BaseViewController, WalletSelectedDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        splitViewController?.show()
         service.updateSelectedWallet()
         listWallets = (service.fullHDKeysList() ?? [HDKey]()) + (service.fullListOfSingleEthereumAddresses() ?? [HDKey]())
         tableView.reloadData()

@@ -20,6 +20,10 @@ public extension UIDevice {
         }
     }
     
+    static var isIpad:Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     static let modelName: String = {
         var systemInfo = utsname()
         uname(&systemInfo)

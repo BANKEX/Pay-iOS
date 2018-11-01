@@ -89,6 +89,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     private func prepareNavBar() {
         addTokensButton()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        UIApplication.shared.statusBarView?.backgroundColor = .white
     }
     
     //MARK: - Refresh Control
@@ -127,13 +128,14 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     //MARK: - Popover magic
     @objc func showTokensButtonTapped(_ sender: Any) {
         popover = Popover(options: self.popoverOptions)
-        let aView = UIView(frame: CGRect(x: 0, y: 0, width: 86, height: calculateHeight()))
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: UIDevice.isIpad ? 320 : 86, height: calculateHeight()))
         aView.clipsToBounds = true
         aView.backgroundColor = UIColor.clear
 //        let tableView = UITableView(frame: CGRect(x: 0, y: 5, width: 100, height: calculateHeight()), style: .plain)
         let tableView = UITableView()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
         tableView.frame = CGRect(x: 0, y: 10, width: aView.bounds.width, height: aView.bounds.height)
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = UIDevice.isIpad ? .singleLine : .none
         tableView.clipsToBounds = true
         let v = UIView()
         v.frame.size.height = 5
