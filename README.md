@@ -20,13 +20,13 @@ Welcome to BANKEX's open source iOS app!
 
 
 
-<img src="/Badge/Getting Started.png">
+## Getting Started
 
 1. [Download](https://developer.apple.com/xcode/download/) the Xcode 10 release.
 1. Clone this repository.
 
 
-<img src="/Badge/Contributing.png">
+## Contributing
 
 
 We intend for this project to be an educational resource: we are excited to
@@ -39,7 +39,7 @@ Please be sure to include your operating system, device, version number, and
 steps to reproduce reported bugs. Keep in mind that all participants will be
 expected to follow our code of conduct.
 
-<img src="/Badge/Information.png">
+## Information
 
 
 - **Compatibility**: Requires iOS 9.0 or later. Compatible with iPhone and iPod touch.
@@ -88,7 +88,7 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
-<img src="/Badge/Communication.png">
+## Communication
 
 
 - If you **found a bug**, open an issue.
@@ -96,11 +96,11 @@ $ pod install
 - If you **want to contribute**, submit a pull request.
 
 
-<img src="/Badge/Details.png">
+## Details
 
 
 More details (architecture, environments, tests, tools...) can be found on the [wiki](https://github.com/BANKEX/BankexWalletIOS/wiki).
 
-<img src="/Badge/Change-Log.png">
+## Change-Log
 
 A brief summary of each Lovely release can be found on the [releases](https://github.com/BANKEX/BankexWalletIOS/releases).
