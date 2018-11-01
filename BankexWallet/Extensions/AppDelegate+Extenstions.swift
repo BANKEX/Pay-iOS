@@ -36,6 +36,7 @@ extension AppDelegate {
         UINavigationBar.appearance().tintColor = UIColor.mainColor
         UITextField.appearance().tintColor = UIColor.mainColor
         UITextView.appearance().tintColor = UIColor.mainColor
+        UIWindow.appearance().tintColor = UIColor.mainColor
         UINavigationBar.appearance().barTintColor = UIColor.white
     }
     
