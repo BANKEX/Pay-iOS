@@ -43,7 +43,7 @@ class WalletTableViewCell: UITableViewCell {
         updateLayout()
         if let wallet = keyService.selectedWallet() {
             nameWalletLbl.text = wallet.name
-            walletImageView.image = PredefinedTokens.Ethereum.image()
+            walletImageView.image = #imageLiteral(resourceName: "Ethereum")
             symbolLbl.text = "ETH"
             UserDefaults.saveData(string: wallet.name)
         }

@@ -60,9 +60,10 @@ class TokenTableViewCell: UITableViewCell {
             addressToken.isHidden = true
         }
         
-        addressToken.text = token.address.formattedAddrToken()
         tokenView.letter = token.name.prefix(1).uppercased()
-
+        tokenView.isHidden = true
+        tokenImageView.setTokenImage(tokenAddress: token.address, placeholder: tokenView)
+        addressToken.text = token.address.formattedAddrToken()
         nameToken.text = token.name
         symbolToken.text = token.symbol.uppercased()
         

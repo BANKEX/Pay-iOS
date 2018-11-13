@@ -185,14 +185,12 @@ extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
             let placeholderCell = tableView.dequeueReusableCell(withIdentifier: PlaceholderCell.identifier, for: indexPath) as! PlaceholderCell
             return placeholderCell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as! TokenTableViewCell
-        cell.isSearchable = true
+        let cell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as? TokenTableViewCell
+        cell?.isSearchable = true
         let num = floor(Double(indexPath.row/2))
         let token = tokensList![Int(num)]
-        //        let available = tokensAvailability![indexPath.row]
-        //        cell.configure(with: token, isAvailable: available)
-        cell.token = token
-        return cell
+        cell?.token = token
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

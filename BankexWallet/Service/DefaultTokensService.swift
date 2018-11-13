@@ -8,9 +8,12 @@
 
 import UIKit
 import SugarRecord
+import SDWebImage
 
 protocol DefaultTokensService {
     func downloadAllAvailableTokensIfNeeded( completion: @escaping ()-> Void)}
+
+
 
 class DefaultTokensServiceImplementation: DefaultTokensService {
     
@@ -18,7 +21,6 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
     private let db = DBStorage.db
     private let networksService = NetworksServiceImplementation()
     private let tokensService: UtilTransactionsService = CustomTokenUtilsServiceImplementation()
- 
     
     func downloadAllAvailableTokensIfNeeded( completion: @escaping ()-> Void) {
         if UserDefaults.standard.bool(forKey: defaultsKey) {
@@ -121,4 +123,18 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
     
     
 }
+
+extension UIImageView {
+    func setTokenImage(tokenAddress:String, placeholder:UIView?) {
+        let path = "https://raw.githubusercontent.com/TrustWallet/tokens/master/images/\(tokenAddress).png"
+        if let url = URL(string:path) {
+            self.sd_setImage(with: url) { img, error, cacheType, _ in
+                if img == nil || error != nil {
+                    placeholder?.isHidden = false
+                }
+            }
+        }
+    }
+}
+
 

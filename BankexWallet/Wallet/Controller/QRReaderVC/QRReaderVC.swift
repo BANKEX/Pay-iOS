@@ -74,6 +74,7 @@ class QRReaderVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
         return greenLayer
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         auth()
