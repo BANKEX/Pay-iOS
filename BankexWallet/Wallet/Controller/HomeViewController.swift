@@ -270,7 +270,8 @@ extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,
             }else {
                 if let tokenCell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as? TokenTableViewCell {
                     let num = floor(Double(indexPath.row/2))
-                    tokenCell.token = tokens[Int(num)]
+                    let token = tokens[Int(num)]
+                    tokenCell.token = token
                     tokenCell.isSearchable = false
                     return tokenCell
                 }
