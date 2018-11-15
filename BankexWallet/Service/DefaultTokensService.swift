@@ -125,15 +125,15 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
 }
 
 extension UIImageView {
-    func setTokenImage(tokenAddress:String, placeholder:UIView?) {
+    func setTokenImage(tokenAddress:String) {
         let path = "https://raw.githubusercontent.com/TrustWallet/tokens/master/images/\(tokenAddress).png"
         if let url = URL(string:path) {
-            self.sd_setImage(with: url) { img, error, cacheType, _ in
-                if img == nil || error != nil {
-                    placeholder?.isHidden = false
-                }
-            }
+            self.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "Group"))
         }
+    }
+    
+    func setBKXImage() {
+        self.sd_setImage(with: nil, placeholderImage: #imageLiteral(resourceName: "Bankex"))
     }
 }
 

@@ -17,7 +17,6 @@ class TokenTableViewCell: UITableViewCell {
     @IBOutlet weak var nameToken:UILabel!
     @IBOutlet weak var addressToken:UILabel!
     @IBOutlet weak var tokenAddedImage:UIImageView!
-    @IBOutlet weak var tokenView:TokenView!
     @IBOutlet weak var fillView:UIView!
     @IBOutlet weak var arrowRight:UIImageView!
     @IBOutlet weak var leftContraint:NSLayoutConstraint!
@@ -27,6 +26,9 @@ class TokenTableViewCell: UITableViewCell {
     let keysService = SingleKeyServiceImplementation()
     var isSearchable = false
     let service = CustomTokenUtilsServiceImplementation()
+    var isBKXToken:Bool {
+        return token.symbol == "BKX"
+    }
 
     
     var token:ERC20TokenModel! {
@@ -59,10 +61,7 @@ class TokenTableViewCell: UITableViewCell {
             balanceToken.isHidden = false
             addressToken.isHidden = true
         }
-        
-        tokenView.letter = token.name.prefix(1).uppercased()
-        tokenView.isHidden = true
-        tokenImageView.setTokenImage(tokenAddress: token.address, placeholder: tokenView)
+        isBKXToken ? tokenImageView.setBKXImage() : tokenImageView.setTokenImage(tokenAddress: token.address)
         addressToken.text = token.address.formattedAddrToken()
         nameToken.text = token.name
         symbolToken.text = token.symbol.uppercased()
