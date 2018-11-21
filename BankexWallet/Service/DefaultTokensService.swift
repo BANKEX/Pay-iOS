@@ -28,7 +28,7 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
             return
         }
     
-        guard let url = URL(string: "https://raw.githubusercontent.com/kvhnuke/etherwallet/mercury/app/scripts/tokens/ethTokens.json") else {
+        guard let url = URL(string: "https://raw.githubusercontent.com/BANKEX/Tokens/master/listTokens") else {
             completion()
             return
         }
