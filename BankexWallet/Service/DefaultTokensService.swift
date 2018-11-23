@@ -126,7 +126,7 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
 
 extension UIImageView {
     func setTokenImage(tokenAddress:String) {
-        let path = "https://raw.githubusercontent.com/TrustWallet/tokens/master/images/\(tokenAddress).png"
+        let path = "https://raw.githubusercontent.com/BANKEX/Tokens/master/tokenImages/\(tokenAddress).png"
         if let url = URL(string:path) {
             self.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "Group"))
         }
