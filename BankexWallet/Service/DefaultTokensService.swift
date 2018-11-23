@@ -58,6 +58,7 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
                                 newToken.name = newToken.symbol
                                 newToken.decimals = String((dict["decimal"] as? Int) ?? 0)
                                 newToken.networkURL =  self.networksService.preferredNetwork().fullNetworkUrl.absoluteString
+                                newToken.isSecurity = dict["isSecurity"] as? Bool ?? false
                                 try context.insert(newToken)
                                 save()
                                 numberOfAddedTokens -= 1
