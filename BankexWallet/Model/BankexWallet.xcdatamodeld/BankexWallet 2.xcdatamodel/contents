@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ERC20Token" representedClassName="ERC20Token" syncable="YES" codeGenerationType="class">
         <attribute name="address" attributeType="String" syncable="YES"/>
         <attribute name="decimals" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isAdded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isSecurity" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="networkURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -45,7 +46,7 @@
         <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="balances" inverseEntity="KeyWallet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ERC20Token" positionX="-63" positionY="9" width="128" height="180"/>
+        <element name="ERC20Token" positionX="-63" positionY="9" width="128" height="195"/>
         <element name="FavoritesAddress" positionX="-18" positionY="135" width="128" height="75"/>
         <element name="KeyWallet" positionX="-54" positionY="54" width="128" height="180"/>
         <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="195"/>

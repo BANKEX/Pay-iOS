@@ -145,7 +145,7 @@ class SendEthServiceImplementation: SendEthService {
         let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@) && token == nil", NSNumber(value: networkId), address.lowercased(), address.lowercased())).sorted(with: "date", ascending: false))
         
         return transactions.map({ (transaction) -> ETHTransactionModel in
-            let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :
+            let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false ,isSecurity:false) :
                 ERC20TokenModel(token: transaction.token!)
             return ETHTransactionModel(from: transaction.from ?? "",
                                        to: transaction.to ?? "",
@@ -163,7 +163,7 @@ class SendEthServiceImplementation: SendEthService {
         let transactions: [SendEthTransaction] = try! db.fetch(FetchRequest<SendEthTransaction>().filtered(with: NSPredicate(format: "networkId == %@ && (from == %@ || to == %@) && token == nil", NSNumber(value: networkId), address.lowercased(), address.lowercased())).sorted(with: "date", ascending: false))
         
         return transactions.map({ (transaction) -> ETHTransactionModel in
-            let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false) :
+            let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false, isSecurity:false) :
                 ERC20TokenModel(token: transaction.token!)
             return ETHTransactionModel(from: transaction.from ?? "",
                                        to: transaction.to ?? "",

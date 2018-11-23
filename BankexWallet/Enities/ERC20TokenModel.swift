@@ -16,6 +16,7 @@ struct ERC20TokenModel {
     let symbol: String
     let isSelected: Bool
     var isAdded: Bool
+    var isSecurity: Bool
     
     init(token: ERC20Token) {
         self.name = token.name ?? ""
@@ -24,19 +25,21 @@ struct ERC20TokenModel {
         self.symbol = token.symbol ?? ""
         self.isSelected = token.isSelected
         self.isAdded = token.isAdded
+        self.isSecurity = token.isSecurity
     }
     
     init(name: String,
          address: String,
          decimals: String,
          symbol: String,
-         isSelected: Bool,isAdded:Bool = false) {
+         isSelected: Bool,isAdded:Bool = false, isSecurity:Bool) {
         self.name = name
         self.address = address
         self.decimals = decimals
         self.symbol = symbol
         self.isSelected = isSelected
         self.isAdded = isAdded
+        self.isSecurity = isSecurity
     }
 }
 
@@ -46,6 +49,7 @@ extension ERC20TokenModel: Equatable {
             lhs.name == rhs.name &&
                 lhs.address == rhs.address &&
                 lhs.decimals == rhs.decimals &&
-                lhs.symbol == rhs.symbol
+                lhs.symbol == rhs.symbol &&
+                lhs.isSecurity == rhs.isSecurity
     }
 }
