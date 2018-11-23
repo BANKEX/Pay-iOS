@@ -161,8 +161,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                                                  address: address,
                                                                  decimals: decimals.description,
                                                                  symbol: symbol,
-                                                                 isSelected: false)))
-                
+                                                                 isSelected: false, isSecurity:false)))
             }
         }
     }
@@ -176,7 +175,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                                                          address: token.address ?? "",
                                                                          decimals: token.decimals ?? "",
                                                                          symbol: token.symbol ?? "",
-                                                                         isSelected: false)))
+                                                                         isSelected: false,isSecurity: token.isSecurity)))
                     }
                     return
                 } else {
@@ -207,7 +206,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                                                  address: token.address ?? "",
                                                                  decimals: token.decimals ?? "",
                                                                  symbol: token.symbol ?? "",
-                                                                 isSelected: false,isAdded: token.isAdded)
+                                                                 isSelected: false,isAdded: token.isAdded, isSecurity: token.isSecurity)
                                 tokensList.append(tokenModel)
                             }
                             completion(SendEthResult.Success(tokensList))
@@ -287,7 +286,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                                                   address: address,
                                                                   decimals: decimals.description,
                                                                   symbol: symbol,
-                                                                  isSelected: false)]))
+                                                                  isSelected: false, isSecurity: false)]))
                 
             }
         }
@@ -325,7 +324,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                address: token.address ?? "",
                                decimals: token.decimals ?? "",
                                symbol: token.symbol ?? "",
-                               isSelected: token.isSelected)
+                               isSelected: token.isSelected, isSecurity:false)
     }
     
     func updateSelectedToken(to token: String, completion: (() -> Void)? = nil) {
@@ -390,7 +389,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                                    address: token.address ?? "",
                                    decimals: token.decimals ?? "",
                                    symbol: token.symbol ?? "",
-                                   isSelected: token.isSelected,isAdded: token.isAdded)
+                                   isSelected: token.isSelected,isAdded: token.isAdded, isSecurity: token.isSecurity)
             
         }
         return listOfNetworks
@@ -399,7 +398,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     private func etherModel() -> ERC20TokenModel {
         let isEtherSelected = try! db.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format: "isSelected == %@", NSNumber(value: true)))).isEmpty
         
-        return ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: isEtherSelected)
+        return ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: isEtherSelected, isSecurity:false)
     }
     
     func updateConversions() {
