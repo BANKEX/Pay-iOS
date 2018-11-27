@@ -18,10 +18,6 @@ class HomeViewController: BaseViewController {
         case home,fromContact
     }
     
-    enum HomeSections:Int {
-        case Ethereum = 0, Tokens
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mainSign: UIImageView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
@@ -74,7 +70,6 @@ class HomeViewController: BaseViewController {
     let service: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     let conversionService = FiatServiceImplementation.service
     var etherToken: ERC20TokenModel?
-    var tokens = [ERC20TokenModel]()
     let walletData = WalletData()
     var selectedToken:ERC20TokenModel!
     
@@ -264,7 +259,6 @@ class HomeViewController: BaseViewController {
                     self.updateViewModel(with: availableTokens)
                     
                     self.etherToken = etherToken
-                    self.tokens = availableTokens
                     self.tableView.reloadData()
                 }
                 
@@ -388,21 +382,27 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            if isFromContact && !tokens.isEmpty {
-                let sendToken = storyboard?.instantiateViewController(withIdentifier: "SendTokenViewController") as! SendTokenViewController
-                navigationController?.pushViewController(sendToken, animated: true)
-                performSegue(withIdentifier: "walletInfo", sender: nil)
-                return
-            }
-            if HomeSections.Ethereum.rawValue == indexPath.section {
-                tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
-                performSegue(withIdentifier: "walletInfo", sender: nil)
-            }else if HomeSections.Tokens.rawValue == indexPath.section && !tokens.isEmpty {
-                let num = floor(Double(indexPath.row/2))
-                selectedToken = tokens[Int(num)]
-                tokenSerive.updateSelectedToken(to: selectedToken.address, completion: nil)
-                performSegue(withIdentifier: "walletInfo", sender: nil)
-            }
+        if isFromContact {
+            let sendToken = storyboard?.instantiateViewController(withIdentifier: "SendTokenViewController") as! SendTokenViewController
+            navigationController?.pushViewController(sendToken, animated: true)
+            performSegue(withIdentifier: "walletInfo", sender: nil)
+            return
+        }
+        
+        let row = viewModel.sections[indexPath.section].rows[indexPath.row]
+        
+        switch row {
+        case .empty: return
+        case .placeholder: return
+        case .wallet:
+            tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
+            performSegue(withIdentifier: "walletInfo", sender: nil)
+            
+        case .token(let token):
+            selectedToken = token
+            tokenSerive.updateSelectedToken(to: selectedToken.address, completion: nil)
+            performSegue(withIdentifier: "walletInfo", sender: nil)
+        }
     }
     
 }
