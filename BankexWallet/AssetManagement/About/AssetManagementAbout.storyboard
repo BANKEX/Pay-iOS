@@ -29,16 +29,26 @@
         <!--About Asset Management-->
         <scene sceneID="DL8-3A-E5y">
             <objects>
-                <viewController id="cLV-H9-6ra" sceneMemberID="viewController">
+                <viewController id="cLV-H9-6ra" customClass="AssetManagementAboutViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SUS-8H-pXB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="yG8-ea-bP4"/>
                     </view>
-                    <navigationItem key="navigationItem" title="About Asset Management" id="TcU-0l-vcb"/>
+                    <navigationItem key="navigationItem" title="About Asset Management" id="TcU-0l-vcb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="aBG-4a-EkS">
+                            <connections>
+                                <action selector="finish" destination="cLV-H9-6ra" id="b2l-9b-XyF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Nhk-Mw-sKK" kind="unwind" identifier="Home" unwindAction="unwindToHome:" id="MAf-MK-KCM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UYX-PB-eeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Nhk-Mw-sKK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-114" y="69"/>
         </scene>

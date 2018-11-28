@@ -217,6 +217,8 @@ class HomeViewController: BaseViewController {
         
     }
     
+    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
+    
     //Methods
     fileprivate func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = .white
