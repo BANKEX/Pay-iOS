@@ -2415,6 +2415,22 @@
             </objects>
             <point key="canvasLocation" x="4002" y="486"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zWw-xs-Pxn">
+            <objects>
+                <navigationController id="8nC-Rq-KgM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cOm-jF-iba">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="CS0-X6-Q0Q" kind="relationship" relationship="rootViewController" id="b3g-aT-qeQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="buL-mg-Btr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4247" y="7355"/>
+        </scene>
         <!--Products View Controller-->
         <scene sceneID="f45-0N-2v8">
             <objects>
@@ -3045,7 +3061,7 @@
                         <outlet property="topConstraint" destination="gtj-Lw-fK7" id="7nN-lm-XNa"/>
                         <segue destination="xjs-f2-eUN" kind="show" identifier="createToken" id="TXr-nN-iSr"/>
                         <segue destination="Nqf-Fy-uI6" kind="show" identifier="walletInfo" id="ew0-Ce-kR2"/>
-                        <segue destination="CS0-X6-Q0Q" kind="presentation" identifier="AssetManagementInfo" modalPresentationStyle="formSheet" id="a9G-9q-npJ"/>
+                        <segue destination="8nC-Rq-KgM" kind="presentation" identifier="AssetManagementInfo" modalPresentationStyle="formSheet" id="rXH-Tq-n6o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLg-F4-kEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3101,10 +3117,12 @@
         <!--AssetManagementAbout-->
         <scene sceneID="1PO-kx-HSj">
             <objects>
-                <viewControllerPlaceholder storyboardName="AssetManagementAbout" id="CS0-X6-Q0Q" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="AssetManagementAbout" id="CS0-X6-Q0Q" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="nOJ-Dq-pq5"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nQ-wF-wXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4268" y="4990"/>
+            <point key="canvasLocation" x="-4556" y="7936"/>
         </scene>
         <!--List Contacts View Controller-->
         <scene sceneID="sOS-Pp-9aG">
@@ -6890,7 +6908,7 @@ minutes, please wait ...</string>
         <segue reference="fKt-CA-37X"/>
         <segue reference="Jbu-eR-5tu"/>
         <segue reference="pT1-5S-qPI"/>
-        <segue reference="bSW-e7-K9g"/>
+        <segue reference="t8R-rs-am5"/>
         <segue reference="o2o-Af-M3V"/>
     </inferredMetricsTieBreakers>
 </document>
