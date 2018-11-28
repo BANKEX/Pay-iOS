@@ -3062,6 +3062,7 @@
                         <segue destination="xjs-f2-eUN" kind="show" identifier="createToken" id="TXr-nN-iSr"/>
                         <segue destination="Nqf-Fy-uI6" kind="show" identifier="walletInfo" id="ew0-Ce-kR2"/>
                         <segue destination="8nC-Rq-KgM" kind="presentation" identifier="AssetManagementInfo" modalPresentationStyle="formSheet" id="rXH-Tq-n6o"/>
+                        <segue destination="IJd-EG-tJ7" kind="presentation" identifier="AssetManagementContacts" modalPresentationStyle="formSheet" id="bfh-cG-Os1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLg-F4-kEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3113,6 +3114,16 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="-4246" y="4504"/>
+        </scene>
+        <!--AssetManagementContacts-->
+        <scene sceneID="F0f-9Q-crQ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AssetManagementContacts" id="Szz-mH-arZ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Xyl-GJ-Qv4"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tjw-Ka-Asb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5287" y="7935"/>
         </scene>
         <!--AssetManagementAbout-->
         <scene sceneID="1PO-kx-HSj">
@@ -6853,6 +6864,22 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="-5727.1999999999998" y="5563.2683658170918"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bvr-kf-nvM">
+            <objects>
+                <navigationController id="IJd-EG-tJ7" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wQK-hD-0Yo">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Szz-mH-arZ" kind="relationship" relationship="rootViewController" id="itu-uj-faW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8UK-d4-YNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5286" y="7354"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Arrow Right Grey" width="8" height="13"/>
@@ -6896,6 +6923,7 @@ minutes, please wait ...</string>
         <image name="white_touch_id" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ew0-Ce-kR2"/>
         <segue reference="USj-xB-uaI"/>
         <segue reference="aQE-iQ-YyK"/>
         <segue reference="ijQ-jv-rc6"/>

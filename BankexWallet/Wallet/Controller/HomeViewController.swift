@@ -214,7 +214,7 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func showAssetManagementContacts() {
-        
+        performSegue(withIdentifier: "AssetManagementContacts", sender: self)
     }
     
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
