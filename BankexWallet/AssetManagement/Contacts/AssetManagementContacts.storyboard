@@ -13,15 +13,27 @@
         <!--Contact Us-->
         <scene sceneID="AtW-bC-pbu">
             <objects>
-                <viewController title="Contact Us" id="z2a-XS-E2n" customClass="AssetManagementContactsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="z2a-XS-E2n" customClass="AssetManagementContactsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NZR-RC-BDu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2JZ-3h-4t1"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Contact Us" id="xBB-N4-eaQ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="bNB-Yq-eDf">
+                            <connections>
+                                <action selector="finish" destination="z2a-XS-E2n" id="6OY-XF-fDw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="qyG-zU-29d" kind="unwind" identifier="Home" unwindAction="unwindToHome:" id="xX7-BV-5GD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opg-5D-wSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qyG-zU-29d" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
     </scenes>

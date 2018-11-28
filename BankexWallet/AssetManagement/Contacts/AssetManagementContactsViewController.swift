@@ -10,4 +10,8 @@ import UIKit
 
 class AssetManagementContactsViewController: UIViewController {
     
+    @IBAction func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
+    }
+    
 }
