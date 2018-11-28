@@ -24,6 +24,7 @@
 		0089E69A2126C9E30037AF60 /* WalletInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089E6992126C9E30037AF60 /* WalletInfoViewController.swift */; };
 		00F0B9A921394C3800AC3013 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00F0B9A721394C3800AC3013 /* Localizable.strings */; };
 		62AC3C13B9AE98E37A41F993 /* Pods_BankexWalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */; };
+		71EA219B21AE829000D70DA6 /* AssetManagementAbout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71EA219A21AE829000D70DA6 /* AssetManagementAbout.storyboard */; };
 		8104B050201F368200AE94B5 /* Web3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B04F201F368200AE94B5 /* Web3.swift */; };
 		81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81942F06201B36A300F0AE29 /* AppDelegate.swift */; };
 		81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81942F0A201B36A300F0AE29 /* Main.storyboard */; };
@@ -266,6 +267,7 @@
 		00F0B9AB21394CF400AC3013 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		1C33ADE69F5E6B37793B41AB /* Pods_Wallet_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wallet_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWalletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		71EA219A21AE829000D70DA6 /* AssetManagementAbout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementAbout.storyboard; sourceTree = "<group>"; };
 		73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		805299A5A8B2FE29BB36247D /* Pods-BankexWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		8104B04F201F368200AE94B5 /* Web3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3.swift; sourceTree = "<group>"; };
@@ -562,6 +564,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		71EA219821AE820D00D70DA6 /* AssetManagement */ = {
+			isa = PBXGroup;
+			children = (
+				71EA219921AE822400D70DA6 /* About */,
+			);
+			path = AssetManagement;
+			sourceTree = "<group>";
+		};
+		71EA219921AE822400D70DA6 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				71EA219A21AE829000D70DA6 /* AssetManagementAbout.storyboard */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
 		81942EFA201B36A300F0AE29 = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +623,7 @@
 				002ED583210F179600845A72 /* TransactionHistory */,
 				E2724AA521076C650070960A /* PinCode */,
 				86A6F8C52147FE6600609413 /* Wallet */,
+				71EA219821AE820D00D70DA6 /* AssetManagement */,
 				864732C4214FC17A00519AE1 /* SupportingFiles */,
 				81C4333F201B730C008D3343 /* GlobalState */,
 				81C4333A201B3B48008D3343 /* Constants */,
@@ -1267,6 +1286,7 @@
 				86219C082180AB1300185EF6 /* SectionTableCell.xib in Resources */,
 				863A6A602184EBAA00E4A8D3 /* GeneralInformationCell.xib in Resources */,
 				86D7FB7F2149338B008245DE /* WalletTableViewCell.xib in Resources */,
+				71EA219B21AE829000D70DA6 /* AssetManagementAbout.storyboard in Resources */,
 				867681C321831F4100C269ED /* DeleteCell.xib in Resources */,
 				00F0B9A921394C3800AC3013 /* Localizable.strings in Resources */,
 				81942F14201B36A300F0AE29 /* LaunchScreen.storyboard in Resources */,
@@ -1503,7 +1523,6 @@
 				864ABA542171723500763D31 /* TokenShort.swift in Sources */,
 				862067F5217927010099A15D /* AutoLockService.swift in Sources */,
 				86A797E021870A3C00F2D4B3 /* PasscodeIpadVC.swift in Sources */,
-
 				864732D0214FC33600519AE1 /* UIColor+Extensions.swift in Sources */,
 				F0B1B4C5205944E1009D76D5 /* CustomERC20TokensService.swift in Sources */,
 				F0B1B4D2205AAC95009D76D5 /* CreateTokenController.swift in Sources */,
