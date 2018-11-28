@@ -35,13 +35,13 @@ class PreparetionTransaction {
             switch result {
             case .Success(let trans):
                 self.transactionIntermediate = trans
+                let options = self.getWeb3options()
+                guard let transIntermediate = self.transactionIntermediate else { return }
+                self.sendETHService.send(transactionModel: transactionETHModel, transaction: transIntermediate, options: options) { _ in }
             case .Error(let error):
                 printDebug(error.localizedDescription)
             }
         }
-        let options = getWeb3options()
-        guard let transIntermediate = transactionIntermediate else { return }
-        sendETHService.send(transactionModel: transactionETHModel, transaction: transIntermediate, options: options) { _ in }
     }
     
     
