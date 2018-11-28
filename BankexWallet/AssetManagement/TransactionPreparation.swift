@@ -11,8 +11,8 @@ import web3swift
 import BigInt
 
 
-//let service = PreparetionTransaction(toAddress:"0xdfdf", amount: "50")
-//service.sendTransaction()
+
+
 
 class PreparetionTransaction {
     
