@@ -210,7 +210,7 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func showAssetManagementInfo() {
-        
+        performSegue(withIdentifier: "AssetManagementInfo", sender: self)
     }
     
     @IBAction func showAssetManagementContacts() {
