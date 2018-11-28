@@ -217,6 +217,10 @@ class HomeViewController: BaseViewController {
         performSegue(withIdentifier: "AssetManagementContacts", sender: self)
     }
     
+    @IBAction func showPerformEthTransfer() {
+        print("showEthTransaction")
+    }
+    
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
     
     //Methods

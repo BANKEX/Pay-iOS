@@ -3067,7 +3067,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLg-F4-kEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="8CS-YX-QOM">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZJ-no-m4Y">
@@ -3088,8 +3088,19 @@
                                 <action selector="showAssetManagementInfo" destination="J4W-a5-AkX" eventType="touchUpInside" id="A0q-El-BIj"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CA-lr-src">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sub-EV-cC3">
                             <rect key="frame" x="15" y="81" width="290" height="44"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="A4F-p3-SzU"/>
+                            </constraints>
+                            <state key="normal" title="ETH"/>
+                            <connections>
+                                <action selector="showPerformEthTransfer" destination="J4W-a5-AkX" eventType="touchUpInside" id="e28-8S-eUd"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CA-lr-src">
+                            <rect key="frame" x="15" y="141" width="290" height="44"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="sfg-Tl-Td6"/>
@@ -3105,10 +3116,13 @@
                         <constraint firstItem="WCq-B7-jd4" firstAttribute="leading" secondItem="AZJ-no-m4Y" secondAttribute="trailing" constant="15" id="AOH-in-wKe"/>
                         <constraint firstItem="AZJ-no-m4Y" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leading" constant="15" id="H7S-ms-rpc"/>
                         <constraint firstItem="5CA-lr-src" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leading" constant="15" id="I5i-MB-zYG"/>
-                        <constraint firstItem="5CA-lr-src" firstAttribute="top" secondItem="AZJ-no-m4Y" secondAttribute="bottom" constant="16" id="WVz-P0-VEC"/>
+                        <constraint firstAttribute="trailing" secondItem="Sub-EV-cC3" secondAttribute="trailing" constant="15" id="SWf-jw-Y5L"/>
+                        <constraint firstItem="Sub-EV-cC3" firstAttribute="top" secondItem="AZJ-no-m4Y" secondAttribute="bottom" constant="16" id="bf8-xS-5Tk"/>
                         <constraint firstItem="WCq-B7-jd4" firstAttribute="centerY" secondItem="AZJ-no-m4Y" secondAttribute="centerY" id="hSl-Xk-OaR"/>
                         <constraint firstAttribute="trailing" secondItem="5CA-lr-src" secondAttribute="trailing" constant="15" id="iKc-Ww-0Ck"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WCq-B7-jd4" secondAttribute="trailing" constant="15" id="mau-u5-q9T"/>
+                        <constraint firstItem="Sub-EV-cC3" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leading" constant="15" id="pFJ-A7-dCn"/>
+                        <constraint firstItem="5CA-lr-src" firstAttribute="top" secondItem="Sub-EV-cC3" secondAttribute="bottom" constant="16" id="rZv-h0-GtR"/>
                         <constraint firstItem="AZJ-no-m4Y" firstAttribute="top" secondItem="8CS-YX-QOM" secondAttribute="top" constant="43" id="vdu-OL-Pp0"/>
                     </constraints>
                 </view>
