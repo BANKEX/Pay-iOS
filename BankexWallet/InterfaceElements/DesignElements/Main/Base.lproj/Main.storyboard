@@ -2415,6 +2415,22 @@
             </objects>
             <point key="canvasLocation" x="4002" y="486"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zWw-xs-Pxn">
+            <objects>
+                <navigationController id="8nC-Rq-KgM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cOm-jF-iba">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="CS0-X6-Q0Q" kind="relationship" relationship="rootViewController" id="b3g-aT-qeQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="buL-mg-Btr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4247" y="7355"/>
+        </scene>
         <!--Products View Controller-->
         <scene sceneID="f45-0N-2v8">
             <objects>
@@ -3038,17 +3054,86 @@
                     </view>
                     <navigationItem key="navigationItem" id="6gd-Aq-3fb"/>
                     <connections>
+                        <outlet property="assetManagementHeaderView" destination="8CS-YX-QOM" id="zM9-eh-Kv5"/>
                         <outlet property="imageView" destination="JIH-nz-qUe" id="ap6-d8-mfh"/>
                         <outlet property="mainSign" destination="PHx-93-Sfk" id="ED5-FZ-751"/>
                         <outlet property="tableView" destination="lFM-Hx-M6q" id="mgK-4n-f2k"/>
                         <outlet property="topConstraint" destination="gtj-Lw-fK7" id="7nN-lm-XNa"/>
                         <segue destination="xjs-f2-eUN" kind="show" identifier="createToken" id="TXr-nN-iSr"/>
                         <segue destination="Nqf-Fy-uI6" kind="show" identifier="walletInfo" id="ew0-Ce-kR2"/>
+                        <segue destination="8nC-Rq-KgM" kind="presentation" identifier="AssetManagementInfo" modalPresentationStyle="formSheet" id="rXH-Tq-n6o"/>
+                        <segue destination="IJd-EG-tJ7" kind="presentation" identifier="AssetManagementContacts" modalPresentationStyle="formSheet" id="bfh-cG-Os1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLg-F4-kEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="8CS-YX-QOM">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZJ-no-m4Y">
+                            <rect key="frame" x="15" y="43" width="168" height="22"/>
+                            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="1" maxY="0.0"/>
+                            <state key="normal" title="Asset Management">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="openAssetManagementPage" destination="J4W-a5-AkX" eventType="touchUpInside" id="DFT-eJ-sTR"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="760" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCq-B7-jd4">
+                            <rect key="frame" x="198" y="43" width="22" height="22"/>
+                            <connections>
+                                <action selector="showAssetManagementInfo" destination="J4W-a5-AkX" eventType="touchUpInside" id="A0q-El-BIj"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CA-lr-src">
+                            <rect key="frame" x="15" y="81" width="290" height="44"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="sfg-Tl-Td6"/>
+                            </constraints>
+                            <state key="normal" title="Contact Us"/>
+                            <connections>
+                                <action selector="showAssetManagementContacts" destination="J4W-a5-AkX" eventType="touchUpInside" id="ngO-xS-7ba"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="WCq-B7-jd4" firstAttribute="leading" secondItem="AZJ-no-m4Y" secondAttribute="trailing" constant="15" id="AOH-in-wKe"/>
+                        <constraint firstItem="AZJ-no-m4Y" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leading" constant="15" id="H7S-ms-rpc"/>
+                        <constraint firstItem="5CA-lr-src" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leading" constant="15" id="I5i-MB-zYG"/>
+                        <constraint firstItem="5CA-lr-src" firstAttribute="top" secondItem="AZJ-no-m4Y" secondAttribute="bottom" constant="16" id="WVz-P0-VEC"/>
+                        <constraint firstItem="WCq-B7-jd4" firstAttribute="centerY" secondItem="AZJ-no-m4Y" secondAttribute="centerY" id="hSl-Xk-OaR"/>
+                        <constraint firstAttribute="trailing" secondItem="5CA-lr-src" secondAttribute="trailing" constant="15" id="iKc-Ww-0Ck"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WCq-B7-jd4" secondAttribute="trailing" constant="15" id="mau-u5-q9T"/>
+                        <constraint firstItem="AZJ-no-m4Y" firstAttribute="top" secondItem="8CS-YX-QOM" secondAttribute="top" constant="43" id="vdu-OL-Pp0"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="-4246" y="4504"/>
+        </scene>
+        <!--AssetManagementContacts-->
+        <scene sceneID="F0f-9Q-crQ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AssetManagementContacts" id="Szz-mH-arZ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Xyl-GJ-Qv4"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tjw-Ka-Asb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5287" y="7935"/>
+        </scene>
+        <!--AssetManagementAbout-->
+        <scene sceneID="1PO-kx-HSj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AssetManagementAbout" id="CS0-X6-Q0Q" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="nOJ-Dq-pq5"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7nQ-wF-wXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4556" y="7936"/>
         </scene>
         <!--List Contacts View Controller-->
         <scene sceneID="sOS-Pp-9aG">
@@ -6779,6 +6864,22 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="-5727.1999999999998" y="5563.2683658170918"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bvr-kf-nvM">
+            <objects>
+                <navigationController id="IJd-EG-tJ7" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wQK-hD-0Yo">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Szz-mH-arZ" kind="relationship" relationship="rootViewController" id="itu-uj-faW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8UK-d4-YNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5286" y="7354"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Arrow Right Grey" width="8" height="13"/>
@@ -6812,7 +6913,7 @@ minutes, please wait ...</string>
         <image name="empty_pin_code" width="119" height="15"/>
         <image name="network_icon" width="29" height="29"/>
         <image name="pin_background" width="375" height="667"/>
-        <image name="qr" width="16.333333969116211" height="16"/>
+        <image name="qr" width="20" height="20"/>
         <image name="receive_icon" width="16" height="16"/>
         <image name="send_icon" width="16" height="16"/>
         <image name="share" width="27" height="27"/>
@@ -6822,6 +6923,7 @@ minutes, please wait ...</string>
         <image name="white_touch_id" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ew0-Ce-kR2"/>
         <segue reference="USj-xB-uaI"/>
         <segue reference="aQE-iQ-YyK"/>
         <segue reference="ijQ-jv-rc6"/>
@@ -6834,7 +6936,7 @@ minutes, please wait ...</string>
         <segue reference="fKt-CA-37X"/>
         <segue reference="Jbu-eR-5tu"/>
         <segue reference="pT1-5S-qPI"/>
-        <segue reference="bSW-e7-K9g"/>
+        <segue reference="t8R-rs-am5"/>
         <segue reference="o2o-Af-M3V"/>
     </inferredMetricsTieBreakers>
 </document>

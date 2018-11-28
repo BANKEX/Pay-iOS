@@ -73,6 +73,8 @@ class HomeViewController: BaseViewController {
     let walletData = WalletData()
     var selectedToken:ERC20TokenModel!
     
+    @IBOutlet var assetManagementHeaderView: UIView!
+    
     lazy var walletHeaderLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -201,6 +203,22 @@ class HomeViewController: BaseViewController {
         Mediator.contactAddr = nil
     }
     
+    @IBAction func openAssetManagementPage() {
+        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
+        
+        UIApplication.shared.openURL(pageURL)
+    }
+    
+    @IBAction func showAssetManagementInfo() {
+        performSegue(withIdentifier: "AssetManagementInfo", sender: self)
+    }
+    
+    @IBAction func showAssetManagementContacts() {
+        performSegue(withIdentifier: "AssetManagementContacts", sender: self)
+    }
+    
+    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
+    
     //Methods
     fileprivate func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = .white
@@ -232,9 +250,9 @@ class HomeViewController: BaseViewController {
         super.viewWillLayoutSubviews()
         
         if UIDevice.isIpad {
-            walletHeaderLabel.frame = CGRect(x: 52, y: 0, width: tableView.bounds.width, height: 22.0)
+            walletHeaderLabel.frame = CGRect(x: 52, y: 52.0 - 22.0, width: tableView.bounds.width, height: 22.0)
         }else {
-            walletHeaderLabel.frame = CGRect(x: 15, y: 0, width: tableView.bounds.width, height: 22.0)
+            walletHeaderLabel.frame = CGRect(x: 15, y: 52.0 - 22.0, width: tableView.bounds.width, height: 22.0)
         }
         
         if UIDevice.isIpad {
@@ -272,7 +290,10 @@ class HomeViewController: BaseViewController {
         
         var sections: [ViewModel.Section] = []
         
-        let walletSection = ViewModel.Section(headerView: walletHeaderView, rows: [.wallet])
+        let assetManagementSection = ViewModel.Section(headerView: assetManagementHeaderView, rows: [])
+        sections.append(assetManagementSection)
+        
+        let walletSection = ViewModel.Section(headerView: walletHeaderView, rows: [.placeholder, .wallet])
         sections.append(walletSection)
         
         var addTokenButtonUsed = false

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z2a-XS-E2n">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Contact Us-->
+        <scene sceneID="AtW-bC-pbu">
+            <objects>
+                <viewController id="z2a-XS-E2n" customClass="AssetManagementContactsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NZR-RC-BDu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="n0h-EJ-GwY">
+                                <rect key="frame" x="30" y="64" width="315" height="192"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mi5-N6-GLO">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="44"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Sp6-q2-M3k"/>
+                                        </constraints>
+                                        <state key="normal" title="Email"/>
+                                        <connections>
+                                            <action selector="sendEmail" destination="z2a-XS-E2n" eventType="touchUpInside" id="5bZ-iB-Ev0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2D-zO-j79">
+                                        <rect key="frame" x="0.0" y="74" width="315" height="44"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="4ZK-BD-Uha"/>
+                                        </constraints>
+                                        <state key="normal" title="Telegram"/>
+                                        <connections>
+                                            <action selector="openTelegram" destination="z2a-XS-E2n" eventType="touchUpInside" id="D43-ck-xIC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3lE-Kp-FId">
+                                        <rect key="frame" x="0.0" y="148" width="315" height="44"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="mS2-Vu-Z3h"/>
+                                        </constraints>
+                                        <state key="normal" title="Site"/>
+                                        <connections>
+                                            <action selector="openPage" destination="z2a-XS-E2n" eventType="touchUpInside" id="L8o-kD-fjv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="n0h-EJ-GwY" firstAttribute="leading" secondItem="2JZ-3h-4t1" secondAttribute="leading" constant="30" id="GBG-GZ-i9I"/>
+                            <constraint firstItem="n0h-EJ-GwY" firstAttribute="top" secondItem="2JZ-3h-4t1" secondAttribute="top" constant="44" id="Ml8-ey-3Up"/>
+                            <constraint firstItem="2JZ-3h-4t1" firstAttribute="trailing" secondItem="n0h-EJ-GwY" secondAttribute="trailing" constant="30" id="RVc-9a-Tef"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2JZ-3h-4t1"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Contact Us" id="xBB-N4-eaQ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="bNB-Yq-eDf">
+                            <connections>
+                                <action selector="finish" destination="z2a-XS-E2n" id="6OY-XF-fDw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="qyG-zU-29d" kind="unwind" identifier="Home" unwindAction="unwindToHome:" id="xX7-BV-5GD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="opg-5D-wSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qyG-zU-29d" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
