@@ -218,7 +218,7 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func showPerformEthTransfer() {
-        print("showEthTransaction")
+        performSegue(withIdentifier: "AssetManagementEth", sender: self)
     }
     
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
