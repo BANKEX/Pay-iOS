@@ -10,5 +10,9 @@ import UIKit
 
 class AssetManagementEthViewController: UIViewController {
         
+    @IBAction func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
+    }
+
 }
 
