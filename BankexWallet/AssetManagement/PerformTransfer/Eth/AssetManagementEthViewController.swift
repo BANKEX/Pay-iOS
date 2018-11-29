@@ -112,7 +112,7 @@ private extension AssetManagementEthViewController {
     func updateFee() {
         transactionService.requestGasPrice { gasPrice in
             guard let gasPrice = gasPrice else { return }
-            guard let gasLimit = Double("21000") else { return }
+            let gasLimit = Double(21000)
             self.fee = BigUInt(gasPrice * pow(10, 9) * gasLimit)
             self.updateView()
         }
