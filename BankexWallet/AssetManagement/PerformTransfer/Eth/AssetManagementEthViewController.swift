@@ -85,7 +85,8 @@ extension AssetManagementEthViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? AssetManagementEthProgressViewController {
-            
+            viewController.amount = amountTextField.text
+            viewController.toAddress = destination.address
         }
     }
     
