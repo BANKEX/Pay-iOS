@@ -18,17 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHq-c5-5d9">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bHq-c5-5d9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XSD-sS-9Ih">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="109.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XSD-sS-9Ih">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="126.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRL-xp-w24">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="109.5"/>
+                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jRL-xp-w24">
+                                                <rect key="frame" x="30" y="16" width="315" height="77.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ji2-3L-8qO">
-                                                        <rect key="frame" x="30" y="16" width="315" height="77.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="77.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZS-My-v0B">
                                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="20.5"/>
@@ -58,9 +58,16 @@
                                                     <constraint firstAttribute="bottomMargin" secondItem="Ji2-3L-8qO" secondAttribute="bottom" id="Rsn-Po-bob"/>
                                                     <constraint firstItem="Ji2-3L-8qO" firstAttribute="top" secondItem="jRL-xp-w24" secondAttribute="topMargin" id="xTY-R3-az9"/>
                                                 </constraints>
-                                                <edgeInsets key="layoutMargins" top="16" left="30" bottom="16" right="30"/>
+                                                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRY-QH-h2p">
+                                                <rect key="frame" x="30" y="109.5" width="315" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
+                                        <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -79,6 +86,7 @@
                             <constraint firstItem="bHq-c5-5d9" firstAttribute="top" secondItem="MNK-ov-qe4" secondAttribute="top" id="VXy-2P-PVs"/>
                             <constraint firstAttribute="bottom" secondItem="bHq-c5-5d9" secondAttribute="bottom" id="qTN-5f-bS4"/>
                         </constraints>
+                        <edgeInsets key="layoutMargins" top="16" left="30" bottom="16" right="30"/>
                         <viewLayoutGuide key="safeArea" id="AFw-fR-SxA"/>
                     </view>
                     <toolbarItems/>
@@ -91,6 +99,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="infoLabel" destination="HRY-QH-h2p" id="3ss-zc-xr9"/>
                         <outlet property="walletAddressLabel" destination="KKD-FG-gMY" id="KFw-Cw-QdA"/>
                         <outlet property="walletBalanceLabel" destination="Jdc-A4-yZu" id="qdU-6P-wNt"/>
                         <outlet property="walletNameLabel" destination="GZS-My-v0B" id="03f-0P-els"/>

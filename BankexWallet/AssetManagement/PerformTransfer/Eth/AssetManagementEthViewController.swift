@@ -15,6 +15,7 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var walletNameLabel: UILabel!
     @IBOutlet private var walletAddressLabel: UILabel!
     @IBOutlet private var walletBalanceLabel: UILabel!
+    @IBOutlet private var infoLabel: UILabel!
     
     private let keyService = SingleKeyServiceImplementation()
     private let utilsService = UtilTransactionsServiceImplementation()
@@ -71,6 +72,8 @@ private extension AssetManagementEthViewController {
         }
         
         walletBalanceLabel.text = walletBalanceText
+        
+        infoLabel.text = LocalizedStrings.info
     }
     
 }
@@ -79,6 +82,7 @@ private extension AssetManagementEthViewController {
     
     struct LocalizedStrings {
         static let walletBalanceEmptyValue = NSLocalizedString("WalletBalance.EmptyValue", tableName: "AssetManagementEthViewController", comment: "")
+        static let info = NSLocalizedString("Info", tableName: "AssetManagementEthViewController", comment: "")
     }
     
 }
