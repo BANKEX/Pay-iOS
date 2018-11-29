@@ -48,7 +48,7 @@ class SendTransactionService {
         let path = "https://ethgasstation.info/json/ethgasAPI.json"
         guard let url = URL(string: path) else {
             DispatchQueue.main.async {
-                onComplition(0)
+                onComplition(nil)
             }
             return
         }
@@ -56,7 +56,7 @@ class SendTransactionService {
             if let error = error {
                 printDebug(error.localizedDescription)
                 DispatchQueue.main.async {
-                    onComplition(0)
+                    onComplition(nil)
                 }
                 return
             }
@@ -69,7 +69,7 @@ class SendTransactionService {
                     }
                 }catch {
                     DispatchQueue.main.async {
-                        onComplition(0)
+                        onComplition(nil)
                     }
                 }
             }
