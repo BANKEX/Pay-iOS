@@ -22,6 +22,7 @@ class SendTransactionService {
     var toAddress:String
     var transactionIntermediate:TransactionIntermediate?
     let gasLimit = "21000"
+    let transactionService = TransactionsService()
     
     init(toAddress to:String, amount:String) {
         self.amount = amount
@@ -44,39 +45,6 @@ class SendTransactionService {
         }
     }
     
-    func requestGasPrice(onComplition:@escaping (Double?) -> Void) {
-        let path = "https://ethgasstation.info/json/ethgasAPI.json"
-        guard let url = URL(string: path) else {
-            DispatchQueue.main.async {
-                onComplition(nil)
-            }
-            return
-        }
-        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                printDebug(error.localizedDescription)
-                DispatchQueue.main.async {
-                    onComplition(nil)
-                }
-                return
-            }
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
-                    let gasPrice = json?["average"] as? Double
-                    DispatchQueue.main.async {
-                        onComplition(gasPrice)
-                    }
-                }catch {
-                    DispatchQueue.main.async {
-                        onComplition(nil)
-                    }
-                }
-            }
-        }
-        dataTask.resume()
-    }
-    
     
     private func getWeb3options(complited:@escaping (Web3Options) -> ()) {
         var options = Web3Options.defaultOptions()
@@ -84,7 +52,7 @@ class SendTransactionService {
         options.to = transactionIntermediate?.options?.to
         options.value = transactionIntermediate?.options?.value
         options.gasLimit = gasLimit.toBigInt
-        requestGasPrice { gasPrice in
+        transactionService.requestGasPrice { gasPrice in
             guard let gasPrice = gasPrice else { return }
             options.gasPrice = BigUInt(gasPrice.toWei)
             complited(options)
