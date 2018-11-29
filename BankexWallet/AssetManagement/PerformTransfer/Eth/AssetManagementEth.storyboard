@@ -185,6 +185,9 @@
                                                             <constraint firstAttribute="height" constant="44" id="1ET-Ev-KAg"/>
                                                         </constraints>
                                                         <state key="normal" title="Send"/>
+                                                        <connections>
+                                                            <action selector="send" destination="i03-uI-bdd" eventType="touchUpInside" id="as0-sK-bZF"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -237,6 +240,7 @@
                         <outlet property="walletBalanceLabel" destination="Jdc-A4-yZu" id="qdU-6P-wNt"/>
                         <outlet property="walletNameLabel" destination="GZS-My-v0B" id="03f-0P-els"/>
                         <segue destination="0Wa-Qp-Gj8" kind="unwind" identifier="Home" unwindAction="unwindToHome:" id="IX8-ny-E87"/>
+                        <segue destination="p0E-tQ-BZW" kind="show" identifier="Progress" id="t4k-2f-iLy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csF-sm-l6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -248,6 +252,14 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-46" y="-12"/>
+        </scene>
+        <!--AssetManagementEthProgress-->
+        <scene sceneID="73p-0O-ePr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AssetManagementEthProgress" id="p0E-tQ-BZW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8rX-lZ-WfV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1009" y="-25"/>
         </scene>
     </scenes>
 </document>
