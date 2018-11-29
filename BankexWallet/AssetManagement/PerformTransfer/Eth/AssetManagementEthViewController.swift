@@ -9,10 +9,13 @@
 import UIKit
 
 class AssetManagementEthViewController: UIViewController {
-        
+    
+    @IBOutlet var walletNameLabel: UILabel!
+    @IBOutlet var walletAddressLabel: UILabel!
+    @IBOutlet var walletBalanceLabel: UILabel!
+    
     @IBAction func finish() {
         performSegue(withIdentifier: "Home", sender: self)
     }
-
+    
 }
-
