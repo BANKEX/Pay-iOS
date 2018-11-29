@@ -10,4 +10,18 @@ import UIKit
 
 class AssetManagementEthProgressViewController: UIViewController {
     
+    private func showSuccess() {
+        performSegue(withIdentifier: "Success", sender: self)
+    }
+    
+}
+
+extension AssetManagementEthProgressViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? AssetManagementEthSuccessViewController {
+            
+        }
+    }
+    
 }
