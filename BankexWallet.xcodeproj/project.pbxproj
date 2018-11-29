@@ -170,6 +170,8 @@
 		86F4CECB216FD27E00B946FF /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4CEC9216FD27E00B946FF /* CurrencyCell.swift */; };
 		86F4CECC216FD27E00B946FF /* CurrencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86F4CECA216FD27E00B946FF /* CurrencyCell.xib */; };
 		86FE6DEC2107696E009AE44E /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FE6DEB2107696E009AE44E /* SecurityViewController.swift */; };
+		9225FC3921AFD66000967431 /* AssetManagementBtc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9225FC3821AFD66000967431 /* AssetManagementBtc.storyboard */; };
+		9225FC3B21AFD67E00967431 /* AssetManagementBtcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225FC3A21AFD67E00967431 /* AssetManagementBtcViewController.swift */; };
 		92A9FCFD21AECA6C00F8BB33 /* AssetManagementEthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */; };
 		92A9FCFF21AECAAD00F8BB33 /* AssetManagementEth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */; };
 		B81B598E56469045FD5A9424 /* Pods_BankexWalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */; };
@@ -430,6 +432,8 @@
 		86F4CEC9216FD27E00B946FF /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		86F4CECA216FD27E00B946FF /* CurrencyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyCell.xib; sourceTree = "<group>"; };
 		86FE6DEB2107696E009AE44E /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
+		9225FC3821AFD66000967431 /* AssetManagementBtc.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementBtc.storyboard; sourceTree = "<group>"; };
+		9225FC3A21AFD67E00967431 /* AssetManagementBtcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementBtcViewController.swift; sourceTree = "<group>"; };
 		92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthViewController.swift; sourceTree = "<group>"; };
 		92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEth.storyboard; sourceTree = "<group>"; };
 		BD1E76CD13960E44B2411D0D /* Pods-BankexWalletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1080,9 +1084,19 @@
 			path = Security;
 			sourceTree = "<group>";
 		};
+		9225FC3721AFD64800967431 /* Btc */ = {
+			isa = PBXGroup;
+			children = (
+				9225FC3821AFD66000967431 /* AssetManagementBtc.storyboard */,
+				9225FC3A21AFD67E00967431 /* AssetManagementBtcViewController.swift */,
+			);
+			path = Btc;
+			sourceTree = "<group>";
+		};
 		92A9FCFA21AEC9F900F8BB33 /* PerformTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				9225FC3721AFD64800967431 /* Btc */,
 				92A9FCFB21AECA0F00F8BB33 /* Eth */,
 			);
 			path = PerformTransfer;
@@ -1342,6 +1356,7 @@
 				862F877921527A10001D7DDE /* TransactionInfoCell.xib in Resources */,
 				861D2CDF214C072400A108C4 /* TokenInfoCell.xib in Resources */,
 				81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */,
+				9225FC3921AFD66000967431 /* AssetManagementBtc.storyboard in Resources */,
 				86D7FB8721495AA0008245DE /* PlaceholderCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1642,6 +1657,7 @@
 				E2366BB22110ADE800FA449F /* KeychainService.swift in Sources */,
 				86A6F8C42147FB8000609413 /* HomeViewController.swift in Sources */,
 				863156AA2103DD2900914F31 /* NetworksDelegate.swift in Sources */,
+				9225FC3B21AFD67E00967431 /* AssetManagementBtcViewController.swift in Sources */,
 				864732E5214FC94C00519AE1 /* ERC20TokenModel.swift in Sources */,
 				F058764D2057BAE5007CF0E1 /* AddressQRCodeController.swift in Sources */,
 				86F4CEC5216EA26700B946FF /* Utils.swift in Sources */,

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6WP-Iz-Bwn">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Btc Asset Management-->
+        <scene sceneID="dfM-r2-oRi">
+            <objects>
+                <viewController id="6WP-Iz-Bwn" customClass="AssetManagementBtcViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ITq-aQ-b1H">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ch9-C7-EHH"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Btc Asset Management" id="13n-KM-mlM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="RH0-qh-RQo">
+                            <connections>
+                                <action selector="finish" destination="6WP-Iz-Bwn" id="ry5-Uj-Lnm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="TUR-Ve-6oi" kind="unwind" identifier="Home" unwindAction="unwindToHome:" id="0o5-Mt-aPQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iDV-I4-lxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="TUR-Ve-6oi" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="329" y="-222"/>
+        </scene>
+    </scenes>
+</document>
