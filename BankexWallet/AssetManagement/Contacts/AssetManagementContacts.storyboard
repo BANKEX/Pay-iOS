@@ -18,60 +18,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="n0h-EJ-GwY">
-                                <rect key="frame" x="30" y="64" width="315" height="350"/>
-                                <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9TI-Pp-Bm1">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="128"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="315" id="IEQ-Df-Lzp"/>
-                                            <constraint firstAttribute="height" constant="128" id="o2y-px-VUE"/>
-                                        </constraints>
-                                        <connections>
-                                            <segue destination="jfs-bg-OHy" kind="embed" id="Oje-tp-TMe"/>
-                                        </connections>
-                                    </containerView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mi5-N6-GLO">
-                                        <rect key="frame" x="0.0" y="158" width="315" height="44"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Sp6-q2-M3k"/>
-                                        </constraints>
-                                        <state key="normal" title="Email"/>
-                                        <connections>
-                                            <action selector="sendEmail" destination="z2a-XS-E2n" eventType="touchUpInside" id="5bZ-iB-Ev0"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2D-zO-j79">
-                                        <rect key="frame" x="0.0" y="232" width="315" height="44"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="4ZK-BD-Uha"/>
-                                        </constraints>
-                                        <state key="normal" title="Telegram"/>
-                                        <connections>
-                                            <action selector="openTelegram" destination="z2a-XS-E2n" eventType="touchUpInside" id="D43-ck-xIC"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3lE-Kp-FId">
-                                        <rect key="frame" x="0.0" y="306" width="315" height="44"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="mS2-Vu-Z3h"/>
-                                        </constraints>
-                                        <state key="normal" title="Site"/>
-                                        <connections>
-                                            <action selector="openPage" destination="z2a-XS-E2n" eventType="touchUpInside" id="L8o-kD-fjv"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9TI-Pp-Bm1">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <connections>
+                                    <segue destination="jfs-bg-OHy" kind="embed" id="Oje-tp-TMe"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="n0h-EJ-GwY" firstAttribute="leading" secondItem="2JZ-3h-4t1" secondAttribute="leading" constant="30" id="GBG-GZ-i9I"/>
-                            <constraint firstItem="n0h-EJ-GwY" firstAttribute="top" secondItem="2JZ-3h-4t1" secondAttribute="top" constant="44" id="Ml8-ey-3Up"/>
-                            <constraint firstItem="2JZ-3h-4t1" firstAttribute="trailing" secondItem="n0h-EJ-GwY" secondAttribute="trailing" constant="30" id="RVc-9a-Tef"/>
+                            <constraint firstItem="9TI-Pp-Bm1" firstAttribute="top" secondItem="2JZ-3h-4t1" secondAttribute="top" id="bgP-Ts-gZl"/>
+                            <constraint firstItem="2JZ-3h-4t1" firstAttribute="trailing" secondItem="9TI-Pp-Bm1" secondAttribute="trailing" id="iws-N8-xI1"/>
+                            <constraint firstItem="9TI-Pp-Bm1" firstAttribute="leading" secondItem="2JZ-3h-4t1" secondAttribute="leading" id="uC5-sJ-yFS"/>
+                            <constraint firstItem="2JZ-3h-4t1" firstAttribute="bottom" secondItem="9TI-Pp-Bm1" secondAttribute="bottom" id="wV8-lU-bHm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2JZ-3h-4t1"/>
                     </view>

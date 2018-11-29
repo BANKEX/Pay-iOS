@@ -18,35 +18,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="j31-yJ-YKV">
-                                <rect key="frame" x="30" y="36" width="315" height="615"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="j31-yJ-YKV">
+                                <rect key="frame" x="30" y="36" width="315" height="266"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FvL-mi-djr">
-                                        <rect key="frame" x="135.5" y="0.0" width="44" height="30"/>
-                                        <state key="normal" title="E-mail"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rme-8h-bl9">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="44"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="G2e-d4-zzd"/>
+                                        </constraints>
+                                        <state key="normal" title="Email"/>
                                         <connections>
-                                            <action selector="sendEmail" destination="aho-nl-VV4" eventType="touchUpInside" id="4Lq-UU-q51"/>
+                                            <action selector="sendEmail" destination="aho-nl-VV4" eventType="touchUpInside" id="gRY-2I-olA"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOv-kq-9ep">
-                                        <rect key="frame" x="125.5" y="195" width="64" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W5x-Uf-LKC">
+                                        <rect key="frame" x="0.0" y="74" width="315" height="44"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="1un-cY-KMD"/>
+                                        </constraints>
                                         <state key="normal" title="Telegram"/>
                                         <connections>
-                                            <action selector="openTelegram" destination="aho-nl-VV4" eventType="touchUpInside" id="EF9-Md-Krj"/>
+                                            <action selector="openTelegram" destination="aho-nl-VV4" eventType="touchUpInside" id="kHW-pb-3qT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mb0-Vs-yce">
-                                        <rect key="frame" x="111" y="390" width="93" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hH5-jE-btD">
+                                        <rect key="frame" x="0.0" y="148" width="315" height="44"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Tc8-q2-ZMe"/>
+                                        </constraints>
                                         <state key="normal" title="Product Page"/>
                                         <connections>
-                                            <action selector="openPage" destination="aho-nl-VV4" eventType="touchUpInside" id="Gmg-zZ-Zrf"/>
+                                            <action selector="openPage" destination="aho-nl-VV4" eventType="touchUpInside" id="Qqh-4X-Csp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0P-nQ-aAq">
-                                        <rect key="frame" x="93.5" y="585" width="128" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YT9-iP-buh">
+                                        <rect key="frame" x="0.0" y="222" width="315" height="44"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="0lY-ym-CNO"/>
+                                        </constraints>
                                         <state key="normal" title="Transaction Status"/>
                                         <connections>
-                                            <action selector="openTransaction" destination="aho-nl-VV4" eventType="touchUpInside" id="3lJ-6e-TiH"/>
+                                            <action selector="openTransaction" destination="aho-nl-VV4" eventType="touchUpInside" id="omE-2u-Z7m"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -57,7 +73,6 @@
                             <constraint firstItem="j31-yJ-YKV" firstAttribute="leading" secondItem="BnF-fY-UNM" secondAttribute="leadingMargin" id="AmW-eK-5i7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="j31-yJ-YKV" secondAttribute="trailing" id="DAs-M4-GKD"/>
                             <constraint firstItem="j31-yJ-YKV" firstAttribute="top" secondItem="BnF-fY-UNM" secondAttribute="topMargin" id="Xv2-hx-z5E"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="j31-yJ-YKV" secondAttribute="bottom" id="c3T-w7-xDU"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="16" left="30" bottom="16" right="30"/>
                         <viewLayoutGuide key="safeArea" id="67K-dy-aj1"/>
