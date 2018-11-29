@@ -100,6 +100,11 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartDashesType="no" smartQuotesType="no"/>
+                                                                <connections>
+                                                                    <action selector="amountChanged" destination="i03-uI-bdd" eventType="editingChanged" id="2H2-dV-4VR"/>
+                                                                    <action selector="amountChanged" destination="i03-uI-bdd" eventType="valueChanged" id="5A8-eI-Nos"/>
+                                                                    <outlet property="delegate" destination="i03-uI-bdd" id="Gml-si-XdK"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -142,10 +147,16 @@
                                                         <subviews>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Vx-5y-EW3">
                                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="agreementChecked" destination="i03-uI-bdd" eventType="valueChanged" id="dbF-Zd-03C"/>
+                                                                </connections>
                                                             </switch>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyP-md-Wr7">
                                                                 <rect key="frame" x="65" y="0.5" width="250" height="30"/>
                                                                 <state key="normal" title="Agreement"/>
+                                                                <connections>
+                                                                    <action selector="openAgreement" destination="i03-uI-bdd" eventType="touchUpInside" id="gpT-wr-m85"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -154,10 +165,16 @@
                                                         <subviews>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HHg-HG-veI">
                                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="riskFactorChecked" destination="i03-uI-bdd" eventType="valueChanged" id="n0h-fS-A4e"/>
+                                                                </connections>
                                                             </switch>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PP-wP-QGw">
                                                                 <rect key="frame" x="65" y="0.5" width="250" height="30"/>
                                                                 <state key="normal" title="Risk-factor"/>
+                                                                <connections>
+                                                                    <action selector="openRiskFactor" destination="i03-uI-bdd" eventType="touchUpInside" id="Rbo-Yc-WXo"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -185,6 +202,7 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="bHq-c5-5d9" secondAttribute="trailing" id="AUs-ia-y8w"/>
                             <constraint firstItem="bHq-c5-5d9" firstAttribute="leading" secondItem="MNK-ov-qe4" secondAttribute="leading" id="KCN-74-LFq"/>
@@ -193,6 +211,9 @@
                         </constraints>
                         <edgeInsets key="layoutMargins" top="16" left="30" bottom="16" right="30"/>
                         <viewLayoutGuide key="safeArea" id="AFw-fR-SxA"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="wVA-sx-0Lg" appends="YES" id="vUT-uS-dTB"/>
+                        </connections>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Eth Asset Management" id="pfU-sg-rJM">
@@ -220,6 +241,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csF-sm-l6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="0Wa-Qp-Gj8" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="wVA-sx-0Lg" userLabel="End Editing Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="endEditing" destination="i03-uI-bdd" id="W6M-QU-ljB"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-46" y="-12"/>
         </scene>

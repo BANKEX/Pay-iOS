@@ -28,13 +28,45 @@ class AssetManagementEthViewController: UIViewController {
     private let utilsService = UtilTransactionsServiceImplementation()
     private let tokensService = CustomERC20TokensServiceImplementation()
     
+    private let destination = EthereumAddress("0x0123456789012345678901234567890123456789")!
     private var walletBalance: BigUInt?
+    private var amount: BigUInt?
+    private var fee: BigUInt? = 0
+    private var total: BigUInt?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateView()
         updateBalance()
+    }
+    
+    @IBAction private func amountChanged() {
+        updateAmount()
+    }
+
+    @IBAction private func agreementChecked() {
+        updateView()
+    }
+    
+    @IBAction private func riskFactorChecked() {
+        updateView()
+    }
+
+    @IBAction private func openAgreement() {
+        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
+        
+        UIApplication.shared.openURL(pageURL)
+    }
+    
+    @IBAction private func openRiskFactor() {
+        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
+        
+        UIApplication.shared.openURL(pageURL)
+    }
+    
+    @IBAction private func endEditing() {
+        view.endEditing(true)
     }
     
     @IBAction private func finish() {
@@ -61,26 +93,52 @@ private extension AssetManagementEthViewController {
         }
     }
     
+    func updateAmount() {
+        let amountText = amountTextField.text ?? ""
+        
+        amount = Web3.Utils.parseToBigUInt(amountText, units: .eth)
+        
+        updateTotals()
+    }
+    
+    func updateTotals() {
+        if let amount = amount, let fee = fee {
+            total = amount + fee
+        } else {
+            total = nil
+        }
+        
+        updateView()
+    }
+    
 }
 
 private extension AssetManagementEthViewController {
+    
+    func formatted(value: BigUInt?) -> String {
+        guard
+            let value = value,
+            let formatted = Web3.Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: 8, fallbackToScientific: true)
+            else { return "—" }
+        
+        return formatted + " ETH"
+    }
     
     func updateView() {
         guard let wallet = keyService.selectedWallet() else { return }
         
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address.formattedAddrToken()
-        
-        let walletBalanceText: String?
-        if let walletBalance = walletBalance, let formatted = Web3.Utils.formatToEthereumUnits(walletBalance, toUnits: .eth, decimals: 8, fallbackToScientific: true) {
-            walletBalanceText = formatted
-        } else {
-            walletBalanceText = LocalizedStrings.walletBalanceEmptyValue
-        }
-        
-        walletBalanceLabel.text = walletBalanceText
+        walletBalanceLabel.text = formatted(value: walletBalance)
         
         infoLabel.text = LocalizedStrings.info
+        
+        destinationAddressLabel.text = destination.address.formattedAddrToken()
+        
+        feeLabel.text = formatted(value: fee)
+        totalLabel.text = formatted(value: total)
+        
+        sendButton.isEnabled = agreementSwitch.isOn && riskFactorSwitch.isOn && (amount ?? 0) > 0
     }
     
 }
@@ -88,7 +146,6 @@ private extension AssetManagementEthViewController {
 private extension AssetManagementEthViewController {
     
     struct LocalizedStrings {
-        static let walletBalanceEmptyValue = NSLocalizedString("WalletBalance.EmptyValue", tableName: "AssetManagementEthViewController", comment: "")
         static let info = NSLocalizedString("Info", tableName: "AssetManagementEthViewController", comment: "")
     }
     
