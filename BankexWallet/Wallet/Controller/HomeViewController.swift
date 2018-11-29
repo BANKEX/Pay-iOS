@@ -221,6 +221,10 @@ class HomeViewController: BaseViewController {
         performSegue(withIdentifier: "AssetManagementEth", sender: self)
     }
     
+    @IBAction func showPerformBtcTransfer() {
+        performSegue(withIdentifier: "AssetManagementBtc", sender: self)
+    }
+    
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
     
     //Methods
