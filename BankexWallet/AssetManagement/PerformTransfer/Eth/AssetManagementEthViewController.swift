@@ -69,8 +69,22 @@ class AssetManagementEthViewController: UIViewController {
         view.endEditing(true)
     }
     
+    @IBAction private func send() {
+        performSegue(withIdentifier: "Progress", sender: self)
+    }
+    
     @IBAction private func finish() {
         performSegue(withIdentifier: "Home", sender: self)
+    }
+    
+}
+
+extension AssetManagementEthViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? AssetManagementEthProgressViewController {
+            
+        }
     }
     
 }
