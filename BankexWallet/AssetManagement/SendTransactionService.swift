@@ -21,7 +21,7 @@ class SendTransactionService {
     var amount:String
     var toAddress:String
     var transactionIntermediate:TransactionIntermediate?
-    let gasLimit = "21001"
+    let gasLimit = "21000"
     
     init(toAddress to:String, amount:String) {
         self.amount = amount
