@@ -170,6 +170,8 @@
 		86F4CECB216FD27E00B946FF /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4CEC9216FD27E00B946FF /* CurrencyCell.swift */; };
 		86F4CECC216FD27E00B946FF /* CurrencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86F4CECA216FD27E00B946FF /* CurrencyCell.xib */; };
 		86FE6DEC2107696E009AE44E /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FE6DEB2107696E009AE44E /* SecurityViewController.swift */; };
+		92A9FCFD21AECA6C00F8BB33 /* AssetManagementEthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */; };
+		92A9FCFF21AECAAD00F8BB33 /* AssetManagementEth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */; };
 		B81B598E56469045FD5A9424 /* Pods_BankexWalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */; };
 		BC001E220296F73719F0697F /* Pods_Wallet_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33ADE69F5E6B37793B41AB /* Pods_Wallet_Widget.framework */; };
 		C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */; };
@@ -428,6 +430,8 @@
 		86F4CEC9216FD27E00B946FF /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		86F4CECA216FD27E00B946FF /* CurrencyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyCell.xib; sourceTree = "<group>"; };
 		86FE6DEB2107696E009AE44E /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
+		92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthViewController.swift; sourceTree = "<group>"; };
+		92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEth.storyboard; sourceTree = "<group>"; };
 		BD1E76CD13960E44B2411D0D /* Pods-BankexWalletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		CE3C7F6D77310F0641F1B97E /* Pods-Wallet Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wallet Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wallet Widget/Pods-Wallet Widget.debug.xcconfig"; sourceTree = "<group>"; };
@@ -582,6 +586,7 @@
 		71EA219821AE820D00D70DA6 /* AssetManagement */ = {
 			isa = PBXGroup;
 			children = (
+				92A9FCFA21AEC9F900F8BB33 /* PerformTransfer */,
 				71EA219921AE822400D70DA6 /* About */,
 				713207E521AE8F31002FD8AF /* Contacts */,
 			);
@@ -1075,6 +1080,23 @@
 			path = Security;
 			sourceTree = "<group>";
 		};
+		92A9FCFA21AEC9F900F8BB33 /* PerformTransfer */ = {
+			isa = PBXGroup;
+			children = (
+				92A9FCFB21AECA0F00F8BB33 /* Eth */,
+			);
+			path = PerformTransfer;
+			sourceTree = "<group>";
+		};
+		92A9FCFB21AECA0F00F8BB33 /* Eth */ = {
+			isa = PBXGroup;
+			children = (
+				92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */,
+				92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */,
+			);
+			path = Eth;
+			sourceTree = "<group>";
+		};
 		D9242BFE1AD22F65352D9039 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1307,6 +1329,7 @@
 				867681C321831F4100C269ED /* DeleteCell.xib in Resources */,
 				713207E721AE8F5B002FD8AF /* AssetManagementContacts.storyboard in Resources */,
 				00F0B9A921394C3800AC3013 /* Localizable.strings in Resources */,
+				92A9FCFF21AECAAD00F8BB33 /* AssetManagementEth.storyboard in Resources */,
 				81942F14201B36A300F0AE29 /* LaunchScreen.storyboard in Resources */,
 				E21926D2212C401E00EC9A83 /* GoogleService-Info.plist in Resources */,
 				861D2CD1214AA0AF00A108C4 /* EmptyTableCell.xib in Resources */,
@@ -1613,6 +1636,7 @@
 				86CE0910216A5C8A0033DD30 /* UIApplication+Extenstions.swift in Sources */,
 				863156A02103B4CF00914F31 /* SettingsDelegate.swift in Sources */,
 				81C43341201B7327008D3343 /* WalletState.swift in Sources */,
+				92A9FCFD21AECA6C00F8BB33 /* AssetManagementEthViewController.swift in Sources */,
 				F00E462D207A357B00387B96 /* SendingErrorViewController.swift in Sources */,
 				003D4BBC20FCE7AE0096FEBA /* CircleView.swift in Sources */,
 				E2366BB22110ADE800FA449F /* KeychainService.swift in Sources */,
