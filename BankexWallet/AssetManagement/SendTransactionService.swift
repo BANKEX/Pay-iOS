@@ -14,7 +14,7 @@ import BigInt
 
 
 
-class PreparetionTransaction {
+class SendTransactionService {
     
     let keyService = SingleKeyServiceImplementation()
     let sendETHService = SendEthServiceImplementation()
