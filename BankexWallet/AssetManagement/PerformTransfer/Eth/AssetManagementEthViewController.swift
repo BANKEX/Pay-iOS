@@ -27,6 +27,7 @@ class AssetManagementEthViewController: UIViewController {
     private let keyService = SingleKeyServiceImplementation()
     private let utilsService = UtilTransactionsServiceImplementation()
     private let tokensService = CustomERC20TokensServiceImplementation()
+    private let transactionService = TransactionsService()
     
     private let destination = EthereumAddress("0x0123456789012345678901234567890123456789")!
     private var walletBalance: BigUInt?
@@ -39,6 +40,7 @@ class AssetManagementEthViewController: UIViewController {
         
         updateView()
         updateBalance()
+        updateFee()
     }
     
     @IBAction private func amountChanged() {
@@ -104,6 +106,15 @@ private extension AssetManagementEthViewController {
                 }
             case .Error: break
             }
+        }
+    }
+    
+    func updateFee() {
+        transactionService.requestGasPrice { gasPrice in
+            guard let gasPrice = gasPrice else { return }
+            guard let gasLimit = Double("21000") else { return }
+            self.fee = BigUInt(gasPrice * pow(10, 9) * gasLimit)
+            self.updateView()
         }
     }
     
