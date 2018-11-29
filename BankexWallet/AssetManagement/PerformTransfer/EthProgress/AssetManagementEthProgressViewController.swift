@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import web3swift
 
 class AssetManagementEthProgressViewController: UIViewController {
     
     var sendTrService:SendTransactionService!
     var amount:String?
     var toAddress:String = ""
+    var transactionResult:TransactionSendingResult?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +23,10 @@ class AssetManagementEthProgressViewController: UIViewController {
         sendTrService.sendTransaction { result in
             switch result {
             case .Success(let transactionResult):
-                break
-            case .Error(let error):
-                break
+                self.transactionResult = transactionResult
+                self.showSuccess()
+            case .Error( _):
+                self.showFailure()
             }
         }
     }
@@ -32,12 +35,19 @@ class AssetManagementEthProgressViewController: UIViewController {
         performSegue(withIdentifier: "Success", sender: self)
     }
     
+    private func showFailure() {
+        performSegue(withIdentifier: "Failure", sender: self)
+    }
+    
 }
 
 extension AssetManagementEthProgressViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? AssetManagementEthSuccessViewController {
+            viewController.trResult = transactionResult
+        }
+        if let viewController = segue.destination as? AssetManagementEthFailureViewController {
             
         }
     }
