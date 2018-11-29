@@ -7,15 +7,78 @@
 //
 
 import UIKit
+import BigInt
+import web3swift
 
 class AssetManagementEthViewController: UIViewController {
     
-    @IBOutlet var walletNameLabel: UILabel!
-    @IBOutlet var walletAddressLabel: UILabel!
-    @IBOutlet var walletBalanceLabel: UILabel!
+    @IBOutlet private var walletNameLabel: UILabel!
+    @IBOutlet private var walletAddressLabel: UILabel!
+    @IBOutlet private var walletBalanceLabel: UILabel!
     
-    @IBAction func finish() {
+    private let keyService = SingleKeyServiceImplementation()
+    private let utilsService = UtilTransactionsServiceImplementation()
+    private let tokensService = CustomERC20TokensServiceImplementation()
+    
+    private var walletBalance: BigUInt?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateView()
+        updateBalance()
+    }
+    
+    @IBAction private func finish() {
         performSegue(withIdentifier: "Home", sender: self)
+    }
+    
+}
+
+private extension AssetManagementEthViewController {
+    
+    func updateBalance() {
+        guard let selectedAddress = keyService.selectedAddress() else { return }
+        let selectedToken = tokensService.selectedERC20Token()
+        
+        utilsService.getBalance(for: selectedToken.address, address: selectedAddress) { [weak self] (result) in
+            switch result {
+            case .Success(let response):
+                DispatchQueue.main.async {
+                    self?.walletBalance = response
+                    self?.updateView()
+                }
+            case .Error: break
+            }
+        }
+    }
+    
+}
+
+private extension AssetManagementEthViewController {
+    
+    func updateView() {
+        guard let wallet = keyService.selectedWallet() else { return }
+        
+        walletNameLabel.text = wallet.name
+        walletAddressLabel.text = wallet.address.formattedAddrToken()
+        
+        let walletBalanceText: String?
+        if let walletBalance = walletBalance, let formatted = Web3.Utils.formatToEthereumUnits(walletBalance, toUnits: .eth, decimals: 8, fallbackToScientific: true) {
+            walletBalanceText = formatted
+        } else {
+            walletBalanceText = LocalizedStrings.walletBalanceEmptyValue
+        }
+        
+        walletBalanceLabel.text = walletBalanceText
+    }
+    
+}
+
+private extension AssetManagementEthViewController {
+    
+    struct LocalizedStrings {
+        static let walletBalanceEmptyValue = NSLocalizedString("WalletBalance.EmptyValue", tableName: "AssetManagementEthViewController", comment: "")
     }
     
 }
