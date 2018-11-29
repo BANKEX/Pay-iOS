@@ -29,7 +29,7 @@ class SendTransactionService {
         self.toAddress = to
     }
     
-    func sendTransaction() {
+    func sendTransaction(completion:@escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         guard let transactionETHModel = createETHTransactionModel() else { return }
         sendETHService.prepareTransactionForSending(destinationAddressString: toAddress, amountString: amount) { result in
             switch result {
@@ -37,7 +37,9 @@ class SendTransactionService {
                 self.transactionIntermediate = trans
                 self.getWeb3options(complited: { options in
                     guard let transIntermediate = self.transactionIntermediate else { return }
-                    self.sendETHService.send(transactionModel: transactionETHModel, transaction: transIntermediate, options: options) { _ in }
+                    self.sendETHService.send(transactionModel: transactionETHModel, transaction: transIntermediate, options: options) { result in
+                        completion(result)
+                    }
                 })
             case .Error(let error):
                 printDebug(error.localizedDescription)
