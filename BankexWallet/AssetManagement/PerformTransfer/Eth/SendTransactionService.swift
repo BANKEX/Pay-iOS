@@ -44,7 +44,7 @@ class SendTransactionService {
         }
     }
     
-    func requestGasPrice(onComplition:@escaping (Double) -> Void) {
+    func requestGasPrice(onComplition:@escaping (Double?) -> Void) {
         let path = "https://ethgasstation.info/json/ethgasAPI.json"
         guard let url = URL(string: path) else {
             DispatchQueue.main.async {
@@ -62,8 +62,8 @@ class SendTransactionService {
             }
             if let data = data {
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
-                    let gasPrice = json["average"] as! Double
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
+                    let gasPrice = json?["average"] as? Double
                     DispatchQueue.main.async {
                         onComplition(gasPrice)
                     }
@@ -85,6 +85,7 @@ class SendTransactionService {
         options.value = transactionIntermediate?.options?.value
         options.gasLimit = gasLimit.toBigInt
         requestGasPrice { gasPrice in
+            guard let gasPrice = gasPrice else { return }
             options.gasPrice = BigUInt(gasPrice.toWei)
             complited(options)
         }
