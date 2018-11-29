@@ -61,10 +61,16 @@
                                                         <subviews>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AMo-Do-dZu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="agreementChecked" destination="6WP-Iz-Bwn" eventType="valueChanged" id="a9R-yi-UXm"/>
+                                                                </connections>
                                                             </switch>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mK8-jV-JZD">
                                                                 <rect key="frame" x="65" y="0.5" width="250" height="30"/>
                                                                 <state key="normal" title="Agreement"/>
+                                                                <connections>
+                                                                    <action selector="openAgreement" destination="6WP-Iz-Bwn" eventType="touchUpInside" id="QaC-do-TOj"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -73,10 +79,16 @@
                                                         <subviews>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6fs-N7-2Sf">
                                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="riskFactorChecked" destination="6WP-Iz-Bwn" eventType="valueChanged" id="9Av-K9-MTV"/>
+                                                                </connections>
                                                             </switch>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxx-V2-Mab">
                                                                 <rect key="frame" x="65" y="0.5" width="250" height="30"/>
                                                                 <state key="normal" title="Risk-factor"/>
+                                                                <connections>
+                                                                    <action selector="openRiskFactor" destination="6WP-Iz-Bwn" eventType="touchUpInside" id="3Ow-7I-XcD"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -130,6 +142,13 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="agreementSwitch" destination="AMo-Do-dZu" id="Rb6-Wd-bOp"/>
+                        <outlet property="contactButton" destination="ESv-Xl-Qf5" id="tUZ-ia-daD"/>
+                        <outlet property="copyButton" destination="k8k-21-1t6" id="ZkC-Ry-Pui"/>
+                        <outlet property="destinationAddressLabel" destination="1op-w8-Rp9" id="0d5-Ck-RG0"/>
+                        <outlet property="infoLabel" destination="MBD-y9-I6g" id="MHF-wF-Vz3"/>
+                        <outlet property="limitsLabel" destination="gyC-VZ-mqu" id="cgV-In-98I"/>
+                        <outlet property="riskFactorSwitch" destination="6fs-N7-2Sf" id="ZiQ-x9-ShL"/>
                         <segue destination="TUR-Ve-6oi" kind="unwind" identifier="Home" unwindAction="unwindToHome:" id="0o5-Mt-aPQ"/>
                     </connections>
                 </viewController>
