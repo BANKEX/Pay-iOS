@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import web3swift
 
 class AssetManagementEthSuccessViewController: UIViewController {
     
+    var trResult:TransactionSendingResult?
 }
