@@ -16,7 +16,6 @@ class AssetManagementBtcViewController: UIViewController {
     @IBOutlet private var agreementSwitch: UISwitch!
     @IBOutlet private var riskFactorSwitch: UISwitch!
     @IBOutlet private var copyButton: UIButton!
-    @IBOutlet private var contactButton: UIButton!
     
     private let destination = "367aqxeq6SqVzaX5qza2HwvfxTJeruLoka"
     
@@ -44,6 +43,10 @@ class AssetManagementBtcViewController: UIViewController {
         let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
         
         UIApplication.shared.openURL(pageURL)
+    }
+        
+    @IBAction func copyDestinationAddress() {
+        UIPasteboard.general.string = destination
     }
     
     @IBAction func finish() {
