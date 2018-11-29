@@ -17,7 +17,25 @@
                     <view key="view" contentMode="scaleToFill" id="SUS-8H-pXB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="SlP-vb-osR">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">What is asset management?
+The trading algorithms we use determine entry points, place / remove orders, make hedging transactions, shift order prices. Before trading, the main performance indicators of the strategies (risk, maximum loss, number of instruments, use of margin trading, etc.) are agreed upon with the client.
+Arbitrage yields are constantly changing, so we track changes in arbitrage opportunities around the clock and redistribute the arbitrage portfolio between different instruments, exchanges, and strategies.
+Setup and control of arbitration strategies depend on current market conditions.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yG8-ea-bP4" firstAttribute="trailing" secondItem="SlP-vb-osR" secondAttribute="trailing" id="U5c-Yc-TSp"/>
+                            <constraint firstItem="SlP-vb-osR" firstAttribute="top" secondItem="yG8-ea-bP4" secondAttribute="top" id="gfH-hG-JWp"/>
+                            <constraint firstItem="yG8-ea-bP4" firstAttribute="bottom" secondItem="SlP-vb-osR" secondAttribute="bottom" id="su3-sq-k3I"/>
+                            <constraint firstItem="SlP-vb-osR" firstAttribute="leading" secondItem="yG8-ea-bP4" secondAttribute="leading" id="x8r-y8-ZE2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="yG8-ea-bP4"/>
                     </view>
                     <navigationItem key="navigationItem" title="About Asset Management" id="TcU-0l-vcb">
