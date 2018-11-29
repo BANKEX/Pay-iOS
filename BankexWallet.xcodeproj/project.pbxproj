@@ -27,6 +27,10 @@
 		7120DD0821AFB16A00A0BC84 /* AssetManagementEthViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7120DD0721AFB16A00A0BC84 /* AssetManagementEthViewController.strings */; };
 		713207E721AE8F5B002FD8AF /* AssetManagementContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 713207E621AE8F5B002FD8AF /* AssetManagementContacts.storyboard */; };
 		713207E921AE8F70002FD8AF /* AssetManagementContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713207E821AE8F70002FD8AF /* AssetManagementContactsViewController.swift */; };
+		71C72A2B21B009D000FB3E13 /* AssetManagementEthProgress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */; };
+		71C72A2D21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */; };
+		71C72A3021B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */; };
+		71C72A3221B0112E00FB3E13 /* AssetManagementEthSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C72A3121B0112E00FB3E13 /* AssetManagementEthSuccessViewController.swift */; };
 		71EA219B21AE829000D70DA6 /* AssetManagementAbout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71EA219A21AE829000D70DA6 /* AssetManagementAbout.storyboard */; };
 		71EA219D21AE879800D70DA6 /* AssetManagementAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA219C21AE879800D70DA6 /* AssetManagementAboutViewController.swift */; };
 		8104B050201F368200AE94B5 /* Web3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B04F201F368200AE94B5 /* Web3.swift */; };
@@ -280,6 +284,10 @@
 		7120DD0721AFB16A00A0BC84 /* AssetManagementEthViewController.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = AssetManagementEthViewController.strings; sourceTree = "<group>"; };
 		713207E621AE8F5B002FD8AF /* AssetManagementContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementContacts.storyboard; sourceTree = "<group>"; };
 		713207E821AE8F70002FD8AF /* AssetManagementContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementContactsViewController.swift; sourceTree = "<group>"; };
+		71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthProgress.storyboard; sourceTree = "<group>"; };
+		71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthProgressViewController.swift; sourceTree = "<group>"; };
+		71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthSuccess.storyboard; sourceTree = "<group>"; };
+		71C72A3121B0112E00FB3E13 /* AssetManagementEthSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthSuccessViewController.swift; sourceTree = "<group>"; };
 		71EA219A21AE829000D70DA6 /* AssetManagementAbout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementAbout.storyboard; sourceTree = "<group>"; };
 		71EA219C21AE879800D70DA6 /* AssetManagementAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementAboutViewController.swift; sourceTree = "<group>"; };
 		73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -591,6 +599,24 @@
 				713207E821AE8F70002FD8AF /* AssetManagementContactsViewController.swift */,
 			);
 			path = Contacts;
+			sourceTree = "<group>";
+		};
+		71C72A2921B009A900FB3E13 /* EthProgress */ = {
+			isa = PBXGroup;
+			children = (
+				71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */,
+				71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */,
+			);
+			path = EthProgress;
+			sourceTree = "<group>";
+		};
+		71C72A2E21B0109600FB3E13 /* EthSuccess */ = {
+			isa = PBXGroup;
+			children = (
+				71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */,
+				71C72A3121B0112E00FB3E13 /* AssetManagementEthSuccessViewController.swift */,
+			);
+			path = EthSuccess;
 			sourceTree = "<group>";
 		};
 		71EA219821AE820D00D70DA6 /* AssetManagement */ = {
@@ -1105,6 +1131,8 @@
 			children = (
 				9225FC3721AFD64800967431 /* Btc */,
 				92A9FCFB21AECA0F00F8BB33 /* Eth */,
+				71C72A2921B009A900FB3E13 /* EthProgress */,
+				71C72A2E21B0109600FB3E13 /* EthSuccess */,
 			);
 			path = PerformTransfer;
 			sourceTree = "<group>";
@@ -1352,6 +1380,7 @@
 				867681C321831F4100C269ED /* DeleteCell.xib in Resources */,
 				713207E721AE8F5B002FD8AF /* AssetManagementContacts.storyboard in Resources */,
 				00F0B9A921394C3800AC3013 /* Localizable.strings in Resources */,
+				71C72A2B21B009D000FB3E13 /* AssetManagementEthProgress.storyboard in Resources */,
 				7120DD0821AFB16A00A0BC84 /* AssetManagementEthViewController.strings in Resources */,
 				92A9FCFF21AECAAD00F8BB33 /* AssetManagementEth.storyboard in Resources */,
 				81942F14201B36A300F0AE29 /* LaunchScreen.storyboard in Resources */,
@@ -1368,6 +1397,7 @@
 				861D2CDF214C072400A108C4 /* TokenInfoCell.xib in Resources */,
 				81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */,
 				9225FC3921AFD66000967431 /* AssetManagementBtc.storyboard in Resources */,
+				71C72A3021B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard in Resources */,
 				86D7FB8721495AA0008245DE /* PlaceholderCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1594,6 +1624,7 @@
 				864732D0214FC33600519AE1 /* UIColor+Extensions.swift in Sources */,
 				F0B1B4C5205944E1009D76D5 /* CustomERC20TokensService.swift in Sources */,
 				F0B1B4D2205AAC95009D76D5 /* CreateTokenController.swift in Sources */,
+				71C72A2D21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift in Sources */,
 				F00E461E207617BC00387B96 /* InitialLogicRouter.swift in Sources */,
 				864732E1214FC89C00519AE1 /* KeyWalletModel.swift in Sources */,
 				86C1FF61217DF91C0081CFCB /* ListSectionsTableViewController.swift in Sources */,
@@ -1625,6 +1656,7 @@
 				003D4BCA20FF44E20096FEBA /* CollectionViewBeforeManager.swift in Sources */,
 				8104B050201F368200AE94B5 /* Web3.swift in Sources */,
 				E218369F2105F0C700795FDC /* WalletDataService.swift in Sources */,
+				71C72A3221B0112E00FB3E13 /* AssetManagementEthSuccessViewController.swift in Sources */,
 				86D7FB8221494AE4008245DE /* TokenTableViewCell.swift in Sources */,
 				0020903C2108ABC600988403 /* RoundedButton.swift in Sources */,
 				8617F6822107DEBB0039751D /* HelpingConstants.swift in Sources */,
