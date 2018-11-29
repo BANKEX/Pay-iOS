@@ -16,6 +16,13 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var walletAddressLabel: UILabel!
     @IBOutlet private var walletBalanceLabel: UILabel!
     @IBOutlet private var infoLabel: UILabel!
+    @IBOutlet private var destinationAddressLabel: UILabel!
+    @IBOutlet private var amountTextField: UITextField!
+    @IBOutlet private var feeLabel: UILabel!
+    @IBOutlet private var totalLabel: UILabel!
+    @IBOutlet private var agreementSwitch: UISwitch!
+    @IBOutlet private var riskFactorSwitch: UISwitch!
+    @IBOutlet private var sendButton: UIButton!
     
     private let keyService = SingleKeyServiceImplementation()
     private let utilsService = UtilTransactionsServiceImplementation()
