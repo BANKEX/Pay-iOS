@@ -10,6 +10,7 @@ import UIKit
 
 class AssetManagementBtcViewController: UIViewController {
     
+    @IBOutlet private var destinationContainerView: UIView!
     @IBOutlet private var destinationAddressLabel: UILabel!
     @IBOutlet private var agreementSwitch: UISwitch!
     @IBOutlet private var riskFactorSwitch: UISwitch!
@@ -58,7 +59,8 @@ private extension AssetManagementBtcViewController {
     func updateView() {
         destinationAddressLabel.text = destination
         
-        copyButton.isEnabled = agreementSwitch.isOn && riskFactorSwitch.isOn
+        destinationContainerView.isHidden = agreementSwitch.isOn == false || riskFactorSwitch.isOn == false
+        copyButton.isHidden = destinationContainerView.isHidden
     }
     
 }
