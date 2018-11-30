@@ -18,7 +18,6 @@ class AssetManagementEthSuccessViewController: UIViewController {
     }
     
     @IBAction func openTransaction() {
-        print("openTransaction")
         guard let trHash = trResult?.hash else { return }
         
         let pageURL = URL(string: "https://etherscan.io/tx/\(trHash)")!
