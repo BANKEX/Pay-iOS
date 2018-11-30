@@ -11,6 +11,12 @@ import MessageUI
 
 class AssetManagementLinksViewController: UIViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     @IBAction func sendEmail() {
         let mailComposeViewController = MFMailComposeViewController()
         mailComposeViewController.mailComposeDelegate = self
