@@ -23,6 +23,7 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var agreementSwitch: UISwitch!
     @IBOutlet private var riskFactorSwitch: UISwitch!
     @IBOutlet private var sendButton: UIButton!
+    @IBOutlet weak var blockView:UIView!
     
     private let keyService = SingleKeyServiceImplementation()
     private let utilsService = UtilTransactionsServiceImplementation()
@@ -37,7 +38,6 @@ class AssetManagementEthViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         updateView()
         updateBalance()
         updateFee()
