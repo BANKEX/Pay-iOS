@@ -17,12 +17,36 @@
                     <view key="view" contentMode="scaleToFill" id="S0J-Hh-zsy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOt-hd-6RQ">
+                                <rect key="frame" x="16" y="593" width="343" height="44"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="X88-dY-zXe"/>
+                                </constraints>
+                                <state key="normal" title="Finish"/>
+                                <connections>
+                                    <action selector="finish" destination="7Bs-Ku-b6k" eventType="touchUpInside" id="WUd-g1-HGt"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="xOt-hd-6RQ" secondAttribute="trailing" id="0Hf-Xc-jJT"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="xOt-hd-6RQ" secondAttribute="bottom" id="SjW-F6-2Y0"/>
+                            <constraint firstItem="xOt-hd-6RQ" firstAttribute="leading" secondItem="S0J-Hh-zsy" secondAttribute="leadingMargin" id="qmb-ba-dCv"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="30" left="15" bottom="30" right="15"/>
                         <viewLayoutGuide key="safeArea" id="nsi-uU-tNm"/>
                     </view>
                     <navigationItem key="navigationItem" title="Asset Management" id="p0x-B3-Erc"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="rRl-zX-OQ0" kind="unwind" identifier="Home" unwindAction="unwindToHome:" id="wzg-0T-arA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aho-hk-ngE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="rRl-zX-OQ0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
     </scenes>
