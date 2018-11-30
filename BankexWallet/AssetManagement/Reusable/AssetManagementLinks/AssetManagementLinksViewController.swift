@@ -11,8 +11,6 @@ import MessageUI
 
 class AssetManagementLinksViewController: UIViewController {
     
-    var trHash: String?
-    
     @IBAction func sendEmail() {
         let mailComposeViewController = MFMailComposeViewController()
         mailComposeViewController.mailComposeDelegate = self
@@ -35,14 +33,6 @@ class AssetManagementLinksViewController: UIViewController {
         UIApplication.shared.openURL(pageURL)
     }
     
-    @IBAction func openTransaction() {
-        guard let trHash = trHash else { return }
-        
-        let pageURL = URL(string: "https://etherscan.io/tx/\(trHash)")!
-        
-        UIApplication.shared.openURL(pageURL)
-    }
-
 }
 
 extension AssetManagementLinksViewController: MFMailComposeViewControllerDelegate {
