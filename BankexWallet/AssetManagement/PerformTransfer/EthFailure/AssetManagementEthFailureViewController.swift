@@ -10,4 +10,8 @@ import UIKit
 
 class AssetManagementEthFailureViewController: UIViewController {
     
+    @IBAction private func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
+    }
+    
 }

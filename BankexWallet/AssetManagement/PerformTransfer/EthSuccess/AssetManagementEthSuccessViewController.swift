@@ -12,4 +12,9 @@ import web3swift
 class AssetManagementEthSuccessViewController: UIViewController {
     
     var trResult:TransactionSendingResult?
+    
+    @IBAction private func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
+    }
+    
 }
