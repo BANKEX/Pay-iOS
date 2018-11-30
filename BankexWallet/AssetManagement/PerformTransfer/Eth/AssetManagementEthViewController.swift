@@ -22,7 +22,7 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var totalLabel: UILabel!
     @IBOutlet private var agreementSwitch: UISwitch!
     @IBOutlet private var riskFactorSwitch: UISwitch!
-    @IBOutlet private var sendButton: UIButton!
+    @IBOutlet private var sendButton: ActionButton!
     
     private let keyService = SingleKeyServiceImplementation()
     private let utilsService = UtilTransactionsServiceImplementation()
@@ -164,6 +164,7 @@ private extension AssetManagementEthViewController {
         totalLabel.text = formatted(value: total)
         
         sendButton.isEnabled = agreementSwitch.isOn && riskFactorSwitch.isOn && (amount ?? 0) > 0
+        sendButton.backgroundColor = sendButton.isEnabled ? UIColor.mainColor : UIColor.lightBlue
     }
     
 }
