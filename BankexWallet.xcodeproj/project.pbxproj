@@ -181,8 +181,8 @@
 		9225FC3921AFD66000967431 /* AssetManagementBtc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9225FC3821AFD66000967431 /* AssetManagementBtc.storyboard */; };
 		9225FC3B21AFD67E00967431 /* AssetManagementBtcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225FC3A21AFD67E00967431 /* AssetManagementBtcViewController.swift */; };
 		924A36DF21B00AD2000954BD /* AssetManagementBtcViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 924A36DE21B00AD2000954BD /* AssetManagementBtcViewController.strings */; };
-		924A36EA21B03A0F000954BD /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A36E821B03A0F000954BD /* ContactsViewController.swift */; };
-		924A36EB21B03A0F000954BD /* Contacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 924A36E921B03A0F000954BD /* Contacts.storyboard */; };
+		924A36EA21B03A0F000954BD /* AssetManagementLinksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A36E821B03A0F000954BD /* AssetManagementLinksViewController.swift */; };
+		924A36EB21B03A0F000954BD /* AssetManagementLinks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 924A36E921B03A0F000954BD /* AssetManagementLinks.storyboard */; };
 		92A9FCFD21AECA6C00F8BB33 /* AssetManagementEthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */; };
 		92A9FCFF21AECAAD00F8BB33 /* AssetManagementEth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */; };
 		B81B598E56469045FD5A9424 /* Pods_BankexWalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */; };
@@ -454,8 +454,8 @@
 		9225FC3821AFD66000967431 /* AssetManagementBtc.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementBtc.storyboard; sourceTree = "<group>"; };
 		9225FC3A21AFD67E00967431 /* AssetManagementBtcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementBtcViewController.swift; sourceTree = "<group>"; };
 		924A36DE21B00AD2000954BD /* AssetManagementBtcViewController.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = AssetManagementBtcViewController.strings; sourceTree = "<group>"; };
-		924A36E821B03A0F000954BD /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
-		924A36E921B03A0F000954BD /* Contacts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contacts.storyboard; sourceTree = "<group>"; };
+		924A36E821B03A0F000954BD /* AssetManagementLinksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetManagementLinksViewController.swift; sourceTree = "<group>"; };
+		924A36E921B03A0F000954BD /* AssetManagementLinks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AssetManagementLinks.storyboard; sourceTree = "<group>"; };
 		92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthViewController.swift; sourceTree = "<group>"; };
 		92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEth.storyboard; sourceTree = "<group>"; };
 		BD1E76CD13960E44B2411D0D /* Pods-BankexWalletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1147,18 +1147,18 @@
 		924A36E021B02038000954BD /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				924A36E721B03A0F000954BD /* Contacts */,
+				924A36E721B03A0F000954BD /* AssetManagementLinks */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
 		};
-		924A36E721B03A0F000954BD /* Contacts */ = {
+		924A36E721B03A0F000954BD /* AssetManagementLinks */ = {
 			isa = PBXGroup;
 			children = (
-				924A36E921B03A0F000954BD /* Contacts.storyboard */,
-				924A36E821B03A0F000954BD /* ContactsViewController.swift */,
+				924A36E921B03A0F000954BD /* AssetManagementLinks.storyboard */,
+				924A36E821B03A0F000954BD /* AssetManagementLinksViewController.swift */,
 			);
-			path = Contacts;
+			path = AssetManagementLinks;
 			sourceTree = "<group>";
 		};
 		92A9FCFA21AEC9F900F8BB33 /* PerformTransfer */ = {
@@ -1414,7 +1414,7 @@
 				86D7FB7F2149338B008245DE /* WalletTableViewCell.xib in Resources */,
 				71EA219B21AE829000D70DA6 /* AssetManagementAbout.storyboard in Resources */,
 				867681C321831F4100C269ED /* DeleteCell.xib in Resources */,
-				924A36EB21B03A0F000954BD /* Contacts.storyboard in Resources */,
+				924A36EB21B03A0F000954BD /* AssetManagementLinks.storyboard in Resources */,
 				713207E721AE8F5B002FD8AF /* AssetManagementContacts.storyboard in Resources */,
 				00F0B9A921394C3800AC3013 /* Localizable.strings in Resources */,
 				71C72A2B21B009D000FB3E13 /* AssetManagementEthProgress.storyboard in Resources */,
@@ -1774,7 +1774,7 @@
 				86FE6DEC2107696E009AE44E /* SecurityViewController.swift in Sources */,
 				86C1FF5F217DF9020081CFCB /* BaseSplitViewController.swift in Sources */,
 				86D7FB8621495AA0008245DE /* PlaceholderCell.swift in Sources */,
-				924A36EA21B03A0F000954BD /* ContactsViewController.swift in Sources */,
+				924A36EA21B03A0F000954BD /* AssetManagementLinksViewController.swift in Sources */,
 				86E7DAE3215D0FE600749F01 /* EditViewController.swift in Sources */,
 				8631569E21039E9700914F31 /* SettingsDataSource.swift in Sources */,
 				862067EB2178ABAF0099A15D /* AutoLockViewController.swift in Sources */,

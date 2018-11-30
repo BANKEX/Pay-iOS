@@ -1,5 +1,5 @@
 //
-//  ContactsViewController.swift
+//  AssetManagementLinksViewController.swift
 //  BankexWallet
 //
 //  Created by Oleg Kolomyitsev on 29/11/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class ContactViewController: UIViewController {
+class AssetManagementLinksViewController: UIViewController {
     
     var trHash: String?
     
@@ -45,7 +45,7 @@ class ContactViewController: UIViewController {
 
 }
 
-extension ContactViewController: MFMailComposeViewControllerDelegate {
+extension AssetManagementLinksViewController: MFMailComposeViewControllerDelegate {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
