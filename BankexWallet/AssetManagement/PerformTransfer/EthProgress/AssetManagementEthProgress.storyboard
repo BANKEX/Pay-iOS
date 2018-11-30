@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,23 +22,24 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending funds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uz4-25-DYe">
                                 <rect key="frame" x="64" y="818.5" width="640" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="AssetManagementEthProgress/Colors/TitleText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The operation may take several minutes, please wait...." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kvk-cD-sKR">
                                 <rect key="frame" x="64" y="855.5" width="640" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="AssetManagementEthProgress/Colors/MessageText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="D49-WB-wgh">
                                 <rect key="frame" x="374" y="908" width="20" height="20"/>
+                                <color key="color" name="AssetManagementEthProgress/Colors/Indicator"/>
                             </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8RZ-3L-4Wj">
                                 <rect key="frame" x="64" y="70" width="640" height="716.5"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="AssetManagementEthProgress/Colors/Background"/>
                         <constraints>
                             <constraint firstItem="8RZ-3L-4Wj" firstAttribute="leading" secondItem="qrD-SH-TMc" secondAttribute="leadingMargin" id="0XG-G4-EHW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8RZ-3L-4Wj" secondAttribute="trailing" id="1RH-u6-TiS"/>
@@ -83,4 +85,18 @@
             <point key="canvasLocation" x="498" y="177"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="AssetManagementEthProgress/Colors/Background">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AssetManagementEthProgress/Colors/Indicator">
+            <color red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AssetManagementEthProgress/Colors/MessageText">
+            <color red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AssetManagementEthProgress/Colors/TitleText">
+            <color red="0.13725490196078433" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
