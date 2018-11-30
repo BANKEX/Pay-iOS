@@ -32,12 +32,11 @@ class AssetManagementEthViewController: UIViewController {
     private let destination = EthereumAddress("0x0123456789012345678901234567890123456789")!
     private var walletBalance: BigUInt?
     private var amount: BigUInt?
-    private var fee: BigUInt? = 0
+    private var fee: BigUInt?
     private var total: BigUInt?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         updateView()
         updateBalance()
         updateFee()

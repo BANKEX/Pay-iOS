@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,89 +18,98 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="j31-yJ-YKV" userLabel="Links">
-                                <rect key="frame" x="16" y="6" width="343" height="138"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="j31-yJ-YKV" userLabel="Links">
+                                <rect key="frame" x="16" y="6" width="343" height="156"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="26g-oJ-jCa" userLabel="SendEmail">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                         <subviews>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementLinks/Icons/Email" translatesAutoresizingMaskIntoConstraints="NO" id="kWR-Tc-umd">
-                                                <rect key="frame" x="0.0" y="0.0" width="29" height="29"/>
+                                                <rect key="frame" x="0.0" y="7.5" width="29" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="29" id="2to-zr-ZxW"/>
                                                     <constraint firstAttribute="width" constant="29" id="nBo-Mn-tN6"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGe-us-Gf7">
-                                                <rect key="frame" x="45" y="4.5" width="274" height="20.5"/>
+                                                <rect key="frame" x="45" y="12" width="274" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementLinks/Icons/DisclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="D8h-M0-2Pt">
-                                                <rect key="frame" x="335" y="8" width="8" height="13"/>
+                                                <rect key="frame" x="335" y="15.5" width="8" height="13"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="8" id="9xW-CL-i6P"/>
                                                     <constraint firstAttribute="height" constant="13" id="E5A-6e-FxJ"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="voF-8X-HWF"/>
+                                        </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="hqA-0k-c4p" appends="YES" id="Ixz-AW-db0"/>
                                         </connections>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ssG-qx-GQc" userLabel="OpenTelegram">
-                                        <rect key="frame" x="0.0" y="54.5" width="343" height="29"/>
+                                        <rect key="frame" x="0.0" y="56" width="343" height="44"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementLinks/Icons/Telegram" translatesAutoresizingMaskIntoConstraints="NO" id="pVb-2o-d0U">
-                                                <rect key="frame" x="0.0" y="0.0" width="29" height="29"/>
+                                                <rect key="frame" x="0.0" y="7.5" width="29" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="29" id="rVt-8Y-Zih"/>
                                                     <constraint firstAttribute="height" constant="29" id="wdt-69-82C"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telegram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCA-xf-lKx">
-                                                <rect key="frame" x="45" y="4.5" width="274" height="20.5"/>
+                                                <rect key="frame" x="45" y="12" width="274" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementLinks/Icons/DisclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="gqQ-78-wig">
-                                                <rect key="frame" x="335" y="8" width="8" height="13"/>
+                                                <rect key="frame" x="335" y="15.5" width="8" height="13"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="13" id="BOM-HD-XVN"/>
                                                     <constraint firstAttribute="width" constant="8" id="DTe-75-aKl"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="hwS-q3-hh4"/>
+                                        </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="tb8-pP-f6A" appends="YES" id="s1D-Uw-VsU"/>
                                         </connections>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cU3-bB-JnH" userLabel="OpenPage">
-                                        <rect key="frame" x="0.0" y="109" width="343" height="29"/>
+                                        <rect key="frame" x="0.0" y="112" width="343" height="44"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementLinks/Icons/ProductPage" translatesAutoresizingMaskIntoConstraints="NO" id="xb4-9m-4Pu">
-                                                <rect key="frame" x="0.0" y="0.0" width="29" height="29"/>
+                                                <rect key="frame" x="0.0" y="7.5" width="29" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="29" id="QXo-ei-Nl2"/>
                                                     <constraint firstAttribute="height" constant="29" id="gxu-kt-vTF"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfF-fW-LLP">
-                                                <rect key="frame" x="45" y="4.5" width="274" height="20.5"/>
+                                                <rect key="frame" x="45" y="12" width="274" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementLinks/Icons/DisclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="7Mf-9c-bqt">
-                                                <rect key="frame" x="335" y="8" width="8" height="13"/>
+                                                <rect key="frame" x="335" y="15.5" width="8" height="13"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="8" id="mhB-pK-JyW"/>
                                                     <constraint firstAttribute="height" constant="13" id="nUl-g1-Okf"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="5lo-uz-akR"/>
+                                        </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="j2U-we-cMb" appends="YES" id="QGh-mG-41w"/>
                                         </connections>
@@ -107,14 +117,15 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="j31-yJ-YKV" firstAttribute="leading" secondItem="BnF-fY-UNM" secondAttribute="leadingMargin" id="AmW-eK-5i7"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="j31-yJ-YKV" secondAttribute="bottom" id="CTu-1A-2fF"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="j31-yJ-YKV" secondAttribute="bottom" priority="750" id="CTu-1A-2fF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="j31-yJ-YKV" secondAttribute="trailing" id="DAs-M4-GKD"/>
                             <constraint firstItem="j31-yJ-YKV" firstAttribute="top" secondItem="BnF-fY-UNM" secondAttribute="topMargin" id="Xv2-hx-z5E"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="6" left="0.0" bottom="6" right="0.0"/>
+                        <viewLayoutGuide key="safeArea" id="WR4-RB-kKg"/>
                     </view>
                     <size key="freeformSize" width="375" height="150"/>
                 </viewController>

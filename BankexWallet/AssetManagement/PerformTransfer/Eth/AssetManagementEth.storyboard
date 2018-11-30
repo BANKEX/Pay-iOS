@@ -21,53 +21,53 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bHq-c5-5d9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XSD-sS-9Ih">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPx-AU-3dZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="222.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jRL-xp-w24">
-                                                <rect key="frame" x="30" y="16" width="315" height="77.5"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ji2-3L-8qO">
-                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="77.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZS-My-v0B">
-                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKD-FG-gMY">
-                                                                <rect key="frame" x="0.0" y="28.5" width="315" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdc-A4-yZu">
-                                                                <rect key="frame" x="0.0" y="57" width="315" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="Ji2-3L-8qO" firstAttribute="leading" secondItem="jRL-xp-w24" secondAttribute="leadingMargin" id="CaB-I4-VWB"/>
-                                                    <constraint firstAttribute="trailingMargin" secondItem="Ji2-3L-8qO" secondAttribute="trailing" id="E97-vh-EqM"/>
-                                                    <constraint firstAttribute="bottomMargin" secondItem="Ji2-3L-8qO" secondAttribute="bottom" id="Rsn-Po-bob"/>
-                                                    <constraint firstItem="Ji2-3L-8qO" firstAttribute="top" secondItem="jRL-xp-w24" secondAttribute="topMargin" id="xTY-R3-az9"/>
-                                                </constraints>
-                                                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLE-5a-55S">
+                                                <rect key="frame" x="16" y="180.5" width="343" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPb-2E-IEK">
+                                                <rect key="frame" x="16" y="159" width="343" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vV0-ME-h2Q">
+                                                <rect key="frame" x="16" y="90.5" width="343" height="41"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="qPb-2E-IEK" firstAttribute="trailing" secondItem="BLE-5a-55S" secondAttribute="trailing" id="BMI-pB-02B"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="vV0-ME-h2Q" secondAttribute="trailing" id="Q3b-A5-IJi"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="BLE-5a-55S" secondAttribute="trailing" id="YPu-HJ-60X"/>
+                                            <constraint firstItem="BLE-5a-55S" firstAttribute="top" secondItem="qPb-2E-IEK" secondAttribute="bottom" constant="1" id="btN-do-weZ"/>
+                                            <constraint firstItem="qPb-2E-IEK" firstAttribute="leading" secondItem="BLE-5a-55S" secondAttribute="leading" id="heq-Kg-CGx"/>
+                                            <constraint firstItem="vV0-ME-h2Q" firstAttribute="centerY" secondItem="hPx-AU-3dZ" secondAttribute="centerY" id="jnY-wK-G4h"/>
+                                            <constraint firstItem="BLE-5a-55S" firstAttribute="leading" secondItem="hPx-AU-3dZ" secondAttribute="leadingMargin" id="rnl-fd-P1A"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="BLE-5a-55S" secondAttribute="bottom" id="t69-46-QSP"/>
+                                            <constraint firstItem="vV0-ME-h2Q" firstAttribute="leading" secondItem="hPx-AU-3dZ" secondAttribute="leadingMargin" id="yKy-ed-aad"/>
+                                        </constraints>
+                                        <edgeInsets key="layoutMargins" top="24" left="16" bottom="24" right="16"/>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XSD-sS-9Ih">
+                                        <rect key="frame" x="0.0" y="238.5" width="375" height="442.5"/>
+                                        <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRY-QH-h2p">
-                                                <rect key="frame" x="30" y="109.5" width="315" height="17"/>
+                                                <rect key="frame" x="30" y="0.0" width="315" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="irP-9j-Cph">
-                                                <rect key="frame" x="30" y="142.5" width="315" height="393.5"/>
+                                                <rect key="frame" x="30" y="33" width="315" height="393.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VfU-2B-WQM">
                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="45.5"/>
@@ -196,8 +196,11 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="XSD-sS-9Ih" firstAttribute="top" secondItem="bHq-c5-5d9" secondAttribute="top" id="6Ar-VK-k7X"/>
+                                    <constraint firstItem="hPx-AU-3dZ" firstAttribute="leading" secondItem="bHq-c5-5d9" secondAttribute="leading" id="CzH-lw-Hga"/>
+                                    <constraint firstAttribute="trailing" secondItem="hPx-AU-3dZ" secondAttribute="trailing" id="NTh-8a-rtC"/>
+                                    <constraint firstItem="hPx-AU-3dZ" firstAttribute="top" secondItem="bHq-c5-5d9" secondAttribute="top" id="Nrc-cj-meP"/>
                                     <constraint firstAttribute="bottom" secondItem="XSD-sS-9Ih" secondAttribute="bottom" id="U82-ie-WWp"/>
+                                    <constraint firstItem="XSD-sS-9Ih" firstAttribute="top" secondItem="hPx-AU-3dZ" secondAttribute="bottom" constant="16" id="V4o-Au-4hD"/>
                                     <constraint firstItem="XSD-sS-9Ih" firstAttribute="width" secondItem="bHq-c5-5d9" secondAttribute="width" id="gZV-vZ-8F6"/>
                                     <constraint firstItem="XSD-sS-9Ih" firstAttribute="leading" secondItem="bHq-c5-5d9" secondAttribute="leading" id="kmN-KA-ZiB"/>
                                     <constraint firstAttribute="trailing" secondItem="XSD-sS-9Ih" secondAttribute="trailing" id="yYh-BR-7qf"/>
@@ -211,6 +214,7 @@
                             <constraint firstItem="bHq-c5-5d9" firstAttribute="leading" secondItem="MNK-ov-qe4" secondAttribute="leading" id="KCN-74-LFq"/>
                             <constraint firstItem="bHq-c5-5d9" firstAttribute="top" secondItem="MNK-ov-qe4" secondAttribute="top" id="VXy-2P-PVs"/>
                             <constraint firstAttribute="bottom" secondItem="bHq-c5-5d9" secondAttribute="bottom" id="qTN-5f-bS4"/>
+                            <constraint firstItem="hPx-AU-3dZ" firstAttribute="height" secondItem="MNK-ov-qe4" secondAttribute="height" multiplier="1:3" id="xxC-s1-oIL"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="16" left="30" bottom="16" right="30"/>
                         <viewLayoutGuide key="safeArea" id="AFw-fR-SxA"/>
@@ -220,7 +224,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Eth Asset Management" id="pfU-sg-rJM">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="rUc-V7-sJl">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rUc-V7-sJl">
                             <connections>
                                 <action selector="finish" destination="i03-uI-bdd" id="gRA-B3-m67"/>
                             </connections>
@@ -236,11 +240,11 @@
                         <outlet property="riskFactorSwitch" destination="HHg-HG-veI" id="IOf-u6-JPK"/>
                         <outlet property="sendButton" destination="ybS-Pj-AmP" id="T0q-Ys-TIA"/>
                         <outlet property="totalLabel" destination="AkE-Zq-0VS" id="dJ3-tS-qIT"/>
-                        <outlet property="walletAddressLabel" destination="KKD-FG-gMY" id="KFw-Cw-QdA"/>
-                        <outlet property="walletBalanceLabel" destination="Jdc-A4-yZu" id="qdU-6P-wNt"/>
-                        <outlet property="walletNameLabel" destination="GZS-My-v0B" id="03f-0P-els"/>
+                        <outlet property="walletAddressLabel" destination="BLE-5a-55S" id="HYF-RL-7Bt"/>
+                        <outlet property="walletBalanceLabel" destination="vV0-ME-h2Q" id="HJm-rA-JeT"/>
+                        <outlet property="walletNameLabel" destination="qPb-2E-IEK" id="rAm-kR-sbu"/>
                         <segue destination="0Wa-Qp-Gj8" kind="unwind" identifier="Home" unwindAction="unwindToHome:" id="IX8-ny-E87"/>
-                        <segue destination="p0E-tQ-BZW" kind="show" identifier="Progress" id="t4k-2f-iLy"/>
+                        <segue destination="p0E-tQ-BZW" kind="show" identifier="Progress" customClass="ReplaceSegue" customModule="BankexWallet" customModuleProvider="target" id="t4k-2f-iLy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csF-sm-l6N" userLabel="First Responder" sceneMemberID="firstResponder"/>

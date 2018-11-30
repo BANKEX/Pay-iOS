@@ -2416,22 +2416,6 @@
             <point key="canvasLocation" x="4002" y="486"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="zWw-xs-Pxn">
-            <objects>
-                <navigationController id="8nC-Rq-KgM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cOm-jF-iba">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="CS0-X6-Q0Q" kind="relationship" relationship="rootViewController" id="b3g-aT-qeQ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="buL-mg-Btr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-5541" y="7353"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="KzY-jO-MSO">
             <objects>
                 <navigationController id="fKk-t2-c3F" sceneMemberID="viewController">
@@ -3093,7 +3077,6 @@
                         <outlet property="topConstraint" destination="gtj-Lw-fK7" id="7nN-lm-XNa"/>
                         <segue destination="xjs-f2-eUN" kind="show" identifier="createToken" id="TXr-nN-iSr"/>
                         <segue destination="Nqf-Fy-uI6" kind="show" identifier="walletInfo" id="ew0-Ce-kR2"/>
-                        <segue destination="8nC-Rq-KgM" kind="presentation" identifier="AssetManagementInfo" modalPresentationStyle="formSheet" id="rXH-Tq-n6o"/>
                         <segue destination="IJd-EG-tJ7" kind="presentation" identifier="AssetManagementContacts" modalPresentationStyle="formSheet" id="bfh-cG-Os1"/>
                         <segue destination="fKk-t2-c3F" kind="presentation" identifier="AssetManagementEth" modalPresentationStyle="formSheet" id="PUE-1z-4GU"/>
                         <segue destination="qBy-0g-AtR" kind="presentation" identifier="AssetManagementBtc" modalPresentationStyle="formSheet" id="clL-jD-6yL"/>
@@ -3101,79 +3084,101 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLg-F4-kEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="8CS-YX-QOM">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="142"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZJ-no-m4Y">
-                            <rect key="frame" x="15" y="43" width="168" height="22"/>
-                            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="1" maxY="0.0"/>
-                            <state key="normal" title="Asset Management">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="openAssetManagementPage" destination="J4W-a5-AkX" eventType="touchUpInside" id="DFT-eJ-sTR"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="760" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCq-B7-jd4">
-                            <rect key="frame" x="198" y="43" width="22" height="22"/>
-                            <connections>
-                                <action selector="showAssetManagementInfo" destination="J4W-a5-AkX" eventType="touchUpInside" id="A0q-El-BIj"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sub-EV-cC3">
-                            <rect key="frame" x="15" y="81" width="137.5" height="44"/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="A4F-p3-SzU"/>
-                            </constraints>
-                            <state key="normal" title="ETH"/>
-                            <connections>
-                                <action selector="showPerformEthTransfer" destination="J4W-a5-AkX" eventType="touchUpInside" id="e28-8S-eUd"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CA-lr-src">
-                            <rect key="frame" x="15" y="141" width="290" height="44"/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="sfg-Tl-Td6"/>
-                            </constraints>
-                            <state key="normal" title="Contact Us"/>
-                            <connections>
-                                <action selector="showAssetManagementContacts" destination="J4W-a5-AkX" eventType="touchUpInside" id="ngO-xS-7ba"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Q1-Hs-y2j">
-                            <rect key="frame" x="167.5" y="81" width="137.5" height="44"/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="kgt-lT-cA7"/>
-                            </constraints>
-                            <state key="normal" title="BTC"/>
-                            <connections>
-                                <action selector="showPerformBtcTransfer" destination="J4W-a5-AkX" eventType="touchUpInside" id="r4B-Yo-lDz"/>
-                                <action selector="showPerformEthTransfer" destination="J4W-a5-AkX" eventType="touchUpInside" id="uYg-yR-lTs"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="L3g-2T-dR1">
+                            <rect key="frame" x="16" y="0.0" width="288" height="30"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asset Management" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkC-F9-3EK">
+                                    <rect key="frame" x="0.0" y="4.5" width="167" height="21.5"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="760" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCq-B7-jd4">
+                                    <rect key="frame" x="210" y="0.0" width="78" height="30"/>
+                                    <state key="normal" title="Learn more">
+                                        <color key="titleColor" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="showAssetManagementInfo" destination="J4W-a5-AkX" eventType="touchUpInside" id="A0q-El-BIj"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="OzP-xR-FsZ">
+                            <rect key="frame" x="24" y="46" width="272" height="96"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uxi-cv-p6u">
+                                    <rect key="frame" x="0.0" y="0.0" width="272" height="40"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sub-EV-cC3" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="40"/>
+                                            <color key="backgroundColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" priority="999" constant="40" id="ceE-t2-dOF"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <state key="normal" title="ETH">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="showPerformEthTransfer" destination="J4W-a5-AkX" eventType="touchUpInside" id="e28-8S-eUd"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Q1-Hs-y2j" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
+                                            <rect key="frame" x="144" y="0.0" width="128" height="40"/>
+                                            <color key="backgroundColor" red="0.96862745098039216" green="0.57647058823529407" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" priority="999" constant="40" id="H3c-fq-oBw"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <state key="normal" title="BTC">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="showPerformBtcTransfer" destination="J4W-a5-AkX" eventType="touchUpInside" id="r4B-Yo-lDz"/>
+                                                <action selector="showPerformEthTransfer" destination="J4W-a5-AkX" eventType="touchUpInside" id="uYg-yR-lTs"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CA-lr-src" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="56" width="272" height="40"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" priority="999" constant="40" id="sfg-Tl-Td6"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <state key="normal" title="Contact us">
+                                        <color key="titleColor" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="showAssetManagementContacts" destination="J4W-a5-AkX" eventType="touchUpInside" id="ngO-xS-7ba"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="WCq-B7-jd4" firstAttribute="leading" secondItem="AZJ-no-m4Y" secondAttribute="trailing" constant="15" id="AOH-in-wKe"/>
-                        <constraint firstItem="AZJ-no-m4Y" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leading" constant="15" id="H7S-ms-rpc"/>
-                        <constraint firstItem="5CA-lr-src" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leading" constant="15" id="I5i-MB-zYG"/>
-                        <constraint firstItem="Sub-EV-cC3" firstAttribute="top" secondItem="AZJ-no-m4Y" secondAttribute="bottom" constant="16" id="bf8-xS-5Tk"/>
-                        <constraint firstItem="WCq-B7-jd4" firstAttribute="centerY" secondItem="AZJ-no-m4Y" secondAttribute="centerY" id="hSl-Xk-OaR"/>
-                        <constraint firstAttribute="trailing" secondItem="5CA-lr-src" secondAttribute="trailing" constant="15" id="iKc-Ww-0Ck"/>
-                        <constraint firstItem="0Q1-Hs-y2j" firstAttribute="leading" secondItem="Sub-EV-cC3" secondAttribute="trailing" constant="15" id="icB-mr-xjb"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WCq-B7-jd4" secondAttribute="trailing" constant="15" id="mau-u5-q9T"/>
-                        <constraint firstItem="Sub-EV-cC3" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leading" constant="15" id="pFJ-A7-dCn"/>
-                        <constraint firstAttribute="trailing" secondItem="0Q1-Hs-y2j" secondAttribute="trailing" constant="15" id="rHF-p1-EFr"/>
-                        <constraint firstItem="5CA-lr-src" firstAttribute="top" secondItem="Sub-EV-cC3" secondAttribute="bottom" constant="16" id="rZv-h0-GtR"/>
-                        <constraint firstItem="AZJ-no-m4Y" firstAttribute="top" secondItem="8CS-YX-QOM" secondAttribute="top" constant="43" id="vdu-OL-Pp0"/>
-                        <constraint firstItem="0Q1-Hs-y2j" firstAttribute="width" secondItem="Sub-EV-cC3" secondAttribute="width" id="x9Q-XB-L1S"/>
-                        <constraint firstItem="0Q1-Hs-y2j" firstAttribute="top" secondItem="AZJ-no-m4Y" secondAttribute="bottom" constant="16" id="zYz-5D-LEx"/>
+                        <constraint firstItem="OzP-xR-FsZ" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leadingMargin" constant="8" id="0n5-Tw-F9I"/>
+                        <constraint firstItem="L3g-2T-dR1" firstAttribute="leading" secondItem="8CS-YX-QOM" secondAttribute="leadingMargin" id="8bm-12-G9a"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="OzP-xR-FsZ" secondAttribute="trailing" constant="8" id="Hqt-vL-CvB"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="L3g-2T-dR1" secondAttribute="trailing" id="hmU-b3-O1L"/>
+                        <constraint firstItem="L3g-2T-dR1" firstAttribute="top" secondItem="8CS-YX-QOM" secondAttribute="topMargin" id="qUX-3D-dwm"/>
+                        <constraint firstItem="OzP-xR-FsZ" firstAttribute="top" secondItem="L3g-2T-dR1" secondAttribute="bottom" constant="16" id="sDU-qU-rk3"/>
                     </constraints>
+                    <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="-4246" y="4504"/>
@@ -3187,16 +3192,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tjw-Ka-Asb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-6300" y="7935"/>
-        </scene>
-        <!--AssetManagementAbout-->
-        <scene sceneID="1PO-kx-HSj">
-            <objects>
-                <viewControllerPlaceholder storyboardName="AssetManagementAbout" id="CS0-X6-Q0Q" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="nOJ-Dq-pq5"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7nQ-wF-wXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-5543" y="7935"/>
         </scene>
         <!--AssetManagementEth-->
         <scene sceneID="WsM-Wd-xsj">
