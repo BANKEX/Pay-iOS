@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hx7-Bj-skI" userLabel="SendEmail">
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hx7-Bj-skI" userLabel="OpenTransaction">
                                 <rect key="frame" x="16" y="94" width="343" height="44"/>
                                 <subviews>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementEthSuccess/Icons/TransactionStatus" translatesAutoresizingMaskIntoConstraints="NO" id="PsR-j3-uXN">
@@ -46,6 +46,9 @@
                                     <constraint firstAttribute="height" constant="44" id="tXy-r9-Nay"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="KqT-fP-f4d"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Daj-dl-pYu" appends="YES" id="uCv-aT-Mxa"/>
+                                </connections>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOt-hd-6RQ">
                                 <rect key="frame" x="16" y="593" width="343" height="44"/>
@@ -78,6 +81,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aho-hk-ngE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Daj-dl-pYu" userLabel="OpenTransaction">
+                    <connections>
+                        <action selector="openTransaction" destination="7Bs-Ku-b6k" id="4zJ-pQ-kwv"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <exit id="rRl-zX-OQ0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
