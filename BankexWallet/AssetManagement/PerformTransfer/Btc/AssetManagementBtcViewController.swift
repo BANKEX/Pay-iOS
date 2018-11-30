@@ -10,8 +10,7 @@ import UIKit
 
 class AssetManagementBtcViewController: UIViewController {
     
-    @IBOutlet private var limitsLabel: UILabel!
-    @IBOutlet private var infoLabel: UILabel!
+    @IBOutlet private var destinationContainerView: UIView!
     @IBOutlet private var destinationAddressLabel: UILabel!
     @IBOutlet private var agreementSwitch: UISwitch!
     @IBOutlet private var riskFactorSwitch: UISwitch!
@@ -58,20 +57,10 @@ class AssetManagementBtcViewController: UIViewController {
 private extension AssetManagementBtcViewController {
     
     func updateView() {
-        
-        limitsLabel.text = LocalizedStrings.limits
-        infoLabel.text = LocalizedStrings.info
         destinationAddressLabel.text = destination
         
-        copyButton.isEnabled = agreementSwitch.isOn && riskFactorSwitch.isOn
+        destinationContainerView.isHidden = agreementSwitch.isOn == false || riskFactorSwitch.isOn == false
+        copyButton.isHidden = destinationContainerView.isHidden
     }
-}
-
-private extension AssetManagementBtcViewController {
     
-    struct LocalizedStrings {
-        static let limits = NSLocalizedString("Limits", tableName: "AssetManagementBtcViewController", comment: "")
-        static let info = NSLocalizedString("Info", tableName: "AssetManagementBtcViewController", comment: "")
-
-    }
 }
