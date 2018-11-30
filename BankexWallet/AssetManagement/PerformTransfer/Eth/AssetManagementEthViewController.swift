@@ -23,7 +23,7 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var agreementSwitch: UISwitch!
     @IBOutlet private var riskFactorSwitch: UISwitch!
     @IBOutlet private var sendButton: UIButton!
-    @IBOutlet weak var blockView:UIView!
+    @IBOutlet private var blockView:UIView!
     
     private let keyService = SingleKeyServiceImplementation()
     private let utilsService = UtilTransactionsServiceImplementation()
