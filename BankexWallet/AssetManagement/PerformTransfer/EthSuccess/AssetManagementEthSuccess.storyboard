@@ -18,6 +18,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hx7-Bj-skI" userLabel="SendEmail">
+                                <rect key="frame" x="16" y="94" width="343" height="44"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementEthSuccess/Icons/TransactionStatus" translatesAutoresizingMaskIntoConstraints="NO" id="PsR-j3-uXN">
+                                        <rect key="frame" x="0.0" y="7.5" width="29" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="c68-Yz-HFx"/>
+                                            <constraint firstAttribute="width" constant="29" id="sqU-Q6-iWy"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MU-HH-mbq">
+                                        <rect key="frame" x="45" y="12" width="274" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementLinks/Icons/DisclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="nQA-kY-hWB">
+                                        <rect key="frame" x="335" y="15.5" width="8" height="13"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="13" id="EDi-jH-Bwr"/>
+                                            <constraint firstAttribute="width" constant="8" id="Jfr-gK-eJY"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="tXy-r9-Nay"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="KqT-fP-f4d"/>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOt-hd-6RQ">
                                 <rect key="frame" x="16" y="593" width="343" height="44"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -33,6 +62,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="xOt-hd-6RQ" secondAttribute="trailing" id="0Hf-Xc-jJT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hx7-Bj-skI" secondAttribute="trailing" id="3nV-bc-0HM"/>
+                            <constraint firstItem="hx7-Bj-skI" firstAttribute="top" secondItem="S0J-Hh-zsy" secondAttribute="topMargin" id="99k-Zz-l0n"/>
+                            <constraint firstItem="hx7-Bj-skI" firstAttribute="leading" secondItem="S0J-Hh-zsy" secondAttribute="leadingMargin" id="9qr-dw-vLU"/>
                             <constraint firstAttribute="bottomMargin" secondItem="xOt-hd-6RQ" secondAttribute="bottom" id="SjW-F6-2Y0"/>
                             <constraint firstItem="xOt-hd-6RQ" firstAttribute="leading" secondItem="S0J-Hh-zsy" secondAttribute="leadingMargin" id="qmb-ba-dCv"/>
                         </constraints>
@@ -50,4 +82,8 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="AssetManagementEthSuccess/Icons/TransactionStatus" width="29" height="29"/>
+        <image name="AssetManagementLinks/Icons/DisclosureIndicator" width="8" height="13"/>
+    </resources>
 </document>
