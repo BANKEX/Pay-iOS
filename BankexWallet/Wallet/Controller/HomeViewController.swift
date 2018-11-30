@@ -209,10 +209,6 @@ class HomeViewController: BaseViewController {
         UIApplication.shared.openURL(pageURL)
     }
     
-    @IBAction func showAssetManagementInfo() {
-        performSegue(withIdentifier: "AssetManagementInfo", sender: self)
-    }
-    
     @IBAction func showAssetManagementContacts() {
         performSegue(withIdentifier: "AssetManagementContacts", sender: self)
     }
