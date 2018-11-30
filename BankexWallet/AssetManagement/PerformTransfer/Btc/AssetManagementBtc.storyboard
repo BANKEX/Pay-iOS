@@ -24,24 +24,24 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="9vD-gF-W9q">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="498.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qc-Ib-hV0" userLabel="Info Content">
+                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qc-Ib-hV0" userLabel="Info Content">
                                                 <rect key="frame" x="16" y="24" width="343" height="124"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="20" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKj-vN-PvY">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20"/>
+                                                        <rect key="frame" x="16" y="0.0" width="311" height="20"/>
                                                         <string key="text">Get passive income from your investments in cryptocurrencies. Arbitrage trading strategies are some of the most low-risk available due to the hedging mechanism used. Arbitrage strategies are resistant to changes in cryptocurrency rates, demonstrating income growth in both bull and bear markets. You can set an acceptable level of risk. If this level of risk is reached, trading on your capital will stop.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.18039215689999999" green="0.21176470589999999" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="20" text="Advantages:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGb-KE-8vp">
-                                                        <rect key="frame" x="0.0" y="60" width="343" height="20"/>
+                                                        <rect key="frame" x="16" y="60" width="311" height="20"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                         <color key="textColor" red="0.18039215689999999" green="0.21176470589999999" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="20" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIL-qe-MnZ">
-                                                        <rect key="frame" x="0.0" y="104" width="343" height="20"/>
+                                                        <rect key="frame" x="16" y="104" width="311" height="20"/>
                                                         <string key="text">- no bots — just real traders 24/7;
 - professional trading team with experience on real markets;
 - consulting for listing on crypto exchanges;
@@ -53,17 +53,18 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="JGb-KE-8vp" secondAttribute="trailing" id="47f-n0-I7C"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="JGb-KE-8vp" secondAttribute="trailing" id="47f-n0-I7C"/>
                                                     <constraint firstAttribute="bottom" secondItem="kIL-qe-MnZ" secondAttribute="bottom" id="4Id-rf-fFf"/>
-                                                    <constraint firstAttribute="trailing" secondItem="VKj-vN-PvY" secondAttribute="trailing" id="62P-og-oJv"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="VKj-vN-PvY" secondAttribute="trailing" id="62P-og-oJv"/>
                                                     <constraint firstItem="kIL-qe-MnZ" firstAttribute="top" secondItem="JGb-KE-8vp" secondAttribute="bottom" constant="24" id="X2R-5z-b2F"/>
                                                     <constraint firstItem="VKj-vN-PvY" firstAttribute="top" secondItem="9qc-Ib-hV0" secondAttribute="top" id="a61-yb-KNy"/>
-                                                    <constraint firstItem="kIL-qe-MnZ" firstAttribute="leading" secondItem="9qc-Ib-hV0" secondAttribute="leading" id="ans-JM-nuF"/>
-                                                    <constraint firstItem="JGb-KE-8vp" firstAttribute="leading" secondItem="9qc-Ib-hV0" secondAttribute="leading" id="eyT-Ec-cfZ"/>
-                                                    <constraint firstAttribute="trailing" secondItem="kIL-qe-MnZ" secondAttribute="trailing" id="qtA-d6-HkD"/>
-                                                    <constraint firstItem="VKj-vN-PvY" firstAttribute="leading" secondItem="9qc-Ib-hV0" secondAttribute="leading" id="rmo-Ek-Tl9"/>
+                                                    <constraint firstItem="kIL-qe-MnZ" firstAttribute="leading" secondItem="9qc-Ib-hV0" secondAttribute="leadingMargin" id="ans-JM-nuF"/>
+                                                    <constraint firstItem="JGb-KE-8vp" firstAttribute="leading" secondItem="9qc-Ib-hV0" secondAttribute="leadingMargin" id="eyT-Ec-cfZ"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="kIL-qe-MnZ" secondAttribute="trailing" id="qtA-d6-HkD"/>
+                                                    <constraint firstItem="VKj-vN-PvY" firstAttribute="leading" secondItem="9qc-Ib-hV0" secondAttribute="leadingMargin" id="rmo-Ek-Tl9"/>
                                                     <constraint firstItem="JGb-KE-8vp" firstAttribute="top" secondItem="VKj-vN-PvY" secondAttribute="bottom" constant="40" id="sE3-DK-1AB"/>
                                                 </constraints>
+                                                <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ESQ-Ew-4ZH" userLabel="Send BTC Content">
                                                 <rect key="frame" x="16" y="188" width="343" height="310.5"/>
