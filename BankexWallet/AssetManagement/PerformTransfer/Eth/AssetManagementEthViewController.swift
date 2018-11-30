@@ -29,7 +29,7 @@ class AssetManagementEthViewController: UIViewController {
     private let tokensService = CustomERC20TokensServiceImplementation()
     private let transactionService = TransactionsService()
     
-    private let destination = EthereumAddress("0x0123456789012345678901234567890123456789")!
+    private let destination = EthereumAddress("0x2BBE012F440Dd7339c189a6b0cA057874e72D2D5")!
     private var walletBalance: BigUInt?
     private var amount: BigUInt?
     private var fee: BigUInt?
