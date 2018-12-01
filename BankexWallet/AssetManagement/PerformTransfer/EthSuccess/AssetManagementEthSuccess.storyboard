@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Bs-Ku-b6k">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,18 +15,36 @@
             <objects>
                 <viewController id="7Bs-Ku-b6k" customClass="AssetManagementEthSuccessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S0J-Hh-zsy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHI-f3-x2O">
-                                <rect key="frame" x="0.0" y="64" width="320" height="189.5"/>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xHI-f3-x2O">
+                                <rect key="frame" x="0.0" y="64" width="375" height="222.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementEthSuccess/Images/Success" translatesAutoresizingMaskIntoConstraints="NO" id="eqS-SH-vou">
+                                        <rect key="frame" x="138" y="42.5" width="99" height="73"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TaI-wW-fv7">
+                                        <rect key="frame" x="16" y="157.5" width="343" height="41"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="TaI-wW-fv7" firstAttribute="leading" secondItem="xHI-f3-x2O" secondAttribute="leadingMargin" id="9rW-BK-aCS"/>
+                                    <constraint firstAttribute="bottom" secondItem="TaI-wW-fv7" secondAttribute="bottom" constant="24" id="T4c-vD-Uso"/>
+                                    <constraint firstItem="eqS-SH-vou" firstAttribute="centerY" secondItem="xHI-f3-x2O" secondAttribute="centerY" constant="-32" id="gh7-VT-b35"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="TaI-wW-fv7" secondAttribute="trailing" id="oQ1-4w-dPR"/>
+                                    <constraint firstItem="eqS-SH-vou" firstAttribute="centerX" secondItem="xHI-f3-x2O" secondAttribute="centerX" id="wAJ-p7-UiP"/>
+                                </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="z7h-Ny-NgS">
-                                <rect key="frame" x="16" y="253.5" width="288" height="216"/>
+                                <rect key="frame" x="16" y="286.5" width="343" height="216"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please contact us for further instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cc4-Lj-r09">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="yBP-7h-zWq"/>
                                         </constraints>
@@ -35,13 +53,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="9pf-Kl-uzM">
-                                        <rect key="frame" x="0.0" y="44" width="288" height="128"/>
+                                        <rect key="frame" x="0.0" y="44" width="343" height="128"/>
                                         <connections>
                                             <segue destination="iWO-Wr-Kti" kind="embed" id="EjG-Aa-7lE"/>
                                         </connections>
                                     </containerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hx7-Bj-skI" userLabel="OpenTransaction">
-                                        <rect key="frame" x="0.0" y="172" width="288" height="44"/>
+                                        <rect key="frame" x="0.0" y="172" width="343" height="44"/>
                                         <subviews>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementEthSuccess/Icons/TransactionStatus" translatesAutoresizingMaskIntoConstraints="NO" id="PsR-j3-uXN">
                                                 <rect key="frame" x="0.0" y="7.5" width="29" height="29"/>
@@ -51,13 +69,13 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MU-HH-mbq">
-                                                <rect key="frame" x="45" y="11.5" width="219" height="20.5"/>
+                                                <rect key="frame" x="45" y="11.5" width="274" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementLinks/Icons/DisclosureIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="nQA-kY-hWB">
-                                                <rect key="frame" x="280" y="15.5" width="8" height="13"/>
+                                                <rect key="frame" x="335" y="15.5" width="8" height="13"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="13" id="EDi-jH-Bwr"/>
                                                     <constraint firstAttribute="width" constant="8" id="Jfr-gK-eJY"/>
@@ -75,7 +93,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOt-hd-6RQ" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="76" y="494" width="168" height="44"/>
+                                <rect key="frame" x="76" y="593" width="223" height="44"/>
                                 <color key="backgroundColor" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="X88-dY-zXe"/>
@@ -119,7 +137,7 @@
                 </tapGestureRecognizer>
                 <exit id="rRl-zX-OQ0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="66" y="-252"/>
+            <point key="canvasLocation" x="65.625" y="-252.46478873239437"/>
         </scene>
         <!--AssetManagementLinks-->
         <scene sceneID="Pxh-3H-Yk3">
@@ -132,6 +150,7 @@
     </scenes>
     <resources>
         <image name="AssetManagementEthSuccess/Icons/TransactionStatus" width="29" height="29"/>
+        <image name="AssetManagementEthSuccess/Images/Success" width="99" height="73"/>
         <image name="AssetManagementLinks/Icons/DisclosureIndicator" width="8" height="13"/>
     </resources>
 </document>
