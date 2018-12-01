@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wbf-xf-Dpp">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -10,17 +10,46 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Sending funds-->
+        <!--Asset Management-->
         <scene sceneID="ryK-fS-Cfs">
             <objects>
                 <viewController id="Wbf-xf-Dpp" customClass="AssetManagementEthProgressViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qrD-SH-TMc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending funds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uz4-25-DYe">
+                                <rect key="frame" x="64" y="284" width="192" height="26.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.13725490196078433" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The operation may take several minutes, please wait...." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kvk-cD-sKR">
+                                <rect key="frame" x="64" y="326.5" width="192" height="61"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="D49-WB-wgh">
+                                <rect key="frame" x="141.5" y="419.5" width="37" height="37"/>
+                                <color key="color" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Uz4-25-DYe" firstAttribute="leading" secondItem="qrD-SH-TMc" secondAttribute="leadingMargin" id="Bsc-Ys-qgi"/>
+                            <constraint firstItem="Uz4-25-DYe" firstAttribute="top" secondItem="qrD-SH-TMc" secondAttribute="centerY" id="GJ1-TY-Bjw"/>
+                            <constraint firstItem="D49-WB-wgh" firstAttribute="top" secondItem="kvk-cD-sKR" secondAttribute="bottom" constant="32" id="GXU-ho-5NI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Uz4-25-DYe" secondAttribute="trailing" id="NA3-9d-ILZ"/>
+                            <constraint firstItem="kvk-cD-sKR" firstAttribute="leading" secondItem="qrD-SH-TMc" secondAttribute="leadingMargin" id="Uqk-3m-uMA"/>
+                            <constraint firstItem="D49-WB-wgh" firstAttribute="centerX" secondItem="qrD-SH-TMc" secondAttribute="centerX" id="dOy-mS-cSq"/>
+                            <constraint firstItem="kvk-cD-sKR" firstAttribute="top" secondItem="Uz4-25-DYe" secondAttribute="bottom" constant="16" id="l3t-cD-3Df"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kvk-cD-sKR" secondAttribute="trailing" id="wHe-L3-LDl"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="0.0" left="64" bottom="64" right="64"/>
                         <viewLayoutGuide key="safeArea" id="Smz-Pb-UpH"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Sending funds" id="TmU-od-eb7"/>
+                    <navigationItem key="navigationItem" title="Asset Management" id="TmU-od-eb7"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <segue destination="GPu-tg-yg6" kind="show" identifier="Success" customClass="ReplaceSegue" customModule="BankexWallet" customModuleProvider="target" id="dR9-ot-Jpy"/>
@@ -29,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFI-Cl-U2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-322" y="108"/>
+            <point key="canvasLocation" x="-198" y="98"/>
         </scene>
         <!--AssetManagementEthSuccess-->
         <scene sceneID="KUv-6v-5bF">
