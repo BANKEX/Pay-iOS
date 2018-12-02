@@ -15,7 +15,7 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var walletNameLabel: UILabel!
     @IBOutlet private var walletAddressLabel: UILabel!
     @IBOutlet private var walletBalanceLabel: UILabel!
-    @IBOutlet private var infoLabel: UILabel!
+    @IBOutlet private var sourceAddressLabel: UILabel!
     @IBOutlet private var destinationAddressLabel: UILabel!
     @IBOutlet private var amountTextField: UITextField!
     @IBOutlet private var feeLabel: UILabel!
@@ -156,8 +156,7 @@ private extension AssetManagementEthViewController {
         walletAddressLabel.text = wallet.address.formattedAddrToken()
         walletBalanceLabel.text = formatted(value: walletBalance)
         
-        infoLabel.text = LocalizedStrings.info
-        
+        sourceAddressLabel.text = walletAddressLabel.text
         destinationAddressLabel.text = destination.address.formattedAddrToken()
         
         feeLabel.text = formatted(value: fee)
@@ -165,14 +164,6 @@ private extension AssetManagementEthViewController {
         
         sendButton.isEnabled = agreementSwitch.isOn && riskFactorSwitch.isOn && (amount ?? 0) > 0
         sendButton.backgroundColor = sendButton.isEnabled ? UIColor.mainColor : UIColor.lightBlue
-    }
-    
-}
-
-private extension AssetManagementEthViewController {
-    
-    struct LocalizedStrings {
-        static let info = NSLocalizedString("Info", tableName: "AssetManagementEthViewController", comment: "")
     }
     
 }
