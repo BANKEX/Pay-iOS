@@ -17,4 +17,12 @@ class AssetManagementEthSuccessViewController: UIViewController {
         performSegue(withIdentifier: "Home", sender: self)
     }
     
+    @IBAction func openTransaction() {
+        guard let trHash = trResult?.hash else { return }
+        
+        let pageURL = URL(string: "https://etherscan.io/tx/\(trHash)")!
+        
+        UIApplication.shared.openURL(pageURL)
+    }
+    
 }
