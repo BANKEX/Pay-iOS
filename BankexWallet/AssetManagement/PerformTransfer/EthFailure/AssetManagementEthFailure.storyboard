@@ -18,25 +18,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5y-pY-D5q">
-                                <rect key="frame" x="16" y="593" width="343" height="44"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5y-pY-D5q" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="76" y="571" width="223" height="48"/>
+                                <color key="backgroundColor" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="P75-rp-4EI"/>
+                                    <constraint firstAttribute="height" constant="48" id="P75-rp-4EI"/>
                                 </constraints>
-                                <state key="normal" title="Finish"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Finish">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="finish" destination="ONO-ZV-X2q" eventType="touchUpInside" id="fGG-2p-ORq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Oops" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hw-4D-lje">
+                                <rect key="frame" x="68" y="333.5" width="239" height="26.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPg-V1-QpB">
+                                <rect key="frame" x="68" y="376" width="239" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="4Hw-4D-lje" firstAttribute="leading" secondItem="6cD-xU-jLK" secondAttribute="leadingMargin" id="6Kr-cG-93Q"/>
                             <constraint firstAttribute="bottomMargin" secondItem="J5y-pY-D5q" secondAttribute="bottom" id="923-VR-Q2X"/>
-                            <constraint firstItem="J5y-pY-D5q" firstAttribute="leading" secondItem="6cD-xU-jLK" secondAttribute="leadingMargin" id="QP3-Cd-9xy"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="J5y-pY-D5q" secondAttribute="trailing" id="fQ3-YS-mgk"/>
+                            <constraint firstItem="4Hw-4D-lje" firstAttribute="top" secondItem="6cD-xU-jLK" secondAttribute="centerY" id="HHr-Cd-hSp"/>
+                            <constraint firstItem="J5y-pY-D5q" firstAttribute="leading" secondItem="6cD-xU-jLK" secondAttribute="leadingMargin" constant="8" id="QP3-Cd-9xy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IPg-V1-QpB" secondAttribute="trailing" id="WlE-S9-3qg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="J5y-pY-D5q" secondAttribute="trailing" constant="8" id="fQ3-YS-mgk"/>
+                            <constraint firstItem="IPg-V1-QpB" firstAttribute="leading" secondItem="6cD-xU-jLK" secondAttribute="leadingMargin" id="skH-bI-Hwt"/>
+                            <constraint firstItem="IPg-V1-QpB" firstAttribute="top" secondItem="4Hw-4D-lje" secondAttribute="bottom" constant="16" id="wkc-kv-Tv3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4Hw-4D-lje" secondAttribute="trailing" id="y1b-Ix-Lzj"/>
                         </constraints>
-                        <edgeInsets key="layoutMargins" top="30" left="15" bottom="30" right="15"/>
+                        <edgeInsets key="layoutMargins" top="60" left="68" bottom="48" right="68"/>
                         <viewLayoutGuide key="safeArea" id="JZm-m3-l0c"/>
                     </view>
                     <navigationItem key="navigationItem" title="Send" id="nlF-Zs-taG"/>
