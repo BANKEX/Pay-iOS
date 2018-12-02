@@ -148,28 +148,40 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8k-21-1t6" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cm3-YG-x3p">
                                                         <rect key="frame" x="0.0" y="266.5" width="343" height="44"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8k-21-1t6" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="59" y="0.0" width="225" height="44"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="44" id="7Y1-V5-9WG"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                <state key="normal" title="Copy Address">
+                                                                    <color key="titleColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="copyDestinationAddress" destination="6WP-Iz-Bwn" eventType="touchUpInside" id="xGm-ta-F6d"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="44" id="7Y1-V5-9WG"/>
+                                                            <constraint firstAttribute="bottom" secondItem="k8k-21-1t6" secondAttribute="bottom" id="1gf-xH-u3A"/>
+                                                            <constraint firstItem="k8k-21-1t6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cm3-YG-x3p" secondAttribute="leading" id="Ssj-Q5-UIj"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="k8k-21-1t6" secondAttribute="trailing" id="TTv-hV-qLx"/>
+                                                            <constraint firstItem="k8k-21-1t6" firstAttribute="top" secondItem="cm3-YG-x3p" secondAttribute="top" id="lY8-pD-eyy"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                        <state key="normal" title="Copy Address">
-                                                            <color key="titleColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="2"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="copyDestinationAddress" destination="6WP-Iz-Bwn" eventType="touchUpInside" id="xGm-ta-F6d"/>
-                                                        </connections>
-                                                    </button>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -187,9 +199,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="k8k-21-1t6" firstAttribute="width" secondItem="Van-9V-31Y" secondAttribute="width" multiplier="0.6" id="DqY-xj-Gca"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="trailing" secondItem="9Oq-xn-WG3" secondAttribute="trailing" id="Ed8-av-DrJ"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="bottom" secondItem="9Oq-xn-WG3" secondAttribute="bottom" id="Gzh-hI-5aU"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="leading" secondItem="9Oq-xn-WG3" secondAttribute="leading" id="Q1T-fr-ahM"/>
+                            <constraint firstItem="k8k-21-1t6" firstAttribute="centerX" secondItem="Van-9V-31Y" secondAttribute="centerX" id="WHy-ox-jY9"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="top" secondItem="9Oq-xn-WG3" secondAttribute="top" id="WeC-pS-UcV"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="24" left="16" bottom="24" right="16"/>
