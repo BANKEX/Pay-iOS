@@ -162,8 +162,10 @@ private extension AssetManagementEthViewController {
         feeLabel.text = formatted(value: fee)
         totalLabel.text = formatted(value: total)
         
-        sendButton.isEnabled = agreementSwitch.isOn && riskFactorSwitch.isOn && (amount ?? 0) > 0
-        sendButton.backgroundColor = sendButton.isEnabled ? UIColor.mainColor : UIColor.lightBlue
+        let allowTransfer = agreementSwitch.isOn && riskFactorSwitch.isOn && (amount ?? 0) > 0
+        
+        sendButton.isEnabled = allowTransfer
+        sendButton.alpha = allowTransfer ? 1.0 : 0.3
     }
     
 }

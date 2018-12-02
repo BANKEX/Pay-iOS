@@ -57,10 +57,13 @@ class AssetManagementBtcViewController: UIViewController {
 private extension AssetManagementBtcViewController {
     
     func updateView() {
-        destinationAddressLabel.text = destination
+        let allowTransfer = agreementSwitch.isOn && riskFactorSwitch.isOn
         
-        destinationContainerView.isHidden = agreementSwitch.isOn == false || riskFactorSwitch.isOn == false
-        copyButton.isHidden = destinationContainerView.isHidden
+        destinationAddressLabel.text = allowTransfer ? destination : "—"
+        copyButton.isEnabled = allowTransfer
+        
+        destinationAddressLabel.alpha = allowTransfer ? 1.0 : 0.3
+        copyButton.alpha = allowTransfer ? 1.0 : 0.3
     }
     
 }
