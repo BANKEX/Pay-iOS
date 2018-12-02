@@ -432,3 +432,22 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+extension HomeViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if
+            let navigationController = segue.destination as? UINavigationController,
+            ["AssetManagementContacts", "AssetManagementEth", "AssetManagementBtc"].contains(segue.identifier ?? "")
+        {
+            UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
+            UIApplication.shared.statusBarStyle = .lightContent
+            
+            navigationController.navigationBar.barTintColor = UIColor.mainColor
+            navigationController.navigationBar.tintColor = UIColor.white
+            navigationController.navigationBar.isTranslucent = false
+            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        }
+    }
+    
+}
+
