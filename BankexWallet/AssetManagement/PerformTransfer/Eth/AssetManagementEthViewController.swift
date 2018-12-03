@@ -27,6 +27,7 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var agreementSwitch: UISwitch!
     @IBOutlet private var riskFactorSwitch: UISwitch!
     @IBOutlet private var sendButton: ActionButton!
+    @IBOutlet private var scrollView:UIScrollView!
     
     private let keyService = SingleKeyServiceImplementation()
     private let utilsService = UtilTransactionsServiceImplementation()
@@ -38,6 +39,12 @@ class AssetManagementEthViewController: UIViewController {
     private var amount: BigUInt?
     private var fee: BigUInt?
     private var total: BigUInt?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -84,6 +91,18 @@ class AssetManagementEthViewController: UIViewController {
     
     @IBAction private func finish() {
         performSegue(withIdentifier: "Home", sender: self)
+    }
+    
+    @objc func keyboardWillShow(notification:NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        scrollView.contentInset.bottom = keyboardFrame.size.height + 10
+        scrollView.scrollIndicatorInsets.bottom = keyboardFrame.size.height + 10
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification){
+        scrollView.contentInset.bottom = 0
+        scrollView.scrollIndicatorInsets.bottom = 0
     }
     
 }
