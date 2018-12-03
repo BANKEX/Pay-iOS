@@ -12,6 +12,10 @@ class AssetManagementBtcViewController: UIViewController {
     
     @IBOutlet private var destinationContainerView: UIView!
     @IBOutlet private var destinationAddressLabel: UILabel!
+    @IBOutlet private var sectionSegmentedControl: UISegmentedControl!
+    @IBOutlet private var sendContainerView: UIView!
+    @IBOutlet private var contactsContainerView: UIView!
+    @IBOutlet private var infoContainerView: UIView!
     @IBOutlet private var agreementSwitch: UISwitch!
     @IBOutlet private var riskFactorSwitch: UISwitch!
     @IBOutlet private var copyButton: UIButton!
@@ -23,7 +27,11 @@ class AssetManagementBtcViewController: UIViewController {
         
         updateView()
     }
-
+    
+    @IBAction private func sectionChanged() {
+        updateView()
+    }
+    
     @IBAction private func agreementChecked() {
         updateView()
     }
@@ -64,6 +72,10 @@ private extension AssetManagementBtcViewController {
         
         destinationAddressLabel.alpha = allowTransfer ? 1.0 : 0.3
         copyButton.alpha = allowTransfer ? 1.0 : 0.3
+        
+        sendContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 0
+        contactsContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 1
+        infoContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 2
     }
     
 }
