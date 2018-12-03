@@ -23,6 +23,7 @@ class AssetManagementBtcViewController: UIViewController {
     private let destination = "367aqxeq6SqVzaX5qza2HwvfxTJeruLoka"
     private var agreementChecked = false
     private var riskFactorChecked = false
+    private var linkToOpen: URL!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -47,15 +48,13 @@ class AssetManagementBtcViewController: UIViewController {
     }
     
     @IBAction private func openAgreement() {
-        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
-        
-        UIApplication.shared.openURL(pageURL)
+        linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
+        performSegue(withIdentifier: "Browser", sender: self)
     }
     
     @IBAction private func openRiskFactor() {
-        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
-        
-        UIApplication.shared.openURL(pageURL)
+        linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
+        performSegue(withIdentifier: "Browser", sender: self)
     }
         
     @IBAction func copyDestinationAddress() {
@@ -67,6 +66,17 @@ class AssetManagementBtcViewController: UIViewController {
     }
     
 }
+
+extension AssetManagementBtcViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let browser = segue.destination as? AssetManagementBrowserViewController {
+            browser.link = linkToOpen
+        }
+    }
+    
+}
+
 
 private extension AssetManagementBtcViewController {
     
