@@ -12,6 +12,19 @@ import web3swift
 
 class AssetManagementEthViewController: UIViewController {
     
+    enum Link {
+        case agreement, riskFactor
+        
+        var url: URL {
+            switch self {
+            case .agreement:
+                return URL(string: "https://bankex.com/en/sto/asset-management")!
+            case .riskFactor:
+                return URL(string: "https://bankex.com/en/sto/asset-management")!
+           }
+        }
+    }
+    
     enum ValidationError {
         case invalidAmount, amountExceedsMin, amountExceedsMax, totalExceedsAvailable
     }
@@ -49,6 +62,7 @@ class AssetManagementEthViewController: UIViewController {
     private var fee: BigUInt?
     private var total: BigUInt?
     private var validationError: ValidationError?
+    private var linkToOpen: Link = .agreement
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,15 +100,13 @@ class AssetManagementEthViewController: UIViewController {
     }
     
     @IBAction private func openAgreement() {
-        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
-        
-        UIApplication.shared.openURL(pageURL)
+        linkToOpen = .agreement
+        performSegue(withIdentifier: "Browser", sender: self)
     }
     
     @IBAction private func openRiskFactor() {
-        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
-        
-        UIApplication.shared.openURL(pageURL)
+        linkToOpen = .riskFactor
+        performSegue(withIdentifier: "Browser", sender: self)
     }
     
     @IBAction private func endEditing() {
@@ -135,6 +147,8 @@ extension AssetManagementEthViewController {
         if let viewController = segue.destination as? AssetManagementEthProgressViewController {
             viewController.amount = amountTextField.text
             viewController.toAddress = destination.address
+        } else if let browser = segue.destination as? AssetManagementBrowserViewController {
+            browser.link = linkToOpen.url
         }
     }
     
