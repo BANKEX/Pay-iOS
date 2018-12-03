@@ -18,8 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please contact us for further instructions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keC-Sd-tUP">
+                                <rect key="frame" x="16" y="88" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="9TI-Pp-Bm1">
-                                <rect key="frame" x="0.0" y="64" width="375" height="100"/>
+                                <rect key="frame" x="16" y="132.5" width="343" height="100"/>
                                 <connections>
                                     <segue destination="jfs-bg-OHy" kind="embed" id="Oje-tp-TMe"/>
                                 </connections>
@@ -27,10 +33,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9TI-Pp-Bm1" firstAttribute="top" secondItem="2JZ-3h-4t1" secondAttribute="top" id="bgP-Ts-gZl"/>
-                            <constraint firstItem="2JZ-3h-4t1" firstAttribute="trailing" secondItem="9TI-Pp-Bm1" secondAttribute="trailing" id="iws-N8-xI1"/>
-                            <constraint firstItem="9TI-Pp-Bm1" firstAttribute="leading" secondItem="2JZ-3h-4t1" secondAttribute="leading" id="uC5-sJ-yFS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="keC-Sd-tUP" secondAttribute="trailing" id="4wf-Pf-6Mx"/>
+                            <constraint firstItem="9TI-Pp-Bm1" firstAttribute="top" secondItem="keC-Sd-tUP" secondAttribute="bottom" constant="24" id="HXf-hj-nBG"/>
+                            <constraint firstItem="keC-Sd-tUP" firstAttribute="leading" secondItem="NZR-RC-BDu" secondAttribute="leadingMargin" id="c00-pz-Yy2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9TI-Pp-Bm1" secondAttribute="trailing" id="iws-N8-xI1"/>
+                            <constraint firstItem="9TI-Pp-Bm1" firstAttribute="leading" secondItem="NZR-RC-BDu" secondAttribute="leadingMargin" id="uC5-sJ-yFS"/>
+                            <constraint firstItem="keC-Sd-tUP" firstAttribute="top" secondItem="NZR-RC-BDu" secondAttribute="topMargin" id="yty-BR-nzX"/>
                         </constraints>
+                        <edgeInsets key="layoutMargins" top="24" left="16" bottom="24" right="16"/>
                         <viewLayoutGuide key="safeArea" id="2JZ-3h-4t1"/>
                     </view>
                     <toolbarItems/>

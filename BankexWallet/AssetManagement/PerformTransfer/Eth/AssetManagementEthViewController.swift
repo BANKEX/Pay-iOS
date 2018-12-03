@@ -15,8 +15,12 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var walletNameLabel: UILabel!
     @IBOutlet private var walletAddressLabel: UILabel!
     @IBOutlet private var walletBalanceLabel: UILabel!
-    @IBOutlet private var infoLabel: UILabel!
+    @IBOutlet private var sourceAddressLabel: UILabel!
     @IBOutlet private var destinationAddressLabel: UILabel!
+    @IBOutlet private var sectionSegmentedControl: UISegmentedControl!
+    @IBOutlet private var sendContainerView: UIView!
+    @IBOutlet private var contactsContainerView: UIView!
+    @IBOutlet private var infoContainerView: UIView!
     @IBOutlet private var amountTextField: UITextField!
     @IBOutlet private var feeLabel: UILabel!
     @IBOutlet private var totalLabel: UILabel!
@@ -40,6 +44,10 @@ class AssetManagementEthViewController: UIViewController {
         updateView()
         updateBalance()
         updateFee()
+    }
+    
+    @IBAction private func sectionChanged() {
+        updateView()
     }
     
     @IBAction private func amountChanged() {
@@ -156,23 +164,20 @@ private extension AssetManagementEthViewController {
         walletAddressLabel.text = wallet.address.formattedAddrToken()
         walletBalanceLabel.text = formatted(value: walletBalance)
         
-        infoLabel.text = LocalizedStrings.info
-        
+        sourceAddressLabel.text = walletAddressLabel.text
         destinationAddressLabel.text = destination.address.formattedAddrToken()
         
         feeLabel.text = formatted(value: fee)
         totalLabel.text = formatted(value: total)
         
-        sendButton.isEnabled = agreementSwitch.isOn && riskFactorSwitch.isOn && (amount ?? 0) > 0
-        sendButton.backgroundColor = sendButton.isEnabled ? UIColor.mainColor : UIColor.lightBlue
-    }
-    
-}
-
-private extension AssetManagementEthViewController {
-    
-    struct LocalizedStrings {
-        static let info = NSLocalizedString("Info", tableName: "AssetManagementEthViewController", comment: "")
+        let allowTransfer = agreementSwitch.isOn && riskFactorSwitch.isOn && (amount ?? 0) > 0
+        
+        sendButton.isEnabled = allowTransfer
+        sendButton.alpha = allowTransfer ? 1.0 : 0.3
+        
+        sendContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 0
+        contactsContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 1
+        infoContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 2
     }
     
 }

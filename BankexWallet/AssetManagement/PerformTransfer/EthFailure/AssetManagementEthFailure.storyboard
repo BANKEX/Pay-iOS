@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5y-pY-D5q" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="76" y="571" width="223" height="48"/>
+                                <rect key="frame" x="75" y="571" width="225" height="48"/>
                                 <color key="backgroundColor" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="P75-rp-4EI"/>
@@ -33,31 +33,40 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Oops" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hw-4D-lje">
-                                <rect key="frame" x="68" y="333.5" width="239" height="26.5"/>
+                                <rect key="frame" x="64" y="333.5" width="247" height="26.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPg-V1-QpB">
-                                <rect key="frame" x="68" y="376" width="239" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPg-V1-QpB">
+                                <rect key="frame" x="64" y="376" width="247" height="41"/>
+                                <string key="text">Funds were not sent due 
+to inccorect data</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementEthFailure/Picture" translatesAutoresizingMaskIntoConstraints="NO" id="2SN-5W-Sif">
+                                <rect key="frame" x="67.5" y="115.5" width="240" height="160"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4Hw-4D-lje" firstAttribute="leading" secondItem="6cD-xU-jLK" secondAttribute="leadingMargin" id="6Kr-cG-93Q"/>
                             <constraint firstAttribute="bottomMargin" secondItem="J5y-pY-D5q" secondAttribute="bottom" id="923-VR-Q2X"/>
+                            <constraint firstItem="J5y-pY-D5q" firstAttribute="width" secondItem="6cD-xU-jLK" secondAttribute="width" multiplier="0.6" id="BZ1-LW-Hql"/>
+                            <constraint firstItem="J5y-pY-D5q" firstAttribute="centerX" secondItem="6cD-xU-jLK" secondAttribute="centerX" id="FcC-Uu-ALc"/>
                             <constraint firstItem="4Hw-4D-lje" firstAttribute="top" secondItem="6cD-xU-jLK" secondAttribute="centerY" id="HHr-Cd-hSp"/>
-                            <constraint firstItem="J5y-pY-D5q" firstAttribute="leading" secondItem="6cD-xU-jLK" secondAttribute="leadingMargin" constant="8" id="QP3-Cd-9xy"/>
+                            <constraint firstItem="J5y-pY-D5q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6cD-xU-jLK" secondAttribute="leadingMargin" id="QP3-Cd-9xy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IPg-V1-QpB" secondAttribute="trailing" id="WlE-S9-3qg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="J5y-pY-D5q" secondAttribute="trailing" constant="8" id="fQ3-YS-mgk"/>
+                            <constraint firstItem="2SN-5W-Sif" firstAttribute="centerX" secondItem="6cD-xU-jLK" secondAttribute="centerX" id="XnN-6r-JgL"/>
+                            <constraint firstItem="4Hw-4D-lje" firstAttribute="top" secondItem="2SN-5W-Sif" secondAttribute="bottom" constant="58" id="awi-Xn-atV"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="J5y-pY-D5q" secondAttribute="trailing" id="fQ3-YS-mgk"/>
                             <constraint firstItem="IPg-V1-QpB" firstAttribute="leading" secondItem="6cD-xU-jLK" secondAttribute="leadingMargin" id="skH-bI-Hwt"/>
                             <constraint firstItem="IPg-V1-QpB" firstAttribute="top" secondItem="4Hw-4D-lje" secondAttribute="bottom" constant="16" id="wkc-kv-Tv3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4Hw-4D-lje" secondAttribute="trailing" id="y1b-Ix-Lzj"/>
                         </constraints>
-                        <edgeInsets key="layoutMargins" top="60" left="68" bottom="48" right="68"/>
+                        <edgeInsets key="layoutMargins" top="24" left="64" bottom="48" right="64"/>
                         <viewLayoutGuide key="safeArea" id="JZm-m3-l0c"/>
                     </view>
                     <navigationItem key="navigationItem" title="Send" id="nlF-Zs-taG"/>
@@ -72,4 +81,7 @@
             <point key="canvasLocation" x="-350" y="13"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AssetManagementEthFailure/Picture" width="240" height="160"/>
+    </resources>
 </document>
