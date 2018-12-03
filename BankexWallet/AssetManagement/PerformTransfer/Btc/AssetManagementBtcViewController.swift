@@ -19,15 +19,13 @@ class AssetManagementBtcViewController: UIViewController {
     @IBOutlet private var agreementButton: UIButton!
     @IBOutlet private var riskFactorButton: UIButton!
     @IBOutlet private var copyButton: UIButton!
-    @IBOutlet private var bottomContraint: NSLayoutConstraint! //TODO: rename whisperBottomContraint
-
+    @IBOutlet private var bottomContraint: NSLayoutConstraint!
     
     private let destination = "367aqxeq6SqVzaX5qza2HwvfxTJeruLoka"
     private var agreementChecked = false
     private var riskFactorChecked = false
     private var linkToOpen: URL!
-    private var isAnimating = false //TODO: rename whisperIsAnimating
-
+    private var isAnimating = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
