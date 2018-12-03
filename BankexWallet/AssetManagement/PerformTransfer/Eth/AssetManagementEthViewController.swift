@@ -12,19 +12,6 @@ import web3swift
 
 class AssetManagementEthViewController: UIViewController {
     
-    enum Link {
-        case agreement, riskFactor
-        
-        var url: URL {
-            switch self {
-            case .agreement:
-                return URL(string: "https://bankex.com/en/sto/asset-management")!
-            case .riskFactor:
-                return URL(string: "https://bankex.com/en/sto/asset-management")!
-           }
-        }
-    }
-    
     enum ValidationError {
         case invalidAmount, amountExceedsMin, amountExceedsMax, totalExceedsAvailable
     }
@@ -62,7 +49,7 @@ class AssetManagementEthViewController: UIViewController {
     private var fee: BigUInt?
     private var total: BigUInt?
     private var validationError: ValidationError?
-    private var linkToOpen: Link = .agreement
+    private var linkToOpen: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,12 +87,12 @@ class AssetManagementEthViewController: UIViewController {
     }
     
     @IBAction private func openAgreement() {
-        linkToOpen = .agreement
+        linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
         performSegue(withIdentifier: "Browser", sender: self)
     }
     
     @IBAction private func openRiskFactor() {
-        linkToOpen = .riskFactor
+        linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
         performSegue(withIdentifier: "Browser", sender: self)
     }
     
@@ -148,7 +135,7 @@ extension AssetManagementEthViewController {
             viewController.amount = amountTextField.text
             viewController.toAddress = destination.address
         } else if let browser = segue.destination as? AssetManagementBrowserViewController {
-            browser.link = linkToOpen.url
+            browser.link = linkToOpen
         }
     }
     
