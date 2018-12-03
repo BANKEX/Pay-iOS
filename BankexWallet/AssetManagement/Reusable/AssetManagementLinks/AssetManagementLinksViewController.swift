@@ -18,13 +18,16 @@ class AssetManagementLinksViewController: UIViewController {
     }
     
     @IBAction func sendEmail() {
-        let mailComposeViewController = MFMailComposeViewController()
-        mailComposeViewController.mailComposeDelegate = self
-        mailComposeViewController.setToRecipients(["support@bankex.com"])
-        mailComposeViewController.setSubject("")
-        mailComposeViewController.setMessageBody("", isHTML: false)
+        let mailComposeViewController: MFMailComposeViewController? = MFMailComposeViewController()
         
-        present(mailComposeViewController, animated: true, completion: nil)
+        guard let viewController = mailComposeViewController else { return }
+        
+        viewController.mailComposeDelegate = self
+        viewController.setToRecipients(["support@bankex.com"])
+        viewController.setSubject("")
+        viewController.setMessageBody("", isHTML: false)
+        
+        present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func openTelegram() {
