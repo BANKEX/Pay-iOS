@@ -47,9 +47,6 @@ extension AssetManagementEthProgressViewController {
         if let viewController = segue.destination as? AssetManagementEthSuccessViewController {
             viewController.trResult = transactionResult
         }
-        if let viewController = segue.destination as? AssetManagementEthFailureViewController {
-            
-        }
     }
     
 }
