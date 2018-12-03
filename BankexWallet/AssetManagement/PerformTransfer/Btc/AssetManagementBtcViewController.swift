@@ -74,9 +74,7 @@ extension AssetManagementBtcViewController {
             browser.link = linkToOpen
         }
     }
-    
 }
-
 
 private extension AssetManagementBtcViewController {
     
