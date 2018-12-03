@@ -29,6 +29,12 @@ class AssetManagementBtcViewController: UIViewController {
     private var isAnimating = false //TODO: rename whisperIsAnimating
 
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        bottomContraint.constant = 100.0
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
