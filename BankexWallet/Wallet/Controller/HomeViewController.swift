@@ -204,9 +204,7 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func openAssetManagementPage() {
-        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
-        
-        UIApplication.shared.openURL(pageURL)
+        performSegue(withIdentifier: "AssetManagementPage", sender: self)
     }
     
     @IBAction func showAssetManagementContacts() {
@@ -437,7 +435,7 @@ extension HomeViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if
             let navigationController = segue.destination as? UINavigationController,
-            ["AssetManagementContacts", "AssetManagementEth", "AssetManagementBtc"].contains(segue.identifier ?? "")
+            ["AssetManagementContacts", "AssetManagementEth", "AssetManagementBtc", "AssetManagementPage"].contains(segue.identifier ?? "")
         {
             UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
             UIApplication.shared.statusBarStyle = .lightContent
@@ -446,6 +444,15 @@ extension HomeViewController {
             navigationController.navigationBar.tintColor = UIColor.white
             navigationController.navigationBar.isTranslucent = false
             navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        }
+        
+        if
+            segue.identifier == "AssetManagementPage",
+            let navigationController = segue.destination as? UINavigationController,
+            let viewController = navigationController.viewControllers.first as? AssetManagementBrowserViewController
+        {
+            viewController.link = URL(string: "https://bankex.com/en/sto/asset-management")!
+            viewController.showDismissButton = true
         }
     }
     

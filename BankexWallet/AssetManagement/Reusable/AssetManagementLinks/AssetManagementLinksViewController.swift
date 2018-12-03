@@ -37,11 +37,17 @@ class AssetManagementLinksViewController: UIViewController {
     }
     
     @IBAction func openPage() {
-        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
-        
-        UIApplication.shared.openURL(pageURL)
+        performSegue(withIdentifier: "Browser", sender: self)
     }
+}
+
+extension AssetManagementLinksViewController {
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let browser = segue.destination as? AssetManagementBrowserViewController {
+            browser.link = URL(string: "https://bankex.com/en/sto/asset-management")!
+        }
+    }
 }
 
 extension AssetManagementLinksViewController: MFMailComposeViewControllerDelegate {

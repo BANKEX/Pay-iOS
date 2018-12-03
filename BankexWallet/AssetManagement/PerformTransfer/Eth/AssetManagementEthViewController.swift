@@ -49,6 +49,7 @@ class AssetManagementEthViewController: UIViewController {
     private var fee: BigUInt?
     private var total: BigUInt?
     private var validationError: ValidationError?
+    private var linkToOpen: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,15 +87,13 @@ class AssetManagementEthViewController: UIViewController {
     }
     
     @IBAction private func openAgreement() {
-        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
-        
-        UIApplication.shared.openURL(pageURL)
+        linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
+        performSegue(withIdentifier: "Browser", sender: self)
     }
     
     @IBAction private func openRiskFactor() {
-        let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
-        
-        UIApplication.shared.openURL(pageURL)
+        linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
+        performSegue(withIdentifier: "Browser", sender: self)
     }
     
     @IBAction private func endEditing() {
@@ -135,6 +134,8 @@ extension AssetManagementEthViewController {
         if let viewController = segue.destination as? AssetManagementEthProgressViewController {
             viewController.amount = amountTextField.text
             viewController.toAddress = destination.address
+        } else if let browser = segue.destination as? AssetManagementBrowserViewController {
+            browser.link = linkToOpen
         }
     }
     
