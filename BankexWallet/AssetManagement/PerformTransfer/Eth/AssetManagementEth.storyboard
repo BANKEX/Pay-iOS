@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRO-eB-vH1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bHq-c5-5d9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                 <subviews>
@@ -357,10 +361,14 @@
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="hPx-AU-3dZ" firstAttribute="top" secondItem="fRO-eB-vH1" secondAttribute="bottom" id="5ws-PY-abp"/>
                             <constraint firstAttribute="trailing" secondItem="bHq-c5-5d9" secondAttribute="trailing" id="AUs-ia-y8w"/>
                             <constraint firstItem="ybS-Pj-AmP" firstAttribute="width" secondItem="MNK-ov-qe4" secondAttribute="width" multiplier="0.6" id="HSy-Ju-9aK"/>
                             <constraint firstItem="bHq-c5-5d9" firstAttribute="leading" secondItem="MNK-ov-qe4" secondAttribute="leading" id="KCN-74-LFq"/>
+                            <constraint firstAttribute="trailing" secondItem="fRO-eB-vH1" secondAttribute="trailing" id="RRf-6d-T8N"/>
                             <constraint firstItem="bHq-c5-5d9" firstAttribute="top" secondItem="MNK-ov-qe4" secondAttribute="top" id="VXy-2P-PVs"/>
+                            <constraint firstItem="fRO-eB-vH1" firstAttribute="leading" secondItem="MNK-ov-qe4" secondAttribute="leading" id="gFD-rd-qIL"/>
+                            <constraint firstItem="fRO-eB-vH1" firstAttribute="top" secondItem="MNK-ov-qe4" secondAttribute="top" priority="240" id="gdM-6T-2av"/>
                             <constraint firstAttribute="bottom" secondItem="bHq-c5-5d9" secondAttribute="bottom" id="qTN-5f-bS4"/>
                             <constraint firstItem="ybS-Pj-AmP" firstAttribute="centerX" secondItem="MNK-ov-qe4" secondAttribute="centerX" id="wmW-Mb-BUb"/>
                             <constraint firstItem="hPx-AU-3dZ" firstAttribute="height" secondItem="MNK-ov-qe4" secondAttribute="height" multiplier="1:3" id="xxC-s1-oIL"/>
