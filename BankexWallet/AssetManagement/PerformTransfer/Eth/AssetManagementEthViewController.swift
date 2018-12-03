@@ -95,9 +95,15 @@ class AssetManagementEthViewController: UIViewController {
     
     @objc func keyboardWillShow(notification:NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-        guard let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        scrollView.contentInset.bottom = keyboardFrame.size.height + 10
-        scrollView.scrollIndicatorInsets.bottom = keyboardFrame.size.height + 10
+        guard let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        var bottomPadding:CGFloat
+        if #available(iOS 11.0, *) {
+            bottomPadding = keyboardFrame.size.height - view.safeAreaInsets.bottom
+        }else {
+            bottomPadding = keyboardFrame.size.height
+        }
+        scrollView.contentInset.bottom = bottomPadding + 10
+        scrollView.scrollIndicatorInsets.bottom = bottomPadding + 10
     }
     
     @objc func keyboardWillHide(notification:NSNotification){
