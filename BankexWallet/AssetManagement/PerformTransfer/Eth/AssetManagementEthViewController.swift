@@ -17,6 +17,10 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var walletBalanceLabel: UILabel!
     @IBOutlet private var sourceAddressLabel: UILabel!
     @IBOutlet private var destinationAddressLabel: UILabel!
+    @IBOutlet private var sectionSegmentedControl: UISegmentedControl!
+    @IBOutlet private var sendContainerView: UIView!
+    @IBOutlet private var contactsContainerView: UIView!
+    @IBOutlet private var infoContainerView: UIView!
     @IBOutlet private var amountTextField: UITextField!
     @IBOutlet private var feeLabel: UILabel!
     @IBOutlet private var totalLabel: UILabel!
@@ -40,6 +44,10 @@ class AssetManagementEthViewController: UIViewController {
         updateView()
         updateBalance()
         updateFee()
+    }
+    
+    @IBAction private func sectionChanged() {
+        updateView()
     }
     
     @IBAction private func amountChanged() {
@@ -166,6 +174,10 @@ private extension AssetManagementEthViewController {
         
         sendButton.isEnabled = allowTransfer
         sendButton.alpha = allowTransfer ? 1.0 : 0.3
+        
+        sendContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 0
+        contactsContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 1
+        infoContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 2
     }
     
 }

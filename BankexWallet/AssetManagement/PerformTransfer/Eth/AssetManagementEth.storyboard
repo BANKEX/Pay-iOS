@@ -58,10 +58,22 @@
                                         <edgeInsets key="layoutMargins" top="24" left="16" bottom="24" right="16"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="XSD-sS-9Ih">
-                                        <rect key="frame" x="0.0" y="282.5" width="375" height="835.5"/>
+                                        <rect key="frame" x="0.0" y="282.5" width="375" height="1116"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hnz-FO-IPQ" userLabel="Info Content">
-                                                <rect key="frame" x="16" y="0.0" width="343" height="124"/>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wGg-d6-TuT">
+                                                <rect key="frame" x="16" y="0.0" width="343" height="29"/>
+                                                <segments>
+                                                    <segment title="Send ETH"/>
+                                                    <segment title="Contacts"/>
+                                                    <segment title="Info"/>
+                                                </segments>
+                                                <color key="tintColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="sectionChanged" destination="i03-uI-bdd" eventType="valueChanged" id="xxX-lj-1ku"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hnz-FO-IPQ">
+                                                <rect key="frame" x="16" y="68" width="343" height="124"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="20" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSU-Ts-bOP">
                                                         <rect key="frame" x="16" y="0.0" width="311" height="20"/>
@@ -102,8 +114,8 @@
                                                 </constraints>
                                                 <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="wHn-wP-1hy" userLabel="Send ETH Content">
-                                                <rect key="frame" x="16" y="164" width="343" height="623.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="wHn-wP-1hy">
+                                                <rect key="frame" x="16" y="232" width="343" height="623.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Information" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOg-lm-eT9">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
@@ -309,6 +321,23 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="D5w-4B-dzC">
+                                                <rect key="frame" x="16" y="895.5" width="343" height="172.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please contact us for further instructions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXC-s4-nhk">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                        <color key="textColor" red="0.18039215689999999" green="0.21176470589999999" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="bH5-EW-0Ja">
+                                                        <rect key="frame" x="0.0" y="44.5" width="343" height="128"/>
+                                                        <connections>
+                                                            <segue destination="MTs-tS-HkD" kind="embed" id="tvw-05-hvp"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                     </stackView>
@@ -355,10 +384,14 @@
                     <connections>
                         <outlet property="agreementSwitch" destination="5Vx-5y-EW3" id="d5D-79-dIw"/>
                         <outlet property="amountTextField" destination="aFh-zh-bdS" id="CME-sJ-rXQ"/>
+                        <outlet property="contactsContainerView" destination="D5w-4B-dzC" id="Vq8-Zu-OOz"/>
                         <outlet property="destinationAddressLabel" destination="rKk-zV-BQW" id="peA-Sg-4wR"/>
                         <outlet property="feeLabel" destination="Pl7-xu-AfX" id="a79-mx-YsG"/>
+                        <outlet property="infoContainerView" destination="Hnz-FO-IPQ" id="IJA-RG-NaF"/>
                         <outlet property="riskFactorSwitch" destination="HHg-HG-veI" id="IOf-u6-JPK"/>
+                        <outlet property="sectionSegmentedControl" destination="wGg-d6-TuT" id="RQr-eS-b6s"/>
                         <outlet property="sendButton" destination="ybS-Pj-AmP" id="T0q-Ys-TIA"/>
+                        <outlet property="sendContainerView" destination="wHn-wP-1hy" id="Bpq-Hg-l7y"/>
                         <outlet property="sourceAddressLabel" destination="tq3-i8-5W0" id="cWu-Bp-dvg"/>
                         <outlet property="totalLabel" destination="AkE-Zq-0VS" id="dJ3-tS-qIT"/>
                         <outlet property="walletAddressLabel" destination="BLE-5a-55S" id="HYF-RL-7Bt"/>
@@ -385,6 +418,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8rX-lZ-WfV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1009" y="-25"/>
+        </scene>
+        <!--AssetManagementLinks-->
+        <scene sceneID="aWS-DX-0pA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AssetManagementLinks" id="MTs-tS-HkD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0zY-bS-9C2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="617" y="145"/>
         </scene>
     </scenes>
 </document>
