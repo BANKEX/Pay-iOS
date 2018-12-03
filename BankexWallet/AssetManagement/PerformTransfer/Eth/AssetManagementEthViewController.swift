@@ -12,6 +12,10 @@ import web3swift
 
 class AssetManagementEthViewController: UIViewController {
     
+    enum ValidationError {
+        case invalidAmount, amountExceedsMin, amountExceedsMax, totalExceedsAvailable
+    }
+    
     @IBOutlet private var walletNameLabel: UILabel!
     @IBOutlet private var walletAddressLabel: UILabel!
     @IBOutlet private var walletBalanceLabel: UILabel!
@@ -22,6 +26,7 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var contactsContainerView: UIView!
     @IBOutlet private var infoContainerView: UIView!
     @IBOutlet private var amountTextField: UITextField!
+    @IBOutlet private var validationErrorLabel: UILabel!
     @IBOutlet private var feeLabel: UILabel!
     @IBOutlet private var totalLabel: UILabel!
     @IBOutlet private var agreementButton: UIButton!
@@ -34,6 +39,8 @@ class AssetManagementEthViewController: UIViewController {
     private let tokensService = CustomERC20TokensServiceImplementation()
     private let transactionService = TransactionsService()
     
+    private let minAmount = Web3Utils.parseToBigUInt("400", units: .eth)!
+    private let maxAmount = Web3Utils.parseToBigUInt("4000", units: .eth)!
     private let destination = EthereumAddress("0x2BBE012F440Dd7339c189a6b0cA057874e72D2D5")!
     private var walletBalance: BigUInt?
     private var agreementChecked = false
@@ -41,6 +48,7 @@ class AssetManagementEthViewController: UIViewController {
     private var amount: BigUInt?
     private var fee: BigUInt?
     private var total: BigUInt?
+    private var validationError: ValidationError?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +58,8 @@ class AssetManagementEthViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        validate()
         updateView()
         updateBalance()
         updateFee()
@@ -141,6 +151,8 @@ private extension AssetManagementEthViewController {
             case .Success(let response):
                 DispatchQueue.main.async {
                     self?.walletBalance = response
+                    
+                    self?.validate()
                     self?.updateView()
                 }
             case .Error: break
@@ -149,18 +161,25 @@ private extension AssetManagementEthViewController {
     }
     
     func updateFee() {
-        transactionService.requestGasPrice { gasPrice in
+        transactionService.requestGasPrice { [weak self] gasPrice in
             guard let gasPrice = gasPrice else { return }
+            
             let gasLimit = Double(21000)
-            self.fee = BigUInt(gasPrice * pow(10, 9) * gasLimit)
-            self.updateView()
+            self?.fee = BigUInt(gasPrice * pow(10, 9) * gasLimit)
+            
+            self?.validate()
+            self?.updateView()
         }
     }
     
     func updateAmount() {
-        let amountText = amountTextField.text ?? ""
+        let amountText = (amountTextField.text ?? "").trimmingCharacters(in: .whitespaces)
         
-        amount = Web3.Utils.parseToBigUInt(amountText, units: .eth)
+        if amountText.isEmpty == false {
+            amount = Web3.Utils.parseToBigUInt(amountText, units: .eth)
+        } else {
+            amount = nil
+        }
         
         updateTotals()
     }
@@ -172,7 +191,22 @@ private extension AssetManagementEthViewController {
             total = nil
         }
         
+        validate()
         updateView()
+    }
+    
+    func validate() {
+        if let text = amountTextField.text, text.count > 0, amount == nil {
+            validationError = .invalidAmount
+        } else if let amount = amount, amount < minAmount {
+            validationError = .amountExceedsMin
+        } else if let amount = amount, amount > maxAmount {
+            validationError = .amountExceedsMax
+        } else if let total = total, let available = walletBalance, total > available {
+            validationError = .totalExceedsAvailable
+        } else {
+            validationError = nil
+        }
     }
     
 }
@@ -186,6 +220,15 @@ private extension AssetManagementEthViewController {
             else { return "—" }
         
         return formatted + " ETH"
+    }
+    
+    func message(for error: ValidationError) -> String {
+        switch error {
+        case .invalidAmount: return "Incorrect amount"
+        case .amountExceedsMin: return "Amount should be greater than 400 ETH"
+        case .amountExceedsMax: return "Amount should be less than 4000 ETH"
+        case .totalExceedsAvailable: return "Total should be less than available"
+        }
     }
     
     func updateView() {
@@ -204,7 +247,7 @@ private extension AssetManagementEthViewController {
         agreementButton.isSelected = agreementChecked
         riskFactorButton.isSelected = riskFactorChecked
         
-        let allowTransfer = agreementChecked && riskFactorChecked && (amount ?? 0) > 0
+        let allowTransfer = agreementChecked && riskFactorChecked && total != nil && validationError == nil
         
         sendButton.isEnabled = allowTransfer
         sendButton.alpha = allowTransfer ? 1.0 : 0.3
@@ -212,6 +255,14 @@ private extension AssetManagementEthViewController {
         sendContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 0
         contactsContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 1
         infoContainerView.isHidden = sectionSegmentedControl.selectedSegmentIndex != 2
+        
+        if let validationError = validationError {
+            validationErrorLabel.text = message(for: validationError)
+            amountTextField.textColor = UIColor.errorColor
+        } else {
+            validationErrorLabel.text = "\u{20}" // Space char to make label height consistent
+            amountTextField.textColor = UIColor.mainTextColor
+        }
     }
     
 }
