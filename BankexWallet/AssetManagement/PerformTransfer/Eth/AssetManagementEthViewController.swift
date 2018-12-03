@@ -24,8 +24,8 @@ class AssetManagementEthViewController: UIViewController {
     @IBOutlet private var amountTextField: UITextField!
     @IBOutlet private var feeLabel: UILabel!
     @IBOutlet private var totalLabel: UILabel!
-    @IBOutlet private var agreementSwitch: UISwitch!
-    @IBOutlet private var riskFactorSwitch: UISwitch!
+    @IBOutlet private var agreementButton: UIButton!
+    @IBOutlet private var riskFactorButton: UIButton!
     @IBOutlet private var sendButton: ActionButton!
     @IBOutlet private var scrollView:UIScrollView!
     
@@ -36,6 +36,8 @@ class AssetManagementEthViewController: UIViewController {
     
     private let destination = EthereumAddress("0x2BBE012F440Dd7339c189a6b0cA057874e72D2D5")!
     private var walletBalance: BigUInt?
+    private var agreementChecked = false
+    private var riskFactorChecked = false
     private var amount: BigUInt?
     private var fee: BigUInt?
     private var total: BigUInt?
@@ -60,15 +62,19 @@ class AssetManagementEthViewController: UIViewController {
     @IBAction private func amountChanged() {
         updateAmount()
     }
-
-    @IBAction private func agreementChecked() {
+    
+    @IBAction private func toggleAgreementChecked() {
+        agreementChecked = agreementChecked == false
+        
         updateView()
     }
     
-    @IBAction private func riskFactorChecked() {
+    @IBAction private func toggleRiskFactorChecked() {
+        riskFactorChecked = riskFactorChecked == false
+        
         updateView()
     }
-
+    
     @IBAction private func openAgreement() {
         let pageURL = URL(string: "https://bankex.com/en/sto/asset-management")!
         
@@ -195,7 +201,10 @@ private extension AssetManagementEthViewController {
         feeLabel.text = formatted(value: fee)
         totalLabel.text = formatted(value: total)
         
-        let allowTransfer = agreementSwitch.isOn && riskFactorSwitch.isOn && (amount ?? 0) > 0
+        agreementButton.isSelected = agreementChecked
+        riskFactorButton.isSelected = riskFactorChecked
+        
+        let allowTransfer = agreementChecked && riskFactorChecked && (amount ?? 0) > 0
         
         sendButton.isEnabled = allowTransfer
         sendButton.alpha = allowTransfer ? 1.0 : 0.3

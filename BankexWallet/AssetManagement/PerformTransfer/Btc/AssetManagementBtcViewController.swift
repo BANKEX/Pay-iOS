@@ -16,11 +16,13 @@ class AssetManagementBtcViewController: UIViewController {
     @IBOutlet private var sendContainerView: UIView!
     @IBOutlet private var contactsContainerView: UIView!
     @IBOutlet private var infoContainerView: UIView!
-    @IBOutlet private var agreementSwitch: UISwitch!
-    @IBOutlet private var riskFactorSwitch: UISwitch!
+    @IBOutlet private var agreementButton: UIButton!
+    @IBOutlet private var riskFactorButton: UIButton!
     @IBOutlet private var copyButton: UIButton!
     
     private let destination = "367aqxeq6SqVzaX5qza2HwvfxTJeruLoka"
+    private var agreementChecked = false
+    private var riskFactorChecked = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,11 +34,15 @@ class AssetManagementBtcViewController: UIViewController {
         updateView()
     }
     
-    @IBAction private func agreementChecked() {
+    @IBAction private func toggleAgreementChecked() {
+        agreementChecked = agreementChecked == false
+        
         updateView()
     }
     
-    @IBAction private func riskFactorChecked() {
+    @IBAction private func toggleRiskFactorChecked() {
+        riskFactorChecked = riskFactorChecked == false
+        
         updateView()
     }
     
@@ -65,7 +71,10 @@ class AssetManagementBtcViewController: UIViewController {
 private extension AssetManagementBtcViewController {
     
     func updateView() {
-        let allowTransfer = agreementSwitch.isOn && riskFactorSwitch.isOn
+        agreementButton.isSelected = agreementChecked
+        riskFactorButton.isSelected = riskFactorChecked
+        
+        let allowTransfer = agreementChecked && riskFactorChecked
         
         destinationAddressLabel.text = allowTransfer ? destination : "—"
         copyButton.isEnabled = allowTransfer
