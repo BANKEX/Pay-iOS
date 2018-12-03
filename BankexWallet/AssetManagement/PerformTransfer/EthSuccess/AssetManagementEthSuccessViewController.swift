@@ -18,11 +18,17 @@ class AssetManagementEthSuccessViewController: UIViewController {
     }
     
     @IBAction func openTransaction() {
-        guard let trHash = trResult?.hash else { return }
-        
-        let pageURL = URL(string: "https://etherscan.io/tx/\(trHash)")!
-        
-        UIApplication.shared.openURL(pageURL)
+        guard let _ = trResult?.hash else { return }
+        performSegue(withIdentifier: "Browser", sender: self)
     }
+}
+
+extension AssetManagementEthSuccessViewController {
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let browser = segue.destination as? AssetManagementBrowserViewController,
+            let trHash = trResult?.hash {
+            browser.link = URL(string: "https://etherscan.io/tx/\(trHash)")!
+        }
+    }
 }
