@@ -13,6 +13,7 @@ class AssetManagementBrowserViewController: UIViewController {
     
     let webView = WKWebView()
     var link: URL?
+    var showDismissButton = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,4 +23,17 @@ class AssetManagementBrowserViewController: UIViewController {
         webView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         view.addSubview(webView)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.leftBarButtonItem = showDismissButton
+            ? UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissBrowser))
+            : nil
+    }
+    
+    @objc func dismissBrowser() {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
