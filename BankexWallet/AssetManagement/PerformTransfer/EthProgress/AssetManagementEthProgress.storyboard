@@ -19,29 +19,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending funds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uz4-25-DYe">
-                                <rect key="frame" x="64" y="284" width="192" height="26.5"/>
+                                <rect key="frame" x="64" y="340" width="192" height="26.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" red="0.13725490196078433" green="0.50980392156862742" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The operation may take several minutes, please wait...." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kvk-cD-sKR">
-                                <rect key="frame" x="64" y="326.5" width="192" height="61"/>
+                                <rect key="frame" x="64" y="382.5" width="192" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="D49-WB-wgh">
-                                <rect key="frame" x="141.5" y="419.5" width="37" height="37"/>
+                                <rect key="frame" x="141.5" y="475.5" width="37" height="37"/>
                                 <color key="color" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementEthProgress/Picture" translatesAutoresizingMaskIntoConstraints="NO" id="89x-tx-v0x">
+                                <rect key="frame" x="40" y="124" width="240" height="160"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Uz4-25-DYe" firstAttribute="top" secondItem="89x-tx-v0x" secondAttribute="bottom" constant="56" id="9Ln-MK-3rh"/>
                             <constraint firstItem="Uz4-25-DYe" firstAttribute="leading" secondItem="qrD-SH-TMc" secondAttribute="leadingMargin" id="Bsc-Ys-qgi"/>
-                            <constraint firstItem="Uz4-25-DYe" firstAttribute="top" secondItem="qrD-SH-TMc" secondAttribute="centerY" id="GJ1-TY-Bjw"/>
                             <constraint firstItem="D49-WB-wgh" firstAttribute="top" secondItem="kvk-cD-sKR" secondAttribute="bottom" constant="32" id="GXU-ho-5NI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Uz4-25-DYe" secondAttribute="trailing" id="NA3-9d-ILZ"/>
                             <constraint firstItem="kvk-cD-sKR" firstAttribute="leading" secondItem="qrD-SH-TMc" secondAttribute="leadingMargin" id="Uqk-3m-uMA"/>
+                            <constraint firstAttribute="centerY" secondItem="89x-tx-v0x" secondAttribute="bottom" id="XyG-hB-uo0"/>
+                            <constraint firstItem="89x-tx-v0x" firstAttribute="centerX" secondItem="qrD-SH-TMc" secondAttribute="centerX" id="bVz-3x-OlT"/>
                             <constraint firstItem="D49-WB-wgh" firstAttribute="centerX" secondItem="qrD-SH-TMc" secondAttribute="centerX" id="dOy-mS-cSq"/>
                             <constraint firstItem="kvk-cD-sKR" firstAttribute="top" secondItem="Uz4-25-DYe" secondAttribute="bottom" constant="16" id="l3t-cD-3Df"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kvk-cD-sKR" secondAttribute="trailing" id="wHe-L3-LDl"/>
@@ -58,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFI-Cl-U2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-198" y="98"/>
+            <point key="canvasLocation" x="-198.75" y="97.183098591549296"/>
         </scene>
         <!--AssetManagementEthSuccess-->
         <scene sceneID="KUv-6v-5bF">
@@ -77,4 +82,7 @@
             <point key="canvasLocation" x="498" y="177"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AssetManagementEthProgress/Picture" width="240" height="160"/>
+    </resources>
 </document>
