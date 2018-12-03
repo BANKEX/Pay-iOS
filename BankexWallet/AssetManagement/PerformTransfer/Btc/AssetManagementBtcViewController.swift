@@ -19,11 +19,15 @@ class AssetManagementBtcViewController: UIViewController {
     @IBOutlet private var agreementButton: UIButton!
     @IBOutlet private var riskFactorButton: UIButton!
     @IBOutlet private var copyButton: UIButton!
+    @IBOutlet private var bottomContraint: NSLayoutConstraint! //TODO: rename whisperBottomContraint
+
     
     private let destination = "367aqxeq6SqVzaX5qza2HwvfxTJeruLoka"
     private var agreementChecked = false
     private var riskFactorChecked = false
     private var linkToOpen: URL!
+    private var isAnimating = false //TODO: rename whisperIsAnimating
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -59,6 +63,28 @@ class AssetManagementBtcViewController: UIViewController {
         
     @IBAction func copyDestinationAddress() {
         UIPasteboard.general.string = destination
+        if !isAnimating {
+            isAnimating = true
+            UIView.animate(withDuration: 0.6,animations: {
+                if #available(iOS 11.0, *) {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let bottomInset = appDelegate.window?.safeAreaInsets.bottom
+                    self.bottomContraint.constant = bottomInset!
+                }else {
+                    self.bottomContraint.constant = 0
+                }
+                
+                self.view.layoutIfNeeded()
+            }) { (_) in
+                UIView.animate(withDuration: 0.6,delay:0.5,animations: {
+                    self.bottomContraint.constant = 100
+                    self.view.layoutIfNeeded()
+                }) { _ in
+                    self.isAnimating = false
+                }
+            }
+        }
+
     }
     
     @IBAction func finish() {

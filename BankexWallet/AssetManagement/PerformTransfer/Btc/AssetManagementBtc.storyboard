@@ -235,15 +235,36 @@
                                     <constraint firstItem="9vD-gF-W9q" firstAttribute="top" secondItem="3JC-5X-ZNw" secondAttribute="top" id="yPD-XY-d1j"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpb-Id-TtN" userLabel="Clipboard View">
+                                <rect key="frame" x="0.0" y="609" width="375" height="58"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOk-Bm-nXV">
+                                        <rect key="frame" x="0.0" y="19" width="375" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="hOk-Bm-nXV" firstAttribute="centerY" secondItem="gpb-Id-TtN" secondAttribute="centerY" id="Xwp-cu-MaU"/>
+                                    <constraint firstItem="hOk-Bm-nXV" firstAttribute="leading" secondItem="gpb-Id-TtN" secondAttribute="leading" id="g9e-bi-fdc"/>
+                                    <constraint firstAttribute="trailing" secondItem="hOk-Bm-nXV" secondAttribute="trailing" id="oRV-wt-pk1"/>
+                                    <constraint firstAttribute="height" constant="58" id="u8A-lu-sc0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="9Oq-xn-WG3" firstAttribute="trailing" secondItem="gpb-Id-TtN" secondAttribute="trailing" id="7cZ-Zq-QRi"/>
+                            <constraint firstItem="9Oq-xn-WG3" firstAttribute="bottom" secondItem="gpb-Id-TtN" secondAttribute="bottom" id="Db8-Qc-lMb"/>
                             <constraint firstItem="k8k-21-1t6" firstAttribute="width" secondItem="Van-9V-31Y" secondAttribute="width" multiplier="0.6" id="DqY-xj-Gca"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="trailing" secondItem="Van-9V-31Y" secondAttribute="trailing" id="Ed8-av-DrJ"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="bottom" secondItem="Van-9V-31Y" secondAttribute="bottom" id="Gzh-hI-5aU"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="leading" secondItem="Van-9V-31Y" secondAttribute="leading" id="Q1T-fr-ahM"/>
                             <constraint firstItem="k8k-21-1t6" firstAttribute="centerX" secondItem="Van-9V-31Y" secondAttribute="centerX" id="WHy-ox-jY9"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="top" secondItem="Van-9V-31Y" secondAttribute="top" id="WeC-pS-UcV"/>
+                            <constraint firstItem="gpb-Id-TtN" firstAttribute="leading" secondItem="9Oq-xn-WG3" secondAttribute="leading" id="sny-16-O9n"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="24" left="16" bottom="48" right="16"/>
                         <viewLayoutGuide key="safeArea" id="9Oq-xn-WG3"/>
@@ -258,6 +279,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="agreementButton" destination="x65-xk-P5l" id="2uT-wO-zRe"/>
+                        <outlet property="bottomContraint" destination="Db8-Qc-lMb" id="QBd-nL-63O"/>
                         <outlet property="contactsContainerView" destination="usU-XM-bN2" id="UAv-qS-zSE"/>
                         <outlet property="copyButton" destination="k8k-21-1t6" id="ZkC-Ry-Pui"/>
                         <outlet property="destinationAddressLabel" destination="1op-w8-Rp9" id="0d5-Ck-RG0"/>
