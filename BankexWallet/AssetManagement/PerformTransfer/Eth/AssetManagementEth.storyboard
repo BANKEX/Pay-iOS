@@ -62,7 +62,7 @@
                                         <edgeInsets key="layoutMargins" top="24" left="16" bottom="24" right="16"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="XSD-sS-9Ih">
-                                        <rect key="frame" x="0.0" y="282.5" width="375" height="1116"/>
+                                        <rect key="frame" x="0.0" y="282.5" width="375" height="1110"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wGg-d6-TuT">
                                                 <rect key="frame" x="16" y="0.0" width="343" height="29"/>
@@ -119,7 +119,7 @@
                                                 <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="wHn-wP-1hy">
-                                                <rect key="frame" x="16" y="232" width="343" height="623.5"/>
+                                                <rect key="frame" x="16" y="232" width="343" height="617.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Information" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOg-lm-eT9">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
@@ -251,22 +251,27 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="84l-fW-Qp7">
-                                                        <rect key="frame" x="0.0" y="441.5" width="343" height="114"/>
+                                                        <rect key="frame" x="0.0" y="441.5" width="343" height="108"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jRw-v7-0VH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="28"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Vx-5y-EW3">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
-                                                                        <color key="onTintColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIb-nj-RVg">
+                                                                        <rect key="frame" x="0.0" y="3" width="22" height="22"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="22" id="Tav-Yo-oc0"/>
+                                                                            <constraint firstAttribute="width" constant="22" id="bkQ-XE-yII"/>
+                                                                        </constraints>
+                                                                        <state key="normal" title="Button" image="AssetManagement/Checkbox-Off"/>
+                                                                        <state key="selected" image="AssetManagement/Checkbox-On"/>
                                                                         <connections>
-                                                                            <action selector="agreementChecked" destination="i03-uI-bdd" eventType="valueChanged" id="dbF-Zd-03C"/>
+                                                                            <action selector="toggleAgreementChecked" destination="i03-uI-bdd" eventType="touchUpInside" id="dLL-Kf-WgJ"/>
                                                                         </connections>
-                                                                    </switch>
+                                                                    </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyP-md-Wr7">
-                                                                        <rect key="frame" x="65" y="1.5" width="278" height="28"/>
+                                                                        <rect key="frame" x="38" y="0.0" width="305" height="28"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                        <state key="normal" title="Agreement">
+                                                                        <state key="normal" title="I accept the User Agreement">
                                                                             <color key="titleColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
                                                                         <connections>
@@ -276,19 +281,24 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JDL-xo-fBx">
-                                                                <rect key="frame" x="0.0" y="47" width="343" height="31"/>
+                                                                <rect key="frame" x="0.0" y="44" width="343" height="28"/>
                                                                 <subviews>
-                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HHg-HG-veI">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
-                                                                        <color key="onTintColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQ8-Md-WkX">
+                                                                        <rect key="frame" x="0.0" y="3" width="22" height="22"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="22" id="0qp-jQ-Vqx"/>
+                                                                            <constraint firstAttribute="width" constant="22" id="Yv4-6N-FAV"/>
+                                                                        </constraints>
+                                                                        <state key="normal" title="Button" image="AssetManagement/Checkbox-Off"/>
+                                                                        <state key="selected" image="AssetManagement/Checkbox-On"/>
                                                                         <connections>
-                                                                            <action selector="riskFactorChecked" destination="i03-uI-bdd" eventType="valueChanged" id="n0h-fS-A4e"/>
+                                                                            <action selector="toggleRiskFactorChecked" destination="i03-uI-bdd" eventType="touchUpInside" id="3cC-td-vTQ"/>
                                                                         </connections>
-                                                                    </switch>
+                                                                    </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PP-wP-QGw">
-                                                                        <rect key="frame" x="65" y="1.5" width="278" height="28"/>
+                                                                        <rect key="frame" x="38" y="0.0" width="305" height="28"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                        <state key="normal" title="Risk-factor">
+                                                                        <state key="normal" title="I accept the Risk Factor statement">
                                                                             <color key="titleColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
                                                                         <connections>
@@ -298,7 +308,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="20" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lh-mZ-pyp">
-                                                                <rect key="frame" x="0.0" y="94" width="343" height="20"/>
+                                                                <rect key="frame" x="0.0" y="88" width="343" height="20"/>
                                                                 <string key="text">Please contact us to initiate Asset Management services. If you do not contact us within 7 days after transferring funds to the Asset Management wallet, your funds will be refunded back to your wallet.</string>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -307,7 +317,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNQ-9j-mmj">
-                                                        <rect key="frame" x="0.0" y="579.5" width="343" height="44"/>
+                                                        <rect key="frame" x="0.0" y="573.5" width="343" height="44"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybS-Pj-AmP" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
                                                                 <rect key="frame" x="59" y="0.0" width="225" height="44"/>
@@ -333,7 +343,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="D5w-4B-dzC">
-                                                <rect key="frame" x="16" y="895.5" width="343" height="172.5"/>
+                                                <rect key="frame" x="16" y="889.5" width="343" height="172.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please contact us for further instructions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXC-s4-nhk">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -397,13 +407,13 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
-                        <outlet property="agreementSwitch" destination="5Vx-5y-EW3" id="d5D-79-dIw"/>
+                        <outlet property="agreementButton" destination="rIb-nj-RVg" id="6df-ce-QEu"/>
                         <outlet property="amountTextField" destination="aFh-zh-bdS" id="CME-sJ-rXQ"/>
                         <outlet property="contactsContainerView" destination="D5w-4B-dzC" id="Vq8-Zu-OOz"/>
                         <outlet property="destinationAddressLabel" destination="rKk-zV-BQW" id="peA-Sg-4wR"/>
                         <outlet property="feeLabel" destination="Pl7-xu-AfX" id="a79-mx-YsG"/>
                         <outlet property="infoContainerView" destination="Hnz-FO-IPQ" id="IJA-RG-NaF"/>
-                        <outlet property="riskFactorSwitch" destination="HHg-HG-veI" id="IOf-u6-JPK"/>
+                        <outlet property="riskFactorButton" destination="XQ8-Md-WkX" id="8eD-WV-8f0"/>
                         <outlet property="sectionSegmentedControl" destination="wGg-d6-TuT" id="RQr-eS-b6s"/>
                         <outlet property="sendButton" destination="ybS-Pj-AmP" id="T0q-Ys-TIA"/>
                         <outlet property="sendContainerView" destination="wHn-wP-1hy" id="Bpq-Hg-l7y"/>
@@ -444,6 +454,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AssetManagement/Checkbox-Off" width="22" height="22"/>
+        <image name="AssetManagement/Checkbox-On" width="22" height="22"/>
         <image name="AssetManagementEth/TransferIcon" width="24" height="24"/>
     </resources>
 </document>
