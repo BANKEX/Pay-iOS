@@ -46,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return keyService.selectedAddress() ?? ""
     }
     
+    var win2: UIWindow?
+
     enum tabBarPage: Int {
         case main = 0
         case wallet = 1

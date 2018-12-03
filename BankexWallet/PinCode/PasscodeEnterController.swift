@@ -137,7 +137,9 @@ class PasscodeEnterController: UIViewController {
             self.performSegue(withIdentifier: "backToSend", sender: nil)
         } else {
             if self.fromBackground {
-                self.dismiss(animated: true, completion: nil)
+                let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                appdelegate.win2 = nil
+                //appdelegate.window?.makeKeyAndVisible()
                 currentPasscodeViewController = nil
             } else {
                 self.performSegue(withIdentifier: "showProcessFromPin", sender: self)

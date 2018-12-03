@@ -45,12 +45,15 @@ extension AppDelegate {
         self.window?.rootViewController = initialNav
         window?.makeKeyAndVisible()
     }
-    
     func showPasscode() {
-        guard !PasscodeEnterController.isLocked else { return }
+        //guard !PasscodeEnterController.isLocked else { return }
         if let vc = storyboard().instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController {
             currentPasscodeViewController = vc
-            window?.rootViewController?.present(vc, animated: false, completion: nil)
+            win2 = UIWindow(frame: UIScreen.main.bounds)
+            win2?.backgroundColor = .white
+            win2?.rootViewController = vc
+            win2?.windowLevel = UIWindowLevelAlert
+            win2?.makeKeyAndVisible()
         }
     }
     
