@@ -19,19 +19,12 @@ class AssetManagementBtcViewController: UIViewController {
     @IBOutlet private var agreementButton: UIButton!
     @IBOutlet private var riskFactorButton: UIButton!
     @IBOutlet private var copyButton: UIButton!
-    @IBOutlet private var bottomContraint: NSLayoutConstraint!
+    @IBOutlet private var clipboardViewHiddingContraint: NSLayoutConstraint!
     
     private let destination = "367aqxeq6SqVzaX5qza2HwvfxTJeruLoka"
     private var agreementChecked = false
     private var riskFactorChecked = false
     private var linkToOpen: URL!
-    private var isAnimating = false
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        bottomContraint.constant = 100.0
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,28 +60,15 @@ class AssetManagementBtcViewController: UIViewController {
         
     @IBAction func copyDestinationAddress() {
         UIPasteboard.general.string = destination
-        if !isAnimating {
-            isAnimating = true
-            UIView.animate(withDuration: 0.6,animations: {
-                if #available(iOS 11.0, *) {
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    let bottomInset = appDelegate.window?.safeAreaInsets.bottom
-                    self.bottomContraint.constant = bottomInset!
-                }else {
-                    self.bottomContraint.constant = 0
-                }
-                
+        UIView.animate(withDuration: 0.6,animations: {
+            self.clipboardViewHiddingContraint.isActive = true
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            UIView.animate(withDuration: 0.6,delay:0.5,animations: {
+                self.clipboardViewHiddingContraint.isActive = false
                 self.view.layoutIfNeeded()
-            }) { (_) in
-                UIView.animate(withDuration: 0.6,delay:0.5,animations: {
-                    self.bottomContraint.constant = 100
-                    self.view.layoutIfNeeded()
-                }) { _ in
-                    self.isAnimating = false
-                }
-            }
+            })
         }
-
     }
     
     @IBAction func finish() {

@@ -235,11 +235,11 @@
                                     <constraint firstItem="9vD-gF-W9q" firstAttribute="top" secondItem="3JC-5X-ZNw" secondAttribute="top" id="yPD-XY-d1j"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpb-Id-TtN" userLabel="Clipboard View">
-                                <rect key="frame" x="0.0" y="609" width="375" height="58"/>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpb-Id-TtN" userLabel="Clipboard View">
+                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet address copied to clipboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hOk-Bm-nXV">
-                                        <rect key="frame" x="0.0" y="19.5" width="375" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Wallet address copied to clipboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hOk-Bm-nXV">
+                                        <rect key="frame" x="16" y="19" width="343" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -247,27 +247,33 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.72156862745098038" green="0.74901960784313726" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="hOk-Bm-nXV" firstAttribute="centerY" secondItem="gpb-Id-TtN" secondAttribute="centerY" id="Xwp-cu-MaU"/>
-                                    <constraint firstItem="hOk-Bm-nXV" firstAttribute="leading" secondItem="gpb-Id-TtN" secondAttribute="leading" id="g9e-bi-fdc"/>
-                                    <constraint firstAttribute="trailing" secondItem="hOk-Bm-nXV" secondAttribute="trailing" id="oRV-wt-pk1"/>
-                                    <constraint firstAttribute="height" constant="58" id="u8A-lu-sc0"/>
+                                    <constraint firstItem="hOk-Bm-nXV" firstAttribute="leading" secondItem="gpb-Id-TtN" secondAttribute="leadingMargin" id="g9e-bi-fdc"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="hOk-Bm-nXV" secondAttribute="trailing" id="oRV-wt-pk1"/>
+                                    <constraint firstAttribute="top" secondItem="hOk-Bm-nXV" secondAttribute="top" constant="-19" id="w9Y-12-lg6"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="9Oq-xn-WG3" firstAttribute="trailing" secondItem="gpb-Id-TtN" secondAttribute="trailing" id="7cZ-Zq-QRi"/>
-                            <constraint firstItem="gpb-Id-TtN" firstAttribute="bottom" secondItem="9Oq-xn-WG3" secondAttribute="bottom" id="Db8-Qc-lMb"/>
+                            <constraint firstAttribute="trailing" secondItem="gpb-Id-TtN" secondAttribute="trailing" id="7cZ-Zq-QRi"/>
                             <constraint firstItem="k8k-21-1t6" firstAttribute="width" secondItem="Van-9V-31Y" secondAttribute="width" multiplier="0.6" id="DqY-xj-Gca"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="trailing" secondItem="Van-9V-31Y" secondAttribute="trailing" id="Ed8-av-DrJ"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="bottom" secondItem="Van-9V-31Y" secondAttribute="bottom" id="Gzh-hI-5aU"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="leading" secondItem="Van-9V-31Y" secondAttribute="leading" id="Q1T-fr-ahM"/>
+                            <constraint firstItem="gpb-Id-TtN" firstAttribute="top" secondItem="Van-9V-31Y" secondAttribute="bottom" priority="990" id="Rn2-Ud-TnG"/>
                             <constraint firstItem="k8k-21-1t6" firstAttribute="centerX" secondItem="Van-9V-31Y" secondAttribute="centerX" id="WHy-ox-jY9"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="top" secondItem="Van-9V-31Y" secondAttribute="top" id="WeC-pS-UcV"/>
-                            <constraint firstItem="gpb-Id-TtN" firstAttribute="leading" secondItem="9Oq-xn-WG3" secondAttribute="leading" id="sny-16-O9n"/>
+                            <constraint firstItem="hOk-Bm-nXV" firstAttribute="bottom" secondItem="9Oq-xn-WG3" secondAttribute="bottom" constant="-19" id="Z9b-Pu-Fgy"/>
+                            <constraint firstItem="gpb-Id-TtN" firstAttribute="leading" secondItem="Van-9V-31Y" secondAttribute="leading" id="sny-16-O9n"/>
+                            <constraint firstItem="gpb-Id-TtN" firstAttribute="bottom" secondItem="Van-9V-31Y" secondAttribute="bottom" id="wSG-0C-zxd"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="24" left="16" bottom="48" right="16"/>
                         <viewLayoutGuide key="safeArea" id="9Oq-xn-WG3"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Z9b-Pu-Fgy"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Asset Management" id="13n-KM-mlM">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="RH0-qh-RQo">
@@ -279,7 +285,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="agreementButton" destination="x65-xk-P5l" id="2uT-wO-zRe"/>
-                        <outlet property="bottomContraint" destination="Db8-Qc-lMb" id="QBd-nL-63O"/>
+                        <outlet property="clipboardViewHiddingContraint" destination="Z9b-Pu-Fgy" id="IRx-rM-ymo"/>
                         <outlet property="contactsContainerView" destination="usU-XM-bN2" id="UAv-qS-zSE"/>
                         <outlet property="copyButton" destination="k8k-21-1t6" id="ZkC-Ry-Pui"/>
                         <outlet property="destinationAddressLabel" destination="1op-w8-Rp9" id="0d5-Ck-RG0"/>
