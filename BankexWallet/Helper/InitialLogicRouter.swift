@@ -20,7 +20,12 @@ class InitialLogicRouter {
         if !UserDefaults.standard.bool(forKey: "passcodeExists") || keysService.selectedWallet() == nil {
             return
         } else {
-            rootControler.performSegue(withIdentifier: "showEnterPin", sender: self)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            guard let enterPINViewController = storyboard.instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController else { return }
+            enterPINViewController.delegate = appDelegate
+            rootControler.pushViewController(enterPINViewController, animated: false)
+            //rootControler.performSegue(withIdentifier: "showEnterPin", sender: self)
         }
     }
     

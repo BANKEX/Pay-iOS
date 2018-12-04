@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return keyService.selectedAddress() ?? ""
     }
     
-    var win2: UIWindow?
+    var passcodeWindow: UIWindow?
 
     enum tabBarPage: Int {
         case main = 0
@@ -452,8 +452,31 @@ extension AppDelegate : MessagingDelegate {
 
   var currentPasscodeViewController: PasscodeEnterController?
 
-
-
-
-
-
+extension AppDelegate:PasscodeEnterControllerDelegate {
+    func showPasscode() {
+        guard !PasscodeEnterController.isLocked else { return }
+        if let vc = storyboard().instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController {
+            vc.delegate = self
+            currentPasscodeViewController = vc
+            passcodeWindow = UIWindow(frame: UIScreen.main.bounds)
+            passcodeWindow?.backgroundColor = .white
+            passcodeWindow?.rootViewController = vc
+            passcodeWindow?.windowLevel = UIWindowLevelAlert
+            passcodeWindow?.makeKeyAndVisible()
+        }
+    }
+    
+    func didFinish(_ context: Context, vc: PasscodeEnterController) {
+        switch context {
+        case .initial:
+            vc.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+        case .background:
+            passcodeWindow = nil
+        case .sendScreen:
+            vc.performSegue(withIdentifier: "backToSend", sender: nil)
+        default: break
+        }
+    }
+    
+    
+}
