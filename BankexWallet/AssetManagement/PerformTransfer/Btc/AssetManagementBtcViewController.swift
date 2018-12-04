@@ -25,7 +25,6 @@ class AssetManagementBtcViewController: UIViewController {
     private var agreementChecked = false
     private var riskFactorChecked = false
     private var linkToOpen: URL!
-    private var isAnimating = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -61,19 +60,14 @@ class AssetManagementBtcViewController: UIViewController {
         
     @IBAction func copyDestinationAddress() {
         UIPasteboard.general.string = destination
-        if !isAnimating {
-            isAnimating = true
-            UIView.animate(withDuration: 0.6,animations: {
+        UIView.animate(withDuration: 0.6,animations: {
+            self.clipboardViewHiddingContraint.isActive = true
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            UIView.animate(withDuration: 0.6,delay:0.5,animations: {
                 self.clipboardViewHiddingContraint.isActive = false
                 self.view.layoutIfNeeded()
-            }) { (_) in
-                UIView.animate(withDuration: 0.6,delay:0.5,animations: {
-                    self.clipboardViewHiddingContraint.isActive = true
-                    self.view.layoutIfNeeded()
-                }) { _ in
-                    self.isAnimating = false
-                }
-            }
+            })
         }
     }
     
