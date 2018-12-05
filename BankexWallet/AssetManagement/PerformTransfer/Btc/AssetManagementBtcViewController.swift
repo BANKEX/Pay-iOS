@@ -30,7 +30,11 @@ class AssetManagementBtcViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addBackButton()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: BackButtonView.create(self, action: #selector(finish)))
+    }
+    
+    @objc func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,13 +86,6 @@ class AssetManagementBtcViewController: UIViewController {
                 self.view.layoutIfNeeded()
             })
         }
-    }
-    
-    func addBackButton() {
-        let backButtonView = BackButtonView.create { [weak self] (_) in
-            self?.performSegue(withIdentifier: "Home", sender: self)
-        }
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButtonView)
     }
     
 }

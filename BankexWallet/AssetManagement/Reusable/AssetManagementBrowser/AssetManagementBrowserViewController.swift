@@ -16,12 +16,12 @@ class AssetManagementBrowserViewController: UIViewController {
     var showDismissButton = false
     
     private lazy var backButton: UIBarButtonItem  = {
-        let backButtonView = BackButtonView.create { [weak self] (_) in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        
-        return UIBarButtonItem(customView: backButtonView)
+        return UIBarButtonItem(customView: BackButtonView.create(self, action: #selector(dismissBrowser)))
     }()
+    
+    @objc func dismissBrowser() {
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

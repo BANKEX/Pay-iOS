@@ -8,13 +8,16 @@
 
 import UIKit
 
-class BackButtonView: UIView {
+class BackButtonView: UIControl {
     
     private static let nib = UINib(nibName: "BackButtonView", bundle: nil)
     
-    class func create(action: @escaping (BackButtonView) -> Void) -> BackButtonView {
+    class func create(_ target: Any?,
+                      action: Selector,
+                      for controlEvents: UIControl.Event = .touchUpInside) -> BackButtonView {
+        
         let view = loadFromNib()
-        view.action = action
+        view.addTarget(target, action: action, for: controlEvents)
         
         return view
     }
@@ -23,9 +26,4 @@ class BackButtonView: UIView {
         return self.nib.instantiate(withOwner: nil, options: nil).first as! BackButtonView
     }
     
-    open var action: ((BackButtonView) -> Void)?
-    
-    @IBAction func tap() {
-        action?(self)
-    }
 }

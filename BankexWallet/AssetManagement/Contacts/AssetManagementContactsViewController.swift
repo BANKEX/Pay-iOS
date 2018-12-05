@@ -14,14 +14,11 @@ class AssetManagementContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addBackButton()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: BackButtonView.create(self, action: #selector(finish)))
     }
     
-    func addBackButton() {
-        let backButtonView = BackButtonView.create { [weak self] (_) in
-            self?.performSegue(withIdentifier: "Home", sender: self)
-        }
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButtonView)
+    @objc func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
     }
     
 }

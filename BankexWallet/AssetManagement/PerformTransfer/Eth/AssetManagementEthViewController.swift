@@ -58,9 +58,13 @@ class AssetManagementEthViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        addBackButton()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: BackButtonView.create(self, action: #selector(finish)))
     }
     
+    @objc func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -130,13 +134,6 @@ class AssetManagementEthViewController: UIViewController {
     @objc func keyboardWillHide(notification:NSNotification){
         scrollView.contentInset.bottom = 0
         scrollView.scrollIndicatorInsets.bottom = 0
-    }
-    
-    func addBackButton() {
-        let backButtonView = BackButtonView.create { [weak self] (_) in
-            self?.performSegue(withIdentifier: "Home", sender: self)
-        }
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButtonView)
     }
     
 }
