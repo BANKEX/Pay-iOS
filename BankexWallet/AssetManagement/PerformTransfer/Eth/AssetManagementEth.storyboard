@@ -28,6 +28,23 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPx-AU-3dZ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="266.5"/>
                                         <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Yf-ML-Fat">
+                                                <rect key="frame" x="139.5" y="92.5" width="96" height="41"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vV0-ME-h2Q">
+                                                        <rect key="frame" x="0.0" y="0.0" width="23" height="41"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ETH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cl7-RC-QUg">
+                                                        <rect key="frame" x="23" y="0.0" width="73" height="41"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                                        <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLE-5a-55S">
                                                 <rect key="frame" x="16" y="224.5" width="343" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -40,24 +57,17 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vV0-ME-h2Q">
-                                                <rect key="frame" x="16" y="92.5" width="343" height="41"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="centerY" secondItem="2Yf-ML-Fat" secondAttribute="bottom" id="B1d-Oi-0JE"/>
                                             <constraint firstItem="qPb-2E-IEK" firstAttribute="trailing" secondItem="BLE-5a-55S" secondAttribute="trailing" id="BMI-pB-02B"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="vV0-ME-h2Q" secondAttribute="trailing" id="Q3b-A5-IJi"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="BLE-5a-55S" secondAttribute="trailing" id="YPu-HJ-60X"/>
                                             <constraint firstItem="BLE-5a-55S" firstAttribute="top" secondItem="qPb-2E-IEK" secondAttribute="bottom" constant="1" id="btN-do-weZ"/>
                                             <constraint firstItem="qPb-2E-IEK" firstAttribute="leading" secondItem="BLE-5a-55S" secondAttribute="leading" id="heq-Kg-CGx"/>
-                                            <constraint firstItem="vV0-ME-h2Q" firstAttribute="bottom" secondItem="hPx-AU-3dZ" secondAttribute="centerY" id="jnY-wK-G4h"/>
+                                            <constraint firstItem="2Yf-ML-Fat" firstAttribute="centerX" secondItem="hPx-AU-3dZ" secondAttribute="centerX" id="k2G-6c-ydI"/>
                                             <constraint firstItem="BLE-5a-55S" firstAttribute="leading" secondItem="hPx-AU-3dZ" secondAttribute="leadingMargin" id="rnl-fd-P1A"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="BLE-5a-55S" secondAttribute="bottom" id="t69-46-QSP"/>
-                                            <constraint firstItem="vV0-ME-h2Q" firstAttribute="leading" secondItem="hPx-AU-3dZ" secondAttribute="leadingMargin" id="yKy-ed-aad"/>
                                         </constraints>
                                         <edgeInsets key="layoutMargins" top="24" left="16" bottom="24" right="16"/>
                                     </view>

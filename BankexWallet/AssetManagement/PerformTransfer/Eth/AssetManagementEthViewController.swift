@@ -254,7 +254,12 @@ private extension AssetManagementEthViewController {
         
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address.formattedAddrToken()
-        walletBalanceLabel.text = formatted(value: walletBalance)
+        
+        if let value = walletBalance {
+            walletBalanceLabel.text = Web3.Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: decimalCount, fallbackToScientific: true)
+        } else {
+            walletBalanceLabel.text = "—"
+        }
         
         sourceAddressLabel.text = walletAddressLabel.text
         destinationAddressLabel.text = destination.address.formattedAddrToken()
