@@ -348,7 +348,7 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="D5w-4B-dzC">
+                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="D5w-4B-dzC">
                                                 <rect key="frame" x="16" y="908.5" width="343" height="172.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please contact us for further instructions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXC-s4-nhk">
@@ -357,12 +357,22 @@
                                                         <color key="textColor" red="0.18039215689999999" green="0.21176470589999999" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="bH5-EW-0Ja">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="urA-aH-tmz">
                                                         <rect key="frame" x="0.0" y="44.5" width="343" height="128"/>
-                                                        <connections>
-                                                            <segue destination="MTs-tS-HkD" kind="embed" id="tvw-05-hvp"/>
-                                                        </connections>
-                                                    </containerView>
+                                                        <subviews>
+                                                            <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bH5-EW-0Ja">
+                                                                <rect key="frame" x="-16" y="0.0" width="375" height="128"/>
+                                                                <connections>
+                                                                    <segue destination="MTs-tS-HkD" kind="embed" id="tvw-05-hvp"/>
+                                                                </connections>
+                                                            </containerView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="bH5-EW-0Ja" firstAttribute="top" secondItem="urA-aH-tmz" secondAttribute="top" id="1nM-aB-ThY"/>
+                                                            <constraint firstAttribute="bottom" secondItem="bH5-EW-0Ja" secondAttribute="bottom" id="TJA-YI-Sdo"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -390,9 +400,11 @@
                             <constraint firstItem="bHq-c5-5d9" firstAttribute="leading" secondItem="MNK-ov-qe4" secondAttribute="leading" id="KCN-74-LFq"/>
                             <constraint firstAttribute="trailing" secondItem="fRO-eB-vH1" secondAttribute="trailing" id="RRf-6d-T8N"/>
                             <constraint firstItem="bHq-c5-5d9" firstAttribute="top" secondItem="MNK-ov-qe4" secondAttribute="top" id="VXy-2P-PVs"/>
+                            <constraint firstItem="bH5-EW-0Ja" firstAttribute="leading" secondItem="MNK-ov-qe4" secondAttribute="leading" id="Z46-fN-R7Z"/>
                             <constraint firstItem="fRO-eB-vH1" firstAttribute="leading" secondItem="MNK-ov-qe4" secondAttribute="leading" id="gFD-rd-qIL"/>
                             <constraint firstItem="fRO-eB-vH1" firstAttribute="top" secondItem="MNK-ov-qe4" secondAttribute="top" priority="240" id="gdM-6T-2av"/>
                             <constraint firstAttribute="bottom" secondItem="bHq-c5-5d9" secondAttribute="bottom" id="qTN-5f-bS4"/>
+                            <constraint firstAttribute="trailing" secondItem="bH5-EW-0Ja" secondAttribute="trailing" id="sfx-wC-LkN"/>
                             <constraint firstItem="ybS-Pj-AmP" firstAttribute="centerX" secondItem="MNK-ov-qe4" secondAttribute="centerX" id="wmW-Mb-BUb"/>
                             <constraint firstItem="hPx-AU-3dZ" firstAttribute="height" secondItem="MNK-ov-qe4" secondAttribute="height" multiplier="1:3" id="xxC-s1-oIL"/>
                         </constraints>
