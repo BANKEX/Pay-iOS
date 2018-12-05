@@ -119,7 +119,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="SrL-9L-E9r"/>
                                                 </constraints>
-                                                <viewLayoutGuide key="safeArea" id="Q2u-YK-fdi"/>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="arY-Ll-XHX" appends="YES" id="aVg-Or-16M"/>
                                                 </connections>
@@ -127,6 +126,10 @@
                                         </subviews>
                                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                     </stackView>
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="6S1-82-dzD" userLabel="DividerTransactionStatus" customClass="SeparatorView" customModule="BankexWallet" customModuleProvider="target">
+                                        <rect key="frame" x="61" y="348.5" width="259" height="1"/>
+                                        <color key="backgroundColor" red="0.89019607840000003" green="0.90196078430000004" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyp-Aa-enw">
                                         <rect key="frame" x="16" y="441.5" width="288" height="44"/>
                                         <subviews>
@@ -161,7 +164,9 @@
                                     <constraint firstItem="c8c-7R-Q4I" firstAttribute="top" secondItem="i1g-su-GGl" secondAttribute="bottom" constant="16" id="8aU-lF-con"/>
                                     <constraint firstAttribute="trailing" secondItem="i1g-su-GGl" secondAttribute="trailing" id="c5R-00-mEF"/>
                                     <constraint firstItem="c8c-7R-Q4I" firstAttribute="width" secondItem="gvG-Qg-ia8" secondAttribute="width" id="dLO-aB-rbG"/>
+                                    <constraint firstItem="NIU-Js-rgc" firstAttribute="top" secondItem="6S1-82-dzD" secondAttribute="bottom" id="dMh-FI-6wF"/>
                                     <constraint firstItem="i1g-su-GGl" firstAttribute="leading" secondItem="gvG-Qg-ia8" secondAttribute="leading" id="fX9-y1-vqr"/>
+                                    <constraint firstItem="uoe-42-cLK" firstAttribute="leading" secondItem="6S1-82-dzD" secondAttribute="leading" id="ruT-4D-SST"/>
                                     <constraint firstItem="nyp-Aa-enw" firstAttribute="leading" secondItem="gvG-Qg-ia8" secondAttribute="leadingMargin" id="tcc-v5-qXj"/>
                                     <constraint firstAttribute="trailing" secondItem="c8c-7R-Q4I" secondAttribute="trailing" id="tuF-ip-RkD"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="nyp-Aa-enw" secondAttribute="trailing" id="u2K-H8-Bi0"/>
@@ -175,6 +180,7 @@
                             <constraint firstAttribute="trailing" secondItem="gvG-Qg-ia8" secondAttribute="trailing" id="GUc-vd-3UE"/>
                             <constraint firstAttribute="bottom" secondItem="gvG-Qg-ia8" secondAttribute="bottom" id="KK8-ht-z7n"/>
                             <constraint firstItem="gvG-Qg-ia8" firstAttribute="leading" secondItem="9mo-7o-nyz" secondAttribute="leading" id="LMV-g8-S8q"/>
+                            <constraint firstAttribute="trailing" secondItem="6S1-82-dzD" secondAttribute="trailing" id="PMS-0t-oQn"/>
                             <constraint firstItem="MNf-Z4-7h5" firstAttribute="leading" secondItem="9mo-7o-nyz" secondAttribute="leading" id="Pz5-vb-FPV"/>
                             <constraint firstItem="4Ln-Z7-c6d" firstAttribute="leading" secondItem="9mo-7o-nyz" secondAttribute="leading" id="R0I-mS-Cpx"/>
                             <constraint firstAttribute="trailing" secondItem="MNf-Z4-7h5" secondAttribute="trailing" id="S9P-jO-uqg"/>
