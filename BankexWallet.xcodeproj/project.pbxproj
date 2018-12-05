@@ -189,6 +189,9 @@
 		924A36EB21B03A0F000954BD /* AssetManagementLinks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 924A36E921B03A0F000954BD /* AssetManagementLinks.storyboard */; };
 		924A36ED21B120C6000954BD /* AssetManagementLinks.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 924A36EC21B120C6000954BD /* AssetManagementLinks.xcassets */; };
 		925D675321B179EC00ED6DBD /* AssetManagementEthSuccess.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925D675221B179EC00ED6DBD /* AssetManagementEthSuccess.xcassets */; };
+		9296A28721B7F44100BB3E27 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9296A28621B7F44100BB3E27 /* BackButtonView.swift */; };
+		9296A28921B7F45300BB3E27 /* BackButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9296A28821B7F45300BB3E27 /* BackButtonView.xib */; };
+		9296A28B21B7F4E500BB3E27 /* BackButtonView.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9296A28A21B7F4E500BB3E27 /* BackButtonView.xcassets */; };
 		92A9FCFD21AECA6C00F8BB33 /* AssetManagementEthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */; };
 		92A9FCFF21AECAAD00F8BB33 /* AssetManagementEth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */; };
 		92B947E221B53AEA00E942D0 /* AssetManagementBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B947E121B53AEA00E942D0 /* AssetManagementBrowser.storyboard */; };
@@ -470,6 +473,9 @@
 		924A36E921B03A0F000954BD /* AssetManagementLinks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AssetManagementLinks.storyboard; sourceTree = "<group>"; };
 		924A36EC21B120C6000954BD /* AssetManagementLinks.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AssetManagementLinks.xcassets; sourceTree = "<group>"; };
 		925D675221B179EC00ED6DBD /* AssetManagementEthSuccess.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AssetManagementEthSuccess.xcassets; sourceTree = "<group>"; };
+		9296A28621B7F44100BB3E27 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
+		9296A28821B7F45300BB3E27 /* BackButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BackButtonView.xib; sourceTree = "<group>"; };
+		9296A28A21B7F4E500BB3E27 /* BackButtonView.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BackButtonView.xcassets; sourceTree = "<group>"; };
 		92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthViewController.swift; sourceTree = "<group>"; };
 		92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEth.storyboard; sourceTree = "<group>"; };
 		92B947E121B53AEA00E942D0 /* AssetManagementBrowser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementBrowser.storyboard; sourceTree = "<group>"; };
@@ -957,6 +963,7 @@
 		864732E8214FF3FD00519AE1 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				9296A28521B7F42400BB3E27 /* BackButtonView */,
 				F00E4627207A354900387B96 /* SendingConfirmationController.swift */,
 				F00E461D207617BC00387B96 /* InitialLogicRouter.swift */,
 				864732E9214FF43900519AE1 /* BaseButton.swift */,
@@ -1173,6 +1180,16 @@
 				924A36EC21B120C6000954BD /* AssetManagementLinks.xcassets */,
 			);
 			path = AssetManagementLinks;
+			sourceTree = "<group>";
+		};
+		9296A28521B7F42400BB3E27 /* BackButtonView */ = {
+			isa = PBXGroup;
+			children = (
+				9296A28821B7F45300BB3E27 /* BackButtonView.xib */,
+				9296A28621B7F44100BB3E27 /* BackButtonView.swift */,
+				9296A28A21B7F4E500BB3E27 /* BackButtonView.xcassets */,
+			);
+			path = BackButtonView;
 			sourceTree = "<group>";
 		};
 		92A9FCFA21AEC9F900F8BB33 /* PerformTransfer */ = {
@@ -1433,6 +1450,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9296A28921B7F45300BB3E27 /* BackButtonView.xib in Resources */,
 				86219C082180AB1300185EF6 /* SectionTableCell.xib in Resources */,
 				863A6A602184EBAA00E4A8D3 /* GeneralInformationCell.xib in Resources */,
 				86D7FB7F2149338B008245DE /* WalletTableViewCell.xib in Resources */,
@@ -1453,6 +1471,7 @@
 				71C72A3521B01BA200FB3E13 /* AssetManagementEthFailure.storyboard in Resources */,
 				81942F11201B36A300F0AE29 /* Assets.xcassets in Resources */,
 				86D7FB8321494AE4008245DE /* TokenTableViewCell.xib in Resources */,
+				9296A28B21B7F4E500BB3E27 /* BackButtonView.xcassets in Resources */,
 				863A6A642184EDAF00E4A8D3 /* InfoCell.xib in Resources */,
 				924A36ED21B120C6000954BD /* AssetManagementLinks.xcassets in Resources */,
 				862F877921527A10001D7DDE /* TransactionInfoCell.xib in Resources */,
@@ -1783,6 +1802,7 @@
 				86E15F13215BCED100F85AD2 /* ContactTableCell.swift in Sources */,
 				864732EE214FF93400519AE1 /* QRButton.swift in Sources */,
 				81942F0F201B36A300F0AE29 /* BankexWallet.xcdatamodeld in Sources */,
+				9296A28721B7F44100BB3E27 /* BackButtonView.swift in Sources */,
 				8649F1A52168135500EAFDF9 /* TokenInfoService.swift in Sources */,
 				864732E3214FC8E100519AE1 /* ETHTransactionModel.swift in Sources */,
 				864732CB214FC2CB00519AE1 /* Date+Extensions.swift in Sources */,

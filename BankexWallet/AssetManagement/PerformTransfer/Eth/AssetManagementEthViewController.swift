@@ -57,8 +57,14 @@ class AssetManagementEthViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: BackButtonView.create(self, action: #selector(finish)))
     }
     
+    @objc func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -110,10 +116,6 @@ class AssetManagementEthViewController: UIViewController {
         Amplitude.instance()?.logEvent("Asset Management ETH Send Started")
         
         performSegue(withIdentifier: "Progress", sender: self)
-    }
-    
-    @IBAction private func finish() {
-        performSegue(withIdentifier: "Home", sender: self)
     }
     
     @objc func keyboardWillShow(notification:NSNotification) {

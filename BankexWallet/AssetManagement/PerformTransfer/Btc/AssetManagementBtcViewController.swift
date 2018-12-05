@@ -27,6 +27,16 @@ class AssetManagementBtcViewController: UIViewController {
     private var riskFactorChecked = false
     private var linkToOpen: URL!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: BackButtonView.create(self, action: #selector(finish)))
+    }
+    
+    @objc func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -76,10 +86,6 @@ class AssetManagementBtcViewController: UIViewController {
                 self.view.layoutIfNeeded()
             })
         }
-    }
-    
-    @IBAction func finish() {
-        performSegue(withIdentifier: "Home", sender: self)
     }
     
 }
