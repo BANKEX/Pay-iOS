@@ -15,6 +15,14 @@ class AssetManagementBrowserViewController: UIViewController {
     var link: URL?
     var showDismissButton = false
     
+    private lazy var backButton: UIBarButtonItem  = {
+        let backButtonView = BackButtonView.create { [weak self] (_) in
+            self?.dismiss(animated: true, completion: nil)
+        }
+        
+        return UIBarButtonItem(customView: backButtonView)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let url = link else { return }
@@ -27,13 +35,7 @@ class AssetManagementBrowserViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationItem.leftBarButtonItem = showDismissButton
-            ? UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissBrowser))
-            : nil
-    }
-    
-    @objc func dismissBrowser() {
-        dismiss(animated: true, completion: nil)
+        navigationItem.leftBarButtonItem = showDismissButton ? backButton : nil
     }
     
 }
