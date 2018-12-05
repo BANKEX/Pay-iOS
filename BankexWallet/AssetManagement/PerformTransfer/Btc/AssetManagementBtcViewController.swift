@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Amplitude_iOS
 
 class AssetManagementBtcViewController: UIViewController {
     
@@ -49,16 +50,22 @@ class AssetManagementBtcViewController: UIViewController {
     }
     
     @IBAction private func openAgreement() {
+        Amplitude.instance()?.logEvent("Asset Management BTC Agreement Opened")
+        
         linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
         performSegue(withIdentifier: "Browser", sender: self)
     }
     
     @IBAction private func openRiskFactor() {
+        Amplitude.instance()?.logEvent("Asset Management BTC Risk Factor Opened")
+        
         linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
         performSegue(withIdentifier: "Browser", sender: self)
     }
         
     @IBAction func copyDestinationAddress() {
+        Amplitude.instance()?.logEvent("Asset Management BTC Address Copied")
+        
         UIPasteboard.general.string = destination
         UIView.animate(withDuration: 0.6,animations: {
             self.clipboardViewHiddingContraint.isActive = true
