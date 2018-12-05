@@ -65,7 +65,7 @@
                                         <edgeInsets key="layoutMargins" top="24" left="16" bottom="24" right="16"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="c8c-7R-Q4I">
-                                        <rect key="frame" x="0.0" y="205.5" width="320" height="216"/>
+                                        <rect key="frame" x="0.0" y="205.5" width="320" height="188"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please contact us for further instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KGM-a1-ePa">
                                                 <rect key="frame" x="16" y="0.0" width="288" height="44"/>
@@ -76,14 +76,24 @@
                                                 <color key="textColor" red="0.18039215689999999" green="0.21176470589999999" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="4Ln-Z7-c6d">
-                                                <rect key="frame" x="16" y="44" width="288" height="128"/>
-                                                <connections>
-                                                    <segue destination="iWO-Wr-Kti" kind="embed" id="KIk-hA-LrY"/>
-                                                </connections>
-                                            </containerView>
+                                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qim-ls-5V2">
+                                                <rect key="frame" x="16" y="44" width="288" height="100"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ln-Z7-c6d">
+                                                        <rect key="frame" x="-16" y="0.0" width="320" height="100"/>
+                                                        <connections>
+                                                            <segue destination="iWO-Wr-Kti" kind="embed" id="KIk-hA-LrY"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="4Ln-Z7-c6d" firstAttribute="top" secondItem="qim-ls-5V2" secondAttribute="top" id="L7D-ao-78d"/>
+                                                    <constraint firstAttribute="bottom" secondItem="4Ln-Z7-c6d" secondAttribute="bottom" id="lm0-6Q-mMg"/>
+                                                </constraints>
+                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="NIU-Js-rgc" userLabel="OpenTransaction">
-                                                <rect key="frame" x="16" y="172" width="288" height="44"/>
+                                                <rect key="frame" x="16" y="144" width="288" height="44"/>
                                                 <subviews>
                                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AssetManagementEthSuccess/Icons/TransactionStatus" translatesAutoresizingMaskIntoConstraints="NO" id="aGf-4C-Hti">
                                                         <rect key="frame" x="0.0" y="7.5" width="29" height="29"/>
@@ -118,7 +128,7 @@
                                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyp-Aa-enw">
-                                        <rect key="frame" x="16" y="469.5" width="288" height="44"/>
+                                        <rect key="frame" x="16" y="441.5" width="288" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqa-G2-ejg" customClass="ActionButton" customModule="BankexWallet" customModuleProvider="target">
                                                 <rect key="frame" x="57.5" y="0.0" width="173" height="44"/>
@@ -166,10 +176,12 @@
                             <constraint firstAttribute="bottom" secondItem="gvG-Qg-ia8" secondAttribute="bottom" id="KK8-ht-z7n"/>
                             <constraint firstItem="gvG-Qg-ia8" firstAttribute="leading" secondItem="9mo-7o-nyz" secondAttribute="leading" id="LMV-g8-S8q"/>
                             <constraint firstItem="MNf-Z4-7h5" firstAttribute="leading" secondItem="9mo-7o-nyz" secondAttribute="leading" id="Pz5-vb-FPV"/>
+                            <constraint firstItem="4Ln-Z7-c6d" firstAttribute="leading" secondItem="9mo-7o-nyz" secondAttribute="leading" id="R0I-mS-Cpx"/>
                             <constraint firstAttribute="trailing" secondItem="MNf-Z4-7h5" secondAttribute="trailing" id="S9P-jO-uqg"/>
                             <constraint firstItem="i1g-su-GGl" firstAttribute="height" secondItem="9mo-7o-nyz" secondAttribute="height" multiplier="1:3" id="asH-3n-9xW"/>
                             <constraint firstItem="i1g-su-GGl" firstAttribute="top" secondItem="MNf-Z4-7h5" secondAttribute="bottom" id="fTt-CL-X6s"/>
                             <constraint firstItem="gvG-Qg-ia8" firstAttribute="top" secondItem="9mo-7o-nyz" secondAttribute="top" id="if3-ib-NGh"/>
+                            <constraint firstAttribute="trailing" secondItem="4Ln-Z7-c6d" secondAttribute="trailing" id="ixC-Ne-zGW"/>
                             <constraint firstItem="MNf-Z4-7h5" firstAttribute="top" secondItem="9mo-7o-nyz" secondAttribute="top" priority="240" id="zdY-mR-7mX"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="24" left="16" bottom="48" right="16"/>
