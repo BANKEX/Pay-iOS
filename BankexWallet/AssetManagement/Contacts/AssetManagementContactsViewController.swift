@@ -11,8 +11,17 @@ import MessageUI
 
 class AssetManagementContactsViewController: UIViewController {
     
-    @IBAction func finish() {
-        performSegue(withIdentifier: "Home", sender: self)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addBackButton()
+    }
+    
+    func addBackButton() {
+        let backButtonView = BackButtonView.create { [weak self] (_) in
+            self?.performSegue(withIdentifier: "Home", sender: self)
+        }
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButtonView)
     }
     
 }
