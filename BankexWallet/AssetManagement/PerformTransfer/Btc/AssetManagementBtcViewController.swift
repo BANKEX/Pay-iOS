@@ -19,6 +19,7 @@ class AssetManagementBtcViewController: UIViewController {
     @IBOutlet private var agreementButton: UIButton!
     @IBOutlet private var riskFactorButton: UIButton!
     @IBOutlet private var copyButton: UIButton!
+    @IBOutlet private var clipboardViewHiddingContraint: NSLayoutConstraint!
     
     private let destination = "367aqxeq6SqVzaX5qza2HwvfxTJeruLoka"
     private var agreementChecked = false
@@ -59,6 +60,15 @@ class AssetManagementBtcViewController: UIViewController {
         
     @IBAction func copyDestinationAddress() {
         UIPasteboard.general.string = destination
+        UIView.animate(withDuration: 0.6,animations: {
+            self.clipboardViewHiddingContraint.isActive = true
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            UIView.animate(withDuration: 0.6,delay:0.5,animations: {
+                self.clipboardViewHiddingContraint.isActive = false
+                self.view.layoutIfNeeded()
+            })
+        }
     }
     
     @IBAction func finish() {

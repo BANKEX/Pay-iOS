@@ -39,6 +39,7 @@ class AssetManagementEthViewController: UIViewController {
     private let tokensService = CustomERC20TokensServiceImplementation()
     private let transactionService = TransactionsService()
     
+    private let decimalCount = 8
     private let minAmount = Web3Utils.parseToBigUInt("400", units: .eth)!
     private let maxAmount = Web3Utils.parseToBigUInt("4000", units: .eth)!
     private let destination = EthereumAddress("0x2BBE012F440Dd7339c189a6b0cA057874e72D2D5")!
@@ -124,6 +125,22 @@ class AssetManagementEthViewController: UIViewController {
     @objc func keyboardWillHide(notification:NSNotification){
         scrollView.contentInset.bottom = 0
         scrollView.scrollIndicatorInsets.bottom = 0
+    }
+    
+}
+
+extension AssetManagementEthViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard var text = textField.text else { return false }
+        
+        let startIndex = text.index(text.startIndex, offsetBy: range.location)
+        let endIndex = text.index(startIndex, offsetBy: range.length)
+
+        text.replaceSubrange(startIndex..<endIndex, with: string)
+        text = text.trimmingCharacters(in: .whitespaces)
+        
+        return Web3.Utils.parseToBigUInt(text, decimals: decimalCount) != nil
     }
     
 }
@@ -217,7 +234,7 @@ private extension AssetManagementEthViewController {
     func formatted(value: BigUInt?) -> String {
         guard
             let value = value,
-            let formatted = Web3.Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: 8, fallbackToScientific: true)
+            let formatted = Web3.Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: decimalCount, fallbackToScientific: true)
             else { return "—" }
         
         return formatted + " ETH"

@@ -454,33 +454,35 @@ extension AppDelegate : MessagingDelegate {
 
 extension AppDelegate:PasscodeEnterControllerDelegate {
     func showPasscode(throughNavBar:Bool = false, _ navController:UINavigationController? = nil) {
+        guard let passcodeVC = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
+        passcodeWindow = UIWindow(frame: UIScreen.main.bounds)
+        passcodeWindow?.backgroundColor = .white
+        passcodeWindow?.windowLevel = UIWindowLevelAlert
         if !throughNavBar {
             guard !PasscodeEnterController.isLocked else { return }
-            if let vc = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController {
-                vc.delegate = self
-                currentPasscodeViewController = vc
-                passcodeWindow = UIWindow(frame: UIScreen.main.bounds)
-                passcodeWindow?.backgroundColor = .white
-                passcodeWindow?.rootViewController = vc
-                passcodeWindow?.windowLevel = UIWindowLevelAlert
-                passcodeWindow?.makeKeyAndVisible()
-            }
+            passcodeVC.delegate = self
+            currentPasscodeViewController = passcodeVC
+            passcodeWindow?.rootViewController = passcodeVC
+            passcodeWindow?.makeKeyAndVisible()
         }else {
-            guard let enterPINViewController = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
-            enterPINViewController.delegate = self
-            navController?.pushViewController(enterPINViewController, animated: false)
+            passcodeVC.delegate = self
+            passcodeWindow?.rootViewController = passcodeVC
+            passcodeWindow?.makeKeyAndVisible()
         }
     }
     
     func didFinish(_ context: Context, vc: PasscodeEnterController) {
         switch context {
         case .initial:
-            vc.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+            passcodeWindow = nil
+            guard let latestVC = UIApplication.topViewController() else { return }
+            guard let processVC = storyboard().instantiateViewController(withIdentifier: "ProcessController") as? SendingInProcessViewController else { return }
+            processVC.fromEnterScreen = true
+            latestVC.navigationController?.pushViewController(processVC, animated: true)
         case .background:
             passcodeWindow = nil
         case .sendScreen:
             vc.performSegue(withIdentifier: "backToSend", sender: nil)
-        default: break
         }
     }
     
