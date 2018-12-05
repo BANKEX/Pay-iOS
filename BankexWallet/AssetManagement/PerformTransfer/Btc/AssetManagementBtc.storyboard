@@ -206,7 +206,7 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="usU-XM-bN2">
+                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="usU-XM-bN2">
                                                 <rect key="frame" x="16" y="597" width="343" height="172.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please contact us for further instructions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFw-kZ-sLQ">
@@ -215,12 +215,22 @@
                                                         <color key="textColor" red="0.18039215689999999" green="0.21176470589999999" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="uOF-b2-Vd2">
+                                                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aFp-TX-VR0">
                                                         <rect key="frame" x="0.0" y="44.5" width="343" height="128"/>
-                                                        <connections>
-                                                            <segue destination="RwY-XR-Uyg" kind="embed" id="lfY-rL-WDT"/>
-                                                        </connections>
-                                                    </containerView>
+                                                        <subviews>
+                                                            <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOF-b2-Vd2">
+                                                                <rect key="frame" x="-16" y="0.0" width="375" height="128"/>
+                                                                <connections>
+                                                                    <segue destination="RwY-XR-Uyg" kind="embed" id="lfY-rL-WDT"/>
+                                                                </connections>
+                                                            </containerView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="uOF-b2-Vd2" firstAttribute="top" secondItem="aFp-TX-VR0" secondAttribute="top" id="KHm-UJ-qYa"/>
+                                                            <constraint firstAttribute="bottom" secondItem="uOF-b2-Vd2" secondAttribute="bottom" id="ja6-AU-sIL"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -256,6 +266,7 @@
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="gpb-Id-TtN" secondAttribute="trailing" id="7cZ-Zq-QRi"/>
+                            <constraint firstItem="uOF-b2-Vd2" firstAttribute="leading" secondItem="Van-9V-31Y" secondAttribute="leading" id="8HR-Lc-VAz"/>
                             <constraint firstItem="k8k-21-1t6" firstAttribute="width" secondItem="Van-9V-31Y" secondAttribute="width" multiplier="0.6" id="DqY-xj-Gca"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="trailing" secondItem="Van-9V-31Y" secondAttribute="trailing" id="Ed8-av-DrJ"/>
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="bottom" secondItem="Van-9V-31Y" secondAttribute="bottom" id="Gzh-hI-5aU"/>
@@ -265,6 +276,7 @@
                             <constraint firstItem="3JC-5X-ZNw" firstAttribute="top" secondItem="Van-9V-31Y" secondAttribute="top" id="WeC-pS-UcV"/>
                             <constraint firstItem="hOk-Bm-nXV" firstAttribute="bottom" secondItem="9Oq-xn-WG3" secondAttribute="bottom" constant="-19" id="Z9b-Pu-Fgy"/>
                             <constraint firstItem="gpb-Id-TtN" firstAttribute="leading" secondItem="Van-9V-31Y" secondAttribute="leading" id="sny-16-O9n"/>
+                            <constraint firstAttribute="trailing" secondItem="uOF-b2-Vd2" secondAttribute="trailing" id="uSD-W5-MJ9"/>
                             <constraint firstItem="gpb-Id-TtN" firstAttribute="bottom" secondItem="Van-9V-31Y" secondAttribute="bottom" id="wSG-0C-zxd"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="24" left="16" bottom="48" right="16"/>
