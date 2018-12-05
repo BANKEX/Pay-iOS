@@ -444,6 +444,7 @@ extension HomeViewController {
             navigationController.navigationBar.tintColor = UIColor.white
             navigationController.navigationBar.isTranslucent = false
             navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController.navigationBar.shadowImage = UIImage()
         }
         
         if
