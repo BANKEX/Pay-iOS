@@ -453,16 +453,22 @@ extension AppDelegate : MessagingDelegate {
   var currentPasscodeViewController: PasscodeEnterController?
 
 extension AppDelegate:PasscodeEnterControllerDelegate {
-    func showPasscode() {
-        guard !PasscodeEnterController.isLocked else { return }
-        if let vc = storyboard().instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController {
-            vc.delegate = self
-            currentPasscodeViewController = vc
-            passcodeWindow = UIWindow(frame: UIScreen.main.bounds)
-            passcodeWindow?.backgroundColor = .white
-            passcodeWindow?.rootViewController = vc
-            passcodeWindow?.windowLevel = UIWindowLevelAlert
-            passcodeWindow?.makeKeyAndVisible()
+    func showPasscode(throughNavBar:Bool = false, _ navController:UINavigationController? = nil) {
+        if !throughNavBar {
+            guard !PasscodeEnterController.isLocked else { return }
+            if let vc = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController {
+                vc.delegate = self
+                currentPasscodeViewController = vc
+                passcodeWindow = UIWindow(frame: UIScreen.main.bounds)
+                passcodeWindow?.backgroundColor = .white
+                passcodeWindow?.rootViewController = vc
+                passcodeWindow?.windowLevel = UIWindowLevelAlert
+                passcodeWindow?.makeKeyAndVisible()
+            }
+        }else {
+            guard let enterPINViewController = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
+            enterPINViewController.delegate = self
+            navController?.pushViewController(enterPINViewController, animated: false)
         }
     }
     
