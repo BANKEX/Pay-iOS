@@ -116,8 +116,6 @@ class ConfirmViewController: UITableViewController {
         } else if let errorVC = segue.destination as? SendingErrorViewController {
             guard let error = sender as? String else { return }
             errorVC.error = error
-        } else if let vc = segue.destination as? PasscodeEnterController {
-            vc.instanciatedFromSend = true
         }
     }
     
@@ -159,11 +157,8 @@ class ConfirmViewController: UITableViewController {
             if isPinAccepted {
                 self.sendFunds()
             } else {
-                guard let passcodeVC = storyboard?.instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController else { return }
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                passcodeVC.delegate = appDelegate
-                passcodeVC.instanciatedFromSend = true
-                navigationController?.pushViewController(passcodeVC, animated: true)
+                appDelegate.showPasscode(context: .sendScreen)
             }
         } else {
             self.sendFunds()

@@ -453,23 +453,26 @@ extension AppDelegate : MessagingDelegate {
   var currentPasscodeViewController: PasscodeEnterController?
 
 extension AppDelegate:PasscodeEnterControllerDelegate {
+    
     func showPasscode(context:Context) {
         guard let passcodeVC = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
         passcodeWindow = UIWindow(frame: UIScreen.main.bounds)
         passcodeWindow?.backgroundColor = .white
         passcodeWindow?.windowLevel = UIWindowLevelAlert
+        passcodeVC.delegate = self
         switch context {
         case .background:
             guard !PasscodeEnterController.isLocked else { return }
-            passcodeVC.delegate = self
             currentPasscodeViewController = passcodeVC
             passcodeWindow?.rootViewController = passcodeVC
             passcodeWindow?.makeKeyAndVisible()
         case .initial:
-            passcodeVC.delegate = self
             passcodeWindow?.rootViewController = passcodeVC
             passcodeWindow?.makeKeyAndVisible()
-        default: break
+        case .sendScreen:
+            passcodeVC.instanciatedFromSend = true
+            passcodeWindow?.rootViewController = passcodeVC
+            passcodeWindow?.makeKeyAndVisible()
         }
     }
     
@@ -484,7 +487,11 @@ extension AppDelegate:PasscodeEnterControllerDelegate {
         case .background:
             passcodeWindow = nil
         case .sendScreen:
-            vc.performSegue(withIdentifier: "backToSend", sender: nil)
+            passcodeWindow = nil
+            guard let tabBarVC = window?.rootViewController as? UITabBarController else { return }
+            guard let navVC = tabBarVC.viewControllers?.first as? UINavigationController else { return }
+            guard let confirmVC = navVC.topViewController as? ConfirmViewController else { return }
+            confirmVC.sendFunds()
         }
     }
     
