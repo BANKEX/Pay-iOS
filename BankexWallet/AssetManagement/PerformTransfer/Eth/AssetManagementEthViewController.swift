@@ -14,7 +14,7 @@ import Amplitude_iOS
 class AssetManagementEthViewController: UIViewController {
     
     enum ValidationError {
-        case invalidAmount, amountExceedsMin, amountExceedsMax, totalExceedsAvailable
+        case invalidAmount, amountExceedsMin, amountExceedsMax, totalExceedsAvailable(required: BigUInt, available: BigUInt)
     }
     
     @IBOutlet private var walletNameLabel: UILabel!
@@ -236,7 +236,7 @@ private extension AssetManagementEthViewController {
         } else if let amount = amount, amount > maxAmount {
             validationError = .amountExceedsMax
         } else if let total = total, let available = walletBalance, total > available {
-            validationError = .totalExceedsAvailable
+            validationError = .totalExceedsAvailable(required: total, available: available)
         } else {
             validationError = nil
         }
@@ -257,10 +257,18 @@ private extension AssetManagementEthViewController {
     
     func message(for error: ValidationError) -> String {
         switch error {
-        case .invalidAmount: return "Incorrect amount"
-        case .amountExceedsMin: return "Amount should be greater than 400 ETH"
-        case .amountExceedsMax: return "Amount should be less than 4000 ETH"
-        case .totalExceedsAvailable: return "Total should be less than available"
+        case .invalidAmount:
+            return NSLocalizedString("ValidationError.InvalidAmount", tableName: "AssetManagementEth", comment: "")
+        case .amountExceedsMin:
+            return NSLocalizedString("ValidationError.AmountExceedsMin", tableName: "AssetManagementEth", comment: "")
+        case .amountExceedsMax:
+            return NSLocalizedString("ValidationError.AmountExceedsMax", tableName: "AssetManagementEth", comment: "")
+        case .totalExceedsAvailable(let required, let available):
+            var message = NSLocalizedString("ValidationError.TotalExceedsAvailable.Template", tableName: "AssetManagementEth", comment: "")
+            message = message.replacingOccurrences(of: "{total}", with: formatted(value: required))
+            message = message.replacingOccurrences(of: "{available}", with: formatted(value: available))
+            
+            return message
         }
     }
     
