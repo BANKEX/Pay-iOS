@@ -9,10 +9,15 @@
 import UIKit
 import LocalAuthentication
 
+protocol PasscodeEnterControllerDelegate:class {
+    func didFinish(_ context:Context, vc:PasscodeEnterController)
+}
+
 class PasscodeEnterController: UIViewController {
     
     static var isLocked = false
     var isEntering = false
+    weak var delegate: PasscodeEnterControllerDelegate?
     
     enum passcodeStatus: String {
         case enter = "Touch ID or Enter Passcode"
@@ -134,13 +139,13 @@ class PasscodeEnterController: UIViewController {
     func enterWallet() {
         PasscodeEnterController.isLocked = false
         if self.instanciatedFromSend {
-            self.performSegue(withIdentifier: "backToSend", sender: nil)
+            delegate?.didFinish(.sendScreen, vc: self)
         } else {
             if self.fromBackground {
-                self.dismiss(animated: true, completion: nil)
                 currentPasscodeViewController = nil
+                delegate?.didFinish(.background, vc: self)
             } else {
-                self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
+                delegate?.didFinish(.initial, vc: self)
             }
         }
     }

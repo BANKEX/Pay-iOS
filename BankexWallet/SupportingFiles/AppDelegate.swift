@@ -46,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return keyService.selectedAddress() ?? ""
     }
     
+    var passcodeWindow: UIWindow?
+
     enum tabBarPage: Int {
         case main = 0
         case wallet = 1
@@ -172,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
         }
         if UserDefaults.standard.bool(forKey: Keys.multiSwitch.rawValue) && UserDefaults.standard.bool(forKey: "isNotFirst") && !AutoLockService.shared.isRunning  {
-            showPasscode()
+            showPasscode(context: .background)
         }
     }
     
@@ -450,8 +452,48 @@ extension AppDelegate : MessagingDelegate {
 
   var currentPasscodeViewController: PasscodeEnterController?
 
-
-
-
-
-
+extension AppDelegate:PasscodeEnterControllerDelegate {
+    
+    func showPasscode(context:Context) {
+        guard let passcodeVC = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
+        passcodeWindow = UIWindow(frame: UIScreen.main.bounds)
+        passcodeWindow?.backgroundColor = .white
+        passcodeWindow?.windowLevel = UIWindowLevelAlert
+        passcodeVC.delegate = self
+        switch context {
+        case .background:
+            guard !PasscodeEnterController.isLocked else { return }
+            currentPasscodeViewController = passcodeVC
+            passcodeWindow?.rootViewController = passcodeVC
+            passcodeWindow?.makeKeyAndVisible()
+        case .initial:
+            passcodeWindow?.rootViewController = passcodeVC
+            passcodeWindow?.makeKeyAndVisible()
+        case .sendScreen:
+            passcodeVC.instanciatedFromSend = true
+            passcodeWindow?.rootViewController = passcodeVC
+            passcodeWindow?.makeKeyAndVisible()
+        }
+    }
+    
+    func didFinish(_ context: Context, vc: PasscodeEnterController) {
+        switch context {
+        case .initial:
+            passcodeWindow = nil
+            guard let latestVC = UIApplication.topViewController() else { return }
+            guard let processVC = storyboard().instantiateViewController(withIdentifier: "ProcessController") as? SendingInProcessViewController else { return }
+            processVC.fromEnterScreen = true
+            latestVC.navigationController?.pushViewController(processVC, animated: true)
+        case .background:
+            passcodeWindow = nil
+        case .sendScreen:
+            passcodeWindow = nil
+            guard let tabBarVC = window?.rootViewController as? UITabBarController else { return }
+            guard let navVC = tabBarVC.viewControllers?.first as? UINavigationController else { return }
+            guard let confirmVC = navVC.topViewController as? ConfirmViewController else { return }
+            confirmVC.sendFunds()
+        }
+    }
+    
+    
+}
