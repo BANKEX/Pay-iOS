@@ -9,6 +9,7 @@
 import UIKit
 import BigInt
 import web3swift
+import Amplitude_iOS
 
 class AssetManagementEthViewController: UIViewController {
     
@@ -56,8 +57,14 @@ class AssetManagementEthViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: BackButtonView.create(self, action: #selector(finish)))
     }
     
+    @objc func finish() {
+        performSegue(withIdentifier: "Home", sender: self)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -88,11 +95,15 @@ class AssetManagementEthViewController: UIViewController {
     }
     
     @IBAction private func openAgreement() {
+        Amplitude.instance()?.logEvent("Asset Management ETH Agreement Opened")
+        
         linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
         performSegue(withIdentifier: "Browser", sender: self)
     }
     
     @IBAction private func openRiskFactor() {
+        Amplitude.instance()?.logEvent("Asset Management ETH Risk Factor Opened")
+        
         linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
         performSegue(withIdentifier: "Browser", sender: self)
     }
@@ -102,11 +113,9 @@ class AssetManagementEthViewController: UIViewController {
     }
     
     @IBAction private func send() {
+        Amplitude.instance()?.logEvent("Asset Management ETH Send Started")
+        
         performSegue(withIdentifier: "Progress", sender: self)
-    }
-    
-    @IBAction private func finish() {
-        performSegue(withIdentifier: "Home", sender: self)
     }
     
     @objc func keyboardWillShow(notification:NSNotification) {
@@ -141,6 +150,12 @@ extension AssetManagementEthViewController: UITextFieldDelegate {
         text = text.trimmingCharacters(in: .whitespaces)
         
         return Web3.Utils.parseToBigUInt(text, decimals: decimalCount) != nil
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == amountTextField {
+            Amplitude.instance()?.logEvent("Asset Management ETH Amount Entered")
+        }
     }
     
 }
@@ -254,7 +269,12 @@ private extension AssetManagementEthViewController {
         
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address.formattedAddrToken()
-        walletBalanceLabel.text = formatted(value: walletBalance)
+        
+        if let value = walletBalance {
+            walletBalanceLabel.text = Web3.Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: decimalCount, fallbackToScientific: true)
+        } else {
+            walletBalanceLabel.text = "—"
+        }
         
         sourceAddressLabel.text = walletAddressLabel.text
         destinationAddressLabel.text = destination.address.formattedAddrToken()

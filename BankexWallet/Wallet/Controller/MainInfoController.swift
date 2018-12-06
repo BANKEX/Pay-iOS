@@ -9,7 +9,7 @@
 import UIKit
 import BigInt
 import web3swift
-
+import Amplitude_iOS
 
 class MainInfoController: BaseViewController,
     UITabBarControllerDelegate,UITableViewDataSource, UITableViewDelegate, InfoViewDelegate {
@@ -188,9 +188,21 @@ class MainInfoController: BaseViewController,
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AddressQRCodeController {
+            if isEtherToken {
+                Amplitude.instance().logEvent("Wallet Receive ETH Tapped")
+            } else {
+                Amplitude.instance().logEvent("Token Receive Tapped")
+            }
+            
             let keyService: GlobalWalletsService = SingleKeyServiceImplementation()
             controller.addressToGenerateQR = keyService.selectedAddress()
         } else if let controller = segue.destination as? SendTokenViewController {
+            if isEtherToken {
+                Amplitude.instance().logEvent("Wallet Send ETH Tapped")
+            } else {
+                Amplitude.instance().logEvent("Token Send Tapped")
+            }
+            
             controller.currentBalance = infoView.balanceLabel.text
         }
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Amplitude_iOS
 
 struct TokenShortService {
     static var arrayTokensShort:[TokenShort] = []
@@ -204,6 +205,8 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func openAssetManagementPage() {
+        Amplitude.instance()?.logEvent("Asset Management Learn More Opened")
+        
         performSegue(withIdentifier: "AssetManagementPage", sender: self)
     }
     
@@ -212,10 +215,14 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func showPerformEthTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management ETH Screen Opened")
+        
         performSegue(withIdentifier: "AssetManagementEth", sender: self)
     }
     
     @IBAction func showPerformBtcTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management BTC Screen Opened")
+        
         performSegue(withIdentifier: "AssetManagementBtc", sender: self)
     }
     
@@ -444,6 +451,7 @@ extension HomeViewController {
             navigationController.navigationBar.tintColor = UIColor.white
             navigationController.navigationBar.isTranslucent = false
             navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController.navigationBar.shadowImage = UIImage()
         }
         
         if
