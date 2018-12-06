@@ -76,7 +76,12 @@ class AddressQRCodeController: BaseViewController {
     
     
     @objc func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        let walletInfoViewController = navigationController?.viewControllers.filter { $0 is WalletInfoViewController }.last
+        if let destination = walletInfoViewController {
+            navigationController?.popToViewController(destination, animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     private func setupClipboardView() {
