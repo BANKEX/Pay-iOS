@@ -21,7 +21,7 @@ class InitialLogicRouter {
             return
         } else {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.showPasscode(throughNavBar: true, rootControler)
+            appDelegate.showPasscode(context: .initial)
         }
     }
     

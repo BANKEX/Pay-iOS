@@ -174,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
         }
         if UserDefaults.standard.bool(forKey: Keys.multiSwitch.rawValue) && UserDefaults.standard.bool(forKey: "isNotFirst") && !AutoLockService.shared.isRunning  {
-            showPasscode()
+            showPasscode(context: .background)
         }
     }
     
@@ -453,21 +453,23 @@ extension AppDelegate : MessagingDelegate {
   var currentPasscodeViewController: PasscodeEnterController?
 
 extension AppDelegate:PasscodeEnterControllerDelegate {
-    func showPasscode(throughNavBar:Bool = false, _ navController:UINavigationController? = nil) {
+    func showPasscode(context:Context) {
         guard let passcodeVC = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
         passcodeWindow = UIWindow(frame: UIScreen.main.bounds)
         passcodeWindow?.backgroundColor = .white
         passcodeWindow?.windowLevel = UIWindowLevelAlert
-        if !throughNavBar {
+        switch context {
+        case .background:
             guard !PasscodeEnterController.isLocked else { return }
             passcodeVC.delegate = self
             currentPasscodeViewController = passcodeVC
             passcodeWindow?.rootViewController = passcodeVC
             passcodeWindow?.makeKeyAndVisible()
-        }else {
+        case .initial:
             passcodeVC.delegate = self
             passcodeWindow?.rootViewController = passcodeVC
             passcodeWindow?.makeKeyAndVisible()
+        default: break
         }
     }
     
