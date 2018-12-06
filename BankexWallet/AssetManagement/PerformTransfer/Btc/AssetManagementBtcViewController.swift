@@ -62,14 +62,14 @@ class AssetManagementBtcViewController: UIViewController {
     @IBAction private func openAgreement() {
         Amplitude.instance()?.logEvent("Asset Management BTC Agreement Opened")
         
-        linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
+        linkToOpen = URL(string: "https://bankex.github.io/pay-asset-management/docs/agreement.pdf")!
         performSegue(withIdentifier: "Browser", sender: self)
     }
     
     @IBAction private func openRiskFactor() {
         Amplitude.instance()?.logEvent("Asset Management BTC Risk Factor Opened")
         
-        linkToOpen = URL(string: "https://bankex.com/en/sto/asset-management")!
+        linkToOpen = URL(string: "https://bankex.github.io/pay-asset-management/docs/risk-factors.pdf")!
         performSegue(withIdentifier: "Browser", sender: self)
     }
         
