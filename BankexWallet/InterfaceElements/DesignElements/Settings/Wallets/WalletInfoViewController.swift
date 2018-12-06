@@ -37,6 +37,11 @@ class WalletInfoViewController: BaseViewController {
         tableView.separatorColor = UIColor.disableColor
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     func setupClipboard() {
         if UIDevice.isIpad {
             secondWidth = view.bounds.width - splitViewController!.primaryColumnWidth
