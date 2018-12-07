@@ -16,9 +16,9 @@ class AutoLockViewController:BaseViewController {
     
     @IBOutlet weak var tableView:UITableView!
     
-    let arrayTimers = ["5","10","15","20","25"]
-    
-    lazy var defaultTime = arrayTimers.last! + " sec"
+    lazy var arrayTimers: [String] = {
+        return Array(Set([5, 10, 15, 20, 25] + [AutoLockService.shared.defaultTime])).sorted().map {"\($0)"}
+    }()
     
     let cellIdentifier = "TimerCell"
     
@@ -34,11 +34,6 @@ class AutoLockViewController:BaseViewController {
         tableView.tableFooterView = HeaderView()
         tableView.backgroundColor = UIColor.bgMainColor
         tableView.separatorColor = UIColor.disableColor
-        
-        if AutoLockService.shared.getState() == nil {
-            delegate?.didSelect(defaultTime)
-            AutoLockService.shared.saveState(defaultTime)
-        }
     }
 
 
@@ -46,7 +41,7 @@ class AutoLockViewController:BaseViewController {
 
 extension AutoLockViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return arrayTimers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

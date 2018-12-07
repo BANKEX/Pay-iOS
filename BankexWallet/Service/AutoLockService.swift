@@ -12,13 +12,19 @@ final class AutoLockService {
     
     public static let shared = AutoLockService()
     
+    let defaultTime = 25
+    
     var timer:Timer?
     
     var isRunning = false
     
     var selectedTime:TimeInterval {
-        guard let timeString = getState() else { return 0 }
+        guard let timeString = getState() else { return TimeInterval(defaultTime) }
         return TimeInterval(timeString.components(separatedBy: " ").first!)!
+    }
+    
+    func setDefaultTime() {
+        saveState("\(defaultTime) sec")
     }
     
     func saveState(_ time:String) {
