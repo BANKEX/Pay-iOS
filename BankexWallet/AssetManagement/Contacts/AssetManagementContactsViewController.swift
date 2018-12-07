@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MessageUI
 
 class AssetManagementContactsViewController: UIViewController {
     
@@ -19,14 +18,6 @@ class AssetManagementContactsViewController: UIViewController {
     
     @objc func finish() {
         performSegue(withIdentifier: "Home", sender: self)
-    }
-    
-}
-
-extension AssetManagementContactsViewController: MFMailComposeViewControllerDelegate {
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
     }
     
 }
