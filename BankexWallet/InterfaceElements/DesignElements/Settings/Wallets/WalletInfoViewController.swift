@@ -40,6 +40,12 @@ class WalletInfoViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
+        UIApplication.shared.statusBarView?.backgroundColor = .white
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func setupClipboard() {
