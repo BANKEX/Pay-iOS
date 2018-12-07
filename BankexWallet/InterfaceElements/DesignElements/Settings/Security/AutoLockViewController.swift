@@ -18,6 +18,8 @@ class AutoLockViewController:BaseViewController {
     
     let arrayTimers = ["5","10","15","20","25"]
     
+    lazy var defaultTime = arrayTimers.last! + " sec"
+    
     let cellIdentifier = "TimerCell"
     
     weak var delegate:AutoLockViewControllerDelegate?
@@ -32,6 +34,11 @@ class AutoLockViewController:BaseViewController {
         tableView.tableFooterView = HeaderView()
         tableView.backgroundColor = UIColor.bgMainColor
         tableView.separatorColor = UIColor.disableColor
+        
+        if AutoLockService.shared.getState() == nil {
+            delegate?.didSelect(defaultTime)
+            AutoLockService.shared.saveState(defaultTime)
+        }
     }
 
 
