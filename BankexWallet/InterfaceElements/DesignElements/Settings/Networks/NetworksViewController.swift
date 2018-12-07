@@ -52,6 +52,11 @@ class NetworksViewController: BaseViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     func hideAddBtn() {
         navigationItem.rightBarButtonItem = nil
     }
