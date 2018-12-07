@@ -23,15 +23,15 @@ class AssetManagementLinksViewController: UIViewController {
         guard let viewController = mailComposeViewController else { return }
         
         viewController.mailComposeDelegate = self
-        viewController.setToRecipients(["support@bankex.com"])
         viewController.setSubject("")
         viewController.setMessageBody("", isHTML: false)
+        viewController.setToRecipients(["sales@bankex.com"])
         
         present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func openTelegram() {
-        let channelURL = URL.init(string: "tg://resolve?domain=bankex")!
+        let channelURL = URL.init(string: "tg://resolve?domain=bankexpay")!
         
         UIApplication.shared.openURL(channelURL)
     }
