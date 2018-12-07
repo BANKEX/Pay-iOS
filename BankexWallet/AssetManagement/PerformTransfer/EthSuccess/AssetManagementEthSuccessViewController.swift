@@ -25,10 +25,19 @@ class AssetManagementEthSuccessViewController: UIViewController {
 
 extension AssetManagementEthSuccessViewController {
     
+    private func transactionLinkURL(for result: TransactionSendingResult?) -> URL? {
+        guard let hash = result?.hash else { return nil }
+        
+        return URL(string: "https://etherscan.io/tx/\(hash)")
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let browser = segue.destination as? AssetManagementBrowserViewController,
-            let trHash = trResult?.hash {
-            browser.link = URL(string: "https://etherscan.io/tx/\(trHash)")!
+        if let browser = segue.destination as? AssetManagementBrowserViewController {
+            browser.link = transactionLinkURL(for: trResult)
+        }
+        
+        if let linksViewController = segue.destination as? AssetManagementLinksViewController {
+            linksViewController.transactionLinkURL = transactionLinkURL(for: trResult)
         }
     }
 }

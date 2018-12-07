@@ -11,6 +11,8 @@ import MessageUI
 
 class AssetManagementLinksViewController: UIViewController {
     
+    var transactionLinkURL: URL?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,16 +24,23 @@ class AssetManagementLinksViewController: UIViewController {
         
         guard let viewController = mailComposeViewController else { return }
         
+        let subject = NSLocalizedString("Email.Subject", tableName: "AssetManagementLinks", comment: "")
+        var message = NSLocalizedString("Email.Message", tableName: "AssetManagementLinks", comment: "")
+        
+        if let transactionLink = transactionLinkURL?.absoluteString {
+            message += "\n\(transactionLink)"
+        }
+        
         viewController.mailComposeDelegate = self
-        viewController.setToRecipients(["support@bankex.com"])
-        viewController.setSubject("")
-        viewController.setMessageBody("", isHTML: false)
+        viewController.setToRecipients(["sales@bankex.com"])
+        viewController.setSubject(subject)
+        viewController.setMessageBody(message, isHTML: false)
         
         present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func openTelegram() {
-        let channelURL = URL.init(string: "tg://resolve?domain=bankex")!
+        let channelURL = URL.init(string: "tg://resolve?domain=bankexpay")!
         
         UIApplication.shared.openURL(channelURL)
     }
