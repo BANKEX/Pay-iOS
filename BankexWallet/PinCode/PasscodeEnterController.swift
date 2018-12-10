@@ -54,7 +54,6 @@ class PasscodeEnterController: UIViewController {
         return true
     }
     var numsIcons: [UIImageView]?
-    var instanciatedFromSend = false
     var isAvailableTouchID:Bool {
         let context = LAContext()
         var error: NSError?
@@ -121,7 +120,8 @@ class PasscodeEnterController: UIViewController {
     
     private func configureBackground() {
         UIApplication.shared.statusBarView?.backgroundColor = nil
-        if instanciatedFromSend {
+        
+        if context == .sendScreen {
             backgroundImageView.image = UIImage(named: "pin-greybackground")
         }
     }
@@ -139,16 +139,12 @@ class PasscodeEnterController: UIViewController {
     
     func enterWallet() {
         PasscodeEnterController.isLocked = false
-        if self.instanciatedFromSend {
-            delegate?.didFinish(vc: self)
-        } else {
-            if self.fromBackground {
-                currentPasscodeViewController = nil
-                delegate?.didFinish(vc: self)
-            } else {
-                delegate?.didFinish(vc: self)
-            }
+        
+        if fromBackground {
+            currentPasscodeViewController = nil
         }
+        
+        delegate?.didFinish(vc: self)
     }
     
     func updateUI(_ nums: Int) {

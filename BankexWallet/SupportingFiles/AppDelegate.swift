@@ -470,7 +470,6 @@ extension AppDelegate:PasscodeEnterControllerDelegate {
             passcodeWindow?.rootViewController = passcodeVC
             passcodeWindow?.makeKeyAndVisible()
         case .sendScreen:
-            passcodeVC.instanciatedFromSend = true
             passcodeWindow?.rootViewController = passcodeVC
             passcodeWindow?.makeKeyAndVisible()
         }
