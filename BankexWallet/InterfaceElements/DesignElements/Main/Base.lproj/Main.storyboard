@@ -1590,50 +1590,50 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="827-HY-a1m">
-                                                    <rect key="frame" x="16" y="10" width="128" height="21"/>
+                                                    <rect key="frame" x="15" y="10" width="128" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4nf-t0-upk">
-                                                    <rect key="frame" x="16" y="32" width="235" height="17"/>
-                                                    <accessibility key="accessibilityConfiguration" label="addrLabel"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GF6-MV-QlO">
-                                                    <rect key="frame" x="255" y="30.5" width="50" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="RsA-8Q-HbL"/>
-                                                        <constraint firstAttribute="height" constant="20" id="zSe-zY-tbP"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <inset key="titleEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="Info" image="Arrow Right Grey">
-                                                        <color key="titleColor" red="0.72156862745098038" green="0.74901960784313726" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="WM0-4b-ynC" userLabel="Address">
+                                                    <rect key="frame" x="15" y="31.5" width="290" height="19.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4nf-t0-upk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="251" height="19.5"/>
+                                                            <accessibility key="accessibilityConfiguration" label="addrLabel"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="760" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVE-ua-g50">
+                                                            <rect key="frame" x="255" y="0.0" width="23" height="19.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.72156862745098038" green="0.74901960784313726" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalCompressionResistancePriority="760" image="Arrow Right Grey" translatesAutoresizingMaskIntoConstraints="NO" id="kFg-te-GlP">
+                                                            <rect key="frame" x="282" y="0.0" width="8" height="19.5"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilJ-a4-IMl" userLabel="InfoButton">
-                                                    <rect key="frame" x="255" y="0.0" width="65" height="61.5"/>
+                                                    <rect key="frame" x="266" y="0.0" width="54" height="61.5"/>
                                                     <connections>
                                                         <action selector="infoButtonTapped:" destination="qby-pv-EVX" eventType="touchUpInside" id="4fF-A7-xxW"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="827-HY-a1m" firstAttribute="leading" secondItem="Ruh-BB-lf4" secondAttribute="leading" constant="16" id="49k-Pr-GGu"/>
-                                                <constraint firstItem="4nf-t0-upk" firstAttribute="top" secondItem="827-HY-a1m" secondAttribute="bottom" constant="1" id="CSp-Cc-vr4"/>
+                                                <constraint firstItem="827-HY-a1m" firstAttribute="leading" secondItem="Ruh-BB-lf4" secondAttribute="leadingMargin" id="49k-Pr-GGu"/>
+                                                <constraint firstItem="WM0-4b-ynC" firstAttribute="leading" secondItem="Ruh-BB-lf4" secondAttribute="leadingMargin" id="LZc-yQ-A1g"/>
                                                 <constraint firstAttribute="bottom" secondItem="ilJ-a4-IMl" secondAttribute="bottom" id="Lpw-Q5-DMh"/>
                                                 <constraint firstItem="827-HY-a1m" firstAttribute="top" secondItem="Ruh-BB-lf4" secondAttribute="top" constant="10" id="MA9-KO-OQv"/>
-                                                <constraint firstItem="4nf-t0-upk" firstAttribute="leading" secondItem="Ruh-BB-lf4" secondAttribute="leading" constant="16" id="c1D-iJ-JvF"/>
-                                                <constraint firstItem="GF6-MV-QlO" firstAttribute="bottom" secondItem="Ruh-BB-lf4" secondAttribute="bottomMargin" multiplier="1:1.01" id="nAG-rb-jOE"/>
+                                                <constraint firstItem="ilJ-a4-IMl" firstAttribute="leading" secondItem="4nf-t0-upk" secondAttribute="trailing" id="Pwn-bc-k6r"/>
+                                                <constraint firstItem="WM0-4b-ynC" firstAttribute="bottom" secondItem="Ruh-BB-lf4" secondAttribute="bottomMargin" id="d9U-wD-cAb"/>
+                                                <constraint firstItem="WM0-4b-ynC" firstAttribute="top" secondItem="827-HY-a1m" secondAttribute="bottom" constant="1" id="maY-Yh-31y"/>
                                                 <constraint firstItem="ilJ-a4-IMl" firstAttribute="top" secondItem="Ruh-BB-lf4" secondAttribute="top" id="qmd-tl-YGm"/>
-                                                <constraint firstItem="GF6-MV-QlO" firstAttribute="trailing" secondItem="Ruh-BB-lf4" secondAttribute="trailingMargin" id="rSu-tR-vWO"/>
-                                                <constraint firstItem="GF6-MV-QlO" firstAttribute="leading" secondItem="4nf-t0-upk" secondAttribute="trailing" constant="4" id="reu-NV-zkm"/>
                                                 <constraint firstAttribute="trailing" secondItem="ilJ-a4-IMl" secondAttribute="trailing" id="sFV-0j-FXc"/>
-                                                <constraint firstItem="ilJ-a4-IMl" firstAttribute="leading" secondItem="GF6-MV-QlO" secondAttribute="leading" id="yfE-Jp-UDt"/>
+                                                <constraint firstItem="WM0-4b-ynC" firstAttribute="trailing" secondItem="Ruh-BB-lf4" secondAttribute="trailingMargin" id="whG-dR-u6H"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
