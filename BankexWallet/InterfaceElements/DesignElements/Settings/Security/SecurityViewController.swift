@@ -66,43 +66,43 @@ class SecurityViewController: UITableViewController {
     
     
     @IBAction func switchTouchID(_ sender:UISwitch) {
-        if sender.isOn {
+        if !sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
-            }) { (error) in
-                sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey: Keys.openSwitch.rawValue)
+            }) { (error) in
+                sender.setOn(true, animated: false)
+                UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
             }
             return
         }
-        UserDefaults.standard.set(false, forKey: Keys.openSwitch.rawValue)
+        UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
-        if sender.isOn {
+        if !sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                UserDefaults.standard.set(true, forKey: Keys.sendSwitch.rawValue)
-            }) { (error) in
-                sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey: Keys.sendSwitch.rawValue)
+            }) { (error) in
+                sender.setOn(true, animated: false)
+                UserDefaults.standard.set(true, forKey: Keys.sendSwitch.rawValue)
             }
             return
         }
-        UserDefaults.standard.set(false, forKey: Keys.sendSwitch.rawValue)
+        UserDefaults.standard.set(true, forKey: Keys.sendSwitch.rawValue)
     }
     
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
-        if sender.isOn {
+        if !sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
+                UserDefaults.standard.set(false, forKey: Keys.multiSwitch.rawValue)
             }) { (error) in
-                sender.setOn(false, animated: false)
-                UserDefaults.standard.set(false, forKey:Keys.multiSwitch.rawValue)
+                sender.setOn(true, animated: false)
+                UserDefaults.standard.set(true, forKey:Keys.multiSwitch.rawValue)
             }
             return
         }
-        UserDefaults.standard.set(false, forKey: Keys.multiSwitch.rawValue)
+        UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
     }
 
     

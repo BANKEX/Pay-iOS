@@ -16,7 +16,9 @@ class AutoLockViewController:BaseViewController {
     
     @IBOutlet weak var tableView:UITableView!
     
-    let arrayTimers = ["5","10","15","20","25"]
+    lazy var arrayTimers: [String] = {
+        return Array(Set([5, 10, 15, 20, 25] + [AutoLockService.shared.defaultTime])).sorted().map {"\($0)"}
+    }()
     
     let cellIdentifier = "TimerCell"
     
@@ -39,7 +41,7 @@ class AutoLockViewController:BaseViewController {
 
 extension AutoLockViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return arrayTimers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
