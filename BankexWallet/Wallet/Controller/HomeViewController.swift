@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Amplitude_iOS
 
 struct TokenShortService {
     static var arrayTokensShort:[TokenShort] = []
@@ -72,6 +73,8 @@ class HomeViewController: BaseViewController {
     var etherToken: ERC20TokenModel?
     let walletData = WalletData()
     var selectedToken:ERC20TokenModel!
+    
+    @IBOutlet var assetManagementHeaderView: UIView!
     
     lazy var walletHeaderLabel: UILabel = {
         let label = UILabel()
@@ -201,6 +204,30 @@ class HomeViewController: BaseViewController {
         Mediator.contactAddr = nil
     }
     
+    @IBAction func openAssetManagementPage() {
+        Amplitude.instance()?.logEvent("Asset Management Learn More Opened")
+        
+        performSegue(withIdentifier: "AssetManagementPage", sender: self)
+    }
+    
+    @IBAction func showAssetManagementContacts() {
+        performSegue(withIdentifier: "AssetManagementContacts", sender: self)
+    }
+    
+    @IBAction func showPerformEthTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management ETH Screen Opened")
+        
+        performSegue(withIdentifier: "AssetManagementEth", sender: self)
+    }
+    
+    @IBAction func showPerformBtcTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management BTC Screen Opened")
+        
+        performSegue(withIdentifier: "AssetManagementBtc", sender: self)
+    }
+    
+    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
+    
     //Methods
     fileprivate func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = .white
@@ -232,9 +259,9 @@ class HomeViewController: BaseViewController {
         super.viewWillLayoutSubviews()
         
         if UIDevice.isIpad {
-            walletHeaderLabel.frame = CGRect(x: 52, y: 0, width: tableView.bounds.width, height: 22.0)
+            walletHeaderLabel.frame = CGRect(x: 52, y: 52.0 - 22.0, width: tableView.bounds.width, height: 22.0)
         }else {
-            walletHeaderLabel.frame = CGRect(x: 15, y: 0, width: tableView.bounds.width, height: 22.0)
+            walletHeaderLabel.frame = CGRect(x: 15, y: 52.0 - 22.0, width: tableView.bounds.width, height: 22.0)
         }
         
         if UIDevice.isIpad {
@@ -272,7 +299,10 @@ class HomeViewController: BaseViewController {
         
         var sections: [ViewModel.Section] = []
         
-        let walletSection = ViewModel.Section(headerView: walletHeaderView, rows: [.wallet])
+        let assetManagementSection = ViewModel.Section(headerView: assetManagementHeaderView, rows: [])
+        sections.append(assetManagementSection)
+        
+        let walletSection = ViewModel.Section(headerView: walletHeaderView, rows: [.placeholder, .wallet])
         sections.append(walletSection)
         
         var addTokenButtonUsed = false
@@ -402,6 +432,35 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             selectedToken = token
             tokenSerive.updateSelectedToken(to: selectedToken.address, completion: nil)
             performSegue(withIdentifier: "walletInfo", sender: nil)
+        }
+    }
+    
+}
+
+extension HomeViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if
+            let navigationController = segue.destination as? UINavigationController,
+            ["AssetManagementContacts", "AssetManagementEth", "AssetManagementBtc", "AssetManagementPage"].contains(segue.identifier ?? "")
+        {
+            UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
+            UIApplication.shared.statusBarStyle = .lightContent
+            
+            navigationController.navigationBar.barTintColor = UIColor.mainColor
+            navigationController.navigationBar.tintColor = UIColor.white
+            navigationController.navigationBar.isTranslucent = false
+            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController.navigationBar.shadowImage = UIImage()
+        }
+        
+        if
+            segue.identifier == "AssetManagementPage",
+            let navigationController = segue.destination as? UINavigationController,
+            let viewController = navigationController.viewControllers.first as? AssetManagementBrowserViewController
+        {
+            viewController.link = URL(string: "https://bankex.com/en/sto/asset-management")!
+            viewController.showDismissButton = true
         }
     }
     
