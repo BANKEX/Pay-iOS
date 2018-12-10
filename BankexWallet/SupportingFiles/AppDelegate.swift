@@ -486,6 +486,7 @@ extension AppDelegate:PasscodeEnterControllerDelegate {
             processVC.fromEnterScreen = true
             latestVC.navigationController?.pushViewController(processVC, animated: true)
         case .background:
+            currentPasscodeViewController = nil
             passcodeWindow = nil
         case .sendScreen:
             passcodeWindow = nil

@@ -49,10 +49,6 @@ class PasscodeEnterController: UIViewController {
     var turnOnTouchID:Bool {
         return UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue)
     }
-    var fromBackground:Bool {
-        guard let vc = currentPasscodeViewController, vc.navigationController == nil else { return false }
-        return true
-    }
     var numsIcons: [UIImageView]?
     var isAvailableTouchID:Bool {
         let context = LAContext()
@@ -139,10 +135,6 @@ class PasscodeEnterController: UIViewController {
     
     func enterWallet() {
         PasscodeEnterController.isLocked = false
-        
-        if fromBackground {
-            currentPasscodeViewController = nil
-        }
         
         delegate?.didFinish(vc: self)
     }
