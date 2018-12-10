@@ -47,7 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     var passcodeWindow: UIWindow?
-
+    var passcodeViewController: PasscodeEnterController?
+    
     enum tabBarPage: Int {
         case main = 0
         case wallet = 1
@@ -393,11 +394,12 @@ extension AppDelegate : MessagingDelegate {
             vc.chooseRowColorIfNeeded(0)
         }else {
             showSplitVC()
-            guard !PasscodeEnterController.isLocked else { return }
-            let passcodeVC = CreateVC(byName: "passcodeEnterController") as! PasscodeEnterController
-            currentPasscodeViewController = passcodeVC
+            
+            guard passcodeViewController == nil else { return }
+            
+            showPasscode(context: .background)
+            
             guard let split = window?.rootViewController as? UISplitViewController else { return }
-            split.present(passcodeVC, animated: true, completion: nil)
             guard let nav = split.viewControllers[1] as? UINavigationController else { return }
             nav.pushViewController(mainInfo, animated: false)
             tokenService.updateSelectedToken(to: tokenAddress)
@@ -417,10 +419,11 @@ extension AppDelegate : MessagingDelegate {
         }else {
             let tabBar = CreateVC(byName: "MainTabController") as! BaseTabBarController
             window?.rootViewController = tabBar
-            guard !PasscodeEnterController.isLocked else { return }
-            let passcodeVC = CreateVC(byName: "passcodeEnterController") as! PasscodeEnterController
-            currentPasscodeViewController = passcodeVC
-            window?.rootViewController?.present(passcodeVC, animated: true, completion: nil)
+            
+            guard passcodeViewController == nil else { return }
+            
+            showPasscode(context: .background)
+            
             let tab = rootVC() as! BaseTabBarController
             tab.selectedIndex = 0
             guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return }
@@ -450,49 +453,43 @@ extension AppDelegate : MessagingDelegate {
     // [END ios_10_data_message]
 }
 
-  var currentPasscodeViewController: PasscodeEnterController?
-
-extension AppDelegate:PasscodeEnterControllerDelegate {
+extension AppDelegate: PasscodeEnterControllerDelegate {
     
-    func showPasscode(context:Context) {
-        guard let passcodeVC = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
-        passcodeWindow = UIWindow(frame: UIScreen.main.bounds)
-        passcodeWindow?.backgroundColor = .white
-        passcodeWindow?.windowLevel = UIWindowLevelAlert
-        passcodeVC.delegate = self
-        switch context {
-        case .background:
-            guard !PasscodeEnterController.isLocked else { return }
-            currentPasscodeViewController = passcodeVC
-            passcodeWindow?.rootViewController = passcodeVC
-            passcodeWindow?.makeKeyAndVisible()
-        case .initial:
-            passcodeWindow?.rootViewController = passcodeVC
-            passcodeWindow?.makeKeyAndVisible()
-        case .sendScreen:
-            passcodeVC.instanciatedFromSend = true
-            passcodeWindow?.rootViewController = passcodeVC
-            passcodeWindow?.makeKeyAndVisible()
-        }
+    func showPasscode(context: Context) {
+        guard passcodeViewController == nil || passcodeViewController?.context == .sendScreen else { return }
+        
+        guard let viewController = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
+        viewController.delegate = self
+        viewController.context = context
+        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.backgroundColor = .white
+        window.windowLevel = UIWindowLevelAlert
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        
+        passcodeViewController = viewController
+        passcodeWindow = window
     }
     
-    func didFinish(_ context: Context, vc: PasscodeEnterController) {
-        switch context {
+    func passcodeEnterControllerDidFinish(_ viewController: PasscodeEnterController) {
+        switch viewController.context {
         case .initial:
-            passcodeWindow = nil
             guard let latestVC = UIApplication.topViewController() else { return }
             guard let processVC = storyboard().instantiateViewController(withIdentifier: "ProcessController") as? SendingInProcessViewController else { return }
             processVC.fromEnterScreen = true
             latestVC.navigationController?.pushViewController(processVC, animated: true)
-        case .background:
-            passcodeWindow = nil
         case .sendScreen:
-            passcodeWindow = nil
             guard let tabBarVC = window?.rootViewController as? UITabBarController else { return }
             guard let navVC = tabBarVC.viewControllers?.first as? UINavigationController else { return }
             guard let confirmVC = navVC.topViewController as? ConfirmViewController else { return }
             confirmVC.sendFunds()
+        case .background:
+            break
         }
+        
+        passcodeViewController = nil
+        passcodeWindow = nil
     }
     
     
