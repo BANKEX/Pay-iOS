@@ -394,11 +394,12 @@ extension AppDelegate : MessagingDelegate {
             vc.chooseRowColorIfNeeded(0)
         }else {
             showSplitVC()
-            guard !PasscodeEnterController.isLocked else { return }
-            let passcodeVC = CreateVC(byName: "passcodeEnterController") as! PasscodeEnterController
-            passcodeViewController = passcodeVC
+            
+            guard passcodeViewController == nil else { return }
+            
+            showPasscode(context: .background)
+            
             guard let split = window?.rootViewController as? UISplitViewController else { return }
-            split.present(passcodeVC, animated: true, completion: nil)
             guard let nav = split.viewControllers[1] as? UINavigationController else { return }
             nav.pushViewController(mainInfo, animated: false)
             tokenService.updateSelectedToken(to: tokenAddress)
@@ -418,10 +419,11 @@ extension AppDelegate : MessagingDelegate {
         }else {
             let tabBar = CreateVC(byName: "MainTabController") as! BaseTabBarController
             window?.rootViewController = tabBar
-            guard !PasscodeEnterController.isLocked else { return }
-            let passcodeVC = CreateVC(byName: "passcodeEnterController") as! PasscodeEnterController
-            passcodeViewController = passcodeVC
-            window?.rootViewController?.present(passcodeVC, animated: true, completion: nil)
+            
+            guard passcodeViewController == nil else { return }
+            
+            showPasscode(context: .background)
+            
             let tab = rootVC() as! BaseTabBarController
             tab.selectedIndex = 0
             guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return }
