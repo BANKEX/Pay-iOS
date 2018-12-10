@@ -474,10 +474,12 @@ extension AppDelegate:PasscodeEnterControllerDelegate {
             passcodeWindow?.rootViewController = passcodeVC
             passcodeWindow?.makeKeyAndVisible()
         }
+        
+        passcodeVC.context = context
     }
     
-    func didFinish(_ context: Context, vc: PasscodeEnterController) {
-        switch context {
+    func didFinish(vc: PasscodeEnterController) {
+        switch vc.context {
         case .initial:
             passcodeWindow = nil
             guard let latestVC = UIApplication.topViewController() else { return }
