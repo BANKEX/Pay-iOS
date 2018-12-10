@@ -70,6 +70,39 @@ class TransactionsService {
         return true
     }
     
+    func requestGasPrice(onComplition:@escaping (Double?) -> Void) {
+        let path = "https://ethgasstation.info/json/ethgasAPI.json"
+        guard let url = URL(string: path) else {
+            DispatchQueue.main.async {
+                onComplition(nil)
+            }
+            return
+        }
+        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                printDebug(error.localizedDescription)
+                DispatchQueue.main.async {
+                    onComplition(nil)
+                }
+                return
+            }
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
+                    let gasPrice = json?["average"] as? Double
+                    DispatchQueue.main.async {
+                        onComplition(gasPrice)
+                    }
+                }catch {
+                    DispatchQueue.main.async {
+                        onComplition(nil)
+                    }
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
     //A function which purpose is to load data from the network and merge it with transactions, that already exists
     func refreshTransactionsInSelectedNetwork(type: TrType?,forAddress address: String,node:Node?, completion: @escaping(Bool) -> Void) {
         let checkedNode = choosenNode(node) ? node! : currentNode

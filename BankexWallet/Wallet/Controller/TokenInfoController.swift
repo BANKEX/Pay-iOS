@@ -8,6 +8,7 @@
 
 import UIKit
 import web3swift
+import Amplitude_iOS
 
 protocol TokenInfoControllerDelegate:class {
     func didAddToken()
@@ -87,6 +88,9 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
                                         name: foundModel.name,
                                         decimals: foundModel.decimals,
                                         symbol: foundModel.symbol)
+        
+        Amplitude.instance().logEvent("Token Created")
+        
         delegate?.didAddToken()
         handleToken(foundModel)
     }
