@@ -477,8 +477,8 @@ extension AppDelegate:PasscodeEnterControllerDelegate {
         passcodeVC.context = context
     }
     
-    func didFinish(vc: PasscodeEnterController) {
-        switch vc.context {
+    func passcodeEnterControllerDidFinish(_ viewController: PasscodeEnterController) {
+        switch viewController.context {
         case .initial:
             passcodeWindow = nil
             guard let latestVC = UIApplication.topViewController() else { return }

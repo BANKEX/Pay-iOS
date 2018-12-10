@@ -10,7 +10,7 @@ import UIKit
 import LocalAuthentication
 
 protocol PasscodeEnterControllerDelegate:class {
-    func didFinish(vc:PasscodeEnterController)
+    func passcodeEnterControllerDidFinish(_: PasscodeEnterController)
 }
 
 class PasscodeEnterController: UIViewController {
@@ -136,7 +136,7 @@ class PasscodeEnterController: UIViewController {
     func enterWallet() {
         PasscodeEnterController.isLocked = false
         
-        delegate?.didFinish(vc: self)
+        delegate?.passcodeEnterControllerDidFinish(self)
     }
     
     func updateUI(_ nums: Int) {
