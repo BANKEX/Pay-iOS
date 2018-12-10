@@ -27,6 +27,7 @@ extension UIColor {
     static let borderColor = UIColor(hex:"8A8A8F").withAlphaComponent(0.3)
     static let shadowColor = UIColor(hex:"848688")
     static let lightBlue = UIColor(hex:"D7E3FA")
+    static let mainTextColor = UIColor(hex: "2E3640")
     
     struct QRReader {
         static let successColor = UIColor(hex: "03B221")

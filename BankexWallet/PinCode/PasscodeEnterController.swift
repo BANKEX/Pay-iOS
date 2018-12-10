@@ -9,10 +9,16 @@
 import UIKit
 import LocalAuthentication
 
+protocol PasscodeEnterControllerDelegate:class {
+    func passcodeEnterControllerDidFinish(_: PasscodeEnterController)
+}
+
 class PasscodeEnterController: UIViewController {
     
     static var isLocked = false
     var isEntering = false
+    weak var delegate: PasscodeEnterControllerDelegate?
+    var context: Context = .initial
     
     enum passcodeStatus: String {
         case enter = "Touch ID or Enter Passcode"
@@ -43,12 +49,7 @@ class PasscodeEnterController: UIViewController {
     var turnOnTouchID:Bool {
         return UserDefaults.standard.bool(forKey: Keys.openSwitch.rawValue)
     }
-    var fromBackground:Bool {
-        guard let vc = currentPasscodeViewController, vc.navigationController == nil else { return false }
-        return true
-    }
     var numsIcons: [UIImageView]?
-    var instanciatedFromSend = false
     var isAvailableTouchID:Bool {
         let context = LAContext()
         var error: NSError?
@@ -115,7 +116,8 @@ class PasscodeEnterController: UIViewController {
     
     private func configureBackground() {
         UIApplication.shared.statusBarView?.backgroundColor = nil
-        if instanciatedFromSend {
+        
+        if context == .sendScreen {
             backgroundImageView.image = UIImage(named: "pin-greybackground")
         }
     }
@@ -133,16 +135,8 @@ class PasscodeEnterController: UIViewController {
     
     func enterWallet() {
         PasscodeEnterController.isLocked = false
-        if self.instanciatedFromSend {
-            self.performSegue(withIdentifier: "backToSend", sender: nil)
-        } else {
-            if self.fromBackground {
-                self.dismiss(animated: true, completion: nil)
-                currentPasscodeViewController = nil
-            } else {
-                self.performSegue(withIdentifier: "showProcessFromPin", sender: self)
-            }
-        }
+        
+        delegate?.passcodeEnterControllerDidFinish(self)
     }
     
     func updateUI(_ nums: Int) {
