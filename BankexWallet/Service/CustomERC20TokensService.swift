@@ -48,6 +48,8 @@ protocol CustomERC20TokensService {
     func updateConversions()
     
     func getNewConversion(for token: String)
+    
+    func ethToken() -> ERC20TokenModel
 }
 
 
@@ -393,6 +395,10 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
             
         }
         return listOfNetworks
+    }
+    
+    func ethToken() -> ERC20TokenModel {
+        return etherModel()
     }
     
     private func etherModel() -> ERC20TokenModel {
