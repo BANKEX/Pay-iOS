@@ -226,8 +226,6 @@
 		F058764D2057BAE5007CF0E1 /* AddressQRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */; };
 		F05C59FB209E19B400F22E3F /* FiatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C59FA209E19B300F22E3F /* FiatService.swift */; };
 		F075A451204BF4EE001949A9 /* TransactionHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */; };
-		F09FAEB220A4517B008D6AD7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F09FAEB020A4517A008D6AD7 /* Crashlytics.framework */; };
-		F09FAEB320A4517B008D6AD7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F09FAEB120A4517A008D6AD7 /* Fabric.framework */; };
 		F0B1B4C5205944E1009D76D5 /* CustomERC20TokensService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4C4205944E1009D76D5 /* CustomERC20TokensService.swift */; };
 		F0B1B4CA20594D53009D76D5 /* CustomTokenUtilsServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4C620594AB0009D76D5 /* CustomTokenUtilsServiceImplementation.swift */; };
 		F0B1B4D2205AAC95009D76D5 /* CreateTokenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B4D1205AAC95009D76D5 /* CreateTokenController.swift */; };
@@ -518,8 +516,6 @@
 		F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressQRCodeController.swift; sourceTree = "<group>"; };
 		F05C59FA209E19B300F22E3F /* FiatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiatService.swift; sourceTree = "<group>"; };
 		F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryCell.swift; sourceTree = "<group>"; };
-		F09FAEB020A4517A008D6AD7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
-		F09FAEB120A4517A008D6AD7 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		F0B1B4C4205944E1009D76D5 /* CustomERC20TokensService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomERC20TokensService.swift; sourceTree = "<group>"; };
 		F0B1B4C620594AB0009D76D5 /* CustomTokenUtilsServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTokenUtilsServiceImplementation.swift; sourceTree = "<group>"; };
 		F0B1B4D1205AAC95009D76D5 /* CreateTokenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenController.swift; sourceTree = "<group>"; };
@@ -538,9 +534,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F09FAEB220A4517B008D6AD7 /* Crashlytics.framework in Frameworks */,
 				C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */,
-				F09FAEB320A4517B008D6AD7 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,8 +725,6 @@
 				81C4333A201B3B48008D3343 /* Constants */,
 				81942F10201B36A300F0AE29 /* Assets.xcassets */,
 				81942F12201B36A300F0AE29 /* LaunchScreen.storyboard */,
-				F09FAEB020A4517A008D6AD7 /* Crashlytics.framework */,
-				F09FAEB120A4517A008D6AD7 /* Fabric.framework */,
 				86A6F8BC2145352200609413 /* Localization */,
 			);
 			path = BankexWallet;
@@ -1634,7 +1626,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 442fbe5690d8ec206a70df703eb405a2aefdfd3c 9804bdf278c67e8459c88ab9309b16c930496edd25ed5413e72033a07f5c0041\n";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 5b2cfd1743e96d92261c59fb94482a93c8ec4e13 2825448f1135487bf64ad36e2b0416ff2d3bf067540a9089c397a793d62d73b7\n";
 		};
 		F99A2D9B6BE0ECA6BB8C7B27 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -19,6 +19,8 @@ target 'BankexWallet' do
   pod 'VisualEffectView'
   pod 'GrowingTextView', '0.6.1'
   pod 'SDWebImage', '~> 4.0'
+  pod 'Fabric'
+  pod 'Crashlytics'
 
   target 'BankexWalletTests' do
     inherit! :search_paths
