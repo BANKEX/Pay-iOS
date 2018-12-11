@@ -230,7 +230,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         tokensButton.setImage(UIImage(named: "Arrow Down"), for: .normal)
         tokensButton.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0)
         tokensButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
-        let title = tokensService.selectedERC20Token().symbol.uppercased()
+        let title = tokensService.ethToken().symbol.uppercased()
         tokensButton.setTitle(title, for: .normal)
         tokensButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         tokensButton.setTitleColor(UIColor.mainColor, for: .normal)
