@@ -3,7 +3,7 @@
 //  BankexWallet
 //
 //  Created by Korovkina, Ekaterina  on 4/4/2561 BE.
-//  Copyright © 2561 Alexander Vlasov. All rights reserved.
+//  Copyright © 2561 BANKEX Foundation. All rights reserved.
 //
 
 import UIKit

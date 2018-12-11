@@ -3,7 +3,7 @@
 //  BankexWallet
 //
 //  Created by Vladislav on 14.09.2018.
-//  Copyright © 2018 Alexander Vlasov. All rights reserved.
+//  Copyright © 2018 BANKEX Foundation. All rights reserved.
 //
 
 import UIKit

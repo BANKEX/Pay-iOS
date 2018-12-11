@@ -3,7 +3,7 @@
 //  BankexWalletUITests
 //
 //  Created by Георгий Фесенко on 30.05.2018.
-//  Copyright © 2018 Alexander Vlasov. All rights reserved.
+//  Copyright © 2018 BANKEX Foundation. All rights reserved.
 //
 
 import XCTest
