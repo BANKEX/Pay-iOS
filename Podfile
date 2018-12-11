@@ -1,10 +1,7 @@
 platform :ios, '9.0'
 
 target 'BankexWallet' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  # Pods for BankexWallet
-  #pod 'web3swift', :path => '../web3swift'
   pod 'web3swift', '<= 1.1.1'
   pod "SugarRecord/CoreData", '<= 3.1'
   pod 'Popover'
@@ -13,7 +10,6 @@ target 'BankexWallet' do
   pod 'Firebase/DynamicLinks'
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Messaging'
-  pod 'Firebase/Crash'
   pod 'ReachabilitySwift'
   pod 'SkeletonView'
   pod 'VisualEffectView'
@@ -29,7 +25,6 @@ target 'BankexWallet' do
 
   target 'BankexWalletUITests' do
     inherit! :search_paths
-    # Pods for testing
   end
 
 end

@@ -60,6 +60,9 @@ NSString *const kFIRDLReadDeepLinkAfterInstallKey =
 // We should only open url once. We use the following key to store the state in the user defaults.
 static NSString *const kFIRDLOpenURLKey = @"com.google.appinvite.openURL";
 
+// Custom domains to be whitelisted are optionally added as an array to the info.plist.
+static NSString *const kInfoPlistCustomDomainsKey = @"FirebaseDynamicLinksCustomDomains";
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FIRDynamicLinks () <FIRDLRetrievalProcessDelegate>
@@ -188,8 +191,8 @@ NS_ASSUME_NONNULL_BEGIN
                                                       service:kFIRServiceDynamicLinks
                                                        reason:errorDescription];
   }
-  [app sendLogsWithServiceName:kFIRServiceDynamicLinks version:kFIRDLVersion error:error];
   if (error) {
+    [app sendLogsWithServiceName:kFIRServiceDynamicLinks version:kFIRDLVersion error:error];
     NSString *message = nil;
     if (options.usingOptionsFromDefaultPlist) {
       // Configured using plist file
@@ -215,6 +218,12 @@ NS_ASSUME_NONNULL_BEGIN
               error.localizedFailureReason];
     }
     [NSException raise:kFirebaseDurableDeepLinkErrorDomain format:@"%@", message];
+  }
+  // Check to see if FirebaseDynamicLinksCustomDomains array is present.
+  NSDictionary *infoDictionary = [NSBundle mainBundle].infoDictionary;
+  NSArray *customDomains = infoDictionary[kInfoPlistCustomDomainsKey];
+  if (customDomains) {
+    FIRDLAddToAllowListForCustomDomainsArray(customDomains);
   }
 }
 
@@ -422,10 +431,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)handleUniversalLink:(NSURL *)universalLinkURL
                  completion:(FIRDynamicLinkUniversalLinkHandler)completion {
   if ([self matchesShortLinkFormat:universalLinkURL]) {
-    __weak typeof(self) weakSelf = self;
+    __weak __typeof__(self) weakSelf = self;
     [self resolveShortLink:universalLinkURL
                 completion:^(NSURL *url, NSError *error) {
-                  typeof(self) strongSelf = weakSelf;
+                  __typeof__(self) strongSelf = weakSelf;
                   if (strongSelf) {
                     FIRDynamicLink *dynamicLink = [strongSelf dynamicLinkFromCustomSchemeURL:url];
                     dispatch_async(dispatch_get_main_queue(), ^{
