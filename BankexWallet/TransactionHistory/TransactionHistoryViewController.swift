@@ -174,7 +174,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         let selAddr = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
         guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
         tokensService.updateSelectedToken(to: token.address, completion: {
-            self.tokenView.tokenSymbol = name
+            self.tokenView.tokenSymbol = name.uppercased()
             self.updateTransactions(address: selAddr, status: self.currentState)
             self.updateUI()
         })
@@ -226,8 +226,9 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     //MARK: - Helpers
     private func addTokensButton() {
-        tokenView = TokenArrow(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
-        tokenView.tokenSymbol = tokensService.selectedERC20Token().symbol
+        //tokenView = TokenArrow(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        tokenView = TokenArrow.loadFromNib()
+        tokenView.tokenSymbol = tokensService.selectedERC20Token().symbol.uppercased()
         tokenView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showTokensButtonTapped)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: tokenView)
     }

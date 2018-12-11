@@ -12,37 +12,20 @@ import UIKit
 class TokenArrow: UIView {
     
     @IBOutlet private var symbolTokenLabel: UILabel!
-    @IBOutlet private var contentView:UIView?
     
-    public var tokenSymbol:String = "" {
-        didSet {
-            if oldValue != tokenSymbol {
-                updateUI()
-            }
+    public var tokenSymbol:String? {
+        get {
+            return symbolTokenLabel.text
+        }
+        set {
+            symbolTokenLabel.text = newValue
         }
     }
 
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    private func commonInit() {
-        Bundle.main.loadNibNamed("TokenArrow", owner: self, options: nil)
-        guard let content = contentView else { return }
-        content.frame = self.bounds
-        content.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        self.addSubview(content)
-    }
-    
-    private func updateUI() {
-        symbolTokenLabel.text = tokenSymbol.uppercased()
+    class func loadFromNib() -> TokenArrow {
+        let nib = UINib(nibName: "TokenArrow", bundle: nil)
+        return nib.instantiate(withOwner: nil, options: nil).first as! TokenArrow
     }
     
     
