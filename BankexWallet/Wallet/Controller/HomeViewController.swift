@@ -8,6 +8,7 @@
 
 import UIKit
 import Amplitude_iOS
+import MessageUI
 
 struct TokenShortService {
     static var arrayTokensShort:[TokenShort] = []
@@ -214,13 +215,13 @@ class HomeViewController: BaseViewController {
         performSegue(withIdentifier: "AssetManagementContacts", sender: self)
     }
     
-    @IBAction func showPerformEthTransfer() {
+    @IBAction func __disabled_feature_showPerformEthTransfer() {
         Amplitude.instance()?.logEvent("Asset Management ETH Screen Opened")
         
         performSegue(withIdentifier: "AssetManagementEth", sender: self)
     }
     
-    @IBAction func showPerformBtcTransfer() {
+    @IBAction func __disabled_feature_showPerformBtcTransfer() {
         Amplitude.instance()?.logEvent("Asset Management BTC Screen Opened")
         
         performSegue(withIdentifier: "AssetManagementBtc", sender: self)
@@ -462,6 +463,42 @@ extension HomeViewController {
             viewController.link = URL(string: "https://bankex.com/en/sto/asset-management")!
             viewController.showDismissButton = true
         }
+    }
+    
+}
+
+extension HomeViewController: MFMailComposeViewControllerDelegate {
+    
+    private func sendAssetManagementRequestEmail(for token: String) {
+        let mailComposeViewController: MFMailComposeViewController? = MFMailComposeViewController()
+        
+        guard let viewController = mailComposeViewController else { return }
+        
+        let subject = "Request \(token) Asset management"
+        let message = "Request Asset management"
+        
+        viewController.mailComposeDelegate = self
+        viewController.setToRecipients(["sales@bankex.com"])
+        viewController.setSubject(subject)
+        viewController.setMessageBody(message, isHTML: false)
+        
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func showPerformEthTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management ETH Email Opened")
+        
+        sendAssetManagementRequestEmail(for: "ETH")
+    }
+    
+    @IBAction func showPerformBtcTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management BTC Email Opened")
+        
+        sendAssetManagementRequestEmail(for: "BTC")
     }
     
 }
