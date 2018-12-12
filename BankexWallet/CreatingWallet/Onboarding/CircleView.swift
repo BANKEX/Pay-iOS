@@ -26,8 +26,8 @@ class CircleView: UIView {
         }
     }
     @IBInspectable var strokeWidth: CGFloat = 2.7
-    @IBInspectable var strokeColor: UIColor = WalletColors.circleColor
-    @IBInspectable var fillColor: UIColor = WalletColors.blackColor
+    @IBInspectable var strokeColor: UIColor = UIColor.circleColor
+    @IBInspectable var fillColor: UIColor = UIColor.blackColor
     
     override func draw(_ rect: CGRect) {
         let bezierPath = UIBezierPath(circleIn: rect)

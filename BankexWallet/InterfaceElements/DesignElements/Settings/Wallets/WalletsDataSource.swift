@@ -34,9 +34,9 @@ extension WalletsViewController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView()
         if WalletsSections.CurrentWallet.rawValue == section {
-            headerView.title = "CURRENT WALLET"
+            headerView.title = NSLocalizedString("CurrentWallet", comment: "")
         }else {
-            headerView.title = "CHOOSE A WALLET"
+            headerView.title = NSLocalizedString("ChooseWallet", comment: "")
         }
         return headerView
     }

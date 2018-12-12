@@ -71,7 +71,6 @@ extension FavoriteModel {
         let attributeSet = CSSearchableItemAttributeSet(
             itemContentType: kUTTypeContact as String)
         attributeSet.title = name
-        attributeSet.contentDescription = note ?? ""
         attributeSet.keywords = [name,address]
         attributeSet.relatedUniqueIdentifier = self.uniqueIdentifier
         return attributeSet

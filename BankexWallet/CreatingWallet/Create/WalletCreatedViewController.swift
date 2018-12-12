@@ -23,20 +23,24 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         walletAddressLabel.text = address
-        navigationBarSetup()
-
     }
     
-    @objc func editButtonTapped() {
-        performSegue(withIdentifier: "showEdit", sender: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        statusBarColor(UIDevice.isIpad ? .white : UIColor.greenColor)
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
-    func navigationBarSetup() {
-        title = NSLocalizedString("Creating Wallet", comment: "")
-        let editBtn = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
-        editBtn.accessibilityLabel = "EditBtn"
-        navigationItem.rightBarButtonItem = editBtn
-        navigationItem.setHidesBackButton(true, animated: false)
+    @IBAction func editButtonTapped() {
+        if UIDevice.isIpad {
+            let editVC = CreateVC(byName: "EditWalletNameController") as! EditWalletNameController
+            editVC.addCancelButtonIfNeed()
+            editVC.delegate = self
+            presentPopUp(editVC, shower: tabBarController)
+        }else {
+            performSegue(withIdentifier: "showEdit", sender: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,10 +67,30 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func presentPasscode() {
+        let passcode = CreateVC(byName: "PasscodeIpadVC") as! PasscodeIpadVC
+        passcode.delegate = self
+        passcode.modalPresentationStyle = .formSheet
+        passcode.preferredContentSize = CGSize(width: 320, height: 600)
+        present(passcode, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func nextButtonTapped(_ sender: Any) {
+        if UIDevice.isIpad && !UserDefaults.standard.bool(forKey: "passcodeExists") {
+            presentPasscode()
+        }else {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "showProcessFromCreation", sender: self)
+            }
+        }
+    }
+}
+
+extension WalletCreatedViewController:PasscodeIpadVCDelegate {
+    func didCreate() {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "showProcessFromCreation", sender: self)
         }
-        //WalletCreationTypeRouterImplementation().exitFromTheScreen()
     }
 }

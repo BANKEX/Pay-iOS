@@ -21,11 +21,18 @@ struct HistoryMediator {
 
 
 class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITextViewDelegate {
+    
+    enum State {
+        case loading,empty,fill
+    }
+    
 
     @IBOutlet weak var nameContactLabel:UILabel!
     @IBOutlet weak var addrContactLabel:UILabel!
     @IBOutlet weak var infoView:UIView!
     @IBOutlet weak var tableVIew:UITableView!
+    @IBOutlet weak var seeAllBtn:UIButton!
+    @IBOutlet weak var heightConstraint:NSLayoutConstraint!
 
     //MARK: - Properties
 
@@ -33,31 +40,52 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let delButton = UIAlertAction(title:NSLocalizedString("Delete", comment: ""), style: .destructive) { _ in
             guard let address = self.addrContactLabel?.text, self.service.contains(address: address) else { return }
-            self.service.delete(with: address) {
+            self.service.delete(with: address) { _ in
                 self.searchManager.deindex()
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
+                self.navigationController?.popViewController(animated: true)
             }
         }
         alertVC.addAction(delButton)
         alertVC.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default))
         return alertVC
     }()
+    var state:State = .loading {
+        didSet {
+            switch state {
+            case .loading:
+                tableVIew.isHidden = true
+                seeAllBtn.isHidden = true
+            case .empty:
+                tableVIew.isHidden = false
+                seeAllBtn.isHidden = true
+            case .fill:
+                tableVIew.isHidden = false
+                seeAllBtn.isHidden = false
+            }
+        }
+    }
     var transactions:[ETHTransactionModel] = []
-    let service = RecipientsAddressesServiceImplementation()
+    let service = ContactService()
     var selectedContact:FavoriteModel!
     var searchManager:SearchManager!
     var sendService = SendEthServiceImplementation()
-
+    var clipboardView:ClipboardView!
 
 
     //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupClipboardView()
         commonPrepare()
         configureTableView()
         prepareUserActivity()
+    }
+    
+    func setupClipboardView() {
+        clipboardView = ClipboardView(frame: CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58))
+        clipboardView.title = "Address copied to clipboard"
+        clipboardView.color = UIColor.clipboardColor
+        view.addSubview(clipboardView)
     }
   
 
@@ -65,8 +93,12 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         super.viewWillAppear(animated)
         manageTop()
         updateUI()
-        view.showSkeleton()
-        TransactionsService().refreshTransactionsInSelectedNetwork(forAddress: selectedContact!.address) { isGood in
+        state = .loading
+        updateTransactions()
+    }
+    
+    func updateTransactions() {
+        TransactionsService().refreshTransactionsInSelectedNetwork(type: .ETH, forAddress: selectedContact!.address, node: nil) { isGood in
             if isGood {
                 self.transactions = Array(self.sendService.getAllTransactions(addr:nil).prefix(3).filter({ tr -> Bool in
                     if tr.to == self.selectedContact.address.lowercased() {
@@ -74,9 +106,8 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
                     }
                     return false
                 }))
+                self.state = self.transactions.isEmpty ? .empty : .fill
                 self.tableVIew.reloadData()
-                self.view.stopSkeletonAnimation()
-                self.view.hideSkeleton()
             }else {
                 print("Appear error")
             }
@@ -102,7 +133,15 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     }
     
     @IBAction func editContact() {
-        self.performSegue(withIdentifier: "editSegue", sender: nil)
+        if UIDevice.isIpad {
+            let editContact = CreateVC(byName: "EditViewController") as! EditViewController
+            editContact.addCancelButtonIfNeed()
+            editContact.delegate = self
+            editContact.selectedContact = selectedContact
+            presentPopUp(editContact, size: CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height/2))
+        }else {
+            self.performSegue(withIdentifier: "editSegue", sender: nil)
+        }
     }
 
 
@@ -112,28 +151,31 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     }
     
     private func commonPrepare() {
-        title = "Contacts"
-        infoView.backgroundColor = WalletColors.mainColor
+        title = NSLocalizedString("Contacts", comment: "")
+        infoView.backgroundColor = UIColor.mainColor
     }
     
     private func manageTop(isHide:Bool = true) {
         if isHide {
-            navigationController?.setNavigationBarHidden(isHide, animated: true)
-            navigationController?.navigationBar.barTintColor = WalletColors.mainColor
+            navigationController?.setNavigationBarHidden(isHide, animated: false)
+            navigationController?.navigationBar.barTintColor = UIColor.mainColor
             navigationController?.navigationBar.tintColor = .white
-            UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
-            UIApplication.shared.statusBarStyle = .lightContent
+            UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.mainColor
+            UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
             return
         }
         navigationController?.isNavigationBarHidden = isHide
         navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = WalletColors.mainColor
-        UIApplication.shared.statusBarView?.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = UIColor.mainColor
         UIApplication.shared.statusBarStyle = .default
     }
     
     @IBAction func seeAll() {
-        tabBarController?.selectedIndex = 1
+        if UIDevice.isIpad {
+            selectSection(1)
+        }else {
+           tabBarController?.selectedIndex = 1
+        }
         HistoryMediator.addr = selectedContact.address
     }
 
@@ -141,8 +183,17 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         tableVIew.delegate = self
         tableVIew.dataSource = self
         tableVIew.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
-        tableVIew.backgroundColor = WalletColors.bgMainColor
-        tableVIew.isScrollEnabled = false
+        tableVIew.register(UINib(nibName: EmptyTableCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyTableCell.identifier)
+        tableVIew.register(UINib(nibName: DeleteCell.identifier, bundle: nil), forCellReuseIdentifier: DeleteCell.identifier)
+        tableVIew.backgroundColor = UIColor.bgMainColor
+        tableVIew.isScrollEnabled = true
+        heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 1/4.76 : 1/3.3)
+        if #available(iOS 11.0, *) {
+            tableVIew.separatorInsetReference = .fromCellEdges
+        } else {
+        }
+        tableVIew.separatorInset.left = 48
+        tableVIew.tableFooterView = UIDevice.isIpad ? UIView() : footerTableView
     }
     
     
@@ -161,35 +212,59 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         nameContactLabel.text = selectedContact.name
         addrContactLabel.text = selectedContact.address.formattedAddrToken(number: 5)
     }
-
-
     
+    
+    func removeContact() {
+        let alertViewController = UIAlertController(title: "Delete contact?", message: nil, preferredStyle: .alert)
+        alertViewController.addCancel()
+        alertViewController.addDestructive(title: NSLocalizedString("Delete", comment: "")) {
+            self.service.delete(with: self.selectedContact.address, completionHandler: { isSuccess in
+                if isSuccess {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+        }
+        alertViewController.addPopover(in: view, rect: CGRect(x: 0, y: 0, width: 270, height: 105))
+        present(alertViewController, animated: true)
+    }
 
     //MARK: - IBAction
-
+    
     @IBAction func sendFunds() {
+        if UIDevice.isIpad {
+            selectSection(0)
+        }
         self.performSegue(withIdentifier: "isFromContact", sender: nil)
     }
 
 
     @IBAction func shareContact() {
-        let text = "Name:\n\(selectedContact!.name)\nAddress:\n\(selectedContact!.address)"
+        let text = "\(selectedContact!.address)"
         let activity = UIActivityViewController.activity(content: text)
-        if let popOver = activity.popoverPresentationController {
-            popOver.sourceView = view
-            popOver.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY, width: 0, height: 0)
-            popOver.permittedArrowDirections = []
-            present(activity, animated: true)
-            return
+        activity.completionWithItemsHandler = { (type, isSuccess, items, error) in
+            if isSuccess && error == nil {
+                self.clipboardView.showClipboard()
+            }
+        }
+        if UIDevice.isIpad {
+            activity.addPopover(in: view, rect: CGRect(x: view.bounds.midX, y: view.bounds.maxY, width: 0, height: 0))
         }
         present(activity, animated: true)
     }
-
 }
 
 extension ProfileContactViewController:EditViewContollerDelegate {
     func didUpdateContact(name: String, address: String) {
-        selectedContact = service.getAddressByAddress(address)
+        service.contactByAddress(address) { contact in
+            self.selectedContact = contact
+            self.updateUI()
+        }
+    }
+}
+
+extension ProfileContactViewController:DeleteCellDelegate {
+    func didTapRemoveButton() {
+        removeContact()
     }
 }
 
@@ -208,22 +283,57 @@ extension ProfileContactViewController:UITableViewDataSource,UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactions.count
+        if UIDevice.isIpad && transactions.isEmpty {
+            return 2
+        }else if !UIDevice.isIpad && transactions.isEmpty {
+            return 1
+        }else if !transactions.isEmpty && UIDevice.isIpad {
+            return transactions.count + 1
+        }else {
+            return transactions.count
+        }
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if transactions.isEmpty && indexPath.row == 0 {
+            let emptyCell = tableView.dequeueReusableCell(withIdentifier: EmptyTableCell.identifier, for: indexPath) as! EmptyTableCell
+            emptyCell.setData("You don't have any transaction history yet")
+            return emptyCell
+        }else if transactions.isEmpty && UIDevice.isIpad && indexPath.row == 1 {
+            let delCell = tableView.dequeueReusableCell(withIdentifier: DeleteCell.identifier, for: indexPath) as! DeleteCell
+            delCell.delegate = self
+            return delCell
+        }else if indexPath.row == transactions.count {
+            let delCell = tableView.dequeueReusableCell(withIdentifier: DeleteCell.identifier, for: indexPath) as! DeleteCell
+            delCell.delegate = self
+            return delCell
+        }
         let cell = tableVIew.dequeueReusableCell(withIdentifier: TransactionInfoCell.identifer, for: indexPath) as! TransactionInfoCell
         cell.transaction = transactions[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 53.0
+        if transactions.isEmpty && UIDevice.isIpad && indexPath.row == 0 {
+            return 240
+        }else if transactions.isEmpty && !UIDevice.isIpad {
+            return tableVIew.bounds.height
+        }else if (transactions.isEmpty && UIDevice.isIpad && indexPath.row == 1) || transactions.count == indexPath.row {
+            return 44
+        }else if !transactions.isEmpty && UIDevice.isIpad && indexPath.row == transactions.count - 1 {
+            return 71
+        }else {
+            return 53
+        }
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if UIDevice.isIpad && indexPath.row == transactions.count {
+            removeContact()
+        }else if UIDevice.isIpad && transactions.isEmpty && indexPath.row == 1 {
+            removeContact()
+        }
     }
 }
 

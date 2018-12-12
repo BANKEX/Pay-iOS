@@ -39,11 +39,11 @@ class RepeatPassphraseViewController: UIViewController {
             
             if wordsAfter == wordsInCorrectOrder {
                 UIView.animate(withDuration: 0.5) {
-                    self.nextButton.backgroundColor = WalletColors.mainColor
+                    self.nextButton.backgroundColor = UIColor.mainColor
                     self.nextButton.isEnabled = true
                 }
             } else {
-                self.nextButton.backgroundColor = WalletColors.disableColor
+                self.nextButton.backgroundColor = UIColor.lightBlue
                 self.nextButton.isEnabled = false
             }
         }
@@ -76,7 +76,7 @@ class RepeatPassphraseViewController: UIViewController {
         super.viewDidLoad()
         navigationBarSetup()
         nextButton.isEnabled = false
-        nextButton.backgroundColor = WalletColors.disableColor
+        nextButton.backgroundColor = UIColor.lightBlue
         setupManagers()
         
     }
@@ -89,12 +89,15 @@ class RepeatPassphraseViewController: UIViewController {
                 sender.isEnabled = true
                 Amplitude.instance().logEvent("Wallet Created")
                 if !UserDefaults.standard.bool(forKey: "passcodeExists") {
-                    error == nil ? self.performSegue(withIdentifier: "goToPinFromCreate", sender: nil) :
-                        self.showWalletCreationAllert()
+                    if UIDevice.isIpad {
+                        error == nil ? self.performSegue(withIdentifier: "toWalletCreated", sender: nil) : self.showWalletCreationAllert()
+                    }else {
+                        error == nil ? self.performSegue(withIdentifier: "goToPinFromCreate", sender: nil) :
+                            self.showWalletCreationAllert()
+                    }
                 } else {
                     error == nil ? self.performSegue(withIdentifier: "toWalletCreated", sender: nil) : self.showWalletCreationAllert()
                 }
-                
             }
         }
         
@@ -118,7 +121,7 @@ class RepeatPassphraseViewController: UIViewController {
     
     func navigationBarSetup() {
         navigationItem.title = NSLocalizedString("Creating Wallet", comment: "")
-        let button = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        let button = UIBarButtonItem(title: NSLocalizedString("Back", comment: ""), style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.topItem?.backBarButtonItem = button
     }
     

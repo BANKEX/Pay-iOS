@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import web3swift
+import Amplitude_iOS
+
+protocol TokenInfoControllerDelegate:class {
+    func didAddToken()
+}
 
 class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,14 +22,16 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     var token: ERC20TokenModel?
+    let utilsService = CustomTokenUtilsServiceImplementation()
     
     
     var forAdding: Bool = false
     
+    weak var delegate:TokenInfoControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Add New Token"
+        title = NSLocalizedString("AddNewToken", comment: "")
         setTableView()
 //        if token == nil && keysService.selectedWallet()?.name == nil {
 //            tokensService.getNewConversion(for: (token?.symbol.uppercased())!)
@@ -81,6 +89,52 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
                                         decimals: foundModel.decimals,
                                         symbol: foundModel.symbol)
         
+        Amplitude.instance().logEvent("Token Created")
+        
+        delegate?.didAddToken()
+        handleToken(foundModel)
+    }
+    
+    func handleToken(_ token:ERC20TokenModel) {
+        guard let adddedTokens = tokensService.availableTokensList()?.count else { return }
+        updateBalance(token) { (balance) in
+            let shortToken = TokenShort(name: token.name, balance: balance!)
+            if (adddedTokens - 1) <= 2 {
+                if !TokenShortService.arrayTokensShort.contains(shortToken) {
+                    TokenShortService.arrayTokensShort.append(shortToken)
+                    TokenShortService.arrayTokensShort.sort { Double($0.balance)! > Double($1.balance)! }
+                    Storage.store(Array(TokenShortService.arrayTokensShort.prefix(2)), as: "tokens.json")
+                }
+            }else {
+                let secondToken = TokenShortService.arrayTokensShort.last!
+                let firstToken = TokenShortService.arrayTokensShort.first!
+                if Double(secondToken.balance)! < Double(balance!)! {
+                    if Double(firstToken.balance)! > Double(balance!)! {
+                        TokenShortService.arrayTokensShort[1] = shortToken
+                    }else {
+                        TokenShortService.arrayTokensShort[0] = shortToken
+                    }
+                    Storage.store(Array(TokenShortService.arrayTokensShort.prefix(2)), as: "tokens.json")
+                }
+            }
+        }
+    }
+    
+    
+    func updateBalance(_ token:ERC20TokenModel,_ onComplition:@escaping ((String)?)->()) {
+        utilsService.getBalance(for: token.address, address: keysService.selectedAddress() ?? "") { (result) in
+            
+            switch result {
+            case .Success(let response):
+                // TODO: it shouldn't be here anyway and also, lets move to background thread
+                let formattedAmount = Web3.Utils.formatToEthereumUnits(response,
+                                                                       toUnits: .eth,
+                                                                       decimals: 8)
+                onComplition(formattedAmount!)
+            case .Error( _):
+                onComplition(nil)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

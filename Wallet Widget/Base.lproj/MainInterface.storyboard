@@ -14,52 +14,31 @@
             <objects>
                 <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="Wallet_Widget" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_widget" translatesAutoresizingMaskIntoConstraints="NO" id="hJT-9u-pux">
-                                <rect key="frame" x="22" y="23" width="64" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="G1A-v6-atR"/>
-                                    <constraint firstAttribute="width" constant="64" id="kyL-JD-Acy"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0081347591 ETH " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jk-mN-agR">
-                                <rect key="frame" x="103" y="25" width="158.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My ETH WALLET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D1-Vx-6KL">
-                                <rect key="frame" x="103" y="53" width="102" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rWC-yv-F0v">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="hJT-9u-pux" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="22" id="4vd-lu-RNL"/>
-                            <constraint firstItem="5jk-mN-agR" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" constant="25" id="IMh-YL-MTQ"/>
-                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="4D1-Vx-6KL" secondAttribute="bottom" constant="41" id="Ww6-WR-Lsn"/>
-                            <constraint firstItem="5jk-mN-agR" firstAttribute="leading" secondItem="hJT-9u-pux" secondAttribute="trailing" constant="17" id="ajX-68-vLO"/>
-                            <constraint firstItem="4D1-Vx-6KL" firstAttribute="leading" secondItem="5jk-mN-agR" secondAttribute="leading" id="eBI-TZ-V1I"/>
-                            <constraint firstItem="hJT-9u-pux" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="k3Q-mG-0cd"/>
+                            <constraint firstItem="rWC-yv-F0v" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" id="1Ck-mG-jxh"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="rWC-yv-F0v" secondAttribute="trailing" id="ULo-za-Npr"/>
+                            <constraint firstItem="rWC-yv-F0v" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="fUc-Zs-wJl"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="rWC-yv-F0v" secondAttribute="bottom" id="wMN-YM-e2S"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="110"/>
+                    <size key="freeformSize" width="320" height="330"/>
                     <connections>
-                        <outlet property="balanceLabel" destination="5jk-mN-agR" id="zYM-F3-V1z"/>
-                        <outlet property="nameWallet" destination="4D1-Vx-6KL" id="aau-Uw-vQt"/>
+                        <outlet property="tableView" destination="rWC-yv-F0v" id="S1E-z3-H2m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
-    <resources>
-        <image name="wallet_widget" width="64" height="64"/>
-    </resources>
 </document>

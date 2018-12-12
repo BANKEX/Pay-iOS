@@ -22,7 +22,7 @@ extension SettingsViewController {
         case SettingsSections.Support.rawValue:
             return 2
         case SettingsSections.Community.rawValue:
-            return 3
+            return 4
         case SettingsSections.Developer.rawValue:
             return 1
         default:
@@ -35,12 +35,14 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let xOffset:CGFloat = UIDevice.isIpad ? 36 : 16
         let headerView = HeaderView()
+        headerView.titleFrame = CGRect(x: xOffset, y: 32.0, width: headerView.frame.width, height: 20)
         switch section {
-        case 0: headerView.title = "GENERAL"
-        case 1: headerView.title = "SUPPORT"
-        case 2: headerView.title = "COMMUNITY"
-        case 3: headerView.title = "DEVELOPER SETTINGS"
+        case 0: headerView.title = NSLocalizedString("General", comment: "")
+        case 1: headerView.title = NSLocalizedString("Support", comment: "")
+        case 2: headerView.title = NSLocalizedString("Community", comment: "")
+        case 3: headerView.title = NSLocalizedString("DevSettings", comment: "")
         default: break
         }
         return headerView

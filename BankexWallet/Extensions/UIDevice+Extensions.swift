@@ -11,6 +11,19 @@ import UIKit
 
 public extension UIDevice {
     
+    
+    static var hasNotch: Bool {
+        if #available(iOS 11.0, *) {
+            return UIApplication.shared.delegate!.window!!.safeAreaInsets.top > 20
+        } else {
+            return false
+        }
+    }
+    
+    static var isIpad:Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     static let modelName: String = {
         var systemInfo = utsname()
         uname(&systemInfo)

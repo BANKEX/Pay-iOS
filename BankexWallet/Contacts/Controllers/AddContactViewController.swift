@@ -10,6 +10,10 @@ import UIKit
 import AVFoundation
 import web3swift
 
+protocol AddContactViewControllerDelegate:class {
+    func didSave()
+}
+
 class AddContactViewController: BaseViewController,UITextFieldDelegate {
     
     @IBOutlet weak var nameContactTextField:UITextField!
@@ -18,7 +22,7 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var pasteButton:UIButton!
     @IBOutlet weak var doneButton:UIButton!
     
-    
+    weak var delegate:AddContactViewControllerDelegate?
     
     enum State {
         case noAvailable,available
@@ -36,15 +40,15 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
         didSet {
             switch state {
             case .available:
-                doneButton.backgroundColor = WalletColors.mainColor
+                doneButton.backgroundColor = UIColor.mainColor
                 doneButton.isEnabled = true
             case .noAvailable:
-                doneButton.backgroundColor = WalletColors.disableColor
+                doneButton.backgroundColor = UIColor.disableColor
                 doneButton.isEnabled = false
             }
         }
     }
-    var service = RecipientsAddressesServiceImplementation()
+    var service = ContactService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,15 +59,36 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
         view.endEditing(true)
     }
     
+    func addCancelButtonIfNeed() {
+        let cancel = UIButton(type: .system)
+        cancel.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        cancel.setTitleColor(UIColor.mainColor, for: .normal)
+        cancel.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        cancel.addTarget(self, action: #selector(fadeOut), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancel)
+    }
+    func addSaveButtonIfNeed() {
+        let save = UIButton(type: .system)
+        save.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
+        save.setTitleColor(UIColor.mainColor, for: .normal)
+        save.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        save.addTarget(self, action: #selector(done), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: save)
+    }
     
+    @objc func fadeOut() {
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         state = .noAvailable
-        navigationController?.navigationBar.barTintColor = WalletColors.mainColor
+        navigationController?.navigationBar.barTintColor = UIDevice.isIpad ? .white : UIColor.mainColor
         navigationController?.navigationBar.tintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.mainColor
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .clear : UIColor.mainColor
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
+        doneButton.isHidden = UIDevice.isIpad ? true : false
+        title = UIDevice.isIpad ? "New Contact" : ""
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,7 +102,7 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        //navigationController?.navigationBar.tintColor = UIColor.mainColor
         UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
     }
@@ -107,20 +132,25 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     @IBAction func done() {
         guard let nameContact = nameContactTextField?.text, let address = addressTextField?.text else { return }
         guard let ethAddress = EthereumAddress(addressTextField?.text ?? "") else {
-            showAlert(with: "Incorrect address", message: "Please enter valid address")
+            showAlert(with: NSLocalizedString("Incorrect", comment: ""), message: NSLocalizedString("ValidAddr", comment: ""))
             return
         }
-        service.store(address: address, with: nameContact , isEditing: false) { (error) in
+        service.saveContact(address: address, with: nameContact) { (error) in
             if error?.localizedDescription == "Address already exists in the database" {
-                self.showAlert(with: "Same Address", message: "Address already exists in your contacts")
+                self.showAlert(with: NSLocalizedString("SameAddr", comment: ""), message: NSLocalizedString("AddrExist", comment: ""))
                 return
             } else if error?.localizedDescription == "Name already exists in the database" {
-                self.showAlert(with: "Same Name", message: "Name already exists in your contacts")
+                self.showAlert(with: NSLocalizedString("SameName", comment: ""), message: NSLocalizedString("NameExist", comment: ""))
                 return
             } else if error != nil {
                 return
             } else {
-                self.navigationController?.popToRootViewController(animated: true)
+                if UIDevice.isIpad {
+                    self.delegate?.didSave()
+                    self.dismiss(animated: true, completion: nil )
+                }else {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
         }
         

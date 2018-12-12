@@ -22,14 +22,14 @@ class CreateTokenController: BaseViewController {
     var needAddTokenAnimation = false
     
     var chosenToken: ERC20TokenModel?
-    
+    var isAnimating = false
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     var tokensList: [ERC20TokenModel]?
     var tokensAvailability: [Bool]?
     var walletData = WalletData()
     lazy var supportView:UIView = {
         let view = UIView()
-        view.backgroundColor = WalletColors.QRReader.successColor
+        view.backgroundColor = UIColor.QRReader.successColor
         return view
     }()
     lazy var supportLbl:UILabel = {
@@ -44,7 +44,7 @@ class CreateTokenController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = WalletColors.bgMainColor
+        view.backgroundColor = UIColor.bgMainColor
         setupNavBar()
         setupTableView()
         setupSupportView()
@@ -55,13 +55,13 @@ class CreateTokenController: BaseViewController {
     
     private func setupSupportView() {
         supportView.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 58.0)
-        supportLbl.frame = CGRect(x: 0, y: supportView.bounds.midY - 15.0, width: supportView.bounds.width, height: 30.0)
+        supportLbl.frame = CGRect(x: 0, y: supportView.bounds.midY - 15.0, width: UIDevice.isIpad ? supportView.bounds.width - splitViewController!.primaryColumnWidth : supportView.bounds.width, height: 30.0)
         supportView.addSubview(supportLbl)
         self.view.addSubview(supportView)
     }
     
     fileprivate func setupTableView() {
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -86,7 +86,8 @@ class CreateTokenController: BaseViewController {
         }
         DispatchQueue.main.async {
             if self.needAddTokenAnimation {
-                self.supportLbl.text = "Token was added to your wallet"
+                self.needAddTokenAnimation = false
+                self.supportLbl.text = NSLocalizedString("TokenAdded", comment: "")
                 UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
                     self.supportView.frame.origin.y = self.view.bounds.height - 58.0
                 }, completion: { _ in
@@ -96,10 +97,8 @@ class CreateTokenController: BaseViewController {
                     })
                 })
             }
-            
             self.searchBar(self.searchBar, textDidChange: searchText)
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -186,32 +185,41 @@ extension CreateTokenController:UITableViewDataSource,UITableViewDelegate {
             let placeholderCell = tableView.dequeueReusableCell(withIdentifier: PlaceholderCell.identifier, for: indexPath) as! PlaceholderCell
             return placeholderCell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as! TokenTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as? TokenTableViewCell
+        cell?.isSearchable = true
         let num = floor(Double(indexPath.row/2))
         let token = tokensList![Int(num)]
-        //        let available = tokensAvailability![indexPath.row]
-        //        cell.configure(with: token, isAvailable: available)
-        cell.token = token
-        cell.isSearchable = true
-        return cell
+        cell?.token = token
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let num = floor(Double(indexPath.row/2))
         let tokenToAdd = self.tokensList![Int(num)]
         if tokenToAdd.isAdded {
-            supportLbl.text = "Token is already added to your wallet"
-            UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
-                self.supportView.frame.origin.y = self.view.bounds.height - 58.0
-            }) { _ in
-                UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
-                    self.supportView.frame.origin.y = self.view.bounds.height
-                })
+            supportLbl.text = NSLocalizedString("tokenIsAdded", comment: "")
+            if !isAnimating {
+                isAnimating = true
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
+                    self.supportView.frame.origin.y = self.view.bounds.height - 58.0
+                }) { _ in
+                    UIView.animate(withDuration: 0.6, delay: 0.5, options: .curveEaseInOut, animations: {
+                        self.supportView.frame.origin.y = self.view.bounds.height
+                    }) { _ in
+                        self.isAnimating = false
+                    }
+                }
             }
             return
         }
         chosenToken = tokenToAdd
         performSegue(withIdentifier: "addChosenToken", sender: self)
+    }
+}
+
+extension CreateTokenController:TokenInfoControllerDelegate {
+    func didAddToken() {
+        //
     }
 }
 

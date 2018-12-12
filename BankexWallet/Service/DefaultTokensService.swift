@@ -8,9 +8,12 @@
 
 import UIKit
 import SugarRecord
+import SDWebImage
 
 protocol DefaultTokensService {
     func downloadAllAvailableTokensIfNeeded( completion: @escaping ()-> Void)}
+
+
 
 class DefaultTokensServiceImplementation: DefaultTokensService {
     
@@ -18,7 +21,6 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
     private let db = DBStorage.db
     private let networksService = NetworksServiceImplementation()
     private let tokensService: UtilTransactionsService = CustomTokenUtilsServiceImplementation()
- 
     
     func downloadAllAvailableTokensIfNeeded( completion: @escaping ()-> Void) {
         if UserDefaults.standard.bool(forKey: defaultsKey) {
@@ -26,7 +28,7 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
             return
         }
     
-        guard let url = URL(string: "https://raw.githubusercontent.com/kvhnuke/etherwallet/mercury/app/scripts/tokens/ethTokens.json") else {
+        guard let url = URL(string: "https://raw.githubusercontent.com/BANKEX/Tokens/master/listTokens") else {
             completion()
             return
         }
@@ -56,6 +58,7 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
                                 newToken.name = newToken.symbol
                                 newToken.decimals = String((dict["decimal"] as? Int) ?? 0)
                                 newToken.networkURL =  self.networksService.preferredNetwork().fullNetworkUrl.absoluteString
+                                newToken.isSecurity = dict["isSecurity"] as? Bool ?? false
                                 try context.insert(newToken)
                                 save()
                                 numberOfAddedTokens -= 1
@@ -121,4 +124,26 @@ class DefaultTokensServiceImplementation: DefaultTokensService {
     
     
 }
+
+extension UIImageView {
+    func setTokenImage(tokenAddress:String) {
+        let prefix: String
+        
+        if tokenAddress.count >= 3 {
+            prefix = "0x" + String(tokenAddress.prefix(3).suffix(1)).uppercased()
+        } else {
+            prefix = ""
+        }
+        
+        let path = "https://raw.githubusercontent.com/BANKEX/Tokens/master/tokenImages/\(prefix)/\(tokenAddress.lowercased()).png"
+        if let url = URL(string:path) {
+            self.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "Group"))
+        }
+    }
+    
+    func setBKXImage() {
+        self.sd_setImage(with: nil, placeholderImage: #imageLiteral(resourceName: "Bankex"))
+    }
+}
+
 

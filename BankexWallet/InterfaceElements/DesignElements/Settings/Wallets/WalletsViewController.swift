@@ -40,6 +40,7 @@ class WalletsViewController: BaseViewController, WalletSelectedDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        splitViewController?.show()
         service.updateSelectedWallet()
         listWallets = (service.fullHDKeysList() ?? [HDKey]()) + (service.fullListOfSingleEthereumAddresses() ?? [HDKey]())
         tableView.reloadData()
@@ -60,13 +61,13 @@ class WalletsViewController: BaseViewController, WalletSelectedDelegate {
     }
     
     func configure() {
-        navigationItem.title = "Wallets"
+        navigationItem.title = NSLocalizedString("Wallets", comment: "")
         tableView.dataSource = self
         tableView.delegate = self
         var btn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goBack(_:)))
         btn.accessibilityLabel = "AddBtn"
         navigationItem.rightBarButtonItem = btn
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.tableFooterView = HeaderView()
     }
     

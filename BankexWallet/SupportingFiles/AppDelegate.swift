@@ -34,18 +34,20 @@ enum ShortcutIdentifier:String {
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    static var isAlreadyLaunchedOnce = false // Used to avoid 2 FIRApp configure
-
     var window: UIWindow?
     var navigationVC:UINavigationController?
     var currentViewController:UIViewController?
-    var service = RecipientsAddressesServiceImplementation()
+    var service = ContactService()
+    var tokenService = CustomERC20TokensServiceImplementation()
     var keyService = SingleKeyServiceImplementation()
     var selectedContact:FavoriteModel?
     let gcmMessageIDKey = "gcm.message_id"
     var selectedAddress:String {
         return keyService.selectedAddress() ?? ""
     }
+    
+    var passcodeWindow: UIWindow?
+    var passcodeViewController: PasscodeEnterController?
     
     enum tabBarPage: Int {
         case main = 0
@@ -89,22 +91,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+//    guard let launchOptions = launchOptions else { return true }
+//    guard let url = launchOptions[.url] as? NSURL else { return true }
+//    handleURL(url as URL)
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        UINavigationBar.appearance().tintColor = WalletColors.mainColor
-        UITextField.appearance().tintColor = WalletColors.mainColor
-        UITextView.appearance().tintColor = WalletColors.mainColor
-        UINavigationBar.appearance().barTintColor = UIColor.white
-        
-
-        if !AppDelegate.isAlreadyLaunchedOnce {
-            FirebaseApp.configure()
-            AppDelegate.isAlreadyLaunchedOnce = true
-            configurePushes()
-        }
+        prepareAppearance()
+        FirebaseApp.configure()
+        configurePushes()
         Amplitude.instance().initializeApiKey("27da55fc989fc196d40aa68b9a163e36")
         Crashlytics.start(withAPIKey: "5b2cfd1743e96d92261c59fb94482a93c8ec4e13")
         Fabric.with([Crashlytics.self])
+        if AutoLockService.shared.getState() == nil {
+            AutoLockService.shared.setDefaultTime()
+        }
         let initialRouter = InitialLogicRouter()
         let isOnboardingNeeded = UserDefaults.standard.value(forKey: "isOnboardingNeeded")
         if isOnboardingNeeded == nil  {
@@ -113,15 +114,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let navigationController = window?.rootViewController as? UINavigationController else {
             return true
         }
-        
         initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
         window?.backgroundColor = .white
         return true
     }
     
+    func showSplitVC() {
+        let splitVC = CreateVC(byName: "BaseSplitViewController") as! BaseSplitViewController
+        window?.rootViewController = splitVC
+        window?.makeKeyAndVisible()
+    }
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         UIApplication.shared.applicationIconBadgeNumber = 0
+        AutoLockService.shared.stopTimer()
     }
+    
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        UIApplication.attachBlur()
+        AutoLockService.shared.launchTimer()
+    }
+    
+    
+    
+    
+    
     
     func configurePushes() {
         // [START set_messaging_delegate]
@@ -149,36 +167,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [END register_for_notifications]
     }
     
-    func showInitialVC() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialNav = storyboard.instantiateInitialViewController() as? UINavigationController
-        self.window?.rootViewController = initialNav
-        window?.makeKeyAndVisible()
-    }
     
-    func showOnboarding() {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let onboarding = storyboard.instantiateViewController(withIdentifier: "OnboardingPage")
-        window?.rootViewController = onboarding
-    }
     
-    func showTabBar() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tabBar = storyboard.instantiateViewController(withIdentifier: "MainTabController") as? BaseTabBarController
-        window?.rootViewController = tabBar
-        window?.makeKeyAndVisible()
-    }
+
 
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        UIApplication.unattachBlur()
         if UserDefaults.standard.value(forKey: Keys.multiSwitch.rawValue) == nil {
             UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
         }
-        if UserDefaults.standard.bool(forKey: Keys.multiSwitch.rawValue) && UserDefaults.standard.bool(forKey: "isNotFirst")  {
-            showPasscode()
+        if UserDefaults.standard.bool(forKey: Keys.multiSwitch.rawValue) && UserDefaults.standard.bool(forKey: "isNotFirst") && !AutoLockService.shared.isRunning  {
+            showPasscode(context: .background)
         }
     }
     
+
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == FavoriteModel.domainIdentifier || userActivity.activityType == CSSearchableItemActionType {
             if let objectID = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String {
@@ -186,16 +190,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     tabViewController.selectedIndex = 2
                         if let vcs = tabViewController.viewControllers, let mainNav = vcs[2] as? BaseNavigationController {
                             if let contactsVC = mainNav.viewControllers.first as? ListContactsViewController {
-                                guard let contact = service.getAddressByAddress(objectID) else { return false }
-                                mainNav.popToRootViewController(animated: false)
-                                contactsVC.chooseContact(contact: contact)
+                                service.contactByAddress(objectID) { contact in
+                                    if let contact = contact {
+                                        mainNav.popToRootViewController(animated: false)
+                                        contactsVC.chooseContact(contact: contact)
+                                    }
+                                }
                                 return true
                             }
                         }
-                }else if let initialNavBar = window?.rootViewController as? BaseNavigationController {
-                    if let addr = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String,let contact = service.getAddressByAddress(addr) {
-                        selectedContact = contact
+                }else if let _ = window?.rootViewController as? BaseNavigationController {
+                    if let addr = userActivity.userInfo![CSSearchableItemActivityIdentifier] as? String {
+                        service.contactByAddress(addr) { contact in
+                            self.selectedContact = contact
+                        }
                     }
+                }else if let splitVC = window?.rootViewController as? UISplitViewController {
+                    let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
+                    let nav = BaseNavigationController(rootViewController: listContactsVC)
+                    let profileVC = CreateVC(byName: "ProfileContactViewController") as! ProfileContactViewController
+                    service.contactByAddress(objectID) { contact in
+                        if let contact = contact {
+                            profileVC.selectedContact = contact
+                            nav.pushViewController(profileVC, animated: false)
+                        }
+                    }
+                    splitVC.showDetailViewController(nav, sender: nil)
                 }
             }
         }
@@ -215,13 +235,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
             print("I am handling a link through the openURL method (custom scheme instead of universal)")
             self.handleIncomingDynamicLink(dynamicLink)
             return true
         } else {
-            return false
+            return handleURL(url)
+        }
+    }
+    
+    
+    
+    @discardableResult
+    func handleURL(_ url:URL) -> Bool {
+        guard let filteredURL = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return true }
+        guard let host = filteredURL.host else { return true }
+        if host == "ether" {
+            if isLaunched {
+                if UIDevice.isIpad { goToMainIpad("", true) } else { goToMain("", true) }
+            }else {
+                if UIDevice.isIpad { goToMainIpad("", false) } else { goToMain("", false) }
+            }
+            return true
+        }else {
+            guard let nameToken = host.components(separatedBy: ".").last else { return true }
+            guard let selectedToken = tokenService.availableTokensList()?.filter({ return $0.name == nameToken }).first else { return true }
+            if isLaunched {
+                if UIDevice.isIpad { goToMainIpad(selectedToken.address, true) } else { goToMain(selectedToken.address, true) }
+            }else {
+                if UIDevice.isIpad { goToMainIpad(selectedToken.address, false) } else { goToMain(selectedToken.address, false) }
+            }
+            return true
         }
     }
     
@@ -289,68 +336,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // With swizzling disabled you must set the APNs token here.
         // Messaging.messaging().apnsToken = deviceToken
     }
-
-    // MARK: - Core Data stack
-
-//    lazy var persistentContainer: NSPersistentContainer = {
-//        /*
-//         The persistent container for the application. This implementation
-//         creates and returns a container, having loaded the store for the
-//         application to it. This property is optional since there are legitimate
-//         error conditions that could cause the creation of the store to fail.
-//        */
-//        let container = NSPersistentContainer(name: "BankexWallet")
-//        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-//            if let error = error as NSError? {
-//                // Replace this implementation with code to handle the error appropriately.
-//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                 
-//                /*
-//                 Typical reasons for an error here include:
-//                 * The parent directory does not exist, cannot be created, or disallows writing.
-//                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-//                 * The device is out of space.
-//                 * The store could not be migrated to the current model version.
-//                 Check the error message to determine what the actual problem was.
-//                 */
-//                fatalError("Unresolved error \(error), \(error.userInfo)")
-//            }
-//        })
-//        return container
-//    }()
-
-    // MARK: - Core Data Saving support
-
-//    func saveContext () {
-//        let context = persistentContainer.viewContext
-//        if context.hasChanges {
-//            do {
-//                try context.save()
-//            } catch {
-//                // Replace this implementation with code to handle the error appropriately.
-//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                let nserror = error as NSError
-//                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//            }
-//        }
-//    }
     
-    func showPasscode() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "passcodeEnterController") as? PasscodeEnterController {
-            currentPasscodeViewController = vc
-            window?.rootViewController?.present(vc, animated: true, completion: nil)
-        }
-    }
 }
-extension UIApplication {
-    var statusBarView: UIView? {
-        if responds(to: Selector(("statusBar"))) {
-            return value(forKey: "statusBar") as? UIView
-        }
-        return nil
-    }
-}
+
 
 // [START ios_10_message_handling]
 @available(iOS 10, *)
@@ -395,6 +383,59 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
 extension AppDelegate : MessagingDelegate {
     
+    func goToMainIpad(_ tokenAddress:String, _ isLaunch:Bool) {
+        let mainInfo = CreateVC(byName: "MainInfoController") as! MainInfoController
+        let homeVC = CreateVC(byName: "HomeViewController") as! HomeViewController
+        if isLaunch {
+            guard let splitVC = window?.rootViewController as? BaseSplitViewController else { return }
+            let nav = BaseNavigationController(rootViewController: homeVC)
+            nav.pushViewController(mainInfo, animated: false)
+            tokenService.updateSelectedToken(to: tokenAddress)
+            splitVC.showDetailViewController(nav, sender: nil)
+            guard let n = splitVC.viewControllers[0] as? UINavigationController else { return }
+            guard let vc = n.topViewController as? ListSectionsViewController else { return }
+            vc.chooseRowColorIfNeeded(0)
+        }else {
+            showSplitVC()
+            
+            guard passcodeViewController == nil else { return }
+            
+            showPasscode(context: .background)
+            
+            guard let split = window?.rootViewController as? UISplitViewController else { return }
+            guard let nav = split.viewControllers[1] as? UINavigationController else { return }
+            nav.pushViewController(mainInfo, animated: false)
+            tokenService.updateSelectedToken(to: tokenAddress)
+            split.showDetailViewController(nav, sender: nil)
+        }
+    }
+    
+    func goToMain(_ tokenAddress:String, _ isLaunch:Bool) {
+        let mainInfo = CreateVC(byName: "MainInfoController") as! MainInfoController
+        if isLaunch {
+            let tab = window?.rootViewController as! BaseTabBarController
+            tab.selectedIndex = 0
+            guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return }
+            nav.popToRootViewController(animated: false)
+            tokenService.updateSelectedToken(to: tokenAddress)
+            nav.pushViewController(mainInfo, animated: false)
+        }else {
+            let tabBar = CreateVC(byName: "MainTabController") as! BaseTabBarController
+            window?.rootViewController = tabBar
+            
+            guard passcodeViewController == nil else { return }
+            
+            showPasscode(context: .background)
+            
+            let tab = rootVC() as! BaseTabBarController
+            tab.selectedIndex = 0
+            guard let nav = tab.viewControllers?[0] as? BaseNavigationController else { return }
+            tokenService.updateSelectedToken(to: tokenAddress)
+            nav.pushViewController(mainInfo, animated: false)
+        }
+        
+    }
+    
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
@@ -415,10 +456,44 @@ extension AppDelegate : MessagingDelegate {
     // [END ios_10_data_message]
 }
 
-var currentPasscodeViewController: PasscodeEnterController?
-
-
-
-
-
-
+extension AppDelegate: PasscodeEnterControllerDelegate {
+    
+    func showPasscode(context: Context) {
+        guard passcodeViewController == nil || passcodeViewController?.context == .sendScreen else { return }
+        
+        guard let viewController = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
+        viewController.delegate = self
+        viewController.context = context
+        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.backgroundColor = .white
+        window.windowLevel = UIWindowLevelAlert
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        
+        passcodeViewController = viewController
+        passcodeWindow = window
+    }
+    
+    func passcodeEnterControllerDidFinish(_ viewController: PasscodeEnterController) {
+        switch viewController.context {
+        case .initial:
+            guard let latestVC = UIApplication.topViewController() else { return }
+            guard let processVC = storyboard().instantiateViewController(withIdentifier: "ProcessController") as? SendingInProcessViewController else { return }
+            processVC.fromEnterScreen = true
+            latestVC.navigationController?.pushViewController(processVC, animated: true)
+        case .sendScreen:
+            guard let tabBarVC = window?.rootViewController as? UITabBarController else { return }
+            guard let navVC = tabBarVC.viewControllers?.first as? UINavigationController else { return }
+            guard let confirmVC = navVC.topViewController as? ConfirmViewController else { return }
+            confirmVC.sendFunds()
+        case .background:
+            break
+        }
+        
+        passcodeViewController = nil
+        passcodeWindow = nil
+    }
+    
+    
+}

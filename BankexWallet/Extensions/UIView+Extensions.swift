@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import VisualEffectView
 
 extension UIView {
     
@@ -25,6 +26,7 @@ extension UIView {
             }
         }
     }
+    
     
     @IBInspectable var borderColor: UIColor? {
         set {
@@ -89,10 +91,59 @@ extension UIView {
         }
     }
     
+    func addBlur() {
+        let visualEffectView = VisualEffectView(frame: self.bounds)
+        
+        // Configure the view with tint color, blur radius, etc
+        visualEffectView.blurRadius = 5
+        visualEffectView.scale = 1
+        visualEffectView.colorTintAlpha = 0.1
+        addSubview(visualEffectView)
+    }
+    func removeBlur() {
+        self.subviews.last!.removeFromSuperview()
+    }
+    
     func setupDefaultShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowRadius = 10
         layer.shadowOffset = CGSize(width: 0, height: 5.0)
         layer.shadowOpacity = 0.1
+    }
+    
+    func initialAnimation() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                self.transform = CGAffineTransform.identity
+            }
+        }
+    }
+    
+    class func titleLabel(_ color:UIColor? = .white) -> UILabel {
+        let label = UILabel()
+        label.text = NSLocalizedString("Send", comment: "")
+        label.textColor = color
+        label.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
+        return label
+    }
+    
+    func rotate() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 3, options: [], animations: {
+            self.transform = self.transform.rotated(by: .pi)
+        })
+    }
+    
+    func show() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }) { _ in
+            self.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
+    
+    func hide() {
+        UIView.animate(withDuration: 0.25) {
+            self.transform = CGAffineTransform(scaleX: 0, y: 0)
+        }
     }
 }

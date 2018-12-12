@@ -10,29 +10,16 @@ import UIKit
 import web3swift
 
 
-class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDelegate {
-    func didTapped(with wallet: HDKey) {
-        DispatchQueue.main.async {
-            self.navigationController?.popViewController(animated: true)
-            UserDefaults.saveData(string: wallet.name!)
-        }
-        updateBalance()
-    }
+class SettingsViewController: UITableViewController {
     
-    func didTapped(with network: CustomNetwork) {
-        DispatchQueue.main.async {
-            self.navigationController?.popViewController(animated: true)
-        }
+    enum SettingsSections:Int,CaseIterable {
+        case  General = 0 ,Support,Community,Developer
     }
     
     
     @IBOutlet weak var nameWalletLabel:UILabel!
     @IBOutlet weak var nameNetworkLabel:UILabel!
     
-    
-    enum SettingsSections:Int,CaseIterable {
-        case General = 0,Support,Community,Developer
-    }
     
     let managerReferences = ManagerReferences()
     let walletService = SingleKeyServiceImplementation()
@@ -43,12 +30,41 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Settings"
         prepareNavbar()
-        tableView.backgroundColor = WalletColors.bgMainColor
+        commonSetup()
     }
     
-    func updateBalance() {
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarView?.backgroundColor = .white
+        walletService.updateSelectedWallet()
+        updateUI()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "networkSegue" {
+            let dest = segue.destination as! NetworksViewController
+            dest.delegate = self
+            dest.isFromDeveloper = selectedSection == SettingsSections.Developer.rawValue ? true : false
+        }else if segue.identifier == "walletSegue" {
+            let dest = segue.destination as! WalletsViewController
+            dest.delegate = self
+        }else if let attentionVC = segue.destination as? AttentionViewController {
+            attentionVC.isFromDeveloper = true
+        }
+    }
+    
+    private func commonSetup() {
+        tableView.backgroundColor = UIColor.bgMainColor
+        tableView.tableFooterView = HeaderView()
+        if UIDevice.isIpad { tableView.separatorInset.right = 20 }
+        tableView.separatorInset.left = UIDevice.isIpad ? 80 : 60
+    }
+    
+    
+    private func updateBalance() {
         var utilsService:UtilTransactionsService
         let tokenService = CustomERC20TokensServiceImplementation()
         let selectedToken = tokenService.selectedERC20Token()
@@ -76,43 +92,33 @@ class SettingsViewController: UITableViewController,NetworkDelegate,WalletsDeleg
             }
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        walletService.updateSelectedWallet()
-        updateUI()
-        setupFooter()
-    }
 
-    func prepareNavbar() {
+    private func prepareNavbar() {
+        navigationItem.title = NSLocalizedString("Settings", comment: "")
         navigationController?.navigationBar.shadowImage = UIImage()
     }
-    
-    func setupFooter() {
-        tableView.tableFooterView = HeaderView()
-    }
 
     
-    func updateUI() {
+    private func updateUI() {
         guard let selectedWallet = walletService.selectedWallet() else { return  }
-        nameWalletLabel.text = selectedWallet.name ?? selectedWallet.address
-        nameNetworkLabel.text = networkService.preferredNetwork().networkName ?? networkService.preferredNetwork().fullNetworkUrl.absoluteString
+        nameWalletLabel.text = selectedWallet.name
+        nameNetworkLabel.text = networkService.preferredNetwork().networkName
     }
+}
 
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "networkSegue" {
-            let dest = segue.destination as! NetworksViewController
-            dest.delegate = self
-            dest.isFromDeveloper = selectedSection == SettingsSections.Developer.rawValue ? true : false
-        }else if segue.identifier == "walletSegue" {
-            let dest = segue.destination as! WalletsViewController
-            dest.delegate = self
-        }else if let attentionVC = segue.destination as? AttentionViewController {
-            attentionVC.isFromDeveloper = true
+extension SettingsViewController:WalletsDelegate {
+    func didTapped(with wallet: HDKey) {
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+            UserDefaults.saveData(string: wallet.name!)
+        }
+        updateBalance()
+    }
+}
+extension SettingsViewController:NetworkDelegate {
+    func didTapped(with network: CustomNetwork) {
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
         }
     }
-    
-    
 }

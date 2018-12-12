@@ -19,7 +19,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     
     
     //MARK: - Properties
-    let service = RecipientsAddressesServiceImplementation()
+    let service = ContactService()
     var listContacts:[FavoriteModel]? {
         didSet {
             updateArray()
@@ -57,16 +57,20 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = WalletColors.mainColor
+        navigationController?.navigationBar.tintColor = UIColor.mainColor
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         if fromSendScreen {
             addLeftBtn()
             hideAddRightButton()
         }else {
             addRightAddButton()
         }
-        self.listContacts = self.service.getAllStoredAddresses()
-        state = isNoContacts() ? .empty : .fill
+        self.service.listContacts(onCompition: { (contacts) in
+            self.listContacts = contacts
+            self.state = self.isNoContacts() ? .empty : .fill
+        })
     }
     
     private func addLeftBtn() {
@@ -74,7 +78,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
         btn.setImage(UIImage(named:"BackArrow"), for: .normal)
         btn.setTitle("  Back", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-        btn.setTitleColor(WalletColors.mainColor, for: .normal)
+        btn.setTitleColor(UIColor.mainColor, for: .normal)
         btn.addTarget(self, action: #selector(back), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btn)
     }
@@ -83,10 +87,11 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     private func prepareTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.register(UINib(nibName: ContactTableCell.identifier, bundle: nil), forCellReuseIdentifier: ContactTableCell.identifier)
         tableView.keyboardDismissMode = .interactive
         tableView.tableFooterView = HeaderView()
+        tableView.separatorStyle = UIDevice.isIpad ? .singleLine : .none
     }
     
     @objc func back() {
@@ -207,12 +212,12 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
 
     
     func setupSearchVC() {
-       searchBar.tintColor = WalletColors.mainColor
-        searchBar.barTintColor = WalletColors.bgMainColor
+       searchBar.tintColor = UIColor.mainColor
+        searchBar.barTintColor = UIColor.bgMainColor
         searchBar.backgroundImage = UIImage()
-        searchBar.changeSearchBarColor(color: WalletColors.disableColor)
-        searchBar.changeSearchBarTextColor(color: WalletColors.separatorColor)
-        searchBar.placeholder = "Search Contact"
+        searchBar.changeSearchBarColor(color: UIColor.disableColor)
+        searchBar.changeSearchBarTextColor(color: UIColor.separatorColor)
+        searchBar.placeholder = NSLocalizedString("SearchContact", comment: "")
         searchBar.delegate = self
     }
     
@@ -228,11 +233,16 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     }
     
     
-    
-    
-    
     @objc func transitionToAddContact() {
-        performSegue(withIdentifier: "addContactSegue", sender: self)
+        if UIDevice.isIpad {
+            let createContactVC = CreateVC(byName: "AddContactViewController") as! AddContactViewController
+            createContactVC.delegate = self
+            createContactVC.addCancelButtonIfNeed()
+            createContactVC.addSaveButtonIfNeed()
+            presentPopUp(createContactVC, size: CGSize(width: splitViewController!.view.bounds.width/2, height: splitViewController!.view.bounds.height * 0.7), shower: self)
+        }else {
+            performSegue(withIdentifier: "addContactSegue", sender: self)
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -253,7 +263,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
                 destVC.selectedContact = currentContacts[selectedIndexPath.row]
             }
             let button = UIBarButtonItem()
-            button.title = "Contacts"
+            button.title = NSLocalizedString("Contacts", comment: "")
             navigationItem.backBarButtonItem = button
         }
     }
@@ -286,6 +296,22 @@ extension ListContactsViewController:UITableViewDataSource {
         }else {
             return sectionsTitles.count
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if UIDevice.isIpad {
+            let view = UIView()
+            view.backgroundColor = UIColor.bgMainColor
+            let label = UILabel()
+            label.frame.size = CGSize(width: tableView.bounds.width, height: 28)
+            label.frame.origin = CGPoint(x: 16, y: 0)
+            view.addSubview(label)
+            label.textColor = .black
+            label.textAlignment = .left
+            label.text = sectionsTitles[section]
+            return view
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -326,6 +352,15 @@ extension ListContactsViewController:UITableViewDataSource {
     }
     
     
+}
+
+extension ListContactsViewController:AddContactViewControllerDelegate {
+    func didSave() {
+        self.service.listContacts(onCompition: { (contacts) in
+            self.listContacts = contacts
+            self.state = self.isNoContacts() ? .empty : .fill
+        })
+    }
 }
 
 

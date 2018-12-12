@@ -2,7 +2,10 @@ PODS:
   - Amplitude-iOS (4.0.4)
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
+  - Crashlytics (3.10.9):
+    - Fabric (~> 1.7.13)
   - CryptoSwift (0.10.0)
+  - Fabric (1.7.13)
   - Firebase/Core (5.9.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.2.0)
@@ -91,7 +94,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.0):
     - GoogleUtilities/Logger
-  - Hero (1.3.1)
+  - GrowingTextView (0.6.1)
   - KIF (3.7.4):
     - KIF/Core (= 3.7.4)
   - KIF/Core (3.7.4)
@@ -112,14 +115,17 @@ PODS:
   - PromiseKit/UIKit (6.3.5):
     - PromiseKit/CorePromise
   - Protobuf (3.6.1)
-  - QRCodeReader.swift (8.1.1)
   - ReachabilitySwift (4.2.1)
   - Result (3.0.0)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
   - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
   - SkeletonView (1.4)
   - SugarRecord/CoreData (3.0.3):
     - Result (~> 3.0)
+  - VisualEffectView (3.1.0)
   - web3swift (1.1.1):
     - BigInt (~> 3.1.0)
     - CryptoSwift (~> 0.10.0)
@@ -130,25 +136,30 @@ PODS:
 
 DEPENDENCIES:
   - Amplitude-iOS (~> 4.0.4)
+  - Crashlytics
+  - Fabric
   - Firebase/Core
   - Firebase/Crash
   - Firebase/DynamicLinks
   - Firebase/Messaging
   - Firebase/RemoteConfig
-  - Hero
+  - GrowingTextView (= 0.6.1)
   - KIF
   - Popover
-  - QRCodeReader.swift (~> 8.1.1)
   - ReachabilitySwift
+  - SDWebImage (~> 4.0)
   - SkeletonView
   - SugarRecord/CoreData (<= 3.1)
+  - VisualEffectView
   - web3swift (<= 1.1.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Amplitude-iOS
     - BigInt
+    - Crashlytics
     - CryptoSwift
+    - Fabric
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -162,26 +173,29 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleToolboxForMac
     - GoogleUtilities
-    - Hero
+    - GrowingTextView
     - KIF
     - libsodium
     - nanopb
     - Popover
     - PromiseKit
     - Protobuf
-    - QRCodeReader.swift
     - ReachabilitySwift
     - Result
+    - SDWebImage
     - secp256k1_ios
     - SipHash
     - SkeletonView
     - SugarRecord
+    - VisualEffectView
     - web3swift
 
 SPEC CHECKSUMS:
   Amplitude-iOS: 2ad4d7270c99186236c1272a3a9425463b1ae1a7
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
+  Crashlytics: 55e24fc23989680285a21cb1146578d9d18e432c
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
+  Fabric: 25d0963b691fc97be566392243ff0ecef5a68338
   Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
   FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
@@ -195,22 +209,23 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
-  Hero: 1c3c625ba05856f305d29f5c270f8766c5ff2df7
+  GrowingTextView: 335aefa45df7df06b01edede1363414d6ee5d6bc
   KIF: f3d01c109ee9d1cfe6b0f2bb2aa278e807e971e2
   libsodium: 9a8faa5ef2fa0d2d57bd7f7d79bf8fb7c1a9f0ea
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Popover: 28c1ac8e937ab2b3965bd2da7dd18324357abc41
   PromiseKit: 32c36425387e9cfc7f1206f27bfd906d0b53c0d6
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  QRCodeReader.swift: b164a681887de276d405ff02bce854d82cd6360b
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SkeletonView: 50f7a9b04e3a62bd0ae964859c19317fabaea367
   SugarRecord: 8bec9d426faf25769483d6814b0c7325c4f156ea
+  VisualEffectView: 922eedf8d7d7e776a367ac11e0a4d4a0b2ba3545
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 17f36e15d26f853d6a1707692ba95e79e3d8c3fe
+PODFILE CHECKSUM: 3745cf733529309ada3f9cb776766ada91a5fee7
 
 COCOAPODS: 1.5.3

@@ -24,4 +24,16 @@ class WalletCreationTypeRouterImplementation: WalletCreationRouter {
             appDelegate.showTabBar()
         }
     }
+    
+    func exitFromTheScreeniPad() {
+        guard let navigationC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else {
+            return
+        }
+        navigationC.performSegue(withIdentifier: "showProcess", sender: self)
+        
+        DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.showSplitVC()
+        }
+    }
 }

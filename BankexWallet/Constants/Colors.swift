@@ -8,10 +8,10 @@
 
 import UIKit
 
-enum WalletColors {
-    
+extension UIColor {
+
     static let circleColor = UIColor(hex:"C7CCD4")
-    static let mainColor = UIColor(hex: "0DA9FF")
+    static let mainColor = UIColor(hex: "3975E8")
     static let importColor = UIColor(hex: "718093")
     static let separatorColor = UIColor(hex: "718093")
     static let disableColor = UIColor(hex: "E3E6E9")
@@ -23,6 +23,11 @@ enum WalletColors {
     static let blackColor = UIColor(hex:"202326")
     static let sendColor = UIColor(hex:"FFB900")
     static let receiveColor = UIColor(hex:"03B221")
+    static let greenColor = UIColor(hex:"0DBA26")
+    static let borderColor = UIColor(hex:"8A8A8F").withAlphaComponent(0.3)
+    static let shadowColor = UIColor(hex:"848688")
+    static let lightBlue = UIColor(hex:"D7E3FA")
+    static let mainTextColor = UIColor(hex: "2E3640")
     
     struct QRReader {
         static let successColor = UIColor(hex: "03B221")

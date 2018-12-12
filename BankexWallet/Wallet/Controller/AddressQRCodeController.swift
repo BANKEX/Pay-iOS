@@ -18,7 +18,8 @@ class AddressQRCodeController: BaseViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var copyAddressButton: UIButton!
     @IBOutlet weak var activityVC:UIActivityIndicatorView!
-
+    
+    var isAnimating = false
     let keysService: SingleKeyService  = SingleKeyServiceImplementation()
     var navTitle: String?
     lazy var clipView:UIView = {
@@ -51,6 +52,8 @@ class AddressQRCodeController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        copyAddressButton.layer.borderWidth = 2
+        copyAddressButton.layer.borderColor = UIColor.mainColor.cgColor
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -66,15 +69,11 @@ class AddressQRCodeController: BaseViewController {
     }
     
     private func addBackButton() {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle(" Wallet", for: .normal)
-        button.setTitleColor(WalletColors.mainColor, for: .normal)
-        //button.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        let button = customBackButton(title: NSLocalizedString(" Wallet", comment: ""))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
+    
     
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
@@ -85,7 +84,7 @@ class AddressQRCodeController: BaseViewController {
         let heightLabel = clipView.bounds.height/2
         let label = UILabel(frame: CGRect(x: 0, y: clipView.bounds.midY - heightLabel/2, width: clipView.bounds.width, height: heightLabel))
         label.textAlignment = .center
-        label.text = navTitle == nil ? "Passphrase copied to clipboard" : "Private key copied to clipboard"
+        label.text = navTitle == nil ? NSLocalizedString("AddrCopied", comment: "") : NSLocalizedString("PrivateCopied", comment: "")
         label.textColor = UIColor(hex: "F9FAFC")
         label.font = UIFont.systemFont(ofSize: 15.0)
         clipView.addSubview(label)
@@ -100,23 +99,29 @@ class AddressQRCodeController: BaseViewController {
 
         let itemsToShare = [ addressToShare ]
         let activityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-
+        if UIDevice.isIpad {
+            activityViewController.addPopover(in: view, rect: CGRect(x: view.bounds.width - 37, y: 0, width: 0, height: 0), .up)
+        }
         // exclude some activity types from the list (optional)
         activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook, UIActivityType.mail, UIActivityType.message, UIActivityType.postToTwitter ]
-
+        
         self.present(activityViewController, animated: true, completion: nil)
     }
 
 
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = addressToGenerateQR
-        UIView.animate(withDuration: 0.7, animations: {
-            self.clipView.frame.origin.y = self.view.bounds.maxY - 58.0
-        }) { _ in
-            UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
-                self.clipView.frame.origin.y = self.view.bounds.maxY
-            })
+        if !isAnimating {
+            isAnimating = true
+            UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseInOut, animations: {
+                self.clipView.frame.origin.y = self.view.bounds.maxY - 58.0
+            }) { _ in
+                UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveEaseInOut, animations: {
+                    self.clipView.frame.origin.y = self.view.bounds.maxY
+                }) { _ in
+                    self.isAnimating = false
+                }
+            }
         }
     }
 
@@ -132,13 +137,11 @@ class AddressQRCodeController: BaseViewController {
 
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
             filter.setValue(data, forKey: "inputMessage")
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
-
+            let transform = CGAffineTransform(scaleX: 7, y: 7)
             if let output = filter.outputImage?.transformed(by: transform) {
                 return UIImage(ciImage: output)
             }
         }
-
         return nil
     }
 }

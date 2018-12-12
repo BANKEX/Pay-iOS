@@ -17,6 +17,8 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet weak var balanceLbl:UILabel!
     @IBOutlet weak var symbolLbl:UILabel!
     @IBOutlet weak var fillView:UIView!
+    @IBOutlet weak var leftConstraint:NSLayoutConstraint!
+    @IBOutlet weak var rightContraint:NSLayoutConstraint!
     
     
     var utilsService = UtilTransactionsServiceImplementation()
@@ -27,10 +29,12 @@ class WalletTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        leftConstraint.constant = UIDevice.isIpad ? 52 : 15
+        rightContraint.constant = UIDevice.isIpad ? 52 : 15
         fillView.setupDefaultShadow()
         selectionStyle = .none
         fillView.layer.cornerRadius = 8.0
-        backgroundColor = WalletColors.bgMainColor
+        backgroundColor = UIColor.bgMainColor
         setData()
     }
     
@@ -39,7 +43,7 @@ class WalletTableViewCell: UITableViewCell {
         updateLayout()
         if let wallet = keyService.selectedWallet() {
             nameWalletLbl.text = wallet.name
-            walletImageView.image = PredefinedTokens.Ethereum.image()
+            walletImageView.image = #imageLiteral(resourceName: "Ethereum")
             symbolLbl.text = "ETH"
             UserDefaults.saveData(string: wallet.name)
         }
@@ -54,6 +58,8 @@ class WalletTableViewCell: UITableViewCell {
     func updateLayout() {
         updateBalance()
     }
+    
+    
     func updateBalance() {
         guard let wallet = keyService.selectedWallet() else { return }
         let selectedAddress = wallet.address

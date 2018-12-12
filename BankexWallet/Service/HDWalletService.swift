@@ -230,15 +230,15 @@ class HDWalletServiceImplementation: HDWalletService {
                            completion: @escaping (String?, Error?) -> Void) {
         // TODO: smth strange is here with throwing
         do {
-            
-            guard let keystore = try? BIP32Keystore(mnemonics: mnemonics,
-                                                    password: walletPassword,
-                                                    mnemonicsPassword: mnemonicsPassword,
-                                                    language: .english),
-                let wallet = keystore else {
-                    throw HDWalletCreationError.creationError
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let keystore = try? BIP32Keystore(mnemonics: mnemonics,
+                                                        password: walletPassword,
+                                                        mnemonicsPassword: mnemonicsPassword,
+                                                        language: .english),
+                    let wallet = keystore {
+                    self.saveWalletInfo(name: name, wallet: wallet, completion: completion)
+                }
             }
-            saveWalletInfo(name: name, wallet: wallet, completion: completion)
         }
         catch (let error) {
             completion(nil, error)

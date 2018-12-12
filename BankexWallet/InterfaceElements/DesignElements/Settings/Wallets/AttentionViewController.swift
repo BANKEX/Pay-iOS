@@ -21,18 +21,19 @@ class AttentionViewController: BaseViewController {
     
     @IBOutlet weak var descriptionLabel:UILabel!
     @IBOutlet weak var titleLabel:UILabel!
+    @IBOutlet weak var heightConstraint:NSLayoutConstraint!
     var isFromDeveloper:Bool = false
     var publicAddress: String?
     var directionSegue:String = ""
     var state:State = .PrivateKey {
         didSet {
             if state == .PrivateKey {
-                descriptionLabel.text = "Anyone who knows your private key has access to your wallet"
-                titleLabel.text = "Private Key"
+                descriptionLabel.text = NSLocalizedString("Anyone", comment: "")
+                titleLabel.text = NSLocalizedString("Private Key", comment: "")
                 directionSegue = "showPrivateKey"
             }else {
-                descriptionLabel.text = "This option is intended for development use only"
-                titleLabel.text = "Custom Networks"
+                descriptionLabel.text = NSLocalizedString("Options", comment: "")
+                titleLabel.text = NSLocalizedString("CustomNetworks", comment: "")
                 directionSegue = "showCustomNetworks"
             }
         }
@@ -41,21 +42,22 @@ class AttentionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = NSLocalizedString("Private Key", comment: "")
+        _ = heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 0.17 : 0.27)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         state = isFromDeveloper ? .CustomNetwork : .PrivateKey
+        navigationItem.title = state == .CustomNetwork ? NSLocalizedString("CustomNetworks", comment: "") : NSLocalizedString("Private Key", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.errorColor
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.errorColor
+        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
     }
     
@@ -71,9 +73,7 @@ class AttentionViewController: BaseViewController {
             navigationItem.backBarButtonItem = item
             guard let selectedAddress = publicAddress, let ethAddress = EthereumAddress(selectedAddress) else { return }
             vc.addressToGenerateQR = try? keysService.keystoreManager(forAddress: selectedAddress).UNSAFE_getPrivateKeyData(password: "BANKEXFOUNDATION", account: ethAddress).toHexString()
-            let prk = try! keysService.keystoreManager(forAddress: selectedAddress).UNSAFE_getPrivateKeyData(password: "BANKEXFOUNDATION", account: ethAddress)
-            print(prk.toHexString())
-            print(String.init(data: prk, encoding: .ascii))
+//            let _ = try! keysService.keystoreManager(forAddress: selectedAddress).UNSAFE_getPrivateKeyData(password: "BANKEXFOUNDATION", account: ethAddress)
         }else if let netwokrsVC = segue.destination as? NetworksViewController {
             netwokrsVC.isFromDeveloper = true
         }

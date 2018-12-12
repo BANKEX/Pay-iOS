@@ -23,16 +23,19 @@ class SecurityViewController: UITableViewController {
     @IBOutlet weak var openSwitch:UISwitch!
     @IBOutlet weak var sendSwitch:UISwitch!
     @IBOutlet weak var multitaskSwitch:UISwitch!
+    @IBOutlet weak var timerLbl:UILabel!
     enum SecuritySections:Int {
-        case First = 0,Second
+        case First = 0,Second,Third
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavbar()
-        [openSwitch,sendSwitch,multitaskSwitch].forEach { $0?.onTintColor = WalletColors.mainColor }
+        [openSwitch,sendSwitch,multitaskSwitch].forEach { $0?.onTintColor = UIColor.mainColor }
         tableView.tableFooterView = HeaderView()
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
+        tableView.separatorInset.right = UIDevice.isIpad ? 20 : 0
+        if UIDevice.isIpad { tableView.separatorInset.left = 36 } 
     }
     
     func setupNavbar() {
@@ -58,69 +61,92 @@ class SecurityViewController: UITableViewController {
         openSwitch.isOn = UserDefaults.standard.bool(forKey:Keys.openSwitch.rawValue)
         sendSwitch.isOn = UserDefaults.standard.value(forKey:Keys.sendSwitch.rawValue) as? Bool ?? true
         multitaskSwitch.isOn = UserDefaults.standard.value(forKey:Keys.multiSwitch.rawValue) as? Bool ?? true
+        timerLbl.text = AutoLockService.shared.getState() ?? ""
     }
     
     
     @IBAction func switchTouchID(_ sender:UISwitch) {
-        if sender.isOn {
+        if !sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
-            }) { (error) in
-                sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey: Keys.openSwitch.rawValue)
+            }) { (error) in
+                sender.setOn(true, animated: false)
+                UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
             }
             return
         }
-        UserDefaults.standard.set(false, forKey: Keys.openSwitch.rawValue)
+        UserDefaults.standard.set(true, forKey: Keys.openSwitch.rawValue)
     }
     
     @IBAction func switchSendFunds(_ sender:UISwitch) {
-        if sender.isOn {
+        if !sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                UserDefaults.standard.set(true, forKey: Keys.sendSwitch.rawValue)
-            }) { (error) in
-                sender.setOn(false, animated: false)
                 UserDefaults.standard.set(false, forKey: Keys.sendSwitch.rawValue)
+            }) { (error) in
+                sender.setOn(true, animated: false)
+                UserDefaults.standard.set(true, forKey: Keys.sendSwitch.rawValue)
             }
             return
         }
-        UserDefaults.standard.set(false, forKey: Keys.sendSwitch.rawValue)
+        UserDefaults.standard.set(true, forKey: Keys.sendSwitch.rawValue)
     }
     
     
     @IBAction func switchMultitask(_ sender:UISwitch) {
-        if sender.isOn {
+        if !sender.isOn {
             TouchManager.authenticateBioMetrics(reason: "", success: {
-                UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
+                UserDefaults.standard.set(false, forKey: Keys.multiSwitch.rawValue)
             }) { (error) in
-                sender.setOn(false, animated: false)
-                UserDefaults.standard.set(false, forKey:Keys.multiSwitch.rawValue)
+                sender.setOn(true, animated: false)
+                UserDefaults.standard.set(true, forKey:Keys.multiSwitch.rawValue)
             }
             return
         }
-        UserDefaults.standard.set(false, forKey: Keys.multiSwitch.rawValue)
+        UserDefaults.standard.set(true, forKey: Keys.multiSwitch.rawValue)
     }
+
     
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let dest = segue.destination as? AutoLockViewController else { return }
+        dest.delegate = self
+    }
     
     
     
     //DataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == SecuritySections.First.rawValue ? 2 : 1
+        if section == SecuritySections.First.rawValue {
+            return 2
+        }else if section == SecuritySections.Second.rawValue {
+            return 1
+        }else {
+            return 1
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            performSegue(withIdentifier: "autoLock", sender: nil)
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView()
+        let xOffset:CGFloat = UIDevice.isIpad ? 36 : 16
         if SecuritySections.First.rawValue == section {
             headerView.title = NSLocalizedString("UseTouchID", comment: "")
-        }else {
+            headerView.titleFrame = CGRect(x: xOffset, y: 32, width: view.bounds.width - 55, height: 20)
+        }else if SecuritySections.Second.rawValue == section {
             headerView.title = NSLocalizedString("Lock App", comment: "")
+            headerView.titleFrame = CGRect(x: xOffset, y: 32, width: view.bounds.width - 55, height: 20)
+        }else {
+            headerView.titleFrame = CGRect(x: xOffset, y: 0, width: view.bounds.width - 55, height: 54)
+            headerView.title = "If enabled the app requires PIN when switching between apps"
         }
         return headerView
     }
@@ -130,4 +156,10 @@ class SecurityViewController: UITableViewController {
     }
     
     
+}
+
+extension SecurityViewController:AutoLockViewControllerDelegate {
+    func didSelect(_ time: String) {
+        timerLbl.text = time
+    }
 }

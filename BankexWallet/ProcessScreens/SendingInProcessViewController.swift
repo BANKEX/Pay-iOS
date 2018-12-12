@@ -20,7 +20,7 @@ protocol SendingResultInformation: class {
                                password: String)
 }
 
-class SendingInProcessViewController: UIViewController,
+class SendingInProcessViewController: BaseViewController,
 SendingResultInformation {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var processTitleLabel: UILabel?
@@ -56,16 +56,19 @@ SendingResultInformation {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        splitViewController?.hide()
+        UIApplication.shared.statusBarStyle = .default
         activityView.startAnimating()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         titleLabel?.text = textToShow == nil ? NSLocalizedString("Sending funds", comment: "") : textToShow!
         processTitleLabel?.text = NSLocalizedString("Retrieving data", comment: "")
-        processTitleLabel?.textColor = WalletColors.sendColor
+        processTitleLabel?.textColor = UIColor.sendColor
         titleLabel?.textColor = UIColor(red: 0, green: 117, blue: 254)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        splitViewController?.show()
         activityView.stopAnimating()
         textToShow = nil
         navigationController?.setNavigationBarHidden(false, animated: false)
@@ -78,7 +81,11 @@ SendingResultInformation {
         if fromEnterScreen {
             DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.showTabBar()
+                if UIDevice.isIpad {
+                    appDelegate.showSplitVC()
+                }else {
+                    appDelegate.showTabBar()
+                }
             }
         }
     }

@@ -29,13 +29,16 @@ class BackupPassphraseViewController: UIViewController {
         }
         return false
     }
+    var isAnimating = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        lookOutView.backgroundColor = WalletColors.errorColor
+        lookOutView.backgroundColor = UIColor.errorColor
         passphrase = service.generateMnemonics()
         passphraseLabel.text = passphrase
-        copyButton.backgroundColor = WalletColors.mainColor
-        clipboardView.backgroundColor = WalletColors.clipboardColor
+        copyButton.backgroundColor = .white
+        copyButton.layer.borderWidth = 2
+        copyButton.layer.borderColor = UIColor.mainColor.cgColor
+        clipboardView.backgroundColor = UIColor.clipboardColor
         bottomContraint.constant = 100.0
     }
     
@@ -53,7 +56,7 @@ class BackupPassphraseViewController: UIViewController {
         }
         if passphrase != UIPasteboard.general.string {
             nextButton?.isEnabled = false
-            nextButton?.backgroundColor = WalletColors.disableColor
+            nextButton?.backgroundColor = UIColor.lightBlue
         }
         
     }
@@ -62,46 +65,53 @@ class BackupPassphraseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = .white
         UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarView?.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
     }
     
     @IBAction func copyButtonTapped(_ sender: Any) {
         UIPasteboard.general.string = passphrase
-        self.nextButton?.backgroundColor = WalletColors.mainColor
-        
-        UIView.animate(withDuration: 0.7,animations: {
-            if #available(iOS 11.0, *) {
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                let bottomInset = appDelegate.window?.safeAreaInsets.bottom
-                self.bottomContraint.constant = bottomInset!
-            }else {
-               self.bottomContraint.constant = 0
-            }
-            
-            self.view.layoutIfNeeded()
-        }) { (_) in
-            UIView.animate(withDuration: 0.7,delay:0.5,animations: {
-                self.bottomContraint.constant = 100
+        self.nextButton?.backgroundColor = UIColor.mainColor
+        if !isAnimating {
+            isAnimating = true
+            UIView.animate(withDuration: 0.6,animations: {
+                if #available(iOS 11.0, *) {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let bottomInset = appDelegate.window?.safeAreaInsets.bottom
+                    self.bottomContraint.constant = bottomInset!
+                }else {
+                    self.bottomContraint.constant = 0
+                }
+                
                 self.view.layoutIfNeeded()
-            })
+            }) { (_) in
+                UIView.animate(withDuration: 0.6,delay:0.5,animations: {
+                    self.bottomContraint.constant = 100
+                    self.view.layoutIfNeeded()
+                }) { _ in
+                    self.isAnimating = false
+                }
+            }
         }
+        
         
         
         nextButton?.isEnabled = true
     }
     
     func navigationBarSetup() {
-        titleLbl.text = navTitle ?? "Create Wallet"
+        title = NSLocalizedString("Back", comment: "")
+        titleLbl.text = navTitle ?? NSLocalizedString("Create Wallet", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = WalletColors.errorColor
+        statusBarColor(UIColor.errorColor)
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
     @IBAction func share() {
         guard let passphrase = passphraseLabel.text else { return }
         let activityVC = UIActivityViewController(activityItems: [passphrase], applicationActivities: nil)
+        activityVC.addPopover(in: view, rect: CGRect(x: view.bounds.width - 34, y: 0, width: 0, height: 0), .up)
         present(activityVC, animated: true)
     }
     

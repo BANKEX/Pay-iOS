@@ -17,28 +17,34 @@ class TokenTableViewCell: UITableViewCell {
     @IBOutlet weak var nameToken:UILabel!
     @IBOutlet weak var addressToken:UILabel!
     @IBOutlet weak var tokenAddedImage:UIImageView!
-    @IBOutlet weak var tokenView:TokenView!
     @IBOutlet weak var fillView:UIView!
     @IBOutlet weak var arrowRight:UIImageView!
+    @IBOutlet weak var leftContraint:NSLayoutConstraint!
+    @IBOutlet weak var rightContraint:NSLayoutConstraint!
     
     static let identifier:String = String(describing: TokenTableViewCell.self)
     let keysService = SingleKeyServiceImplementation()
     var isSearchable = false
+    let service = CustomTokenUtilsServiceImplementation()
+    var isBKXToken:Bool {
+        return token.symbol == "BKX"
+    }
+
     
     var token:ERC20TokenModel! {
         didSet {
             configure()
         }
     }
-        
-
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        leftContraint.constant = UIDevice.isIpad ? 52 : 15
+        rightContraint.constant = UIDevice.isIpad ? 52 : 15
         fillView.setupDefaultShadow()
         fillView.layer.cornerRadius = 8.0
         selectionStyle = .none
-        backgroundColor = WalletColors.bgMainColor
+        backgroundColor = UIColor.bgMainColor
         tokenAddedImage.isHidden = true
     }
 
@@ -55,22 +61,11 @@ class TokenTableViewCell: UITableViewCell {
             balanceToken.isHidden = false
             addressToken.isHidden = true
         }
-        
+        isBKXToken ? tokenImageView.setBKXImage() : tokenImageView.setTokenImage(tokenAddress: token.address)
         addressToken.text = token.address.formattedAddrToken()
-        let tokenCase = PredefinedTokens(with: token.symbol)
-//        if tokenCase == .NotDefined {
-//            tokenImageView.isHidden = true
-//            tokenView.isHidden = false
-//        }else {
-//            tokenView.isHidden = true
-//            tokenImageView.isHidden = false
-//        }
-        tokenView.letter = token.name.prefix(1).uppercased()
-
         nameToken.text = token.name
         symbolToken.text = token.symbol.uppercased()
         
-        let service: UtilTransactionsService = !token.address.isEmpty ? CustomTokenUtilsServiceImplementation() : UtilTransactionsServiceImplementation()
         service.getBalance(for: token.address, address: keysService.selectedAddress() ?? "") { (result) in
 
             switch result {
@@ -80,12 +75,16 @@ class TokenTableViewCell: UITableViewCell {
                                                                         toUnits: .eth,
                                                                         decimals: 8)
                 self.balanceToken.text = formattedAmount!
-
             case .Error( _):
                 self.balanceToken.text = "..."
             }
         }
-        
+        if !self.isSearchable {
+            let tokenShort = TokenShort(name: self.token.name, balance: balanceToken.text!)
+            if !TokenShortService.arrayTokensShort.contains(tokenShort) {
+                TokenShortService.arrayTokensShort.append(tokenShort)
+            }
+        }
     }
     
 }

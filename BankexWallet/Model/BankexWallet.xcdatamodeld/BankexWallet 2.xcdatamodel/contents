@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ERC20Token" representedClassName="ERC20Token" syncable="YES" codeGenerationType="class">
+        <attribute name="address" attributeType="String" syncable="YES"/>
+        <attribute name="decimals" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isAdded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isSecurity" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="networkURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="symbol" attributeType="String" syncable="YES"/>
+        <relationship name="balances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TokenBalance" inverseName="token" inverseEntity="TokenBalance" syncable="YES"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SendEthTransaction" inverseName="token" inverseEntity="SendEthTransaction" syncable="YES"/>
+    </entity>
+    <entity name="FavoritesAddress" representedClassName="FavoritesAddress" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="KeyWallet" representedClassName="KeyWallet" syncable="YES" codeGenerationType="class">
+        <attribute name="address" attributeType="String" syncable="YES"/>
+        <attribute name="data" attributeType="Binary" syncable="YES"/>
+        <attribute name="isHD" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="balances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TokenBalance" inverseName="wallet" inverseEntity="TokenBalance" syncable="YES"/>
+        <relationship name="childKeys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="parentKey" inverseEntity="KeyWallet" syncable="YES"/>
+        <relationship name="parentKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="childKeys" inverseEntity="KeyWallet" syncable="YES"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SendEthTransaction" inverseName="keywallet" inverseEntity="SendEthTransaction" syncable="YES"/>
+    </entity>
+    <entity name="SendEthTransaction" representedClassName="SendEthTransaction" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" attributeType="String" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="from" attributeType="String" syncable="YES"/>
+        <attribute name="isPending" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="networkId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="to" attributeType="String" syncable="YES"/>
+        <attribute name="trHash" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="keywallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="transactions" inverseEntity="KeyWallet" syncable="YES"/>
+        <relationship name="token" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ERC20Token" inverseName="transactions" inverseEntity="ERC20Token" syncable="YES"/>
+    </entity>
+    <entity name="TokenBalance" representedClassName="TokenBalance" syncable="YES" codeGenerationType="class">
+        <attribute name="balance" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="networkUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="token" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ERC20Token" inverseName="balances" inverseEntity="ERC20Token" syncable="YES"/>
+        <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KeyWallet" inverseName="balances" inverseEntity="KeyWallet" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ERC20Token" positionX="-63" positionY="9" width="128" height="195"/>
+        <element name="FavoritesAddress" positionX="-18" positionY="135" width="128" height="75"/>
+        <element name="KeyWallet" positionX="-54" positionY="54" width="128" height="180"/>
+        <element name="SendEthTransaction" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="TokenBalance" positionX="-54" positionY="90" width="128" height="105"/>
+    </elements>
+</model>

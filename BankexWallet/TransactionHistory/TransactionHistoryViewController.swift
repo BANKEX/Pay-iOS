@@ -53,17 +53,16 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        TransactionsService().refreshTransactionsInSelectedNetwork(type: nil, forAddress: keysService.selectedAddress()!, node: nil, completion: { _ in })
         setupTableView()
-        prepareNavBar()
         configureRefreshControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        prepareNavBar()
     }
     
-
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -83,13 +82,14 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     
     func setupTableView() {
-        tableView.backgroundColor = WalletColors.bgMainColor
+        tableView.backgroundColor = UIColor.bgMainColor
         tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
     }
     
     private func prepareNavBar() {
         addTokensButton()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        UIApplication.shared.statusBarView?.backgroundColor = .white
     }
     
     //MARK: - Refresh Control
@@ -105,7 +105,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         let heightOfToken:CGFloat = 23
         guard let tokens = tokensService.availableTokensList() else { return 0 }
         if tokens.count > 5 {
-            return fiveTokensHeight
+            return CGFloat(5 * Int(heightOfToken)).next(number: tokens.count)
         }else {
             let height = tokens.count * Int(heightOfToken)
             fiveTokensHeight = CGFloat(height).next(number: tokens.count)
@@ -116,7 +116,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         //TODO: - Update the data here
         guard let selectedAddress = HistoryMediator.addr ?? keysService.selectedAddress() else { return }
-        transactionsService.refreshTransactionsInSelectedNetwork(forAddress: selectedAddress) { (success) in
+        transactionsService.refreshTransactionsInSelectedNetwork(type: nil, forAddress: selectedAddress, node: nil) { (success) in
             if success {
                 self.updateTransactions(address: selectedAddress, status: self.currentState)
                 self.updateUI()
@@ -128,13 +128,14 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     //MARK: - Popover magic
     @objc func showTokensButtonTapped(_ sender: Any) {
         popover = Popover(options: self.popoverOptions)
-        let aView = UIView(frame: CGRect(x: 0, y: 0, width: 86, height: calculateHeight()))
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: UIDevice.isIpad ? 320 : 86, height: calculateHeight()))
         aView.clipsToBounds = true
         aView.backgroundColor = UIColor.clear
 //        let tableView = UITableView(frame: CGRect(x: 0, y: 5, width: 100, height: calculateHeight()), style: .plain)
         let tableView = UITableView()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
         tableView.frame = CGRect(x: 0, y: 10, width: aView.bounds.width, height: aView.bounds.height)
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = UIDevice.isIpad ? .singleLine : .none
         tableView.clipsToBounds = true
         let v = UIView()
         v.frame.size.height = 5
@@ -200,14 +201,14 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 22))
         label.text = getDateForPrint(date: transactionsToShow[section][0].date)
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        view.backgroundColor = WalletColors.bgMainColor
+        view.backgroundColor = UIColor.bgMainColor
         view.addSubview(label)
         return view
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30))
-        view.backgroundColor = WalletColors.bgMainColor
+        view.backgroundColor = UIColor.bgMainColor
         return view
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -232,7 +233,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         let title = tokensService.selectedERC20Token().symbol.uppercased()
         tokensButton.setTitle(title, for: .normal)
         tokensButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        tokensButton.setTitleColor(WalletColors.mainColor, for: .normal)
+        tokensButton.setTitleColor(UIColor.mainColor, for: .normal)
         tokensButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: tokensButton)
         tokensButton.addTarget(self, action: #selector(showTokensButtonTapped), for: .touchUpInside)

@@ -1,14 +1,18 @@
-# BANKEX Wallet - Ethereum Wallet for iOS
-![](https://github.com/BANKEX/BankexWalletIOS/blob/develop/Badge/%20bankex.png)
+# BANKEX Pay - Ethereum Wallet for iOS
+
+
+<img src="/Badge/Pay-General.png">
+
 
 <p align="center">
  <a href="https://itunes.apple.com/ru/app/bankex-pay/id1411403963?l=en&mt=8"><img src="/Badge/appStore.svg"/></a>
  </p>
  
- <br>
- 
-[![Swift](https://img.shields.io/badge/Swift-4.0-blue.svg)](https://swift.org/)
-[![Platform](https://img.shields.io/badge/Platform-iOS%2B9.0-purple.svg)](https://developer.apple.com/swift)
+<br>
+
+[![Swift](https://img.shields.io/badge/Swift-4.2-blue.svg)](https://swift.org/)
+[![Twitter](https://img.shields.io/badge/contact-%40BANKEX-blue.svg)](https://twitter.com/BANKEX)
+[![Platform](https://img.shields.io/badge/Platform-iOS%2B10.0-purple.svg)](https://developer.apple.com/swift)
 [![Build Status](https://travis-ci.org/BANKEX/BankexWalletIOS.svg?branch=develop)](https://travis-ci.org/BANKEX/BankexWalletIOS)
 
 <br>
@@ -18,10 +22,12 @@ Welcome to BANKEX's open source iOS app!
 
 ## Getting Started
 
-1. [Download](https://developer.apple.com/xcode/download/) the Xcode 9 release.
+1. [Download](https://developer.apple.com/xcode/download/) the Xcode 10 release.
 1. Clone this repository.
 
+
 ## Contributing
+
 
 We intend for this project to be an educational resource: we are excited to
 share our wins, mistakes, and methodology of iOS development as we work
@@ -35,8 +41,9 @@ expected to follow our code of conduct.
 
 ## Information
 
+
 - **Compatibility**: Requires iOS 9.0 or later. Compatible with iPhone and iPod touch.
-- **Languages**: English
+- **Languages**: English,Chinese
 
 ## Code of Conduct
 
@@ -81,10 +88,19 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+## Communication
+
+
+- If you **found a bug**, open an issue.
+- If you **have a feature request**, open an issue.
+- If you **want to contribute**, submit a pull request.
+
 
 ## Details
+
+
 More details (architecture, environments, tests, tools...) can be found on the [wiki](https://github.com/BANKEX/BankexWalletIOS/wiki).
 
-## Change-log
+## Change-Log
 
 A brief summary of each Lovely release can be found on the [releases](https://github.com/BANKEX/BankexWalletIOS/releases).

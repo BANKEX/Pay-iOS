@@ -40,12 +40,12 @@ extension NetworksViewController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView()
         if section == 0 {
-            headerView.title = "CURRENT NETWORK"
+            headerView.title = NSLocalizedString("CurrentNetwork", comment: "")
         }else {
             if isFromDeveloper && listCustomNetworks.count == 0 {
                 headerView.textColor = .clear
             }
-            headerView.title = isFromDeveloper ? "CUSTOM NETWORKS" : "DEFAULT NETWORKS"
+            headerView.title = isFromDeveloper ? "CUSTOM NETWORKS" : NSLocalizedString("DefaultNetworks", comment: "")
         }
         return headerView
     }

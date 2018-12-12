@@ -7,16 +7,17 @@
 //
 
 import UIKit
-import SkeletonView
+import Amplitude_iOS
+import MessageUI
+
+struct TokenShortService {
+    static var arrayTokensShort:[TokenShort] = []
+}
 
 class HomeViewController: BaseViewController {
     
     enum State {
         case home,fromContact
-    }
-    
-    enum HomeSections:Int {
-        case Ethereum = 0, Tokens
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -33,18 +34,33 @@ class HomeViewController: BaseViewController {
             } else {
                 navigationController?.setNavigationBarHidden(false, animated: true)
                 mainSign.isHidden = true
-                navigationItem.title = "Send funds"
+                navigationItem.title = NSLocalizedString("SendFunds", comment: "")
                 topConstraint.constant = -(inset-40)
-                let btn = UIButton(type: .system)
-                btn.setImage(UIImage(named:"BackArrow"), for: .normal)
-                btn.setTitle("  Back", for: .normal)
-                btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-                btn.setTitleColor(WalletColors.mainColor, for: .normal)
-                btn.addTarget(self, action: #selector(self.back), for: .touchUpInside)
-                navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btn)
+               let backButton = self.customBackButton()
+                backButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+                navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
             }
         }
     }
+    
+    private struct ViewModel {
+        
+        struct Section {
+            let headerView: UIView?
+            let rows: [Row]
+        }
+        
+        enum Row {
+            case wallet
+            case empty
+            case placeholder
+            case token(token: ERC20TokenModel)
+        }
+        
+        let sections: [Section]
+    }
+    
+    private var viewModel = ViewModel(sections: [])
     
     var inset:CGFloat {
         return imageView.bounds.size.height - 20.0
@@ -56,34 +72,80 @@ class HomeViewController: BaseViewController {
     let service: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     let conversionService = FiatServiceImplementation.service
     var etherToken: ERC20TokenModel?
-    var tokens = [ERC20TokenModel]()
     let walletData = WalletData()
     var selectedToken:ERC20TokenModel!
-    lazy var ethHeader:UILabel = {
+    
+    @IBOutlet var assetManagementHeaderView: UIView!
+    
+    lazy var walletHeaderLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.text = "Ethereum"
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         label.textColor = .black
+        
         return label
     }()
-    lazy var tokensHeader:UILabel = {
+    
+    lazy var walletHeaderView: UIView = {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        headerView.addSubview(walletHeaderLabel)
+        headerView.frame.size.height = 52
+        
+        return headerView
+    }()
+    
+    lazy var utilityTokensHeaderLabel: UILabel = {
         let label = UILabel()
-        //My favorite magic number
         label.textAlignment = .left
         label.text = "Tokens"
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         label.textColor = .black
+        
         return label
     }()
+    
+    lazy var utilityTokensHeaderView: UIView = {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        headerView.addSubview(utilityTokensHeaderLabel)
+        headerView.frame.size.height = 65
+        
+        return headerView
+    }()
+    
+    lazy var securityTokensHeaderLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.text = "Security Tokens"
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
+        label.textColor = .black
+        
+        return label
+    }()
+    
+    lazy var securityTokensHeaderView: UIView = {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        headerView.addSubview(securityTokensHeaderLabel)
+        headerView.frame.size.height = 65
+        
+        return headerView
+    }()
+    
     lazy var addTokenBtn:BaseButton = {
         let button = BaseButton()
         let widthBtn:CGFloat = 80.0
-        button.frame = CGRect(x: tableView.bounds.width - widthBtn - 15.0, y: 65.0 - 22.0, width: widthBtn, height: 22.0)
-        button.setTitle("Add Tokens", for: .normal)
+        if UIDevice.isIpad {
+            button.frame = CGRect(x: tableView.bounds.width - widthBtn - 50.0, y: 65.0 - 22.0, width: widthBtn, height: 22.0)
+        }else {
+            button.frame = CGRect(x: tableView.bounds.width - widthBtn - 15.0, y: 65.0 - 22.0, width: widthBtn, height: 22.0)
+        }
+        button.setTitle(NSLocalizedString("AddTokens", comment:""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
         button.addTarget(self, action: #selector(self.createToken), for: .touchUpInside)
-        button.setTitleColor(WalletColors.mainColor, for: .normal)
+        button.setTitleColor(UIColor.mainColor, for: .normal)
         button.backgroundColor = .clear
         return button
     }()
@@ -106,8 +168,20 @@ class HomeViewController: BaseViewController {
         catchUserActivity()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //imageView.shimmerAnimation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let sortedArray = TokenShortService.arrayTokensShort.sorted { lhs, rhs -> Bool in
+                return Double(lhs.balance)! > Double(rhs.balance)!
+            }
+            Storage.store(Array(sortedArray.prefix(2)), as: "tokens.json")
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        TokenShortService.arrayTokensShort.removeAll()
         setupStatusBarColor()
         state = isFromContact ? .fromContact : .home
         updateTableView()
@@ -115,12 +189,6 @@ class HomeViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         Guide.value = nil
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let walletInfoVC = segue.destination as? MainInfoController {
-            walletInfoVC.selectedToken = selectedToken
-        }
     }
 
     
@@ -137,14 +205,49 @@ class HomeViewController: BaseViewController {
         Mediator.contactAddr = nil
     }
     
+    @IBAction func openAssetManagementPage() {
+        Amplitude.instance()?.logEvent("Asset Management Learn More Opened")
+        
+        performSegue(withIdentifier: "AssetManagementPage", sender: self)
+    }
+    
+    @IBAction func showAssetManagementContacts() {
+        performSegue(withIdentifier: "AssetManagementContacts", sender: self)
+    }
+    
+    @IBAction func __disabled_feature_showPerformEthTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management ETH Screen Opened")
+        
+        performSegue(withIdentifier: "AssetManagementEth", sender: self)
+    }
+    
+    @IBAction func __disabled_feature_showPerformBtcTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management BTC Screen Opened")
+        
+        performSegue(withIdentifier: "AssetManagementBtc", sender: self)
+    }
+    
+    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
+    
     //Methods
     fileprivate func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = .white
+        UIApplication.shared.statusBarStyle = .default
     }
     
     func catchUserActivity() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if let selectedContact = appDelegate.selectedContact {
+            appDelegate.selectedContact = nil
+            if UIDevice.isIpad {
+                let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
+                let nav = BaseNavigationController(rootViewController: listContactsVC)
+                let profileVC = CreateVC(byName: "ProfileContactViewController") as! ProfileContactViewController
+                profileVC.selectedContact = selectedContact
+                nav.pushViewController(profileVC, animated: false)
+                splitViewController?.showDetailViewController(nav, sender: nil)
+                return
+            }
             tabBarController?.selectedIndex = 2
             let navVC = tabBarController?.viewControllers![2] as? BaseNavigationController
             navVC?.popToRootViewController(animated: false)
@@ -153,22 +256,100 @@ class HomeViewController: BaseViewController {
         }
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if UIDevice.isIpad {
+            walletHeaderLabel.frame = CGRect(x: 52, y: 52.0 - 22.0, width: tableView.bounds.width, height: 22.0)
+        }else {
+            walletHeaderLabel.frame = CGRect(x: 15, y: 52.0 - 22.0, width: tableView.bounds.width, height: 22.0)
+        }
+        
+        if UIDevice.isIpad {
+            utilityTokensHeaderLabel.frame = CGRect(x: 52, y: 65.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
+        }else {
+            utilityTokensHeaderLabel.frame = CGRect(x: 15, y: 65.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
+        }
+        
+        if UIDevice.isIpad {
+            securityTokensHeaderLabel.frame = CGRect(x: 52, y: 65.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
+        }else {
+            securityTokensHeaderLabel.frame = CGRect(x: 15, y: 65.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
+        }
+    }
+    
     
      fileprivate func updateTableView() {
-        view.showSkeleton()
         let dataQueue = DispatchQueue.global(qos: .userInitiated)
         dataQueue.async {
             self.walletData.update(callback: { (etherToken, transactions, availableTokens) in
                 DispatchQueue.main.async {
+                    self.updateViewModel(with: availableTokens)
+                    
                     self.etherToken = etherToken
-                    self.tokens = availableTokens
                     self.tableView.reloadData()
-                    self.view.stopSkeletonAnimation()
-                    self.view.hideSkeleton()
                 }
                 
             })
         }
+    }
+    
+    fileprivate func updateViewModel(with availableTokens: [ERC20TokenModel]) {
+        let utilityTokens = availableTokens.filter { $0.isSecurity == false }
+        let securityTokens = availableTokens.filter { $0.isSecurity == true }
+        
+        var sections: [ViewModel.Section] = []
+        
+        let assetManagementSection = ViewModel.Section(headerView: assetManagementHeaderView, rows: [])
+        sections.append(assetManagementSection)
+        
+        let walletSection = ViewModel.Section(headerView: walletHeaderView, rows: [.placeholder, .wallet])
+        sections.append(walletSection)
+        
+        var addTokenButtonUsed = false
+        
+        if utilityTokens.count > 0 {
+            if addTokenButtonUsed == false {
+                addTokenButtonUsed = true
+                utilityTokensHeaderView.addSubview(addTokenBtn)
+            }
+            
+            let section = ViewModel.Section(headerView: utilityTokensHeaderView, rows: rows(for: utilityTokens))
+            
+            sections.append(section)
+        }
+        
+        if securityTokens.count > 0 {
+            if addTokenButtonUsed == false {
+                addTokenButtonUsed = true
+                securityTokensHeaderView.addSubview(addTokenBtn)
+            }
+            
+            let section = ViewModel.Section(headerView: securityTokensHeaderView, rows: rows(for: securityTokens))
+            
+            sections.append(section)
+        }
+        
+        if utilityTokens.count == 0 && securityTokens.count == 0 {
+            if addTokenButtonUsed == false {
+                addTokenButtonUsed = true
+                utilityTokensHeaderView.addSubview(addTokenBtn)
+            }
+            
+            let section = ViewModel.Section(headerView: utilityTokensHeaderView, rows: [.empty])
+            
+            sections.append(section)
+        }
+        
+        viewModel = ViewModel(sections: sections)
+    }
+    
+    private func rows(for tokens: [ERC20TokenModel]) -> [ViewModel.Row] {
+        return tokens.reduce([], { (rows, token) -> [ViewModel.Row] in
+            let tokenRows: [ViewModel.Row] = [.placeholder, .token(token: token)]
+            
+            return rows + tokenRows
+        })
     }
     
     fileprivate func setupTableView() {
@@ -182,114 +363,143 @@ class HomeViewController: BaseViewController {
         tableView.register(UINib(nibName: TokenTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: TokenTableViewCell.identifier)
         tableView.register(UINib(nibName: PlaceholderCell.identifier, bundle: nil), forCellReuseIdentifier: PlaceholderCell.identifier)
         tableView.register(UINib(nibName: EmptyTableCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyTableCell.identifier)
-        tableView.isSkeletonable = true
     }
 
 }
 
-extension HomeViewController: UITableViewDataSource,SkeletonTableViewDataSource,UITableViewDelegate {
-    
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return 1
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return TokenTableViewCell.identifier
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == HomeSections.Ethereum.rawValue {
-            return 1
-        }else {
-            if tokens.isEmpty {
-                return 1
-            }
-            return tokens.count == 1 ? 3 : tokens.count * 2 + 1
-        }
-    }
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return viewModel.sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.sections[section].rows.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 70.0
-        }else {
-            if tokens.isEmpty {
-                return 180.0
-            }
-            return indexPath.row % 2 == 0 ? 20.0 : 70.0
-        }
+        let row = viewModel.sections[indexPath.section].rows[indexPath.row]
         
+        switch row {
+        case .empty: return 180
+        case .placeholder: return 20
+        case .token: return 70
+        case .wallet: return 70
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if HomeSections.Ethereum.rawValue == indexPath.section {
-            if let walletCell = tableView.dequeueReusableCell(withIdentifier: WalletTableViewCell.identifier, for: indexPath) as? WalletTableViewCell {
-                return walletCell
-            }
-        }else if HomeSections.Tokens.rawValue == 1 {
-            if tokens.isEmpty {
-                let emptyCell = tableView.dequeueReusableCell(withIdentifier: EmptyTableCell.identifier, for: indexPath) as! EmptyTableCell
-                return emptyCell
-            }
-            if indexPath.row % 2 == 0 {
-                if let placeholderCell = tableView.dequeueReusableCell(withIdentifier: PlaceholderCell.identifier, for: indexPath) as? PlaceholderCell {
-                    return placeholderCell
-                }
-            }else {
-                if let tokenCell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as? TokenTableViewCell {
-                    let num = floor(Double(indexPath.row/2))
-                    tokenCell.token = tokens[Int(num)]
-                    tokenCell.isSearchable = false
-                    return tokenCell
-                }
-            }
+        let row = viewModel.sections[indexPath.section].rows[indexPath.row]
+        
+        switch row {
+        case .empty: return tableView.dequeueReusableCell(withIdentifier: EmptyTableCell.identifier, for: indexPath)
+        case .placeholder: return tableView.dequeueReusableCell(withIdentifier: PlaceholderCell.identifier, for: indexPath)
+        case .wallet: return tableView.dequeueReusableCell(withIdentifier: WalletTableViewCell.identifier, for: indexPath)
+        case .token(let token):
+            let tokenCell = tableView.dequeueReusableCell(withIdentifier: TokenTableViewCell.identifier, for: indexPath) as! TokenTableViewCell
+            tokenCell.token = token
+            tokenCell.isSearchable = false
+            
+            return tokenCell
         }
-        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == HomeSections.Ethereum.rawValue {
-            let ethView = UIView()
-            ethView.backgroundColor = .clear
-            ethHeader.frame = CGRect(x: 15, y: 0, width: tableView.bounds.width, height: 22.0)
-            ethView.addSubview(ethHeader)
-            return ethView
-        }else if section == HomeSections.Tokens.rawValue {
-            let tokensView = UIView()
-            tokensView.backgroundColor = .clear
-            tokensHeader.frame = CGRect(x: 15, y: 65.0 - 22.0, width: tableView.bounds.width/2, height: 22.0)
-            tokensView.addSubview(tokensHeader)
-            tokensView.addSubview(addTokenBtn)
-            return tokensView
-        }
-        return nil
+        return viewModel.sections[section].headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return HomeSections.Ethereum.rawValue == section ? 52.0 : 65.0
+        return viewModel.sections[section].headerView?.frame.size.height ?? 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if HomeSections.Ethereum.rawValue == indexPath.section {
-            selectedToken = etherToken
-            tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
-        }else {
-            let num = floor(Double(indexPath.row/2))
-            selectedToken = tokens[Int(num)]
-            tokenSerive.updateSelectedToken(to: selectedToken.address, completion: nil)
+        if isFromContact {
+            let sendToken = storyboard?.instantiateViewController(withIdentifier: "SendTokenViewController") as! SendTokenViewController
+            navigationController?.pushViewController(sendToken, animated: true)
+            performSegue(withIdentifier: "walletInfo", sender: nil)
+            return
         }
-        performSegue(withIdentifier: "walletInfo", sender: nil)
+        
+        let row = viewModel.sections[indexPath.section].rows[indexPath.row]
+        
+        switch row {
+        case .empty: return
+        case .placeholder: return
+        case .wallet:
+            tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
+            performSegue(withIdentifier: "walletInfo", sender: nil)
+            
+        case .token(let token):
+            selectedToken = token
+            tokenSerive.updateSelectedToken(to: selectedToken.address, completion: nil)
+            performSegue(withIdentifier: "walletInfo", sender: nil)
+        }
     }
-   
     
 }
 
+extension HomeViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if
+            let navigationController = segue.destination as? UINavigationController,
+            ["AssetManagementContacts", "AssetManagementEth", "AssetManagementBtc", "AssetManagementPage"].contains(segue.identifier ?? "")
+        {
+            UIApplication.shared.statusBarView?.backgroundColor = UIColor.mainColor
+            UIApplication.shared.statusBarStyle = .lightContent
+            
+            navigationController.navigationBar.barTintColor = UIColor.mainColor
+            navigationController.navigationBar.tintColor = UIColor.white
+            navigationController.navigationBar.isTranslucent = false
+            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController.navigationBar.shadowImage = UIImage()
+        }
+        
+        if
+            segue.identifier == "AssetManagementPage",
+            let navigationController = segue.destination as? UINavigationController,
+            let viewController = navigationController.viewControllers.first as? AssetManagementBrowserViewController
+        {
+            viewController.link = URL(string: "https://bankex.com/en/sto/asset-management")!
+            viewController.showDismissButton = true
+        }
+    }
+    
+}
+
+extension HomeViewController: MFMailComposeViewControllerDelegate {
+    
+    private func sendAssetManagementRequestEmail(for token: String) {
+        let mailComposeViewController: MFMailComposeViewController? = MFMailComposeViewController()
+        
+        guard let viewController = mailComposeViewController else { return }
+        
+        let subject = "Request \(token) Asset management"
+        let message = "Request Asset management"
+        
+        viewController.mailComposeDelegate = self
+        viewController.setToRecipients(["sales@bankex.com"])
+        viewController.setSubject(subject)
+        viewController.setMessageBody(message, isHTML: false)
+        
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func showPerformEthTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management ETH Email Opened")
+        
+        sendAssetManagementRequestEmail(for: "ETH")
+    }
+    
+    @IBAction func showPerformBtcTransfer() {
+        Amplitude.instance()?.logEvent("Asset Management BTC Email Opened")
+        
+        sendAssetManagementRequestEmail(for: "BTC")
+    }
+    
+}
 

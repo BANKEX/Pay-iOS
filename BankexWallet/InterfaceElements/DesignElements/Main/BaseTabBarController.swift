@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Hero
 
 class BaseTabBarController: UITabBarController {
 
@@ -15,7 +14,7 @@ class BaseTabBarController: UITabBarController {
         super.viewDidLoad()
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
-        tabBar.tintColor = WalletColors.mainColor
+        tabBar.tintColor = UIColor.mainColor
         tabBar.barTintColor = .white
         tabBar.items?.first?.image = UIImage(named:"Wallet")
         tabBar.items?.first?.selectedImage = UIImage(named:"Wallet_Selected")
