@@ -51,11 +51,9 @@ class GenericImportViewController: BaseViewController {
         if segmentedControl.selectedSegmentIndex == 0 {
             privateKeyContainer.isHidden = false
             passphraseContainer.isHidden = true
-            controllersWithContent.forEach { $0.clearTextFields() }
         }else {
             privateKeyContainer.isHidden = true
             passphraseContainer.isHidden = false
-            controllersWithContent.forEach { $0.clearTextFields() }
         }
     }
     
