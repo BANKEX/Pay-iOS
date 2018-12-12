@@ -37,3 +37,19 @@ target 'Wallet Widget' do
     pod 'Fabric', '~> 1.7.13'
     pod 'Crashlytics', '~> 3.10.9'
 end
+
+
+pods_with_specific_swift_versions = {
+  'GrowingTextView' => '4.2',
+}
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if pods_with_specific_swift_versions.key? target.name
+        swift_version = pods_with_specific_swift_versions[target.name]
+        target.build_configurations.each do |config|
+          config.build_settings['SWIFT_VERSION'] = swift_version
+        end
+      end
+    end
+end
