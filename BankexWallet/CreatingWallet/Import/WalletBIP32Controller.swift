@@ -10,7 +10,7 @@ import UIKit
 import Amplitude_iOS
 import GrowingTextView
 
-class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithContentProtocol,GrowingTextViewDelegate {
+class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,GrowingTextViewDelegate {
     
     
     enum State {
