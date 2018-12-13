@@ -64,14 +64,6 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,GrowingTextV
     
     
     //MARK: - Methods
-    func clearTextFields() {
-        nameTextField.text = ""
-        passphraseTextView.text = ""
-        view.endEditing(true)
-        if passphraseTextView.text.utf16.count > 0  {
-            state = .notAvailable
-        }
-    }
     
     func configure() {
         nameTextField.delegate = self

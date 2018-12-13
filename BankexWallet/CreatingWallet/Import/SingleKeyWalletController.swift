@@ -71,10 +71,6 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,QRReader
     
     //MARK: - Methods
     
-    func clearTextFields() {
-        nameWalletTextField.text = ""
-        view.endEditing(true)
-    }
     
     func configure() {
         privateKeyTextView.delegate = self
