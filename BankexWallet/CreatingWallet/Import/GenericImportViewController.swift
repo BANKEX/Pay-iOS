@@ -38,9 +38,8 @@ class GenericImportViewController: BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? UIViewController {
-            controllersWithContent.append(viewController)
-        }
+        let viewController = segue.destination
+        controllersWithContent.append(viewController)
     }
     
     
