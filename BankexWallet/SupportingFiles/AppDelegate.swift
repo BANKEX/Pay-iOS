@@ -174,9 +174,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         UIApplication.unattachBlur()
-        if UserDefaults.standard.value(forKey: Keys.multiSwitch.rawValue) == nil {
-            UserDefaults.standard.set(false, forKey: Keys.multiSwitch.rawValue)
-        }
         if UserDefaults.standard.bool(forKey: Keys.multiSwitch.rawValue) && UserDefaults.standard.bool(forKey: "isNotFirst") && !AutoLockService.shared.isRunning  {
             showPasscode(context: .background)
         }
