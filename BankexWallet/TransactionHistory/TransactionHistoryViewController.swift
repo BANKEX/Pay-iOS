@@ -84,6 +84,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     func setupTableView() {
         tableView.backgroundColor = UIColor.bgMainColor
         tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
+        tableView.separatorInset.left = 50
     }
     
     private func prepareNavBar() {
