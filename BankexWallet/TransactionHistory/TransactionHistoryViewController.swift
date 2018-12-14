@@ -200,7 +200,8 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 53))
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 22))
         label.text = getDateForPrint(date: transactionsToShow[section][0].date)
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textColor = UIColor.separatorColor
         view.backgroundColor = UIColor.bgMainColor
         view.addSubview(label)
         return view
