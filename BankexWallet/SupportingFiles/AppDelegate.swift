@@ -456,7 +456,16 @@ extension AppDelegate : MessagingDelegate {
 extension AppDelegate: PasscodeEnterControllerDelegate {
     
     func showPasscode(context: Context) {
-        guard passcodeViewController == nil || passcodeViewController?.context == .sendScreen else { return }
+        guard let _: Bool = {
+            guard let passcodeViewController = passcodeViewController else {
+                return true
+            }
+            if case .sendScreen(_) = passcodeViewController.context {
+                return true
+            } else {
+                return false
+            }
+        }() else { return }
         
         guard let viewController = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
         viewController.delegate = self
@@ -479,10 +488,7 @@ extension AppDelegate: PasscodeEnterControllerDelegate {
             guard let processVC = storyboard().instantiateViewController(withIdentifier: "ProcessController") as? SendingInProcessViewController else { return }
             processVC.fromEnterScreen = true
             latestVC.navigationController?.pushViewController(processVC, animated: true)
-        case .sendScreen:
-            guard let tabBarVC = window?.rootViewController as? UITabBarController else { return }
-            guard let navVC = tabBarVC.viewControllers?.first as? UINavigationController else { return }
-            guard let confirmVC = navVC.topViewController as? ConfirmViewController else { return }
+        case let .sendScreen(confirmVC):
             confirmVC.sendFunds()
         case .background:
             break

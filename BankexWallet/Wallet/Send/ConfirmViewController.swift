@@ -158,7 +158,7 @@ class ConfirmViewController: UITableViewController {
                 self.sendFunds()
             } else {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.showPasscode(context: .sendScreen)
+                appDelegate.showPasscode(context: .sendScreen(self))
             }
         } else {
             self.sendFunds()
