@@ -21,7 +21,7 @@ class SendingSuccessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //addBackButton()
+        addBackButton()
         
     }
     
@@ -40,12 +40,10 @@ class SendingSuccessViewController: UIViewController {
     }
     
     func addBackButton() {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "BackArrow"), for: .normal)
-        button.setTitle(NSLocalizedString("Home", comment: ""), for: .normal)
-        button.setTitleColor(UIColor.mainColor, for: .normal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-        button.addTarget(self, action: #selector(done(_:)), for: .touchUpInside)
+        let back = BackButtonView.create(self, action: #selector(done(_:)))
+        back.label.text = NSLocalizedString("Back", comment: "")
+        back.label.textColor = .mainColor
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: back)
     }
     
     // MARK: Actions
