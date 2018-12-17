@@ -60,7 +60,7 @@ class SecurityViewController: UITableViewController {
     func updateUI() {
         openSwitch.isOn = UserDefaults.standard.bool(forKey:Keys.openSwitch.rawValue)
         sendSwitch.isOn = UserDefaults.standard.value(forKey:Keys.sendSwitch.rawValue) as? Bool ?? true
-        multitaskSwitch.isOn = UserDefaults.standard.value(forKey:Keys.multiSwitch.rawValue) as? Bool ?? true
+        multitaskSwitch.isOn = UserDefaults.standard.bool(forKey:Keys.multiSwitch.rawValue)
         timerLbl.text = AutoLockService.shared.getState() ?? ""
     }
     
