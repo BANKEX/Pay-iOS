@@ -416,7 +416,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         if isFromContact {
             let sendToken = storyboard?.instantiateViewController(withIdentifier: "SendTokenViewController") as! SendTokenViewController
             navigationController?.pushViewController(sendToken, animated: true)
-            performSegue(withIdentifier: "walletInfo", sender: nil)
             return
         }
         
