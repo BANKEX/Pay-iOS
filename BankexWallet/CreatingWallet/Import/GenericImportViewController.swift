@@ -18,7 +18,7 @@ class GenericImportViewController: BaseViewController {
     
     
     //MARK: - Properties
-    var controllersWithContent = [ScreenWithContentProtocol]()
+    var controllersWithContent = [UIViewController]()
     
     //MARK: - LifeCircle
     override func viewDidLoad() {
@@ -38,9 +38,8 @@ class GenericImportViewController: BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? ScreenWithContentProtocol {
-            controllersWithContent.append(viewController)
-        }
+        let viewController = segue.destination
+        controllersWithContent.append(viewController)
     }
     
     

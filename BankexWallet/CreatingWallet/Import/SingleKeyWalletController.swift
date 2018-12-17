@@ -11,7 +11,7 @@ import Amplitude_iOS
 import web3swift
 import GrowingTextView
 
-class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWithContentProtocol,QRReaderVCDelegate {
+class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,QRReaderVCDelegate {
     
     
     
@@ -71,10 +71,6 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,ScreenWi
     
     //MARK: - Methods
     
-    func clearTextFields() {
-        nameWalletTextField.text = ""
-        view.endEditing(true)
-    }
     
     func configure() {
         privateKeyTextView.delegate = self

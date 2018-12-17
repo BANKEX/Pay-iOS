@@ -10,7 +10,7 @@ import UIKit
 import Amplitude_iOS
 import GrowingTextView
 
-class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithContentProtocol,GrowingTextViewDelegate {
+class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,GrowingTextViewDelegate {
     
     
     enum State {
@@ -64,14 +64,6 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,ScreenWithCo
     
     
     //MARK: - Methods
-    func clearTextFields() {
-        nameTextField.text = ""
-        passphraseTextView.text = ""
-        view.endEditing(true)
-        if passphraseTextView.text.utf16.count > 0  {
-            state = .notAvailable
-        }
-    }
     
     func configure() {
         nameTextField.delegate = self
