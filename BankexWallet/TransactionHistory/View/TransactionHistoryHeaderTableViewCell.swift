@@ -12,7 +12,7 @@ class TransactionHistoryHeaderTableViewCell: UITableViewCell {
     
     @IBOutlet private var dateLabel: UILabel!
     
-    static let identifer = String(describing: TransactionHistoryHeaderTableViewCell.self)
+    static let identifier = String(describing: TransactionHistoryHeaderTableViewCell.self)
     public var dateText:String? {
         get {
             return dateLabel.text
