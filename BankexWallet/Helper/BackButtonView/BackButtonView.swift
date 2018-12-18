@@ -10,6 +10,8 @@ import UIKit
 
 class BackButtonView: UIControl {
     
+    @IBOutlet var label: UILabel!
+    
     private static let nib = UINib(nibName: "BackButtonView", bundle: nil)
     
     class func create(_ target: Any?,
