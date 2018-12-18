@@ -117,7 +117,7 @@ class PasscodeEnterController: UIViewController {
     private func configureBackground() {
         UIApplication.shared.statusBarView?.backgroundColor = nil
         
-        if context == .sendScreen {
+        if case .sendScreen(_) = context {
             backgroundImageView.image = UIImage(named: "pin-greybackground")
         }
     }

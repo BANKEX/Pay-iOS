@@ -9,5 +9,7 @@
 import Foundation
 
 enum Context {
-    case initial,sendScreen,background
+    case initial
+    case sendScreen(ConfirmViewController)
+    case background
 }
