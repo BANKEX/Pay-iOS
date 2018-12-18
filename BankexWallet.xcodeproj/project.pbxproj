@@ -99,8 +99,8 @@
 		863156A22103B7AA00914F31 /* NetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863156A12103B7AA00914F31 /* NetworksViewController.swift */; };
 		863156A82103DC5300914F31 /* NetworksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863156A72103DC5300914F31 /* NetworksDataSource.swift */; };
 		863156AA2103DD2900914F31 /* NetworksDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863156A92103DD2900914F31 /* NetworksDelegate.swift */; };
-		8635AB6D21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8635AB6B21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.swift */; };
-		8635AB6E21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8635AB6C21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.xib */; };
+		8635AB6D21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8635AB6B21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.swift */; };
+		8635AB6E21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8635AB6C21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.xib */; };
 		863A6A5F2184EBAA00E4A8D3 /* GeneralInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863A6A5D2184EBAA00E4A8D3 /* GeneralInformationCell.swift */; };
 		863A6A602184EBAA00E4A8D3 /* GeneralInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 863A6A5E2184EBAA00E4A8D3 /* GeneralInformationCell.xib */; };
 		863A6A632184EDAF00E4A8D3 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863A6A612184EDAF00E4A8D3 /* InfoCell.swift */; };
@@ -386,8 +386,8 @@
 		863156A12103B7AA00914F31 /* NetworksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworksViewController.swift; sourceTree = "<group>"; };
 		863156A72103DC5300914F31 /* NetworksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworksDataSource.swift; sourceTree = "<group>"; };
 		863156A92103DD2900914F31 /* NetworksDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworksDelegate.swift; sourceTree = "<group>"; };
-		8635AB6B21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrHistoryHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		8635AB6C21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrHistoryHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		8635AB6B21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		8635AB6C21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistoryHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		863A6A5D2184EBAA00E4A8D3 /* GeneralInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInformationCell.swift; sourceTree = "<group>"; };
 		863A6A5E2184EBAA00E4A8D3 /* GeneralInformationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneralInformationCell.xib; sourceTree = "<group>"; };
 		863A6A612184EDAF00E4A8D3 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
@@ -608,8 +608,8 @@
 			isa = PBXGroup;
 			children = (
 				F075A450204BF4EE001949A9 /* TransactionHistoryCell.swift */,
-				8635AB6B21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.swift */,
-				8635AB6C21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.xib */,
+				8635AB6B21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.swift */,
+				8635AB6C21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1476,7 +1476,7 @@
 				86D7FB8321494AE4008245DE /* TokenTableViewCell.xib in Resources */,
 				9296A28B21B7F4E500BB3E27 /* BackButtonView.xcassets in Resources */,
 				863A6A642184EDAF00E4A8D3 /* InfoCell.xib in Resources */,
-				8635AB6E21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.xib in Resources */,
+				8635AB6E21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.xib in Resources */,
 				924A36ED21B120C6000954BD /* AssetManagementLinks.xcassets in Resources */,
 				862F877921527A10001D7DDE /* TransactionInfoCell.xib in Resources */,
 				71155E7221B4E94A00ED7B4E /* AssetManagementEthProgress.xcassets in Resources */,
@@ -1691,7 +1691,7 @@
 				86DB8A6F2105D12300B900F2 /* CreateNetworkViewController.swift in Sources */,
 				71C72A3721B01BB100FB3E13 /* AssetManagementEthFailureViewController.swift in Sources */,
 				863A6A632184EDAF00E4A8D3 /* InfoCell.swift in Sources */,
-				8635AB6D21C3D5AB001BC100 /* TrHistoryHeaderTableViewCell.swift in Sources */,
+				8635AB6D21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.swift in Sources */,
 				861D2CD0214AA0AF00A108C4 /* EmptyTableCell.swift in Sources */,
 				86E15F10215BA02800F85AD2 /* UISearchBar+Extensions.swift in Sources */,
 				8649F1A22167AC9F00EAFDF9 /* AppDelegate+Extenstions.swift in Sources */,

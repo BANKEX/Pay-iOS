@@ -1,5 +1,5 @@
 //
-//  TrHistoryHeaderTableViewCell.swift
+//  TransactionHistoryHeaderTableViewCell.swift
 //  BankexWallet
 //
 //  Created by Vladislav on 14/12/2018.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class TrHistoryHeaderTableViewCell: UITableViewCell {
+class TransactionHistoryHeaderTableViewCell: UITableViewCell {
     
     @IBOutlet private var dateLabel: UILabel!
     
-    static let identifer = String(describing: TrHistoryHeaderTableViewCell.self)
+    static let identifer = String(describing: TransactionHistoryHeaderTableViewCell.self)
     public var dateText:String? {
         get {
             return dateLabel.text

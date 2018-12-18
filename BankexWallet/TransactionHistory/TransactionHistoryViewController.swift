@@ -84,7 +84,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     func setupTableView() {
         tableView.backgroundColor = UIColor.bgMainColor
         tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
-        tableView.register(UINib(nibName: TrHistoryHeaderTableViewCell.identifer, bundle: nil), forCellReuseIdentifier: TrHistoryHeaderTableViewCell.identifer)
+        tableView.register(UINib(nibName: TransactionHistoryHeaderTableViewCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionHistoryHeaderTableViewCell.identifer)
         tableView.separatorInset.left = 50
     }
     
@@ -199,7 +199,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let trDateCell = tableView.dequeueReusableCell(withIdentifier: TrHistoryHeaderTableViewCell.identifer) as? TrHistoryHeaderTableViewCell else { return nil }
+        guard let trDateCell = tableView.dequeueReusableCell(withIdentifier: TransactionHistoryHeaderTableViewCell.identifer) as? TransactionHistoryHeaderTableViewCell else { return nil }
         trDateCell.dateText = getDateForPrint(date: transactionsToShow[section][0].date)
         return trDateCell
     }
