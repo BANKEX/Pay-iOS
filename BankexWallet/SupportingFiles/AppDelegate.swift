@@ -456,17 +456,18 @@ extension AppDelegate : MessagingDelegate {
 extension AppDelegate: PasscodeEnterControllerDelegate {
     
     func showPasscode(context: Context) {
-        guard let _: Bool = {
+        let isFirstTime = passcodeViewController == nil
+        let isSendScreen: Bool = {
             guard let passcodeViewController = passcodeViewController else {
-                return true
+                return false
             }
             if case .sendScreen(_) = passcodeViewController.context {
                 return true
             } else {
                 return false
             }
-        }() else { return }
-        
+        }()
+        guard isFirstTime || isSendScreen else { return }
         guard let viewController = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
         viewController.delegate = self
         viewController.context = context
