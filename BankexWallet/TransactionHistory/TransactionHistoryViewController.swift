@@ -84,6 +84,8 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     func setupTableView() {
         tableView.backgroundColor = UIColor.bgMainColor
         tableView.register(UINib(nibName: TransactionInfoCell.identifer, bundle: nil), forCellReuseIdentifier: TransactionInfoCell.identifer)
+        tableView.register(UINib(nibName: TransactionHistoryHeaderTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: TransactionHistoryHeaderTableViewCell.identifier)
+        tableView.separatorInset.left = 50
     }
     
     private func prepareNavBar() {
@@ -197,17 +199,13 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 53))
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 22))
-        label.text = getDateForPrint(date: transactionsToShow[section][0].date)
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        view.backgroundColor = UIColor.bgMainColor
-        view.addSubview(label)
-        return view
+        guard let trDateCell = tableView.dequeueReusableCell(withIdentifier: TransactionHistoryHeaderTableViewCell.identifier) as? TransactionHistoryHeaderTableViewCell else { return nil }
+        trDateCell.dateText = getDateForPrint(date: transactionsToShow[section][0].date)
+        return trDateCell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35))
         view.backgroundColor = UIColor.bgMainColor
         return view
     }

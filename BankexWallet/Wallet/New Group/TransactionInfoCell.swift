@@ -24,7 +24,7 @@ class TransactionInfoCell: UITableViewCell {
     static let identifer = String(describing: TransactionInfoCell.self)
     let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss"
+        formatter.dateFormat = "HH:mm"
         return formatter
     }()
     var fromMain:Bool = true
