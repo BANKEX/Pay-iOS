@@ -4572,11 +4572,18 @@ any transaction history yet</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XY1-et-eTM"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Transaction History" id="2j5-wE-yUj"/>
+                    <navigationItem key="navigationItem" title="Transaction History" id="2j5-wE-yUj">
+                        <barButtonItem key="rightBarButtonItem" title="All" id="dfh-89-w16">
+                            <connections>
+                                <action selector="showTokensButtonTapped:" destination="8WB-rZ-FB6" id="hiB-Va-HVa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emptyView" destination="jqw-4f-7Z9" id="xoX-Cm-3yn"/>
                         <outlet property="segmentControl" destination="Jtp-9m-itp" id="5Cs-3i-aSF"/>
                         <outlet property="tableView" destination="Tll-nS-pNB" id="GZn-90-L1Y"/>
+                        <outlet property="tokenFilter" destination="dfh-89-w16" id="QGS-tx-ha5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iW7-FR-ZhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
