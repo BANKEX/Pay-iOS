@@ -17,7 +17,8 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     @IBOutlet weak var segmentControl:UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView:UIView!
-    @IBOutlet var tokenFilter: UIBarButtonItem!
+    @IBOutlet var tokenFilterBarButtonItem: UIBarButtonItem!
+    var availableTokensList: [ERC20TokenModel] = []
     var popover: Popover!
     //Save height of popover when appear 5 tokens
     var fiveTokensHeight:CGFloat = 0
@@ -60,6 +61,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        availableTokensList = tokensService.availableTokensList() ?? []
         prepareNavBar()
     }
     
@@ -89,7 +91,8 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     }
     
     private func prepareNavBar() {
-        tokenFilter.title = tokensService.selectedERC20Token().symbol.uppercased()
+        tokenFilterBarButtonItem.title = tokensService.selectedERC20Token().symbol.uppercased()
+        tokenFilterBarButtonItem.isEnabled = availableTokensList.count > 0
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         UIApplication.shared.statusBarView?.backgroundColor = .white
     }
@@ -133,20 +136,15 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     }
     
     private func showActionSheet() {
-        guard let symbols = tokensService.availableTokensList()?
-            .map({ $0.symbol.uppercased() }), symbols.count > 0 else { return }
-        
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addCancel()
-
-        symbols
-            .map { symbol in
-                return UIAlertAction(title: symbol, style: .default, handler: { [weak self] (_) in
-                    self?.didSelectToken(name: symbol)
-                })
-            }
-            .forEach { actionSheet.addAction($0) }
-        
+        availableTokensList.forEach { token in
+            let symbol = token.symbol.uppercased()
+            let action = UIAlertAction(title: symbol, style: .default, handler: { [weak self] (_) in
+                self?.didSelectToken(name: symbol)
+            })
+            actionSheet.addAction(action)
+        }
         present(actionSheet, animated: true, completion: nil)
     }
     
@@ -200,7 +198,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         let selAddr = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
         guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
         tokensService.updateSelectedToken(to: token.address, completion: {
-            self.tokenFilter.title = name.uppercased()
+            self.tokenFilterBarButtonItem.title = name.uppercased()
             self.updateTransactions(address: selAddr, status: self.currentState)
             self.updateUI()
         })
