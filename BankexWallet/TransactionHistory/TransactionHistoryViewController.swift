@@ -19,7 +19,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     @IBOutlet weak var emptyView:UIView!
     @IBOutlet var tokenFilterBarButtonItem: UIBarButtonItem!
     var availableTokensList: [ERC20TokenModel] = []
-    var popover: Popover!
+    var popover: Popover?
     //Save height of popover when appear 5 tokens
     var fiveTokensHeight:CGFloat = 0
     var tokensTableViewManager = TokensTableViewManager()
@@ -169,7 +169,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         tokensTableViewManager.delegate = self
         tableView.delegate = tokensTableViewManager
         tableView.dataSource = tokensTableViewManager
-        self.popover.show(aView, point: point)
+        popover?.show(aView, point: point)
         
     }
     
@@ -192,9 +192,8 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     //MARK: - Choose Token Delegate
     func didSelectToken(name: String) {
-        if UIDevice.isIpad {
-            popover.dismiss()
-        }
+        popover?.dismiss()
+        popover = nil
         let selAddr = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
         guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
         tokensService.updateSelectedToken(to: token.address, completion: {
