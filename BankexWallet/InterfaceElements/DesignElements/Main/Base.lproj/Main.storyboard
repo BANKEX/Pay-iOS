@@ -4572,11 +4572,18 @@ any transaction history yet</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XY1-et-eTM"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Transaction History" id="2j5-wE-yUj"/>
+                    <navigationItem key="navigationItem" title="Transaction History" id="2j5-wE-yUj">
+                        <barButtonItem key="rightBarButtonItem" title="All" id="dfh-89-w16">
+                            <connections>
+                                <action selector="showTokensButtonTapped:" destination="8WB-rZ-FB6" id="hiB-Va-HVa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emptyView" destination="jqw-4f-7Z9" id="xoX-Cm-3yn"/>
                         <outlet property="segmentControl" destination="Jtp-9m-itp" id="5Cs-3i-aSF"/>
                         <outlet property="tableView" destination="Tll-nS-pNB" id="GZn-90-L1Y"/>
+                        <outlet property="tokenFilterBarButtonItem" destination="dfh-89-w16" id="QGS-tx-ha5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iW7-FR-ZhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5482,7 +5489,7 @@ successfully</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0xde0b295669a9fd93d5f28c85e40f4cb697bae" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTY-n2-9CJ">
-                                <rect key="frame" x="44" y="352.5" width="160" height="54"/>
+                                <rect key="frame" x="44" y="396.5" width="160" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -5491,7 +5498,7 @@ successfully</string>
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Q3-a6-G0T">
-                                <rect key="frame" x="0.0" y="20" width="320" height="284"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="284"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="crX-5b-v1D">
                                         <rect key="frame" x="40" y="22" width="240" height="240"/>
@@ -5546,7 +5553,7 @@ successfully</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Stu-Ab-sXL">
-                                <rect key="frame" x="44" y="320" width="266" height="20.5"/>
+                                <rect key="frame" x="44" y="364" width="266" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -6189,11 +6196,11 @@ successfully</string>
             <objects>
                 <viewController storyboardIdentifier="ProcessController" hidesBottomBarWhenPushed="YES" id="iLc-LU-ReD" customClass="SendingInProcessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="08T-rQ-TzM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vu5-xB-3LK">
-                                <rect key="frame" x="40" y="153" width="240" height="262"/>
+                                <rect key="frame" x="40" y="37.5" width="240" height="262"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DW4-9U-UJB">
                                         <rect key="frame" x="5" y="223.5" width="230.5" height="38.5"/>
@@ -6227,7 +6234,7 @@ minutes, please wait ...</string>
                                 </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Qxu-mh-aVm">
-                                <rect key="frame" x="142.5" y="453" width="35" height="35"/>
+                                <rect key="frame" x="142.5" y="337.5" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="hap-ME-2od"/>
                                     <constraint firstAttribute="width" constant="35" id="um6-qS-gPu"/>
@@ -7037,9 +7044,6 @@ minutes, please wait ...</string>
     <inferredMetricsTieBreakers>
         <segue reference="USj-xB-uaI"/>
         <segue reference="aQE-iQ-YyK"/>
-        <segue reference="94t-6M-Swp"/>
-        <segue reference="gqW-bN-vW7"/>
-        <segue reference="CVH-8R-7yl"/>
         <segue reference="ijQ-jv-rc6"/>
         <segue reference="JaH-wa-aDn"/>
         <segue reference="VK0-qH-nIq"/>
