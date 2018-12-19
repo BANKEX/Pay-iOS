@@ -129,15 +129,37 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     //MARK: - Popover magic
     @IBAction func showTokensButtonTapped(_ sender: Any) {
+         UIDevice.isIpad ? showPopover() : showActionSheet()
+    }
+    
+    private func showActionSheet() {
+        guard let symbols = tokensService.availableTokensList()?
+            .map({ $0.symbol.uppercased() }), symbols.count > 0 else { return }
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.addCancel()
+
+        symbols
+            .map { symbol in
+                return UIAlertAction(title: symbol, style: .default, handler: { [weak self] (_) in
+                    self?.didSelectToken(name: symbol)
+                })
+            }
+            .forEach { actionSheet.addAction($0) }
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func showPopover() {
         popover = Popover(options: self.popoverOptions)
-        let aView = UIView(frame: CGRect(x: 0, y: 0, width: UIDevice.isIpad ? 320 : 86, height: calculateHeight()))
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: calculateHeight()))
         aView.clipsToBounds = true
         aView.backgroundColor = UIColor.clear
 //        let tableView = UITableView(frame: CGRect(x: 0, y: 5, width: 100, height: calculateHeight()), style: .plain)
         let tableView = UITableView()
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
         tableView.frame = CGRect(x: 0, y: 10, width: aView.bounds.width, height: aView.bounds.height)
-        tableView.separatorStyle = UIDevice.isIpad ? .singleLine : .none
+        tableView.separatorStyle = .singleLine
         tableView.clipsToBounds = true
         let v = UIView()
         v.frame.size.height = 5
@@ -172,7 +194,9 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     //MARK: - Choose Token Delegate
     func didSelectToken(name: String) {
-        popover.dismiss()
+        if UIDevice.isIpad {
+            popover.dismiss()
+        }
         let selAddr = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
         guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
         tokensService.updateSelectedToken(to: token.address, completion: {
