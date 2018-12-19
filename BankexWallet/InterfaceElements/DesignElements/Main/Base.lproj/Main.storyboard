@@ -4462,7 +4462,7 @@ any transaction history yet</string>
                                     <constraint firstItem="9Tj-e8-G5l" firstAttribute="centerY" secondItem="jqw-4f-7Z9" secondAttribute="centerY" id="jrB-8x-E6P"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="58" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tll-nS-pNB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="58" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tll-nS-pNB">
                                 <rect key="frame" x="16" y="134" width="304" height="385"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.8901960784313725" green="0.90196078431372551" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -4584,11 +4584,20 @@ any transaction history yet</string>
                         <outlet property="segmentControl" destination="Jtp-9m-itp" id="5Cs-3i-aSF"/>
                         <outlet property="tableView" destination="Tll-nS-pNB" id="GZn-90-L1Y"/>
                         <outlet property="tokenFilterBarButtonItem" destination="dfh-89-w16" id="QGS-tx-ha5"/>
+                        <segue destination="ha8-fh-3OP" kind="show" identifier="TransactionDetails" id="RlK-Ac-7st"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iW7-FR-ZhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4857" y="6122"/>
+        </scene>
+        <!--TransactionDetails-->
+        <scene sceneID="IFG-kv-U7w">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TransactionDetails" id="ha8-fh-3OP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mzW-4X-thB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5326" y="6650"/>
         </scene>
         <!--Base Tab Bar Controller-->
         <scene sceneID="hpa-95-7Pu">
@@ -7032,7 +7041,7 @@ minutes, please wait ...</string>
         <image name="empty_pin_code" width="119" height="15"/>
         <image name="network_icon" width="29" height="29"/>
         <image name="pin_background" width="375" height="667"/>
-        <image name="qr" width="16.333333969116211" height="16"/>
+        <image name="qr" width="20" height="20"/>
         <image name="receive_icon" width="16" height="16"/>
         <image name="send_icon" width="16" height="16"/>
         <image name="share" width="27" height="27"/>
