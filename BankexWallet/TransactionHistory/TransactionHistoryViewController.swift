@@ -17,8 +17,9 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     @IBOutlet weak var segmentControl:UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView:UIView!
-    var tokenView: TokenArrow!
-    var popover: Popover!
+    @IBOutlet var tokenFilterBarButtonItem: UIBarButtonItem!
+    var availableTokensList: [ERC20TokenModel] = []
+    var popover: Popover?
     //Save height of popover when appear 5 tokens
     var fiveTokensHeight:CGFloat = 0
     var tokensTableViewManager = TokensTableViewManager()
@@ -60,6 +61,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        availableTokensList = tokensService.availableTokensList() ?? []
         prepareNavBar()
     }
     
@@ -89,7 +91,8 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     }
     
     private func prepareNavBar() {
-        addTokensButton()
+        tokenFilterBarButtonItem.title = tokensService.selectedERC20Token().symbol.uppercased()
+        tokenFilterBarButtonItem.isEnabled = availableTokensList.count > 0
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         UIApplication.shared.statusBarView?.backgroundColor = .white
     }
@@ -128,16 +131,33 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     }
     
     //MARK: - Popover magic
-    @objc func showTokensButtonTapped(_ sender: Any) {
+    @IBAction func showTokensButtonTapped(_ sender: Any) {
+         UIDevice.isIpad ? showPopover() : showActionSheet()
+    }
+    
+    private func showActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.addCancel()
+        availableTokensList.forEach { token in
+            let symbol = token.symbol.uppercased()
+            let action = UIAlertAction(title: symbol, style: .default, handler: { [weak self] (_) in
+                self?.didSelectToken(name: symbol)
+            })
+            actionSheet.addAction(action)
+        }
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func showPopover() {
         popover = Popover(options: self.popoverOptions)
-        let aView = UIView(frame: CGRect(x: 0, y: 0, width: UIDevice.isIpad ? 320 : 86, height: calculateHeight()))
+        let aView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: calculateHeight()))
         aView.clipsToBounds = true
         aView.backgroundColor = UIColor.clear
 //        let tableView = UITableView(frame: CGRect(x: 0, y: 5, width: 100, height: calculateHeight()), style: .plain)
         let tableView = UITableView()
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
         tableView.frame = CGRect(x: 0, y: 10, width: aView.bounds.width, height: aView.bounds.height)
-        tableView.separatorStyle = UIDevice.isIpad ? .singleLine : .none
+        tableView.separatorStyle = .singleLine
         tableView.clipsToBounds = true
         let v = UIView()
         v.frame.size.height = 5
@@ -149,7 +169,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         tokensTableViewManager.delegate = self
         tableView.delegate = tokensTableViewManager
         tableView.dataSource = tokensTableViewManager
-        self.popover.show(aView, point: point)
+        popover?.show(aView, point: point)
         
     }
     
@@ -172,11 +192,12 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     //MARK: - Choose Token Delegate
     func didSelectToken(name: String) {
-        popover.dismiss()
+        popover?.dismiss()
+        popover = nil
         let selAddr = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
         guard let token = tokensService.availableTokensList()?.filter({$0.symbol.uppercased() == name.uppercased()}).first else { return }
         tokensService.updateSelectedToken(to: token.address, completion: {
-            self.tokenView.tokenSymbol = name.uppercased()
+            self.tokenFilterBarButtonItem.title = name.uppercased()
             self.updateTransactions(address: selAddr, status: self.currentState)
             self.updateUI()
         })
@@ -223,13 +244,6 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     }
     
     //MARK: - Helpers
-    private func addTokensButton() {
-        tokenView = TokenArrow.loadFromNib()
-        tokenView.tokenSymbol = tokensService.selectedERC20Token().symbol.uppercased()
-        tokenView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showTokensButtonTapped)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: tokenView)
-    }
-    
     private func getFormattedDate(date: Date) -> (day: Int, month: Int, year: Int) {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
