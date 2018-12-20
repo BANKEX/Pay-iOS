@@ -17,9 +17,7 @@ class TransactionDetailsViewController: UIViewController {
     @IBOutlet private var txHashLabel: UILabel!
     @IBOutlet private var notificationMessageLabel: UILabel!
     @IBOutlet private var notificationViewDisplayingConstraint: NSLayoutConstraint!
-    @IBOutlet private var statusLabel: UILabel!
-    @IBOutlet private var statusIndicatorView: UIView!
-    @IBOutlet private var statusBackgroundView: UIView!
+    @IBOutlet private var statusLabel: StatusLabel!
     @IBOutlet private var addressFromLabel: UILabel!
     @IBOutlet private var addressToLabel: UILabel!
     @IBOutlet private var dateTitleLabel: UILabel!

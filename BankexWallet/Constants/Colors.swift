@@ -29,6 +29,12 @@ extension UIColor {
     static let lightBlue = UIColor(hex:"D7E3FA")
     static let mainTextColor = UIColor(hex: "2E3640")
     
+    struct TxStatus {
+        static let pending = UIColor(hex: "E3E6E9")
+        static let success = UIColor(hex: "03B221")
+        static let failed = UIColor(hex: "FFDBDC")
+    }
+    
     struct QRReader {
         static let successColor = UIColor(hex: "03B221")
         static let errorColor = UIColor(hex:"FF3B30")
