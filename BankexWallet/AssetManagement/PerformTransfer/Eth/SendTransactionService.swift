@@ -65,7 +65,7 @@ class SendTransactionService {
         let ethToken = createETHModel()
         guard let fromAddress = keyService.selectedAddress() else { return nil }
         guard let selectedKey = keyService.selectedKey() else { return nil }
-        let transaction = ETHTransactionModel.init(from: fromAddress, to: toAddress, amount: amount, date: Date(), token: ethToken, key: selectedKey, isPending: false)
+        let transaction = ETHTransactionModel.init(hash: nil, from: fromAddress, to: toAddress, amount: amount, date: Date(), token: ethToken, key: selectedKey, isPending: false)
         return transaction
     }
     
