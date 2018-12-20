@@ -22,10 +22,6 @@ class TransactionDetailsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func tapShare(_ sender: UIButton) {
-        
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavBar()
@@ -36,7 +32,26 @@ class TransactionDetailsViewController: UIViewController {
         UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : .disableColor
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .`default`
     }
-
+    
+    @IBAction func shareTransactionHash(_ sender: UIButton) {
+        guard let hash = transaction?.hash else { return }
+        
+        let activity = UIActivityViewController.activity(content: hash)
+        activity.completionWithItemsHandler = { [weak self] (type, isSuccess, items, error) in
+            if isSuccess && type == UIActivityType.copyToPasteboard {
+                let message = NSLocalizedString("Sharing.TransactionHashCopied.Message", tableName: "TransactionDetails", comment: "")
+                
+                self?.showNotification(withMessage: message)
+            }
+        }
+        
+        if UIDevice.isIpad {
+            activity.addPopover(in: sender, rect: CGRect(x: view.bounds.midX, y: view.bounds.maxY, width: 0, height: 0))
+        }
+        
+        present(activity, animated: true)
+    }
+    
 }
 
 extension TransactionDetailsViewController {
