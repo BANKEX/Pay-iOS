@@ -204,9 +204,28 @@
                                     <constraint firstItem="4ow-rF-9xD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BgJ-3b-gCf" secondAttribute="trailing" constant="16" id="dUl-1Z-2p3"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bog-Tz-bsk">
+                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRy-EI-wyO">
+                                        <rect key="frame" x="16" y="19" width="343" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.72156862745098038" green="0.74901960784313726" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="740" id="EcW-5a-C7i"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="oRy-EI-wyO" secondAttribute="trailing" id="SS2-dE-N1x"/>
+                                    <constraint firstItem="oRy-EI-wyO" firstAttribute="top" secondItem="bog-Tz-bsk" secondAttribute="top" constant="19" id="dHz-8Y-2oM"/>
+                                    <constraint firstItem="oRy-EI-wyO" firstAttribute="leading" secondItem="bog-Tz-bsk" secondAttribute="leadingMargin" id="ddv-gB-PjK"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bog-Tz-bsk" secondAttribute="trailing" id="5zx-OI-8yF"/>
                             <constraint firstItem="vQz-4n-SzC" firstAttribute="top" secondItem="rwL-J2-dvt" secondAttribute="top" priority="240" id="9t3-Zd-Lw7"/>
                             <constraint firstAttribute="trailing" secondItem="vQz-4n-SzC" secondAttribute="trailing" id="Dlf-ww-AWP"/>
                             <constraint firstItem="psl-z7-1Qh" firstAttribute="trailing" secondItem="rwL-J2-dvt" secondAttribute="trailing" id="LZs-4k-T2z"/>
@@ -215,16 +234,26 @@
                             <constraint firstItem="n50-fT-7Oe" firstAttribute="top" secondItem="psl-z7-1Qh" secondAttribute="top" id="Wle-en-RuU"/>
                             <constraint firstItem="Tdl-Da-WeW" firstAttribute="leading" secondItem="rwL-J2-dvt" secondAttribute="leading" id="X0Y-bP-YEB"/>
                             <constraint firstItem="un3-yB-BMu" firstAttribute="height" secondItem="rwL-J2-dvt" secondAttribute="height" multiplier="1:3" id="bN7-2l-190"/>
+                            <constraint firstItem="n50-fT-7Oe" firstAttribute="bottom" secondItem="oRy-EI-wyO" secondAttribute="bottom" constant="19" id="cSs-6T-oKf"/>
                             <constraint firstAttribute="trailing" secondItem="Tdl-Da-WeW" secondAttribute="trailing" id="d4C-Mb-B7t"/>
                             <constraint firstItem="Tdl-Da-WeW" firstAttribute="top" secondItem="rwL-J2-dvt" secondAttribute="top" id="jYf-UZ-BCn"/>
+                            <constraint firstItem="bog-Tz-bsk" firstAttribute="leading" secondItem="rwL-J2-dvt" secondAttribute="leading" id="pRE-5a-mt4"/>
+                            <constraint firstAttribute="bottom" secondItem="bog-Tz-bsk" secondAttribute="bottom" id="pYd-1U-bjU"/>
                             <constraint firstItem="un3-yB-BMu" firstAttribute="top" secondItem="vQz-4n-SzC" secondAttribute="bottom" id="xUx-54-3KY"/>
                             <constraint firstItem="psl-z7-1Qh" firstAttribute="leading" secondItem="rwL-J2-dvt" secondAttribute="leading" id="xnQ-Td-Z5e"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                         <viewLayoutGuide key="safeArea" id="n50-fT-7Oe"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cSs-6T-oKf"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="amountLabel" destination="Vjg-YV-mdW" id="DOT-Li-0F9"/>
+                        <outlet property="notificationMessageLabel" destination="oRy-EI-wyO" id="yrR-pK-KFU"/>
+                        <outlet property="notificationViewDisplayingConstraint" destination="cSs-6T-oKf" id="Wrd-yc-eeH"/>
                         <outlet property="symbolLabel" destination="bMH-hA-aTr" id="fb2-OZ-QE8"/>
                         <outlet property="txHashLabel" destination="j2n-jv-Fjg" id="c9L-wn-Zei"/>
                     </connections>
