@@ -48,43 +48,46 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="txHash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLt-sC-lmK">
-                                                <rect key="frame" x="16" y="162" width="55.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                <color key="textColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0xf7edcbe06cf13ff34d…e722d5f" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2n-jv-Fjg" userLabel="HashLabel">
-                                                <rect key="frame" x="16" y="186.5" width="227.5" height="18"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <color key="textColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.25065933051302713" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeT-Pm-533" userLabel="ShareButton">
-                                                <rect key="frame" x="259.5" y="174" width="24" height="27"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="24" id="obT-8z-qhd"/>
-                                                </constraints>
-                                                <color key="tintColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.24996369695138329" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="TransactionDetails/Icon/Share"/>
-                                                <connections>
-                                                    <action selector="tapShare:" destination="3pB-qQ-tHw" eventType="touchUpInside" id="Ivp-cW-wz3"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="sVZ-zk-Ceg">
+                                                <rect key="frame" x="16" y="162" width="262.5" height="42.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ee0-JP-xAD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="227.5" height="42.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="txHash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLt-sC-lmK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="55.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                                <color key="textColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="0xf7edcbe06cf13ff34d…e722d5f" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2n-jv-Fjg" userLabel="HashLabel">
+                                                                <rect key="frame" x="0.0" y="24.5" width="227.5" height="18"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                <color key="textColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.25065933051302713" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeT-Pm-533" userLabel="ShareButton">
+                                                        <rect key="frame" x="243.5" y="15.5" width="19" height="27"/>
+                                                        <color key="tintColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.24996369695138329" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" image="TransactionDetails/Icon/Share"/>
+                                                        <connections>
+                                                            <action selector="tapShare:" destination="3pB-qQ-tHw" eventType="touchUpInside" id="Ivp-cW-wz3"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.8901960784313725" green="0.90196078431372551" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" red="0.1803921568627451" green="0.21176470588235294" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="j2n-jv-Fjg" firstAttribute="leading" secondItem="un3-yB-BMu" secondAttribute="leadingMargin" id="16k-it-xXo"/>
                                             <constraint firstItem="BgL-z7-AV2" firstAttribute="leading" secondItem="un3-yB-BMu" secondAttribute="leadingMargin" id="7Sw-Ja-ELQ"/>
-                                            <constraint firstItem="CeT-Pm-533" firstAttribute="bottom" secondItem="j2n-jv-Fjg" secondAttribute="baseline" id="RW6-H6-HNR"/>
-                                            <constraint firstItem="CeT-Pm-533" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="un3-yB-BMu" secondAttribute="trailingMargin" priority="240" id="VOd-RP-fcJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="j2n-jv-Fjg" secondAttribute="bottom" constant="18" id="YdG-vm-yEH"/>
+                                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="sVZ-zk-Ceg" secondAttribute="trailing" id="Giy-8c-45y"/>
                                             <constraint firstItem="BgL-z7-AV2" firstAttribute="centerY" secondItem="un3-yB-BMu" secondAttribute="centerY" id="aQ5-1Y-o1f"/>
-                                            <constraint firstItem="CLt-sC-lmK" firstAttribute="leading" secondItem="un3-yB-BMu" secondAttribute="leadingMargin" id="cAU-9R-ph5"/>
-                                            <constraint firstItem="CeT-Pm-533" firstAttribute="leading" secondItem="j2n-jv-Fjg" secondAttribute="trailing" constant="16" id="d96-Ic-fS7"/>
+                                            <constraint firstItem="sVZ-zk-Ceg" firstAttribute="leading" secondItem="un3-yB-BMu" secondAttribute="leadingMargin" id="c66-uQ-9s0"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="BgL-z7-AV2" secondAttribute="trailing" id="oOx-fd-4Ep"/>
-                                            <constraint firstItem="j2n-jv-Fjg" firstAttribute="top" secondItem="CLt-sC-lmK" secondAttribute="bottom" constant="4" id="pd1-fX-cpA"/>
+                                            <constraint firstAttribute="bottom" secondItem="sVZ-zk-Ceg" secondAttribute="bottom" constant="18" id="vIH-zu-mdi"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Huf-v4-fsa" userLabel="StackView">
