@@ -15,6 +15,8 @@ class TransactionDetailsViewController: UIViewController {
     @IBOutlet var amountLabel: UILabel!
     @IBOutlet var symbolLabel: UILabel!
     @IBOutlet var txHashLabel: UILabel!
+    @IBOutlet var notificationMessageLabel: UILabel!
+    @IBOutlet var notificationViewDisplayingConstraint: NSLayoutConstraint!
     
     @IBAction func tapBack(_ sender: UITapGestureRecognizer) {
         navigationController?.popViewController(animated: true)
@@ -35,4 +37,22 @@ class TransactionDetailsViewController: UIViewController {
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .`default`
     }
 
+}
+
+extension TransactionDetailsViewController {
+    
+    private func showNotification(withMessage message: String) {
+        notificationMessageLabel.text = message
+        
+        UIView.animate(withDuration: 0.6, animations: {
+            self.notificationViewDisplayingConstraint.isActive = true
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            UIView.animate(withDuration: 0.6, delay:0.5, animations: {
+                self.notificationViewDisplayingConstraint.isActive = false
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
 }
