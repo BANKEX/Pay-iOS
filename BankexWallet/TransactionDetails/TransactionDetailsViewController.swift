@@ -52,6 +52,26 @@ class TransactionDetailsViewController: UIViewController {
         present(activity, animated: true)
     }
     
+    @IBAction func shareFromAddress() {
+        guard let address = transaction?.from else { return }
+        
+        copyToPasteboard(address: address)
+    }
+    
+    @IBAction func shareToAddress() {
+        guard let address = transaction?.to else { return }
+        
+        copyToPasteboard(address: address)
+    }
+    
+    private func copyToPasteboard(address: String) {
+        UIPasteboard.general.string = address
+        
+        let message = NSLocalizedString("Sharing.AddressCopied.Message", tableName: "TransactionDetails", comment: "")
+        
+        showNotification(withMessage: message)
+    }
+    
 }
 
 extension TransactionDetailsViewController {
