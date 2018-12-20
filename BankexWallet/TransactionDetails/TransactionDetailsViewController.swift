@@ -12,14 +12,28 @@ class TransactionDetailsViewController: UIViewController {
     
     var transaction: ETHTransactionModel?
     
-    @IBOutlet var amountLabel: UILabel!
-    @IBOutlet var symbolLabel: UILabel!
-    @IBOutlet var txHashLabel: UILabel!
-    @IBOutlet var notificationMessageLabel: UILabel!
-    @IBOutlet var notificationViewDisplayingConstraint: NSLayoutConstraint!
-    
+    @IBOutlet private var amountLabel: UILabel!
+    @IBOutlet private var symbolLabel: UILabel!
+    @IBOutlet private var txHashLabel: UILabel!
+    @IBOutlet private var notificationMessageLabel: UILabel!
+    @IBOutlet private var notificationViewDisplayingConstraint: NSLayoutConstraint!
+    @IBOutlet private var statusLabel: UILabel!
+    @IBOutlet private var statusIndicatorView: UIView!
+    @IBOutlet private var statusBackgroundView: UIView!
+    @IBOutlet private var addressFromLabel: UILabel!
+    @IBOutlet private var addressToLabel: UILabel!
+    @IBOutlet private var dateTitleLabel: UILabel!
+    @IBOutlet private var dateValueLabel: UILabel!
+    @IBOutlet private var gasPriceValueLabel: UILabel!
+    @IBOutlet private var gasLimitValueLabel: UILabel!
+    @IBOutlet private var feeValueLabel: UILabel!
+
     @IBAction func tapBack(_ sender: UITapGestureRecognizer) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func tapCheckOnEtherscan(_ sender: UITapGestureRecognizer) {
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
