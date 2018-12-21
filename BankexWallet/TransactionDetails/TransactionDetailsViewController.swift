@@ -10,6 +10,7 @@ import UIKit
 
 class TransactionDetailsViewController: UIViewController {
     
+    var address: String?
     var transaction: ETHTransactionModel?
     
     @IBOutlet private var amountLabel: UILabel!
