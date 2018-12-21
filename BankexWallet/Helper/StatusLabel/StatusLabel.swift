@@ -14,29 +14,9 @@ class StatusLabel: UILabel {
         case success
         case pending
         case failed
-        
-        var backgroundColor: UIColor {
-            return pointColor.withAlphaComponent(0.2)
-        }
-        
-        var pointColor: UIColor {
-            switch self {
-            case .success: return UIColor.Status.success
-            case .pending: return UIColor.Status.pending
-            case .failed: return UIColor.Status.failed
-            }
-        }
-        
-        var title: String {
-            switch self {
-            case .success: return NSLocalizedString("Status.Success", tableName: "StatusLabel", comment: "")
-            case .pending: return NSLocalizedString("Status.Pending", tableName: "StatusLabel", comment: "")
-            case .failed: return NSLocalizedString("Status.Failed", tableName: "StatusLabel", comment: "")
-            }
-        }
     }
     
-    var status: Status? = .success {
+    var status: Status? {
         didSet {
             stylize()
         }
@@ -107,10 +87,22 @@ extension StatusLabel {
 
 extension StatusLabel {
     
+    private func backgroundColor(for status: Status?) -> UIColor? {
+        return pointColor(for: status)?.withAlphaComponent(0.2)
+    }
+    
+    private func pointColor(for status: Status?) -> UIColor? {
+        switch status {
+        case .success?: return UIColor.Status.success
+        case .pending?: return UIColor.Status.pending
+        case .failed?: return UIColor.Status.failed
+        default: return nil
+        }
+    }
+    
     fileprivate func stylize() {
-        backgroundColor = status?.backgroundColor
-        pointLayer.backgroundColor = status?.pointColor.cgColor
-        text = status?.title
+        backgroundColor = backgroundColor(for: status)
+        pointLayer.backgroundColor = pointColor(for: status)?.cgColor
     }
     
 }
