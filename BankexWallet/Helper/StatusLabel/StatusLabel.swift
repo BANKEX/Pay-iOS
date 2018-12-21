@@ -21,9 +21,9 @@ class StatusLabel: UILabel {
         
         var pointColor: UIColor {
             switch self {
-            case .success: return UIColor.TxStatus.success
-            case .pending: return UIColor.TxStatus.pending
-            case .failed: return UIColor.TxStatus.failed
+            case .success: return UIColor.Status.success
+            case .pending: return UIColor.Status.pending
+            case .failed: return UIColor.Status.failed
             }
         }
         
