@@ -208,6 +208,7 @@ class MainInfoController: BaseViewController,
             controller.currentBalance = infoView.balanceLabel.text
             
         } else if let viewController = segue.destination as? TransactionDetailsViewController {
+            viewController.address = keyService.selectedAddress()
             viewController.transaction = transactionForDetails
         }
     }

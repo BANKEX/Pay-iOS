@@ -324,6 +324,7 @@ extension TransactionHistoryViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? TransactionDetailsViewController {
+            viewController.address = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
             viewController.transaction = transactionForDetails
         }
     }

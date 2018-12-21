@@ -10,7 +10,12 @@ import UIKit
 
 class TransactionDetailsViewController: UIViewController {
     
-    var transaction: ETHTransactionModel?
+    var address: String?
+    var transaction: ETHTransactionModel? {
+        didSet {
+            updateView()
+        }
+    }
     
     @IBOutlet private var amountLabel: UILabel!
     @IBOutlet private var symbolLabel: UILabel!
@@ -25,7 +30,19 @@ class TransactionDetailsViewController: UIViewController {
     @IBOutlet private var gasPriceValueLabel: UILabel!
     @IBOutlet private var gasLimitValueLabel: UILabel!
     @IBOutlet private var feeValueLabel: UILabel!
-
+    
+    private let amountFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.plusSign = ""
+        formatter.minusSign = ""
+        formatter.nilSymbol = "—"
+        formatter.positivePrefix = "+ "
+        formatter.negativePrefix = "\u{2212} "
+        
+        return formatter
+    }()
+    
     @IBAction func tapBack(_ sender: UITapGestureRecognizer) {
         navigationController?.popViewController(animated: true)
     }
@@ -36,7 +53,9 @@ class TransactionDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         configureNavBar()
+        updateView()
     }
 
     private func configureNavBar() {
@@ -82,6 +101,31 @@ class TransactionDetailsViewController: UIViewController {
         let message = NSLocalizedString("Sharing.AddressCopied.Message", tableName: "TransactionDetails", comment: "")
         
         showNotification(withMessage: message)
+    }
+    
+}
+
+extension TransactionDetailsViewController {
+    
+    private func updateView() {
+        guard isViewLoaded else { return }
+        
+        let outgoing = address?.lowercased() == transaction?.from.lowercased()
+        
+        let amount: Decimal? = {
+            guard let amountString = transaction?.amount, var amount = Decimal(string: amountString) else { return nil }
+            
+            if outgoing {
+                amount = amount * -1
+            }
+            
+            return amount
+        }()
+        
+        amountLabel.text = amountFormatter.string(for: amount)
+        
+        symbolLabel.text = transaction?.token.symbol.uppercased()
+        txHashLabel.text = transaction?.hash
     }
     
 }
