@@ -16,12 +16,6 @@ protocol TransactionDetailsService {
     func getStatus(txHash: String, completion: @escaping (TransactionReceipt.TXStatus?) -> Void)
 }
 
-struct TransactionDetails {
-    let gasLimit: BigUInt
-    let gasPrice: BigUInt
-    let blockNumber: BigUInt?
-}
-
 class TransactionDetailsServiceImplementation: TransactionDetailsService {
     
     func getTransactionDetails(txHash: String, completion: @escaping (TransactionDetails?) -> Void) {
