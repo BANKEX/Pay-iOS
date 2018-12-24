@@ -171,6 +171,8 @@ extension TransactionDetailsViewController {
         
         symbolLabel.text = transaction?.token.symbol.uppercased()
         txHashLabel.text = transaction?.hash
+        addressToLabel.text = getFormattedAddress(transaction?.to)
+        addressFromLabel.text = getFormattedAddress(transaction?.from)
     }
     
     private func updateTransactionDetails() {
@@ -253,6 +255,18 @@ extension TransactionDetailsViewController {
         }
     }
     
+}
+
+extension TransactionDetailsViewController {
+    
+    private func getFormattedAddress(_ address: String?) -> String? {
+        guard let address = address else { return nil }
+        let offset = 5
+        
+        return String(address[address.startIndex..<address.index(address.startIndex, offsetBy: offset)]
+            + "..." + address[address.index(address.endIndex, offsetBy: -offset)..<address.endIndex])
+    }
+
 }
 
 extension TransactionDetailsViewController {
