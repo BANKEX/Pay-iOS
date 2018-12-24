@@ -62,7 +62,15 @@ class TransactionDetailsViewController: UIViewController {
         return formatter
     }()
     
-    let txDetailsService: TransactionDetailsService = TransactionDetailsServiceImplementation()
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss z, dd MMMM yyyy"
+        formatter.timeZone = TimeZone(abbreviation: "EST")
+        
+        return formatter
+    }()
+    
+    private let txDetailsService: TransactionDetailsService = TransactionDetailsServiceImplementation()
     
     @IBAction func tapBack(_ sender: UITapGestureRecognizer) {
         navigationController?.popViewController(animated: true)
