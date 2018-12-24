@@ -176,7 +176,8 @@ extension TransactionDetailsViewController {
     }
     
     private func updateTransactionDetails() {
-        
+        guard isViewLoaded else { return }
+
         guard let txDetails = transactionDetails else {
             setTransactionDetails(isEnabled: false)
             return
@@ -197,7 +198,7 @@ extension TransactionDetailsViewController {
         setTransactionDetails(isEnabled: true)
     }
     
-    func setTransactionDetails(isEnabled: Bool) {
+    private func setTransactionDetails(isEnabled: Bool) {
         
         gasPriceTitleLabel.isEnabled = isEnabled
         gasPriceValueLabel.isEnabled = isEnabled
@@ -210,7 +211,8 @@ extension TransactionDetailsViewController {
     }
     
     private func updateTransactionStatus() {
-        
+        guard isViewLoaded else { return }
+
         guard let txStatus = transactionStatus else {
             statusLabel.alpha = 0
             return
