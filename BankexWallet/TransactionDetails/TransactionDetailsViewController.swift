@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import BigInt
+import web3swift
 
 class TransactionDetailsViewController: UIViewController {
     
@@ -14,6 +16,13 @@ class TransactionDetailsViewController: UIViewController {
     var transaction: ETHTransactionModel? {
         didSet {
             updateView()
+            getTransactionDetails(txHash: transaction?.hash)
+        }
+    }
+    
+    var transactionDetails: TransactionDetails? {
+        didSet {
+            updateTransactionDetails()
         }
     }
     
@@ -57,6 +66,7 @@ class TransactionDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         configureNavBar()
+        getTransactionDetails(txHash: transaction?.hash)
         updateView()
     }
 
@@ -64,6 +74,17 @@ class TransactionDetailsViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : .disableColor
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .`default`
+    }
+    
+    private func getTransactionDetails(txHash: String?) {
+        guard let txHash = txHash else {
+            transactionDetails = nil
+            return
+        }
+        txDetailsService.getTransactionDetails(txHash: txHash) { [weak self] (txDetails) in
+            guard let controller = self, let txDetails = txDetails else { return }
+            controller.transactionDetails = txDetails
+        }
     }
     
     @IBAction func shareTransactionHash(_ sender: UIButton) {
@@ -132,6 +153,29 @@ extension TransactionDetailsViewController {
         updateStatus(txHash: transaction?.hash)
     }
     
+    private func updateTransactionDetails() {
+        
+        guard let txDetails = transactionDetails else {
+            
+            // disable gasPrice, gasLimit, blockNumber
+            return
+        }
+        
+        let gasPrice: String? = {
+            guard
+                let gwei = inGwei(value: txDetails.gasPrice),
+                let eth = inEth(value: txDetails.gasPrice) else {
+                    return nil
+            }
+            
+            return "\(eth) (\(gwei))"
+        }()
+        
+        gasPriceValueLabel.text = gasPrice
+        gasLimitValueLabel.text = "\(txDetails.gasLimit)"
+        feeValueLabel.text = inEth(value: txDetails.gasPrice * txDetails.gasLimit)
+    }
+    
     private func updateStatus(txHash: String?) {
         
         guard let txHash = txHash else {
@@ -186,4 +230,28 @@ extension TransactionDetailsViewController {
         }
     }
     
+}
+
+extension TransactionDetailsViewController {
+    
+    private func inGwei(value: BigUInt) -> String? {
+        guard let gwei = Web3.Utils.formatToEthereumUnits(value, toUnits: .Gwei) else { return nil }
+        
+        return "\(trimInsignificantLastZeros(gwei)) Gwei"
+    }
+    
+    private func inEth(value: BigUInt) -> String? {
+        guard let eth = Web3.Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: 9) else { return nil }
+        
+        return "\(trimInsignificantLastZeros(eth)) ETH"
+    }
+    
+    private func trimInsignificantLastZeros(_ string: String) -> String {
+        var string = string
+        while string.hasSuffix("0") {
+            string = String(string.dropLast())
+        }
+        
+        return string
+    }
 }
