@@ -179,15 +179,35 @@ extension TransactionDetailsViewController {
         
         symbolLabel.text = transaction?.token.symbol.uppercased()
         txHashLabel.text = transaction?.hash
-        addressToLabel.text = getFormattedAddress(transaction?.to)
-        addressFromLabel.text = getFormattedAddress(transaction?.from)
+        
+        guard let transaction = transaction else {
+            addressToLabel.text = "-"
+            addressFromLabel.text = "-"
+            
+            dateValueLabel.text = "-"
+            dateValueLabel.isEnabled = false
+            dateTitleLabel.isEnabled = false
+
+            return
+        }
+        
+        addressToLabel.text = getFormattedAddress(transaction.to)
+        addressFromLabel.text = getFormattedAddress(transaction.from)
+        
+        dateValueLabel.text = dateFormatter.string(from: transaction.date)
+        dateValueLabel.isEnabled = true
+        dateTitleLabel.isEnabled = true
     }
     
     private func updateTransactionDetails() {
         guard isViewLoaded else { return }
 
         guard let txDetails = transactionDetails else {
+            gasPriceValueLabel.text = "-"
+            gasLimitValueLabel.text = "-"
+            feeValueLabel.text = "-"
             setTransactionDetails(isEnabled: false)
+            
             return
         }
         
@@ -269,8 +289,7 @@ extension TransactionDetailsViewController {
 
 extension TransactionDetailsViewController {
     
-    private func getFormattedAddress(_ address: String?) -> String? {
-        guard let address = address else { return nil }
+    private func getFormattedAddress(_ address: String) -> String {
         let offset = 5
         
         return String(address[address.startIndex..<address.index(address.startIndex, offsetBy: offset)]
