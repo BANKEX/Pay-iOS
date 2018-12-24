@@ -43,8 +43,11 @@ class TransactionDetailsViewController: UIViewController {
     @IBOutlet private var addressToLabel: UILabel!
     @IBOutlet private var dateTitleLabel: UILabel!
     @IBOutlet private var dateValueLabel: UILabel!
+    @IBOutlet private var gasPriceTitleLabel: UILabel!
     @IBOutlet private var gasPriceValueLabel: UILabel!
+    @IBOutlet private var gasLimitTitleLabel: UILabel!
     @IBOutlet private var gasLimitValueLabel: UILabel!
+    @IBOutlet private var feeTitleLabel: UILabel!
     @IBOutlet private var feeValueLabel: UILabel!
     
     private let amountFormatter: NumberFormatter = {
@@ -173,12 +176,11 @@ extension TransactionDetailsViewController {
     private func updateTransactionDetails() {
         
         guard let txDetails = transactionDetails else {
-            
-            // disable gasPrice, gasLimit, blockNumber
+            setTransactionDetails(isEnabled: false)
             return
         }
         
-        let gasPrice: String? = {
+        gasPriceValueLabel.text = {
             guard
                 let gwei = inGwei(value: txDetails.gasPrice),
                 let eth = inEth(value: txDetails.gasPrice) else {
@@ -187,10 +189,22 @@ extension TransactionDetailsViewController {
             
             return "\(eth) (\(gwei))"
         }()
-        
-        gasPriceValueLabel.text = gasPrice
         gasLimitValueLabel.text = "\(txDetails.gasLimit)"
         feeValueLabel.text = inEth(value: txDetails.gasPrice * txDetails.gasLimit)
+        
+        setTransactionDetails(isEnabled: true)
+    }
+    
+    func setTransactionDetails(isEnabled: Bool) {
+        
+        gasPriceTitleLabel.isEnabled = isEnabled
+        gasPriceValueLabel.isEnabled = isEnabled
+        
+        gasLimitTitleLabel.isEnabled = isEnabled
+        gasLimitValueLabel.isEnabled = isEnabled
+        
+        feeTitleLabel.isEnabled = isEnabled
+        feeValueLabel.isEnabled = isEnabled
     }
     
     private func updateTransactionStatus() {
