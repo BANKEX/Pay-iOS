@@ -17,12 +17,19 @@ class TransactionDetailsViewController: UIViewController {
         didSet {
             updateView()
             getTransactionDetails(txHash: transaction?.hash)
+            getTransactionStatus(txHash: transaction?.hash)
         }
     }
     
     var transactionDetails: TransactionDetails? {
         didSet {
             updateTransactionDetails()
+        }
+    }
+    
+    var transactionStatus: TransactionReceipt.TXStatus? {
+        didSet {
+            updateTransactionStatus()
         }
     }
     
@@ -67,6 +74,7 @@ class TransactionDetailsViewController: UIViewController {
         
         configureNavBar()
         getTransactionDetails(txHash: transaction?.hash)
+        getTransactionStatus(txHash: transaction?.hash)
         updateView()
     }
 
@@ -84,6 +92,17 @@ class TransactionDetailsViewController: UIViewController {
         txDetailsService.getTransactionDetails(txHash: txHash) { [weak self] (txDetails) in
             guard let controller = self, let txDetails = txDetails else { return }
             controller.transactionDetails = txDetails
+        }
+    }
+    
+    private func getTransactionStatus(txHash: String?) {
+        guard let txHash = txHash else {
+            transactionStatus = nil
+            return
+        }
+        txDetailsService.getStatus(txHash: txHash) { [weak self] (txStatus) in
+            guard let controller = self, let txStatus = txStatus else { return }
+            controller.transactionStatus = txStatus
         }
     }
     
@@ -149,8 +168,6 @@ extension TransactionDetailsViewController {
         
         symbolLabel.text = transaction?.token.symbol.uppercased()
         txHashLabel.text = transaction?.hash
-        
-        updateStatus(txHash: transaction?.hash)
     }
     
     private func updateTransactionDetails() {
@@ -176,38 +193,30 @@ extension TransactionDetailsViewController {
         feeValueLabel.text = inEth(value: txDetails.gasPrice * txDetails.gasLimit)
     }
     
-    private func updateStatus(txHash: String?) {
+    private func updateTransactionStatus() {
         
-        guard let txHash = txHash else {
+        guard let txStatus = transactionStatus else {
             statusLabel.alpha = 0
             return
         }
         
-        if statusLabel.status == nil {
-            statusLabel.alpha = 0
+        switch txStatus {
+        case .ok:
+            statusLabel.status = .success
+            statusLabel.text = NSLocalizedString("Status.Success", tableName: "StatusLabel", comment: "")
+            
+        case .failed:
+            statusLabel.status = .failed
+            statusLabel.text = NSLocalizedString("Status.Failed", tableName: "StatusLabel", comment: "")
+            
+        case .notYetProcessed:
+            statusLabel.status = .pending
+            statusLabel.text = NSLocalizedString("Status.Pending", tableName: "StatusLabel", comment: "")
         }
         
-        txDetailsService.getStatus(txHash: txHash) { [weak self] (status) in
-            guard let controller = self, let status = status else { return }
-            
-            switch status {
-            case .ok:
-                controller.statusLabel.status = .success
-                controller.statusLabel.text = NSLocalizedString("Status.Success", tableName: "StatusLabel", comment: "")
-                
-            case .failed:
-                controller.statusLabel.status = .failed
-                controller.statusLabel.text = NSLocalizedString("Status.Failed", tableName: "StatusLabel", comment: "")
-                
-            case .notYetProcessed:
-                controller.statusLabel.status = .pending
-                controller.statusLabel.text = NSLocalizedString("Status.Pending", tableName: "StatusLabel", comment: "")
-            }
-            
-            if controller.statusLabel.alpha < 1 {
-                UIView.animate(withDuration: 0.3) {
-                    controller.statusLabel.alpha = 1
-                }
+        if statusLabel.alpha < 1 {
+            UIView.animate(withDuration: 0.3) {
+                self.statusLabel.alpha = 1
             }
         }
     }
