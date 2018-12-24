@@ -43,6 +43,8 @@ class TransactionDetailsViewController: UIViewController {
         return formatter
     }()
     
+    let txDetailsService: TransactionDetailsService = TransactionDetailsServiceImplementation()
+    
     @IBAction func tapBack(_ sender: UITapGestureRecognizer) {
         navigationController?.popViewController(animated: true)
     }
@@ -126,6 +128,44 @@ extension TransactionDetailsViewController {
         
         symbolLabel.text = transaction?.token.symbol.uppercased()
         txHashLabel.text = transaction?.hash
+        
+        updateStatus(txHash: transaction?.hash)
+    }
+    
+    private func updateStatus(txHash: String?) {
+        
+        guard let txHash = txHash else {
+            statusLabel.alpha = 0
+            return
+        }
+        
+        if statusLabel.status == nil {
+            statusLabel.alpha = 0
+        }
+        
+        txDetailsService.getStatus(txHash: txHash) { [weak self] (status) in
+            guard let controller = self, let status = status else { return }
+            
+            switch status {
+            case .ok:
+                controller.statusLabel.status = .success
+                controller.statusLabel.text = NSLocalizedString("Status.Success", tableName: "StatusLabel", comment: "")
+                
+            case .failed:
+                controller.statusLabel.status = .failed
+                controller.statusLabel.text = NSLocalizedString("Status.Failed", tableName: "StatusLabel", comment: "")
+                
+            case .notYetProcessed:
+                controller.statusLabel.status = .pending
+                controller.statusLabel.text = NSLocalizedString("Status.Pending", tableName: "StatusLabel", comment: "")
+            }
+            
+            if controller.statusLabel.alpha < 1 {
+                UIView.animate(withDuration: 0.3) {
+                    controller.statusLabel.alpha = 1
+                }
+            }
+        }
     }
     
 }
