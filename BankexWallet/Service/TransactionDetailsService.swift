@@ -12,40 +12,33 @@ import BigInt
 import Result
 
 protocol TransactionDetailsService {
-    func getGasLimit(txHash: String, completion: @escaping (BigUInt?)->Void)
-    func getGasPrice(txHash: String, completion: @escaping (BigUInt?)->Void)
-    func getBlockNumber(txHash: String, completion: @escaping (BigUInt?) -> Void)
+    func getTransactionDetails(txHash: String, completion: @escaping (TransactionDetails?)->Void)
     func getStatus(txHash: String, completion: @escaping (TransactionReceipt.TXStatus?) -> Void)
+}
+
+struct TransactionDetails {
+    let gasLimit: BigUInt
+    let gasPrice: BigUInt
+    let blockNumber: BigUInt?
 }
 
 class TransactionDetailsServiceImplementation: TransactionDetailsService {
     
-    func getGasLimit(txHash: String, completion: @escaping (BigUInt?) -> Void) {
+    func getTransactionDetails(txHash: String, completion: @escaping (TransactionDetails?) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let web3 = WalletWeb3Factory.web3()
-            let result: Result<TransactionDetails, Web3Error> = web3.eth.getTransactionDetails(txHash)
+            let result: Result<web3swift.TransactionDetails, Web3Error> = web3.eth.getTransactionDetails(txHash)
+            let txDetails: TransactionDetails? = {
+                guard let value = result.value else {
+                    return nil
+                }
+                return TransactionDetails(
+                    gasLimit: value.transaction.gasLimit,
+                    gasPrice: value.transaction.gasPrice,
+                    blockNumber: value.blockNumber)
+            }()
             DispatchQueue.main.async {
-                completion(result.value?.transaction.gasLimit)
-            }
-        }
-    }
-    
-    func getGasPrice(txHash: String, completion: @escaping (BigUInt?) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let web3 = WalletWeb3Factory.web3()
-            let result: Result<TransactionDetails, Web3Error> = web3.eth.getTransactionDetails(txHash)
-            DispatchQueue.main.async {
-                completion(result.value?.transaction.gasPrice)
-            }
-        }
-    }
-    
-    func getBlockNumber(txHash: String, completion: @escaping (BigUInt?) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let web3 = WalletWeb3Factory.web3()
-            let result: Result<TransactionDetails, Web3Error> = web3.eth.getTransactionDetails(txHash)
-            DispatchQueue.main.async {
-                completion(result.value?.blockNumber)
+                completion(txDetails)
             }
         }
     }
