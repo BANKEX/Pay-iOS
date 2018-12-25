@@ -16,22 +16,11 @@ class TransactionDetailsViewController: UIViewController {
     var transaction: ETHTransactionModel? {
         didSet {
             updateView()
-            getTransactionDetails(txHash: transaction?.hash)
-            getTransactionStatus(txHash: transaction?.hash)
         }
     }
     
-    var transactionDetails: TransactionDetails? {
-        didSet {
-            updateTransactionDetails()
-        }
-    }
-    
-    var transactionStatus: TransactionReceipt.TXStatus? {
-        didSet {
-            updateTransactionStatus()
-        }
-    }
+    var transactionDetails: TransactionDetails?
+    var transactionStatus: TransactionReceipt.TXStatus?
     
     @IBOutlet private var amountLabel: UILabel!
     @IBOutlet private var symbolLabel: UILabel!
@@ -39,10 +28,10 @@ class TransactionDetailsViewController: UIViewController {
     @IBOutlet private var notificationMessageLabel: UILabel!
     @IBOutlet private var notificationViewDisplayingConstraint: NSLayoutConstraint!
     @IBOutlet private var statusLabel: StatusLabel!
-    @IBOutlet private var addressFromTitle: UILabel!
-    @IBOutlet private var addressFromLabel: UILabel!
-    @IBOutlet private var addressToTitle: UILabel!
-    @IBOutlet private var addressToLabel: UILabel!
+    @IBOutlet private var addressFromTitleLabel: UILabel!
+    @IBOutlet private var addressFromValueLabel: UILabel!
+    @IBOutlet private var addressToTitleLabel: UILabel!
+    @IBOutlet private var addressToValueLabel: UILabel!
     @IBOutlet private var dateTitleLabel: UILabel!
     @IBOutlet private var dateValueLabel: UILabel!
     @IBOutlet private var blockNumberTitleLabel: UILabel!
@@ -69,7 +58,6 @@ class TransactionDetailsViewController: UIViewController {
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss z, dd MMMM yyyy"
-        formatter.timeZone = TimeZone(abbreviation: "EST")
         
         return formatter
     }()
@@ -100,8 +88,8 @@ class TransactionDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         configureNavBar()
-        getTransactionDetails(txHash: transaction?.hash)
-        getTransactionStatus(txHash: transaction?.hash)
+        loadTransactionDetails(txHash: transaction?.hash)
+        loadTransactionStatus(txHash: transaction?.hash)
         updateView()
     }
 
@@ -111,27 +99,37 @@ class TransactionDetailsViewController: UIViewController {
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .`default`
     }
     
-    private func getTransactionDetails(txHash: String?) {
-        guard let txHash = txHash else {
-            transactionDetails = nil
-            return
-        }
-        txDetailsService.getTransactionDetails(txHash: txHash) { [weak self] (txDetails) in
-            guard let controller = self, let txDetails = txDetails else { return }
-            controller.transactionDetails = txDetails
-        }
+    private func loadTransactionDetails(txHash: String?) {
+        guard let txHash = txHash else { return }
+        
+        txDetailsService.getTransactionDetails(txHash: txHash, completion: loadTransactionDetailsHandler)
     }
     
-    private func getTransactionStatus(txHash: String?) {
-        guard let txHash = txHash else {
-            transactionStatus = nil
-            return
-        }
-        txDetailsService.getStatus(txHash: txHash) { [weak self] (txStatus) in
-            guard let controller = self, let txStatus = txStatus else { return }
-            controller.transactionStatus = txStatus
-        }
+    private lazy var loadTransactionDetailsHandler: (TransactionDetails?)->Void = { [weak self] (txDetails) in
+        guard let controller = self else { return }
+        
+        controller.transactionDetails = txDetails
+        
+        controller.updateBlockNumber()
+        controller.updateGasPrice()
+        controller.updateGasLimit()
+        controller.updateFee()
     }
+    
+    private func loadTransactionStatus(txHash: String?) {
+        guard let txHash = txHash else { return }
+        
+        txDetailsService.getStatus(txHash: txHash, completion: loadTransactionStatusHandler)
+    }
+    
+    private lazy var loadTransactionStatusHandler: (TransactionReceipt.TXStatus?)->Void = { [weak self] (txStatus) in
+        guard let controller = self else { return }
+        
+        controller.transactionStatus = txStatus
+        
+        controller.updateStatus()
+    }
+
     
     @IBAction func shareTransactionHash(_ sender: UIButton) {
         guard let hash = transaction?.hash else { return }
@@ -196,75 +194,133 @@ extension TransactionDetailsViewController {
         symbolLabel.text = transaction?.token.symbol.uppercased()
         txHashLabel.text = transaction?.hash
         
-        guard let transaction = transaction else {
-            setAddress(isEnabled: false, to: "-", from: "-")
-            setDate(isEnabled: false, text: "-")
-
-            return
-        }
-        
-        setAddress(isEnabled: true,
-                   to: getFormattedAddress(transaction.to), from: getFormattedAddress(transaction.from))
-        setDate(isEnabled: true, text: dateFormatter.string(from: transaction.date))
+        updateAddress()
+        updateDate()
     }
     
-    private func updateTransactionDetails() {
+    private func updateAddress() {
         guard isViewLoaded else { return }
-
-        guard let txDetails = transactionDetails else {
-            
-            setBlockNumber(isEnabled: false, text: "-")
-            setGasPrice(isEnabled: false, text: "-")
-            setGasLimit(isEnabled: false, text: "-")
-            setFee(isEnabled: false, text: "-")
-            
-            return
-        }
         
-        if let blockNumber = txDetails.blockNumber {
-            setBlockNumber(isEnabled: true, text: "\(blockNumber)")
+        if let transaction = transaction {
+            addressToTitleLabel.isEnabled = true
+            addressToValueLabel.text = transaction.to
+            addressFromTitleLabel.isEnabled = true
+            addressFromValueLabel.text = transaction.from
         } else {
-            setBlockNumber(isEnabled: false, text: "-")
+            addressToTitleLabel.isEnabled = false
+            addressToValueLabel.text = "-"
+            addressFromTitleLabel.isEnabled = false
+            addressFromValueLabel.text = "-"
         }
-        
-        setGasPrice(isEnabled: true, text: {
-            guard let gwei = inGwei(txDetails.gasPrice), let eth = inEth(txDetails.gasPrice) else { return nil }
-            
-            return "\(eth) (\(gwei))"
-        }())
-        setGasLimit(isEnabled: true, text: "\(txDetails.gasLimit)")
-        setFee(isEnabled: true, text: inEth(txDetails.gasPrice * txDetails.gasLimit))
     }
     
-    private func updateTransactionStatus() {
+    private func updateDate() {
+        guard isViewLoaded else { return }
+        
+        if let transaction = transaction {
+            dateTitleLabel.isEnabled = true
+            dateValueLabel.isEnabled = true
+            dateValueLabel.text = dateFormatter.string(from: transaction.date)
+        } else {
+            dateTitleLabel.isEnabled = false
+            dateValueLabel.isEnabled = false
+            dateValueLabel.text = "-"
+        }
+    }
+    
+    private func updateStatus() {
         guard isViewLoaded else { return }
 
-        guard let txStatus = transactionStatus else {
-            statusLabel.alpha = 0
-            return
-        }
-        
-        switch txStatus {
-        case .ok:
-            statusLabel.status = .success
-            statusLabel.text = NSLocalizedString("Status.Success", tableName: "StatusLabel", comment: "")
+        if let txStatus = transactionStatus {
+            switch txStatus {
+            case .ok:
+                statusLabel.status = .success
+                statusLabel.text = NSLocalizedString("Status.Success", tableName: "StatusLabel", comment: "")
+                
+            case .failed:
+                statusLabel.status = .failed
+                statusLabel.text = NSLocalizedString("Status.Failed", tableName: "StatusLabel", comment: "")
+                
+            case .notYetProcessed:
+                statusLabel.status = .pending
+                statusLabel.text = NSLocalizedString("Status.Pending", tableName: "StatusLabel", comment: "")
+            }
             
-        case .failed:
-            statusLabel.status = .failed
-            statusLabel.text = NSLocalizedString("Status.Failed", tableName: "StatusLabel", comment: "")
+            if statusLabel.alpha < 1 {
+                UIView.animate(withDuration: 0.3) {
+                    self.statusLabel.alpha = 1
+                }
+            }
             
-        case .notYetProcessed:
-            statusLabel.status = .pending
-            statusLabel.text = NSLocalizedString("Status.Pending", tableName: "StatusLabel", comment: "")
-        }
-        
-        if statusLabel.alpha < 1 {
-            UIView.animate(withDuration: 0.3) {
-                self.statusLabel.alpha = 1
+        } else {
+            
+            if statusLabel.alpha > 0 {
+                UIView.animate(withDuration: 0.3) {
+                    self.statusLabel.alpha = 0
+                }
             }
         }
     }
     
+    private func updateBlockNumber() {
+        guard isViewLoaded else { return }
+        
+        if let blockNumber = transactionDetails?.blockNumber {
+            blockNumberTitleLabel.isEnabled = true
+            blockNumberValueLabel.isEnabled = true
+            blockNumberValueLabel.text = "\(blockNumber)"
+        } else {
+            blockNumberTitleLabel.isEnabled = false
+            blockNumberValueLabel.isEnabled = false
+            blockNumberValueLabel.text = "-"
+        }
+    }
+    
+    private func updateGasPrice() {
+        guard isViewLoaded else { return }
+        
+        if let txDetails = transactionDetails {
+            gasPriceTitleLabel.isEnabled = true
+            gasPriceValueLabel.isEnabled = true
+            gasPriceValueLabel.text = {
+                guard let gwei = inGwei(txDetails.gasPrice), let eth = inEth(txDetails.gasPrice) else { return nil }
+                
+                return "\(eth) (\(gwei))"
+            }()
+        } else {
+            gasPriceTitleLabel.isEnabled = false
+            gasPriceValueLabel.isEnabled = false
+            gasPriceValueLabel.text = "-"
+        }
+    }
+    
+    private func updateGasLimit() {
+        guard isViewLoaded else { return }
+        
+        if let txDetails = transactionDetails {
+            gasLimitTitleLabel.isEnabled = true
+            gasLimitValueLabel.isEnabled = true
+            gasLimitValueLabel.text = "\(txDetails.gasLimit)"
+        } else {
+            gasLimitTitleLabel.isEnabled = false
+            gasLimitValueLabel.isEnabled = false
+            gasLimitValueLabel.text = "-"
+        }
+    }
+    
+    private func updateFee() {
+        guard isViewLoaded else { return }
+        
+        if let txDetails = transactionDetails {
+            feeTitleLabel.isEnabled = true
+            feeValueLabel.isEnabled = true
+            feeValueLabel.text = inEth(txDetails.gasPrice * txDetails.gasLimit)
+        } else {
+            feeTitleLabel.isEnabled = false
+            feeValueLabel.isEnabled = false
+            feeValueLabel.text = "-"
+        }
+    }
 }
 
 extension TransactionDetailsViewController {
@@ -283,48 +339,6 @@ extension TransactionDetailsViewController {
         }
     }
     
-}
-
-extension TransactionDetailsViewController {
-    
-    private func setAddress(isEnabled: Bool, to: String?, from: String?) {
-        
-        addressToTitle.isEnabled = isEnabled
-        addressToLabel.text = to
-        
-        addressFromTitle.isEnabled = isEnabled
-        addressFromLabel.text = from
-    }
-    
-    private func setDate(isEnabled: Bool, text: String?) {
-        dateTitleLabel.isEnabled = isEnabled
-        dateValueLabel.isEnabled = isEnabled
-        dateValueLabel.text = text
-    }
-    
-    private func setBlockNumber(isEnabled: Bool, text: String?) {
-        blockNumberTitleLabel.isEnabled = isEnabled
-        blockNumberValueLabel.isEnabled = isEnabled
-        blockNumberValueLabel.text = text
-    }
-    
-    private func setGasPrice(isEnabled: Bool, text: String?) {
-        gasPriceTitleLabel.isEnabled = isEnabled
-        gasPriceValueLabel.isEnabled = isEnabled
-        gasPriceValueLabel.text = text
-    }
-    
-    private func setGasLimit(isEnabled: Bool, text: String?) {
-        gasLimitTitleLabel.isEnabled = isEnabled
-        gasLimitValueLabel.isEnabled = isEnabled
-        gasLimitValueLabel.text = text
-    }
-    
-    private func setFee(isEnabled: Bool, text: String?) {
-        feeTitleLabel.isEnabled = isEnabled
-        feeValueLabel.isEnabled = isEnabled
-        feeValueLabel.text = text
-    }
 }
 
 extension TransactionDetailsViewController {
