@@ -39,7 +39,9 @@ class TransactionDetailsViewController: UIViewController {
     @IBOutlet private var notificationMessageLabel: UILabel!
     @IBOutlet private var notificationViewDisplayingConstraint: NSLayoutConstraint!
     @IBOutlet private var statusLabel: StatusLabel!
+    @IBOutlet private var addressFromTitle: UILabel!
     @IBOutlet private var addressFromLabel: UILabel!
+    @IBOutlet private var addressToTitle: UILabel!
     @IBOutlet private var addressToLabel: UILabel!
     @IBOutlet private var dateTitleLabel: UILabel!
     @IBOutlet private var dateValueLabel: UILabel!
@@ -183,22 +185,15 @@ extension TransactionDetailsViewController {
         txHashLabel.text = transaction?.hash
         
         guard let transaction = transaction else {
-            addressToLabel.text = "-"
-            addressFromLabel.text = "-"
-            
-            dateValueLabel.text = "-"
-            dateValueLabel.isEnabled = false
-            dateTitleLabel.isEnabled = false
+            setAddress(isEnabled: false, to: "-", from: "-")
+            setDate(isEnabled: false, text: "-")
 
             return
         }
         
-        addressToLabel.text = getFormattedAddress(transaction.to)
-        addressFromLabel.text = getFormattedAddress(transaction.from)
-        
-        dateValueLabel.text = dateFormatter.string(from: transaction.date)
-        dateValueLabel.isEnabled = true
-        dateTitleLabel.isEnabled = true
+        setAddress(isEnabled: true,
+                   to: getFormattedAddress(transaction.to), from: getFormattedAddress(transaction.from))
+        setDate(isEnabled: true, text: dateFormatter.string(from: transaction.date))
     }
     
     private func updateTransactionDetails() {
@@ -206,53 +201,27 @@ extension TransactionDetailsViewController {
 
         guard let txDetails = transactionDetails else {
             
-            blockNumberValueLabel.text = "-"
-            blockNumberValueLabel.isEnabled = false
-            blockNumberTitleLabel.isEnabled = false
-
-            gasPriceValueLabel.text = "-"
-            gasLimitValueLabel.text = "-"
-            feeValueLabel.text = "-"
-            setTransactionDetails(isEnabled: false)
+            setBlockNumber(isEnabled: false, text: "-")
+            setGasPrice(isEnabled: false, text: "-")
+            setGasLimit(isEnabled: false, text: "-")
+            setFee(isEnabled: false, text: "-")
             
             return
         }
         
         if let blockNumber = txDetails.blockNumber {
-            blockNumberValueLabel.text = "\(blockNumber)"
-            blockNumberValueLabel.isEnabled = true
-            blockNumberTitleLabel.isEnabled = true
-
+            setBlockNumber(isEnabled: true, text: "\(blockNumber)")
         } else {
-            blockNumberValueLabel.text = "-"
-            blockNumberValueLabel.isEnabled = false
-            blockNumberTitleLabel.isEnabled = false
+            setBlockNumber(isEnabled: false, text: "-")
         }
         
-        gasPriceValueLabel.text = {
-            guard
-                let gwei = inGwei(value: txDetails.gasPrice),
-                let eth = inEth(value: txDetails.gasPrice) else {
-                    return nil
-            }
+        setGasPrice(isEnabled: true, text: {
+            guard let gwei = inGwei(txDetails.gasPrice), let eth = inEth(txDetails.gasPrice) else { return nil }
             
             return "\(eth) (\(gwei))"
-        }()
-        gasLimitValueLabel.text = "\(txDetails.gasLimit)"
-        feeValueLabel.text = inEth(value: txDetails.gasPrice * txDetails.gasLimit)
-        setTransactionDetails(isEnabled: true)
-    }
-    
-    private func setTransactionDetails(isEnabled: Bool) {
-        
-        gasPriceTitleLabel.isEnabled = isEnabled
-        gasPriceValueLabel.isEnabled = isEnabled
-        
-        gasLimitTitleLabel.isEnabled = isEnabled
-        gasLimitValueLabel.isEnabled = isEnabled
-        
-        feeTitleLabel.isEnabled = isEnabled
-        feeValueLabel.isEnabled = isEnabled
+        }())
+        setGasLimit(isEnabled: true, text: "\(txDetails.gasLimit)")
+        setFee(isEnabled: true, text: inEth(txDetails.gasPrice * txDetails.gasLimit))
     }
     
     private func updateTransactionStatus() {
@@ -306,6 +275,48 @@ extension TransactionDetailsViewController {
 
 extension TransactionDetailsViewController {
     
+    private func setAddress(isEnabled: Bool, to: String?, from: String?) {
+        
+        addressToTitle.isEnabled = isEnabled
+        addressToLabel.text = to
+        
+        addressFromTitle.isEnabled = isEnabled
+        addressFromLabel.text = from
+    }
+    
+    private func setDate(isEnabled: Bool, text: String?) {
+        dateTitleLabel.isEnabled = isEnabled
+        dateValueLabel.isEnabled = isEnabled
+        dateValueLabel.text = text
+    }
+    
+    private func setBlockNumber(isEnabled: Bool, text: String?) {
+        blockNumberTitleLabel.isEnabled = isEnabled
+        blockNumberValueLabel.isEnabled = isEnabled
+        blockNumberValueLabel.text = text
+    }
+    
+    private func setGasPrice(isEnabled: Bool, text: String?) {
+        gasPriceTitleLabel.isEnabled = isEnabled
+        gasPriceValueLabel.isEnabled = isEnabled
+        gasPriceValueLabel.text = text
+    }
+    
+    private func setGasLimit(isEnabled: Bool, text: String?) {
+        gasLimitTitleLabel.isEnabled = isEnabled
+        gasLimitValueLabel.isEnabled = isEnabled
+        gasLimitValueLabel.text = text
+    }
+    
+    private func setFee(isEnabled: Bool, text: String?) {
+        feeTitleLabel.isEnabled = isEnabled
+        feeValueLabel.isEnabled = isEnabled
+        feeValueLabel.text = text
+    }
+}
+
+extension TransactionDetailsViewController {
+    
     private func getFormattedAddress(_ address: String) -> String {
         let offset = 5
         
@@ -317,13 +328,13 @@ extension TransactionDetailsViewController {
 
 extension TransactionDetailsViewController {
     
-    private func inGwei(value: BigUInt) -> String? {
+    private func inGwei(_ value: BigUInt) -> String? {
         guard let gwei = Web3.Utils.formatToEthereumUnits(value, toUnits: .Gwei) else { return nil }
         
         return "\(trimInsignificantLastZeros(gwei)) Gwei"
     }
     
-    private func inEth(value: BigUInt) -> String? {
+    private func inEth(_ value: BigUInt) -> String? {
         guard let eth = Web3.Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: 9) else { return nil }
         
         return "\(trimInsignificantLastZeros(eth)) ETH"
