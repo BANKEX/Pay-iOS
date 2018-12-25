@@ -43,6 +43,8 @@ class TransactionDetailsViewController: UIViewController {
     @IBOutlet private var addressToLabel: UILabel!
     @IBOutlet private var dateTitleLabel: UILabel!
     @IBOutlet private var dateValueLabel: UILabel!
+    @IBOutlet private var blockNumberTitleLabel: UILabel!
+    @IBOutlet private var blockNumberValueLabel: UILabel!
     @IBOutlet private var gasPriceTitleLabel: UILabel!
     @IBOutlet private var gasPriceValueLabel: UILabel!
     @IBOutlet private var gasLimitTitleLabel: UILabel!
