@@ -178,6 +178,9 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="X8r-rW-0Tm" appends="YES" id="89q-cG-XDD"/>
+                                                </connections>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9IP-Jg-KSg" userLabel="GasPriceStackView">
                                                 <rect key="frame" x="16" y="230.5" width="343" height="49"/>
@@ -418,6 +421,11 @@
                 <tapGestureRecognizer id="zQ9-fD-rPg" userLabel="ShareToAddressTapGestureRecognizer">
                     <connections>
                         <action selector="shareToAddress" destination="3pB-qQ-tHw" id="NXK-TG-NA0"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="X8r-rW-0Tm" userLabel="BlockNumberTapGestureRecognizer">
+                    <connections>
+                        <action selector="tapBlockNumber:" destination="3pB-qQ-tHw" id="8Kh-OX-Eg5"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

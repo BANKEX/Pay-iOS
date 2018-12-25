@@ -88,6 +88,14 @@ class TransactionDetailsViewController: UIViewController {
         UIApplication.shared.open(url)
     }
     
+    @IBAction func tapBlockNumber(_ sender: UITapGestureRecognizer) {
+        guard let blockNumber = transactionDetails?.blockNumber,
+            let url = URL(string: "https://etherscan.io/block/\(blockNumber)"),
+            UIApplication.shared.canOpenURL(url) else { return }
+        
+        UIApplication.shared.open(url)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
