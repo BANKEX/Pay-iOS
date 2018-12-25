@@ -205,12 +205,28 @@ extension TransactionDetailsViewController {
         guard isViewLoaded else { return }
 
         guard let txDetails = transactionDetails else {
+            
+            blockNumberValueLabel.text = "-"
+            blockNumberValueLabel.isEnabled = false
+            blockNumberTitleLabel.isEnabled = false
+
             gasPriceValueLabel.text = "-"
             gasLimitValueLabel.text = "-"
             feeValueLabel.text = "-"
             setTransactionDetails(isEnabled: false)
             
             return
+        }
+        
+        if let blockNumber = txDetails.blockNumber {
+            blockNumberValueLabel.text = "\(blockNumber)"
+            blockNumberValueLabel.isEnabled = true
+            blockNumberTitleLabel.isEnabled = true
+
+        } else {
+            blockNumberValueLabel.text = "-"
+            blockNumberValueLabel.isEnabled = false
+            blockNumberTitleLabel.isEnabled = false
         }
         
         gasPriceValueLabel.text = {
@@ -224,7 +240,6 @@ extension TransactionDetailsViewController {
         }()
         gasLimitValueLabel.text = "\(txDetails.gasLimit)"
         feeValueLabel.text = inEth(value: txDetails.gasPrice * txDetails.gasLimit)
-        
         setTransactionDetails(isEnabled: true)
     }
     
