@@ -81,7 +81,11 @@ class TransactionDetailsViewController: UIViewController {
     }
     
     @IBAction func tapCheckOnEtherscan(_ sender: UITapGestureRecognizer) {
+        guard let hash = transaction?.hash,
+            let url = URL(string: "https://etherscan.io/tx/\(hash)"),
+            UIApplication.shared.canOpenURL(url) else { return }
         
+        UIApplication.shared.open(url)
     }
     
     override func viewWillAppear(_ animated: Bool) {
