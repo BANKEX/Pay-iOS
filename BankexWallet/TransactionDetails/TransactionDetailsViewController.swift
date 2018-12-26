@@ -88,8 +88,8 @@ class TransactionDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         configureNavBar()
-        tryLoadTransactionDetails()
-        tryLoadTransactionStatus()
+        loadTransactionDetails()
+        loadTransactionStatus()
         updateView()
     }
 
@@ -99,8 +99,8 @@ class TransactionDetailsViewController: UIViewController {
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .`default`
     }
     
-    private func tryLoadTransactionDetails() {
-        guard let txHash = transaction?.hash else { return }
+    private func loadTransactionDetails() {
+        guard let txHash = transaction?.hash, transactionDetails == nil else { return }
         
         txDetailsService.getTransactionDetails(txHash: txHash) { [weak self] (txDetails) in
             guard let controller = self else { return }
@@ -114,8 +114,8 @@ class TransactionDetailsViewController: UIViewController {
         }
     }
     
-    private func tryLoadTransactionStatus() {
-        guard let txHash = transaction?.hash else { return }
+    private func loadTransactionStatus() {
+        guard let txHash = transaction?.hash, transactionStatus == nil  else { return }
         
         txDetailsService.getStatus(txHash: txHash) { [weak self] (txStatus) in
             guard let controller = self else { return }
@@ -328,10 +328,6 @@ extension TransactionDetailsViewController {
         return String(address[address.startIndex..<address.index(address.startIndex, offsetBy: offset)]
             + "..." + address[address.index(address.endIndex, offsetBy: -offset)..<address.endIndex])
     }
-
-}
-
-extension TransactionDetailsViewController {
     
     private func inGwei(_ value: BigUInt) -> String? {
         guard let gwei = Web3.Utils.formatToEthereumUnits(value, toUnits: .Gwei) else { return nil }
