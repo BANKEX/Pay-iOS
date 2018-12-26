@@ -88,8 +88,8 @@ class TransactionDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         configureNavBar()
-        loadTransactionDetails(txHash: transaction?.hash)
-        loadTransactionStatus(txHash: transaction?.hash)
+        tryLoadTransactionDetails()
+        tryLoadTransactionStatus()
         updateView()
     }
 
@@ -99,37 +99,32 @@ class TransactionDetailsViewController: UIViewController {
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .`default`
     }
     
-    private func loadTransactionDetails(txHash: String?) {
-        guard let txHash = txHash else { return }
+    private func tryLoadTransactionDetails() {
+        guard let txHash = transaction?.hash else { return }
         
-        txDetailsService.getTransactionDetails(txHash: txHash, completion: loadTransactionDetailsHandler)
+        txDetailsService.getTransactionDetails(txHash: txHash) { [weak self] (txDetails) in
+            guard let controller = self else { return }
+            
+            controller.transactionDetails = txDetails
+            
+            controller.updateBlockNumber()
+            controller.updateGasPrice()
+            controller.updateGasLimit()
+            controller.updateFee()
+        }
     }
     
-    private lazy var loadTransactionDetailsHandler: (TransactionDetails?)->Void = { [weak self] (txDetails) in
-        guard let controller = self else { return }
+    private func tryLoadTransactionStatus() {
+        guard let txHash = transaction?.hash else { return }
         
-        controller.transactionDetails = txDetails
-        
-        controller.updateBlockNumber()
-        controller.updateGasPrice()
-        controller.updateGasLimit()
-        controller.updateFee()
+        txDetailsService.getStatus(txHash: txHash) { [weak self] (txStatus) in
+            guard let controller = self else { return }
+            
+            controller.transactionStatus = txStatus
+            
+            controller.updateStatus()
+        }
     }
-    
-    private func loadTransactionStatus(txHash: String?) {
-        guard let txHash = txHash else { return }
-        
-        txDetailsService.getStatus(txHash: txHash, completion: loadTransactionStatusHandler)
-    }
-    
-    private lazy var loadTransactionStatusHandler: (TransactionReceipt.TXStatus?)->Void = { [weak self] (txStatus) in
-        guard let controller = self else { return }
-        
-        controller.transactionStatus = txStatus
-        
-        controller.updateStatus()
-    }
-
     
     @IBAction func shareTransactionHash(_ sender: UIButton) {
         guard let hash = transaction?.hash else { return }
@@ -201,15 +196,13 @@ extension TransactionDetailsViewController {
     private func updateAddress() {
         guard isViewLoaded else { return }
         
+        addressToTitleLabel.isEnabled = transaction != nil
+        addressFromTitleLabel.isEnabled = transaction != nil
         if let transaction = transaction {
-            addressToTitleLabel.isEnabled = true
-            addressToValueLabel.text = transaction.to
-            addressFromTitleLabel.isEnabled = true
-            addressFromValueLabel.text = transaction.from
+            addressToValueLabel.text = getFormattedAddress(transaction.to)
+            addressFromValueLabel.text = getFormattedAddress(transaction.from)
         } else {
-            addressToTitleLabel.isEnabled = false
             addressToValueLabel.text = "-"
-            addressFromTitleLabel.isEnabled = false
             addressFromValueLabel.text = "-"
         }
     }
@@ -217,15 +210,15 @@ extension TransactionDetailsViewController {
     private func updateDate() {
         guard isViewLoaded else { return }
         
-        if let transaction = transaction {
-            dateTitleLabel.isEnabled = true
-            dateValueLabel.isEnabled = true
-            dateValueLabel.text = dateFormatter.string(from: transaction.date)
-        } else {
-            dateTitleLabel.isEnabled = false
-            dateValueLabel.isEnabled = false
-            dateValueLabel.text = "-"
-        }
+        dateTitleLabel.isEnabled = transaction != nil
+        dateValueLabel.isEnabled = transaction != nil
+        dateValueLabel.text = {
+            if let transaction = transaction {
+                return dateFormatter.string(from: transaction.date)
+            } else {
+                return "-"
+            }
+        }()
     }
     
     private func updateStatus() {
@@ -265,61 +258,47 @@ extension TransactionDetailsViewController {
     private func updateBlockNumber() {
         guard isViewLoaded else { return }
         
-        if let blockNumber = transactionDetails?.blockNumber {
-            blockNumberTitleLabel.isEnabled = true
-            blockNumberValueLabel.isEnabled = true
-            blockNumberValueLabel.text = "\(blockNumber)"
-        } else {
-            blockNumberTitleLabel.isEnabled = false
-            blockNumberValueLabel.isEnabled = false
-            blockNumberValueLabel.text = "-"
-        }
+        blockNumberTitleLabel.isEnabled = transactionDetails?.blockNumber != nil
+        blockNumberValueLabel.isEnabled = transactionDetails?.blockNumber != nil
+        blockNumberValueLabel.text = String(describing: transactionDetails?.blockNumber ?? "-")
     }
     
     private func updateGasPrice() {
         guard isViewLoaded else { return }
         
-        if let txDetails = transactionDetails {
-            gasPriceTitleLabel.isEnabled = true
-            gasPriceValueLabel.isEnabled = true
-            gasPriceValueLabel.text = {
+        gasPriceTitleLabel.isEnabled = transactionDetails != nil
+        gasPriceValueLabel.isEnabled = transactionDetails != nil
+        gasPriceValueLabel.text = {
+            if let txDetails = transactionDetails {
                 guard let gwei = inGwei(txDetails.gasPrice), let eth = inEth(txDetails.gasPrice) else { return nil }
                 
-                return "\(eth) (\(gwei))"
-            }()
-        } else {
-            gasPriceTitleLabel.isEnabled = false
-            gasPriceValueLabel.isEnabled = false
-            gasPriceValueLabel.text = "-"
-        }
+                return String(describing: eth) + " (" + String(describing: gwei) + ")"
+            } else {
+                return "-"
+            }
+        }()
     }
     
     private func updateGasLimit() {
         guard isViewLoaded else { return }
         
-        if let txDetails = transactionDetails {
-            gasLimitTitleLabel.isEnabled = true
-            gasLimitValueLabel.isEnabled = true
-            gasLimitValueLabel.text = "\(txDetails.gasLimit)"
-        } else {
-            gasLimitTitleLabel.isEnabled = false
-            gasLimitValueLabel.isEnabled = false
-            gasLimitValueLabel.text = "-"
-        }
+        gasLimitTitleLabel.isEnabled = transactionDetails != nil
+        gasLimitValueLabel.isEnabled = transactionDetails != nil
+        gasLimitValueLabel.text = String(describing: transactionDetails?.gasLimit ?? "-")
     }
     
     private func updateFee() {
         guard isViewLoaded else { return }
         
-        if let txDetails = transactionDetails {
-            feeTitleLabel.isEnabled = true
-            feeValueLabel.isEnabled = true
-            feeValueLabel.text = inEth(txDetails.gasPrice * txDetails.gasLimit)
-        } else {
-            feeTitleLabel.isEnabled = false
-            feeValueLabel.isEnabled = false
-            feeValueLabel.text = "-"
-        }
+        feeTitleLabel.isEnabled = transactionDetails != nil
+        feeValueLabel.isEnabled = transactionDetails != nil
+        feeValueLabel.text = {
+            if let txDetails = transactionDetails {
+                return inEth(txDetails.gasPrice * txDetails.gasLimit)
+            } else {
+                return "-"
+            }
+        }()
     }
 }
 
@@ -357,13 +336,13 @@ extension TransactionDetailsViewController {
     private func inGwei(_ value: BigUInt) -> String? {
         guard let gwei = Web3.Utils.formatToEthereumUnits(value, toUnits: .Gwei) else { return nil }
         
-        return "\(trimInsignificantLastZeros(gwei)) Gwei"
+        return String(describing: trimInsignificantLastZeros(gwei)) + " Gwei"
     }
     
     private func inEth(_ value: BigUInt) -> String? {
         guard let eth = Web3.Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: 9) else { return nil }
         
-        return "\(trimInsignificantLastZeros(eth)) ETH"
+        return String(describing: trimInsignificantLastZeros(eth)) + " ETH"
     }
     
     private func trimInsignificantLastZeros(_ string: String) -> String {
