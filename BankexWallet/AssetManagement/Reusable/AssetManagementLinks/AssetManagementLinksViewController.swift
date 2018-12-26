@@ -8,7 +8,6 @@
 
 import UIKit
 import MessageUI
-import SafariServices
 
 class AssetManagementLinksViewController: UIViewController {
     
@@ -47,13 +46,9 @@ class AssetManagementLinksViewController: UIViewController {
     }
     
     @IBAction func openPage() {
-        
         let url = URL(string: "https://bankex.com/en/sto/asset-management")!
-        let browser = SFSafariViewController(url: url)
-        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
-        UIApplication.shared.statusBarStyle = .default
         
-        present(browser, animated: true, completion: nil)
+        AssetManagementBrowser().present(on: self, url: url)
     }
 }
 

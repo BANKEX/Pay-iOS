@@ -10,7 +10,6 @@ import UIKit
 import BigInt
 import web3swift
 import Amplitude_iOS
-import SafariServices
 
 class AssetManagementEthViewController: UIViewController {
     
@@ -98,22 +97,14 @@ class AssetManagementEthViewController: UIViewController {
         Amplitude.instance()?.logEvent("Asset Management ETH Agreement Opened")
         
         let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/agreement.pdf")!
-        let browser = SFSafariViewController(url: url)
-        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
-        UIApplication.shared.statusBarStyle = .default
-        
-        present(browser, animated: true, completion: nil)
+        AssetManagementBrowser().present(on: self, url: url)
     }
     
     @IBAction private func openRiskFactor() {
         Amplitude.instance()?.logEvent("Asset Management ETH Risk Factor Opened")
         
         let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/risk-factors.pdf")!
-        let browser = SFSafariViewController(url: url)
-        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
-        UIApplication.shared.statusBarStyle = .default
-        
-        present(browser, animated: true, completion: nil)
+        AssetManagementBrowser().present(on: self, url: url)
     }
     
     @IBAction private func endEditing() {

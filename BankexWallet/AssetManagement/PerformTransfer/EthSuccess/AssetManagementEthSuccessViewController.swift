@@ -8,7 +8,6 @@
 
 import UIKit
 import web3swift
-import SafariServices
 
 class AssetManagementEthSuccessViewController: UIViewController {
     
@@ -22,11 +21,7 @@ class AssetManagementEthSuccessViewController: UIViewController {
         guard let _ = trResult?.hash else { return }
         
         let url = transactionLinkURL(for: trResult)!
-        let browser = SFSafariViewController(url: url)
-        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
-        UIApplication.shared.statusBarStyle = .default
-        
-        present(browser, animated: true, completion: nil)
+        AssetManagementBrowser().present(on: self, url: url)
     }
 }
 
