@@ -8,6 +8,7 @@
 
 import UIKit
 import web3swift
+import SafariServices
 
 class AssetManagementEthSuccessViewController: UIViewController {
     
@@ -19,7 +20,13 @@ class AssetManagementEthSuccessViewController: UIViewController {
     
     @IBAction func openTransaction() {
         guard let _ = trResult?.hash else { return }
-        performSegue(withIdentifier: "Browser", sender: self)
+        
+        let url = transactionLinkURL(for: trResult)!
+        let browser = SFSafariViewController(url: url)
+        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
+        UIApplication.shared.statusBarStyle = .default
+        
+        present(browser, animated: true, completion: nil)
     }
 }
 
@@ -32,9 +39,6 @@ extension AssetManagementEthSuccessViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let browser = segue.destination as? AssetManagementBrowserViewController {
-            browser.link = transactionLinkURL(for: trResult)
-        }
         
         if let linksViewController = segue.destination as? AssetManagementLinksViewController {
             linksViewController.transactionLinkURL = transactionLinkURL(for: trResult)

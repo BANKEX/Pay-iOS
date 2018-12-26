@@ -10,6 +10,7 @@ import UIKit
 import BigInt
 import web3swift
 import Amplitude_iOS
+import SafariServices
 
 class AssetManagementEthViewController: UIViewController {
     
@@ -51,7 +52,6 @@ class AssetManagementEthViewController: UIViewController {
     private var fee: BigUInt?
     private var total: BigUInt?
     private var validationError: ValidationError?
-    private var linkToOpen: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,15 +97,23 @@ class AssetManagementEthViewController: UIViewController {
     @IBAction private func openAgreement() {
         Amplitude.instance()?.logEvent("Asset Management ETH Agreement Opened")
         
-        linkToOpen = URL(string: "https://bankex.github.io/pay-asset-management/docs/agreement.pdf")!
-        performSegue(withIdentifier: "Browser", sender: self)
+        let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/agreement.pdf")!
+        let browser = SFSafariViewController(url: url)
+        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
+        UIApplication.shared.statusBarStyle = .default
+        
+        present(browser, animated: true, completion: nil)
     }
     
     @IBAction private func openRiskFactor() {
         Amplitude.instance()?.logEvent("Asset Management ETH Risk Factor Opened")
         
-        linkToOpen = URL(string: "https://bankex.github.io/pay-asset-management/docs/risk-factors.pdf")!
-        performSegue(withIdentifier: "Browser", sender: self)
+        let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/risk-factors.pdf")!
+        let browser = SFSafariViewController(url: url)
+        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
+        UIApplication.shared.statusBarStyle = .default
+        
+        present(browser, animated: true, completion: nil)
     }
     
     @IBAction private func endEditing() {
@@ -166,8 +174,6 @@ extension AssetManagementEthViewController {
         if let viewController = segue.destination as? AssetManagementEthProgressViewController {
             viewController.amount = amountTextField.text
             viewController.toAddress = destination.address
-        } else if let browser = segue.destination as? AssetManagementBrowserViewController {
-            browser.link = linkToOpen
         }
     }
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import SafariServices
 
 class AssetManagementLinksViewController: UIViewController {
     
@@ -46,16 +47,13 @@ class AssetManagementLinksViewController: UIViewController {
     }
     
     @IBAction func openPage() {
-        performSegue(withIdentifier: "Browser", sender: self)
-    }
-}
-
-extension AssetManagementLinksViewController {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let browser = segue.destination as? AssetManagementBrowserViewController {
-            browser.link = URL(string: "https://bankex.com/en/sto/asset-management")!
-        }
+        
+        let url = URL(string: "https://bankex.com/en/sto/asset-management")!
+        let browser = SFSafariViewController(url: url)
+        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
+        UIApplication.shared.statusBarStyle = .default
+        
+        present(browser, animated: true, completion: nil)
     }
 }
 

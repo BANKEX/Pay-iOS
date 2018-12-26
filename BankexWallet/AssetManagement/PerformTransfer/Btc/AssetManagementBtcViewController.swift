@@ -8,6 +8,7 @@
 
 import UIKit
 import Amplitude_iOS
+import SafariServices
 
 class AssetManagementBtcViewController: UIViewController {
     
@@ -25,7 +26,6 @@ class AssetManagementBtcViewController: UIViewController {
     private let destination = "367aqxeq6SqVzaX5qza2HwvfxTJeruLoka"
     private var agreementChecked = false
     private var riskFactorChecked = false
-    private var linkToOpen: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,15 +62,23 @@ class AssetManagementBtcViewController: UIViewController {
     @IBAction private func openAgreement() {
         Amplitude.instance()?.logEvent("Asset Management BTC Agreement Opened")
         
-        linkToOpen = URL(string: "https://bankex.github.io/pay-asset-management/docs/agreement.pdf")!
-        performSegue(withIdentifier: "Browser", sender: self)
+        let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/agreement.pdf")!
+        let browser = SFSafariViewController(url: url)
+        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
+        UIApplication.shared.statusBarStyle = .default
+        
+        present(browser, animated: true, completion: nil)
     }
     
     @IBAction private func openRiskFactor() {
         Amplitude.instance()?.logEvent("Asset Management BTC Risk Factor Opened")
         
-        linkToOpen = URL(string: "https://bankex.github.io/pay-asset-management/docs/risk-factors.pdf")!
-        performSegue(withIdentifier: "Browser", sender: self)
+        let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/risk-factors.pdf")!
+        let browser = SFSafariViewController(url: url)
+        UIApplication.shared.statusBarView?.backgroundColor = browser.preferredControlTintColor
+        UIApplication.shared.statusBarStyle = .default
+        
+        present(browser, animated: true, completion: nil)
     }
         
     @IBAction func copyDestinationAddress() {
@@ -88,15 +96,6 @@ class AssetManagementBtcViewController: UIViewController {
         }
     }
     
-}
-
-extension AssetManagementBtcViewController {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let browser = segue.destination as? AssetManagementBrowserViewController {
-            browser.link = linkToOpen
-        }
-    }
 }
 
 private extension AssetManagementBtcViewController {
