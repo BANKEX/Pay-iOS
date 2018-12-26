@@ -10,6 +10,7 @@ import UIKit
 import Amplitude_iOS
 import web3swift
 import GrowingTextView
+import AVFoundation
 
 class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,QRReaderVCDelegate {
     
@@ -83,6 +84,11 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,QRReader
         privateKeyTextView.autocapitalizationType = .none
     }
     
+    private func showScanner() {
+        let qrReader = QRReaderVC()
+        qrReader.delegate = self
+        self.present(qrReader, animated: true)
+    }
    
     
     //MARK: - IBActions
@@ -152,9 +158,20 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,QRReader
     
     
     @IBAction func scanDidTapped(_ scan: UIButton) {
-        let qrReaderVC = QRReaderVC()
-        qrReaderVC.delegate = self
-        self.present(qrReaderVC, animated: true)
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            showScanner()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { (granted) in
+                if granted {
+                    self.showScanner()
+                }
+            }
+        case .denied:
+            self.present(UIAlertController.accessCameraAlert(), animated: true, completion: nil)
+        case .restricted:
+            break
+        }
     }
     
     @IBAction func bufferDidTapped() {

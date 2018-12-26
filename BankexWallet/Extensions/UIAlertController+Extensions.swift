@@ -66,5 +66,18 @@ extension UIAlertController {
         let destructiveButton = UIAlertAction(title: title, style: .destructive, handler: handler)
         addAction(destructiveButton)
     }
+
+    class func accessCameraAlert() -> UIAlertController {
+        let alertVC = UIAlertController(title: "Please Allow Access", message: "BANKEX Pay needs access to your camera so that you can capture QR Code.\n Please go to your device's settings > Privacy > Camera and set BANKEX Pay to ON", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Not Now", style: .cancel, handler: nil))
+        alertVC.add(title: "Settings") {
+            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
+        }
+        return alertVC
+    }
+
+
     
 }

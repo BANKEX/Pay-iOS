@@ -8,6 +8,7 @@
 
 import UIKit
 import web3swift
+import AVFoundation
 
 class CreateTokenController: BaseViewController {
     
@@ -79,6 +80,12 @@ class CreateTokenController: BaseViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
+    private func showScanner() {
+        let qrReader = QRReaderVC()
+        qrReader.delegate = self
+        self.present(qrReader, animated: true)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         guard let searchText = searchBar.text else {
@@ -137,9 +144,20 @@ class CreateTokenController: BaseViewController {
     }
     
     @IBAction func scanTapped() {
-        let qrReader = QRReaderVC()
-        qrReader.delegate = self
-        present(qrReader, animated: true)
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            showScanner()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { (granted) in
+                if granted {
+                    self.showScanner()
+                }
+            }
+        case .denied:
+            self.present(UIAlertController.accessCameraAlert(), animated: true, completion: nil)
+        case .restricted:
+            break
+        }
     }
     
     
