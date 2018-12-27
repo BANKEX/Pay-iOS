@@ -2714,46 +2714,12 @@
                         <outlet property="openSwitch" destination="HAo-8s-SbN" id="S7k-Tz-Nkf"/>
                         <outlet property="sendSwitch" destination="pNX-OM-Wmp" id="BkI-RA-P8j"/>
                         <outlet property="timerLbl" destination="zn1-Ra-nfO" id="e0Q-5Z-Yix"/>
-                        <segue destination="rih-FO-Yhm" kind="show" identifier="autoLock" id="57f-rg-Mi6"/>
+                        <segue destination="1bI-XG-pZm" kind="show" identifier="autoLock" id="57f-rg-Mi6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3l9-5x-K3w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1604" y="7407"/>
-        </scene>
-        <!--Auto Lock View Controller-->
-        <scene sceneID="ryN-py-pn3">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="rih-FO-Yhm" customClass="AutoLockViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iqX-dO-ZCk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dDs-uE-eW2">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="79e-jM-fjt" firstAttribute="trailing" secondItem="dDs-uE-eW2" secondAttribute="trailing" id="9Zz-Jc-GkO">
-                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                            </constraint>
-                            <constraint firstItem="79e-jM-fjt" firstAttribute="bottom" secondItem="dDs-uE-eW2" secondAttribute="bottom" id="Zcp-Q2-Q9J"/>
-                            <constraint firstItem="dDs-uE-eW2" firstAttribute="leading" secondItem="79e-jM-fjt" secondAttribute="leading" id="nJO-Jk-93v">
-                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                            </constraint>
-                            <constraint firstItem="dDs-uE-eW2" firstAttribute="top" secondItem="79e-jM-fjt" secondAttribute="top" id="pTC-5v-kwh"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="79e-jM-fjt"/>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="dDs-uE-eW2" id="36r-Ct-3Jy"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BLn-Fi-W9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1601" y="8159"/>
         </scene>
         <!--Networks View Controller-->
         <scene sceneID="qlF-13-w0o">
@@ -6828,6 +6794,14 @@ minutes, please wait ...</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tiO-iF-q8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1231" y="5562"/>
+        </scene>
+        <!--AppTimeout-->
+        <scene sceneID="mbA-et-7xY">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AppTimeout" id="1bI-XG-pZm" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ed-rK-Bce" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1601" y="8159"/>
         </scene>
     </scenes>
     <resources>
