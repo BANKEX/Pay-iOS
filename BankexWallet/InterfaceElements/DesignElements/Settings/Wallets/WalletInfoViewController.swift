@@ -154,7 +154,7 @@ extension WalletInfoViewController:UITableViewDelegate,UITableViewDataSource {
                 self.performSegue(withIdentifier: "ShowPrivateKey", sender: nil)
             case 1:
                 if UIDevice.isIpad {
-                    let renameVC = CreateVC(byName: "RenameViewController") as! RenameViewController
+                    let renameVC = UIStoryboard(name: "WalletRename", bundle: nil).instantiateInitialViewController() as! RenameViewController
                     renameVC.addCancelButtonIfNeed()
                     if let nameWallet = publicName {
                         renameVC.selectedWalletName = nameWallet

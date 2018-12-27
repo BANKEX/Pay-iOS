@@ -1672,58 +1672,6 @@
             </objects>
             <point key="canvasLocation" x="-1247.2" y="6357.571214392804"/>
         </scene>
-        <!--Rename Wallet-->
-        <scene sceneID="ZPM-Ry-nW3">
-            <objects>
-                <viewController storyboardIdentifier="RenameViewController" title="Rename Wallet" hidesBottomBarWhenPushed="YES" id="JYY-IY-B5W" customClass="RenameViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Z0m-Iv-3X2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9A-NY-hZ2">
-                                <rect key="frame" x="19" y="112" width="54" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <color key="textColor" red="0.12549019607843137" green="0.13725490196078433" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wallet Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YDQ-RL-4WJ">
-                                <rect key="frame" x="19" y="146" width="301" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="ixS-CZ-Wfl"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TnT-FG-f0H">
-                                <rect key="frame" x="19" y="172" width="301" height="1"/>
-                                <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="AUC-d6-9LT"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="zJa-dI-OZf" firstAttribute="trailing" secondItem="TnT-FG-f0H" secondAttribute="trailing" id="2ph-Cu-cGC"/>
-                            <constraint firstItem="YDQ-RL-4WJ" firstAttribute="top" secondItem="Y9A-NY-hZ2" secondAttribute="bottom" constant="10" id="EN7-Ig-Tl2"/>
-                            <constraint firstItem="Y9A-NY-hZ2" firstAttribute="top" secondItem="zJa-dI-OZf" secondAttribute="top" constant="48" id="Jh8-uT-D4j"/>
-                            <constraint firstItem="YDQ-RL-4WJ" firstAttribute="leading" secondItem="Y9A-NY-hZ2" secondAttribute="leading" id="LZj-B3-RvV"/>
-                            <constraint firstItem="zJa-dI-OZf" firstAttribute="trailing" secondItem="YDQ-RL-4WJ" secondAttribute="trailing" id="Mzp-r5-o5j"/>
-                            <constraint firstItem="TnT-FG-f0H" firstAttribute="leading" secondItem="YDQ-RL-4WJ" secondAttribute="leading" id="UIP-Ng-aVt"/>
-                            <constraint firstItem="Y9A-NY-hZ2" firstAttribute="leading" secondItem="zJa-dI-OZf" secondAttribute="leading" constant="19" id="kCC-cD-W6C"/>
-                            <constraint firstItem="TnT-FG-f0H" firstAttribute="top" secondItem="YDQ-RL-4WJ" secondAttribute="bottom" id="l1Q-38-lS5"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="zJa-dI-OZf"/>
-                    </view>
-                    <connections>
-                        <outlet property="nameWalletTF" destination="YDQ-RL-4WJ" id="AJt-98-pZ1"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yTe-a6-2wn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1369" y="6375"/>
-        </scene>
         <!--Attention View Controller-->
         <scene sceneID="e8a-qT-GOj">
             <objects>
@@ -2886,7 +2834,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="oCC-Ts-14Y" id="Ylr-8y-yrn"/>
-                        <segue destination="JYY-IY-B5W" kind="show" identifier="renameSegue" id="sY0-mT-luG"/>
+                        <segue destination="S4E-b3-Bhy" kind="show" identifier="renameSegue" id="sY0-mT-luG"/>
                         <segue destination="a4u-Jz-fwR" kind="show" identifier="ShowPrivateKey" id="t8R-rs-am5"/>
                     </connections>
                 </viewController>
@@ -6986,6 +6934,14 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="-6300" y="7354"/>
         </scene>
+        <!--WalletRename-->
+        <scene sceneID="y1r-nd-3Hc">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="RenameViewController" storyboardName="WalletRename" id="S4E-b3-Bhy" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="994-nw-iox" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1369" y="6375"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Arrow Right Grey" width="8" height="13"/>
@@ -7019,7 +6975,7 @@ minutes, please wait ...</string>
         <image name="empty_pin_code" width="119" height="15"/>
         <image name="network_icon" width="29" height="29"/>
         <image name="pin_background" width="375" height="667"/>
-        <image name="qr" width="16.333333969116211" height="16"/>
+        <image name="qr" width="20" height="20"/>
         <image name="receive_icon" width="16" height="16"/>
         <image name="send_icon" width="16" height="16"/>
         <image name="share" width="27" height="27"/>
