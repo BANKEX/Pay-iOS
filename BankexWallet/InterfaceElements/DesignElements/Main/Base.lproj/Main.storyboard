@@ -1563,7 +1563,7 @@
                         <segue destination="2hH-TX-0h2" kind="show" identifier="walletSegue" id="cjv-fL-ghI"/>
                         <segue destination="hFV-ds-0T9" kind="show" identifier="securitySegue" id="w2E-r0-NRd"/>
                         <segue destination="a4u-Jz-fwR" kind="show" identifier="dev" id="bSW-e7-K9g"/>
-                        <segue destination="3eT-zK-M3d" kind="show" identifier="products" id="8AR-q8-9c4"/>
+                        <segue destination="snQ-rS-aSh" kind="show" identifier="products" id="8AR-q8-9c4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YkV-yB-ASf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2401,52 +2401,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZo-O0-2Ry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4035" y="7352"/>
-        </scene>
-        <!--Products View Controller-->
-        <scene sceneID="f45-0N-2v8">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="3eT-zK-M3d" customClass="ProductsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Nvh-ec-D1a">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sTZ-jB-M9f">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cWe-6n-Rca">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="yei-tx-Aey">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="aKo-Ur-XhB" firstAttribute="trailing" secondItem="sTZ-jB-M9f" secondAttribute="trailing" id="gdr-tW-kxW"/>
-                            <constraint firstItem="sTZ-jB-M9f" firstAttribute="top" secondItem="aKo-Ur-XhB" secondAttribute="top" id="gnQ-2N-kvY"/>
-                            <constraint firstItem="aKo-Ur-XhB" firstAttribute="bottom" secondItem="sTZ-jB-M9f" secondAttribute="bottom" id="nLU-vU-btw"/>
-                            <constraint firstItem="sTZ-jB-M9f" firstAttribute="leading" secondItem="aKo-Ur-XhB" secondAttribute="leading" id="pQ7-6f-4wy"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="aKo-Ur-XhB"/>
-                    </view>
-                    <connections>
-                        <outlet property="collectionView" destination="sTZ-jB-M9f" id="4nj-uZ-rgY"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OId-2W-noc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2732" y="7470"/>
         </scene>
         <!--Security View Controller-->
         <scene sceneID="KXC-Lb-a4W">
@@ -6802,6 +6756,14 @@ minutes, please wait ...</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ed-rK-Bce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1601" y="8159"/>
+        </scene>
+        <!--CompanyProducts-->
+        <scene sceneID="BVp-ye-Ikm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CompanyProducts" id="snQ-rS-aSh" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="duC-FZ-BwG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2732" y="7470"/>
         </scene>
     </scenes>
     <resources>
