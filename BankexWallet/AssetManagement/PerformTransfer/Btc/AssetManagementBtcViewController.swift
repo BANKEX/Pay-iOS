@@ -63,14 +63,14 @@ class AssetManagementBtcViewController: UIViewController {
         Amplitude.instance()?.logEvent("Asset Management BTC Agreement Opened")
         
         let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/agreement.pdf")!
-        present(SFSafariViewController(assetManagementUrl: url), animated: true, completion:  nil)
+        show(SFSafariViewController(assetManagementUrl: url), sender:  nil)
     }
     
     @IBAction private func openRiskFactor() {
         Amplitude.instance()?.logEvent("Asset Management BTC Risk Factor Opened")
         
         let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/risk-factors.pdf")!
-        present(SFSafariViewController(assetManagementUrl: url), animated: true, completion:  nil)
+        show(SFSafariViewController(assetManagementUrl: url), sender: nil)
     }
         
     @IBAction func copyDestinationAddress() {

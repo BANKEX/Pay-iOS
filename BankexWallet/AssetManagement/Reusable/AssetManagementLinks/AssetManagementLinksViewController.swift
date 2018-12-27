@@ -49,7 +49,7 @@ class AssetManagementLinksViewController: UIViewController {
     @IBAction func openPage() {
         let url = URL(string: "https://bankex.com/en/sto/asset-management")!
         
-        present(SFSafariViewController(assetManagementUrl: url), animated: true, completion:  nil)
+        show(SFSafariViewController(assetManagementUrl: url), sender:  nil)
     }
 }
 

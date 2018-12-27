@@ -22,7 +22,7 @@ class AssetManagementEthSuccessViewController: UIViewController {
         guard let _ = trResult?.hash else { return }
         
         let url = transactionLinkURL(for: trResult)!
-        present(SFSafariViewController(assetManagementUrl: url), animated: true, completion:  nil)
+        show(SFSafariViewController(assetManagementUrl: url), sender:  nil)
     }
 }
 
