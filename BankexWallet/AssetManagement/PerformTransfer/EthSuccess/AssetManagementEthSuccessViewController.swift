@@ -8,6 +8,7 @@
 
 import UIKit
 import web3swift
+import SafariServices
 
 class AssetManagementEthSuccessViewController: UIViewController {
     
@@ -21,7 +22,7 @@ class AssetManagementEthSuccessViewController: UIViewController {
         guard let _ = trResult?.hash else { return }
         
         let url = transactionLinkURL(for: trResult)!
-        AssetManagementBrowser().present(on: self, url: url)
+        present(SFSafariViewController(assetManagementUrl: url), animated: true, completion:  nil)
     }
 }
 

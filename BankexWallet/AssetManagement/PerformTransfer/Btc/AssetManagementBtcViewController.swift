@@ -8,6 +8,7 @@
 
 import UIKit
 import Amplitude_iOS
+import SafariServices
 
 class AssetManagementBtcViewController: UIViewController {
     
@@ -62,14 +63,14 @@ class AssetManagementBtcViewController: UIViewController {
         Amplitude.instance()?.logEvent("Asset Management BTC Agreement Opened")
         
         let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/agreement.pdf")!
-        AssetManagementBrowser().present(on: self, url: url)
+        present(SFSafariViewController(assetManagementUrl: url), animated: true, completion:  nil)
     }
     
     @IBAction private func openRiskFactor() {
         Amplitude.instance()?.logEvent("Asset Management BTC Risk Factor Opened")
         
         let url = URL(string: "https://bankex.github.io/pay-asset-management/docs/risk-factors.pdf")!
-        AssetManagementBrowser().present(on: self, url: url)
+        present(SFSafariViewController(assetManagementUrl: url), animated: true, completion:  nil)
     }
         
     @IBAction func copyDestinationAddress() {

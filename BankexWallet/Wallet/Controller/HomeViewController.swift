@@ -9,6 +9,7 @@
 import UIKit
 import Amplitude_iOS
 import MessageUI
+import SafariServices
 
 struct TokenShortService {
     static var arrayTokensShort:[TokenShort] = []
@@ -209,7 +210,7 @@ class HomeViewController: BaseViewController {
         Amplitude.instance()?.logEvent("Asset Management Learn More Opened")
         
         let url = URL(string: "https://bankex.com/en/sto/asset-management")!
-        AssetManagementBrowser().present(on: self, url: url)
+        present(SFSafariViewController(assetManagementUrl: url), animated: true, completion:  nil)
     }
     
     @IBAction func showAssetManagementContacts() {
