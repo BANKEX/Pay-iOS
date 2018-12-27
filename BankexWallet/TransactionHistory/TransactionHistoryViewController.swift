@@ -51,6 +51,8 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     var transactionsToShow = [[ETHTransactionModel]]()
     var currentState: TransactionStatus = .all
     
+    var transactionForDetails: ETHTransactionModel?
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -238,6 +240,12 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let transaction = transactionsToShow[indexPath.section][indexPath.row]
+        
+        showTransactionDetails(for: transaction)
+    }
+    
     //MARK: Popover Delegate
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
@@ -301,6 +309,26 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         print(tokensService.selectedERC20Token().symbol.uppercased())
         sendEthService = tokensService.selectedERC20Token().symbol.uppercased() == "ETH" ? SendEthServiceImplementation() :  ERC20TokenContractMethodsServiceImplementation()
     }
+    
+}
+
+extension TransactionHistoryViewController {
+    
+    private func showTransactionDetails(for transaction: ETHTransactionModel) {
+        transactionForDetails = transaction
+        
+        performSegue(withIdentifier: "TransactionDetails", sender: self)
+        
+        transactionForDetails = nil
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? TransactionDetailsViewController {
+            viewController.address = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
+            viewController.transaction = transactionForDetails
+        }
+    }
+    
 }
 
 

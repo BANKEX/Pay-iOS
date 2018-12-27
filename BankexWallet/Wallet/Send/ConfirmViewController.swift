@@ -124,7 +124,7 @@ class ConfirmViewController: UITableViewController {
     func sendFunds() {
         let sendEthService: SendEthService = isEthToken ? SendEthServiceImplementation() : ERC20TokenContractMethodsServiceImplementation()
         let token  = self.tokenService.selectedERC20Token()
-        let model = ETHTransactionModel(from: self.fromAddr, to: self.toLabel.text ?? "", amount: self.amount, date: Date(), token: token, key:self.keyService.selectedKey()!, isPending: true)
+        let model = ETHTransactionModel(hash: nil, from: self.fromAddr, to: self.toLabel.text ?? "", amount: self.amount, date: Date(), token: token, key:self.keyService.selectedKey()!, isPending: true)
         self.performSegue(withIdentifier: "waitSegue", sender: nil)
         var options = Web3Options.defaultOptions()
         options.gasLimit = BigUInt(self.gasLimit)
