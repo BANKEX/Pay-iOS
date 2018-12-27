@@ -206,10 +206,9 @@
 		9296A28B21B7F4E500BB3E27 /* BackButtonView.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9296A28A21B7F4E500BB3E27 /* BackButtonView.xcassets */; };
 		92A9FCFD21AECA6C00F8BB33 /* AssetManagementEthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */; };
 		92A9FCFF21AECAAD00F8BB33 /* AssetManagementEth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */; };
-		92B947E221B53AEA00E942D0 /* AssetManagementBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B947E121B53AEA00E942D0 /* AssetManagementBrowser.storyboard */; };
-		92B947E421B53B0D00E942D0 /* AssetManagementBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B947E321B53B0D00E942D0 /* AssetManagementBrowserViewController.swift */; };
 		92BCEDEA21D0D805002264FE /* TransactionDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEDE921D0D805002264FE /* TransactionDetailsService.swift */; };
 		92BCEDEC21D0E23D002264FE /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEDEB21D0E23D002264FE /* TransactionDetails.swift */; };
+		92DF231521D3D65C00AF00A0 /* SFSafariViewController+AssetManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF231421D3D65C00AF00A0 /* SFSafariViewController+AssetManagement.swift */; };
 		B81B598E56469045FD5A9424 /* Pods_BankexWalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A16C3A5FF4B56B886DA004 /* Pods_BankexWalletUITests.framework */; };
 		BC001E220296F73719F0697F /* Pods_Wallet_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33ADE69F5E6B37793B41AB /* Pods_Wallet_Widget.framework */; };
 		C7B75CCA6F60C9EB0D8D5C74 /* Pods_BankexWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D481374BDCC0F5EA10FEDC13 /* Pods_BankexWallet.framework */; };
@@ -502,10 +501,9 @@
 		9296A28A21B7F4E500BB3E27 /* BackButtonView.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BackButtonView.xcassets; sourceTree = "<group>"; };
 		92A9FCFC21AECA6C00F8BB33 /* AssetManagementEthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthViewController.swift; sourceTree = "<group>"; };
 		92A9FCFE21AECAAD00F8BB33 /* AssetManagementEth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEth.storyboard; sourceTree = "<group>"; };
-		92B947E121B53AEA00E942D0 /* AssetManagementBrowser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementBrowser.storyboard; sourceTree = "<group>"; };
-		92B947E321B53B0D00E942D0 /* AssetManagementBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementBrowserViewController.swift; sourceTree = "<group>"; };
 		92BCEDE921D0D805002264FE /* TransactionDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsService.swift; sourceTree = "<group>"; };
 		92BCEDEB21D0E23D002264FE /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
+		92DF231421D3D65C00AF00A0 /* SFSafariViewController+AssetManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SFSafariViewController+AssetManagement.swift"; sourceTree = "<group>"; };
 		BD1E76CD13960E44B2411D0D /* Pods-BankexWalletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletUITests/Pods-BankexWalletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD8DBF0DC86534920BCAE980 /* Pods-BankexWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWalletTests/Pods-BankexWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		CE3C7F6D77310F0641F1B97E /* Pods-Wallet Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wallet Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wallet Widget/Pods-Wallet Widget.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1203,7 +1201,7 @@
 		924A36E021B02038000954BD /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				92B947E021B53AC400E942D0 /* AssetManagementBrowser */,
+				92DF231321D3D65100AF00A0 /* AssetManagementBrowser */,
 				924A36E721B03A0F000954BD /* AssetManagementLinks */,
 			);
 			path = Reusable;
@@ -1255,11 +1253,10 @@
 			path = Eth;
 			sourceTree = "<group>";
 		};
-		92B947E021B53AC400E942D0 /* AssetManagementBrowser */ = {
+		92DF231321D3D65100AF00A0 /* AssetManagementBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				92B947E121B53AEA00E942D0 /* AssetManagementBrowser.storyboard */,
-				92B947E321B53B0D00E942D0 /* AssetManagementBrowserViewController.swift */,
+				92DF231421D3D65C00AF00A0 /* SFSafariViewController+AssetManagement.swift */,
 			);
 			path = AssetManagementBrowser;
 			sourceTree = "<group>";
@@ -1506,7 +1503,6 @@
 				81942F14201B36A300F0AE29 /* LaunchScreen.storyboard in Resources */,
 				E21926D2212C401E00EC9A83 /* GoogleService-Info.plist in Resources */,
 				714B5AD721CA349300CA729A /* TransactionDetails.storyboard in Resources */,
-				92B947E221B53AEA00E942D0 /* AssetManagementBrowser.storyboard in Resources */,
 				711923EB21B90BC300F90972 /* AssetManagementEth.strings in Resources */,
 				861D2CD1214AA0AF00A108C4 /* EmptyTableCell.xib in Resources */,
 				925D675321B179EC00ED6DBD /* AssetManagementEthSuccess.xcassets in Resources */,
@@ -1849,6 +1845,7 @@
 				86BE227C2161018800C1B18D /* HeaderView.swift in Sources */,
 				F00E462B207A356E00387B96 /* SendingInProcessViewController.swift in Sources */,
 				86C8D76E210536490025BAFB /* WalletsDataSource.swift in Sources */,
+				92DF231521D3D65C00AF00A0 /* SFSafariViewController+AssetManagement.swift in Sources */,
 				86E15F13215BCED100F85AD2 /* ContactTableCell.swift in Sources */,
 				864732EE214FF93400519AE1 /* QRButton.swift in Sources */,
 				81942F0F201B36A300F0AE29 /* BankexWallet.xcdatamodeld in Sources */,
@@ -1858,7 +1855,6 @@
 				864732CB214FC2CB00519AE1 /* Date+Extensions.swift in Sources */,
 				8667D75321569C2500C6B5E3 /* UITextField+Extensions.swift in Sources */,
 				86BE227E2161895C00C1B18D /* RenameViewController.swift in Sources */,
-				92B947E421B53B0D00E942D0 /* AssetManagementBrowserViewController.swift in Sources */,
 				86A6CAEE20FE33A1002C19AA /* WalletCreatedViewController.swift in Sources */,
 				8617F6802107D5900039751D /* TouchManager.swift in Sources */,
 				8649F1A021679BB700EAFDF9 /* Guide.swift in Sources */,
@@ -2027,7 +2023,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: BKX SEA PTE. LTD. (32Q6R987N8)";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2183,7 +2179,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ci Cd (MBF89KPS53)";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2244,7 +2240,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: BKX SEA PTE. LTD. (32Q6R987N8)";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

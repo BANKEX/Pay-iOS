@@ -217,6 +217,12 @@ Retriable,UITextFieldDelegate {
         symbolTFLabel.frame = CGRect(x: xOffset, y: -1, width: 60.0, height: amountTextfield.bounds.height)
         amountTextfield.addSubview(symbolTFLabel)
     }
+    
+    private func showScanner() {
+        let qrReader = QRReaderVC()
+        qrReader.delegate = self
+        self.present(qrReader, animated: true)
+    }
 
     
 
@@ -302,9 +308,20 @@ Retriable,UITextFieldDelegate {
     }
     
     @IBAction func scanQRTapped(_ sender: Any) {
-        let qrReaderVC = QRReaderVC()
-        qrReaderVC.delegate = self
-        self.present(qrReaderVC, animated: true)
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            showScanner()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { (granted) in
+                if granted {
+                    self.showScanner()
+                }
+            }
+        case .denied:
+            self.present(UIAlertController.accessCameraAlert(), animated: true, completion: nil)
+        case .restricted:
+            break
+        }
     }
     
     

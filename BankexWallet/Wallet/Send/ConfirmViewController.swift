@@ -64,6 +64,8 @@ class ConfirmViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 1))
         tableView.backgroundColor = UIColor(hex:"F9F9F9")
+        tableView.estimatedRowHeight = 360
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     func configure(_ dict:[String:Any]) {
@@ -162,16 +164,6 @@ class ConfirmViewController: UITableViewController {
             }
         } else {
             self.sendFunds()
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 3 {
-            return tableView.bounds.height - 3 * 62 - 169
-        }else if indexPath.row == 0 {
-            return 233
-        }else {
-            return 62
         }
     }
     
