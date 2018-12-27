@@ -88,7 +88,7 @@ class NetworksViewController: BaseViewController {
     
     @objc func createNetworkTapped(_ sender:UIButton) {
         if UIDevice.isIpad {
-            let addNetworkVC = CreateVC(byName: "CreateNetworkViewController") as! CreateNetworkViewController
+            let addNetworkVC = UIStoryboard(name: "NetworkAdd", bundle: nil).instantiateInitialViewController() as! CreateNetworkViewController
             presentPopOver(addNetworkVC)
         }else {
             performSegue(withIdentifier: "createNetworkSegue", sender: self)

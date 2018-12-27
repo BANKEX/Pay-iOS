@@ -2803,7 +2803,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="FF7-B1-CUc" id="B4W-OI-63g"/>
-                        <segue destination="dbZ-gf-mVt" kind="show" identifier="createNetworkSegue" id="gtP-5L-zJ2"/>
+                        <segue destination="DOk-aa-Ow5" kind="show" identifier="createNetworkSegue" id="gtP-5L-zJ2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0D-A7-Ozm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2841,137 +2841,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n9p-uI-cfZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="234" y="6326"/>
-        </scene>
-        <!--Create Network View Controller-->
-        <scene sceneID="DRW-GF-yiK">
-            <objects>
-                <tableViewController storyboardIdentifier="CreateNetworkViewController" hidesBottomBarWhenPushed="YES" id="dbZ-gf-mVt" customClass="CreateNetworkViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DFj-Ib-vdJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="separatorColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
-                        <sections>
-                            <tableViewSection id="Fp7-sq-K5U">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="S0e-iJ-Ab8">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S0e-iJ-Ab8" id="dpU-Xf-d56">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sa-ok-3yg">
-                                                    <rect key="frame" x="16" y="11.5" width="101" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Network URL" adjustsFontForContentSizeCategory="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Cpt-dz-83a">
-                                                    <rect key="frame" x="142" y="0.0" width="178" height="43.5"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Cpt-dz-83a" firstAttribute="top" secondItem="dpU-Xf-d56" secondAttribute="top" id="Ys4-Mu-Un8"/>
-                                                <constraint firstItem="6sa-ok-3yg" firstAttribute="centerY" secondItem="dpU-Xf-d56" secondAttribute="centerY" id="aCb-wk-gx7"/>
-                                                <constraint firstItem="Cpt-dz-83a" firstAttribute="width" secondItem="dpU-Xf-d56" secondAttribute="width" multiplier="1:1.8" id="cwn-mY-nPJ"/>
-                                                <constraint firstAttribute="trailing" secondItem="Cpt-dz-83a" secondAttribute="trailing" id="dgy-Jr-pVu"/>
-                                                <constraint firstItem="6sa-ok-3yg" firstAttribute="leading" secondItem="dpU-Xf-d56" secondAttribute="leading" constant="16" id="fCl-UJ-Z43"/>
-                                                <constraint firstAttribute="bottom" secondItem="Cpt-dz-83a" secondAttribute="bottom" id="g5e-UB-HVv"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="NWA-hZ-M4L">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="mXd-vO-1cP">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mXd-vO-1cP" id="4Fb-Lt-zKI">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptc-e9-qAk">
-                                                    <rect key="frame" x="16" y="11.5" width="114" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Network Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eaf-fD-dBF">
-                                                    <rect key="frame" x="142" y="0.0" width="178" height="43.5"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Eaf-fD-dBF" firstAttribute="width" secondItem="4Fb-Lt-zKI" secondAttribute="width" multiplier="1:1.8" id="30M-FR-Xua"/>
-                                                <constraint firstAttribute="bottom" secondItem="Eaf-fD-dBF" secondAttribute="bottom" id="Iem-NH-1EI"/>
-                                                <constraint firstItem="Eaf-fD-dBF" firstAttribute="top" secondItem="4Fb-Lt-zKI" secondAttribute="top" id="ZvE-N4-jKy"/>
-                                                <constraint firstItem="ptc-e9-qAk" firstAttribute="centerY" secondItem="4Fb-Lt-zKI" secondAttribute="centerY" id="s5u-v4-ijt"/>
-                                                <constraint firstItem="ptc-e9-qAk" firstAttribute="leading" secondItem="4Fb-Lt-zKI" secondAttribute="leading" constant="16" id="ukY-07-lvI"/>
-                                                <constraint firstAttribute="trailing" secondItem="Eaf-fD-dBF" secondAttribute="trailing" id="yh2-BE-XEG"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="jEQ-qb-DIr">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="8Ba-0k-3Fq">
-                                        <rect key="frame" x="0.0" y="88" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Ba-0k-3Fq" id="Bku-j2-NQ8">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NetworkID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehd-ec-Wbe">
-                                                    <rect key="frame" x="16" y="11.5" width="81" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NetworkID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9gq-8t-bWE">
-                                                    <rect key="frame" x="142" y="0.0" width="178" height="43.5"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="9gq-8t-bWE" secondAttribute="bottom" id="6L4-j1-QQS"/>
-                                                <constraint firstItem="9gq-8t-bWE" firstAttribute="top" secondItem="Bku-j2-NQ8" secondAttribute="top" id="8oe-ji-6X3"/>
-                                                <constraint firstItem="9gq-8t-bWE" firstAttribute="width" secondItem="Bku-j2-NQ8" secondAttribute="width" multiplier="1:1.8" id="Usr-ui-hqf"/>
-                                                <constraint firstItem="ehd-ec-Wbe" firstAttribute="leading" secondItem="Bku-j2-NQ8" secondAttribute="leading" constant="16" id="Xld-or-sS0"/>
-                                                <constraint firstItem="ehd-ec-Wbe" firstAttribute="centerY" secondItem="Bku-j2-NQ8" secondAttribute="centerY" id="r04-YH-W0v"/>
-                                                <constraint firstAttribute="trailing" secondItem="9gq-8t-bWE" secondAttribute="trailing" id="yvL-dA-O1L"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="dbZ-gf-mVt" id="gKa-rc-RsW"/>
-                            <outlet property="delegate" destination="dbZ-gf-mVt" id="xx2-Yr-2CH"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <outlet property="networkIDTextField" destination="9gq-8t-bWE" id="pEv-jz-L1M"/>
-                        <outlet property="networkNameTextField" destination="Eaf-fD-dBF" id="KqY-fE-rhX"/>
-                        <outlet property="networkURLTextField" destination="Cpt-dz-83a" id="jFN-0Z-FMZ"/>
-                        <outletCollection property="textFields" destination="Cpt-dz-83a" collectionClass="NSMutableArray" id="LVo-ho-ZeR"/>
-                        <outletCollection property="textFields" destination="Eaf-fD-dBF" collectionClass="NSMutableArray" id="Ue1-kq-flw"/>
-                        <outletCollection property="textFields" destination="9gq-8t-bWE" collectionClass="NSMutableArray" id="ssT-20-TIh"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bH0-wL-aff" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1231" y="5562"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="a5f-6j-zQ2">
@@ -6951,6 +6820,14 @@ minutes, please wait ...</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="994-nw-iox" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1369" y="6375"/>
+        </scene>
+        <!--NetworkAdd-->
+        <scene sceneID="g77-30-wqd">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="CreateNetworkViewController" storyboardName="NetworkAdd" id="DOk-aa-Ow5" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tiO-iF-q8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1231" y="5562"/>
         </scene>
     </scenes>
     <resources>
