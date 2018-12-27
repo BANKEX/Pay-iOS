@@ -9,6 +9,7 @@
 import UIKit
 import BigInt
 import web3swift
+import Amplitude_iOS
 
 class TransactionDetailsViewController: UIViewController {
     
@@ -73,6 +74,8 @@ class TransactionDetailsViewController: UIViewController {
             let url = URL(string: "https://etherscan.io/tx/\(hash)"),
             UIApplication.shared.canOpenURL(url) else { return }
         
+        Amplitude.instance()?.logEvent("Transaction Details Transaction on Etherscan Opened")
+        
         UIApplication.shared.open(url)
     }
     
@@ -80,6 +83,8 @@ class TransactionDetailsViewController: UIViewController {
         guard let blockNumber = transactionDetails?.blockNumber,
             let url = URL(string: "https://etherscan.io/block/\(blockNumber)"),
             UIApplication.shared.canOpenURL(url) else { return }
+        
+        Amplitude.instance()?.logEvent("Transaction Details Block Number on Etherscan Opened")
         
         UIApplication.shared.open(url)
     }
@@ -129,6 +134,8 @@ class TransactionDetailsViewController: UIViewController {
     @IBAction func shareTransactionHash(_ sender: UIButton) {
         guard let hash = transaction?.hash else { return }
         
+        Amplitude.instance()?.logEvent("Transaction Details Share Transaction Hash")
+        
         let activity = UIActivityViewController.activity(content: hash)
         activity.completionWithItemsHandler = { [weak self] (type, isSuccess, items, error) in
             if isSuccess && type == UIActivityType.copyToPasteboard {
@@ -148,11 +155,15 @@ class TransactionDetailsViewController: UIViewController {
     @IBAction func shareFromAddress() {
         guard let address = transaction?.from else { return }
         
+        Amplitude.instance()?.logEvent("Transaction Details From Address Copied")
+        
         copyToPasteboard(address: address)
     }
     
     @IBAction func shareToAddress() {
         guard let address = transaction?.to else { return }
+        
+        Amplitude.instance()?.logEvent("Transaction Details To Address Copied")
         
         copyToPasteboard(address: address)
     }
