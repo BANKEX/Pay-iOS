@@ -43,11 +43,6 @@ class WalletInfoViewController: BaseViewController {
         UIApplication.shared.statusBarView?.backgroundColor = .white
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
     func setupClipboard() {
         if UIDevice.isIpad {
             secondWidth = view.bounds.width - splitViewController!.primaryColumnWidth
@@ -154,7 +149,7 @@ extension WalletInfoViewController:UITableViewDelegate,UITableViewDataSource {
                 self.performSegue(withIdentifier: "ShowPrivateKey", sender: nil)
             case 1:
                 if UIDevice.isIpad {
-                    let renameVC = CreateVC(byName: "RenameViewController") as! RenameViewController
+                    let renameVC = UIStoryboard(name: "WalletRename", bundle: nil).instantiateInitialViewController() as! RenameViewController
                     renameVC.addCancelButtonIfNeed()
                     if let nameWallet = publicName {
                         renameVC.selectedWalletName = nameWallet

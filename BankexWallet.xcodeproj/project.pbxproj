@@ -42,6 +42,7 @@
 		71C72A3521B01BA200FB3E13 /* AssetManagementEthFailure.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A3421B01BA200FB3E13 /* AssetManagementEthFailure.storyboard */; };
 		71C72A3721B01BB100FB3E13 /* AssetManagementEthFailureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C72A3621B01BB100FB3E13 /* AssetManagementEthFailureViewController.swift */; };
 		71C72A3921B1001300FB3E13 /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C72A3821B1001300FB3E13 /* ReplaceSegue.swift */; };
+		71EB27A521D4CBF000B9EE30 /* WalletRename.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71EB27A421D4CBEF00B9EE30 /* WalletRename.storyboard */; };
 		8104B050201F368200AE94B5 /* Web3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B04F201F368200AE94B5 /* Web3.swift */; };
 		81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81942F06201B36A300F0AE29 /* AppDelegate.swift */; };
 		81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81942F0A201B36A300F0AE29 /* Main.storyboard */; };
@@ -317,6 +318,7 @@
 		71C72A3421B01BA200FB3E13 /* AssetManagementEthFailure.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthFailure.storyboard; sourceTree = "<group>"; };
 		71C72A3621B01BB100FB3E13 /* AssetManagementEthFailureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthFailureViewController.swift; sourceTree = "<group>"; };
 		71C72A3821B1001300FB3E13 /* ReplaceSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceSegue.swift; sourceTree = "<group>"; };
+		71EB27A421D4CBEF00B9EE30 /* WalletRename.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletRename.storyboard; sourceTree = "<group>"; };
 		73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		805299A5A8B2FE29BB36247D /* Pods-BankexWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		8104B04F201F368200AE94B5 /* Web3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3.swift; sourceTree = "<group>"; };
@@ -677,9 +679,35 @@
 			path = AssetManagement;
 			sourceTree = "<group>";
 		};
+		71EB27A121D4C8C100B9EE30 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				71EB27A221D4C8C100B9EE30 /* Modules */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		71EB27A221D4C8C100B9EE30 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				71EB27A321D4C8C100B9EE30 /* WalletRename */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		71EB27A321D4C8C100B9EE30 /* WalletRename */ = {
+			isa = PBXGroup;
+			children = (
+				71EB27A421D4CBEF00B9EE30 /* WalletRename.storyboard */,
+				86BE227D2161895C00C1B18D /* RenameViewController.swift */,
+			);
+			path = WalletRename;
+			sourceTree = "<group>";
+		};
 		81942EFA201B36A300F0AE29 = {
 			isa = PBXGroup;
 			children = (
+				71EB27A121D4C8C100B9EE30 /* App */,
 				81942F05201B36A300F0AE29 /* BankexWallet */,
 				81942F1D201B36A300F0AE29 /* BankexWalletTests */,
 				860144F62133661F002010AE /* BankexWalletUITests */,
@@ -1081,7 +1109,6 @@
 				0089E6992126C9E30037AF60 /* WalletInfoViewController.swift */,
 				001A23E9212AD49C001B268B /* AttentionViewController.swift */,
 				86C8D76D210536490025BAFB /* WalletsDataSource.swift */,
-				86BE227D2161895C00C1B18D /* RenameViewController.swift */,
 				86C8D76F210536550025BAFB /* WalletsDelegate.swift */,
 				86C8D771210536AD0025BAFB /* View */,
 			);
@@ -1482,6 +1509,7 @@
 				711923E521B51F6400F90972 /* AssetManagement.xcassets in Resources */,
 				9225FC3921AFD66000967431 /* AssetManagementBtc.storyboard in Resources */,
 				71C72A3021B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard in Resources */,
+				71EB27A521D4CBF000B9EE30 /* WalletRename.storyboard in Resources */,
 				71155E7421B4F3F700ED7B4E /* AssetManagementEthFailure.xcassets in Resources */,
 				86D7FB8721495AA0008245DE /* PlaceholderCell.xib in Resources */,
 			);
