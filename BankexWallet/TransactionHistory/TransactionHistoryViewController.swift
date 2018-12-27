@@ -8,6 +8,7 @@
 
 import UIKit
 import Popover
+import Amplitude_iOS
 
 class TransactionHistoryViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, ChooseTokenDelegate, UIPopoverPresentationControllerDelegate {
     
@@ -134,7 +135,9 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     //MARK: - Popover magic
     @IBAction func showTokensButtonTapped(_ sender: Any) {
-         UIDevice.isIpad ? showPopover() : showActionSheet()
+        Amplitude.instance()?.logEvent("Transaction History Token Picker Opened")
+        
+        UIDevice.isIpad ? showPopover() : showActionSheet()
     }
     
     private func showActionSheet() {
@@ -324,6 +327,8 @@ extension TransactionHistoryViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? TransactionDetailsViewController {
+            Amplitude.instance()?.logEvent("Transaction Details Opened")
+            
             viewController.address = HistoryMediator.addr ?? SingleKeyServiceImplementation().selectedAddress()!
             viewController.transaction = transactionForDetails
         }
