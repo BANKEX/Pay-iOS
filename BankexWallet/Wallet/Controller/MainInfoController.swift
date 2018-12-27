@@ -50,6 +50,8 @@ class MainInfoController: BaseViewController,
         return selectedToken.address.isEmpty
     }
     
+    var transactionForDetails: ETHTransactionModel?
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,6 +206,10 @@ class MainInfoController: BaseViewController,
             }
             
             controller.currentBalance = infoView.balanceLabel.text
+            
+        } else if let viewController = segue.destination as? TransactionDetailsViewController {
+            viewController.address = keyService.selectedAddress()
+            viewController.transaction = transactionForDetails
         }
     }
     
@@ -313,7 +319,11 @@ class MainInfoController: BaseViewController,
         return 53.0
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let transaction = transactions[indexPath.row]
+        
+        showTransactionDetails(for: transaction)
+    }
     
     // MARK: TabbarController Delegate
     // TODO:  Think about better place
@@ -323,6 +333,18 @@ class MainInfoController: BaseViewController,
         }
         // This is just to force balance update sometimes, but think about better way maybe
         //tableView.reloadData()
+    }
+    
+}
+
+extension MainInfoController {
+    
+    private func showTransactionDetails(for transaction: ETHTransactionModel) {
+        transactionForDetails = transaction
+        
+        performSegue(withIdentifier: "TransactionDetails", sender: self)
+        
+        transactionForDetails = nil
     }
     
 }

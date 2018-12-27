@@ -166,7 +166,8 @@ class ERC20TokenContractMethodsServiceImplementation: SendEthService {
         return filteredTransactions.map({ (transaction) -> ETHTransactionModel in
             let token = transaction.token == nil ? ERC20TokenModel(name: "Ether", address: "", decimals: "18", symbol: "Eth", isSelected: false, isSecurity:false) :
                 ERC20TokenModel(token: transaction.token!)
-            return ETHTransactionModel(from: transaction.from ?? "",
+            return ETHTransactionModel(hash: transaction.trHash,
+                                       from: transaction.from ?? "",
                                        to: transaction.to ?? "",
                                        amount: transaction.amount ?? "",
                                        date: transaction.date!,

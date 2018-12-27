@@ -52,7 +52,8 @@ class SendingConfirmationController: UIViewController, Retriable {
             ERC20TokenContractMethodsServiceImplementation()
         
         let token = tokensService.selectedERC20Token()
-        let transactionModel = ETHTransactionModel(from: keysService.selectedAddress() ?? "",
+        let transactionModel = ETHTransactionModel(hash: nil,
+                                                   from: keysService.selectedAddress() ?? "",
                                                    to: destinationAddress ?? "",
                                                    amount: (amount ?? "") + " " + token.symbol,
                                                    date: Date(),

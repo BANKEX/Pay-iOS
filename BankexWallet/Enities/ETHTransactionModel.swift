@@ -9,6 +9,7 @@
 import Foundation
 
 struct ETHTransactionModel {
+    let hash: String?
     let from: String
     let to: String
     let amount: String
