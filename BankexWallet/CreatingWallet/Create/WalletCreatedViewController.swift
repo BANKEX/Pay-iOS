@@ -34,7 +34,7 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     
     @IBAction func editButtonTapped() {
         if UIDevice.isIpad {
-            let editVC = CreateVC(byName: "EditWalletNameController") as! EditWalletNameController
+            let editVC = UIStoryboard(name: "WalletAddRename", bundle: nil).instantiateInitialViewController() as! EditWalletNameController
             editVC.addCancelButtonIfNeed()
             editVC.delegate = self
             presentPopUp(editVC, shower: tabBarController)
