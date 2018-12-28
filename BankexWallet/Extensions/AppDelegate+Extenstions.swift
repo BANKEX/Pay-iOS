@@ -48,7 +48,7 @@ extension AppDelegate {
     
     
     func showOnboarding() {
-        let onboarding = storyboard().instantiateViewController(withIdentifier: "OnboardingPage")
+        let onboarding = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
         window?.rootViewController = onboarding
         window?.makeKeyAndVisible()
     }
