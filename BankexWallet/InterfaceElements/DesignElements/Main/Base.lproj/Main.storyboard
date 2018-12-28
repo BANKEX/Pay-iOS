@@ -2365,7 +2365,7 @@
                         <outlet property="mainSign" destination="PHx-93-Sfk" id="ED5-FZ-751"/>
                         <outlet property="tableView" destination="lFM-Hx-M6q" id="mgK-4n-f2k"/>
                         <outlet property="topConstraint" destination="gtj-Lw-fK7" id="7nN-lm-XNa"/>
-                        <segue destination="xjs-f2-eUN" kind="show" identifier="createToken" id="TXr-nN-iSr"/>
+                        <segue destination="wTU-6t-YqB" kind="show" identifier="createToken" id="TXr-nN-iSr"/>
                         <segue destination="Nqf-Fy-uI6" kind="show" identifier="walletInfo" id="ew0-Ce-kR2"/>
                         <segue destination="IJd-EG-tJ7" kind="presentation" identifier="AssetManagementContacts" modalPresentationStyle="formSheet" id="bfh-cG-Os1"/>
                         <segue destination="fKk-t2-c3F" kind="presentation" identifier="AssetManagementEth" modalPresentationStyle="formSheet" id="PUE-1z-4GU"/>
@@ -5558,182 +5558,6 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="-2" y="904"/>
         </scene>
-        <!--Create Token Controller-->
-        <scene sceneID="fUE-iV-9fx">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="xjs-f2-eUN" customClass="CreateTokenController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MLJ-mO-ATL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search Token" translatesAutoresizingMaskIntoConstraints="NO" id="54I-a7-qHO">
-                                <rect key="frame" x="0.0" y="20" width="320" height="56"/>
-                                <color key="backgroundColor" red="0.97254901959999995" green="0.97647058819999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="6iX-Bj-IV3"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Search"/>
-                                </userDefinedRuntimeAttributes>
-                            </searchBar>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FRc-Ed-946">
-                                <rect key="frame" x="9" y="92" width="148" height="35"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l26-fd-vqJ" customClass="QRButton" customModule="BankexWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="66" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="66" id="4Fc-m9-gdo"/>
-                                            <constraint firstAttribute="height" constant="35" id="M7S-58-tOq"/>
-                                        </constraints>
-                                        <state key="normal" image="qr"/>
-                                        <connections>
-                                            <action selector="scanTapped" destination="xjs-f2-eUN" eventType="touchUpInside" id="Edy-mh-zz6"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eES-Ve-k39" customClass="PasteButton" customModule="BankexWallet" customModuleProvider="target">
-                                        <rect key="frame" x="82" y="0.0" width="66" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="n5B-vu-Dkf"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                        <state key="normal" title="Paste"/>
-                                        <connections>
-                                            <action selector="textFromBuffer:" destination="xjs-f2-eUN" eventType="touchUpInside" id="IAD-Ze-4s8"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="eES-Ve-k39" firstAttribute="width" secondItem="l26-fd-vqJ" secondAttribute="width" id="nuK-4W-7FF"/>
-                                </constraints>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter token address to search" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RD7-yR-13E">
-                                <rect key="frame" x="85" y="273.5" width="150" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="CwU-1I-0Jd"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jdL-P1-RdF">
-                                <rect key="frame" x="0.0" y="177" width="320" height="391"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CreateTokenCell" rowHeight="53" id="Y3X-e5-Bbn" customClass="CreateTokenCell" customModule="BankexWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="53"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y3X-e5-Bbn" id="AR7-Wq-Iru">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="52.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Favorites" translatesAutoresizingMaskIntoConstraints="NO" id="vDW-9X-rqe">
-                                                    <rect key="frame" x="10" y="4" width="48" height="48"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="48" id="4HG-VH-WLg"/>
-                                                        <constraint firstAttribute="height" constant="48" id="H3y-x4-DpN"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAL-ki-LFZ">
-                                                    <rect key="frame" x="74" y="4" width="204" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNy-7f-0xq">
-                                                    <rect key="frame" x="74" y="28" width="230" height="14"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CopiedIcon" translatesAutoresizingMaskIntoConstraints="NO" id="LZC-I8-x45">
-                                                    <rect key="frame" x="290" y="5.5" width="14" height="14"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="14" id="1XX-gs-af2"/>
-                                                        <constraint firstAttribute="height" constant="14" id="mjn-9Y-uPb"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="LZC-I8-x45" firstAttribute="centerY" secondItem="HAL-ki-LFZ" secondAttribute="centerY" id="0KA-7E-uox"/>
-                                                <constraint firstItem="vDW-9X-rqe" firstAttribute="leading" secondItem="AR7-Wq-Iru" secondAttribute="leading" constant="10" id="33h-wu-UYz"/>
-                                                <constraint firstItem="LZC-I8-x45" firstAttribute="leading" secondItem="HAL-ki-LFZ" secondAttribute="trailing" constant="12" id="3kB-YY-kq1"/>
-                                                <constraint firstItem="VNy-7f-0xq" firstAttribute="top" secondItem="HAL-ki-LFZ" secondAttribute="bottom" constant="7" id="5hu-85-O7S"/>
-                                                <constraint firstItem="vDW-9X-rqe" firstAttribute="top" secondItem="AR7-Wq-Iru" secondAttribute="top" constant="4" id="9Z1-Wd-YxU"/>
-                                                <constraint firstAttribute="trailing" secondItem="HAL-ki-LFZ" secondAttribute="trailing" constant="42" id="KO5-KK-8pL"/>
-                                                <constraint firstItem="HAL-ki-LFZ" firstAttribute="leading" secondItem="vDW-9X-rqe" secondAttribute="trailing" constant="16" id="WM9-2i-Odh"/>
-                                                <constraint firstItem="VNy-7f-0xq" firstAttribute="trailing" secondItem="LZC-I8-x45" secondAttribute="trailing" id="cdH-9M-Bve"/>
-                                                <constraint firstItem="VNy-7f-0xq" firstAttribute="leading" secondItem="HAL-ki-LFZ" secondAttribute="leading" id="eQj-Fi-kZQ"/>
-                                                <constraint firstAttribute="bottom" secondItem="VNy-7f-0xq" secondAttribute="bottom" constant="10.666666666666664" id="iQg-Wv-8LE"/>
-                                                <constraint firstItem="HAL-ki-LFZ" firstAttribute="top" secondItem="vDW-9X-rqe" secondAttribute="top" id="l7N-8l-KS9"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="74" minY="0.0" maxX="16" maxY="0.0"/>
-                                        <connections>
-                                            <outlet property="tokenAddedImageView" destination="LZC-I8-x45" id="eJ2-xs-ER5"/>
-                                            <outlet property="tokenAddressLabel" destination="VNy-7f-0xq" id="v33-el-VPQ"/>
-                                            <outlet property="tokenIconImageView" destination="vDW-9X-rqe" id="8ql-AJ-820"/>
-                                            <outlet property="tokenNameLabel" destination="HAL-ki-LFZ" id="9Rs-bY-vLw"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="tokenTable"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="tokenLbl"/>
-                                </userDefinedRuntimeAttributes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="jdL-P1-RdF" firstAttribute="trailing" secondItem="Z7H-F4-9jP" secondAttribute="trailing" id="8Wa-On-YB2"/>
-                            <constraint firstItem="FRc-Ed-946" firstAttribute="centerX" secondItem="MLJ-mO-ATL" secondAttribute="centerX" id="EZT-Ao-1KS"/>
-                            <constraint firstItem="54I-a7-qHO" firstAttribute="top" secondItem="Z7H-F4-9jP" secondAttribute="top" id="Ea4-M9-64j">
-                                <variation key="heightClass=regular-widthClass=regular" constant="16"/>
-                            </constraint>
-                            <constraint firstItem="FRc-Ed-946" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" constant="9" id="LKt-6Z-4lK"/>
-                            <constraint firstItem="RD7-yR-13E" firstAttribute="centerX" secondItem="Z7H-F4-9jP" secondAttribute="centerX" id="MYI-rV-C5e"/>
-                            <constraint firstItem="54I-a7-qHO" firstAttribute="trailing" secondItem="Z7H-F4-9jP" secondAttribute="trailing" id="ORI-z8-V4p">
-                                <variation key="heightClass=regular-widthClass=regular" constant="-65"/>
-                            </constraint>
-                            <constraint firstItem="jdL-P1-RdF" firstAttribute="top" secondItem="FRc-Ed-946" secondAttribute="bottom" constant="50" id="ZX3-oc-gAM"/>
-                            <constraint firstItem="jdL-P1-RdF" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" id="aze-FT-bo1"/>
-                            <constraint firstItem="54I-a7-qHO" firstAttribute="leading" secondItem="Z7H-F4-9jP" secondAttribute="leading" id="ehT-aO-QEW">
-                                <variation key="heightClass=regular-widthClass=regular" constant="65"/>
-                            </constraint>
-                            <constraint firstItem="jdL-P1-RdF" firstAttribute="bottom" secondItem="Z7H-F4-9jP" secondAttribute="bottom" id="fIZ-ft-vNk"/>
-                            <constraint firstItem="RD7-yR-13E" firstAttribute="centerY" secondItem="Z7H-F4-9jP" secondAttribute="centerY" id="nPI-rc-NZU"/>
-                            <constraint firstItem="FRc-Ed-946" firstAttribute="top" secondItem="54I-a7-qHO" secondAttribute="bottom" constant="16" id="tT6-jl-9ce"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Z7H-F4-9jP"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="EZT-Ao-1KS"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <mask key="constraints">
-                                <include reference="EZT-Ao-1KS"/>
-                                <exclude reference="LKt-6Z-4lK"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="messageLabel" destination="RD7-yR-13E" id="Jej-fO-xu5"/>
-                        <outlet property="pasteButton" destination="eES-Ve-k39" id="NWg-2W-wRz"/>
-                        <outlet property="qrButton" destination="l26-fd-vqJ" id="4cp-kv-11i"/>
-                        <outlet property="searchBar" destination="54I-a7-qHO" id="XDj-uy-4Cn"/>
-                        <outlet property="tableView" destination="jdL-P1-RdF" id="ERu-PB-3nl"/>
-                        <segue destination="bft-Yv-Iqm" kind="show" identifier="addChosenToken" id="4bl-zo-1Ji"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rIo-Jl-Mwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2383.1999999999998" y="5475.1124437781118"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="DEp-oT-BDe">
             <objects>
@@ -5928,14 +5752,6 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="-2732" y="7470"/>
         </scene>
-        <!--TokenAddConfirmation-->
-        <scene sceneID="cme-KK-aJZ">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="TokenInfoController" storyboardName="TokenAddConfirmation" id="bft-Yv-Iqm" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PHl-I0-yUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3184" y="6738"/>
-        </scene>
         <!--ContactAdd-->
         <scene sceneID="YM6-o2-xV6">
             <objects>
@@ -5968,6 +5784,14 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="-1604" y="7407"/>
         </scene>
+        <!--TokenAddSearch-->
+        <scene sceneID="ncC-ca-Ujx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TokenAddSearch" id="wTU-6t-YqB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wdA-Y8-qHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2383.1999999999998" y="5475.1124437781118"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Arrow Right Grey" width="8" height="13"/>
@@ -5977,10 +5801,8 @@ minutes, please wait ...</string>
         <image name="Carrier" width="29" height="29"/>
         <image name="Contact" width="29" height="29"/>
         <image name="ContactsSmallIcon" width="20" height="16"/>
-        <image name="CopiedIcon" width="25" height="24"/>
         <image name="Delete-1" width="23" height="18"/>
         <image name="Facebook" width="29" height="29"/>
-        <image name="Favorites" width="240" height="160"/>
         <image name="Rate US" width="29" height="29"/>
         <image name="Sending" width="240.33332824707031" height="160"/>
         <image name="Sent" width="24" height="24"/>
