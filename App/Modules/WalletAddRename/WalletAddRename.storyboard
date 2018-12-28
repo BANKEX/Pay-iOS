@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RPO-E3-gdZ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Edit Wallet Name Controller-->
+        <scene sceneID="JVB-HH-aOk">
+            <objects>
+                <viewController id="RPO-E3-gdZ" customClass="EditWalletNameController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nLn-Dg-aVu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGh-3S-RXd">
+                                <rect key="frame" x="19" y="68" width="54" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ETH Wallet Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WF7-dg-mJo">
+                                <rect key="frame" x="19" y="107" width="356" height="33"/>
+                                <accessibility key="accessibilityConfiguration" label="walletNameTf"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="NGA-Mn-4la"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anW-1m-RV9">
+                                <rect key="frame" x="19" y="140" width="356" height="1"/>
+                                <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="1vl-zA-23O"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="WF7-dg-mJo" firstAttribute="top" secondItem="jGh-3S-RXd" secondAttribute="bottom" constant="15" id="DKI-2P-mdu"/>
+                            <constraint firstItem="VwM-aE-yuZ" firstAttribute="trailing" secondItem="anW-1m-RV9" secondAttribute="trailing" id="DMy-0v-dcp"/>
+                            <constraint firstItem="WF7-dg-mJo" firstAttribute="leading" secondItem="jGh-3S-RXd" secondAttribute="leading" id="RmC-Jq-YVh"/>
+                            <constraint firstItem="anW-1m-RV9" firstAttribute="top" secondItem="WF7-dg-mJo" secondAttribute="bottom" id="UGZ-m5-hyf"/>
+                            <constraint firstItem="jGh-3S-RXd" firstAttribute="top" secondItem="VwM-aE-yuZ" secondAttribute="top" constant="48" id="dtP-17-PO2"/>
+                            <constraint firstItem="anW-1m-RV9" firstAttribute="leading" secondItem="WF7-dg-mJo" secondAttribute="leading" id="l8k-ox-y8u"/>
+                            <constraint firstItem="VwM-aE-yuZ" firstAttribute="trailing" secondItem="WF7-dg-mJo" secondAttribute="trailing" id="oO3-LM-WOY"/>
+                            <constraint firstItem="jGh-3S-RXd" firstAttribute="leading" secondItem="VwM-aE-yuZ" secondAttribute="leading" constant="19" id="t3a-ab-XKP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VwM-aE-yuZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="walletNameTextField" destination="WF7-dg-mJo" id="SIo-mV-XLI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tOj-gn-veC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4748" y="3360"/>
+        </scene>
+    </scenes>
+</document>

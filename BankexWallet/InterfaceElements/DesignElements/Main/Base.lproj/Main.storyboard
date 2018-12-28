@@ -4622,66 +4622,13 @@ accessibilityIdentifier</string>
                         <outlet property="nextButton" destination="qAC-II-JHc" id="ZCC-Mj-7pp"/>
                         <outlet property="walletAddressLabel" destination="f0X-Ac-2ve" id="Jy7-SB-ggv"/>
                         <outlet property="walletNameLabel" destination="Gcm-SJ-pEb" id="4Mu-rt-8Ss"/>
-                        <segue destination="RPO-E3-gdZ" kind="show" identifier="showEdit" id="oVN-c5-CvU"/>
+                        <segue destination="w5r-mj-a4O" kind="show" identifier="showEdit" id="oVN-c5-CvU"/>
                         <segue destination="iLc-LU-ReD" kind="show" identifier="showProcessFromCreation" id="OdR-NC-3s9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y3i-mb-NGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3783.1999999999998" y="2854.7226386806601"/>
-        </scene>
-        <!--Edit Wallet Name Controller-->
-        <scene sceneID="JVB-HH-aOk">
-            <objects>
-                <viewController storyboardIdentifier="EditWalletNameController" id="RPO-E3-gdZ" customClass="EditWalletNameController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nLn-Dg-aVu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGh-3S-RXd">
-                                <rect key="frame" x="19" y="112" width="54" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ETH Wallet Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WF7-dg-mJo">
-                                <rect key="frame" x="19" y="151" width="301" height="33"/>
-                                <accessibility key="accessibilityConfiguration" label="walletNameTf"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="NGA-Mn-4la"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anW-1m-RV9">
-                                <rect key="frame" x="19" y="184" width="301" height="1"/>
-                                <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="1vl-zA-23O"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="WF7-dg-mJo" firstAttribute="top" secondItem="jGh-3S-RXd" secondAttribute="bottom" constant="15" id="DKI-2P-mdu"/>
-                            <constraint firstItem="VwM-aE-yuZ" firstAttribute="trailing" secondItem="anW-1m-RV9" secondAttribute="trailing" id="DMy-0v-dcp"/>
-                            <constraint firstItem="WF7-dg-mJo" firstAttribute="leading" secondItem="jGh-3S-RXd" secondAttribute="leading" id="RmC-Jq-YVh"/>
-                            <constraint firstItem="anW-1m-RV9" firstAttribute="top" secondItem="WF7-dg-mJo" secondAttribute="bottom" id="UGZ-m5-hyf"/>
-                            <constraint firstItem="jGh-3S-RXd" firstAttribute="top" secondItem="VwM-aE-yuZ" secondAttribute="top" constant="48" id="dtP-17-PO2"/>
-                            <constraint firstItem="anW-1m-RV9" firstAttribute="leading" secondItem="WF7-dg-mJo" secondAttribute="leading" id="l8k-ox-y8u"/>
-                            <constraint firstItem="VwM-aE-yuZ" firstAttribute="trailing" secondItem="WF7-dg-mJo" secondAttribute="trailing" id="oO3-LM-WOY"/>
-                            <constraint firstItem="jGh-3S-RXd" firstAttribute="leading" secondItem="VwM-aE-yuZ" secondAttribute="leading" constant="19" id="t3a-ab-XKP"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="VwM-aE-yuZ"/>
-                    </view>
-                    <connections>
-                        <outlet property="walletNameTextField" destination="WF7-dg-mJo" id="SIo-mV-XLI"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tOj-gn-veC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4580" y="2865.5172413793107"/>
         </scene>
         <!--Sending Success View Controller-->
         <scene sceneID="wZG-eG-xWt">
@@ -6285,6 +6232,14 @@ minutes, please wait ...</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59K-ME-Iti" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2167.1999999999998" y="3001.3493253373317"/>
+        </scene>
+        <!--WalletAddRename-->
+        <scene sceneID="bNW-dm-fL0">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="EditWalletNameController" storyboardName="WalletAddRename" id="w5r-mj-a4O" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qW3-5e-z6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4748" y="3360"/>
         </scene>
     </scenes>
     <resources>
