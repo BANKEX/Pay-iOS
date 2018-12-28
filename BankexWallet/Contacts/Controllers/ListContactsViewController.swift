@@ -235,7 +235,7 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     
     @objc func transitionToAddContact() {
         if UIDevice.isIpad {
-            let createContactVC = CreateVC(byName: "AddContactViewController") as! AddContactViewController
+            let createContactVC = UIStoryboard(name: "ContactAdd", bundle: nil).instantiateInitialViewController() as! AddContactViewController
             createContactVC.delegate = self
             createContactVC.addCancelButtonIfNeed()
             createContactVC.addSaveButtonIfNeed()
