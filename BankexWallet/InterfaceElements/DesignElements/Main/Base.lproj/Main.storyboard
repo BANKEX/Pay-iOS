@@ -1378,7 +1378,7 @@
                     <connections>
                         <outlet property="nameNetworkLabel" destination="tlb-dS-iiN" id="Wkc-TX-Xn3"/>
                         <outlet property="nameWalletLabel" destination="Iat-gY-4ly" id="31X-b0-be9"/>
-                        <segue destination="0Uf-R9-bZe" kind="show" identifier="networkSegue" id="AnP-VM-Uv4"/>
+                        <segue destination="c27-W6-qMj" kind="show" identifier="networkSegue" id="AnP-VM-Uv4"/>
                         <segue destination="2hH-TX-0h2" kind="show" identifier="walletSegue" id="cjv-fL-ghI"/>
                         <segue destination="Xx9-g5-dfS" kind="show" identifier="securitySegue" id="w2E-r0-NRd"/>
                         <segue destination="a4u-Jz-fwR" kind="show" identifier="dev" id="bSW-e7-K9g"/>
@@ -1613,7 +1613,7 @@
                         <outlet property="heightConstraint" destination="cJ4-Vk-k1J" id="hwU-8C-yH0"/>
                         <outlet property="titleLabel" destination="Pwb-7R-2sM" id="rHB-3U-zPZ"/>
                         <segue destination="vp6-20-0hl" kind="show" identifier="showPrivateKey" customClass="ReplaceSegue" customModule="BankexWallet" customModuleProvider="target" id="VK0-qH-nIq"/>
-                        <segue destination="0Uf-R9-bZe" kind="show" identifier="showCustomNetworks" customClass="ReplaceSegue" customModule="BankexWallet" customModuleProvider="target" id="Jbu-eR-5tu"/>
+                        <segue destination="c27-W6-qMj" kind="show" identifier="showCustomNetworks" customClass="ReplaceSegue" customModule="BankexWallet" customModuleProvider="target" id="Jbu-eR-5tu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMt-ra-vmu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2220,61 +2220,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZo-O0-2Ry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4035" y="7352"/>
-        </scene>
-        <!--Networks View Controller-->
-        <scene sceneID="qlF-13-w0o">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="0Uf-R9-bZe" customClass="NetworksViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pmG-d1-sZ9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FF7-B1-CUc">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="separatorColor" red="0.89019607840000003" green="0.90196078430000004" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="cNL-Hx-6D9" style="IBUITableViewCellStyleDefault" id="ofK-ZN-bqi">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ofK-ZN-bqi" id="gZo-NS-75d">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cNL-Hx-6D9">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="FF7-B1-CUc" firstAttribute="leading" secondItem="1YV-BH-FyT" secondAttribute="leading" id="2Y2-Ct-aYH">
-                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                            </constraint>
-                            <constraint firstItem="1YV-BH-FyT" firstAttribute="trailing" secondItem="FF7-B1-CUc" secondAttribute="trailing" id="7vp-Tk-i8g">
-                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                            </constraint>
-                            <constraint firstItem="1YV-BH-FyT" firstAttribute="bottom" secondItem="FF7-B1-CUc" secondAttribute="bottom" id="aSm-cj-Hzz"/>
-                            <constraint firstItem="FF7-B1-CUc" firstAttribute="top" secondItem="1YV-BH-FyT" secondAttribute="top" id="zBJ-ZR-hgZ"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="1YV-BH-FyT"/>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="FF7-B1-CUc" id="B4W-OI-63g"/>
-                        <segue destination="DOk-aa-Ow5" kind="show" identifier="createNetworkSegue" id="gtP-5L-zJ2"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q0D-A7-Ozm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-30" y="5563"/>
         </scene>
         <!--Wallet Info View Controller-->
         <scene sceneID="0Sv-gN-sOR">
@@ -5569,14 +5514,6 @@ minutes, please wait ...</string>
             </objects>
             <point key="canvasLocation" x="1369" y="6375"/>
         </scene>
-        <!--NetworkAdd-->
-        <scene sceneID="g77-30-wqd">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="CreateNetworkViewController" storyboardName="NetworkAdd" id="DOk-aa-Ow5" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tiO-iF-q8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1231" y="5562"/>
-        </scene>
         <!--CompanyProducts-->
         <scene sceneID="BVp-ye-Ikm">
             <objects>
@@ -5634,6 +5571,14 @@ minutes, please wait ...</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMY-9g-l6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4857" y="6122"/>
+        </scene>
+        <!--SettingsNetworks-->
+        <scene sceneID="fqz-PX-OrW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsNetworks" id="c27-W6-qMj" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hCe-Pq-447" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-30" y="5563"/>
         </scene>
     </scenes>
     <resources>
