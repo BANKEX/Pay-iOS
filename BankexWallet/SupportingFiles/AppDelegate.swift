@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabvc = window?.rootViewController as! BaseTabBarController
             tabvc.selectedIndex = 0
             if let nav = tabvc.viewControllers?[0] as? BaseNavigationController {
-                if let addressQRVC = storyboard().instantiateViewController(withIdentifier: "AddressQRCodeController") as? AddressQRCodeController {
+                if let addressQRVC = UIStoryboard(name: "QRCodeGeneration", bundle: nil).instantiateInitialViewController() as? AddressQRCodeController {
                     addressQRVC.addressToGenerateQR = SingleKeyServiceImplementation().selectedAddress()
                     nav.pushViewController(addressQRVC, animated: false)
                 }

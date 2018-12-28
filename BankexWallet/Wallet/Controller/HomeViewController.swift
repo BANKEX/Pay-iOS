@@ -156,7 +156,7 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if Guide.value != nil {
-            let addrVC = storyboard?.instantiateViewController(withIdentifier: "AddressQRCodeController") as! AddressQRCodeController
+            let addrVC = UIStoryboard(name: "QRCodeGeneration", bundle: nil).instantiateInitialViewController() as! AddressQRCodeController
             addrVC.addressToGenerateQR = SingleKeyServiceImplementation().selectedAddress()!
             navigationController?.pushViewController(addrVC, animated: false)
         }

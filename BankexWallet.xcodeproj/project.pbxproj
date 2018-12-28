@@ -59,6 +59,7 @@
 		71EB27C721D640B200B9EE30 /* TokenAddSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71EB27C621D640B100B9EE30 /* TokenAddSearch.storyboard */; };
 		71EB27CA21D646B700B9EE30 /* TransactionHistory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71EB27C921D646B700B9EE30 /* TransactionHistory.storyboard */; };
 		71EB27CD21D6498A00B9EE30 /* SettingsNetworks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71EB27CC21D6498A00B9EE30 /* SettingsNetworks.storyboard */; };
+		71EB27D021D64EAD00B9EE30 /* QRCodeGeneration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71EB27CF21D64EAD00B9EE30 /* QRCodeGeneration.storyboard */; };
 		8104B050201F368200AE94B5 /* Web3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8104B04F201F368200AE94B5 /* Web3.swift */; };
 		81942F07201B36A300F0AE29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81942F06201B36A300F0AE29 /* AppDelegate.swift */; };
 		81942F0C201B36A300F0AE29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81942F0A201B36A300F0AE29 /* Main.storyboard */; };
@@ -356,6 +357,7 @@
 		71EB27C621D640B100B9EE30 /* TokenAddSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TokenAddSearch.storyboard; sourceTree = "<group>"; };
 		71EB27C921D646B700B9EE30 /* TransactionHistory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionHistory.storyboard; sourceTree = "<group>"; };
 		71EB27CC21D6498A00B9EE30 /* SettingsNetworks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsNetworks.storyboard; sourceTree = "<group>"; };
+		71EB27CF21D64EAD00B9EE30 /* QRCodeGeneration.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QRCodeGeneration.storyboard; sourceTree = "<group>"; };
 		73922D647535ECC36CCDF7C4 /* Pods_BankexWalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankexWalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		805299A5A8B2FE29BB36247D /* Pods-BankexWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankexWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BankexWallet/Pods-BankexWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		8104B04F201F368200AE94B5 /* Web3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 				71EB27A621D4FF0C00B9EE30 /* NetworkAdd */,
 				71EB27BC21D6132E00B9EE30 /* Onboarding */,
 				71EB27B821D6026200B9EE30 /* OnboardingStep */,
+				71EB27CE21D64A5F00B9EE30 /* QRCodeGeneration */,
 				71EB27CB21D648A700B9EE30 /* SettingsNetworks */,
 				71EB27C221D630B600B9EE30 /* SettingsSecurity */,
 				71EB27AF21D527D800B9EE30 /* TokenAddConfirmation */,
@@ -876,6 +879,15 @@
 				863156A72103DC5300914F31 /* NetworksDataSource.swift */,
 			);
 			path = SettingsNetworks;
+			sourceTree = "<group>";
+		};
+		71EB27CE21D64A5F00B9EE30 /* QRCodeGeneration */ = {
+			isa = PBXGroup;
+			children = (
+				71EB27CF21D64EAD00B9EE30 /* QRCodeGeneration.storyboard */,
+				F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */,
+			);
+			path = QRCodeGeneration;
 			sourceTree = "<group>";
 		};
 		81942EFA201B36A300F0AE29 = {
@@ -1027,7 +1039,6 @@
 			children = (
 				86A6F8C32147FB8000609413 /* HomeViewController.swift */,
 				F00E46192075212900387B96 /* MainInfoController.swift */,
-				F058764C2057BAE5007CF0E1 /* AddressQRCodeController.swift */,
 				8649F1A6216813C600EAFDF9 /* QRReaderVC */,
 			);
 			path = Controller;
@@ -1629,6 +1640,7 @@
 				86219C082180AB1300185EF6 /* SectionTableCell.xib in Resources */,
 				863A6A602184EBAA00E4A8D3 /* GeneralInformationCell.xib in Resources */,
 				9220BE7D21CC228F0079F85C /* StatusLabel.strings in Resources */,
+				71EB27D021D64EAD00B9EE30 /* QRCodeGeneration.storyboard in Resources */,
 				86D7FB7F2149338B008245DE /* WalletTableViewCell.xib in Resources */,
 				867681C321831F4100C269ED /* DeleteCell.xib in Resources */,
 				71EB27BA21D6108300B9EE30 /* OnboardingStep.storyboard in Resources */,
