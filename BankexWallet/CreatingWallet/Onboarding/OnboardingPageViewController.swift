@@ -73,7 +73,7 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
     }
     
     private func getViewController(withImage image: String, andCircleSelected circleSecelted: Int) -> UIViewController {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Onboarding") as! OnboardingViewController
+        let viewController = UIStoryboard(name: "OnboardingStep", bundle: nil).instantiateInitialViewController() as! OnboardingViewController
         viewController.delegate = self
         viewController.configure(with: image, andCircleSelected: circleSecelted)
         return viewController
