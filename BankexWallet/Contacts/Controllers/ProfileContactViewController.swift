@@ -134,7 +134,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     
     @IBAction func editContact() {
         if UIDevice.isIpad {
-            let editContact = CreateVC(byName: "EditViewController") as! EditViewController
+            let editContact = UIStoryboard(name: "ContactEdit", bundle: nil).instantiateInitialViewController() as! EditViewController
             editContact.addCancelButtonIfNeed()
             editContact.delegate = self
             editContact.selectedContact = selectedContact
