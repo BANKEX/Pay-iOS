@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lkK-o0-Lf8">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Token Info Controller-->
+        <scene sceneID="ExW-rJ-byV">
+            <objects>
+                <viewController id="lkK-o0-Lf8" customClass="TokenInfoController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="o85-n3-xDl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QP9-93-tO4">
+                                <rect key="frame" x="27" y="111.5" width="348" height="447.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="lkK-o0-Lf8" id="gWG-ep-Fju"/>
+                                    <outlet property="delegate" destination="lkK-o0-Lf8" id="mKI-KJ-3oA"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBX-vW-DSp">
+                                <rect key="frame" x="75" y="567" width="225" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="addToken"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hg8-wh-UAX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Add Token">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addTokenAction:" destination="lkK-o0-Lf8" eventType="touchUpInside" id="Pny-Nw-c2R"/>
+                                    <segue destination="UIg-NB-Qwd" kind="unwind" unwindAction="unwindFromAddVC:" id="IWX-sn-dqx"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYC-jJ-Z5t">
+                                <rect key="frame" x="27" y="57" width="186" height="26.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="JBX-vW-DSp" firstAttribute="top" secondItem="QP9-93-tO4" secondAttribute="bottom" constant="8" symbolic="YES" id="FI4-cS-4b2"/>
+                            <constraint firstItem="Ab3-Ya-2Xt" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pYC-jJ-Z5t" secondAttribute="trailing" symbolic="YES" id="M9t-PE-GUb"/>
+                            <constraint firstItem="pYC-jJ-Z5t" firstAttribute="top" secondItem="Ab3-Ya-2Xt" secondAttribute="top" constant="37" id="MMb-n4-Bha"/>
+                            <constraint firstItem="JBX-vW-DSp" firstAttribute="leading" secondItem="Ab3-Ya-2Xt" secondAttribute="leading" constant="75" id="OrJ-DK-16v">
+                                <variation key="heightClass=regular-widthClass=regular" constant="110"/>
+                            </constraint>
+                            <constraint firstItem="Ab3-Ya-2Xt" firstAttribute="trailing" secondItem="QP9-93-tO4" secondAttribute="trailing" id="SSY-jo-gsx"/>
+                            <constraint firstItem="Ab3-Ya-2Xt" firstAttribute="trailing" secondItem="JBX-vW-DSp" secondAttribute="trailing" constant="75" id="SdP-D4-D9t">
+                                <variation key="heightClass=regular-widthClass=regular" constant="110"/>
+                            </constraint>
+                            <constraint firstItem="QP9-93-tO4" firstAttribute="top" secondItem="pYC-jJ-Z5t" secondAttribute="bottom" constant="28" id="aB9-ri-qav"/>
+                            <constraint firstItem="Ab3-Ya-2Xt" firstAttribute="bottom" secondItem="JBX-vW-DSp" secondAttribute="bottom" constant="50" id="gSq-LV-5SH"/>
+                            <constraint firstItem="QP9-93-tO4" firstAttribute="leading" secondItem="pYC-jJ-Z5t" secondAttribute="leading" id="uQu-qZ-xh4"/>
+                            <constraint firstItem="pYC-jJ-Z5t" firstAttribute="leading" secondItem="Ab3-Ya-2Xt" secondAttribute="leading" constant="27" id="xRT-G2-2fj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ab3-Ya-2Xt"/>
+                    </view>
+                    <connections>
+                        <outlet property="addingButton" destination="JBX-vW-DSp" id="f5P-NN-EHp"/>
+                        <outlet property="tableView" destination="QP9-93-tO4" id="Jbi-S9-4Yt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gta-EK-9oj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="UIg-NB-Qwd" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-3184" y="6738"/>
+        </scene>
+    </scenes>
+</document>
