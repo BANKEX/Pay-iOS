@@ -415,11 +415,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isFromContact {
-            let sendToken = storyboard?.instantiateViewController(withIdentifier: "SendTokenViewController") as! SendTokenViewController
-            navigationController?.pushViewController(sendToken, animated: true)
-            return
-        }
         
         let row = viewModel.sections[indexPath.section].rows[indexPath.row]
         
@@ -427,13 +422,30 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         case .empty: return
         case .placeholder: return
         case .wallet:
-            tokenSerive.updateSelectedToken(to: etherToken!.address, completion: nil)
-            performSegue(withIdentifier: "walletInfo", sender: nil)
-            
+            tokenSerive.updateSelectedToken(to: etherToken!.address) { [weak self] in
+                guard let controller = self else { return }
+
+                if controller.isFromContact {
+                    let sendToken = CreateVC(byName: "SendTokenViewController") as! SendTokenViewController
+                    controller.navigationController?.pushViewController(sendToken, animated: true)
+                    
+                } else {
+                    controller.performSegue(withIdentifier: "walletInfo", sender: nil)
+                }
+            }
         case .token(let token):
             selectedToken = token
-            tokenSerive.updateSelectedToken(to: selectedToken.address, completion: nil)
-            performSegue(withIdentifier: "walletInfo", sender: nil)
+            tokenSerive.updateSelectedToken(to: selectedToken.address) { [weak self] in
+                guard let controller = self else { return }
+                
+                if controller.isFromContact {
+                    let sendToken = CreateVC(byName: "SendTokenViewController") as! SendTokenViewController
+                    controller.navigationController?.pushViewController(sendToken, animated: true)
+                    
+                } else {
+                    controller.performSegue(withIdentifier: "walletInfo", sender: nil)
+                }
+            }
         }
     }
     
