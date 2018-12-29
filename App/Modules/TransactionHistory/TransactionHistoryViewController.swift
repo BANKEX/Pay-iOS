@@ -96,6 +96,7 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     private func prepareNavBar() {
         tokenFilterBarButtonItem.title = tokensService.selectedERC20Token().symbol.uppercased()
         tokenFilterBarButtonItem.isEnabled = availableTokensList.count > 0
+        navigationController?.navigationBar.isHidden = false
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         UIApplication.shared.statusBarView?.backgroundColor = .white
     }
