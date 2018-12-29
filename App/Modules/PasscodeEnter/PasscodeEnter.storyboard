@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7aw-h3-7Wt">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Passcode Enter Controller-->
+        <scene sceneID="a8g-7P-G0U">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="7aw-h3-7Wt" customClass="PasscodeEnterController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HXw-0K-02Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n8Z-VX-d6x">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin_background" translatesAutoresizingMaskIntoConstraints="NO" id="aKi-rG-jlH">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch ID or Enter Passcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rE-CX-rHf">
+                                        <rect key="frame" x="70.5" y="80" width="234.5" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="gLt-53-COS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="G8X-Qn-EiI">
+                                        <rect key="frame" x="122.5" y="133" width="130" height="13"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_line" translatesAutoresizingMaskIntoConstraints="NO" id="s4n-Sd-z4K">
+                                                <rect key="frame" x="0.0" y="0.0" width="13" height="13"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="13" id="bwd-QV-sNg"/>
+                                                    <constraint firstAttribute="width" secondItem="s4n-Sd-z4K" secondAttribute="height" multiplier="1:1" id="hjk-sI-gd8"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_line" translatesAutoresizingMaskIntoConstraints="NO" id="6yR-z6-9X2">
+                                                <rect key="frame" x="39" y="0.0" width="13" height="13"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_line" translatesAutoresizingMaskIntoConstraints="NO" id="nfR-AT-O3D">
+                                                <rect key="frame" x="78" y="0.0" width="13" height="13"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_line" translatesAutoresizingMaskIntoConstraints="NO" id="hKV-sP-Ga9">
+                                                <rect key="frame" x="117" y="0.0" width="13" height="13"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="nfR-AT-O3D" firstAttribute="height" secondItem="6yR-z6-9X2" secondAttribute="height" id="1bU-eb-IQq"/>
+                                            <constraint firstItem="nfR-AT-O3D" firstAttribute="width" secondItem="6yR-z6-9X2" secondAttribute="width" id="ClE-sH-dKH"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="13" id="RHS-ny-8If"/>
+                                            <constraint firstItem="hKV-sP-Ga9" firstAttribute="width" secondItem="nfR-AT-O3D" secondAttribute="width" id="Www-1j-TkJ"/>
+                                            <constraint firstItem="hKV-sP-Ga9" firstAttribute="height" secondItem="nfR-AT-O3D" secondAttribute="height" id="i1V-SG-cXh"/>
+                                            <constraint firstItem="6yR-z6-9X2" firstAttribute="width" secondItem="s4n-Sd-z4K" secondAttribute="width" id="lMr-XP-6uM"/>
+                                            <constraint firstItem="6yR-z6-9X2" firstAttribute="height" secondItem="s4n-Sd-z4K" secondAttribute="height" id="v4M-04-hno"/>
+                                        </constraints>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXD-es-Gbg">
+                                        <rect key="frame" x="50" y="196" width="275" height="375"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="61E-vC-YAb">
+                                                <rect key="frame" x="0.0" y="0.0" width="275" height="375"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="fbA-HD-uGL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="75"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="af6-bu-h6U" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <accessibility key="accessibilityConfiguration" label="EnterPinBtn"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="af6-bu-h6U" secondAttribute="height" multiplier="1:1" id="Ju9-ly-DUo"/>
+                                                                    <constraint firstAttribute="width" constant="75" id="Uw5-g5-atW"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="1">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="point" keyPath="shadowOffset">
+                                                                        <point key="value" x="0.0" y="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="QSX-r7-GAv"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="eY4-Xl-m66"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="HWp-wR-DjP"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="ly0-RO-lpa"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAZ-kD-hgh" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="100" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="2">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="yK5-of-tpG"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="9Cx-eF-bA4"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="Ht5-9c-d9G"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="255-SU-rqr"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bA4-U9-HmO" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="200" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="3">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="eab-Uh-oee"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="HvE-RH-6xZ"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="Rlm-ci-OG0"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="Eeu-gf-NpL"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="EsY-Kk-SAU">
+                                                        <rect key="frame" x="0.0" y="100" width="275" height="75"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acA-Al-VT7" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="4">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ha1-cC-z7D"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="Qc4-3U-twP"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="xv2-ty-deu"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="Vna-kS-QGR"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IsY-ca-iQy" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="100" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="5">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ZRu-pb-GkC"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="p6j-Z3-gng"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="BjV-qq-MiG"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="bcF-D3-283"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCb-UU-i5h" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="200" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="6">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="LLx-Ob-eiV"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="Ffz-D0-EeS"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="5qC-Ua-hQL"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="MyJ-zC-TbG"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="ilN-Em-ern">
+                                                        <rect key="frame" x="0.0" y="200" width="275" height="75"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiV-B0-hkE" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="7">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="ZqX-dn-WWZ"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="LZu-g0-Zbm"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="HOS-wX-emg"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="KHz-G0-oKw"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvK-Ga-Oua" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="100" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="8">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="qqa-6J-M2t"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="b4v-6o-xmg"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="SKh-vQ-8w4"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="ZWy-AB-A6a"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7GD-70-kBm" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="200" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="9">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="dXL-oA-hgH"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="1Ka-ZA-a8E"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="zmm-1H-Rss"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="PTh-BN-0Fp"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="X3I-hS-p99">
+                                                        <rect key="frame" x="0.0" y="300" width="275" height="75"/>
+                                                        <subviews>
+                                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBr-dM-waA">
+                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" image="white_touch_id">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="biometricsPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="XkR-HL-hhY"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="Omj-BY-NpX"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="cXp-o2-Unz"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="zio-4Q-axE"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rg-Bp-lOR" customClass="enterPinCodeNumberButton" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="100" y="0.0" width="75" height="75"/>
+                                                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" title="0">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="numberPressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="uiW-0f-PY7"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="bzj-Ic-vgS"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="zf4-gT-wve"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="9hx-QL-tSH"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hhr-hH-JPH">
+                                                                <rect key="frame" x="200" y="0.0" width="75" height="75"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <state key="normal" image="white_delete">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="deletePressed:" destination="7aw-h3-7Wt" eventType="touchUpInside" id="xQv-eo-fX2"/>
+                                                                    <action selector="numberTouchedDown:" destination="7aw-h3-7Wt" eventType="touchDown" id="xYb-1A-dIn"/>
+                                                                    <action selector="touchAborted:" destination="7aw-h3-7Wt" eventType="touchDragOutside" id="nET-FY-ONV"/>
+                                                                    <action selector="touchDragInside:" destination="7aw-h3-7Wt" eventType="touchDragInside" id="Q23-BR-3Rr"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="61E-vC-YAb" secondAttribute="trailing" id="0D9-MG-YUG"/>
+                                            <constraint firstItem="61E-vC-YAb" firstAttribute="top" secondItem="UXD-es-Gbg" secondAttribute="top" id="GdJ-SR-ug5"/>
+                                            <constraint firstAttribute="bottom" secondItem="61E-vC-YAb" secondAttribute="bottom" id="T4z-0m-gTa"/>
+                                            <constraint firstItem="61E-vC-YAb" firstAttribute="leading" secondItem="UXD-es-Gbg" secondAttribute="leading" id="jEh-Gt-fxO"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.52549019607843139" green="0.70588235294117652" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="UXD-es-Gbg" firstAttribute="centerX" secondItem="n8Z-VX-d6x" secondAttribute="centerX" id="0sa-mo-dLW"/>
+                                    <constraint firstItem="7rE-CX-rHf" firstAttribute="centerX" secondItem="n8Z-VX-d6x" secondAttribute="centerX" id="8Hx-rd-o0Q"/>
+                                    <constraint firstItem="UXD-es-Gbg" firstAttribute="top" secondItem="G8X-Qn-EiI" secondAttribute="bottom" constant="50" id="8Ps-3W-bQg"/>
+                                    <constraint firstAttribute="bottom" secondItem="aKi-rG-jlH" secondAttribute="bottom" id="Cc5-J8-y7o"/>
+                                    <constraint firstItem="G8X-Qn-EiI" firstAttribute="top" secondItem="7rE-CX-rHf" secondAttribute="bottom" constant="30" id="D2o-Ix-NlX"/>
+                                    <constraint firstItem="aKi-rG-jlH" firstAttribute="leading" secondItem="n8Z-VX-d6x" secondAttribute="leading" id="etm-h6-SUP"/>
+                                    <constraint firstItem="EsY-Kk-SAU" firstAttribute="centerY" secondItem="n8Z-VX-d6x" secondAttribute="centerY" id="gWW-4X-9co"/>
+                                    <constraint firstAttribute="trailing" secondItem="aKi-rG-jlH" secondAttribute="trailing" id="www-RQ-MP2"/>
+                                    <constraint firstItem="aKi-rG-jlH" firstAttribute="top" secondItem="n8Z-VX-d6x" secondAttribute="top" id="xWs-K3-AQf"/>
+                                    <constraint firstItem="G8X-Qn-EiI" firstAttribute="centerX" secondItem="n8Z-VX-d6x" secondAttribute="centerX" id="yPC-AB-1qW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.19607843137254902" green="0.31764705882352939" blue="0.58039215686274515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="a3d-QR-8TB" firstAttribute="trailing" secondItem="n8Z-VX-d6x" secondAttribute="trailing" id="Cse-jy-SNK"/>
+                            <constraint firstItem="n8Z-VX-d6x" firstAttribute="top" secondItem="HXw-0K-02Z" secondAttribute="top" id="GOK-7G-HqC"/>
+                            <constraint firstItem="a3d-QR-8TB" firstAttribute="bottom" secondItem="n8Z-VX-d6x" secondAttribute="bottom" id="Xg6-IY-XcS"/>
+                            <constraint firstItem="n8Z-VX-d6x" firstAttribute="leading" secondItem="a3d-QR-8TB" secondAttribute="leading" id="gc2-ks-kqg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="a3d-QR-8TB"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="aKi-rG-jlH" id="Dq7-2p-JC1"/>
+                        <outlet property="biometricsButton" destination="dBr-dM-waA" id="whQ-N4-Odg"/>
+                        <outlet property="firstNum" destination="s4n-Sd-z4K" id="kp6-Xi-ean"/>
+                        <outlet property="fourthNum" destination="hKV-sP-Ga9" id="6AV-vv-CSG"/>
+                        <outlet property="messageLabel" destination="7rE-CX-rHf" id="eAU-JK-3Lh"/>
+                        <outlet property="secondNum" destination="6yR-z6-9X2" id="Dl4-sm-ZCi"/>
+                        <outlet property="thirdNum" destination="nfR-AT-O3D" id="amw-V1-eia"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xgU-gH-667" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2" y="904"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="pin_background" width="375" height="667"/>
+        <image name="white_delete" width="32" height="24"/>
+        <image name="white_line" width="24" height="2"/>
+        <image name="white_touch_id" width="42" height="42"/>
+    </resources>
+</document>

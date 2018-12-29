@@ -468,7 +468,7 @@ extension AppDelegate: PasscodeEnterControllerDelegate {
             }
         }()
         guard isFirstTime || isSendScreen else { return }
-        guard let viewController = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
+        guard let viewController = UIStoryboard(name: "PasscodeEnter", bundle: nil).instantiateInitialViewController() as? PasscodeEnterController else { return }
         viewController.delegate = self
         viewController.context = context
         
