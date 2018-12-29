@@ -16,7 +16,18 @@ struct Mediator {
 }
 
 struct HistoryMediator {
+    
+    enum TabItem: Int {
+        case wallet = 0, history, contacts, settings
+    }
+
     public static var addr:String?
+    
+    public static func handleDidSelect(item: Int) {
+        if item == TabItem.history.rawValue {
+            addr = nil
+        }
+    }
 }
 
 
@@ -171,12 +182,9 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     }
     
     @IBAction func seeAll() {
-        if UIDevice.isIpad {
-            selectSection(1)
-        }else {
-           tabBarController?.selectedIndex = 1
-        }
         HistoryMediator.addr = selectedContact.address
+        let historyVC = CreateVC(byName: "TransactionHistoryViewController") as! TransactionHistoryViewController
+        navigationController?.pushViewController(historyVC, animated: true)
     }
 
     private func configureTableView() {

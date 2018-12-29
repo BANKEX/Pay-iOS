@@ -220,7 +220,6 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        HistoryMediator.addr = nil
         segmentControl.selectedSegmentIndex = 0
     }
     
