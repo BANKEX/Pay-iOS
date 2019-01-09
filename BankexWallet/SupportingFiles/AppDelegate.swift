@@ -486,8 +486,7 @@ extension AppDelegate: PasscodeEnterControllerDelegate {
         switch viewController.context {
         case .initial:
             guard let latestVC = UIApplication.topViewController() else { return }
-            guard let processVC = storyboard().instantiateViewController(withIdentifier: "ProcessController") as? SendingInProcessViewController else { return }
-            processVC.fromEnterScreen = true
+            guard let processVC = UIStoryboard(name: "WalletAddProcessing", bundle: nil).instantiateInitialViewController() as? AddingInProcessViewController else { return }
             latestVC.navigationController?.pushViewController(processVC, animated: true)
         case let .sendScreen(confirmVC):
             confirmVC.sendFunds()

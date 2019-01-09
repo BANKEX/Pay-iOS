@@ -252,9 +252,7 @@ class PasscodeEnterController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? SendingInProcessViewController {
-            vc.fromEnterScreen = true
-        } else if let vc = segue.destination as? ConfirmViewController {
+        if let vc = segue.destination as? ConfirmViewController {
             vc.isPinAccepted = true
         }
     }

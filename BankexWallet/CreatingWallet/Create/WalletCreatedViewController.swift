@@ -47,9 +47,6 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
         if let vc = segue.destination as? EditWalletNameController {
             vc.delegate = self
         }
-        if let vc = segue.destination as? SendingInProcessViewController {
-            vc.fromEnterScreen = true
-        }
     }
     
     func nameChanged(to name: String) {

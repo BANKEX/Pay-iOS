@@ -133,9 +133,6 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,QRReader
         if let destinationViewController = segue.destination as? PasscodeLockController {
             destinationViewController.newWallet = false
         }
-        if let vc = segue.destination as? SendingInProcessViewController {
-            vc.fromEnterScreen = true
-        }
     }
 
     
