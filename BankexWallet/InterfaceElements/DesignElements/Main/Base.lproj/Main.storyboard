@@ -24,116 +24,13 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="M7A-D7-jHu" kind="relationship" relationship="rootViewController" id="0M5-ZF-71X"/>
+                        <segue destination="Zfo-Ve-SgX" kind="relationship" relationship="rootViewController" id="0M5-ZF-71X"/>
                         <segue destination="wYo-D0-EMj" kind="show" identifier="showProcess" animates="NO" id="jmi-Ci-Lfa"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89C-4i-6ZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1481" y="2209"/>
-        </scene>
-        <!--Wallet Creation Type Controller-->
-        <scene sceneID="SFe-o1-xOp">
-            <objects>
-                <viewController id="M7A-D7-jHu" customClass="WalletCreationTypeController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5cA-co-zbv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BANKEXlogo" translatesAutoresizingMaskIntoConstraints="NO" id="jfa-7I-5Lw">
-                                <rect key="frame" x="80" y="104" width="160" height="76"/>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="J47-g9-ucF">
-                                <rect key="frame" x="75" y="356" width="170" height="115"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncR-Ov-TWm">
-                                        <rect key="frame" x="0.0" y="0.0" width="170" height="50"/>
-                                        <color key="backgroundColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <accessibility key="accessibilityConfiguration" label="ImportWallet_Btn"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Xni-Tt-2vn"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Create Wallet">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="8lh-sW-gUb" kind="show" identifier="createWallet" id="pZZ-Va-Vad"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gby-1k-WVy">
-                                        <rect key="frame" x="0.0" y="65" width="170" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <accessibility key="accessibilityConfiguration" label="createWallet"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Import Wallet">
-                                            <color key="titleColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="nMo-6x-PXm" kind="show" identifier="importWallet" id="SYG-ye-O3M"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="224" id="TFb-ga-1Mz"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="TFb-ga-1Mz"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="TFb-ga-1Mz"/>
-                                    </mask>
-                                </variation>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="SAA-FI-iNO" firstAttribute="trailing" secondItem="J47-g9-ucF" secondAttribute="trailing" constant="75" id="3hb-pu-hhI"/>
-                            <constraint firstItem="jfa-7I-5Lw" firstAttribute="top" secondItem="SAA-FI-iNO" secondAttribute="top" constant="40" id="JoE-sU-Wj1">
-                                <variation key="heightClass=regular-widthClass=regular" constant="104"/>
-                            </constraint>
-                            <constraint firstItem="J47-g9-ucF" firstAttribute="centerX" secondItem="5cA-co-zbv" secondAttribute="centerX" id="R5w-W6-rbN"/>
-                            <constraint firstItem="J47-g9-ucF" firstAttribute="leading" secondItem="SAA-FI-iNO" secondAttribute="leading" constant="75" id="bwa-k4-Shs"/>
-                            <constraint firstItem="SAA-FI-iNO" firstAttribute="bottom" secondItem="J47-g9-ucF" secondAttribute="bottom" constant="48" id="dAG-yp-f5o"/>
-                            <constraint firstItem="jfa-7I-5Lw" firstAttribute="width" secondItem="5cA-co-zbv" secondAttribute="width" multiplier="0.5" id="lwb-Re-fuk"/>
-                            <constraint firstItem="jfa-7I-5Lw" firstAttribute="centerX" secondItem="5cA-co-zbv" secondAttribute="centerX" id="o7T-NX-HNg"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="SAA-FI-iNO"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="R5w-W6-rbN"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <mask key="constraints">
-                                <exclude reference="3hb-pu-hhI"/>
-                                <include reference="R5w-W6-rbN"/>
-                                <exclude reference="bwa-k4-Shs"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <navigationItem key="navigationItem" id="ORK-pG-0UM"/>
-                    <connections>
-                        <outlet property="creaetBtn" destination="ncR-Ov-TWm" id="Eg0-bB-I6f"/>
-                        <outlet property="importBtn" destination="Gby-1k-WVy" id="JpW-Uz-Efi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YFA-ll-3Mu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2" y="2397"/>
         </scene>
         <!--Settings-->
         <scene sceneID="UUo-TQ-OMY">
@@ -980,7 +877,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="ihI-ft-ZZn" id="PYF-zV-HfV"/>
-                        <segue destination="M7A-D7-jHu" kind="show" identifier="showAddWalletVC" id="o2o-Af-M3V"/>
+                        <segue destination="Zfo-Ve-SgX" kind="show" identifier="showAddWalletVC" id="o2o-Af-M3V"/>
                         <segue destination="tca-Xj-fCZ" kind="show" identifier="ShowWalletInfo" id="IPS-OW-U8x"/>
                     </connections>
                 </viewController>
@@ -3135,21 +3032,15 @@ successfully</string>
             </objects>
             <point key="canvasLocation" x="5639.1999999999998" y="2854.7226386806601"/>
         </scene>
-        <!--WalletImport-->
-        <scene sceneID="MSj-w2-dLc">
+        <!--WalletAddMethod-->
+        <scene sceneID="EP6-5Z-lVe">
             <objects>
-                <viewControllerPlaceholder storyboardName="WalletImport" id="nMo-6x-PXm" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RAW-YP-pUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="WalletAddMethod" id="Zfo-Ve-SgX" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="JI3-vq-kPv"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mVJ-Sj-hb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1153" y="905"/>
-        </scene>
-        <!--WalletCreatePasscodeGeneration-->
-        <scene sceneID="emw-ad-V1T">
-            <objects>
-                <viewControllerPlaceholder storyboardName="WalletCreatePasscodeGeneration" id="8lh-sW-gUb" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fqm-YY-igd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2128.8000000000002" y="2674.8125937031487"/>
+            <point key="canvasLocation" x="-2" y="2397"/>
         </scene>
     </scenes>
     <resources>
@@ -3178,12 +3069,12 @@ successfully</string>
         <image name="wallet_icon" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="0M5-ZF-71X"/>
         <segue reference="USj-xB-uaI"/>
         <segue reference="JaH-wa-aDn"/>
         <segue reference="4v7-Bv-6wS"/>
         <segue reference="bDG-Xv-WCD"/>
         <segue reference="Ifx-vO-B66"/>
         <segue reference="fKt-CA-37X"/>
-        <segue reference="o2o-Af-M3V"/>
     </inferredMetricsTieBreakers>
 </document>
