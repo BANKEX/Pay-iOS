@@ -65,7 +65,8 @@ class WalletCreatedViewController: UIViewController, NameChangingDelegate {
     }
     
     func presentPasscode() {
-        let passcode = CreateVC(byName: "PasscodeIpadVC") as! PasscodeIpadVC
+        let passcode = UIStoryboard(name: "PasscodeSetupPad", bundle: nil).instantiateInitialViewController() as! PasscodeIpadVC
+        
         passcode.delegate = self
         passcode.modalPresentationStyle = .formSheet
         passcode.preferredContentSize = CGSize(width: 320, height: 600)

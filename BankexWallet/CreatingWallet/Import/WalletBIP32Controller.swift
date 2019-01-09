@@ -93,7 +93,7 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,GrowingTextV
     @IBAction func createWalletTapped(_ sender:Any) {
         if UIDevice.isIpad {
             if !UserDefaults.standard.bool(forKey: "passcodeExists") {
-                let passcodeLock = CreateVC(byName: "PasscodeIpadVC") as! PasscodeIpadVC
+                let passcodeLock = UIStoryboard(name: "PasscodeSetupPad", bundle: nil).instantiateInitialViewController() as! PasscodeIpadVC
                 passcodeLock.delegate = self
                 passcodeLock.modalPresentationStyle = .formSheet
                 passcodeLock.preferredContentSize = CGSize(width: 320, height: 600)
