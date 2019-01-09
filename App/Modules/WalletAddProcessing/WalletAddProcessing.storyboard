@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iLc-LU-ReD">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Adding In Process View Controller-->
+        <scene sceneID="ttd-FO-4vY">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="iLc-LU-ReD" customClass="AddingInProcessViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="08T-rQ-TzM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vu5-xB-3LK">
+                                <rect key="frame" x="40" y="37.5" width="240" height="262"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DW4-9U-UJB">
+                                        <rect key="frame" x="5" y="223.5" width="230.5" height="38.5"/>
+                                        <string key="text">The operation may take several 
+minutes, please wait ...</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.61176470589999998" green="0.65098039220000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol 4 – 1" translatesAutoresizingMaskIntoConstraints="NO" id="Gco-zj-wFy">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="160"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending funds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFr-e1-QqG">
+                                        <rect key="frame" x="61.5" y="194" width="117" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.12549019610000001" green="0.13725490200000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Gco-zj-wFy" firstAttribute="top" secondItem="vu5-xB-3LK" secondAttribute="top" id="2g4-QU-wCU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gco-zj-wFy" secondAttribute="trailing" id="EYr-6F-Wyq"/>
+                                    <constraint firstItem="fFr-e1-QqG" firstAttribute="centerX" secondItem="vu5-xB-3LK" secondAttribute="centerX" id="OuW-Yg-bqB"/>
+                                    <constraint firstItem="DW4-9U-UJB" firstAttribute="top" secondItem="fFr-e1-QqG" secondAttribute="bottom" constant="8" id="YTa-tu-XtF"/>
+                                    <constraint firstItem="fFr-e1-QqG" firstAttribute="top" secondItem="Gco-zj-wFy" secondAttribute="bottom" constant="34" id="aLP-tQ-Sks"/>
+                                    <constraint firstItem="Gco-zj-wFy" firstAttribute="leading" secondItem="vu5-xB-3LK" secondAttribute="leading" id="f7c-sU-yAd"/>
+                                    <constraint firstAttribute="bottom" secondItem="DW4-9U-UJB" secondAttribute="bottom" id="lfT-58-8D1"/>
+                                    <constraint firstItem="DW4-9U-UJB" firstAttribute="centerX" secondItem="vu5-xB-3LK" secondAttribute="centerX" id="llL-th-EYc"/>
+                                    <constraint firstItem="Gco-zj-wFy" firstAttribute="centerX" secondItem="vu5-xB-3LK" secondAttribute="centerX" id="nwX-fp-yPF"/>
+                                </constraints>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Qxu-mh-aVm">
+                                <rect key="frame" x="142.5" y="337.5" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="hap-ME-2od"/>
+                                    <constraint firstAttribute="width" constant="35" id="um6-qS-gPu"/>
+                                </constraints>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qxu-mh-aVm" firstAttribute="top" secondItem="vu5-xB-3LK" secondAttribute="bottom" constant="38" id="8AT-8g-s0H"/>
+                            <constraint firstItem="Qxu-mh-aVm" firstAttribute="centerX" secondItem="08T-rQ-TzM" secondAttribute="centerX" id="S0Q-S4-kUM"/>
+                            <constraint firstItem="vu5-xB-3LK" firstAttribute="centerX" secondItem="08T-rQ-TzM" secondAttribute="centerX" id="WaS-Ow-tU4"/>
+                            <constraint firstItem="vu5-xB-3LK" firstAttribute="centerY" secondItem="08T-rQ-TzM" secondAttribute="centerY" id="s9h-fM-v6R"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EUY-xE-arv"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityView" destination="Qxu-mh-aVm" id="3gg-9m-Mvk"/>
+                        <outlet property="processTitleLabel" destination="fFr-e1-QqG" id="CNk-vd-Ftt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jFc-yi-Hy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5639.1999999999998" y="2854.7226386806601"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Symbol 4 – 1" width="240" height="160"/>
+    </resources>
+</document>

@@ -41,6 +41,8 @@
 		7185060021D76E2200CA204F /* Warning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 718505FF21D76E2100CA204F /* Warning.storyboard */; };
 		7185060321D771E600CA204F /* WalletDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185060221D771E600CA204F /* WalletDetails.storyboard */; };
 		7185060621D7AEAC00CA204F /* PasscodeEnter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185060521D7AEAB00CA204F /* PasscodeEnter.storyboard */; };
+		7185060B21D7B68800CA204F /* AddingInProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185060A21D7B68800CA204F /* AddingInProcessViewController.swift */; };
+		7185060D21E5C28100CA204F /* WalletAddProcessing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185060C21E5C28000CA204F /* WalletAddProcessing.storyboard */; };
 		71C72A2B21B009D000FB3E13 /* AssetManagementEthProgress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */; };
 		71C72A2D21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */; };
 		71C72A3021B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */; };
@@ -342,6 +344,8 @@
 		718505FF21D76E2100CA204F /* Warning.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Warning.storyboard; sourceTree = "<group>"; };
 		7185060221D771E600CA204F /* WalletDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletDetails.storyboard; sourceTree = "<group>"; };
 		7185060521D7AEAB00CA204F /* PasscodeEnter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PasscodeEnter.storyboard; sourceTree = "<group>"; };
+		7185060A21D7B68800CA204F /* AddingInProcessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingInProcessViewController.swift; sourceTree = "<group>"; };
+		7185060C21E5C28000CA204F /* WalletAddProcessing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletAddProcessing.storyboard; sourceTree = "<group>"; };
 		71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthProgress.storyboard; sourceTree = "<group>"; };
 		71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthProgressViewController.swift; sourceTree = "<group>"; };
 		71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthSuccess.storyboard; sourceTree = "<group>"; };
@@ -708,6 +712,15 @@
 			path = PasscodeEnter;
 			sourceTree = "<group>";
 		};
+		7185060721D7B58100CA204F /* WalletAddProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				7185060C21E5C28000CA204F /* WalletAddProcessing.storyboard */,
+				7185060A21D7B68800CA204F /* AddingInProcessViewController.swift */,
+			);
+			path = WalletAddProcessing;
+			sourceTree = "<group>";
+		};
 		71C72A2921B009A900FB3E13 /* EthProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -775,6 +788,7 @@
 				71EB27C521D63F0C00B9EE30 /* TokenAddSearch */,
 				71EB27C821D6430000B9EE30 /* TransactionHistory */,
 				71EB27BF21D6158E00B9EE30 /* WalletAddRename */,
+				7185060721D7B58100CA204F /* WalletAddProcessing */,
 				7185060121D770D400CA204F /* WalletDetails */,
 				71EB27A321D4C8C100B9EE30 /* WalletRename */,
 				718505FE21D76D5400CA204F /* Warning */,
@@ -1697,6 +1711,7 @@
 				863A6A642184EDAF00E4A8D3 /* InfoCell.xib in Resources */,
 				71EB27CA21D646B700B9EE30 /* TransactionHistory.storyboard in Resources */,
 				9220BE7621CB7ECB0079F85C /* TransactionDetails.xcassets in Resources */,
+				7185060D21E5C28100CA204F /* WalletAddProcessing.storyboard in Resources */,
 				71EB27C121D6164100B9EE30 /* WalletAddRename.storyboard in Resources */,
 				8635AB6E21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.xib in Resources */,
 				924A36ED21B120C6000954BD /* AssetManagementLinks.xcassets in Resources */,
@@ -1926,6 +1941,7 @@
 				8635AB6D21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.swift in Sources */,
 				861D2CD0214AA0AF00A108C4 /* EmptyTableCell.swift in Sources */,
 				86E15F10215BA02800F85AD2 /* UISearchBar+Extensions.swift in Sources */,
+				7185060B21D7B68800CA204F /* AddingInProcessViewController.swift in Sources */,
 				8649F1A22167AC9F00EAFDF9 /* AppDelegate+Extenstions.swift in Sources */,
 				861D2CDB214AF6B500A108C4 /* BaseNavigationController.swift in Sources */,
 				861D2CD8214AF69E00A108C4 /* BaseTabBarController.swift in Sources */,

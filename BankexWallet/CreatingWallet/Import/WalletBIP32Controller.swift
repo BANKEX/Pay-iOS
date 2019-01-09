@@ -216,9 +216,6 @@ class WalletBIP32Controller: BaseViewController,UITextFieldDelegate,GrowingTextV
         if let destinationViewController = segue.destination as? PasscodeLockController {
             destinationViewController.newWallet = false
         }
-        if let vc = segue.destination as? SendingInProcessViewController {
-            vc.fromEnterScreen = true
-        }
     }
 
 }
