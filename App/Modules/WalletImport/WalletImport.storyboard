@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7ST-Xq-jOz">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Generic Import View Controller-->
+        <scene sceneID="6tc-qL-hRV">
+            <objects>
+                <viewController id="7ST-Xq-jOz" customClass="GenericImportViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ogw-hm-B6z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ne5-Eb-jRR">
+                                <rect key="frame" x="15" y="45" width="345" height="29"/>
+                                <segments>
+                                    <segment title="Private Key"/>
+                                    <segment title="Passphrase"/>
+                                </segments>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Import_SegmentControl"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="segmentedControlerTapped:" destination="7ST-Xq-jOz" eventType="valueChanged" id="TIF-57-HuZ"/>
+                                </connections>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uth-qE-4i7">
+                                <rect key="frame" x="0.0" y="138" width="375" height="529"/>
+                                <connections>
+                                    <segue destination="NQv-6V-bIF" kind="embed" id="3Es-ip-Avo"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m62-vk-V3q">
+                                <rect key="frame" x="0.0" y="138" width="375" height="529"/>
+                                <connections>
+                                    <segue destination="zgF-bs-7XP" kind="embed" id="Axi-28-c3N"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ne5-Eb-jRR" firstAttribute="centerX" secondItem="ogw-hm-B6z" secondAttribute="centerX" id="0uC-Dc-oMd"/>
+                            <constraint firstItem="m62-vk-V3q" firstAttribute="bottom" secondItem="IS9-Fd-wHn" secondAttribute="bottom" id="9uK-FH-Shm"/>
+                            <constraint firstItem="m62-vk-V3q" firstAttribute="trailing" secondItem="IS9-Fd-wHn" secondAttribute="trailing" id="AOu-sP-pbC"/>
+                            <constraint firstItem="Ne5-Eb-jRR" firstAttribute="top" secondItem="IS9-Fd-wHn" secondAttribute="top" constant="25" id="AyL-zB-dsv">
+                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                            </constraint>
+                            <constraint firstItem="uth-qE-4i7" firstAttribute="trailing" secondItem="Ne5-Eb-jRR" secondAttribute="trailing" id="BkH-Ts-Gd2"/>
+                            <constraint firstItem="m62-vk-V3q" firstAttribute="trailing" secondItem="Ne5-Eb-jRR" secondAttribute="trailing" id="GaE-4v-Ted">
+                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="uth-qE-4i7" firstAttribute="centerX" secondItem="ogw-hm-B6z" secondAttribute="centerX" id="HFj-uK-a7i"/>
+                            <constraint firstItem="uth-qE-4i7" firstAttribute="leading" secondItem="Ne5-Eb-jRR" secondAttribute="leading" id="IFs-Kq-bHA">
+                                <variation key="heightClass=regular-widthClass=regular" constant="-15"/>
+                            </constraint>
+                            <constraint firstItem="Ne5-Eb-jRR" firstAttribute="leading" secondItem="IS9-Fd-wHn" secondAttribute="leading" constant="15" id="Ihe-0P-PaG"/>
+                            <constraint firstItem="IS9-Fd-wHn" firstAttribute="trailing" secondItem="uth-qE-4i7" secondAttribute="trailing" id="XOD-5R-9pb"/>
+                            <constraint firstItem="m62-vk-V3q" firstAttribute="leading" secondItem="Ne5-Eb-jRR" secondAttribute="leading" id="aMj-zG-pL9">
+                                <variation key="heightClass=regular-widthClass=regular" constant="-15"/>
+                            </constraint>
+                            <constraint firstItem="IS9-Fd-wHn" firstAttribute="bottom" secondItem="uth-qE-4i7" secondAttribute="bottom" id="c4u-3v-4cf"/>
+                            <constraint firstItem="m62-vk-V3q" firstAttribute="leading" secondItem="IS9-Fd-wHn" secondAttribute="leading" id="fjX-ss-tfZ"/>
+                            <constraint firstItem="Ne5-Eb-jRR" firstAttribute="width" secondItem="ogw-hm-B6z" secondAttribute="width" multiplier="1:2.2" id="j2q-V6-y8G"/>
+                            <constraint firstItem="IS9-Fd-wHn" firstAttribute="trailing" secondItem="Ne5-Eb-jRR" secondAttribute="trailing" constant="15" id="o2g-MV-Izj"/>
+                            <constraint firstItem="uth-qE-4i7" firstAttribute="top" secondItem="Ne5-Eb-jRR" secondAttribute="bottom" constant="65" id="tcV-oB-WR2">
+                                <variation key="heightClass=regular-widthClass=regular" constant="111"/>
+                            </constraint>
+                            <constraint firstItem="uth-qE-4i7" firstAttribute="leading" secondItem="IS9-Fd-wHn" secondAttribute="leading" id="yKn-MO-Ydx"/>
+                            <constraint firstItem="m62-vk-V3q" firstAttribute="top" secondItem="Ne5-Eb-jRR" secondAttribute="bottom" constant="65" id="zOM-y6-fwW">
+                                <variation key="heightClass=regular-widthClass=regular" constant="111"/>
+                            </constraint>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IS9-Fd-wHn"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0uC-Dc-oMd"/>
+                                <exclude reference="j2q-V6-y8G"/>
+                                <exclude reference="GaE-4v-Ted"/>
+                                <exclude reference="aMj-zG-pL9"/>
+                                <exclude reference="BkH-Ts-Gd2"/>
+                                <exclude reference="HFj-uK-a7i"/>
+                                <exclude reference="IFs-Kq-bHA"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="XOD-5R-9pb"/>
+                                <exclude reference="o2g-MV-Izj"/>
+                                <include reference="0uC-Dc-oMd"/>
+                                <exclude reference="Ihe-0P-PaG"/>
+                                <include reference="j2q-V6-y8G"/>
+                                <exclude reference="AOu-sP-pbC"/>
+                                <include reference="GaE-4v-Ted"/>
+                                <include reference="aMj-zG-pL9"/>
+                                <exclude reference="fjX-ss-tfZ"/>
+                                <include reference="BkH-Ts-Gd2"/>
+                                <exclude reference="HFj-uK-a7i"/>
+                                <include reference="IFs-Kq-bHA"/>
+                                <exclude reference="yKn-MO-Ydx"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="passphraseContainer" destination="m62-vk-V3q" id="eQo-R9-lSS"/>
+                        <outlet property="privateKeyContainer" destination="uth-qE-4i7" id="qVw-r0-ORN"/>
+                        <outlet property="segmentedControl" destination="Ne5-Eb-jRR" id="8ig-Lo-4Qq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qM1-1n-vL5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1153" y="905"/>
+        </scene>
+        <!--WalletBIP32 Controller-->
+        <scene sceneID="Fre-fM-0X0">
+            <objects>
+                <viewController id="zgF-bs-7XP" customClass="WalletBIP32Controller" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W3j-xf-8ev">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="529"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UsK-Jd-mN2" customClass="GrowingTextView" customModule="GrowingTextView">
+                                <rect key="frame" x="11" y="54" width="334" height="37"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="PassphraseTextVIew"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="zJ9-bE-ReN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7g-mL-nV1">
+                                <rect key="frame" x="15" y="91" width="360" height="1"/>
+                                <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="win-Rx-zpG"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B9-kC-WYr">
+                                <rect key="frame" x="75" y="431" width="225" height="50"/>
+                                <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="importPassphraseBtn"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NJJ-m9-yH4"/>
+                                    <constraint firstAttribute="width" constant="224" id="svO-3Z-Sgk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Import Wallet">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="svO-3Z-Sgk"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="svO-3Z-Sgk"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="createWalletTapped:" destination="zgF-bs-7XP" eventType="touchUpInside" id="aVa-sr-Scf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALn-bm-ReB">
+                                <rect key="frame" x="345" y="60" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="19r-23-xIJ"/>
+                                    <constraint firstAttribute="width" constant="16" id="nPY-V2-ckU"/>
+                                </constraints>
+                                <state key="normal" image="clear"/>
+                                <connections>
+                                    <action selector="clearTextView:" destination="zgF-bs-7XP" eventType="touchUpInside" id="kXp-5h-Lne"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-WJ-80e" customClass="PasteButton" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="15" y="108" width="66" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="8rN-GF-i9h"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="66" id="soe-9s-ota"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="Paste"/>
+                                <connections>
+                                    <action selector="stringFromBuffer:" destination="zgF-bs-7XP" eventType="touchUpInside" id="m0u-CT-dIj"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9g-mt-ozN">
+                                <rect key="frame" x="15" y="20" width="106.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Z8-EN-dVw">
+                                <rect key="frame" x="15" y="172" width="115.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ca2-qI-28c">
+                                <rect key="frame" x="15" y="206" width="360" height="37"/>
+                                <accessibility key="accessibilityConfiguration" label="passphraseNameTF"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="K5Q-H2-MoN"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nK-oM-Q9C">
+                                <rect key="frame" x="15" y="243" width="360" height="1"/>
+                                <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="nRy-27-pNF"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DAp-Sl-vKc">
+                                <rect key="frame" x="127.5" y="108" width="120" height="120"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="nWZ-Xr-7Eu">
+                                        <rect key="frame" x="16" y="24.5" width="88" height="71.5"/>
+                                        <subviews>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dmf-qD-n6Z">
+                                                <rect key="frame" x="25.5" y="0.0" width="37" height="37"/>
+                                                <color key="color" red="0.89019607840000003" green="0.90196078430000004" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Importing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7u-i6-VP1">
+                                                <rect key="frame" x="0.0" y="51" width="88" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.89019607840000003" green="0.90196078430000004" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.64996254279999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="nWZ-Xr-7Eu" firstAttribute="centerY" secondItem="DAp-Sl-vKc" secondAttribute="centerY" id="B7Q-3F-Tqo"/>
+                                    <constraint firstAttribute="height" constant="120" id="dKf-8V-VoL"/>
+                                    <constraint firstItem="nWZ-Xr-7Eu" firstAttribute="centerX" secondItem="DAp-Sl-vKc" secondAttribute="centerX" id="lv6-OU-rgm"/>
+                                    <constraint firstAttribute="width" constant="120" id="qRh-BF-hRR"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                        <accessibility key="accessibilityConfiguration" label="ContainerViewPass">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
+                        <constraints>
+                            <constraint firstItem="ALn-bm-ReB" firstAttribute="top" secondItem="UsK-Jd-mN2" secondAttribute="top" constant="6" id="36y-bp-eYU"/>
+                            <constraint firstItem="ca2-qI-28c" firstAttribute="top" secondItem="4Z8-EN-dVw" secondAttribute="bottom" constant="10" id="8Sm-To-6xn"/>
+                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2f2-WJ-80e" secondAttribute="trailing" symbolic="YES" id="Ebw-Bd-g4X"/>
+                            <constraint firstItem="ALn-bm-ReB" firstAttribute="leading" secondItem="UsK-Jd-mN2" secondAttribute="trailing" id="G1l-28-nkt"/>
+                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="UsK-Jd-mN2" secondAttribute="trailing" constant="30" id="GJg-sk-zeF"/>
+                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="I7g-mL-nV1" secondAttribute="trailing" id="N3S-7c-xjX"/>
+                            <constraint firstItem="gHq-h3-oUr" firstAttribute="bottom" secondItem="9B9-kC-WYr" secondAttribute="bottom" constant="48" id="QZt-of-QG1"/>
+                            <constraint firstItem="4Z8-EN-dVw" firstAttribute="leading" secondItem="K9g-mt-ozN" secondAttribute="leading" id="SZI-sf-RNJ"/>
+                            <constraint firstItem="9B9-kC-WYr" firstAttribute="centerX" secondItem="W3j-xf-8ev" secondAttribute="centerX" id="WGS-sp-LLo"/>
+                            <constraint firstItem="ca2-qI-28c" firstAttribute="leading" secondItem="4Z8-EN-dVw" secondAttribute="leading" id="ZlQ-3U-ZLL"/>
+                            <constraint firstItem="4Z8-EN-dVw" firstAttribute="top" secondItem="2f2-WJ-80e" secondAttribute="bottom" constant="30" id="Zmn-Zh-k4z"/>
+                            <constraint firstItem="2f2-WJ-80e" firstAttribute="top" secondItem="I7g-mL-nV1" secondAttribute="bottom" constant="16" id="aKO-AB-50u"/>
+                            <constraint firstItem="I7g-mL-nV1" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="15" id="aPL-cP-cxg"/>
+                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="K9g-mt-ozN" secondAttribute="trailing" symbolic="YES" id="elT-l4-yGA"/>
+                            <constraint firstItem="9B9-kC-WYr" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="75" id="h2N-hG-wrD"/>
+                            <constraint firstItem="UsK-Jd-mN2" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="11" id="iDF-7I-cLh"/>
+                            <constraint firstItem="1nK-oM-Q9C" firstAttribute="top" secondItem="ca2-qI-28c" secondAttribute="bottom" id="jE7-To-2av"/>
+                            <constraint firstItem="I7g-mL-nV1" firstAttribute="top" secondItem="UsK-Jd-mN2" secondAttribute="bottom" id="lhD-38-9Y2"/>
+                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="9B9-kC-WYr" secondAttribute="trailing" constant="75" id="pLA-Tl-mzw"/>
+                            <constraint firstItem="UsK-Jd-mN2" firstAttribute="top" secondItem="K9g-mt-ozN" secondAttribute="bottom" constant="10" id="pLB-mn-qnk"/>
+                            <constraint firstItem="2f2-WJ-80e" firstAttribute="leading" secondItem="I7g-mL-nV1" secondAttribute="leading" id="qkI-CK-4Zj"/>
+                            <constraint firstItem="1nK-oM-Q9C" firstAttribute="leading" secondItem="ca2-qI-28c" secondAttribute="leading" id="qwy-Dt-ASc"/>
+                            <constraint firstItem="K9g-mt-ozN" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="15" id="sFT-IT-BcF"/>
+                            <constraint firstItem="DAp-Sl-vKc" firstAttribute="centerX" secondItem="W3j-xf-8ev" secondAttribute="centerX" id="sr5-4V-jF7"/>
+                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4Z8-EN-dVw" secondAttribute="trailing" symbolic="YES" id="tw9-TL-XMO"/>
+                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="1nK-oM-Q9C" secondAttribute="trailing" id="umj-kB-Qve"/>
+                            <constraint firstItem="DAp-Sl-vKc" firstAttribute="top" secondItem="2f2-WJ-80e" secondAttribute="top" id="wkw-5s-cgy"/>
+                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="ca2-qI-28c" secondAttribute="trailing" id="xuN-sT-7TT"/>
+                            <constraint firstItem="K9g-mt-ozN" firstAttribute="top" secondItem="gHq-h3-oUr" secondAttribute="top" id="zcw-BT-IWb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gHq-h3-oUr"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="WGS-sp-LLo"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="pLA-Tl-mzw"/>
+                                <include reference="WGS-sp-LLo"/>
+                                <exclude reference="h2N-hG-wrD"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="activityView" destination="dmf-qD-n6Z" id="GPw-wk-vMc"/>
+                        <outlet property="clearButton" destination="ALn-bm-ReB" id="jV7-S9-Q5S"/>
+                        <outlet property="containerView" destination="DAp-Sl-vKc" id="WDC-ZV-zbd"/>
+                        <outlet property="importButton" destination="9B9-kC-WYr" id="492-sy-Cf1"/>
+                        <outlet property="nameTextField" destination="ca2-qI-28c" id="IQF-3r-Fvs"/>
+                        <outlet property="passphraseTextView" destination="UsK-Jd-mN2" id="tE1-CC-sFW"/>
+                        <outlet property="pasteButton" destination="2f2-WJ-80e" id="OSN-cP-PQV"/>
+                        <outlet property="separator1" destination="I7g-mL-nV1" id="ATb-MB-5vv"/>
+                        <outlet property="separator2" destination="1nK-oM-Q9C" id="agM-qd-ndI"/>
+                        <segue destination="nuO-ax-XC0" kind="show" identifier="goToPinFromImportPassphrase" id="pT1-5S-qPI"/>
+                        <segue destination="wYo-D0-EMj" kind="show" identifier="showProcessFromImportPassphrase" id="ijQ-jv-rc6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MFv-ts-Cdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2253.5999999999999" y="914.84257871064472"/>
+        </scene>
+        <!--Single Key Wallet Controller-->
+        <scene sceneID="MU4-7j-m43">
+            <objects>
+                <viewController id="NQv-6V-bIF" customClass="SingleKeyWalletController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mOs-aW-oc9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="529"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JGw-Ba-1Is" customClass="GrowingTextView" customModule="GrowingTextView">
+                                <rect key="frame" x="11" y="54" width="334" height="37"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="privateTextView"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="CdQ-UU-nVz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vd-OQ-DBo">
+                                <rect key="frame" x="15" y="91" width="360" height="1"/>
+                                <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="edc-nb-tYa"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YeP-ir-Kad">
+                                <rect key="frame" x="15" y="243" width="360" height="1"/>
+                                <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="57r-oS-Oeq"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6i-Sg-uPe">
+                                <rect key="frame" x="75" y="431" width="225" height="50"/>
+                                <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="ImportBtn_ImportingScren"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="224" id="BoY-1x-0us"/>
+                                    <constraint firstAttribute="height" constant="50" id="yzP-24-Myz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Import Wallet">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="BoY-1x-0us"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="BoY-1x-0us"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="createPrivateKeyWallet:" destination="NQv-6V-bIF" eventType="touchUpInside" id="xHK-xP-Ii9"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rO7-Le-asG">
+                                <rect key="frame" x="15" y="20" width="103" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TLz-RI-Hz8">
+                                <rect key="frame" x="345" y="60" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="11v-Cn-7Ns"/>
+                                    <constraint firstAttribute="height" constant="16" id="cUh-pJ-aNb"/>
+                                </constraints>
+                                <state key="normal" image="clear"/>
+                                <connections>
+                                    <action selector="clearTextView:" destination="NQv-6V-bIF" eventType="touchUpInside" id="nSu-JA-zYq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fg-76-J5l" customClass="QRButton" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="15" y="108" width="66" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="1k3-6D-KBJ"/>
+                                    <constraint firstAttribute="height" constant="34" id="OK0-K7-CWC"/>
+                                </constraints>
+                                <state key="normal" image="qr"/>
+                                <connections>
+                                    <action selector="scanDidTapped:" destination="NQv-6V-bIF" eventType="touchUpInside" id="nsx-Tz-pzx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWb-Io-1BB" customClass="PasteButton" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="97" y="108" width="66" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="DfC-Yv-xWd"/>
+                                    <constraint firstAttribute="height" constant="34" id="cqX-40-XQB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="Paste">
+                                    <color key="titleColor" red="0.1803921568627451" green="0.49019607843137253" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="bufferDidTapped" destination="NQv-6V-bIF" eventType="touchUpInside" id="Hd0-vc-zqJ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLV-Qe-aEY">
+                                <rect key="frame" x="15" y="172" width="115.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OVl-0c-dto">
+                                <rect key="frame" x="15" y="206" width="360" height="37"/>
+                                <accessibility key="accessibilityConfiguration" label="nameWalletTextField"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="nQO-ri-CoN"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                        <accessibility key="accessibilityConfiguration" label="ContainerView">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
+                        <constraints>
+                            <constraint firstItem="3vd-OQ-DBo" firstAttribute="leading" secondItem="Z5d-6n-nCi" secondAttribute="leading" constant="15" id="7de-lb-Tsc"/>
+                            <constraint firstItem="OVl-0c-dto" firstAttribute="leading" secondItem="gLV-Qe-aEY" secondAttribute="leading" id="9m2-LB-QFB"/>
+                            <constraint firstItem="gLV-Qe-aEY" firstAttribute="top" secondItem="0Fg-76-J5l" secondAttribute="bottom" constant="30" id="Cxc-C0-kyj"/>
+                            <constraint firstItem="0Fg-76-J5l" firstAttribute="leading" secondItem="3vd-OQ-DBo" secondAttribute="leading" id="FrF-IE-FP9"/>
+                            <constraint firstItem="Z5d-6n-nCi" firstAttribute="trailing" secondItem="JGw-Ba-1Is" secondAttribute="trailing" constant="30" id="IJ8-0V-cq9"/>
+                            <constraint firstItem="YeP-ir-Kad" firstAttribute="leading" secondItem="OVl-0c-dto" secondAttribute="leading" id="IUC-O4-mjX"/>
+                            <constraint firstItem="3vd-OQ-DBo" firstAttribute="top" secondItem="JGw-Ba-1Is" secondAttribute="bottom" id="Im2-lr-ZHL"/>
+                            <constraint firstItem="w6i-Sg-uPe" firstAttribute="centerX" secondItem="mOs-aW-oc9" secondAttribute="centerX" id="Mbb-c7-vs6"/>
+                            <constraint firstItem="rO7-Le-asG" firstAttribute="leading" secondItem="Z5d-6n-nCi" secondAttribute="leading" constant="15" id="OmN-62-UVq"/>
+                            <constraint firstItem="aWb-Io-1BB" firstAttribute="top" secondItem="0Fg-76-J5l" secondAttribute="top" id="PzE-Fn-C1x"/>
+                            <constraint firstItem="0Fg-76-J5l" firstAttribute="top" secondItem="3vd-OQ-DBo" secondAttribute="bottom" constant="16" id="Vt1-ne-gNG"/>
+                            <constraint firstItem="Z5d-6n-nCi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rO7-Le-asG" secondAttribute="trailing" symbolic="YES" id="fgg-w5-u7R"/>
+                            <constraint firstItem="TLz-RI-Hz8" firstAttribute="leading" secondItem="JGw-Ba-1Is" secondAttribute="trailing" id="h4x-2t-aRE"/>
+                            <constraint firstItem="gLV-Qe-aEY" firstAttribute="leading" secondItem="0Fg-76-J5l" secondAttribute="leading" id="h8c-jA-JUg"/>
+                            <constraint firstItem="w6i-Sg-uPe" firstAttribute="leading" secondItem="Z5d-6n-nCi" secondAttribute="leading" constant="75" id="hMY-So-nVb"/>
+                            <constraint firstItem="JGw-Ba-1Is" firstAttribute="top" secondItem="rO7-Le-asG" secondAttribute="bottom" constant="10" id="hr5-XR-CZf"/>
+                            <constraint firstItem="aWb-Io-1BB" firstAttribute="leading" secondItem="0Fg-76-J5l" secondAttribute="trailing" constant="16" id="hxj-jD-18c"/>
+                            <constraint firstItem="Z5d-6n-nCi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gLV-Qe-aEY" secondAttribute="trailing" symbolic="YES" id="kwT-PH-xVE"/>
+                            <constraint firstItem="rO7-Le-asG" firstAttribute="top" secondItem="Z5d-6n-nCi" secondAttribute="top" id="mEc-NA-wEz"/>
+                            <constraint firstAttribute="trailing" secondItem="YeP-ir-Kad" secondAttribute="trailing" id="nG4-l9-OjA"/>
+                            <constraint firstItem="JGw-Ba-1Is" firstAttribute="leading" secondItem="Z5d-6n-nCi" secondAttribute="leading" constant="11" id="plr-UW-OYj"/>
+                            <constraint firstItem="Z5d-6n-nCi" firstAttribute="trailing" secondItem="OVl-0c-dto" secondAttribute="trailing" id="qn9-dm-lNk"/>
+                            <constraint firstItem="OVl-0c-dto" firstAttribute="top" secondItem="gLV-Qe-aEY" secondAttribute="bottom" constant="10" id="rbB-iJ-oDr"/>
+                            <constraint firstItem="Z5d-6n-nCi" firstAttribute="trailing" secondItem="3vd-OQ-DBo" secondAttribute="trailing" id="uas-Bt-lHe"/>
+                            <constraint firstItem="YeP-ir-Kad" firstAttribute="top" secondItem="OVl-0c-dto" secondAttribute="bottom" id="ugR-Af-7Wn"/>
+                            <constraint firstItem="Z5d-6n-nCi" firstAttribute="trailing" secondItem="w6i-Sg-uPe" secondAttribute="trailing" constant="75" id="v0A-WZ-Ozq"/>
+                            <constraint firstItem="Z5d-6n-nCi" firstAttribute="bottom" secondItem="w6i-Sg-uPe" secondAttribute="bottom" constant="48" id="vgP-On-oqa"/>
+                            <constraint firstItem="TLz-RI-Hz8" firstAttribute="top" secondItem="JGw-Ba-1Is" secondAttribute="top" constant="6" id="vtI-zk-0JT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Z5d-6n-nCi"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Mbb-c7-vs6"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="v0A-WZ-Ozq"/>
+                                <include reference="Mbb-c7-vs6"/>
+                                <exclude reference="hMY-So-nVb"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="clearButton" destination="TLz-RI-Hz8" id="nhM-PN-UF5"/>
+                        <outlet property="importButton" destination="w6i-Sg-uPe" id="RQu-Be-5O1"/>
+                        <outlet property="nameWalletTextField" destination="OVl-0c-dto" id="5lX-jd-fpk"/>
+                        <outlet property="pasteButton" destination="aWb-Io-1BB" id="mAU-pc-F08"/>
+                        <outlet property="privateKeyTextView" destination="JGw-Ba-1Is" id="QhQ-LW-brI"/>
+                        <outlet property="qrButton" destination="0Fg-76-J5l" id="4Cc-VU-AL7"/>
+                        <outlet property="separator1" destination="3vd-OQ-DBo" id="ZB4-S6-dE7"/>
+                        <outlet property="separator2" destination="YeP-ir-Kad" id="h6g-Cz-mgw"/>
+                        <segue destination="nuO-ax-XC0" kind="show" identifier="goToPinFromImportSingleKey" id="qly-rG-0HJ"/>
+                        <segue destination="wYo-D0-EMj" kind="show" identifier="showProcessFromImportSecretKey" id="bbg-ak-3Up"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yza-R7-FuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2184" y="329"/>
+        </scene>
+        <!--WalletAddProcessing-->
+        <scene sceneID="eBS-Oz-I9Z">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WalletAddProcessing" id="wYo-D0-EMj" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vKa-2M-l1C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3975" y="554"/>
+        </scene>
+        <!--PasscodeSetupPhone-->
+        <scene sceneID="2zH-2H-KfX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PasscodeSetupPhone" id="nuO-ax-XC0" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fnS-Rg-0zk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3194" y="554"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="clear" width="14" height="14"/>
+        <image name="qr" width="20" height="20"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="pT1-5S-qPI"/>
+        <segue reference="ijQ-jv-rc6"/>
+    </inferredMetricsTieBreakers>
+</document>
