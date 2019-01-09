@@ -48,6 +48,7 @@
 		7185061521E5E17600CA204F /* PasscodeSetupPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185061421E5E17600CA204F /* PasscodeSetupPhone.storyboard */; };
 		7185061821E5EEE400CA204F /* WalletImport.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185061721E5EEE400CA204F /* WalletImport.storyboard */; };
 		7185061B21E5F43100CA204F /* WalletCreatePasscodeConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185061A21E5F43000CA204F /* WalletCreatePasscodeConfirmation.storyboard */; };
+		7185061E21E5F70000CA204F /* WalletCreatePasscodeGeneration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185061D21E5F6FF00CA204F /* WalletCreatePasscodeGeneration.storyboard */; };
 		71C72A2B21B009D000FB3E13 /* AssetManagementEthProgress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */; };
 		71C72A2D21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */; };
 		71C72A3021B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */; };
@@ -356,6 +357,7 @@
 		7185061421E5E17600CA204F /* PasscodeSetupPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PasscodeSetupPhone.storyboard; sourceTree = "<group>"; };
 		7185061721E5EEE400CA204F /* WalletImport.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletImport.storyboard; sourceTree = "<group>"; };
 		7185061A21E5F43000CA204F /* WalletCreatePasscodeConfirmation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletCreatePasscodeConfirmation.storyboard; sourceTree = "<group>"; };
+		7185061D21E5F6FF00CA204F /* WalletCreatePasscodeGeneration.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletCreatePasscodeGeneration.storyboard; sourceTree = "<group>"; };
 		71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthProgress.storyboard; sourceTree = "<group>"; };
 		71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthProgressViewController.swift; sourceTree = "<group>"; };
 		71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthSuccess.storyboard; sourceTree = "<group>"; };
@@ -765,6 +767,15 @@
 			path = WalletCreatePasscodeConfirmation;
 			sourceTree = "<group>";
 		};
+		7185061C21E5F67B00CA204F /* WalletCreatePasscodeGeneration */ = {
+			isa = PBXGroup;
+			children = (
+				7185061D21E5F6FF00CA204F /* WalletCreatePasscodeGeneration.storyboard */,
+				86A6CAE920FE3367002C19AA /* BackupPassphraseViewController.swift */,
+			);
+			path = WalletCreatePasscodeGeneration;
+			sourceTree = "<group>";
+		};
 		71C72A2921B009A900FB3E13 /* EthProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -836,6 +847,7 @@
 				71EB27BF21D6158E00B9EE30 /* WalletAddRename */,
 				7185060721D7B58100CA204F /* WalletAddProcessing */,
 				7185061921E5F24800CA204F /* WalletCreatePasscodeConfirmation */,
+				7185061C21E5F67B00CA204F /* WalletCreatePasscodeGeneration */,
 				7185060121D770D400CA204F /* WalletDetails */,
 				7185061621E5EDAF00CA204F /* WalletImport */,
 				71EB27A321D4C8C100B9EE30 /* WalletRename */,
@@ -1161,7 +1173,6 @@
 			isa = PBXGroup;
 			children = (
 				86A6CAE820FE330C002C19AA /* Import */,
-				86A6CAE720FE3303002C19AA /* Create */,
 			);
 			path = CreatingWallet;
 			sourceTree = "<group>";
@@ -1295,14 +1306,6 @@
 				86E3C7892113A4FA0085794A /* Views */,
 			);
 			path = Contacts;
-			sourceTree = "<group>";
-		};
-		86A6CAE720FE3303002C19AA /* Create */ = {
-			isa = PBXGroup;
-			children = (
-				86A6CAE920FE3367002C19AA /* BackupPassphraseViewController.swift */,
-			);
-			path = Create;
 			sourceTree = "<group>";
 		};
 		86A6CAE820FE330C002C19AA /* Import */ = {
@@ -1715,6 +1718,7 @@
 				867681C321831F4100C269ED /* DeleteCell.xib in Resources */,
 				71EB27BA21D6108300B9EE30 /* OnboardingStep.storyboard in Resources */,
 				8688F2A921BEA8C00005B248 /* TokenArrow.xib in Resources */,
+				7185061E21E5F70000CA204F /* WalletCreatePasscodeGeneration.storyboard in Resources */,
 				924A36EB21B03A0F000954BD /* AssetManagementLinks.storyboard in Resources */,
 				711923F121BA6A0600F90972 /* AssetManagementLinks.strings in Resources */,
 				713207E721AE8F5B002FD8AF /* AssetManagementContacts.storyboard in Resources */,
