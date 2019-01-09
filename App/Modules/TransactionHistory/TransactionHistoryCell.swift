@@ -44,8 +44,8 @@ class TransactionHistoryCell: UITableViewCell {
             statusImageView.image = isSend ? #imageLiteral(resourceName: "Sent") : #imageLiteral(resourceName: "Received")
             transactionTypeLabel.text = isSend ? NSLocalizedString("Sent", comment: "") : NSLocalizedString("Received", comment: "")
         }
-        let toLbl = String(format: NSLocalizedString("To: %@", comment: ""), getFormattedAddress(trans.to))
-        let fromLbl = String(format: NSLocalizedString("From: %@", comment: ""), getFormattedAddress(trans.from))
+        let toLbl = String(format: NSLocalizedString("To: %@", comment: ""), trans.to.formattedAddrToken(number: 5))
+        let fromLbl = String(format: NSLocalizedString("From: %@", comment: ""), trans.from.formattedAddrToken(number: 5))
         addressLabel.text = isSend ? toLbl : fromLbl
         if trans.amount.first == "." {
             var amount = trans.amount
@@ -57,11 +57,6 @@ class TransactionHistoryCell: UITableViewCell {
         transactionTime.text = forMain ? dateFormatter.string(from: trans.date) : timeFormatter.string(from: trans.date)
     }
     
-    private func getFormattedAddress(_ address: String) -> String {
-        let formatted = address[address.startIndex..<address.index(address.startIndex, offsetBy: 5)] + "..." + address[address.index(address.endIndex, offsetBy: -5)..<address.endIndex]
-        return String(formatted)
-        
-    }
 }
 
 class TransactionHistorySectionCell: UITableViewCell {

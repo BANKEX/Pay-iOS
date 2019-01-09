@@ -40,14 +40,8 @@ class WalletCell: UITableViewCell {
     
     func configure(wallet:HDKey) {
         nameWalletLabel.text = wallet.name
-        addressWalletLabel.text = getFormattedAddress(wallet.address)
+        addressWalletLabel.text = wallet.address.formattedAddrToken(number: 10)
         address = wallet.address
-    }
-    
-    private func getFormattedAddress(_ address: String) -> String {
-        let formatted = address[address.startIndex..<address.index(address.startIndex, offsetBy: 10)] + "..." + address[address.index(address.endIndex, offsetBy: -10)..<address.endIndex]
-        return String(formatted)
-        
     }
     
     func prepareAddressLabel() {

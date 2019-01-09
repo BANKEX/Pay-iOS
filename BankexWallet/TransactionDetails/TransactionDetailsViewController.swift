@@ -210,8 +210,8 @@ extension TransactionDetailsViewController {
         addressToTitleLabel.isEnabled = transaction != nil
         addressFromTitleLabel.isEnabled = transaction != nil
         if let transaction = transaction {
-            addressToValueLabel.text = getFormattedAddress(transaction.to)
-            addressFromValueLabel.text = getFormattedAddress(transaction.from)
+            addressToValueLabel.text = transaction.to.formattedAddrToken(number: 5)
+            addressFromValueLabel.text = transaction.to.formattedAddrToken(number: 5)
         } else {
             addressToValueLabel.text = "-"
             addressFromValueLabel.text = "-"
@@ -333,31 +333,16 @@ extension TransactionDetailsViewController {
 
 extension TransactionDetailsViewController {
     
-    private func getFormattedAddress(_ address: String) -> String {
-        let offset = 5
-        
-        return String(address[address.startIndex..<address.index(address.startIndex, offsetBy: offset)]
-            + "..." + address[address.index(address.endIndex, offsetBy: -offset)..<address.endIndex])
-    }
-    
     private func inGwei(_ value: BigUInt) -> String? {
         guard let gwei = Web3.Utils.formatToEthereumUnits(value, toUnits: .Gwei) else { return nil }
         
-        return String(describing: trimInsignificantLastZeros(gwei)) + " Gwei"
+        return String(describing: gwei.stripZeros()) + " Gwei"
     }
     
     private func inEth(_ value: BigUInt) -> String? {
         guard let eth = Web3.Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: 9) else { return nil }
         
-        return String(describing: trimInsignificantLastZeros(eth)) + " ETH"
+        return String(describing: eth.stripZeros()) + " ETH"
     }
     
-    private func trimInsignificantLastZeros(_ string: String) -> String {
-        var string = string
-        while string.hasSuffix("0") {
-            string = String(string.dropLast())
-        }
-        
-        return string
-    }
 }
