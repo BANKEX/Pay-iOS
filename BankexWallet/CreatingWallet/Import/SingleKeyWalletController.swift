@@ -179,7 +179,7 @@ class SingleKeyWalletController: BaseViewController,UITextFieldDelegate,QRReader
     }
     
     func presentPasscodeIpad() {
-        let passcodeVC = CreateVC(byName: "PasscodeIpadVC") as! PasscodeIpadVC
+        let passcodeVC = UIStoryboard(name: "PasscodeSetupPad", bundle: nil).instantiateInitialViewController() as! PasscodeIpadVC
         passcodeVC.modalPresentationStyle = .formSheet
         passcodeVC.delegate = self
         passcodeVC.preferredContentSize = CGSize(width: 320, height: 600)
