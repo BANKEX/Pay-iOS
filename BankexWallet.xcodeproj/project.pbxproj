@@ -51,6 +51,7 @@
 		7185061E21E5F70000CA204F /* WalletCreatePasscodeGeneration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185061D21E5F6FF00CA204F /* WalletCreatePasscodeGeneration.storyboard */; };
 		7185062121E5FB1600CA204F /* WalletAddMethod.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185062021E5FB1500CA204F /* WalletAddMethod.storyboard */; };
 		7185062421E600F300CA204F /* WalletList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185062321E600F300CA204F /* WalletList.storyboard */; };
+		7185062721E604B600CA204F /* SettingsMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185062621E604B600CA204F /* SettingsMain.storyboard */; };
 		71C72A2B21B009D000FB3E13 /* AssetManagementEthProgress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */; };
 		71C72A2D21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */; };
 		71C72A3021B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */; };
@@ -362,6 +363,7 @@
 		7185061D21E5F6FF00CA204F /* WalletCreatePasscodeGeneration.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletCreatePasscodeGeneration.storyboard; sourceTree = "<group>"; };
 		7185062021E5FB1500CA204F /* WalletAddMethod.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletAddMethod.storyboard; sourceTree = "<group>"; };
 		7185062321E600F300CA204F /* WalletList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletList.storyboard; sourceTree = "<group>"; };
+		7185062621E604B600CA204F /* SettingsMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsMain.storyboard; sourceTree = "<group>"; };
 		71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthProgress.storyboard; sourceTree = "<group>"; };
 		71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthProgressViewController.swift; sourceTree = "<group>"; };
 		71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthSuccess.storyboard; sourceTree = "<group>"; };
@@ -801,6 +803,18 @@
 			path = WalletList;
 			sourceTree = "<group>";
 		};
+		7185062521E6030B00CA204F /* SettingsMain */ = {
+			isa = PBXGroup;
+			children = (
+				7185062621E604B600CA204F /* SettingsMain.storyboard */,
+				863156992103940300914F31 /* SettingsViewController.swift */,
+				8631569D21039E9700914F31 /* SettingsDataSource.swift */,
+				8631569F2103B4CF00914F31 /* SettingsDelegate.swift */,
+				8631569B2103944600914F31 /* ManagerReferences.swift */,
+			);
+			path = SettingsMain;
+			sourceTree = "<group>";
+		};
 		71C72A2921B009A900FB3E13 /* EthProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -863,6 +877,7 @@
 				7185060421D7AD9400CA204F /* PasscodeEnter */,
 				7185061121E5D57A00CA204F /* PasscodeSetup */,
 				71EB27CE21D64A5F00B9EE30 /* QRCodeGeneration */,
+				7185062521E6030B00CA204F /* SettingsMain */,
 				71EB27CB21D648A700B9EE30 /* SettingsNetworks */,
 				71EB27C221D630B600B9EE30 /* SettingsSecurity */,
 				71EB27AF21D527D800B9EE30 /* TokenAddConfirmation */,
@@ -1070,7 +1085,6 @@
 				86A4917A2109CD70006E3679 /* Contacts */,
 				861D2CD6214AF68100A108C4 /* Main */,
 				F00E4629207A354D00387B96 /* ProcessScreens */,
-				86315698210393E700914F31 /* Settings */,
 				002ED583210F179600845A72 /* TransactionHistory */,
 				714B5AD521CA346700CA729A /* TransactionDetails */,
 				86A6F8C52147FE6600609413 /* Wallet */,
@@ -1202,20 +1216,6 @@
 				86A6CAE820FE330C002C19AA /* Import */,
 			);
 			path = CreatingWallet;
-			sourceTree = "<group>";
-		};
-		86315698210393E700914F31 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				86FE6DEA21076933009AE44E /* Security */,
-				86D54B2F21050A8A0001A9AA /* Wallets */,
-				863156992103940300914F31 /* SettingsViewController.swift */,
-				8631569B2103944600914F31 /* ManagerReferences.swift */,
-				8631569D21039E9700914F31 /* SettingsDataSource.swift */,
-				8631569F2103B4CF00914F31 /* SettingsDelegate.swift */,
-			);
-			name = Settings;
-			path = InterfaceElements/DesignElements/Settings;
 			sourceTree = "<group>";
 		};
 		864732C4214FC17A00519AE1 /* SupportingFiles */ = {
@@ -1373,13 +1373,6 @@
 			path = Split;
 			sourceTree = "<group>";
 		};
-		86D54B2F21050A8A0001A9AA /* Wallets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Wallets;
-			sourceTree = "<group>";
-		};
 		86D7FB7721493269008245DE /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1417,13 +1410,6 @@
 				8617A51C210CE84C007F6A9A /* ProfileContactViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		86FE6DEA21076933009AE44E /* Security */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Security;
 			sourceTree = "<group>";
 		};
 		9220BE7721CC12AF0079F85C /* StatusLabel */ = {
@@ -1727,6 +1713,7 @@
 				86219C082180AB1300185EF6 /* SectionTableCell.xib in Resources */,
 				863A6A602184EBAA00E4A8D3 /* GeneralInformationCell.xib in Resources */,
 				9220BE7D21CC228F0079F85C /* StatusLabel.strings in Resources */,
+				7185062721E604B600CA204F /* SettingsMain.storyboard in Resources */,
 				71EB27D021D64EAD00B9EE30 /* QRCodeGeneration.storyboard in Resources */,
 				86D7FB7F2149338B008245DE /* WalletTableViewCell.xib in Resources */,
 				867681C321831F4100C269ED /* DeleteCell.xib in Resources */,
