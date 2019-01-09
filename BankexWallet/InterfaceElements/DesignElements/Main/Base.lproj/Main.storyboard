@@ -773,7 +773,7 @@
                         <outlet property="nameNetworkLabel" destination="tlb-dS-iiN" id="Wkc-TX-Xn3"/>
                         <outlet property="nameWalletLabel" destination="Iat-gY-4ly" id="31X-b0-be9"/>
                         <segue destination="c27-W6-qMj" kind="show" identifier="networkSegue" id="AnP-VM-Uv4"/>
-                        <segue destination="2hH-TX-0h2" kind="show" identifier="walletSegue" id="cjv-fL-ghI"/>
+                        <segue destination="iAC-73-mQ1" kind="show" identifier="walletSegue" id="cjv-fL-ghI"/>
                         <segue destination="Xx9-g5-dfS" kind="show" identifier="securitySegue" id="w2E-r0-NRd"/>
                         <segue destination="qAV-m8-HFe" kind="show" identifier="dev" id="bSW-e7-K9g"/>
                         <segue destination="snQ-rS-aSh" kind="show" identifier="products" id="8AR-q8-9c4"/>
@@ -782,108 +782,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YkV-yB-ASf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2466" y="6295"/>
-        </scene>
-        <!--Wallets View Controller-->
-        <scene sceneID="9in-QS-g9s">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="2hH-TX-0h2" customClass="WalletsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="JRl-0E-xFe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ihI-ft-ZZn">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" rowHeight="62" id="qby-pv-EVX" customClass="WalletCell" customModule="BankexWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="62"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qby-pv-EVX" id="Ruh-BB-lf4">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="61.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="827-HY-a1m">
-                                                    <rect key="frame" x="15" y="10" width="128" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="WM0-4b-ynC" userLabel="Address">
-                                                    <rect key="frame" x="15" y="31.5" width="290" height="19.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4nf-t0-upk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="251" height="19.5"/>
-                                                            <accessibility key="accessibilityConfiguration" label="addrLabel"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="760" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVE-ua-g50">
-                                                            <rect key="frame" x="255" y="0.0" width="23" height="19.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                            <color key="textColor" red="0.72156862745098038" green="0.74901960784313726" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalCompressionResistancePriority="760" image="Arrow Right Grey" translatesAutoresizingMaskIntoConstraints="NO" id="kFg-te-GlP">
-                                                            <rect key="frame" x="282" y="0.0" width="8" height="19.5"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilJ-a4-IMl" userLabel="InfoButton">
-                                                    <rect key="frame" x="266" y="0.0" width="54" height="61.5"/>
-                                                    <connections>
-                                                        <action selector="infoButtonTapped:" destination="qby-pv-EVX" eventType="touchUpInside" id="4fF-A7-xxW"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="827-HY-a1m" firstAttribute="leading" secondItem="Ruh-BB-lf4" secondAttribute="leadingMargin" id="49k-Pr-GGu"/>
-                                                <constraint firstItem="WM0-4b-ynC" firstAttribute="leading" secondItem="Ruh-BB-lf4" secondAttribute="leadingMargin" id="LZc-yQ-A1g"/>
-                                                <constraint firstAttribute="bottom" secondItem="ilJ-a4-IMl" secondAttribute="bottom" id="Lpw-Q5-DMh"/>
-                                                <constraint firstItem="827-HY-a1m" firstAttribute="top" secondItem="Ruh-BB-lf4" secondAttribute="top" constant="10" id="MA9-KO-OQv"/>
-                                                <constraint firstItem="ilJ-a4-IMl" firstAttribute="leading" secondItem="4nf-t0-upk" secondAttribute="trailing" id="Pwn-bc-k6r"/>
-                                                <constraint firstItem="WM0-4b-ynC" firstAttribute="bottom" secondItem="Ruh-BB-lf4" secondAttribute="bottomMargin" id="d9U-wD-cAb"/>
-                                                <constraint firstItem="WM0-4b-ynC" firstAttribute="top" secondItem="827-HY-a1m" secondAttribute="bottom" constant="1" id="maY-Yh-31y"/>
-                                                <constraint firstItem="ilJ-a4-IMl" firstAttribute="top" secondItem="Ruh-BB-lf4" secondAttribute="top" id="qmd-tl-YGm"/>
-                                                <constraint firstAttribute="trailing" secondItem="ilJ-a4-IMl" secondAttribute="trailing" id="sFV-0j-FXc"/>
-                                                <constraint firstItem="WM0-4b-ynC" firstAttribute="trailing" secondItem="Ruh-BB-lf4" secondAttribute="trailingMargin" id="whG-dR-u6H"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="addressWalletLabel" destination="4nf-t0-upk" id="pRA-AI-o6c"/>
-                                            <outlet property="nameWalletLabel" destination="827-HY-a1m" id="Nq3-eX-g3F"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <sections/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="walletTableView"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="walletTableidentifier"/>
-                                </userDefinedRuntimeAttributes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="ihI-ft-ZZn" firstAttribute="leading" secondItem="QBJ-f3-MFh" secondAttribute="leading" id="6Y0-ss-cSe">
-                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                            </constraint>
-                            <constraint firstItem="QBJ-f3-MFh" firstAttribute="bottom" secondItem="ihI-ft-ZZn" secondAttribute="bottom" id="7mf-Fh-kfi"/>
-                            <constraint firstItem="ihI-ft-ZZn" firstAttribute="top" secondItem="QBJ-f3-MFh" secondAttribute="top" id="R8C-eI-Mg7"/>
-                            <constraint firstItem="QBJ-f3-MFh" firstAttribute="trailing" secondItem="ihI-ft-ZZn" secondAttribute="trailing" id="jtp-Og-5gb">
-                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                            </constraint>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="QBJ-f3-MFh"/>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="ihI-ft-ZZn" id="PYF-zV-HfV"/>
-                        <segue destination="Zfo-Ve-SgX" kind="show" identifier="showAddWalletVC" id="o2o-Af-M3V"/>
-                        <segue destination="tca-Xj-fCZ" kind="show" identifier="ShowWalletInfo" id="IPS-OW-U8x"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jcy-WG-pjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1247.2" y="6357.571214392804"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KzY-jO-MSO">
@@ -3016,14 +2914,6 @@ successfully</string>
             </objects>
             <point key="canvasLocation" x="-233" y="7512"/>
         </scene>
-        <!--WalletDetails-->
-        <scene sceneID="Kp1-xo-oGD">
-            <objects>
-                <viewControllerPlaceholder storyboardName="WalletDetails" id="tca-Xj-fCZ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TR6-qH-eYI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="234" y="6326"/>
-        </scene>
         <!--WalletAddProcessing-->
         <scene sceneID="eBS-Oz-I9Z">
             <objects>
@@ -3041,6 +2931,14 @@ successfully</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVJ-Sj-hb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2" y="2397"/>
+        </scene>
+        <!--WalletList-->
+        <scene sceneID="Lh6-LD-j9J">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WalletList" id="iAC-73-mQ1" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rSM-mq-Kar" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1247.2" y="6357.571214392804"/>
         </scene>
     </scenes>
     <resources>
@@ -3069,7 +2967,6 @@ successfully</string>
         <image name="wallet_icon" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0M5-ZF-71X"/>
         <segue reference="USj-xB-uaI"/>
         <segue reference="JaH-wa-aDn"/>
         <segue reference="4v7-Bv-6wS"/>
