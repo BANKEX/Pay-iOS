@@ -1754,7 +1754,7 @@
                         <outlet property="messageLabel" destination="wUM-zI-rhZ" id="hWn-KL-d2b"/>
                         <outlet property="secondNum" destination="QV2-BS-1G5" id="usG-k2-86M"/>
                         <outlet property="thirdNum" destination="4Bf-gp-yRh" id="UeT-0x-Vvt"/>
-                        <segue destination="a3J-Y6-DtH" kind="show" identifier="fromPinToWalletCreated" id="57D-OX-sbx"/>
+                        <segue destination="TCn-QB-PgX" kind="show" identifier="fromPinToWalletCreated" id="57D-OX-sbx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="phY-9X-PxK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3793,185 +3793,13 @@ accessibilityIdentifier</string>
                         <outlet property="errorLabel" destination="igo-na-Rvf" id="71z-pS-wjg"/>
                         <outlet property="heightConstraing" destination="uUd-WL-YVh" id="1mH-BE-uON"/>
                         <outlet property="nextButton" destination="2ou-vL-T35" id="rZx-47-yr4"/>
-                        <segue destination="a3J-Y6-DtH" kind="show" identifier="toWalletCreated" id="BAb-mb-KXV"/>
+                        <segue destination="TCn-QB-PgX" kind="show" identifier="toWalletCreated" id="BAb-mb-KXV"/>
                         <segue destination="ieh-eS-frZ" kind="show" identifier="goToPinFromCreate" id="9Eb-Fz-7t3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bTM-ME-ITE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2991.1999999999998" y="2870.9145427286358"/>
-        </scene>
-        <!--Wallet Created View Controller-->
-        <scene sceneID="38z-em-Dxv">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="a3J-Y6-DtH" customClass="WalletCreatedViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="J2S-WQ-nkd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAC-II-JHc">
-                                <rect key="frame" x="75" y="470" width="170" height="50"/>
-                                <color key="backgroundColor" red="0.22352941176470587" green="0.45882352941176469" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
-                                <accessibility key="accessibilityConfiguration" label="next3"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="224" id="A0v-Mk-W04"/>
-                                    <constraint firstAttribute="height" constant="50" id="VR6-rC-zMU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Create Wallet">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="A0v-Mk-W04"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="A0v-Mk-W04"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="nextButtonTapped:" destination="a3J-Y6-DtH" eventType="touchUpInside" id="Zdo-S7-z9m"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbS-T0-1sL">
-                                <rect key="frame" x="16" y="287.5" width="100.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="ETH Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcm-SJ-pEb">
-                                <rect key="frame" x="16" y="316" width="119.5" height="18"/>
-                                <accessibility key="accessibilityConfiguration" label="walletNameLb"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Wallet Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLI-qR-wfT">
-                                <rect key="frame" x="16" y="363" width="120" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="f0X-Ac-2ve">
-                                <rect key="frame" x="16" y="391.5" width="288" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                </variation>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYg-yj-7TT">
-                                <rect key="frame" x="0.0" y="64" width="320" height="189.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cu-sb-LSi">
-                                        <rect key="frame" x="106" y="11" width="108" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFe-cj-9G9">
-                                        <rect key="frame" x="273" y="5" width="30" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Edit">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="editButtonTapped" destination="a3J-Y6-DtH" eventType="touchUpInside" id="z4l-8g-Ely"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="_Compound Path_" translatesAutoresizingMaskIntoConstraints="NO" id="xYI-ya-DCD">
-                                        <rect key="frame" x="118" y="55.5" width="104" height="78"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="104" id="3EU-lc-V4m"/>
-                                            <constraint firstAttribute="height" constant="78" id="h4r-AR-CCQ"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXW-NM-BWp">
-                                        <rect key="frame" x="118.5" y="146.5" width="83" height="41"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.050980392156862744" green="0.72941176470588232" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="SFe-cj-9G9" firstAttribute="centerY" secondItem="6cu-sb-LSi" secondAttribute="centerY" id="CM4-Pt-XWG"/>
-                                    <constraint firstItem="KXW-NM-BWp" firstAttribute="centerX" secondItem="vYg-yj-7TT" secondAttribute="centerX" id="IGj-uO-hJo"/>
-                                    <constraint firstItem="6cu-sb-LSi" firstAttribute="top" secondItem="vYg-yj-7TT" secondAttribute="top" constant="11" id="O7V-Vg-GVn"/>
-                                    <constraint firstItem="6cu-sb-LSi" firstAttribute="centerX" secondItem="vYg-yj-7TT" secondAttribute="centerX" id="Oyc-en-CH6"/>
-                                    <constraint firstAttribute="trailing" secondItem="SFe-cj-9G9" secondAttribute="trailing" constant="17" id="gcZ-tN-Iec"/>
-                                    <constraint firstItem="xYI-ya-DCD" firstAttribute="centerY" secondItem="vYg-yj-7TT" secondAttribute="centerY" id="o0P-e6-Ox7"/>
-                                    <constraint firstItem="KXW-NM-BWp" firstAttribute="top" secondItem="xYI-ya-DCD" secondAttribute="bottom" constant="13" id="qnd-Az-Luh"/>
-                                    <constraint firstItem="xYI-ya-DCD" firstAttribute="centerX" secondItem="vYg-yj-7TT" secondAttribute="centerX" constant="10" id="vWI-KM-HYk"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="HBi-1G-beW" firstAttribute="trailing" secondItem="qAC-II-JHc" secondAttribute="trailing" constant="75" id="3A1-3s-Hfv"/>
-                            <constraint firstItem="vYg-yj-7TT" firstAttribute="top" secondItem="HBi-1G-beW" secondAttribute="top" id="9MR-ht-gRP"/>
-                            <constraint firstItem="pbS-T0-1sL" firstAttribute="top" secondItem="vYg-yj-7TT" secondAttribute="bottom" constant="34" id="BUx-jZ-mPm">
-                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                            </constraint>
-                            <constraint firstItem="BLI-qR-wfT" firstAttribute="top" secondItem="Gcm-SJ-pEb" secondAttribute="bottom" constant="29" id="Ejg-QH-JdK"/>
-                            <constraint firstItem="qAC-II-JHc" firstAttribute="centerX" secondItem="J2S-WQ-nkd" secondAttribute="centerX" id="G80-VQ-IoE"/>
-                            <constraint firstItem="Gcm-SJ-pEb" firstAttribute="top" secondItem="pbS-T0-1sL" secondAttribute="bottom" constant="8" id="OdM-p3-aT5"/>
-                            <constraint firstItem="Gcm-SJ-pEb" firstAttribute="leading" secondItem="pbS-T0-1sL" secondAttribute="leading" id="TLd-hP-FDQ"/>
-                            <constraint firstItem="HBi-1G-beW" firstAttribute="bottom" secondItem="qAC-II-JHc" secondAttribute="bottom" constant="48" id="XQl-WJ-8cx"/>
-                            <constraint firstItem="qAC-II-JHc" firstAttribute="leading" secondItem="HBi-1G-beW" secondAttribute="leading" constant="75" id="fJj-SA-Ui0"/>
-                            <constraint firstItem="f0X-Ac-2ve" firstAttribute="leading" secondItem="pbS-T0-1sL" secondAttribute="leading" id="fbA-8t-PIx"/>
-                            <constraint firstItem="vYg-yj-7TT" firstAttribute="height" secondItem="J2S-WQ-nkd" secondAttribute="height" multiplier="1:3" id="gDO-20-qGj"/>
-                            <constraint firstItem="pbS-T0-1sL" firstAttribute="leading" secondItem="HBi-1G-beW" secondAttribute="leading" constant="16" id="lPj-TN-dC0">
-                                <variation key="heightClass=regular-widthClass=regular" constant="68"/>
-                            </constraint>
-                            <constraint firstItem="BLI-qR-wfT" firstAttribute="leading" secondItem="pbS-T0-1sL" secondAttribute="leading" id="lSU-E1-Zfd"/>
-                            <constraint firstItem="HBi-1G-beW" firstAttribute="trailing" secondItem="vYg-yj-7TT" secondAttribute="trailing" id="lpQ-Sj-jSM"/>
-                            <constraint firstItem="HBi-1G-beW" firstAttribute="trailing" secondItem="f0X-Ac-2ve" secondAttribute="trailing" constant="16" id="qcB-bu-M2q"/>
-                            <constraint firstItem="vYg-yj-7TT" firstAttribute="leading" secondItem="HBi-1G-beW" secondAttribute="leading" id="qyu-JC-atM"/>
-                            <constraint firstItem="f0X-Ac-2ve" firstAttribute="top" secondItem="BLI-qR-wfT" secondAttribute="bottom" constant="8" id="ywI-Li-DIi"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="HBi-1G-beW"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="G80-VQ-IoE"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <mask key="constraints">
-                                <exclude reference="3A1-3s-Hfv"/>
-                                <include reference="G80-VQ-IoE"/>
-                                <exclude reference="fJj-SA-Ui0"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="nextButton" destination="qAC-II-JHc" id="ZCC-Mj-7pp"/>
-                        <outlet property="walletAddressLabel" destination="f0X-Ac-2ve" id="Jy7-SB-ggv"/>
-                        <outlet property="walletNameLabel" destination="Gcm-SJ-pEb" id="4Mu-rt-8Ss"/>
-                        <segue destination="w5r-mj-a4O" kind="show" identifier="showEdit" id="oVN-c5-CvU"/>
-                        <segue destination="wYo-D0-EMj" kind="show" identifier="showProcessFromCreation" id="OdR-NC-3s9"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y3i-mb-NGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3783.1999999999998" y="2854.7226386806601"/>
         </scene>
         <!--Sending Success View Controller-->
         <scene sceneID="wZG-eG-xWt">
@@ -4853,14 +4681,6 @@ successfully</string>
             </objects>
             <point key="canvasLocation" x="-2167.1999999999998" y="3001.3493253373317"/>
         </scene>
-        <!--WalletAddRename-->
-        <scene sceneID="bNW-dm-fL0">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="EditWalletNameController" storyboardName="WalletAddRename" id="w5r-mj-a4O" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qW3-5e-z6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4748" y="3360"/>
-        </scene>
         <!--SettingsSecurity-->
         <scene sceneID="SeY-2y-gv0">
             <objects>
@@ -4927,6 +4747,14 @@ successfully</string>
             </objects>
             <point key="canvasLocation" x="5639.1999999999998" y="2854.7226386806601"/>
         </scene>
+        <!--WalletAddConfirmation-->
+        <scene sceneID="6Iv-qk-ilw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WalletAddConfirmation" id="TCn-QB-PgX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eeo-Ms-awX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3783.1999999999998" y="2854.7226386806601"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Arrow Right Grey" width="8" height="13"/>
@@ -4947,7 +4775,6 @@ successfully</string>
         <image name="Twitter" width="29" height="29"/>
         <image name="Vector" width="46" height="182"/>
         <image name="Warning- Error" width="240" height="160"/>
-        <image name="_Compound Path_" width="99" height="72.5"/>
         <image name="arrow_right" width="24" height="24"/>
         <image name="clear" width="14" height="14"/>
         <image name="developer" width="29" height="29"/>
@@ -4960,11 +4787,11 @@ successfully</string>
         <image name="wallet_icon" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jmi-Ci-Lfa"/>
+        <segue reference="57D-OX-sbx"/>
+        <segue reference="ijQ-jv-rc6"/>
         <segue reference="USj-xB-uaI"/>
         <segue reference="JaH-wa-aDn"/>
         <segue reference="4v7-Bv-6wS"/>
-        <segue reference="BAb-mb-KXV"/>
         <segue reference="bDG-Xv-WCD"/>
         <segue reference="Ifx-vO-B66"/>
         <segue reference="fKt-CA-37X"/>
