@@ -15,7 +15,8 @@ protocol RenameViewControllerDelegate:class {
 
 class RenameViewController: BaseViewController {
     
-    @IBOutlet weak var nameWalletTF:UITextField!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var nameWalletTF: UITextField!
     @IBOutlet var saveBarButtonItem: UIBarButtonItem!
     
     var selectedWalletName:String!
@@ -38,6 +39,8 @@ class RenameViewController: BaseViewController {
         
         title = LocalizedStrings.title
         saveBarButtonItem.title = LocalizedStrings.save
+        nameLabel.text = LocalizedStrings.nameLabelTitle
+        nameWalletTF.placeholder = LocalizedStrings.nameTextFieldPlaceholder
     }
     
     func addCancelButtonIfNeed() {
@@ -98,13 +101,14 @@ class RenameViewController: BaseViewController {
 
 }
 
-
 private extension RenameViewController {
     
     struct LocalizedStrings {
         static let title = NSLocalizedString("Title", tableName: "WalletRename", comment: "")
         static let save = NSLocalizedString("SaveBarButtonTitle", tableName: "WalletRename", comment: "")
         static let cancel = NSLocalizedString("CancelBarButtonTitle", tableName: "WalletRename", comment: "")
+        static let nameLabelTitle = NSLocalizedString("WalletNameLabelTitle", tableName: "WalletRename", comment: "")
+        static let nameTextFieldPlaceholder = NSLocalizedString("WalletNameTextFieldPlaceholder", tableName: "WalletRename", comment: "")
     }
     
 }
