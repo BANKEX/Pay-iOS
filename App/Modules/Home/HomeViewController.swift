@@ -244,7 +244,7 @@ class HomeViewController: BaseViewController {
             if UIDevice.isIpad {
                 let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
                 let nav = BaseNavigationController(rootViewController: listContactsVC)
-                let profileVC = CreateVC(byName: "ProfileContactViewController") as! ProfileContactViewController
+                let profileVC = UIStoryboard(name: "ContactDetails", bundle: nil).instantiateInitialViewController() as! ProfileContactViewController
                 profileVC.selectedContact = selectedContact
                 nav.pushViewController(profileVC, animated: false)
                 splitViewController?.showDetailViewController(nav, sender: nil)
