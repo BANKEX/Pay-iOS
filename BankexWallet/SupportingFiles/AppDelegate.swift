@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showSplitVC() {
-        let splitVC = CreateVC(byName: "BaseSplitViewController") as! BaseSplitViewController
+        let splitVC = UIStoryboard(name: "MenuPad", bundle: nil).instantiateInitialViewController() as! BaseSplitViewController
         window?.rootViewController = splitVC
         window?.makeKeyAndVisible()
     }
