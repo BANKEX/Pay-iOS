@@ -25,35 +25,4 @@ class InitialLogicRouter {
         }
     }
     
-    
-    
-    func useFaceIdToAuth(rootControler: UINavigationController) {
-        let context = LAContext()
-        var error: NSError?
-        
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Identify yourself!"
-            
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
-                [unowned self] (success, authenticationError) in
-                
-                DispatchQueue.main.async {
-                    if success {
-                        rootControler.performSegue(withIdentifier: "showProcess", sender: self)
-                        
-                        DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
-                            
-                            let controller = UIStoryboard(name: "MenuPhone", bundle: nil).instantiateInitialViewController() as! BaseTabBarController
-                            
-                            rootControler.viewControllers = [controller]
-                        }
-                    } else {
-                        // error
-                    }
-                }
-            }
-        } else {
-            // no biometry
-        }
-    }
 }

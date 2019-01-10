@@ -193,7 +193,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         } else {
         }
         tableVIew.separatorInset.left = 48
-        tableVIew.tableFooterView = UIDevice.isIpad ? UIView() : footerTableView
+        tableVIew.tableFooterView = UIDevice.isIpad ? UIView() : UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
     }
     
     

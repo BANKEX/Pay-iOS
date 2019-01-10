@@ -176,20 +176,52 @@
                         <outletCollection property="circles" destination="hWS-Kd-c5X" collectionClass="NSMutableArray" id="jcV-zN-O63"/>
                         <outletCollection property="circles" destination="qCI-cE-E7J" collectionClass="NSMutableArray" id="cfh-rA-hAZ"/>
                         <outletCollection property="circles" destination="Qbj-sq-pfx" collectionClass="NSMutableArray" id="gcd-f0-n7s"/>
-                        <segue destination="QJj-5f-dgt" kind="show" identifier="toNavigation" id="ui0-Ra-hSh"/>
+                        <segue destination="dvo-0a-qNY" kind="show" identifier="toNavigation" id="LUm-XV-moS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8uH-eC-nY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2412" y="2238.530734632684"/>
         </scene>
-        <!--startNavigationController-->
-        <scene sceneID="37f-4p-E0U">
+        <!--Base Navigation Controller-->
+        <scene sceneID="JWs-Yi-0Zx">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="startNavigationController" storyboardName="Main" referencedIdentifier="startNavigationController" id="QJj-5f-dgt" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5jf-MJ-cfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="dvo-0a-qNY" customClass="BaseNavigationController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kfw-5j-OiY">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="view.backgroundColor">
+                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="RaB-Mn-6hE" kind="relationship" relationship="rootViewController" id="LdJ-Dh-FbT"/>
+                        <segue destination="Alu-eP-10h" kind="show" identifier="showProcess" animates="NO" id="EOG-ox-fMx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SOe-c4-olc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1481" y="2209"/>
+            <point key="canvasLocation" x="-750" y="2239"/>
+        </scene>
+        <!--WalletAddProcessing-->
+        <scene sceneID="Ofg-Ex-ZIl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WalletAddProcessing" id="Alu-eP-10h" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bOK-z9-rbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="294" y="2238"/>
+        </scene>
+        <!--WalletAddMethod-->
+        <scene sceneID="kfS-Jl-YMW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WalletAddMethod" id="RaB-Mn-6hE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3w9-eb-wZu"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Txs-Pv-mF0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-752" y="2746"/>
         </scene>
     </scenes>
     <resources>
