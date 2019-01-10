@@ -13,13 +13,13 @@
         <!--Rename Wallet-->
         <scene sceneID="ZPM-Ry-nW3">
             <objects>
-                <viewController title="Rename Wallet" hidesBottomBarWhenPushed="YES" id="JYY-IY-B5W" customClass="RenameViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="JYY-IY-B5W" customClass="RenameViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z0m-Iv-3X2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DzA-Fq-8Sa">
-                                <rect key="frame" x="24" y="68" width="331" height="53"/>
+                                <rect key="frame" x="24" y="48" width="331" height="53"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9A-NY-hZ2">
                                         <rect key="frame" x="0.0" y="0.0" width="331" height="24"/>
@@ -36,7 +36,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="efN-BQ-Dpo" customClass="SeparatorView" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="24" y="125" width="351" height="1"/>
+                                <rect key="frame" x="24" y="105" width="351" height="1"/>
                                 <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -52,8 +52,17 @@
                         <edgeInsets key="layoutMargins" top="48" left="24" bottom="0.0" right="20"/>
                         <viewLayoutGuide key="safeArea" id="zJa-dI-OZf"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Rename Wallet" id="W7q-an-4Gu">
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="plain" id="IZA-wz-l9r">
+                            <connections>
+                                <action selector="saveWalletName" destination="JYY-IY-B5W" id="FAa-VP-xr1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="nameWalletTF" destination="YDQ-RL-4WJ" id="AJt-98-pZ1"/>
+                        <outlet property="saveBarButtonItem" destination="IZA-wz-l9r" id="b8k-Ey-kkU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTe-a6-2wn" userLabel="First Responder" sceneMemberID="firstResponder"/>
