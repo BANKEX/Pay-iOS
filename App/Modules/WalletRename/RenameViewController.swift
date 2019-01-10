@@ -16,6 +16,7 @@ protocol RenameViewControllerDelegate:class {
 class RenameViewController: BaseViewController {
     
     @IBOutlet weak var nameWalletTF:UITextField!
+    @IBOutlet var saveBarButtonItem: UIBarButtonItem!
     
     var selectedWalletName:String!
     let service = HDWalletServiceImplementation()
@@ -34,8 +35,9 @@ class RenameViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let rightBarButton = UIBarButtonItem(title: LocalizedStrings.save, style: .plain, target: self, action: #selector(self.saveWalletName))
-        navigationItem.setRightBarButton(rightBarButton, animated: false)
+        
+        title = LocalizedStrings.title
+        saveBarButtonItem.title = LocalizedStrings.save
     }
     
     func addCancelButtonIfNeed() {
@@ -100,6 +102,7 @@ class RenameViewController: BaseViewController {
 private extension RenameViewController {
     
     struct LocalizedStrings {
+        static let title = NSLocalizedString("Title", tableName: "WalletRename", comment: "")
         static let save = NSLocalizedString("SaveBarButtonTitle", tableName: "WalletRename", comment: "")
         static let cancel = NSLocalizedString("CancelBarButtonTitle", tableName: "WalletRename", comment: "")
     }
