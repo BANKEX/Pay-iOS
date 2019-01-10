@@ -62,6 +62,8 @@
 		7185063F21E7106E00CA204F /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185063E21E7106E00CA204F /* Home.storyboard */; };
 		7185064221E7142500CA204F /* ContactDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185064121E7142400CA204F /* ContactDetails.storyboard */; };
 		7185064521E7185E00CA204F /* ContactList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185064421E7185E00CA204F /* ContactList.storyboard */; };
+		7185064821E722A800CA204F /* MenuPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185064721E722A800CA204F /* MenuPad.storyboard */; };
+		7185064A21E729EC00CA204F /* MenuPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7185064921E729EB00CA204F /* MenuPhone.storyboard */; };
 		71C72A2B21B009D000FB3E13 /* AssetManagementEthProgress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */; };
 		71C72A2D21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */; };
 		71C72A3021B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */; };
@@ -384,6 +386,8 @@
 		7185063E21E7106E00CA204F /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		7185064121E7142400CA204F /* ContactDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ContactDetails.storyboard; sourceTree = "<group>"; };
 		7185064421E7185E00CA204F /* ContactList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ContactList.storyboard; sourceTree = "<group>"; };
+		7185064721E722A800CA204F /* MenuPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuPad.storyboard; sourceTree = "<group>"; };
+		7185064921E729EB00CA204F /* MenuPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuPhone.storyboard; sourceTree = "<group>"; };
 		71C72A2A21B009D000FB3E13 /* AssetManagementEthProgress.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthProgress.storyboard; sourceTree = "<group>"; };
 		71C72A2C21B00A2300FB3E13 /* AssetManagementEthProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagementEthProgressViewController.swift; sourceTree = "<group>"; };
 		71C72A2F21B0111F00FB3E13 /* AssetManagementEthSuccess.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetManagementEthSuccess.storyboard; sourceTree = "<group>"; };
@@ -929,6 +933,18 @@
 			path = ContactList;
 			sourceTree = "<group>";
 		};
+		7185064621E71FCA00CA204F /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7185064921E729EB00CA204F /* MenuPhone.storyboard */,
+				7185064721E722A800CA204F /* MenuPad.storyboard */,
+				86C1FF60217DF91C0081CFCB /* ListSectionsTableViewController.swift */,
+				86219C052180AB1300185EF6 /* SectionTableCell.swift */,
+				86219C062180AB1300185EF6 /* SectionTableCell.xib */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		71C72A2921B009A900FB3E13 /* EthProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -989,6 +1005,7 @@
 				71EB27B521D5FF4500B9EE30 /* ContactEdit */,
 				7185064321E7170600CA204F /* ContactList */,
 				7185063D21E70EBF00CA204F /* Home */,
+				7185064621E71FCA00CA204F /* Menu */,
 				71EB27A621D4FF0C00B9EE30 /* NetworkAdd */,
 				71EB27BC21D6132E00B9EE30 /* Onboarding */,
 				71EB27B821D6026200B9EE30 /* OnboardingStep */,
@@ -1477,9 +1494,6 @@
 			isa = PBXGroup;
 			children = (
 				86C1FF5E217DF9020081CFCB /* BaseSplitViewController.swift */,
-				86C1FF60217DF91C0081CFCB /* ListSectionsTableViewController.swift */,
-				86219C052180AB1300185EF6 /* SectionTableCell.swift */,
-				86219C062180AB1300185EF6 /* SectionTableCell.xib */,
 			);
 			path = Split;
 			sourceTree = "<group>";
@@ -1794,6 +1808,7 @@
 				86219C082180AB1300185EF6 /* SectionTableCell.xib in Resources */,
 				863A6A602184EBAA00E4A8D3 /* GeneralInformationCell.xib in Resources */,
 				9220BE7D21CC228F0079F85C /* StatusLabel.strings in Resources */,
+				7185064A21E729EC00CA204F /* MenuPhone.storyboard in Resources */,
 				7185062721E604B600CA204F /* SettingsMain.storyboard in Resources */,
 				71EB27D021D64EAD00B9EE30 /* QRCodeGeneration.storyboard in Resources */,
 				86D7FB7F2149338B008245DE /* WalletTableViewCell.xib in Resources */,
@@ -1838,6 +1853,7 @@
 				7185063921E703B600CA204F /* TransactionCreate.storyboard in Resources */,
 				7185060D21E5C28100CA204F /* WalletAddProcessing.storyboard in Resources */,
 				71EB27C121D6164100B9EE30 /* WalletAddRename.storyboard in Resources */,
+				7185064821E722A800CA204F /* MenuPad.storyboard in Resources */,
 				8635AB6E21C3D5AB001BC100 /* TransactionHistoryHeaderTableViewCell.xib in Resources */,
 				924A36ED21B120C6000954BD /* AssetManagementLinks.xcassets in Resources */,
 				7185060021D76E2200CA204F /* Warning.storyboard in Resources */,

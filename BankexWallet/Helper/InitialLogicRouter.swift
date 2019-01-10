@@ -43,8 +43,7 @@ class InitialLogicRouter {
                         
                         DefaultTokensServiceImplementation().downloadAllAvailableTokensIfNeeded {
                             
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let controller = storyboard.instantiateViewController(withIdentifier: "MainTabController")
+                            let controller = UIStoryboard(name: "MenuPhone", bundle: nil).instantiateInitialViewController() as! BaseTabBarController
                             
                             rootControler.viewControllers = [controller]
                         }

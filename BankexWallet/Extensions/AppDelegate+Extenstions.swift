@@ -54,7 +54,7 @@ extension AppDelegate {
     }
     
     func showTabBar() {
-        let tabBar = storyboard().instantiateViewController(withIdentifier: "MainTabController") as? BaseTabBarController
+        let tabBar = UIStoryboard(name: "MenuPhone", bundle: nil).instantiateInitialViewController() as! BaseTabBarController
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
     }

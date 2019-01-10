@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showSplitVC() {
-        let splitVC = CreateVC(byName: "BaseSplitViewController") as! BaseSplitViewController
+        let splitVC = UIStoryboard(name: "MenuPad", bundle: nil).instantiateInitialViewController() as! BaseSplitViewController
         window?.rootViewController = splitVC
         window?.makeKeyAndVisible()
     }
@@ -417,7 +417,7 @@ extension AppDelegate : MessagingDelegate {
             tokenService.updateSelectedToken(to: tokenAddress)
             nav.pushViewController(mainInfo, animated: false)
         }else {
-            let tabBar = CreateVC(byName: "MainTabController") as! BaseTabBarController
+            let tabBar = UIStoryboard(name: "MenuPhone", bundle: nil).instantiateInitialViewController() as! BaseTabBarController
             window?.rootViewController = tabBar
             
             guard passcodeViewController == nil else { return }
