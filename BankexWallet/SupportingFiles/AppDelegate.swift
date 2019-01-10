@@ -382,7 +382,7 @@ extension AppDelegate : MessagingDelegate {
     
     func goToMainIpad(_ tokenAddress:String, _ isLaunch:Bool) {
         let mainInfo = UIStoryboard(name: "AddressDetails", bundle: nil).instantiateInitialViewController() as! MainInfoController
-        let homeVC = CreateVC(byName: "HomeViewController") as! HomeViewController
+        let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateInitialViewController() as! HomeViewController
         if isLaunch {
             guard let splitVC = window?.rootViewController as? BaseSplitViewController else { return }
             let nav = BaseNavigationController(rootViewController: homeVC)
