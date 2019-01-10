@@ -40,6 +40,7 @@ class ListSectionsViewController: UIViewController {
 
 extension ListSectionsViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        HistoryMediator.handleDidSelect(item: indexPath.row)
         let nv = storyboard?.instantiateViewController(withIdentifier: "\(indexPath.row)") as! BaseNavigationController
         splitViewController?.showDetailViewController(nv, sender: nil)
     }
