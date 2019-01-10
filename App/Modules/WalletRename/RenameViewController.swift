@@ -34,13 +34,13 @@ class RenameViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let rightBarButton = UIBarButtonItem(title: NSLocalizedString("Save", comment: ""), style: .plain, target: self, action: #selector(self.saveWalletName))
+        let rightBarButton = UIBarButtonItem(title: LocalizedStrings.save, style: .plain, target: self, action: #selector(self.saveWalletName))
         navigationItem.setRightBarButton(rightBarButton, animated: false)
     }
     
     func addCancelButtonIfNeed() {
         let cancel = UIButton(type: .system)
-        cancel.setTitle("Cancel", for: .normal)
+        cancel.setTitle(LocalizedStrings.cancel, for: .normal)
         cancel.setTitleColor(UIColor.mainColor, for: .normal)
         cancel.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         cancel.addTarget(self, action: #selector(fadeOut), for: .touchUpInside)
@@ -94,4 +94,14 @@ class RenameViewController: BaseViewController {
         nameWalletTF.text = selectedWalletName
     }
 
+}
+
+
+private extension RenameViewController {
+    
+    struct LocalizedStrings {
+        static let save = NSLocalizedString("SaveBarButtonTitle", tableName: "WalletRename", comment: "")
+        static let cancel = NSLocalizedString("CancelBarButtonTitle", tableName: "WalletRename", comment: "")
+    }
+    
 }
