@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,40 +18,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9A-NY-hZ2">
-                                <rect key="frame" x="19" y="68" width="54" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <color key="textColor" red="0.12549019607843137" green="0.13725490196078433" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wallet Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YDQ-RL-4WJ">
-                                <rect key="frame" x="19" y="102" width="356" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="ixS-CZ-Wfl"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TnT-FG-f0H">
-                                <rect key="frame" x="19" y="128" width="356" height="1"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DzA-Fq-8Sa">
+                                <rect key="frame" x="24" y="68" width="331" height="53"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9A-NY-hZ2">
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <color key="textColor" red="0.12549019607843137" green="0.13725490196078433" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wallet Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YDQ-RL-4WJ">
+                                        <rect key="frame" x="0.0" y="32" width="331" height="21"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="efN-BQ-Dpo" customClass="SeparatorView" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="24" y="125" width="351" height="1"/>
                                 <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="AUC-d6-9LT"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="zJa-dI-OZf" firstAttribute="trailing" secondItem="TnT-FG-f0H" secondAttribute="trailing" id="2ph-Cu-cGC"/>
-                            <constraint firstItem="YDQ-RL-4WJ" firstAttribute="top" secondItem="Y9A-NY-hZ2" secondAttribute="bottom" constant="10" id="EN7-Ig-Tl2"/>
-                            <constraint firstItem="Y9A-NY-hZ2" firstAttribute="top" secondItem="zJa-dI-OZf" secondAttribute="top" constant="48" id="Jh8-uT-D4j"/>
-                            <constraint firstItem="YDQ-RL-4WJ" firstAttribute="leading" secondItem="Y9A-NY-hZ2" secondAttribute="leading" id="LZj-B3-RvV"/>
-                            <constraint firstItem="zJa-dI-OZf" firstAttribute="trailing" secondItem="YDQ-RL-4WJ" secondAttribute="trailing" id="Mzp-r5-o5j"/>
-                            <constraint firstItem="TnT-FG-f0H" firstAttribute="leading" secondItem="YDQ-RL-4WJ" secondAttribute="leading" id="UIP-Ng-aVt"/>
-                            <constraint firstItem="Y9A-NY-hZ2" firstAttribute="leading" secondItem="zJa-dI-OZf" secondAttribute="leading" constant="19" id="kCC-cD-W6C"/>
-                            <constraint firstItem="TnT-FG-f0H" firstAttribute="top" secondItem="YDQ-RL-4WJ" secondAttribute="bottom" id="l1Q-38-lS5"/>
+                            <constraint firstItem="DzA-Fq-8Sa" firstAttribute="leading" secondItem="Z0m-Iv-3X2" secondAttribute="leadingMargin" id="7IX-F4-MvN"/>
+                            <constraint firstItem="DzA-Fq-8Sa" firstAttribute="top" secondItem="Z0m-Iv-3X2" secondAttribute="topMargin" id="Hac-67-Dx8"/>
+                            <constraint firstItem="efN-BQ-Dpo" firstAttribute="top" secondItem="DzA-Fq-8Sa" secondAttribute="bottom" constant="4" id="IXI-2o-G3t"/>
+                            <constraint firstItem="zJa-dI-OZf" firstAttribute="trailing" secondItem="efN-BQ-Dpo" secondAttribute="trailing" id="Koh-jz-jwk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DzA-Fq-8Sa" secondAttribute="trailing" id="VPB-fT-EVw"/>
+                            <constraint firstItem="efN-BQ-Dpo" firstAttribute="leading" secondItem="DzA-Fq-8Sa" secondAttribute="leading" id="iul-2i-5oA"/>
                         </constraints>
+                        <edgeInsets key="layoutMargins" top="48" left="24" bottom="0.0" right="20"/>
                         <viewLayoutGuide key="safeArea" id="zJa-dI-OZf"/>
                     </view>
                     <connections>
