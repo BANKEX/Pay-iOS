@@ -426,7 +426,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 guard let controller = self else { return }
 
                 if controller.isFromContact {
-                    let sendToken = CreateVC(byName: "SendTokenViewController") as! SendTokenViewController
+                    let sendToken = UIStoryboard(name: "TransactionCreate", bundle: nil).instantiateInitialViewController() as! SendTokenViewController
                     controller.navigationController?.pushViewController(sendToken, animated: true)
                     
                 } else {
@@ -439,7 +439,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 guard let controller = self else { return }
                 
                 if controller.isFromContact {
-                    let sendToken = CreateVC(byName: "SendTokenViewController") as! SendTokenViewController
+                    let sendToken = UIStoryboard(name: "TransactionCreate", bundle: nil).instantiateInitialViewController() as! SendTokenViewController
                     controller.navigationController?.pushViewController(sendToken, animated: true)
                     
                 } else {
