@@ -417,7 +417,7 @@ extension AppDelegate : MessagingDelegate {
             tokenService.updateSelectedToken(to: tokenAddress)
             nav.pushViewController(mainInfo, animated: false)
         }else {
-            let tabBar = CreateVC(byName: "MainTabController") as! BaseTabBarController
+            let tabBar = UIStoryboard(name: "MenuPhone", bundle: nil).instantiateInitialViewController() as! BaseTabBarController
             window?.rootViewController = tabBar
             
             guard passcodeViewController == nil else { return }
