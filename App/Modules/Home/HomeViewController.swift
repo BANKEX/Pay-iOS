@@ -242,7 +242,7 @@ class HomeViewController: BaseViewController {
         if let selectedContact = appDelegate.selectedContact {
             appDelegate.selectedContact = nil
             if UIDevice.isIpad {
-                let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
+                let listContactsVC = UIStoryboard(name: "ContactList", bundle: nil).instantiateInitialViewController() as! ListContactsViewController
                 let nav = BaseNavigationController(rootViewController: listContactsVC)
                 let profileVC = UIStoryboard(name: "ContactDetails", bundle: nil).instantiateInitialViewController() as! ProfileContactViewController
                 profileVC.selectedContact = selectedContact

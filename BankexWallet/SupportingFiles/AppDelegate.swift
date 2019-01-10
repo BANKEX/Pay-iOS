@@ -203,7 +203,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                     }
                 }else if let splitVC = window?.rootViewController as? UISplitViewController {
-                    let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
+                    let listContactsVC = UIStoryboard(name: "ContactList", bundle: nil).instantiateInitialViewController() as! ListContactsViewController
                     let nav = BaseNavigationController(rootViewController: listContactsVC)
                     let profileVC = UIStoryboard(name: "ContactDetails", bundle: nil).instantiateInitialViewController() as! ProfileContactViewController
                     service.contactByAddress(objectID) { contact in
