@@ -31,14 +31,17 @@ class TimerCell: UITableViewCell {
     }
     
     func setData(_ time:String) {
-        timerLabel.text = time + " sec"
+        timerLabel.text = LocalizedStrings.timeout(time: time)
         isCurrentCell ? doneImage.show() : doneImage.hide()
     }
     
 }
 
-
-
-
-
-
+private extension TimerCell {
+    
+    struct LocalizedStrings {
+        static func timeout(time: String) -> String {
+            return String(format: NSLocalizedString("Timeout", tableName: "AppTimeout", comment: ""), time)
+        }
+    }
+}

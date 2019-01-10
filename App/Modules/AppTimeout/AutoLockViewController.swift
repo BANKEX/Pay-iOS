@@ -26,7 +26,7 @@ class AutoLockViewController:BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "App Time Lock"
+        title = LocalizedStrings.title
         tableView.contentInset.top = 56
         tableView.delegate = self
         tableView.dataSource = self
@@ -71,4 +71,9 @@ private extension AutoLockViewController {
     }
 }
 
-
+private extension AutoLockViewController {
+    
+    struct LocalizedStrings {
+        static let title = NSLocalizedString("Title", tableName: "AppTimeout", comment: "")
+    }
+}
