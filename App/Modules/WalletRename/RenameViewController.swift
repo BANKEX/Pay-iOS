@@ -38,18 +38,12 @@ class RenameViewController: BaseViewController {
         super.viewDidLoad()
         
         title = LocalizedStrings.title
-        saveBarButtonItem.title = LocalizedStrings.save
         nameLabel.text = LocalizedStrings.nameLabelTitle
         nameWalletTF.placeholder = LocalizedStrings.nameTextFieldPlaceholder
     }
     
     func addCancelButtonIfNeed() {
-        let cancel = UIButton(type: .system)
-        cancel.setTitle(LocalizedStrings.cancel, for: .normal)
-        cancel.setTitleColor(UIColor.mainColor, for: .normal)
-        cancel.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        cancel.addTarget(self, action: #selector(fadeOut), for: .touchUpInside)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancel)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(fadeOut))
     }
     
     @objc func fadeOut() {
@@ -105,8 +99,6 @@ private extension RenameViewController {
     
     struct LocalizedStrings {
         static let title = NSLocalizedString("Title", tableName: "WalletRename", comment: "")
-        static let save = NSLocalizedString("SaveBarButtonTitle", tableName: "WalletRename", comment: "")
-        static let cancel = NSLocalizedString("CancelBarButtonTitle", tableName: "WalletRename", comment: "")
         static let nameLabelTitle = NSLocalizedString("WalletNameLabelTitle", tableName: "WalletRename", comment: "")
         static let nameTextFieldPlaceholder = NSLocalizedString("WalletNameTextFieldPlaceholder", tableName: "WalletRename", comment: "")
     }
