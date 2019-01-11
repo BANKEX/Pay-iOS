@@ -23,7 +23,7 @@ class OnboardingViewController: BaseViewController {
     weak var delegate: OnboardingDelegate?
     
     var images = ["Favorites", "ERC20", "Custom network"]
-    let texts = ["ERC20": (NSLocalizedString("ERC20 Standard", comment: ""), NSLocalizedString("Support for any token within the Ether network.", comment: "")), "Custom network": (NSLocalizedString("Custom Network", comment: ""), NSLocalizedString("Add your network and work with tokens right inside your wallet.", comment: "")), "Favorites": (NSLocalizedString("Favorites", comment: ""), NSLocalizedString("Add your contacts to Favorites to access them quickly.", comment: ""))]
+    let texts = ["ERC20": (NSLocalizedString("ERC-20 Standard", comment: ""), NSLocalizedString("Support for any token on the Ethereum network.", comment: "")), "Custom network": (NSLocalizedString("Custom network", comment: ""), NSLocalizedString("Add a custom network and work with tokens right inside the wallet.", comment: "")), "Favorites": (NSLocalizedString("Favorites", comment: ""), NSLocalizedString("Add your contacts to Favorites to access them quickly.", comment: ""))]
     
     var image: UIImage?
     var name: String?
