@@ -83,7 +83,7 @@ class NavigationController: UINavigationController {
     
 }
 
-class NavigationBarAppearance {
+class NavigationBarAppearance: NSObject {
     
     var barTintColor: UIColor?
     var tintColor: UIColor?

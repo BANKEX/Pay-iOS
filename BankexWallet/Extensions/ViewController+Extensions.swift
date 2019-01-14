@@ -116,3 +116,14 @@ extension UIViewController {
     }
     
 }
+
+private var UIViewControllerNavigationBarAppearance: UInt8 = 0
+
+extension UIViewController: NavigationBarAppearanceProvider {
+    
+    @objc var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return objc_getAssociatedObject(self, &UIViewControllerNavigationBarAppearance) as? NavigationBarAppearance
+        }
+    }
+}
