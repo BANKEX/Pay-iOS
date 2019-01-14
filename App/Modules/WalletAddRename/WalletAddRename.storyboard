@@ -18,40 +18,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGh-3S-RXd">
-                                <rect key="frame" x="19" y="68" width="54" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ETH Wallet Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WF7-dg-mJo">
-                                <rect key="frame" x="19" y="107" width="356" height="33"/>
-                                <accessibility key="accessibilityConfiguration" label="walletNameTf"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="NGA-Mn-4la"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anW-1m-RV9">
-                                <rect key="frame" x="19" y="140" width="356" height="1"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dcc-3M-xdz">
+                                <rect key="frame" x="16" y="68" width="343" height="53"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGh-3S-RXd">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ETH Wallet Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WF7-dg-mJo">
+                                        <rect key="frame" x="0.0" y="32" width="343" height="21"/>
+                                        <accessibility key="accessibilityConfiguration" label="walletNameTf"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="anW-1m-RV9" customClass="SeparatorView" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="125" width="359" height="1"/>
                                 <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="1vl-zA-23O"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="WF7-dg-mJo" firstAttribute="top" secondItem="jGh-3S-RXd" secondAttribute="bottom" constant="15" id="DKI-2P-mdu"/>
-                            <constraint firstItem="VwM-aE-yuZ" firstAttribute="trailing" secondItem="anW-1m-RV9" secondAttribute="trailing" id="DMy-0v-dcp"/>
-                            <constraint firstItem="WF7-dg-mJo" firstAttribute="leading" secondItem="jGh-3S-RXd" secondAttribute="leading" id="RmC-Jq-YVh"/>
-                            <constraint firstItem="anW-1m-RV9" firstAttribute="top" secondItem="WF7-dg-mJo" secondAttribute="bottom" id="UGZ-m5-hyf"/>
-                            <constraint firstItem="jGh-3S-RXd" firstAttribute="top" secondItem="VwM-aE-yuZ" secondAttribute="top" constant="48" id="dtP-17-PO2"/>
-                            <constraint firstItem="anW-1m-RV9" firstAttribute="leading" secondItem="WF7-dg-mJo" secondAttribute="leading" id="l8k-ox-y8u"/>
-                            <constraint firstItem="VwM-aE-yuZ" firstAttribute="trailing" secondItem="WF7-dg-mJo" secondAttribute="trailing" id="oO3-LM-WOY"/>
-                            <constraint firstItem="jGh-3S-RXd" firstAttribute="leading" secondItem="VwM-aE-yuZ" secondAttribute="leading" constant="19" id="t3a-ab-XKP"/>
+                            <constraint firstAttribute="trailing" secondItem="anW-1m-RV9" secondAttribute="trailing" id="1t2-bC-LZJ"/>
+                            <constraint firstItem="anW-1m-RV9" firstAttribute="top" secondItem="dcc-3M-xdz" secondAttribute="bottom" constant="4" id="Mbe-qV-QfH"/>
+                            <constraint firstItem="dcc-3M-xdz" firstAttribute="top" secondItem="nLn-Dg-aVu" secondAttribute="topMargin" constant="48" id="hop-Uu-raq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dcc-3M-xdz" secondAttribute="trailing" id="k1H-bc-Azf"/>
+                            <constraint firstItem="anW-1m-RV9" firstAttribute="leading" secondItem="dcc-3M-xdz" secondAttribute="leading" id="qio-zH-1Ta"/>
+                            <constraint firstItem="dcc-3M-xdz" firstAttribute="leading" secondItem="nLn-Dg-aVu" secondAttribute="leadingMargin" id="ywT-5Y-GrZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VwM-aE-yuZ"/>
                     </view>
@@ -61,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tOj-gn-veC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4748" y="3360"/>
+            <point key="canvasLocation" x="4748" y="3359.3703148425789"/>
         </scene>
     </scenes>
 </document>
