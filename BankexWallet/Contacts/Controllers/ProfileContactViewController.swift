@@ -111,7 +111,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     func updateTransactions() {
         TransactionsService().refreshTransactionsInSelectedNetwork(type: .ETH, forAddress: selectedContact!.address, node: nil) { isGood in
             if isGood {
-                self.transactions = Array(self.sendService.getAllTransactions(addr:nil).prefix(3).filter({ tr -> Bool in
+                self.transactions = Array(self.sendService.getAllTransactions(addr: self.selectedContact.address.lowercased()).prefix(3).filter({ tr -> Bool in
                     if tr.to == self.selectedContact.address.lowercased() {
                         return true
                     }
