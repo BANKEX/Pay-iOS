@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EditViewContollerDelegate:class {
-    func didUpdateContact(name:String,address:String)
+    func didUpdateContact(name:String,address:String, completion: @escaping ()->Void)
 }
 
 class EditViewController: BaseViewController {
@@ -99,11 +99,12 @@ class EditViewController: BaseViewController {
     @IBAction func saveContact() {
         service.updateName(newName: nameTextField.text!, selectedContact!.address) { _ in
             self.service.updateAddress(newAddress: self.addrTextField.text!, self.selectedContact!.name) { isSuccess in
-                self.delegate?.didUpdateContact(name: self.nameTextField.text!, address: self.addrTextField.text!)
-                if UIDevice.isIpad {
-                    self.dismiss(animated: true, completion: nil)
-                }else {
-                    self.navigationController?.popViewController(animated: true)
+                self.delegate?.didUpdateContact(name: self.nameTextField.text!, address: self.addrTextField.text!) {
+                    if UIDevice.isIpad {
+                        self.dismiss(animated: true, completion: nil)
+                    }else {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
         }
