@@ -49,7 +49,7 @@ class TransactionInfoCell: UITableViewCell {
     
     private func setData() {
         guard let transaction = transaction else { return }
-        let selectedAddr = HistoryMediator.addr ?? keyService.selectedAddress()?.lowercased()
+        let selectedAddr = HistoryMediator.addr?.lowercased() ?? keyService.selectedAddress()?.lowercased()
         let isSend = selectedAddr == transaction.from
         var amount = transaction.amount
         if transaction.amount.first == "." {
