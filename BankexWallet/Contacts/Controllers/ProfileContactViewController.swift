@@ -102,6 +102,7 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        HistoryMediator.addr = selectedContact.address.lowercased()
         manageTop()
         updateUI()
         state = .loading
@@ -182,7 +183,6 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     }
     
     @IBAction func seeAll() {
-        HistoryMediator.addr = selectedContact.address
         let historyVC = CreateVC(byName: "TransactionHistoryViewController") as! TransactionHistoryViewController
         navigationController?.pushViewController(historyVC, animated: true)
     }
