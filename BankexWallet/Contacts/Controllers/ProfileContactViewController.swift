@@ -262,10 +262,11 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
 }
 
 extension ProfileContactViewController:EditViewContollerDelegate {
-    func didUpdateContact(name: String, address: String) {
+    func didUpdateContact(name: String, address: String, completion: @escaping ()->Void) {
         service.contactByAddress(address) { contact in
             self.selectedContact = contact
             self.updateUI()
+            completion()
         }
     }
 }
