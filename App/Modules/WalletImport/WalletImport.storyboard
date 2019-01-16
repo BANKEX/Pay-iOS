@@ -125,22 +125,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="529"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UsK-Jd-mN2" customClass="GrowingTextView" customModule="GrowingTextView">
-                                <rect key="frame" x="11" y="54" width="334" height="37"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="334" placeholderIntrinsicHeight="34" translatesAutoresizingMaskIntoConstraints="NO" id="UsK-Jd-mN2" customClass="GrowingTextView" customModule="GrowingTextView">
+                                <rect key="frame" x="11" y="52" width="332" height="34"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="PassphraseTextVIew"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="zJ9-bE-ReN"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7g-mL-nV1">
-                                <rect key="frame" x="15" y="91" width="360" height="1"/>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="I7g-mL-nV1" customClass="SeparatorView" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="90" width="359" height="1"/>
                                 <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="win-Rx-zpG"/>
-                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B9-kC-WYr">
                                 <rect key="frame" x="75" y="431" width="225" height="50"/>
@@ -174,7 +168,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALn-bm-ReB">
-                                <rect key="frame" x="345" y="60" width="16" height="16"/>
+                                <rect key="frame" x="343" y="58" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="19r-23-xIJ"/>
                                     <constraint firstAttribute="width" constant="16" id="nPY-V2-ckU"/>
@@ -185,10 +179,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-WJ-80e" customClass="PasteButton" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="15" y="108" width="66" height="34"/>
+                                <rect key="frame" x="16" y="107" width="66" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="8rN-GF-i9h"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="66" id="soe-9s-ota"/>
+                                    <constraint firstAttribute="width" constant="66" id="soe-9s-ota"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <state key="normal" title="Paste"/>
@@ -197,36 +191,33 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9g-mt-ozN">
-                                <rect key="frame" x="15" y="20" width="106.5" height="24"/>
+                                <rect key="frame" x="16" y="20" width="343" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Z8-EN-dVw">
-                                <rect key="frame" x="15" y="172" width="115.5" height="24"/>
+                                <rect key="frame" x="16" y="173" width="343" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your wallet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ca2-qI-28c">
-                                <rect key="frame" x="15" y="206" width="360" height="37"/>
+                                <rect key="frame" x="16" y="205" width="343" height="34"/>
                                 <accessibility key="accessibilityConfiguration" label="passphraseNameTF"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="K5Q-H2-MoN"/>
+                                    <constraint firstAttribute="height" constant="34" id="K5Q-H2-MoN"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nK-oM-Q9C">
-                                <rect key="frame" x="15" y="243" width="360" height="1"/>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1nK-oM-Q9C" customClass="SeparatorView" customModule="BankexWallet" customModuleProvider="target">
+                                <rect key="frame" x="16" y="243" width="359" height="1"/>
                                 <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="nRy-27-pNF"/>
-                                </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DAp-Sl-vKc">
-                                <rect key="frame" x="127.5" y="108" width="120" height="120"/>
+                                <rect key="frame" x="127.5" y="107" width="120" height="120"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="nWZ-Xr-7Eu">
                                         <rect key="frame" x="16" y="24.5" width="88" height="71.5"/>
@@ -264,34 +255,34 @@
                         </accessibility>
                         <constraints>
                             <constraint firstItem="ALn-bm-ReB" firstAttribute="top" secondItem="UsK-Jd-mN2" secondAttribute="top" constant="6" id="36y-bp-eYU"/>
-                            <constraint firstItem="ca2-qI-28c" firstAttribute="top" secondItem="4Z8-EN-dVw" secondAttribute="bottom" constant="10" id="8Sm-To-6xn"/>
+                            <constraint firstItem="ca2-qI-28c" firstAttribute="top" secondItem="4Z8-EN-dVw" secondAttribute="bottom" constant="8" id="8Sm-To-6xn"/>
+                            <constraint firstItem="ca2-qI-28c" firstAttribute="leading" secondItem="W3j-xf-8ev" secondAttribute="leadingMargin" id="Eaz-Gn-Jk8"/>
                             <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2f2-WJ-80e" secondAttribute="trailing" symbolic="YES" id="Ebw-Bd-g4X"/>
                             <constraint firstItem="ALn-bm-ReB" firstAttribute="leading" secondItem="UsK-Jd-mN2" secondAttribute="trailing" id="G1l-28-nkt"/>
-                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="UsK-Jd-mN2" secondAttribute="trailing" constant="30" id="GJg-sk-zeF"/>
-                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="I7g-mL-nV1" secondAttribute="trailing" id="N3S-7c-xjX"/>
-                            <constraint firstItem="gHq-h3-oUr" firstAttribute="bottom" secondItem="9B9-kC-WYr" secondAttribute="bottom" constant="48" id="QZt-of-QG1"/>
-                            <constraint firstItem="4Z8-EN-dVw" firstAttribute="leading" secondItem="K9g-mt-ozN" secondAttribute="leading" id="SZI-sf-RNJ"/>
+                            <constraint firstAttribute="trailing" secondItem="I7g-mL-nV1" secondAttribute="trailing" id="N3S-7c-xjX"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="9B9-kC-WYr" secondAttribute="bottom" constant="48" id="QZt-of-QG1"/>
                             <constraint firstItem="9B9-kC-WYr" firstAttribute="centerX" secondItem="W3j-xf-8ev" secondAttribute="centerX" id="WGS-sp-LLo"/>
-                            <constraint firstItem="ca2-qI-28c" firstAttribute="leading" secondItem="4Z8-EN-dVw" secondAttribute="leading" id="ZlQ-3U-ZLL"/>
-                            <constraint firstItem="4Z8-EN-dVw" firstAttribute="top" secondItem="2f2-WJ-80e" secondAttribute="bottom" constant="30" id="Zmn-Zh-k4z"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ALn-bm-ReB" secondAttribute="trailing" id="XmF-2G-qUc"/>
+                            <constraint firstItem="4Z8-EN-dVw" firstAttribute="top" secondItem="2f2-WJ-80e" secondAttribute="bottom" constant="32" id="Zmn-Zh-k4z"/>
                             <constraint firstItem="2f2-WJ-80e" firstAttribute="top" secondItem="I7g-mL-nV1" secondAttribute="bottom" constant="16" id="aKO-AB-50u"/>
-                            <constraint firstItem="I7g-mL-nV1" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="15" id="aPL-cP-cxg"/>
-                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="K9g-mt-ozN" secondAttribute="trailing" symbolic="YES" id="elT-l4-yGA"/>
-                            <constraint firstItem="9B9-kC-WYr" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="75" id="h2N-hG-wrD"/>
-                            <constraint firstItem="UsK-Jd-mN2" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="11" id="iDF-7I-cLh"/>
-                            <constraint firstItem="1nK-oM-Q9C" firstAttribute="top" secondItem="ca2-qI-28c" secondAttribute="bottom" id="jE7-To-2av"/>
-                            <constraint firstItem="I7g-mL-nV1" firstAttribute="top" secondItem="UsK-Jd-mN2" secondAttribute="bottom" id="lhD-38-9Y2"/>
-                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="9B9-kC-WYr" secondAttribute="trailing" constant="75" id="pLA-Tl-mzw"/>
-                            <constraint firstItem="UsK-Jd-mN2" firstAttribute="top" secondItem="K9g-mt-ozN" secondAttribute="bottom" constant="10" id="pLB-mn-qnk"/>
-                            <constraint firstItem="2f2-WJ-80e" firstAttribute="leading" secondItem="I7g-mL-nV1" secondAttribute="leading" id="qkI-CK-4Zj"/>
-                            <constraint firstItem="1nK-oM-Q9C" firstAttribute="leading" secondItem="ca2-qI-28c" secondAttribute="leading" id="qwy-Dt-ASc"/>
-                            <constraint firstItem="K9g-mt-ozN" firstAttribute="leading" secondItem="gHq-h3-oUr" secondAttribute="leading" constant="15" id="sFT-IT-BcF"/>
+                            <constraint firstItem="I7g-mL-nV1" firstAttribute="leading" secondItem="W3j-xf-8ev" secondAttribute="leadingMargin" id="aPL-cP-cxg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="K9g-mt-ozN" secondAttribute="trailing" id="elT-l4-yGA"/>
+                            <constraint firstItem="2f2-WJ-80e" firstAttribute="leading" secondItem="W3j-xf-8ev" secondAttribute="leadingMargin" id="faF-kZ-kXG"/>
+                            <constraint firstItem="9B9-kC-WYr" firstAttribute="leading" secondItem="W3j-xf-8ev" secondAttribute="leadingMargin" constant="59" id="h2N-hG-wrD"/>
+                            <constraint firstItem="UsK-Jd-mN2" firstAttribute="leading" secondItem="W3j-xf-8ev" secondAttribute="leadingMargin" constant="-5" id="iDF-7I-cLh"/>
+                            <constraint firstItem="1nK-oM-Q9C" firstAttribute="top" secondItem="ca2-qI-28c" secondAttribute="bottom" constant="4" id="jE7-To-2av"/>
+                            <constraint firstItem="I7g-mL-nV1" firstAttribute="top" secondItem="UsK-Jd-mN2" secondAttribute="bottom" constant="4" id="lhD-38-9Y2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9B9-kC-WYr" secondAttribute="trailing" constant="59" id="pLA-Tl-mzw"/>
+                            <constraint firstItem="UsK-Jd-mN2" firstAttribute="top" secondItem="K9g-mt-ozN" secondAttribute="bottom" constant="8" id="pLB-mn-qnk"/>
+                            <constraint firstItem="1nK-oM-Q9C" firstAttribute="leading" secondItem="W3j-xf-8ev" secondAttribute="leadingMargin" id="qwy-Dt-ASc"/>
+                            <constraint firstItem="K9g-mt-ozN" firstAttribute="leading" secondItem="W3j-xf-8ev" secondAttribute="leadingMargin" id="sFT-IT-BcF"/>
                             <constraint firstItem="DAp-Sl-vKc" firstAttribute="centerX" secondItem="W3j-xf-8ev" secondAttribute="centerX" id="sr5-4V-jF7"/>
-                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4Z8-EN-dVw" secondAttribute="trailing" symbolic="YES" id="tw9-TL-XMO"/>
-                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="1nK-oM-Q9C" secondAttribute="trailing" id="umj-kB-Qve"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4Z8-EN-dVw" secondAttribute="trailing" id="tw9-TL-XMO"/>
+                            <constraint firstAttribute="trailing" secondItem="1nK-oM-Q9C" secondAttribute="trailing" id="umj-kB-Qve"/>
+                            <constraint firstItem="4Z8-EN-dVw" firstAttribute="leading" secondItem="W3j-xf-8ev" secondAttribute="leadingMargin" id="wdy-Dn-RNq"/>
                             <constraint firstItem="DAp-Sl-vKc" firstAttribute="top" secondItem="2f2-WJ-80e" secondAttribute="top" id="wkw-5s-cgy"/>
-                            <constraint firstItem="gHq-h3-oUr" firstAttribute="trailing" secondItem="ca2-qI-28c" secondAttribute="trailing" id="xuN-sT-7TT"/>
-                            <constraint firstItem="K9g-mt-ozN" firstAttribute="top" secondItem="gHq-h3-oUr" secondAttribute="top" id="zcw-BT-IWb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ca2-qI-28c" secondAttribute="trailing" id="xuN-sT-7TT"/>
+                            <constraint firstItem="K9g-mt-ozN" firstAttribute="top" secondItem="W3j-xf-8ev" secondAttribute="topMargin" id="zcw-BT-IWb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gHq-h3-oUr"/>
                         <variation key="default">
@@ -301,9 +292,9 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
-                                <exclude reference="pLA-Tl-mzw"/>
                                 <include reference="WGS-sp-LLo"/>
                                 <exclude reference="h2N-hG-wrD"/>
+                                <exclude reference="pLA-Tl-mzw"/>
                             </mask>
                         </variation>
                     </view>
@@ -525,7 +516,7 @@
         <image name="qr" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qly-rG-0HJ"/>
-        <segue reference="bbg-ak-3Up"/>
+        <segue reference="pT1-5S-qPI"/>
+        <segue reference="ijQ-jv-rc6"/>
     </inferredMetricsTieBreakers>
 </document>
