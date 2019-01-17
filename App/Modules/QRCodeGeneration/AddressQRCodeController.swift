@@ -27,6 +27,9 @@ class AddressQRCodeController: BaseViewController {
         clipView.backgroundColor = UIColor(hex: "B8BFC9")
         return clipView
     }()
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        return .whiteStyle
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

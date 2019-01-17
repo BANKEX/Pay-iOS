@@ -25,6 +25,9 @@ class AttentionViewController: BaseViewController {
     var isFromDeveloper:Bool = false
     var publicAddress: String?
     var directionSegue:String = ""
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        return NavigationBarAppearance(barTintColor: .errorColor, tintColor: .white, titleTextAttributes: [NSAttributedStringKey.foregroundColor : UIColor.white], statusBarStyle: .lightContent, shadowImage: UIImage())
+    }
     var state:State = .PrivateKey {
         didSet {
             if state == .PrivateKey {
@@ -51,14 +54,11 @@ class AttentionViewController: BaseViewController {
         state = isFromDeveloper ? .CustomNetwork : .PrivateKey
         navigationItem.title = state == .CustomNetwork ? NSLocalizedString("CustomNetworks", comment: "") : NSLocalizedString("Private Key", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.errorColor
-        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        UIApplication.shared.statusBarStyle = .default
     }
     
     @IBAction func proceed() {

@@ -25,7 +25,9 @@ class SettingsViewController: UITableViewController {
     let walletService = SingleKeyServiceImplementation()
     let networkService = NetworksServiceImplementation()
     var selectedSection:Int!
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        return .whiteStyle
+    }
     
     
     override func viewDidLoad() {
@@ -38,7 +40,6 @@ class SettingsViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarView?.backgroundColor = .white
         walletService.updateSelectedWallet()
         updateUI()
     }
@@ -95,7 +96,6 @@ class SettingsViewController: UITableViewController {
 
     private func prepareNavbar() {
         navigationItem.title = NSLocalizedString("Settings", comment: "")
-        navigationController?.navigationBar.shadowImage = UIImage()
     }
 
     

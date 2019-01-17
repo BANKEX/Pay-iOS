@@ -37,7 +37,9 @@ class NetworksViewController: BaseViewController {
     var listCustomNetworks:[CustomNetwork] {
         return Array(listNetworks[4...])
     }
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        return .whiteStyle
+    }
     
     
     override func viewDidLoad() {

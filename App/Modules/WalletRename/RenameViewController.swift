@@ -26,6 +26,9 @@ class RenameViewController: BaseViewController {
         }
         return true
     }
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        return .whiteStyle
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -79,9 +82,6 @@ class RenameViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if UIDevice.isIpad {
-            UIApplication.shared.statusBarView?.backgroundColor = nil
-        }
         updateUI()
     }
     

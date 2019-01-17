@@ -25,6 +25,9 @@ class CreateNetworkViewController: UITableViewController,UITextFieldDelegate {
     
     
     var joinButton = UIBarButtonItem(title: NSLocalizedString("Join", comment: ""), style: .done, target: self, action: #selector(joinToConnection))
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        return .whiteStyle
+    }
     var state:State = .unavailable {
         didSet {
             if state == .available {

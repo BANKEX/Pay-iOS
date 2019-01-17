@@ -21,9 +21,11 @@ class AutoLockViewController:BaseViewController {
     }()
     
     let cellIdentifier = "TimerCell"
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        return .whiteStyle
+    }
     weak var delegate:AutoLockViewControllerDelegate?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "App Time Lock"
