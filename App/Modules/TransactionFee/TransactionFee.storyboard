@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XNH-dl-oHH" customClass="InfoView" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="320" height="212"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="212"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vNv-n9-og4">
-                                        <rect key="frame" x="16" y="8" width="61" height="44"/>
+                                        <rect key="frame" x="16" y="28" width="61" height="44"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" verticalHuggingPriority="251" image="BackButtonView/BackButtonView" translatesAutoresizingMaskIntoConstraints="NO" id="qaI-Ry-8xB">
                                                 <rect key="frame" x="-6" y="11.5" width="13" height="21"/>
@@ -50,7 +50,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1Q-vz-qrT">
-                                        <rect key="frame" x="139.5" y="20" width="41" height="20.5"/>
+                                        <rect key="frame" x="139.5" y="40" width="41" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -124,7 +124,7 @@
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aVE-US-9qD">
-                                <rect key="frame" x="16" y="264" width="288" height="53"/>
+                                <rect key="frame" x="16" y="244" width="288" height="53"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gas Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rC8-Of-Fye">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="24"/>
@@ -141,11 +141,11 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="9Ah-p2-9lH" customClass="SeparatorView" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="321" width="304" height="1"/>
+                                <rect key="frame" x="16" y="301" width="304" height="1"/>
                                 <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="O5j-zY-BJ1">
-                                <rect key="frame" x="16" y="354" width="288" height="53"/>
+                                <rect key="frame" x="16" y="334" width="288" height="53"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gas Limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hu-xB-TSB">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="24"/>
@@ -162,7 +162,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="6oo-4E-9gC" customClass="SeparatorView" customModule="BankexWallet" customModuleProvider="target">
-                                <rect key="frame" x="16" y="411" width="304" height="1"/>
+                                <rect key="frame" x="16" y="391" width="304" height="1"/>
                                 <color key="backgroundColor" red="0.44313725490196076" green="0.50196078431372548" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8c-uL-PaL">
@@ -194,7 +194,7 @@
                             <constraint firstItem="S8c-uL-PaL" firstAttribute="leading" secondItem="B5z-XE-p9e" secondAttribute="leadingMargin" constant="59" id="OJk-eS-s1t">
                                 <variation key="heightClass=regular-widthClass=regular" constant="110"/>
                             </constraint>
-                            <constraint firstItem="XNH-dl-oHH" firstAttribute="top" secondItem="eiY-4s-5zi" secondAttribute="top" id="QuC-vK-nLy">
+                            <constraint firstItem="XNH-dl-oHH" firstAttribute="top" secondItem="B5z-XE-p9e" secondAttribute="top" id="QuC-vK-nLy">
                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="aVE-US-9qD" firstAttribute="leading" secondItem="B5z-XE-p9e" secondAttribute="leadingMargin" id="Ux2-wL-oQb"/>
