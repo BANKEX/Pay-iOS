@@ -28,9 +28,6 @@ extension AppDelegate {
         guard let _ = window?.rootViewController as? BaseTabBarController else { return false }
         return true
     }
-    func storyboard() -> UIStoryboard {
-        return UIStoryboard(name: "Main", bundle: nil)
-    }
     
     func prepareAppearance() {
         UINavigationBar.appearance().tintColor = UIColor.mainColor
@@ -40,21 +37,20 @@ extension AppDelegate {
         UINavigationBar.appearance().barTintColor = UIColor.white
     }
     
-    func showInitialVC() {
-        let initialNav = storyboard().instantiateInitialViewController() as? UINavigationController
-        self.window?.rootViewController = initialNav
-        window?.makeKeyAndVisible()
-    }
-    
-    
     func showOnboarding() {
-        let onboarding = storyboard().instantiateViewController(withIdentifier: "OnboardingPage")
+        let onboarding = UIStoryboard(name: "Onboarding", bundle: nil).instantiateInitialViewController()
         window?.rootViewController = onboarding
         window?.makeKeyAndVisible()
     }
     
+    func showSplitVC() {
+        let splitVC = UIStoryboard(name: "MenuPad", bundle: nil).instantiateInitialViewController() as! BaseSplitViewController
+        window?.rootViewController = splitVC
+        window?.makeKeyAndVisible()
+    }
+    
     func showTabBar() {
-        let tabBar = storyboard().instantiateViewController(withIdentifier: "MainTabController") as? BaseTabBarController
+        let tabBar = UIStoryboard(name: "MenuPhone", bundle: nil).instantiateInitialViewController() as! BaseTabBarController
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
     }

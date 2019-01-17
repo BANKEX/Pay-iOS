@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fD8-KE-WPK">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="JmZ-3e-wvL">
+            <objects>
+                <navigationController id="4hC-js-yC4" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xmt-t1-43m">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="H1N-Dv-BCM" kind="relationship" relationship="rootViewController" id="3l0-B9-p3L"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="343-Vu-1gH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7753" y="6008"/>
+        </scene>
+        <!--List Sections View Controller-->
+        <scene sceneID="ZYd-0L-Tdf">
+            <objects>
+                <viewController id="H1N-Dv-BCM" customClass="ListSectionsViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0KU-n6-oF2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LkN-9V-Sfr">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LkN-9V-Sfr" firstAttribute="top" secondItem="e8m-1O-8ey" secondAttribute="top" id="6wB-nq-axW"/>
+                            <constraint firstItem="e8m-1O-8ey" firstAttribute="trailing" secondItem="LkN-9V-Sfr" secondAttribute="trailing" id="LIm-nc-yCQ"/>
+                            <constraint firstItem="LkN-9V-Sfr" firstAttribute="leading" secondItem="e8m-1O-8ey" secondAttribute="leading" id="fT8-JE-NgB"/>
+                            <constraint firstItem="e8m-1O-8ey" firstAttribute="bottom" secondItem="LkN-9V-Sfr" secondAttribute="bottom" id="wqJ-nT-6tz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="e8m-1O-8ey"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Wx-F1-vRp"/>
+                    <connections>
+                        <outlet property="tableView" destination="LkN-9V-Sfr" id="7Ag-Dn-kdv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hmy-ge-0CU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6923" y="6007"/>
+        </scene>
+        <!--Base Split View Controller-->
+        <scene sceneID="eCi-dA-Suc">
+            <objects>
+                <splitViewController id="fD8-KE-WPK" customClass="BaseSplitViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="4hC-js-yC4" kind="relationship" relationship="masterViewController" id="SEA-1T-mNa"/>
+                        <segue destination="ad3-cz-Scg" kind="showDetail" identifier="Home" id="8de-Pl-xwt"/>
+                        <segue destination="AEe-PY-0vf" kind="showDetail" identifier="TransactionHistory" id="1TD-DA-7fK"/>
+                        <segue destination="Blm-NL-GuX" kind="showDetail" identifier="ContactList" id="WIa-zm-AS3"/>
+                        <segue destination="1oz-6I-2c5" kind="showDetail" identifier="SettingsMain" id="Pn1-Sp-RGb"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e8R-BY-kxO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-8705" y="6338"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="H6u-rl-hui">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="1oz-6I-2c5" customClass="BaseNavigationController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="Setting" id="nNj-i1-aku">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="SettingsTab"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wi7-qN-AYX">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pkq-hr-Inw" kind="relationship" relationship="rootViewController" id="FWu-X8-AkL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="teo-98-6kv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5962" y="7947"/>
+        </scene>
+        <!--Wallet-->
+        <scene sceneID="JmT-9e-Nv0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ad3-cz-Scg" customClass="BaseNavigationController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Wallet" id="Kd0-P1-uYX"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5GV-fl-YdX">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ctx-u4-4Xr" kind="relationship" relationship="rootViewController" id="heX-ui-qKR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kl5-2n-3HL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-9546" y="7947"/>
+        </scene>
+        <!--Contacts-->
+        <scene sceneID="0Qs-IB-Tan">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Blm-NL-GuX" customClass="BaseNavigationController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Contacts" id="uRd-jn-IWz"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vxM-GC-6eu">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jvN-7C-1Md" kind="relationship" relationship="rootViewController" id="wP5-f9-dyk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q4P-C8-ZlN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7118" y="7947"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="7cp-eC-WvY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AEe-PY-0vf" customClass="BaseNavigationController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="History" id="2lq-0e-qdQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8ah-ZX-dVE">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Tmx-YA-sIg" kind="relationship" relationship="rootViewController" id="wYG-bk-4CY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3gN-ds-9SE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-8394" y="7947"/>
+        </scene>
+        <!--TransactionHistory-->
+        <scene sceneID="jiW-Y9-sfs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TransactionHistory" id="Tmx-YA-sIg" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="RlD-Vf-62s"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OlS-PV-D2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-8394" y="8507"/>
+        </scene>
+        <!--SettingsMain-->
+        <scene sceneID="dsD-Gc-hFr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsMain" id="pkq-hr-Inw" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="1ZG-4E-adQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PIE-hs-cdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5962" y="8507"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="crb-kO-6Ej">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="Ctx-u4-4Xr" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Yp5-Ef-F4x"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZRt-Mg-IfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-9549" y="8507"/>
+        </scene>
+        <!--ContactList-->
+        <scene sceneID="mGi-jk-Crj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ContactList" id="jvN-7C-1Md" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="fiz-7Z-3r1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GZY-em-TOu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7118" y="8507"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Setting" width="24" height="24"/>
+    </resources>
+</document>

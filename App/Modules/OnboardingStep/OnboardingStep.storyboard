@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tIR-RD-pJ7">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Onboarding View Controller-->
+        <scene sceneID="pWT-Ki-qbg">
+            <objects>
+                <viewController id="tIR-RD-pJ7" customClass="OnboardingViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dLa-oo-1Nb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0o-XF-oaQ">
+                                <rect key="frame" x="0.0" y="556" width="375" height="111"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="R04-81-t6x">
+                                        <rect key="frame" x="158" y="8" width="59" height="16"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOR-u9-EYf">
+                                                <rect key="frame" x="0.0" y="0.0" width="39" height="16"/>
+                                                <state key="normal" title="NEXT">
+                                                    <color key="titleColor" red="0.22352941179999999" green="0.45882352939999999" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow next" translatesAutoresizingMaskIntoConstraints="NO" id="4tZ-OV-MtC">
+                                                <rect key="frame" x="43" y="0.0" width="16" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="nFt-ye-LRN"/>
+                                                    <constraint firstAttribute="width" constant="16" id="r5Z-QK-3pS"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qiu-wH-wa6">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
+                                        <accessibility key="accessibilityConfiguration" label="nextBtn_Onboarding"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="tIR-RD-pJ7" eventType="touchUpInside" id="DoA-te-oM8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Qiu-wH-wa6" firstAttribute="leading" secondItem="C0o-XF-oaQ" secondAttribute="leading" id="IxJ-9T-AUD"/>
+                                    <constraint firstItem="R04-81-t6x" firstAttribute="top" secondItem="C0o-XF-oaQ" secondAttribute="top" constant="8" id="JfU-x9-Aal"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qiu-wH-wa6" secondAttribute="trailing" id="Tpt-P6-aYy"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qiu-wH-wa6" secondAttribute="bottom" id="XjL-wT-vbb"/>
+                                    <constraint firstItem="R04-81-t6x" firstAttribute="centerX" secondItem="C0o-XF-oaQ" secondAttribute="centerX" id="hhP-yn-5Ob"/>
+                                    <constraint firstItem="Qiu-wH-wa6" firstAttribute="top" secondItem="C0o-XF-oaQ" secondAttribute="top" id="zyg-sj-Dff"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OlK-gQ-Ppl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="556"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ERC20" translatesAutoresizingMaskIntoConstraints="NO" id="yr6-Em-ZNX">
+                                        <rect key="frame" x="66" y="197.5" width="243" height="161"/>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02S-6y-4u1">
+                                        <rect key="frame" x="0.0" y="358.5" width="375" height="197.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9Ve-qx-RKP">
+                                                <rect key="frame" x="48" y="53.5" width="279" height="90.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="ERC20 standart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzQ-Sn-i55">
+                                                        <rect key="frame" x="57.5" y="0.0" width="164" height="26.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0aW-eX-Gmg">
+                                                        <rect key="frame" x="27.5" y="50.5" width="224" height="40"/>
+                                                        <string key="text">Support for any tokens within
+ the Ether network.</string>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                        <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9L-7W-n9p">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="53.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GdE-rX-YEr">
+                                                        <rect key="frame" x="167.5" y="21.5" width="40" height="10"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWS-Kd-c5X" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="10" id="09f-gW-GiP"/>
+                                                                    <constraint firstAttribute="height" constant="10" id="SBE-jl-deT"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCI-cE-E7J" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="15" y="0.0" width="10" height="10"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="NO"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qbj-sq-pfx" customClass="CircleView" customModule="BankexWallet" customModuleProvider="target">
+                                                                <rect key="frame" x="30" y="0.0" width="10" height="10"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filled" value="NO"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="GdE-rX-YEr" firstAttribute="centerY" secondItem="E9L-7W-n9p" secondAttribute="centerY" id="0nJ-8C-cKi"/>
+                                                    <constraint firstItem="GdE-rX-YEr" firstAttribute="centerX" secondItem="E9L-7W-n9p" secondAttribute="centerX" id="EvJ-hK-UaD"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="9Ve-qx-RKP" secondAttribute="trailing" constant="48" id="5xS-5S-Qso"/>
+                                            <constraint firstItem="9Ve-qx-RKP" firstAttribute="leading" secondItem="02S-6y-4u1" secondAttribute="leading" constant="48" id="Afe-6n-11b"/>
+                                            <constraint firstItem="9Ve-qx-RKP" firstAttribute="centerY" secondItem="02S-6y-4u1" secondAttribute="centerY" id="RBA-n5-n41"/>
+                                            <constraint firstAttribute="trailing" secondItem="E9L-7W-n9p" secondAttribute="trailing" id="cSt-21-pKm"/>
+                                            <constraint firstItem="E9L-7W-n9p" firstAttribute="leading" secondItem="02S-6y-4u1" secondAttribute="leading" id="esU-rX-eeG"/>
+                                            <constraint firstItem="9Ve-qx-RKP" firstAttribute="top" secondItem="E9L-7W-n9p" secondAttribute="bottom" id="qQD-X3-VOp"/>
+                                            <constraint firstItem="9Ve-qx-RKP" firstAttribute="centerX" secondItem="02S-6y-4u1" secondAttribute="centerX" id="wfm-Oy-djC"/>
+                                            <constraint firstItem="E9L-7W-n9p" firstAttribute="top" secondItem="02S-6y-4u1" secondAttribute="top" id="wiW-cs-Fr7"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="yr6-Em-ZNX" firstAttribute="centerY" secondItem="OlK-gQ-Ppl" secondAttribute="centerY" id="433-4Q-nkF"/>
+                                    <constraint firstItem="02S-6y-4u1" firstAttribute="top" secondItem="yr6-Em-ZNX" secondAttribute="bottom" id="5nd-BA-vPs"/>
+                                    <constraint firstItem="yr6-Em-ZNX" firstAttribute="centerX" secondItem="OlK-gQ-Ppl" secondAttribute="centerX" id="96U-Eo-eRu"/>
+                                    <constraint firstAttribute="trailing" secondItem="02S-6y-4u1" secondAttribute="trailing" id="UDg-sd-49n"/>
+                                    <constraint firstItem="02S-6y-4u1" firstAttribute="leading" secondItem="OlK-gQ-Ppl" secondAttribute="leading" id="s1L-6A-8zc"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Qiu-wH-wa6" firstAttribute="top" secondItem="02S-6y-4u1" secondAttribute="bottom" id="BcM-6m-c2X"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="trailing" secondItem="PBJ-d9-wl3" secondAttribute="trailing" id="Gwg-ug-IXF"/>
+                            <constraint firstItem="OlK-gQ-Ppl" firstAttribute="top" secondItem="dLa-oo-1Nb" secondAttribute="top" id="K7l-xF-72j"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="leading" secondItem="PBJ-d9-wl3" secondAttribute="leading" id="SP3-Oh-U86"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="top" secondItem="OlK-gQ-Ppl" secondAttribute="bottom" id="ZWs-sy-uwQ"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="bottom" secondItem="PBJ-d9-wl3" secondAttribute="bottom" id="baG-kF-nmq"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="top" secondItem="OlK-gQ-Ppl" secondAttribute="bottom" id="h95-f8-KiA"/>
+                            <constraint firstItem="OlK-gQ-Ppl" firstAttribute="leading" secondItem="PBJ-d9-wl3" secondAttribute="leading" id="myB-7u-7zX"/>
+                            <constraint firstItem="OlK-gQ-Ppl" firstAttribute="trailing" secondItem="PBJ-d9-wl3" secondAttribute="trailing" id="rfs-lB-1Fp"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="height" secondItem="OlK-gQ-Ppl" secondAttribute="height" multiplier="1:5" id="uv8-ge-EQU"/>
+                            <constraint firstItem="C0o-XF-oaQ" firstAttribute="top" secondItem="OlK-gQ-Ppl" secondAttribute="bottom" id="zdu-Si-v5k"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PBJ-d9-wl3"/>
+                    </view>
+                    <connections>
+                        <outlet property="arrowNext" destination="4tZ-OV-MtC" id="Nol-fl-P4K"/>
+                        <outlet property="circlesStack" destination="GdE-rX-YEr" id="oer-t5-Blj"/>
+                        <outlet property="descriptionLabel" destination="0aW-eX-Gmg" id="2a8-g7-tM5"/>
+                        <outlet property="imageView" destination="yr6-Em-ZNX" id="TQc-43-8d5"/>
+                        <outlet property="nameLabel" destination="tzQ-Sn-i55" id="FYk-Km-sYt"/>
+                        <outlet property="nextButton" destination="sOR-u9-EYf" id="PTK-bz-38v"/>
+                        <outletCollection property="circles" destination="hWS-Kd-c5X" collectionClass="NSMutableArray" id="jcV-zN-O63"/>
+                        <outletCollection property="circles" destination="qCI-cE-E7J" collectionClass="NSMutableArray" id="cfh-rA-hAZ"/>
+                        <outletCollection property="circles" destination="Qbj-sq-pfx" collectionClass="NSMutableArray" id="gcd-f0-n7s"/>
+                        <segue destination="dvo-0a-qNY" kind="show" identifier="toNavigation" id="LUm-XV-moS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8uH-eC-nY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2412" y="2238.530734632684"/>
+        </scene>
+        <!--Base Navigation Controller-->
+        <scene sceneID="JWs-Yi-0Zx">
+            <objects>
+                <navigationController id="dvo-0a-qNY" customClass="BaseNavigationController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kfw-5j-OiY">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="view.backgroundColor">
+                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="RaB-Mn-6hE" kind="relationship" relationship="rootViewController" id="LdJ-Dh-FbT"/>
+                        <segue destination="Alu-eP-10h" kind="show" identifier="showProcess" animates="NO" id="EOG-ox-fMx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SOe-c4-olc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-750" y="2239"/>
+        </scene>
+        <!--WalletAddProcessing-->
+        <scene sceneID="Ofg-Ex-ZIl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WalletAddProcessing" id="Alu-eP-10h" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bOK-z9-rbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="294" y="2238"/>
+        </scene>
+        <!--WalletAddMethod-->
+        <scene sceneID="kfS-Jl-YMW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WalletAddMethod" id="RaB-Mn-6hE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3w9-eb-wZu"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Txs-Pv-mF0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-752" y="2746"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Arrow next" width="12" height="10.5"/>
+        <image name="ERC20" width="243" height="161"/>
+    </resources>
+</document>

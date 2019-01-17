@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabvc = window?.rootViewController as! BaseTabBarController
             tabvc.selectedIndex = 0
             if let nav = tabvc.viewControllers?[0] as? BaseNavigationController {
-                if let addressQRVC = storyboard().instantiateViewController(withIdentifier: "AddressQRCodeController") as? AddressQRCodeController {
+                if let addressQRVC = UIStoryboard(name: "QRCodeGeneration", bundle: nil).instantiateInitialViewController() as? AddressQRCodeController {
                     addressQRVC.addressToGenerateQR = SingleKeyServiceImplementation().selectedAddress()
                     nav.pushViewController(addressQRVC, animated: false)
                 }
@@ -106,23 +106,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if AutoLockService.shared.getState() == nil {
             AutoLockService.shared.setDefaultTime()
         }
-        let initialRouter = InitialLogicRouter()
+        
         let isOnboardingNeeded = UserDefaults.standard.value(forKey: "isOnboardingNeeded")
         if isOnboardingNeeded == nil  {
             showOnboarding()
         }
-        guard let navigationController = window?.rootViewController as? UINavigationController else {
-            return true
+        
+        if UserDefaults.standard.bool(forKey: "passcodeExists") && SingleKeyServiceImplementation().selectedWallet() != nil {
+            showPasscode(context: .initial)
+            
+        } else {
+            if UIDevice.isIpad {
+                showSplitVC()
+            } else {
+                showTabBar()
+            }
         }
-        initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
+        
         window?.backgroundColor = .white
+        
         return true
-    }
-    
-    func showSplitVC() {
-        let splitVC = CreateVC(byName: "BaseSplitViewController") as! BaseSplitViewController
-        window?.rootViewController = splitVC
-        window?.makeKeyAndVisible()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -203,9 +206,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                     }
                 }else if let splitVC = window?.rootViewController as? UISplitViewController {
-                    let listContactsVC = CreateVC(byName: "ListContactsViewController") as! ListContactsViewController
+                    let listContactsVC = UIStoryboard(name: "ContactList", bundle: nil).instantiateInitialViewController() as! ListContactsViewController
                     let nav = BaseNavigationController(rootViewController: listContactsVC)
-                    let profileVC = CreateVC(byName: "ProfileContactViewController") as! ProfileContactViewController
+                    let profileVC = UIStoryboard(name: "ContactDetails", bundle: nil).instantiateInitialViewController() as! ProfileContactViewController
                     service.contactByAddress(objectID) { contact in
                         if let contact = contact {
                             profileVC.selectedContact = contact
@@ -381,8 +384,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 extension AppDelegate : MessagingDelegate {
     
     func goToMainIpad(_ tokenAddress:String, _ isLaunch:Bool) {
-        let mainInfo = CreateVC(byName: "MainInfoController") as! MainInfoController
-        let homeVC = CreateVC(byName: "HomeViewController") as! HomeViewController
+        let mainInfo = UIStoryboard(name: "AddressDetails", bundle: nil).instantiateInitialViewController() as! MainInfoController
+        let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateInitialViewController() as! HomeViewController
         if isLaunch {
             guard let splitVC = window?.rootViewController as? BaseSplitViewController else { return }
             let nav = BaseNavigationController(rootViewController: homeVC)
@@ -408,7 +411,7 @@ extension AppDelegate : MessagingDelegate {
     }
     
     func goToMain(_ tokenAddress:String, _ isLaunch:Bool) {
-        let mainInfo = CreateVC(byName: "MainInfoController") as! MainInfoController
+        let mainInfo = UIStoryboard(name: "AddressDetails", bundle: nil).instantiateInitialViewController() as! MainInfoController
         if isLaunch {
             let tab = window?.rootViewController as! BaseTabBarController
             tab.selectedIndex = 0
@@ -417,7 +420,7 @@ extension AppDelegate : MessagingDelegate {
             tokenService.updateSelectedToken(to: tokenAddress)
             nav.pushViewController(mainInfo, animated: false)
         }else {
-            let tabBar = CreateVC(byName: "MainTabController") as! BaseTabBarController
+            let tabBar = UIStoryboard(name: "MenuPhone", bundle: nil).instantiateInitialViewController() as! BaseTabBarController
             window?.rootViewController = tabBar
             
             guard passcodeViewController == nil else { return }
@@ -468,7 +471,7 @@ extension AppDelegate: PasscodeEnterControllerDelegate {
             }
         }()
         guard isFirstTime || isSendScreen else { return }
-        guard let viewController = CreateVC(byName: "passcodeEnterController") as? PasscodeEnterController else { return }
+        guard let viewController = UIStoryboard(name: "PasscodeEnter", bundle: nil).instantiateInitialViewController() as? PasscodeEnterController else { return }
         viewController.delegate = self
         viewController.context = context
         
@@ -486,8 +489,7 @@ extension AppDelegate: PasscodeEnterControllerDelegate {
         switch viewController.context {
         case .initial:
             guard let latestVC = UIApplication.topViewController() else { return }
-            guard let processVC = storyboard().instantiateViewController(withIdentifier: "ProcessController") as? SendingInProcessViewController else { return }
-            processVC.fromEnterScreen = true
+            guard let processVC = UIStoryboard(name: "WalletAddProcessing", bundle: nil).instantiateInitialViewController() as? AddingInProcessViewController else { return }
             latestVC.navigationController?.pushViewController(processVC, animated: true)
         case let .sendScreen(confirmVC):
             confirmVC.sendFunds()
