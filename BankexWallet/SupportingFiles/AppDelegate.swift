@@ -106,23 +106,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if AutoLockService.shared.getState() == nil {
             AutoLockService.shared.setDefaultTime()
         }
-        let initialRouter = InitialLogicRouter()
+        
         let isOnboardingNeeded = UserDefaults.standard.value(forKey: "isOnboardingNeeded")
         if isOnboardingNeeded == nil  {
             showOnboarding()
         }
-        guard let navigationController = window?.rootViewController as? UINavigationController else {
-            return true
+        
+        if UserDefaults.standard.bool(forKey: "passcodeExists") && SingleKeyServiceImplementation().selectedWallet() != nil {
+            showPasscode(context: .initial)
+            
+        } else {
+            if UIDevice.isIpad {
+                showSplitVC()
+            } else {
+                showTabBar()
+            }
         }
-        initialRouter.navigateToMainControllerIfNeeded(rootControler: navigationController)
+        
         window?.backgroundColor = .white
+        
         return true
-    }
-    
-    func showSplitVC() {
-        let splitVC = UIStoryboard(name: "MenuPad", bundle: nil).instantiateInitialViewController() as! BaseSplitViewController
-        window?.rootViewController = splitVC
-        window?.makeKeyAndVisible()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
