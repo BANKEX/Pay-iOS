@@ -13,9 +13,9 @@
         <!--Rename Wallet-->
         <scene sceneID="ZPM-Ry-nW3">
             <objects>
-                <viewController title="Rename Wallet" hidesBottomBarWhenPushed="YES" id="JYY-IY-B5W" customClass="RenameViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="JYY-IY-B5W" customClass="RenameViewController" customModule="BankexWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z0m-Iv-3X2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DzA-Fq-8Sa">
@@ -51,8 +51,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zJa-dI-OZf"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Rename Wallet" id="W7q-an-4Gu">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="IZA-wz-l9r">
+                            <connections>
+                                <action selector="saveWalletName" destination="JYY-IY-B5W" id="FAa-VP-xr1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="nameLabel" destination="Y9A-NY-hZ2" id="WAJ-sM-Vl3"/>
                         <outlet property="nameWalletTF" destination="YDQ-RL-4WJ" id="AJt-98-pZ1"/>
+                        <outlet property="saveBarButtonItem" destination="IZA-wz-l9r" id="b8k-Ey-kkU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTe-a6-2wn" userLabel="First Responder" sceneMemberID="firstResponder"/>
