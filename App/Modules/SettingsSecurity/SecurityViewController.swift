@@ -27,7 +27,14 @@ class SecurityViewController: UITableViewController {
     enum SecuritySections:Int {
         case First = 0,Second,Third
     }
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavbar()
