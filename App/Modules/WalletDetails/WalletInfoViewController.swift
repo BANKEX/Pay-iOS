@@ -20,6 +20,14 @@ class WalletInfoViewController: BaseViewController {
     let infoCellIdentifier = "InfoCell"
     var publicName:String?
     var secondWidth:CGFloat?
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +48,6 @@ class WalletInfoViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
-        UIApplication.shared.statusBarView?.backgroundColor = .white
     }
     
     func setupClipboard() {
