@@ -40,8 +40,13 @@ class ListSectionsViewController: UIViewController {
 
 extension ListSectionsViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nv = storyboard?.instantiateViewController(withIdentifier: "\(indexPath.row)") as! BaseNavigationController
-        splitViewController?.showDetailViewController(nv, sender: nil)
+        switch indexPath.row {
+        case 0: splitViewController?.performSegue(withIdentifier: "Home", sender: self)
+        case 1: splitViewController?.performSegue(withIdentifier: "TransactionHistory", sender: self)
+        case 2: splitViewController?.performSegue(withIdentifier: "ContactList", sender: self)
+        case 3: splitViewController?.performSegue(withIdentifier: "SettingsMain", sender: self)
+        default: break
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
