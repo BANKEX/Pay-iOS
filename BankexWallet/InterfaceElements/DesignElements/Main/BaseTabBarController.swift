@@ -25,5 +25,12 @@ class BaseTabBarController: UITabBarController {
         tabBar.items?.last?.image = #imageLiteral(resourceName: "Setting")
         tabBar.items?.last?.selectedImage = #imageLiteral(resourceName: "settings_selected")
     }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        
+        if let item = tabBar.items?.index(of: item) {
+            HistoryMediator.handleDidSelect(item: item)
+        }
+    }
 }
 

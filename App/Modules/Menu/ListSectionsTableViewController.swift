@@ -40,6 +40,8 @@ class ListSectionsViewController: UIViewController {
 
 extension ListSectionsViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        HistoryMediator.handleDidSelect(item: indexPath.row)
+        
         switch indexPath.row {
         case 0: splitViewController?.performSegue(withIdentifier: "Home", sender: self)
         case 1: splitViewController?.performSegue(withIdentifier: "TransactionHistory", sender: self)
