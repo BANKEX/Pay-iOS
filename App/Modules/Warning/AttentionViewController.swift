@@ -39,7 +39,15 @@ class AttentionViewController: BaseViewController {
         }
     }
     let keysService = SingleKeyServiceImplementation()
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            let statusBarStyle: UIStatusBarStyle = UIDevice.isIpad ? .default : .lightContent
+            return super.navigationBarAppearance ?? NavigationBarAppearance(barTintColor: .errorColor, tintColor: .white, titleTextAttributes: [NSAttributedStringKey.foregroundColor : UIColor.white], statusBarStyle: statusBarStyle, shadowImage: UIImage())
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = heightConstraint.setMultiplier(multiplier: UIDevice.isIpad ? 0.17 : 0.27)
@@ -51,14 +59,11 @@ class AttentionViewController: BaseViewController {
         state = isFromDeveloper ? .CustomNetwork : .PrivateKey
         navigationItem.title = state == .CustomNetwork ? NSLocalizedString("CustomNetworks", comment: "") : NSLocalizedString("Private Key", comment: "")
         navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.errorColor
-        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        UIApplication.shared.statusBarStyle = .default
     }
     
     @IBAction func proceed() {
