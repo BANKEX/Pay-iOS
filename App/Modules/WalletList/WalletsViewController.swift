@@ -27,7 +27,14 @@ class WalletsViewController: BaseViewController, WalletSelectedDelegate {
     var selectedWallet:HDKey? {
         return service.selectedKey()
     }
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     weak var delegate:WalletsDelegate?
 
     override func viewDidLoad() {
