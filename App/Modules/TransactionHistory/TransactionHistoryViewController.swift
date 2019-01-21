@@ -31,6 +31,14 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         .arrowSize(CGSize(width: 29, height: 16)),
         .cornerRadius(8.0)
     ]
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     var state:State = .empty {
         didSet {
             if state == .empty {
@@ -98,7 +106,6 @@ class TransactionHistoryViewController: BaseViewController, UITableViewDataSourc
         tokenFilterBarButtonItem.isEnabled = availableTokensList.count > 0
         navigationController?.navigationBar.isHidden = false
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        UIApplication.shared.statusBarView?.backgroundColor = .white
     }
     
     //MARK: - Refresh Control

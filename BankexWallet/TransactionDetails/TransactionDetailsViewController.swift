@@ -22,6 +22,15 @@ class TransactionDetailsViewController: UIViewController {
     
     var transactionDetails: TransactionDetails?
     var transactionStatus: TransactionReceipt.TXStatus?
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            let statusBarStyle: UIStatusBarStyle = UIDevice.isIpad ? .default : .`default`
+            return super.navigationBarAppearance ?? NavigationBarAppearance(barTintColor: .disableColor, tintColor: .white, titleTextAttributes: [NSAttributedStringKey.foregroundColor : UIColor.white], statusBarStyle: statusBarStyle, shadowImage: UIImage())
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     
     @IBOutlet private var amountLabel: UILabel!
     @IBOutlet private var symbolLabel: UILabel!
@@ -100,7 +109,6 @@ class TransactionDetailsViewController: UIViewController {
 
     private func configureNavBar() {
         navigationController?.navigationBar.isHidden = true
-        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : .disableColor
         UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .`default`
     }
     
