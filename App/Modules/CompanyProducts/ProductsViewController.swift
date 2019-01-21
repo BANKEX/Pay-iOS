@@ -19,6 +19,14 @@ class ProductsViewController: BaseViewController {
     let viewIdentifer = "ProductDetailView"
     let heightCell:CGFloat = 70
     let inset:CGFloat = 15
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "BANKEX Products"

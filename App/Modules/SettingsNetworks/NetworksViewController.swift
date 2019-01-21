@@ -25,7 +25,14 @@ class NetworksViewController: BaseViewController {
     enum NetworksSections:Int,CaseIterable {
         case CurrentNetwork = 0,DefaultNetwork,CustomNetwork
     }
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     weak var delegate:NetworkDelegate?
     
     var selectedNetwork:CustomNetwork {

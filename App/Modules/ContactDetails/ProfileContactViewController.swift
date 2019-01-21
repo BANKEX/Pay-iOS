@@ -60,6 +60,14 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
         alertVC.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default))
         return alertVC
     }()
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     var state:State = .loading {
         didSet {
             switch state {
@@ -169,16 +177,9 @@ class ProfileContactViewController: BaseViewController,UITextFieldDelegate,UITex
     private func manageTop(isHide:Bool = true) {
         if isHide {
             navigationController?.setNavigationBarHidden(isHide, animated: false)
-            navigationController?.navigationBar.barTintColor = UIColor.mainColor
-            navigationController?.navigationBar.tintColor = .white
-            UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.mainColor
-            UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
             return
         }
         navigationController?.isNavigationBarHidden = isHide
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = UIColor.mainColor
-        UIApplication.shared.statusBarStyle = .default
     }
     
     @IBAction func seeAll() {

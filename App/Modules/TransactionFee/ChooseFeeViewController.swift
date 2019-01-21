@@ -39,6 +39,15 @@ class ChooseFeeViewController: BaseViewController {
             }
         }
     }
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            let statusBarStyle: UIStatusBarStyle = UIDevice.isIpad ? .default : .lightContent
+            return super.navigationBarAppearance ?? NavigationBarAppearance(barTintColor: .mainColor, tintColor: .white, titleTextAttributes: [NSAttributedStringKey.foregroundColor: UIColor.white], statusBarStyle: statusBarStyle, shadowImage: UIImage())
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     lazy var unitLabel:UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17.0)
@@ -87,15 +96,12 @@ class ChooseFeeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
-        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.mainColor
         updateUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
-        UIApplication.shared.statusBarStyle = .default
     }
     
     

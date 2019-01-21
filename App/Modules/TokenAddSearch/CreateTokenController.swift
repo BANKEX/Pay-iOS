@@ -40,7 +40,14 @@ class CreateTokenController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -77,7 +84,6 @@ class CreateTokenController: BaseViewController {
     
     fileprivate func setupNavBar() {
         navigationController?.navigationBar.topItem?.title = NSLocalizedString("Wallet", comment: "")
-        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     private func showScanner() {

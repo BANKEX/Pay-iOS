@@ -43,6 +43,14 @@ class HomeViewController: BaseViewController {
             }
         }
     }
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     
     private struct ViewModel {
         
@@ -183,7 +191,6 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         TokenShortService.arrayTokensShort.removeAll()
-        setupStatusBarColor()
         state = isFromContact ? .fromContact : .home
         updateTableView()
     }
@@ -232,10 +239,7 @@ class HomeViewController: BaseViewController {
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
     
     //Methods
-    fileprivate func setupStatusBarColor() {
-        UIApplication.shared.statusBarView?.backgroundColor = .white
-        UIApplication.shared.statusBarStyle = .default
-    }
+
     
     func catchUserActivity() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

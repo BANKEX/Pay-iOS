@@ -15,6 +15,14 @@ class SendingSuccessViewController: UIViewController {
     var addressToSend: String?
     let favoritesService: ContactServiceProtocol = ContactService()
     let tokenService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     
     // MARK:  Outlets
     @IBOutlet weak var transactionSucceedLabel: UILabel!

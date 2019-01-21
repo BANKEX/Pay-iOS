@@ -37,6 +37,14 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
             tableView.reloadData()
         }
     }
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var emptyView:UIView!
     
@@ -58,9 +66,6 @@ class ListContactsViewController: BaseViewController,UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = UIColor.mainColor
-        UIApplication.shared.statusBarView?.backgroundColor = .white
         if fromSendScreen {
             addLeftBtn()
             hideAddRightButton()
