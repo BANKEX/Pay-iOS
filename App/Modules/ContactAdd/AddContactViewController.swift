@@ -48,6 +48,14 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
             }
         }
     }
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .blueStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     var service = ContactService()
     
     override func viewDidLoad() {
@@ -83,10 +91,6 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         state = .noAvailable
-        navigationController?.navigationBar.barTintColor = UIDevice.isIpad ? .white : UIColor.mainColor
-        navigationController?.navigationBar.tintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .clear : UIColor.mainColor
-        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
         doneButton.isHidden = UIDevice.isIpad ? true : false
         title = UIDevice.isIpad ? "New Contact" : ""
     }
@@ -94,17 +98,6 @@ class AddContactViewController: BaseViewController,UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         nameContactTextField.becomeFirstResponder()
-    }
-    
-    override func willMove(toParentViewController parent: UIViewController?) {
-        navigationController?.navigationBar.barTintColor = .white
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //navigationController?.navigationBar.tintColor = UIColor.mainColor
-        UIApplication.shared.statusBarView?.backgroundColor = .white
-        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -35,6 +35,14 @@ class EditViewController: BaseViewController {
             }
         }
     }
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .blueStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     let service = ContactService()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,19 +66,9 @@ class EditViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = UIDevice.isIpad ? "Edit Contact" : ""
-        navigationController?.navigationBar.barTintColor = UIDevice.isIpad ? UIColor.white : UIColor.mainColor
-        navigationController?.navigationBar.tintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? nil : UIColor.mainColor
-        UIApplication.shared.statusBarStyle = .lightContent
         updateUI()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .lightContent : .default
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = UIColor.mainColor
-    }
     
     private func prepareTFs() {
         [nameTextField,addrTextField].forEach {
