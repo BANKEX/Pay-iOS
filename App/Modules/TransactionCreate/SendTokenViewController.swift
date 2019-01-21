@@ -64,7 +64,15 @@ Retriable,UITextFieldDelegate {
     var tokensTableViewManager = TokensTableViewManager()
     let keysService: SingleKeyService = SingleKeyServiceImplementation()
     var transaction:TransactionIntermediate?
-
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            let statusBarStyle: UIStatusBarStyle = UIDevice.isIpad ? .default : .lightContent
+            return NavigationBarAppearance(barTintColor: .mainColor, tintColor: .white, titleTextAttributes: [NSAttributedStringKey.foregroundColor : UIColor.white], statusBarStyle: statusBarStyle, shadowImage: UIImage())
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     // MARK: Inputs
     var selectedToken:ERC20TokenModel {
         return tokensService.selectedERC20Token()
@@ -130,8 +138,6 @@ Retriable,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.statusBarView?.backgroundColor = UIDevice.isIpad ? .white : UIColor.mainColor
-        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
         updateUI()
     }
     

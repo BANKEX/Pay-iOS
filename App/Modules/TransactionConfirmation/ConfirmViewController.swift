@@ -22,12 +22,20 @@ class ConfirmViewController: UITableViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var totalLabel:UILabel!
     
-    //Properties
-    
-    
     var fromAddr:String {
         let addr = keyService.selectedAddress() ?? ""
         return addr
+    }
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            let barTintColor: UIColor = UIDevice.isIpad ? .white : .mainColor
+            let tintColor: UIColor = UIDevice.isIpad ? .black : .white
+            let statusBarStyle: UIStatusBarStyle = UIDevice.isIpad ? .default : .lightContent
+            return super.navigationBarAppearance ?? NavigationBarAppearance(barTintColor: barTintColor, tintColor: tintColor, titleTextAttributes: nil, statusBarStyle: statusBarStyle, shadowImage: UIImage())
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
     }
     var gasPrice:String!
     var gasLimit:String!
@@ -91,14 +99,8 @@ class ConfirmViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        appearanceNavBar(false)
         if isPinAccepted { self.sendFunds() }
         updateUI()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        appearanceNavBar(true)
     }
     
     //Helper
@@ -165,20 +167,6 @@ class ConfirmViewController: UITableViewController {
         } else {
             self.sendFunds()
         }
-    }
-    
-    func appearanceNavBar(_ exit:Bool) {
-        if exit {
-            navBarColor(.white)
-            navBarTintColor(UIColor.mainColor)
-            statusBarColor(.white)
-            UIApplication.shared.statusBarStyle = .default
-            return
-        }
-        navBarColor(UIDevice.isIpad ? .white : UIColor.mainColor)
-        navBarTintColor(UIDevice.isIpad ? UIColor.mainColor : .white)
-        statusBarColor(UIDevice.isIpad ? nil : UIColor.mainColor)
-        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
     }
 }
 

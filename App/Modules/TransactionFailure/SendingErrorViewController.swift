@@ -19,6 +19,15 @@ class SendingErrorViewController: BaseViewController {
     @IBOutlet weak var retryButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .blueStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addBackButton()
@@ -61,18 +70,11 @@ class SendingErrorViewController: BaseViewController {
         super.viewWillAppear(animated)
         splitViewController?.show()
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.barTintColor = UIDevice.isIpad ? .white : UIColor.mainColor
-        statusBarColor(UIDevice.isIpad ? .white : UIColor.mainColor)
-        UIApplication.shared.statusBarStyle = UIDevice.isIpad ? .default : .lightContent
-        navigationController?.navigationBar.tintColor = UIDevice.isIpad ? UIColor.mainColor : .white
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.navigationBar.barTintColor = .white
-        UIApplication.shared.statusBarView?.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = UIColor.mainColor
     }
     
     func addBackButton() {

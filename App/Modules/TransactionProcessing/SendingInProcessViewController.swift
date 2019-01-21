@@ -34,7 +34,14 @@ SendingResultInformation {
     
     var fromEnterScreen = false
     var textToShow: String?
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? SendingSuccessViewController {
@@ -57,7 +64,6 @@ SendingResultInformation {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         splitViewController?.hide()
-        UIApplication.shared.statusBarStyle = .default
         activityView.startAnimating()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         titleLabel?.text = textToShow == nil ? NSLocalizedString("Sending funds", comment: "") : textToShow!

@@ -23,7 +23,14 @@ class TokenInfoController: BaseViewController, UITableViewDelegate, UITableViewD
     let tokensService: CustomERC20TokensService = CustomERC20TokensServiceImplementation()
     var token: ERC20TokenModel?
     let utilsService = CustomTokenUtilsServiceImplementation()
-    
+    override var navigationBarAppearance: NavigationBarAppearance? {
+        get {
+            return super.navigationBarAppearance ?? .whiteStyle
+        }
+        set {
+            super.navigationBarAppearance = newValue
+        }
+    }
     
     var forAdding: Bool = false
     
