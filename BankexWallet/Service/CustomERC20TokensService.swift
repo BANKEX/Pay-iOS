@@ -92,7 +92,6 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
                 newToken.decimals = decimals.description
                 newToken.isAdded = true
                 newToken.isSelected = true
-                newToken.networkURL = self.networksService.preferredNetwork().fullNetworkUrl.absoluteString
                 try context.insert(newToken)
                 save()
             }
@@ -383,8 +382,7 @@ class CustomERC20TokensServiceImplementation: CustomERC20TokensService {
     
     let networksService = NetworksServiceImplementation()
     func availableTokensList() -> [ERC20TokenModel]? {
-        let selectedNetworkURL = networksService.preferredNetwork().fullNetworkUrl.absoluteString
-        let networks = try! db.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format:"networkURL == %@ && isAdded == %@", selectedNetworkURL, NSNumber(value: true))))
+        let networks = try! db.fetch(FetchRequest<ERC20Token>().filtered(with: NSPredicate(format:"isAdded == %@", NSNumber(value: true))))
         
         let listOfNetworks = [etherModel()] + networks.map { (token) -> ERC20TokenModel in
             return ERC20TokenModel(name: token.name ?? "",
